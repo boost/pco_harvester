@@ -13,7 +13,7 @@ class ContentPartnersController < ApplicationController
   def create
     @content_partner = ContentPartner.create(content_partner_params)
 
-    @content_partner.save!
+    @content_partner.save
 
     redirect_to content_partners_path
   end
@@ -21,7 +21,7 @@ class ContentPartnersController < ApplicationController
   def update
     @content_partner = ContentPartner.find(params[:id])
     if @content_partner.update(content_partner_params)
-      redirect_to content_partner_path(@content_partner)
+      redirect_to content_partners_path
     else
       render 'show'
     end
