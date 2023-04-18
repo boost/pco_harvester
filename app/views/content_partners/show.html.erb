@@ -1,16 +1,7 @@
 <%= render 'shared/breadcrumb_nav' %>
 
-<h1><%= @content_partner.name_in_database %></h1>
+<h1 class="float-start"><%= @content_partner.name_in_database %></h1>
 
-<%= vertical_form_with model: @content_partner, class: { row: true } do |form| %>
-  <div class="mb-3 col-6">
-    <%= form.label :name, 'Name', class: "form-label" %>
-    <%= form.text_field :name, class: {"form-control": true, "is-invalid": @content_partner.errors[:name].any?} %>
-  </div>
+<%= link_to 'Edit', edit_content_partner_path(@content_partner), class: 'float-end btn btn-primary float-end' %>
 
-  <div class="col-12">
-    <button type="submit" class="btn btn-primary">
-      Save
-    </button>
-  </div>
-<% end %>
+<div class="clearfix"></div>

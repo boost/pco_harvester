@@ -17,7 +17,7 @@
         <% end %>
       <% end%>
 
-      <% if current_page(:'content_partners', %w[show update]) %>
+      <% if current_page(:'content_partners', %w[show update edit]) %>
         <li class="breadcrumb-item active">
           <%= @content_partner.name_in_database %>
         </li>

@@ -3,6 +3,9 @@
 class ContentPartnersController < ApplicationController
   def index
     @content_partners = ContentPartner.order(:name).page(params[:page])
+  end
+
+  def new
     @content_partner  = ContentPartner.new
   end
 
@@ -10,16 +13,24 @@ class ContentPartnersController < ApplicationController
     @content_partner = ContentPartner.find(params[:id])
   end
 
+  def edit
+    @content_partner = ContentPartner.find(params[:id])
+  end
+
   def create
     @content_partner = ContentPartner.create(content_partner_params)
 
-    @content_partner.save
-
-    redirect_to content_partners_path
+    if @content_partner.save
+      redirect_to content_partners_path, notice: 'Content Partner created successfully'
+    else
+      flash.alert = 'There was an issue creating your Content Partner'
+      render :new
+    end
   end
 
   def update
     @content_partner = ContentPartner.find(params[:id])
+
     if @content_partner.update(content_partner_params)
       redirect_to content_partners_path
     else
