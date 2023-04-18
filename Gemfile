@@ -41,4 +41,3 @@ end
 group :test do
   gem "factory_bot_rails"
 end
-

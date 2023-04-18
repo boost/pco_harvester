@@ -1,0 +1,5 @@
+default: &default
+  MYSQL_SOCKET: null
+
+development:
+  <<: *default

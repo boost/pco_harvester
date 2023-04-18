@@ -18,6 +18,8 @@ require "rails/test_unit/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+ENV.update YAML.load_file('config/application.yml')[Rails.env] rescue nil
+
 module Harvester
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
