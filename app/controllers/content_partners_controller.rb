@@ -2,8 +2,8 @@
 
 class ContentPartnersController < ApplicationController
   def index
-    @content_partners = ContentPartner.all
-    @content_partner  = ContentPartner.new 
+    @content_partners = ContentPartner.order(:name).page(params[:page])
+    @content_partner  = ContentPartner.new
   end
 
   def create
