@@ -1,1 +1,57 @@
-Hello!
+<div class="mt-4"></div>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item active">Content Partners</li>
+  </ol>
+</nav>
+
+<div class="mt-4"></div>
+
+<h1 class="float-start">Content Partners</h1>
+
+<button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#new-content-partner">
+  Add a new Content Partner
+</button>
+
+<div class="clearfix"></div>
+
+<%- if @content_partners.any? %>
+  <%- @content_partners.each do |content_partner| %>
+    <%= content_partner.name %>
+  <%- end %>
+<% else %>
+  <p>There are currently no content partners.</p>
+<% end %>
+
+
+<!-- Modal -->
+<div class="modal fade" id="new-content-partner" tabindex="-1" aria-labelledby="new-content-partner-label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="new-content-partner-label">Add a new Content Partner</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+      <%= form_with model: @content_partner do |form| %>
+
+        <div class="mb-3">
+
+          <%= form.label :name, 'Name', class: "form-label" %>
+          <%= form.text_field :name, class: "form-control", required: true %>
+
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Create Content Partner</button>
+        </div>
+      <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>
