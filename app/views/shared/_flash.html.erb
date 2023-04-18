@@ -1,0 +1,8 @@
+<%
+  matches = { notice: 'primary', alert: 'danger'}
+%>
+<% flash.each do |type, msg| %>
+  <div class="alert <%= "alert-#{matches[type.to_sym]}"%>" role="alert">
+    <%= msg %>
+  </div>
+<% end %>
