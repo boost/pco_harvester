@@ -1,3 +1,5 @@
 <%= render 'shared/breadcrumb_nav' %>
 
-<h1><%= @extraction_definition.name %></h1>
+<h1 class='float-start'><%= @extraction_definition.name %></h1>
+
+<%= link_to 'Edit', edit_content_partner_extraction_definition_path(@content_partner, @extraction_definition), class: 'float-end btn btn-primary float-end' %>

@@ -23,7 +23,7 @@
         </li>
       <% end %>
 
-      <% if current_page(:extraction_definitions, %w[new show]) %>
+      <% if current_page(:extraction_definitions, %w[new show edit]) %>
         <li class="breadcrumb-item">
           <%= link_to @content_partner.name, content_partner_path(@content_partner) %>
         </li>
@@ -34,7 +34,7 @@
         </li>
       <% end %>
 
-      <% if current_page(:extraction_definitions, %w[show]) %>
+      <% if current_page(:extraction_definitions, %w[show edit]) %>
         <li class="breadcrumb-item active">
           <%= @extraction_definition.name %>
         </li>
