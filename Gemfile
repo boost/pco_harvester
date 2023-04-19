@@ -20,9 +20,6 @@ gem 'vite_rails'
 # handles pagination
 gem 'kaminari'
 
-# Bundle and process CSS [https://github.com/rails/cssbundling-rails]
-gem "cssbundling-rails"
-
 gem 'foreman'
 
 gem 'pry-byebug'

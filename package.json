@@ -7,9 +7,7 @@
     "bootstrap-icons": "^1.10.4",
     "sass": "^1.62.0"
   },
-  "scripts": {
-    "build:css": "sass ./app/assets/stylesheets/application.bootstrap.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules"
-  },
+  "scripts": {},
   "devDependencies": {
     "vite": "^4.2.0",
     "vite-plugin-full-reload": "^1.0.5",
