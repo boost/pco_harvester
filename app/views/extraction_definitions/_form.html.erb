@@ -1,10 +1,65 @@
 <%= vertical_form_with model: [@content_partner, @extraction_definition], class: { row: true } do |form| %>
   <%= form.hidden_field :content_partner_id, value: @content_partner.id %>
 
-  <div class="mb-3 col-6">
+  <h2>Common settings</h2>
+
+  <div class="mb-3 col-12">
     <%= form.label :name, 'Name', class: "form-label" %>
-    <%= form.text_field :name, class: {"form-control": true, "is-invalid": @extraction_definition.errors[:name].any? } %>
+    <%= form.text_field :name, class: "form-control" %>
   </div>
+
+  <div class="mb-3 col-auto">
+    <%= form.label :format, 'Format', class: "form-label" %>
+    <% options = find_options_from_validations(ExtractionDefinition, :format) %>
+    <%= form.select :format, options, {}, class: "form-select" %>
+  </div>
+
+  <div class="mb-3 col">
+    <%= form.label :base_url, 'Base URL', class: "form-label" %>
+    <%= form.text_field :base_url, class: "form-control" %>
+  </div>
+
+  <div class="mb-3 col-auto">
+    <%= form.label :throttle, 'Throttle (in ms)', class: "form-label" %>
+    <%= form.number_field :throttle, class: "form-control" %>
+  </div>
+
+
+
+  <h2>Pagination setting</h2>
+
+  <div class="mb-3 col-12">
+    <%= form.label :pagination_type, 'Type', class: "form-label" %>
+    <% options = find_options_from_validations(ExtractionDefinition, :pagination_type) %>
+    <%= form.select :pagination_type, options, {}, class: "form-select" %>
+  </div>
+
+  <div class="mb-3 col-6">
+    <%= form.label :page_parameter, 'Page parameter', class: "form-label" %>
+    <%= form.text_field :page_parameter, class: "form-control" %>
+  </div>
+
+  <div class="mb-3 col-6">
+    <%= form.label :page, 'Page', class: "form-label" %>
+    <%= form.number_field :page, class: "form-control" %>
+  </div>
+
+  <div class="mb-3 col-6">
+    <%= form.label :per_page_parameter, 'Per page parameter', class: "form-label" %>
+    <%= form.text_field :per_page_parameter, class: "form-control" %>
+  </div>
+
+  <div class="mb-3 col-6">
+    <%= form.label :per_page, 'Per page', class: "form-label" %>
+    <%= form.number_field :per_page, class: "form-control" %>
+  </div>
+
+  <div class="mb-3 col-12">
+    <%= form.label :total_selector, 'Total selector', class: "form-label" %>
+    <%= form.text_field :total_selector, class: "form-control" %>
+  </div>
+
+
 
   <div class="col-12">
     <button type="submit" class="btn btn-primary">

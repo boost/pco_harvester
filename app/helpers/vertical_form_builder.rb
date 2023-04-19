@@ -7,7 +7,7 @@ class VerticalFormBuilder < ActionView::Helpers::FormBuilder
 
     errors.uniq.map do |error_msg|
       @template.tag.div(class: 'invalid-feedback') do
-        @template.tag.p(error_msg, class: :error)
+        error_msg
       end
     end.join.html_safe
   end
@@ -42,6 +42,14 @@ class VerticalFormBuilder < ActionView::Helpers::FormBuilder
       return super(method, options) if disable_errors_display
 
       error_wrapper(method) do
+        if @object.errors[method].any?
+          if options[:class].is_a? Hash
+            options[:class]['is-invalid'] = true
+          else
+            options[:class] = "is-invalid #{options[:class]}"
+          end
+        end
+
         super(method, options)
       end
     end

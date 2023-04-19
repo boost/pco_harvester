@@ -51,6 +51,11 @@ class ExtractionDefinitionsController < ApplicationController
   end
 
   def extraction_definition_params
-    params.require(:extraction_definition).permit(:content_partner_id, :name)
+    params.require(:extraction_definition).permit(
+      :content_partner_id,
+      :name, :format, :base_url, :throttle, :pagination_type,
+      :page_parameter, :per_page_parameter, :page, :per_page,
+      :total_selector
+    )
   end
 end
