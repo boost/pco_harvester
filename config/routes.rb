@@ -5,5 +5,7 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   root 'home#index'
-  resources :content_partners, only: %i[index show create update new edit]
+  resources :content_partners, only: %i[index show create update new edit] do
+    resources :extraction_definitions, only: %i[show new create]
+  end
 end

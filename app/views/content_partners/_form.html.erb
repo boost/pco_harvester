@@ -1,12 +1,12 @@
 <%= vertical_form_with model: @content_partner, class: { row: true } do |form| %>
-    <div class="mb-3 col-6">
-      <%= form.label :name, 'Name', class: "form-label" %>
-      <%= form.text_field :name, class: {"form-control": true, "is-invalid": @content_partner.errors[:name].any? } %>
-    </div>
-  
-    <div class="col-12">
-      <button type="submit" class="btn btn-primary">
-        Save
-      </button>
-    </div>
-  <% end %>
+  <div class="mb-3 col-6">
+    <%= form.label :name, 'Name', class: "form-label" %>
+    <%= form.text_field :name, class: {"form-control": true, "is-invalid": @content_partner.errors[:name].any? } %>
+  </div>
+
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">
+      Save
+    </button>
+  </div>
+<% end %>

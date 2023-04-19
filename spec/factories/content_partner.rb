@@ -1,6 +1,5 @@
 FactoryBot.define do
   factory :content_partner do
-    name { 'National Library of New Zealand' }
+    name { Faker::Company.name }
   end
 end
-

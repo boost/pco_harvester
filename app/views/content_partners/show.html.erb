@@ -3,5 +3,24 @@
 <h1 class="float-start"><%= @content_partner.name_in_database %></h1>
 
 <%= link_to 'Edit', edit_content_partner_path(@content_partner), class: 'float-end btn btn-primary float-end' %>
+<%= link_to 'Add new definition', new_content_partner_extraction_definition_path(@content_partner), class: 'float-end btn btn-primary me-1 float-end' %>
 
 <div class="clearfix"></div>
+
+<%- if @extraction_definitions.any? %>
+  <%- @extraction_definitions.each do |extraction_definition| %>
+    <div class="border p-3 my-2">
+      <span class="float-start">
+        <%= extraction_definition.name %>
+      </span>
+
+      <%= link_to "Details", content_partner_extraction_definition_path(@content_partner, extraction_definition), class: "btn btn-outline-primary float-end" %>
+
+      <div class="clearfix"></div>
+    </div>
+  <%- end %>
+
+  <%= render 'shared/pagination_below_table', items: @extraction_definitions %>
+<% else %>
+  <p>There are currently no content partners.</p>
+<% end %>

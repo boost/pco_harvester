@@ -17,9 +17,26 @@
         <% end %>
       <% end%>
 
-      <% if current_page(:'content_partners', %w[show update edit]) %>
+      <% if current_page(:content_partners, %w[show update edit]) %>
         <li class="breadcrumb-item active">
           <%= @content_partner.name_in_database %>
+        </li>
+      <% end %>
+
+      <% if current_page(:extraction_definitions, %w[new show]) %>
+        <li class="breadcrumb-item">
+          <%= link_to @content_partner.name, content_partner_path(@content_partner) %>
+        </li>
+      <% end %>
+      <% if current_page(:extraction_definitions, %w[new]) %>
+        <li class="breadcrumb-item">
+          New
+        </li>
+      <% end %>
+
+      <% if current_page(:extraction_definitions, %w[show]) %>
+        <li class="breadcrumb-item active">
+          <%= @extraction_definition.name %>
         </li>
       <% end %>
     </ol>

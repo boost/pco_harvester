@@ -11,6 +11,7 @@ class ContentPartnersController < ApplicationController
 
   def show
     @content_partner = ContentPartner.find(params[:id])
+    @extraction_definitions = @content_partner.extraction_definitions.order(created_at: :desc).page(params[:page])
   end
 
   def edit
@@ -18,7 +19,7 @@ class ContentPartnersController < ApplicationController
   end
 
   def create
-    @content_partner = ContentPartner.create(content_partner_params)
+    @content_partner = ContentPartner.new(content_partner_params)
 
     if @content_partner.save
       redirect_to content_partners_path, notice: 'Content Partner created successfully'
