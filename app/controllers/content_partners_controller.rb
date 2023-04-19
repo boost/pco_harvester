@@ -33,9 +33,10 @@ class ContentPartnersController < ApplicationController
     @content_partner = ContentPartner.find(params[:id])
 
     if @content_partner.update(content_partner_params)
-      redirect_to content_partners_path
+      redirect_to content_partners_path, notice: 'Content Partner updated successfully'
     else
-      render 'show'
+      flash.alert = 'There was an issue updating your Content Partner'
+      render :edit
     end
   end
 
