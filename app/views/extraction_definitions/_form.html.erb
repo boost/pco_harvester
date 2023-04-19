@@ -9,7 +9,13 @@
   </div>
 
   <div class="mb-3 col-auto">
-    <%= form.label :format, 'Format', class: "form-label" %>
+    <%= form.label :format, class: "form-label" do %>
+      Format
+      <span
+        data-bs-toggle="tooltip"
+        data-bs-title="The format the API returns"
+      ><%= bootstrap_icon('question-circle') %></span>
+    <% end %>
     <% options = find_options_from_validations(ExtractionDefinition, :format) %>
     <%= form.select :format, options, {}, class: "form-select" %>
   </div>
@@ -35,17 +41,35 @@
   </div>
 
   <div class="mb-3 col-6">
-    <%= form.label :page_parameter, 'Page parameter', class: "form-label" %>
+    <%= form.label :page_parameter, class: "form-label" do %>
+      Page parameter
+      <span
+        data-bs-toggle="tooltip"
+        data-bs-title="This parameter will be appended to the base_url for selecting the page. It will be incremented until the extraction reaches the limit."
+      ><%= bootstrap_icon('question-circle') %></span>
+    <% end %>
     <%= form.text_field :page_parameter, class: "form-control" %>
   </div>
 
   <div class="mb-3 col-6">
-    <%= form.label :page, 'Page', class: "form-label" %>
+    <%= form.label :page, class: "form-label" do %>
+      Page
+      <span
+        data-bs-toggle="tooltip"
+        data-bs-title="First page which being requested"
+      ><%= bootstrap_icon('question-circle') %></span>
+    <% end %>
     <%= form.number_field :page, class: "form-control" %>
   </div>
 
   <div class="mb-3 col-6">
-    <%= form.label :per_page_parameter, 'Per page parameter', class: "form-label" %>
+    <%= form.label :per_page_parameter, class: "form-label" do %>
+    Per page parameter
+      <span
+        data-bs-toggle="tooltip"
+        data-bs-title="This parameter will be appended to the base_url"
+      ><%= bootstrap_icon('question-circle') %></span>
+    <% end %>
     <%= form.text_field :per_page_parameter, class: "form-control" %>
   </div>
 

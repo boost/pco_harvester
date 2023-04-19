@@ -19,7 +19,7 @@ module ApplicationHelper
   #
   # The color of the SVG can be controller with "color" CSS property
   # The size of it is 1em -> it will match the font-size
-  def bootstrap_icon(name)
-    render("shared/icons/#{name}")
+  def bootstrap_icon(name, **html_attributes)
+    render("shared/icons/#{name}", locals: html_attributes)
   end
 end
