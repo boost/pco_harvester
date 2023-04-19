@@ -1,44 +1,38 @@
+<% partner_id = partner_id@content_partner&.id %>
+<% definition_id = @extraction_definition&.id %>
+
 <div class="my-4">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item">
-        <%= link_to 'Home', root_path %>
-      </li>
+      <%= breadcrumb_item(text: 'Home', path: root_path) %>
 
-      <% if request.path.include? content_partners_path %>
-        <% if current_page?(content_partners_path) %>
-          <li class="breadcrumb-item active">
-            Content Partners
-          </li>
-        <% else %>
-          <li class="breadcrumb-item">
-            <%= link_to 'Content Partners', content_partners_path %>
-          </li>
-        <% end %>
-      <% end%>
+      <%= breadcrumb_item(
+        text: 'Content Partners',
+        path: content_partners_path,
+        active: current_page?(content_partners_path),
+        display: request.path.include?(content_partners_path)) %>
 
-      <% if current_page(:content_partners, %w[show update edit]) %>
-        <li class="breadcrumb-item active">
-          <%= @content_partner.name_in_database %>
-        </li>
-      <% end %>
+      <%= breadcrumb_item(
+        text: @content_partner&.name_in_database,
+        path: (content_partner_path(partner_id) rescue nil),
+        active: (current_page?(content_partner_path(partner_id)) rescue false),
+        display: request.path.match?(/^\/content_partners\/\d+/)) %>
 
-      <% if current_page(:extraction_definitions, %w[new show edit]) %>
-        <li class="breadcrumb-item">
-          <%= link_to @content_partner.name, content_partner_path(@content_partner) %>
-        </li>
-      <% end %>
-      <% if current_page(:extraction_definitions, %w[new]) %>
-        <li class="breadcrumb-item">
-          New
-        </li>
-      <% end %>
+      <%= breadcrumb_item(
+        text: @extraction_definition&.name_in_database,
+        path: (content_partner_extraction_definition_path(partner_id, definition_id) rescue nil),
+        active: current_page(:extraction_definitions, %w[show]),
+        display: request.path.match?(/\/extraction_definitions\/\d+/)) %>
 
-      <% if current_page(:extraction_definitions, %w[show edit]) %>
-        <li class="breadcrumb-item active">
-          <%= @extraction_definition.name %>
-        </li>
-      <% end %>
+      <%= breadcrumb_item(
+        text: 'Edit',
+        active: action_name.in?(%w[edit update]),
+        display: action_name.in?(%w[edit update])) %>
+
+      <%= breadcrumb_item(
+        text: 'New',
+        active: action_name.in?(%w[new create]),
+        display: action_name.in?(%w[new create])) %>
     </ol>
   </nav>
 </div>
