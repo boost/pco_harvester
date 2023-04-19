@@ -1,15 +1,14 @@
 @import "~bootstrap/scss/bootstrap";
 
 // Mixins
-
 @import "../stylesheets/mixins/bem";
 
 // Modules
-
 @import "../stylesheets/modules/colors";
 
+// Blocks
+@import "../stylesheets/blocks/icons";
 
 body {
   background-color: $bleached-silk;
 }
-

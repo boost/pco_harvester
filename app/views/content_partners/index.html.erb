@@ -2,7 +2,9 @@
 
 <h1 class="float-start">Content Partners</h1>
 
-<%= link_to 'Add a new Content Partner', new_content_partner_path, class: 'btn btn-primary float-end' %>
+<%= link_to new_content_partner_path, class: 'btn btn-primary float-end' do %>
+  <%= bootstrap_icon('plus-circle') %>Add new content partner
+<% end %>
 
 <div class="clearfix"></div>
 
