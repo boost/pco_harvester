@@ -32,7 +32,7 @@
 
 
 
-  <h2>Pagination setting</h2>
+  <h2>Pagination settings</h2>
 
   <div class="mb-3 col-12">
     <%= form.label :pagination_type, 'Type', class: "form-label" %>
@@ -64,7 +64,7 @@
 
   <div class="mb-3 col-6">
     <%= form.label :per_page_parameter, class: "form-label" do %>
-    Per page parameter
+      Per page parameter
       <span
         data-bs-toggle="tooltip"
         data-bs-title="This parameter will be appended to the base_url"
@@ -79,7 +79,13 @@
   </div>
 
   <div class="mb-3 col-12">
-    <%= form.label :total_selector, 'Total selector', class: "form-label" %>
+    <%= form.label :total_selector, class: "form-label" do %>
+      Total selector
+      <span
+        data-bs-toggle="tooltip"
+        data-bs-title="Used to calculate the number of pages to extract"
+      ><%= bootstrap_icon('question-circle') %></span>
+    <% end %>
     <%= form.text_field :total_selector, class: "form-control" %>
   </div>
 
