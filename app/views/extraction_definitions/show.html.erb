@@ -2,4 +2,26 @@
 
 <h1 class='float-start'><%= @extraction_definition.name %></h1>
 
-<%= link_to 'Edit', edit_content_partner_extraction_definition_path(@content_partner, @extraction_definition), class: 'float-end btn btn-primary float-end' %>
+<button type="button" class="float-end btn btn-primary" data-bs-toggle="modal" data-bs-target="#delete-modal">
+  Delete
+</button>
+<%= link_to 'Edit', edit_content_partner_extraction_definition_path(@content_partner, @extraction_definition), class: 'float-end me-1 btn btn-primary' %>
+
+<!-- Modal -->
+<div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="Delete extraction definition" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete it</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete "<%= @extraction_definition.name %>"?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <%= button_to("Delete", content_partner_extraction_definition_path(@content_partner, @extraction_definition), method: :delete, class: "btn btn-danger") %>
+      </div>
+    </div>
+  </div>
+</div>

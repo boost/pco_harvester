@@ -2,10 +2,9 @@
 
 class ExtractionDefinitionsController < ApplicationController
   before_action :find_content_partner
-  before_action :find_extraction_definition, only: %i[show edit]
+  before_action :find_extraction_definition, only: %i[show edit update destroy]
 
-  def show
-  end
+  def show; end
 
   def new
     @extraction_definition = ExtractionDefinition.new
@@ -21,17 +20,23 @@ class ExtractionDefinitionsController < ApplicationController
     end
   end
 
-  def edit
-  end
-  
-  def update
-    @extraction_definition = ExtractionDefinition.find(params[:id])
+  def edit; end
 
+  def update
     if @extraction_definition.update(extraction_definition_params)
       redirect_to content_partner_extraction_definition_path(@content_partner, @extraction_definition), notice: 'Extraction Definition updated successfully'
     else
       flash.alert = 'There was an issue updating your Extraction Definition'
       render 'edit'
+    end
+  end
+
+  def destroy
+    if @extraction_definition.destroy
+      redirect_to content_partner_path(@content_partner), notice: 'Extraction Definition deleted successfully'
+    else
+      flash.alert = 'There was an issue deleting your Extraction Definition'
+      render 'show'
     end
   end
 

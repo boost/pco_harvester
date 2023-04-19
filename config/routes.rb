@@ -6,6 +6,6 @@ Rails.application.routes.draw do
 
   root 'home#index'
   resources :content_partners, only: %i[index show create update new edit] do
-    resources :extraction_definitions, only: %i[show new create edit update]
+    resources :extraction_definitions, only: %i[show new create edit update destroy]
   end
 end

@@ -24,7 +24,7 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
   describe '#create' do
     context 'with valid parameters' do
       it 'creates a new extraction definition' do
-        expect { 
+        expect {
           post content_partner_extraction_definitions_path(content_partner), params: {
             extraction_definition: {
               name: 'Name',
@@ -48,7 +48,7 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
 
     context 'with invalid parameters' do
       it 'does not create a new extraction definition' do
-        expect { 
+        expect {
           post content_partner_extraction_definitions_path(content_partner), params: {
             extraction_definition: { name: nil }
           }
@@ -65,7 +65,7 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
       end
     end
   end
-  
+
   describe '#update' do
     context 'with valid parameters' do
       it 'updates the extraction definition' do
@@ -87,7 +87,7 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
       end
     end
 
-    context 'with invalid paramaters' do 
+    context 'with invalid paramaters' do
       it 'does not update the content partner' do
         patch content_partner_extraction_definition_path(content_partner, extraction_definition), params: {
           extraction_definition: { name: nil }
@@ -105,6 +105,23 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
 
         expect(response.body).to include extraction_definition.name_in_database
       end
+    end
+  end
+
+  describe '#destroy' do
+    it 'destroys the extraction definition' do
+      delete content_partner_extraction_definition_path(content_partner, extraction_definition)
+
+      expect(response).to redirect_to(content_partner_path(content_partner))
+      follow_redirect!
+      expect(response.body).to include('Extraction Definition deleted successfully')
+    end
+
+    it 'displays a message when failing' do
+      allow_any_instance_of(ExtractionDefinition).to receive(:destroy).and_return false
+      delete content_partner_extraction_definition_path(content_partner, extraction_definition)
+
+      expect(response.body).to include('There was an issue deleting your Extraction Definition')
     end
   end
 end

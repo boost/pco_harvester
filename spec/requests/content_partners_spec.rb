@@ -3,12 +3,12 @@ require 'rails_helper'
 RSpec.describe "ContentPartners", type: :request do
   let!(:content_partner) { create(:content_partner) }
 
-  describe "#index" do
+  describe '#index' do
     it 'displays a list of content partners' do
       get content_partners_path
 
       expect(response.status).to eq 200
-      expect(response.body).to include content_partner.name
+      expect(response.body).to include CGI::escapeHTML(content_partner.name)
     end
   end
 
@@ -42,12 +42,11 @@ RSpec.describe "ContentPartners", type: :request do
   describe '#create' do
     context 'with valid parameters' do
       it 'creates a new content partner' do
-        expect { 
+        expect do
           post content_partners_path, params: {
             content_partner: attributes_for(:content_partner)
           }
-        }.to change(ContentPartner, :count).by(1)
-
+        end.to change(ContentPartner, :count).by(1)
       end
 
       it 'redirects to the content_partners_path' do
@@ -61,7 +60,7 @@ RSpec.describe "ContentPartners", type: :request do
 
     context 'with invalid parameters' do
       it 'does not create a new content partner' do
-        expect { 
+        expect {
           post content_partners_path, params: {
             content_partner: { name: nil }
           }
@@ -100,7 +99,7 @@ RSpec.describe "ContentPartners", type: :request do
       end
     end
 
-    context 'with invalid paramaters' do 
+    context 'with invalid paramaters' do
       it 'does not update the content partner' do
         patch content_partner_path(content_partner), params: {
           content_partner: { name: nil }
