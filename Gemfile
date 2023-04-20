@@ -22,11 +22,14 @@ gem 'kaminari'
 
 gem 'foreman'
 
+# extraction related
 gem 'faraday', '~> 2.7'
 gem 'faraday-follow_redirects'
+gem 'jsonpath'
 
-gem 'sidekiq'
+# used by jobs
 gem 'awesome_print'
+gem 'sidekiq'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

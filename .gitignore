@@ -18,6 +18,10 @@
 !/tmp/pids/
 !/tmp/pids/.keep
 
+# Ignore extraction files, but the keep the directory
+/extractions/*
+!/extractions/
+!/extractions/.keep
 
 /public/assets
 
