@@ -5,6 +5,6 @@ class ExtractionJob
 
   def perform(extraction_definition_id)
     @extraction_definition = ExtractionDefinition.find(extraction_definition_id)
-    Extraction.new(@extraction_definition).call
+    ExtractionExecution.new(@extraction_definition).call
   end
 end
