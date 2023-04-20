@@ -1,4 +1,19 @@
 document.addEventListener('DOMContentLoaded', function () {
+  function alertClass(statusCode) {
+    if (status >= 200 && status < 300) {
+      return "my-2 alert alert-success"
+    } else {
+      return "my-2 alert alert-danger";
+    }
+  }
+
+  function somethingWentWrong() {
+    document.getElementById("test-result").innerHTML =
+      `<div class="alert alert-danger my-2" role="alert">
+        Something went wrong.
+      </div>`
+  }
+
   function sendData() {
     const XHR = new XMLHttpRequest();
 
@@ -8,13 +23,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Define what happens on successful data submission
     XHR.addEventListener("load", (event) => {
-      document.getElementById("test-result").textContent =
-        JSON.stringify(JSON.parse(event.target.responseText), null, 2)
+      if (event.target.status >= 300) {
+        somethingWentWrong();
+        return;
+      }
+
+      const url = JSON.parse(event.target.responseText)['url']
+      const status = JSON.parse(event.target.responseText)['status']
+
+      document.getElementById("test-result").innerHTML =
+        `<div class="${alertClass(status)}" role="alert">
+          <a href="${url}" target="_blank">${url}</a>
+        </div>`
     });
 
     // Define what happens in case of error
     XHR.addEventListener("error", (event) => {
-      alert('Oops! Something went wrong.');
+      somethingWentWrong();
     });
 
     // Set up our request

@@ -26,7 +26,8 @@ class ExtractionDefinitionsController < ApplicationController
 
   def update
     if @extraction_definition.update(extraction_definition_params)
-      redirect_to content_partner_extraction_definition_path(@content_partner, @extraction_definition), notice: 'Extraction Definition updated successfully'
+      flash.notice = 'Extraction Definition updated successfully'
+      redirect_to content_partner_extraction_definition_path(@content_partner, @extraction_definition)
     else
       flash.alert = 'There was an issue updating your Extraction Definition'
       render 'edit'
@@ -36,11 +37,7 @@ class ExtractionDefinitionsController < ApplicationController
   def test
     @extraction_definition = ExtractionDefinition.new(extraction_definition_params)
 
-    response = TestExtractionDefinition.new(@extraction_definition).call
-    render json: {
-      headers: response.headers,
-      body: JSON.parse(response.body)
-    }
+    render json: DocumentExtraction.new(@extraction_definition).extract
   end
 
   def destroy
