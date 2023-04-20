@@ -10,7 +10,7 @@ class ExtractionDefinition < ApplicationRecord
     OAI: /^\//
   }
 
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: { scope: :content_partner }
   validates :format, presence: true, inclusion: { in: %w[JSON HTML XML OAI] }
   validates :base_url, presence: true, format: { with: URI::DEFAULT_PARSER.make_regexp }
   validates :throttle, numericality: { only_integer: true }
