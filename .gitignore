@@ -38,3 +38,5 @@ node_modules
 
 /config/application.yml
 
+app/extractions/*
+
