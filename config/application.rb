@@ -32,7 +32,7 @@ module Harvester
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
-    config.eager_load_paths << Rails.root.join('requests')
+    config.eager_load_paths << Rails.root.join('supplejack')
 
     # Don't generate system test files.
     config.generators.system_tests = nil

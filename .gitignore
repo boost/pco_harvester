@@ -42,7 +42,5 @@ node_modules
 
 /config/application.yml
 
-app/extractions/*
-
 # rspec
 /spec/examples.txt

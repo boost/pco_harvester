@@ -1,7 +1,7 @@
 class DocumentExtraction
   EXTRACTION_FOLDER = "#{Rails.root}/extractions/".freeze
 
-  attr_reader :request
+  attr_reader :document
 
   def initialize(extraction_definition)
     @extraction_definition = extraction_definition
@@ -9,11 +9,11 @@ class DocumentExtraction
 
   def extract
     p "Fetching from page #{@extraction_definition.page}"
-    @request = Request.new(url:, params:, headers:).get
+    @document = Extraction::Request.new(url:, params:, headers:).get
   end
 
   def save
-    File.write(request_path, @request.to_json)
+    @document.save(file_path)
   end
 
   def extract_and_save
@@ -23,7 +23,7 @@ class DocumentExtraction
 
   private
 
-  def request_path
+  def file_path
     page_str = format('%05d', @extraction_definition.page)[-5..]
     name_str = @extraction_definition.name.parameterize(separator: '_')
     "#{EXTRACTION_FOLDER}/#{name_str}__-__#{page_str}.json"

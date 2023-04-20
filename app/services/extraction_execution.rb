@@ -6,7 +6,7 @@ class ExtractionExecution
   def call
     de = DocumentExtraction.new(@extraction_definition)
     de.extract_and_save
-    total_results   = JsonPath.new(@extraction_definition.total_selector).on(de.request.body).first.to_i
+    total_results   = JsonPath.new(@extraction_definition.total_selector).on(de.document.body).first.to_i
     max_pages       = (total_results / @extraction_definition.per_page) + 1
 
     (@extraction_definition.page...max_pages).each do
