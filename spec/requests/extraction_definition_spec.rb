@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'ExtractionDefinitions', type: :request do
   let(:content_partner) { create(:content_partner) }
-  let!(:extraction_definition) { create(:extraction_definition, content_partner: content_partner) }
+  let!(:extraction_definition) { create(:extraction_definition, content_partner:) }
 
   describe '#show' do
     it 'renders a specific extraction definition' do
@@ -24,22 +24,18 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
   describe '#create' do
     context 'with valid parameters' do
       it 'creates a new extraction definition' do
-        expect {
+        extraction_definition2 = build(:extraction_definition, content_partner:)
+        expect do
           post content_partner_extraction_definitions_path(content_partner), params: {
-            extraction_definition: {
-              name: 'Name',
-              content_partner_id: content_partner.id
-            }
+            extraction_definition: extraction_definition2.attributes
           }
-        }.to change(ExtractionDefinition, :count).by(1)
+        end.to change(ExtractionDefinition, :count).by(1)
       end
 
       it 'redirects to the content_partner_path' do
+        extraction_definition2 = build(:extraction_definition, content_partner:)
         post content_partner_extraction_definitions_path(content_partner), params: {
-          extraction_definition: {
-            name: 'Name',
-            content_partner_id: content_partner.id
-          }
+          extraction_definition: extraction_definition2.attributes
         }
 
         expect(response).to redirect_to content_partner_path(content_partner)
@@ -48,16 +44,18 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
 
     context 'with invalid parameters' do
       it 'does not create a new extraction definition' do
-        expect {
+        extraction_definition2 = build(:extraction_definition, name: nil, content_partner:)
+        expect do
           post content_partner_extraction_definitions_path(content_partner), params: {
-            extraction_definition: { name: nil }
+            extraction_definition: extraction_definition2.attributes
           }
-        }.to change(ExtractionDefinition, :count).by(0)
+        end.to change(ExtractionDefinition, :count).by(0)
       end
 
       it 'renders the form again' do
+        extraction_definition2 = build(:extraction_definition, name: nil, content_partner:)
         post content_partner_extraction_definitions_path(content_partner), params: {
-          extraction_definition: { name: nil }
+          extraction_definition: extraction_definition2.attributes
         }
 
         expect(response.status).to eq 200
