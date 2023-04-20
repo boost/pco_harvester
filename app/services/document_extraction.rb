@@ -1,7 +1,7 @@
 class DocumentExtraction
   EXTRACTION_FOLDER = "#{Rails.root}/extractions/".freeze
 
-  attr_reader :response, :connection
+  attr_reader :request
 
   def initialize(extraction_definition)
     @extraction_definition = extraction_definition
@@ -9,21 +9,11 @@ class DocumentExtraction
 
   def extract
     p "Fetching from page #{@extraction_definition.page}"
-    @connection = Faraday.new(url:, params:, headers:) do |f|
-      f.response :follow_redirects, limit: 5
-      f.adapter Faraday.default_adapter
-    end
-
-    @response = @connection.get
+    @request = Request.new(url:, params:, headers:).get
   end
 
   def save
-    File.write(response_path, response.to_json)
-    File.write(request_path, {
-      url: @connection.build_url,
-      params: @connection.params,
-      headers: @connection.headers
-    }.to_json)
+    File.write(request_path, @request.to_json)
   end
 
   def extract_and_save
@@ -33,18 +23,10 @@ class DocumentExtraction
 
   private
 
-  def base_path
+  def request_path
     page_str = format('%05d', @extraction_definition.page)[-5..]
     name_str = @extraction_definition.name.parameterize(separator: '_')
-    "#{EXTRACTION_FOLDER}/#{name_str}__-__#{page_str}"
-  end
-
-  def response_path
-    "#{base_path}_response.json"
-  end
-
-  def request_path
-    "#{base_path}_request.json"
+    "#{EXTRACTION_FOLDER}/#{name_str}__-__#{page_str}.json"
   end
 
   def url
