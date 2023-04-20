@@ -4,6 +4,8 @@ class ExtractionDefinitionsController < ApplicationController
   before_action :find_content_partner
   before_action :find_extraction_definition, only: %i[show edit update destroy]
 
+  skip_before_action :verify_authenticity_token, only: %i[test]
+
   def show; end
 
   def new
@@ -29,6 +31,16 @@ class ExtractionDefinitionsController < ApplicationController
       flash.alert = 'There was an issue updating your Extraction Definition'
       render 'edit'
     end
+  end
+
+  def test
+    @extraction_definition = ExtractionDefinition.new(extraction_definition_params)
+
+    response = TestExtractionDefinition.new(@extraction_definition).call
+    render json: {
+      headers: response.headers,
+      body: JSON.parse(response.body)
+    }
   end
 
   def destroy
