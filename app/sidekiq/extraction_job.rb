@@ -17,7 +17,7 @@ class ExtractionJob
         'User-Agent' => 'Supplejack Harvester v2.0'
       }
     }
-    
+
     records = []
 
     initial_request = Faraday.new(faraday_params).get
@@ -28,7 +28,7 @@ class ExtractionJob
       p "Fetching from page #{@extraction_definition.page}"
 
       response = Faraday.new(faraday_params) do |f|
-        f.use FaradayMiddleware::FollowRedirects, limit: 5
+        f.response :follow_redirects, limit: 5
         f.adapter Faraday.default_adapter
       end.get
 
@@ -38,7 +38,7 @@ class ExtractionJob
 
       @extraction_definition.page += 1
     end
-    
+
     File.write("#{Rails.root}/app/extractions/#{@extraction_definition.name.parameterize(separator: '_')}.json", records.flatten.to_json)
    end
 end

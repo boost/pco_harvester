@@ -22,8 +22,8 @@ gem 'kaminari'
 
 gem 'foreman'
 
-gem 'faraday'
-gem 'faraday_middleware'
+gem 'faraday', '~> 2.7'
+gem 'faraday-follow_redirects'
 
 gem 'sidekiq'
 gem 'awesome_print'

@@ -5,7 +5,7 @@ class TestExtractionDefinition
 
   def call
     Faraday.new(url:, params:, headers:) do |f|
-      f.use FaradayMiddleware::FollowRedirects, limit: 5
+      f.response :follow_redirects, limit: 5
       f.adapter Faraday.default_adapter
     end.get
   end
