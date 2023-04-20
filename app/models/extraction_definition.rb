@@ -17,7 +17,7 @@ class ExtractionDefinition < ApplicationRecord
   validate :total_selector_format
 
   # pagination fields
-  validates :pagination_type, presence: true, inclusion: { in: %w[item] }
+  validates :pagination_type, presence: true, inclusion: { in: %w[item page] }
   validates :page, numericality: { only_integer: true }
   validates :per_page, numericality: { only_integer: true }
 
