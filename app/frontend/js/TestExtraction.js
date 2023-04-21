@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
   function alertClass(statusCode) {
-    if (status >= 200 && status < 300) {
+    if (statusCode >= 200 && statusCode < 300) {
       return "my-2 alert alert-success"
     } else {
       return "my-2 alert alert-danger";
