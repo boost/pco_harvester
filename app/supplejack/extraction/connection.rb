@@ -1,10 +1,13 @@
 module Extraction
   class Connection
+    attr_reader :url, :params, :headers
+
     def initialize(url:, params: {}, headers: {})
       @connection = connection(url, params, headers)
       @method     = nil
       @params     = @connection.params
       @headers    = @connection.headers
+      @url        = url
     end
 
     def get
