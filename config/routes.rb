@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :content_partners, only: %i[index show create update new edit] do
     resources :extraction_definitions, only: %i[show new create edit update destroy] do
       post :test, on: :member
+      get :run
     end
   end
 end

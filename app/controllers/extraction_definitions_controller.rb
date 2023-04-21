@@ -40,6 +40,12 @@ class ExtractionDefinitionsController < ApplicationController
     render json: DocumentExtraction.new(@extraction_definition).extract
   end
 
+  def run
+    @job = Job.create(status: 'queued')
+
+    ExtractionJob.perform_async(params[:id], @job.id)
+  end
+
   def destroy
     if @extraction_definition.destroy
       redirect_to content_partner_path(@content_partner), notice: 'Extraction Definition deleted successfully'

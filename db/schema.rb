@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_19_203310) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_21_042600) do
   create_table "content_partners", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -33,6 +33,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_19_203310) do
     t.string "total_selector"
     t.index ["content_partner_id"], name: "index_extraction_definitions_on_content_partner_id"
     t.index ["name"], name: "index_extraction_definitions_on_name", unique: true
+  end
+
+  create_table "jobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.string "status"
+    t.string "result_location"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
