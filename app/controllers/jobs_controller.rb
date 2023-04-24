@@ -16,11 +16,11 @@ class JobsController < ApplicationController
     if @job.save
       ExtractionJob.perform_async(@job.id)
       flash.notice = 'Job queued successfuly'
-      redirect_to content_partner_extraction_definition_job_path(@content_partner, @extraction_definition, @job)
     else
       flash.alert = 'There was an issue launching the job'
-      redirect_to content_partner_extraction_definition_path(@content_partner, @extraction_definition)
     end
+
+    redirect_to content_partner_extraction_definition_path(@content_partner, @extraction_definition)
   end
 
   private
