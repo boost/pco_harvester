@@ -2,16 +2,15 @@
 
 <h1 class='float-start'><%= @extraction_definition.name %></h1>
 
-<button type="button" class="float-end btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">
-  Delete
-</button>
+<button type="button" class="float-end btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">Delete</button>
+
 <%= link_to 'Edit definition', edit_content_partner_extraction_definition_path(@content_partner, @extraction_definition), class: 'float-end me-1 btn btn-outline-primary' %>
 
-<%= link_to 'Run sample job', '', class: 'float-end me-1 btn btn-primary' %>
-
-<%= link_to 'Run full job', '', class: 'float-end me-1 btn btn-primary' %>
+<%= button_to 'Run full job', content_partner_extraction_definition_jobs_path(@content_partner, @extraction_definition), class: 'float-end me-1 btn btn-primary' %>
 
 <div class="clearfix"></div>
+
+<%= render partial: 'jobs/jobs', locals: { jobs: @jobs } %>
 
 <!-- Modal -->
 <div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="Delete extraction definition" aria-hidden="true">

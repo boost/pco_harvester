@@ -6,7 +6,9 @@ class ExtractionDefinitionsController < ApplicationController
 
   skip_before_action :verify_authenticity_token, only: %i[test]
 
-  def show; end
+  def show
+    @jobs = @extraction_definition.jobs.order(updated_at: :desc).page(params[:page])
+  end
 
   def new
     @extraction_definition = ExtractionDefinition.new
@@ -38,12 +40,6 @@ class ExtractionDefinitionsController < ApplicationController
     @extraction_definition = ExtractionDefinition.new(extraction_definition_params)
 
     render json: DocumentExtraction.new(@extraction_definition).extract
-  end
-
-  def run
-    @job = Job.create(status: 'queued')
-
-    ExtractionJob.perform_async(params[:id], @job.id)
   end
 
   def destroy

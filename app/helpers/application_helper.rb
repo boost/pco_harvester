@@ -7,7 +7,7 @@ module ApplicationHelper
     return unless display
 
     tag.li(class: { 'breadcrumb-item': true, active: }) do
-      path && !active ? link_to(text, path) : text
+      path && !active ? link_to(text, path) : text&.to_s
     end
   end
 

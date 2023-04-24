@@ -13,7 +13,7 @@ class ExtractionExecution
       @extraction_definition.page += 1
       de.extract_and_save
 
-      sleep @extraction_definition.throttle
+      sleep @extraction_definition.throttle / 1000.0
       break if @extraction_definition.page > 3
     end
   end

@@ -1,0 +1,33 @@
+<%- if jobs.any? %>
+  <%- jobs.each do |job| %>
+    <div class="border p-3 my-2 row justify-content-between">
+      <div class="col">
+        <%# 13 Jan | 4:42pm | %>
+        <h2 class="h4"><%= job.updated_at.strftime('%d %b | %H:%m | ') %> Richard Matthews</h2>
+        <p class="text-secondary mb-0">
+          <% if job.queued? %>
+            Queued
+          <% elsif job.running? %>
+            Running full job...
+          <% elsif job.completed? %>
+            Completed
+          <% end %>
+        </p>
+      </div>
+
+      <div class="col-auto">
+        <% path = content_partner_extraction_definition_job_path(job.extraction_definition.content_partner, job.extraction_definition, job) %>
+
+        <% if job.queued? || job.running? %>
+          <%= link_to "Cancel job", path, class: "btn btn-outline-danger" %>
+        <% elsif job.completed? %>
+          <%= link_to "See results", path, class: "btn btn-outline-primary" %>
+        <% end %>
+      </div>
+    </div>
+  <%- end %>
+
+  <%= render 'shared/pagination_below_table', items: jobs %>
+<% else %>
+  <p>There are currently no jobs.</p>
+<% end %>

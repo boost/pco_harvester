@@ -3,15 +3,17 @@ class ExtractionJob
 
   sidekiq_options retry: false
 
-  def perform(extraction_definition_id, job_id)
+  sidekiq_retries_exhausted do |job, ex|
+    @job.mark_as_errored
+    Sidekiq.logger.warn "Failed #{job['class']} with #{job['args']}: #{job['error_message']}"
+  end
 
+  def perform(job_id)
     @job = Job.find(job_id)
-    @job.update_attributes(status: 'running')
-    
-    @extraction_definition = ExtractionDefinition.find(extraction_definition_id)
-   
-    ExtractionExecution.new(@extraction_definition).call
+    @job.mark_as_running
 
-    @job.update_attributes(status: 'complete')
+    ExtractionExecution.new(@job.extraction_definition).call
+
+    @job.mark_as_completed
   end
 end
