@@ -118,6 +118,7 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
     it 'displays a message when failing' do
       allow_any_instance_of(ExtractionDefinition).to receive(:destroy).and_return false
       delete content_partner_extraction_definition_path(content_partner, extraction_definition)
+      follow_redirect!
 
       expect(response.body).to include('There was an issue deleting your Extraction Definition')
     end

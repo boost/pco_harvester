@@ -15,7 +15,7 @@ module Extraction
         request_headers: @connection.headers,
         status: @response.status,
         response_headers: @response.headers,
-        body: @response.body,
+        body: @response.body
       )
     end
   end

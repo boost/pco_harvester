@@ -1,6 +1,6 @@
 module Extraction
   class Response
-    attr_reader :status, :body, :headers
+    attr_reader :status, :headers, :body
 
     def initialize(response)
       @status = response.status

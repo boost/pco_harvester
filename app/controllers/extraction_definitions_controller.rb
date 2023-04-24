@@ -47,7 +47,7 @@ class ExtractionDefinitionsController < ApplicationController
       redirect_to content_partner_path(@content_partner), notice: 'Extraction Definition deleted successfully'
     else
       flash.alert = 'There was an issue deleting your Extraction Definition'
-      render 'show'
+      redirect_to content_partner_extraction_definition_path(@content_partner, @extraction_definition)
     end
   end
 

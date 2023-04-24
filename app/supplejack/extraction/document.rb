@@ -4,14 +4,14 @@ module Extraction
   class Document
     attr_reader :status, :request_headers, :response_headers, :body, :url, :method, :params
 
-    def initialize(attributes)
-      @url = attributes[:url]
-      @method = attributes[:method]
-      @params = attributes[:params]
-      @request_headers = attributes[:request_headers]
-      @status = attributes[:status]
-      @response_headers = attributes[:response_headers]
-      @body = attributes[:body]
+    def initialize(**kwargs)
+      @url = kwargs[:url]
+      @method = kwargs[:method]
+      @params = kwargs[:params]
+      @request_headers = kwargs[:request_headers]
+      @status = kwargs[:status]
+      @response_headers = kwargs[:response_headers]
+      @body = kwargs[:body]
     end
 
     def save(file_path)

@@ -3,15 +3,15 @@ module Extraction
     attr_reader :url, :params, :headers
 
     def initialize(url:, params: {}, headers: {})
+      headers ||= {}
+
       @connection = connection(url, params, headers)
-      @method     = nil
+      @url        = @connection.build_url
       @params     = @connection.params
       @headers    = @connection.headers
-      @url        = url
     end
 
     def get
-      @method = 'GET'
       Response.new(@connection.get)
     end
 
