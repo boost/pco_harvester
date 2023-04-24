@@ -2,10 +2,12 @@
 
 <h1 class="float-start"><%= @content_partner.name_in_database %></h1>
 
-<%= link_to 'Edit content partner', edit_content_partner_path(@content_partner), class: 'float-end btn btn-outline-primary float-end' %>
-<%= link_to new_content_partner_extraction_definition_path(@content_partner), class: 'float-end btn btn-primary me-1 float-end' do %>
-  <%= bootstrap_icon('plus-circle') %>Add new definition
-<% end %>
+<div class="float-end">
+  <%= link_to new_content_partner_extraction_definition_path(@content_partner), class: 'btn btn-primary me-1' do %>
+    <%= bootstrap_icon('plus-circle') %>Add new definition
+  <% end %>
+  <%= link_to 'Edit content partner', edit_content_partner_path(@content_partner), class: 'btn btn-outline-primary' %>
+</div>
 
 <div class="clearfix"></div>
 
