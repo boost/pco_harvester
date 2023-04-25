@@ -12,7 +12,9 @@ Rails.application.routes.draw do
         post :test
       end
 
-      resources :jobs, only: %i[show create destroy]
+      resources :jobs, only: %i[show create destroy] do
+        post :cancel, on: :member
+      end
     end
   end
 

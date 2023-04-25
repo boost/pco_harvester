@@ -15,7 +15,9 @@ class ExtractionExecution
       de.extract_and_save
 
       sleep @extraction_definition.throttle / 1000.0
-      break if @extraction_definition.page > 3
+      @job.reload
+
+      break if @job.cancelled?
     end
   end
 end

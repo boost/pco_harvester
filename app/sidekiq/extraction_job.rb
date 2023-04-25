@@ -15,6 +15,6 @@ class ExtractionJob
 
     ExtractionExecution.new(@job, @job.extraction_definition).call
 
-    @job.mark_as_completed
+    @job.mark_as_completed unless @job.cancelled?
   end
 end

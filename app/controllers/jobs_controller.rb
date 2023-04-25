@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class JobsController < ApplicationController
-  before_action :find_content_partner, only: %i[show create destroy]
-  before_action :find_extraction_definition, only: %i[show create destroy]
-  before_action :find_job, only: %i[show destroy]
+  before_action :find_content_partner, only: %i[show create destroy cancel]
+  before_action :find_extraction_definition, only: %i[show create destroy cancel]
+  before_action :find_job, only: %i[show destroy cancel]
 
   def index
     @jobs = Job.order(updated_at: :desc).page(params[:page])
@@ -34,6 +34,16 @@ class JobsController < ApplicationController
       flash.alert = 'There was an issue deleting the results'
       redirect_to content_partner_extraction_definition_job_path(@content_partner, @extraction_definition, @job)
     end
+  end
+
+  def cancel
+    if @job.mark_as_cancelled
+      flash.notice = 'Job cancelled successfully'
+    else
+      flash.alert = 'There was an issue cancelling this job'
+    end
+
+    redirect_to content_partner_extraction_definition_path(@content_partner, @extraction_definition)
   end
 
   private
