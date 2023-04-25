@@ -26,9 +26,6 @@ gem 'foreman'
 gem 'faraday', '~> 2.7'
 gem 'faraday-follow_redirects'
 gem 'jsonpath'
-
-# used by jobs
-gem 'awesome_print'
 gem 'sidekiq'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
