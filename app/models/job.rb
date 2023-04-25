@@ -9,8 +9,10 @@ class Job < ApplicationRecord
   after_destroy :delete_folder
 
   STATUSES = %w[queued cancelled running completed errored].freeze
+  KINDS = %w[full sample].freeze
 
   validates :status, presence: true, inclusion: { in: STATUSES }
+  validates :kind, presence: true, inclusion: { in: KINDS }
 
   STATUSES.each do |status_name|
     define_method("#{status_name}?".to_sym) do
@@ -19,6 +21,12 @@ class Job < ApplicationRecord
 
     define_method("mark_as_#{status_name}".to_sym) do
       update(status: status_name)
+    end
+  end
+
+  KINDS.each do |kind_name|
+    define_method("#{kind_name}?".to_sym) do
+      kind == kind_name
     end
   end
 

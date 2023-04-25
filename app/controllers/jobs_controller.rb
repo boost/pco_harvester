@@ -15,7 +15,7 @@ class JobsController < ApplicationController
   end
 
   def create
-    @job = Job.new(extraction_definition: @extraction_definition)
+    @job = Job.new(extraction_definition: @extraction_definition, kind: params[:kind])
     if @job.save
       ExtractionJob.perform_async(@job.id)
       flash.notice = 'Job queued successfuly'
