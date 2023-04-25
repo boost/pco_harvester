@@ -5,7 +5,9 @@ module JobsHelper
     elsif job.running?
       'Running full job...'
     elsif job.errored?
-      'An error occured...'
+      'An error occured'
+    elsif job.canceled?
+      'Canceled'
     elsif job.completed?
       'Completed'
     end

@@ -8,7 +8,7 @@ class Job < ApplicationRecord
   after_create :create_folder
   after_destroy :delete_folder
 
-  STATUSES = %w[queued running completed errored].freeze
+  STATUSES = %w[queued canceled running completed errored].freeze
 
   validates :status, presence: true, inclusion: { in: STATUSES }
 
