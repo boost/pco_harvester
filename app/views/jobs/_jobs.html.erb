@@ -15,8 +15,9 @@
         <% path = content_partner_extraction_definition_job_path(job.extraction_definition.content_partner, job.extraction_definition, job) %>
 
         <% if job.queued? || job.running? %>
-          <%= link_to "Cancel job", path, class: "btn btn-outline-danger" %>
-        <% elsif job.completed? %>
+          <%= link_to "Cancel job", path, class: "btn btn-outline-danger me-1" %>
+          <%= link_to "See results", path, class: "btn btn-outline-primary" %>
+        <% elsif job.completed? || job.errored? %>
           <%= link_to "See results", path, class: "btn btn-outline-primary" %>
         <% end %>
       </div>

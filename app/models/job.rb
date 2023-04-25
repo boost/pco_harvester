@@ -5,7 +5,8 @@ class Job < ApplicationRecord
 
   belongs_to :extraction_definition
 
-  after_create :setup_folder
+  after_create :create_folder
+  after_destroy :delete_folder
 
   STATUSES = %w[queued running completed errored].freeze
 
@@ -25,12 +26,13 @@ class Job < ApplicationRecord
     "#{EXTRACTIONS_FOLDER}/#{created_at.strftime('%Y-%m-%d_%H-%M-%S')}_-_#{id}"
   end
 
-  def setup_folder
-    if Dir.exist?(@extraction_folder)
-      Dir.each_child(&:delete)
-    else
-      Dir.mkdir(@extraction_folder)
-    end
+  def create_folder
+    Dir.mkdir(extraction_folder)
+  end
+
+  def delete_folder
+    FileUtils.rm Dir.glob("#{extraction_folder}/*")
+    Dir.rmdir(extraction_folder)
   end
 
   def documents

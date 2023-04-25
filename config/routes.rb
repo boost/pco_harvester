@@ -12,7 +12,7 @@ Rails.application.routes.draw do
         post :test
       end
 
-      resources :jobs, only: %i[show create]
+      resources :jobs, only: %i[show create destroy]
     end
   end
 
