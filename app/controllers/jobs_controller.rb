@@ -9,7 +9,10 @@ class JobsController < ApplicationController
     @jobs = Job.order(updated_at: :desc).page(params[:page])
   end
 
-  def show; end
+  def show
+    @documents = @job.documents
+    @document = @documents[params[:page]]
+  end
 
   def create
     @job = Job.new(extraction_definition: @extraction_definition)

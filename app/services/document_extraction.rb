@@ -1,10 +1,9 @@
 class DocumentExtraction
-  EXTRACTION_FOLDER = "#{Rails.root}/extractions/".freeze
-
   attr_reader :document
 
-  def initialize(extraction_definition)
+  def initialize(extraction_definition, extraction_folder)
     @extraction_definition = extraction_definition
+    @extraction_folder = extraction_folder
   end
 
   def extract
@@ -26,7 +25,7 @@ class DocumentExtraction
   def file_path
     page_str = format('%05d', @extraction_definition.page)[-5..]
     name_str = @extraction_definition.name.parameterize(separator: '_')
-    "#{EXTRACTION_FOLDER}/#{name_str}__-__#{page_str}.json"
+    "#{@extraction_folder}/#{name_str}__-__#{page_str}.json"
   end
 
   def url

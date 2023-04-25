@@ -20,7 +20,7 @@ module Extraction
 
     def self.load_from_file(file_path)
       json = JSON.parse(File.read(file_path)).symbolize_keys
-      Document.new(json)
+      Document.new(**json)
     end
 
     def to_hash

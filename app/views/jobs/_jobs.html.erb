@@ -2,17 +2,13 @@
   <%- jobs.each do |job| %>
     <div class="border p-3 my-2 row justify-content-between">
       <div class="col">
-        <%# 13 Jan | 4:42pm | %>
+
         <h2 class="h4"><%= job.updated_at.strftime('%d %b | %H:%M | ') %> Richard Matthews</h2>
+
         <p class="text-secondary mb-0">
-          <% if job.queued? %>
-            Queued
-          <% elsif job.running? %>
-            Running full job...
-          <% elsif job.completed? %>
-            Completed
-          <% end %>
+          <%= job_status_text(job) %>
         </p>
+
       </div>
 
       <div class="col-auto">

@@ -12,7 +12,7 @@ class ExtractionJob
     @job = Job.find(job_id)
     @job.mark_as_running
 
-    ExtractionExecution.new(@job.extraction_definition).call
+    ExtractionExecution.new(@job, @job.extraction_definition).call
 
     @job.mark_as_completed
   end

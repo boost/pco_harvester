@@ -1,5 +1,88 @@
 <%= render 'shared/breadcrumb_nav' %>
 
 <h1><%= @job.updated_at.strftime('%d %b | %H:%M | ') %> Richard Matthews</h1>
+<h2 class="text-success"><%= job_status_text(@job) %></h2>
 
-<p>Status: <%= @job.status %></p>
+<div class="alert alert-success border-success text-dark">
+  <h4 class="alert-heading">This job is currently <%= @job.status %></h4>
+  <p>
+    It has been running for XX mins.
+    This is some more information about what you can currently do while the job is running,
+    and some ways you may be able to pass your time.
+  </p>
+</div>
+
+<% if @document.blank? %>
+  <p>The extracted page could not be found.</p>
+<% else %>
+  <div class="alert border">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="h1">Extracted data</h2>
+        <%= render 'shared/pagination_below_table', items: @documents %>
+      </div>
+      <div class="col">
+        <h3>Request</h3>
+
+        <ol class="list-group">
+          <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">URL</div>
+              <a href="<%= @document.url %>"><%= @document.url %></a>
+            </div>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">HTTP Method</div>
+              <%= @document.method %>
+            </div>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">Params</div>
+              <pre><code><%= JSON.pretty_generate(@document.params) %></code></pre>
+            </div>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">Request Headers</div>
+              <% @document.request_headers.each do |header, value| %>
+                  <dt class="d-inline"><%= header %></dt>
+                  <dd class="d-inline"><%= value %></dd>
+                  <br />
+                <% end %>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <div class="col">
+        <h3>Response</h3>
+
+        <ol class="list-group">
+          <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">Status code</div>
+              <%= @document.status %>
+            </div>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">Response Headers</div>
+                <% @document.response_headers.each do |header, value| %>
+                  <dt class="d-inline"><%= header %></dt>
+                  <dd class="d-inline"><%= value %></dd>
+                  <br />
+                <% end %>
+              </dl>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <div class="col-12 mt-3">
+        <pre class="bg-dark text-white p-1"><code><%= JSON.pretty_generate(JSON.parse(@document.body)) %></code></pre>
+      </div>
+    </div>
+  </div>
+<% end %>
