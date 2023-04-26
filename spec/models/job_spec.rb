@@ -46,7 +46,7 @@ RSpec.describe Job, type: :model do
 
   describe '#extraction_folder' do
     it 'returns the path for where the extractions are kept' do
-      expect(subject.extraction_folder).to eq("#{Rails.root.join('extractions')}/#{subject.created_at.strftime('%Y-%m-%d_%H-%M-%S')}_-_#{subject.id}")
+      expect(subject.extraction_folder).to eq("#{Rails.root.join('extractions')}/#{Rails.env}/#{subject.created_at.strftime('%Y-%m-%d_%H-%M-%S')}_-_#{subject.id}")
     end
   end
 
