@@ -12,6 +12,16 @@ FactoryBot.define do
     per_page { 50 }
     total_selector { '$.totalObjects' }
 
+    trait :ngataonga do
+      name { 'api.ngataonga.org.nz' }
+      base_url { 'http://api.ngataonga.org.nz/records.json/?api_key=MYAPIKEY&and[has_media]=true' }
+      page_parameter { 'page' }
+      page { 1 }
+      per_page_parameter { 'per_page' }
+      per_page { 50 }
+      total_selector { '$..result_count' }
+    end
+
     association :content_partner
   end
 end
