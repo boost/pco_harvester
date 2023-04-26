@@ -41,7 +41,7 @@ class JobsController < ApplicationController
     if @job.mark_as_cancelled
       flash.notice = 'Job cancelled successfully'
     else
-      flash.alert = 'There was an issue cancelling this job'
+      flash.alert = 'There was an issue cancelling the job'
     end
 
     redirect_to content_partner_extraction_definition_path(@content_partner, @extraction_definition)

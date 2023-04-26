@@ -120,4 +120,57 @@ RSpec.describe 'Jobs', type: :request do
       end
     end
   end
+
+  describe '#cancel' do
+    context 'when the cancellation is successful' do
+      it 'sets the job status to be cancelled' do
+        post cancel_content_partner_extraction_definition_job_path(content_partner, extraction_definition, subject) 
+
+        subject.reload
+        expect(subject.status).to eq 'cancelled'
+      end
+
+      it 'redirects to the correct path' do
+        post cancel_content_partner_extraction_definition_job_path(content_partner, extraction_definition, subject) 
+
+        expect(response).to redirect_to content_partner_extraction_definition_path(content_partner, extraction_definition)
+      end
+
+      it 'displays an appropriate flash message' do
+        post cancel_content_partner_extraction_definition_job_path(content_partner, extraction_definition, subject) 
+
+        follow_redirect!
+
+        expect(response.body).to include 'Job cancelled successfully'
+      end
+    end
+
+    context 'when the cancellation is unsuccessful' do
+      before do
+        allow_any_instance_of(Job).to receive(:update).and_return(false)
+      end
+
+      it 'does not set the job status to be cancelled' do
+        post cancel_content_partner_extraction_definition_job_path(content_partner, extraction_definition, subject) 
+
+        subject.reload
+        expect(subject.status).not_to eq 'cancelled'
+      end
+      
+      it 'redirects to the correct path' do
+        post cancel_content_partner_extraction_definition_job_path(content_partner, extraction_definition, subject) 
+
+        expect(response).to redirect_to content_partner_extraction_definition_path(content_partner, extraction_definition)
+      end
+
+      it 'displays an appropriate flash message' do
+        post cancel_content_partner_extraction_definition_job_path(content_partner, extraction_definition, subject) 
+
+        follow_redirect!
+
+        expect(response.body).to include 'There was an issue cancelling the job'
+      end
+      
+    end
+  end
 end
