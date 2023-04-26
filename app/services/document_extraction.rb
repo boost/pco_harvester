@@ -1,7 +1,7 @@
 class DocumentExtraction
   attr_reader :document
 
-  def initialize(extraction_definition, extraction_folder)
+  def initialize(extraction_definition, extraction_folder: nil)
     @extraction_definition = extraction_definition
     @extraction_folder = extraction_folder
   end
@@ -12,7 +12,8 @@ class DocumentExtraction
   end
 
   def save
-    raise StandardError, 'A document is required to call save on an instance of DocumentExtraction' unless @document.present?
+    raise ArgumentError, 'extraction_folder was not provided in #new' unless @extraction_folder.present?
+    raise '#extract must be called before #save DocumentExtraction' unless @document.present?
 
     @document.save(file_path)
   end

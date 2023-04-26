@@ -14,44 +14,32 @@ document.addEventListener('DOMContentLoaded', function () {
       </div>`
   }
 
-  function sendData() {
-    const XHR = new XMLHttpRequest();
-
+  function sendData(form) {
     // Bind the FormData object and the form element
     const FD = new FormData(form);
     FD.set('_method', 'post')
 
-    // Define what happens on successful data submission
-    XHR.addEventListener("load", (event) => {
-      if (event.target.status >= 300) {
-        somethingWentWrong();
-        return;
-      }
-
-      const url = JSON.parse(event.target.responseText)['url']
-      const status = JSON.parse(event.target.responseText)['status']
-
+    const path = `${form.action.replace(/\/\d+$/, '')}/test`;
+    // Fetches the response
+    fetch(path, {
+      method: 'POST',
+      body: FD
+    }).then(function(response) {
+      return response.ok ? response.json() : Promise.reject()
+    })
+    .then(function(data) {
       document.getElementById("test-result").innerHTML =
-        `<div class="${alertClass(status)}" role="alert">
-          <a href="${url}" target="_blank">${url}</a>
+        `<div class="${alertClass(data.status)}" role="alert">
+          <a href="${data.url}" target="_blank">${data.url}</a>
         </div>`
-    });
-
-    // Define what happens in case of error
-    XHR.addEventListener("error", (event) => {
+    }).catch(function(error) {
       somethingWentWrong();
-    });
-
-    // Set up our request
-    XHR.open("POST", `${form.action}/test`);
-
-    // The data sent is what the user provided in the form
-    XHR.send(FD);
+    })
   }
 
   const button = this.getElementById('test-extraction');
   const form = button.closest("form");
   button.addEventListener("click", (event) => {
-    sendData();
+    sendData(form);
   });
 }, false);

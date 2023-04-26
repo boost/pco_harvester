@@ -8,9 +8,7 @@ Rails.application.routes.draw do
 
   resources :content_partners, only: %i[index show create update new edit] do
     resources :extraction_definitions, only: %i[show new create edit update destroy] do
-      member do
-        post :test
-      end
+      post :test, on: :collection
 
       resources :jobs, only: %i[show create destroy] do
         post :cancel, on: :member
