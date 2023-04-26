@@ -9,10 +9,6 @@ RSpec.describe ExtractionDefinition, type: :model do
     it 'has a name' do
       expect(subject.name).to eq 'Flickr API'
     end
-
-    it 'has a content partner' do
-      expect(subject.content_partner).to be_a ContentPartner
-    end
   end
 
   describe '#validations presence of' do
@@ -76,6 +72,19 @@ RSpec.describe ExtractionDefinition, type: :model do
       'google.com'
     ].each do |base_url|
       it { should_not allow_value(base_url).for(:base_url) }
+    end
+  end
+
+  describe '#associations' do
+    let(:job) { create(:job) }
+    let(:ed)  { create(:extraction_definition, jobs: [job]) }
+
+    it 'has many jobs' do
+      expect(ed.jobs).to include job
+    end
+
+    it 'belongs to a content partner' do
+      expect(subject.content_partner).to be_a ContentPartner
     end
   end
 end
