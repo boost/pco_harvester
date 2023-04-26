@@ -19,9 +19,16 @@
 !/tmp/pids/.keep
 
 # Ignore extraction files, but the keep the directory
-/extractions/*
+/extractions/test/*
+/extractions/development/*
+/extractions/staging/*
+/extractions/production/*
+
 !/extractions/
-!/extractions/.keep
+!/extractions/test/.keep
+!/extractions/development/.keep
+!/extractions/staging/.keep
+!/extractions/production/.keep
 
 /public/assets
 

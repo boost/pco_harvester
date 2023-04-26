@@ -1,6 +1,6 @@
 
 class Job < ApplicationRecord
-  EXTRACTIONS_FOLDER = "#{Rails.root}/extractions".freeze
+  EXTRACTIONS_FOLDER = "#{Rails.root}/extractions/#{Rails.env}".freeze
 
   belongs_to :extraction_definition
 
