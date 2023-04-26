@@ -1,3 +1,23 @@
+# frozen_string_literal: true
+
+unless Extraction::Connection.private_method_defined?(:connection)
+  abort('
+    You changed how to make external requests.
+    Please make sure we do not make external API calls during tests."
+  ')
+end
+
+module Extraction
+  class Connection
+    private
+
+    def connection(url, params, headers)
+      stubs = Faraday::Adapter::Test::Stubs.new
+      Faraday.new(url:, params:, headers:) { |b| b.adapter(:test, stubs) }
+    end
+  end
+end
+
 class FakeResponse
   def initialize(file)
     path = Rails.root.join("spec/stub_responses/#{file}.json")

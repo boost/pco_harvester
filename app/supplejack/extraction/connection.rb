@@ -18,6 +18,8 @@ module Extraction
     private
 
     def connection(url, params, headers)
+      raise 'This code should not be executed in tests' if Rails.env.test?
+
       Faraday.new(url:, params:, headers:) do |f|
         f.response :follow_redirects, limit: 5
         f.adapter Faraday.default_adapter
