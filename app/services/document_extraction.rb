@@ -12,6 +12,8 @@ class DocumentExtraction
   end
 
   def save
+    raise StandardError, 'A document is required to call save on an instance of DocumentExtraction' unless @document.present?
+
     @document.save(file_path)
   end
 
