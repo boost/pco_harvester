@@ -3,23 +3,64 @@
 require 'rails_helper'
 
 RSpec.describe ExtractionExecution do
-  let(:job) { create(:job) }
-  let(:ed) { create(:extraction_definition, base_url: 'http://google.com/?url_param=url_value', jobs: [job]) }
-  let(:subject) { described_class.new(job, ed) }
+  let(:full_job) { create(:job) }
+  let(:sample_job) { create(:job, kind: 'sample') }
+  let(:ed) { create(:extraction_definition, base_url: 'http://google.com/?url_param=url_value', jobs: [full_job, sample_job]) }
 
   before do
-    init_params = {
-      url: 'http://google.com/?url_param=url_value',
-      params: { 'page' => 1, 'per_page' => 50  },
-      headers: { 'Content-Type' => 'application/json', 'User-Agent' => 'Supplejack Harvester v2.0' }
-    }
+    (1...6).each do |page|
+      init_params = {
+        url: 'http://google.com/?url_param=url_value',
+        params: { 'page' => page, 'per_page' => 50  },
+        headers: { 'Content-Type' => 'application/json', 'User-Agent' => 'Supplejack Harvester v2.0' }
+      }
 
-    stub_request(**init_params) { 'test' }
+      stub_request(**init_params) { 'test' }
+    end
   end
 
   describe '#call' do
-    it 'saves response from the content partner to the filesystem' do
-      subject.call
+    context 'when running a full job' do
+      let(:subject) { described_class.new(full_job, ed) }
+
+      it 'saves the full response from the content partner to the filesystem' do
+        subject.call
+
+        expect(File.exist?(full_job.extraction_folder)).to eq true
+        extracted_files = Dir.glob("#{full_job.extraction_folder}/*").select { |e| File.file? e }
+
+        expect(extracted_files.count).to eq 5
+      end
+    end
+
+    context 'when running a sample job' do
+      let(:subject) { described_class.new(sample_job, ed) }
+
+      it 'saves the first page from the content partner to the filesystem' do
+        subject.call
+
+        expect(File.exist?(sample_job.extraction_folder)).to eq true
+        extracted_files = Dir.glob("#{sample_job.extraction_folder}/*").select { |e| File.file? e }
+
+        expect(extracted_files.count).to eq 1
+      end
+    end
+
+    context 'when the extraction definition has a throttle' do
+      let(:job) { create(:job) }
+      let(:ed) { create(:extraction_definition, base_url: 'http://google.com/?url_param=url_value', throttle: 500, jobs: [full_job, sample_job]) }
+      let(:subject) { described_class.new(job, ed) }
+
+      it 'it respects the throttle set in the extraction_definition' do
+        start_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+
+        subject.call
+
+        end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+        total_time = end_time - start_time
+
+        expect(total_time.ceil).to eq 3
+      end
     end
   end
 end
