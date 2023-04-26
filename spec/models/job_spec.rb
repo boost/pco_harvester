@@ -64,6 +64,16 @@ RSpec.describe Job, type: :model do
 
       expect(File.exist?(subject.extraction_folder)).to eq false
     end
+
+    it 'does nothing if the folder does not exist' do
+      expect(File.exist?(subject.extraction_folder)).to eq true
+
+      subject.delete_folder
+
+      expect(File.exist?(subject.extraction_folder)).to eq false
+
+      expect { subject.delete_folder }.not_to raise_error
+    end
   end
 
   describe '#documents' do
