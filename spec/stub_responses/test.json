@@ -2,5 +2,7 @@
   "headers": {
   },
   "status": 200,
-  "body": "hi paul!"
+  "body": {
+    "totalObjects": 200    
+  }
 }
