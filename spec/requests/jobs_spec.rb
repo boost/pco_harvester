@@ -32,19 +32,19 @@ RSpec.describe 'Jobs', type: :request do
   describe '#create' do
     describe 'is successful' do
       it 'redirects to the ED path' do
-        post content_partner_extraction_definition_jobs_path(content_partner, extraction_definition)
+        post content_partner_extraction_definition_jobs_path(content_partner, extraction_definition, kind: 'full')
         expect(response).to redirect_to content_partner_extraction_definition_path(content_partner, extraction_definition)
       end
 
       it 'sets a succesful message' do
-        post content_partner_extraction_definition_jobs_path(content_partner, extraction_definition)
+        post content_partner_extraction_definition_jobs_path(content_partner, extraction_definition, kind: 'full')
         follow_redirect!
         expect(response.body).to include 'Job queued successfuly'
       end
 
       it 'queues a job' do
         expect(ExtractionJob).to receive(:perform_async)
-        post content_partner_extraction_definition_jobs_path(content_partner, extraction_definition)
+        post content_partner_extraction_definition_jobs_path(content_partner, extraction_definition, kind: 'full')
       end
     end
 
@@ -67,6 +67,56 @@ RSpec.describe 'Jobs', type: :request do
       it 'does not queue a job' do
         expect(ExtractionJob).to_not receive(:perform_async)
         post content_partner_extraction_definition_jobs_path(content_partner, extraction_definition)
+      end
+    end
+  end
+
+  describe '#destroy' do
+    context 'when the destroy is successful' do
+      it 'deletes the job' do
+        expect { 
+          delete content_partner_extraction_definition_job_path(content_partner, extraction_definition, subject)
+        }.to change(Job, :count).by(-1)
+      end
+
+      it 'redirects to the correct path' do
+        delete content_partner_extraction_definition_job_path(content_partner, extraction_definition, subject)
+
+        expect(response).to redirect_to content_partner_extraction_definition_path(content_partner, extraction_definition)
+      end
+
+      it 'displays an appropriate flash message' do
+        delete content_partner_extraction_definition_job_path(content_partner, extraction_definition, subject)
+
+        follow_redirect!
+
+        expect(response.body).to include 'Results deleted successfully'
+      end
+    end
+
+    context 'when the destroy is not successful' do
+      before do
+        allow_any_instance_of(Job).to receive(:destroy).and_return(false)
+      end
+
+      it 'does not delete the job' do
+        expect { 
+          delete content_partner_extraction_definition_job_path(content_partner, extraction_definition, subject)
+        }.to change(Job, :count).by(0)
+      end
+
+      it 'redirects to the correct path' do
+        delete content_partner_extraction_definition_job_path(content_partner, extraction_definition, subject)
+
+        expect(response).to redirect_to content_partner_extraction_definition_job_path(content_partner, extraction_definition, subject)
+      end
+
+      it 'displays an appropriate flash message' do
+        delete content_partner_extraction_definition_job_path(content_partner, extraction_definition, subject)
+
+        follow_redirect!
+
+        expect(response.body).to include 'There was an issue deleting the results'
       end
     end
   end
