@@ -26,16 +26,23 @@ RSpec.describe DocumentExtraction do
   describe '#save' do
     context 'when there is a document to save' do
       it 'saves the document to the filepath' do
-        subject.extract 
+        subject.extract
         subject.save
 
         expect(File.exist?(subject.send(:file_path))).to eq true
       end
     end
 
+    context 'when there is no extraction_folder' do
+      it 'returns an extracted document from a content partner' do
+        doc = described_class.new(ed)
+        expect { doc.save }.to raise_error(ArgumentError, 'extraction_folder was not provided in #new')
+      end
+    end
+
     context 'when there is not a document to save' do
       it 'returns a helpful error message' do
-        expect{ subject.save }.to raise_error(StandardError, 'A document is required to call save on an instance of DocumentExtraction')
+        expect { subject.save }.to raise_error('#extract must be called before #save DocumentExtraction')
       end
     end
   end

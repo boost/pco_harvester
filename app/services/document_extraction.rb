@@ -1,7 +1,7 @@
 class DocumentExtraction
   attr_reader :document
 
-  def initialize(extraction_definition, extraction_folder: nil)
+  def initialize(extraction_definition, extraction_folder = nil)
     @extraction_definition = extraction_definition
     @extraction_folder = extraction_folder
   end
