@@ -7,7 +7,8 @@ class DocumentExtraction
   end
 
   def extract
-    p "Fetching from page #{@extraction_definition.page}"
+    p "Fetching from page #{@extraction_definition.page}" unless Rails.env.test?
+
     @document = Extraction::Request.new(url:, params:, headers:).get
   end
 

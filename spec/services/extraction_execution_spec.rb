@@ -48,7 +48,7 @@ RSpec.describe ExtractionExecution do
 
     context 'when the extraction definition has a throttle' do
       let(:job) { create(:job) }
-      let(:ed) { create(:extraction_definition, base_url: 'http://google.com/?url_param=url_value', throttle: 500, jobs: [full_job, sample_job]) }
+      let(:ed) { create(:extraction_definition, base_url: 'http://google.com/?url_param=url_value', throttle: 500, jobs: [job]) }
       let(:subject) { described_class.new(job, ed) }
 
       it 'it respects the throttle set in the extraction_definition' do
@@ -60,6 +60,21 @@ RSpec.describe ExtractionExecution do
         total_time = end_time - start_time
 
         expect(total_time.ceil).to eq 3
+      end
+    end
+
+    context 'when the job has been cancelled' do
+      let(:job) { create(:job, status: 'cancelled') }
+      let(:ed) { create(:extraction_definition, base_url: 'http://google.com/?url_param=url_value', throttle: 500, jobs: [job]) }
+      let(:subject) { described_class.new(job, ed) }
+
+      it 'it does not extract further pages' do
+        subject.call
+
+        expect(File.exist?(job.extraction_folder)).to eq true
+        extracted_files = Dir.glob("#{job.extraction_folder}/*").select { |e| File.file? e }
+
+        expect(extracted_files.count).to eq 2
       end
     end
   end
