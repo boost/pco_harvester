@@ -25,7 +25,7 @@ RSpec.describe Extraction::Request do
       expect(doc.request_headers).to eq init_params[:headers].merge('User-Agent' => ENV['SJ_USER_AGENT'])
       expect(doc.status).to eq 200
       expect(doc.response_headers).to eq({})
-      expect(doc.body).to eq('hi paul!')
+      expect(doc.body).to eq('{"totalObjects": 200}')
     end
   end
 end

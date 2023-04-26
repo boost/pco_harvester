@@ -2,7 +2,5 @@
   "headers": {
   },
   "status": 200,
-  "body": {
-    "totalObjects": 200    
-  }
+  "body": "{\"totalObjects\": 200}"
 }
