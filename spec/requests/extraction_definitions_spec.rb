@@ -106,6 +106,36 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
     end
   end
 
+  describe '#test' do
+    let(:ed) { create(:extraction_definition, base_url: 'http://google.com/?url_param=url_value') }
+    
+    before do
+      init_params = {
+        url: 'http://google.com/?url_param=url_value',
+        params: { 'page' => 1, 'per_page' => 50  },
+        headers: { 'Content-Type' => 'application/json', 'User-Agent' => 'Supplejack Harvester v2.0' }
+      }
+
+      stub_request(**init_params) { 'test' }
+    end
+
+    it 'returns a document extraction as JSON' do
+      post test_content_partner_extraction_definitions_path(content_partner), params: {
+        extraction_definition: ed.attributes
+      }
+
+      expect(response.status).to eq 200
+
+      json_data = JSON.parse(response.body)
+
+      expected_keys = ["url", "method", "params", "request_headers", "status", "response_headers", "body"]
+
+      expected_keys.each do |key|
+        expect(json_data).to have_key(key)
+      end
+    end
+  end  
+
   describe '#destroy' do
     it 'destroys the extraction definition' do
       delete content_partner_extraction_definition_path(content_partner, extraction_definition)
