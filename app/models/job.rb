@@ -31,7 +31,7 @@ class Job < ApplicationRecord
   end
 
   def extraction_folder
-    "#{EXTRACTIONS_FOLDER}/#{created_at.strftime('%Y-%m-%d_%H-%M-%S')}_-_#{id}"
+    "#{EXTRACTIONS_FOLDER}/#{created_at.to_fs(:file_format)}_-_#{id}"
   end
 
   def create_folder
