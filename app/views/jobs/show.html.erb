@@ -50,13 +50,19 @@
 
 <ul class="nav nav-tabs" role="tablist">
   <li class="nav-item" role="presentation">
-    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#result-tab" type="button" role="tab" aria-controls="result-tab" aria-selected="true">Result</button>
+    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#result-tab" type="button" role="tab" aria-controls="result-tab" aria-selected="true">
+      Result
+    </button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#request-headers-tab" type="button" role="tab" aria-controls="request-headers-tab" aria-selected="false">Request Headers</button>
+    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#request-details-tab" type="button" role="tab" aria-controls="request-details-tab" aria-selected="false">
+      Request details
+    </button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#response-headers-tab" type="button" role="tab" aria-controls="response-headers-tab" aria-selected="false">Response Headers</button>
+    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#response-details-tab" type="button" role="tab" aria-controls="response-details-tab" aria-selected="false">
+      Response details
+    </button>
   </li>
 </ul>
 <div class="tab-content">
@@ -65,7 +71,7 @@
       <div id="extraction-result-viewer" data-results="<%= @document.body %>"></div>
     </div>
   </div>
-  <div class="tab-pane fade" id="request-headers-tab" role="tal" aria-labelledby="request-headers-tab" tabindex="0">
+  <div class="tab-pane fade" id="request-details-tab" role="tal" aria-labelledby="request-details-tab" tabindex="0">
     <ol class="list-group">
       <li class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto">
@@ -97,7 +103,7 @@
       </li>
     </ol>
   </div>
-  <div class="tab-pane fade" id="response-headers-tab" role="tal" aria-labelledby="response-headers-tab" tabindex="0">
+  <div class="tab-pane fade" id="response-details-tab" role="tal" aria-labelledby="response-details-tab" tabindex="0">
     <ol class="list-group">
       <li class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto">
