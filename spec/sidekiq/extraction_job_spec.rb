@@ -21,17 +21,7 @@ RSpec.describe ExtractionJob, type: :job do
   end
 
   describe '#perform' do
-    before do
-      (1..3).each do |page|
-        stub_request(:get, ed.base_url).with(
-          query: { 'page' => page, 'per_page' => ed.per_page },
-          headers: {
-            'Content-Type' => 'application/json',
-            'User-Agent' => 'Supplejack Harvester v2.0'
-          }
-        ).to_return(fake_response("ngataonga_#{page}"))
-      end
-    end
+    before { stub_ngataonga_harvest_requests(ed) }
 
     it 'marks the job as completed' do
       subject.perform(job.id)
