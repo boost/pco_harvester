@@ -26,7 +26,7 @@ class DocumentExtraction
   private
 
   def file_path
-    page_str = format('%05d', @extraction_definition.page)[-5..]
+    page_str = format('%09d', @extraction_definition.page)[-9..]
     name_str = @extraction_definition.name.parameterize(separator: '_')
     "#{@extraction_folder}/#{name_str}__-__#{page_str}.json"
   end
