@@ -30,7 +30,7 @@
     <li class="list-group-item">Filesize: <%= number_to_human_size(@job.extraction_folder_size_in_bytes) %></li>
     <li class="list-group-item">Records Per Page: <%= @extraction_definition.per_page %></li>
     <li class="list-group-item">Total Pages: <%= @job.documents.total_pages %></li>
-    <li class="list-group-item">Total Records: <%= @extraction_definition.per_page * @job.documents.total_pages %></li>
+    <li class="list-group-item"><span data-bs-toggle="tooltip" title="This is based on the per_page and the total_pages amount, not the extracted data.">Estimated Records: <%= @extraction_definition.per_page * @job.documents.total_pages %></span></li>
 </ul>
 
 <% if @document.blank? %>
