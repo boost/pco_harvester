@@ -39,7 +39,7 @@ class ExtractionDefinitionsController < ApplicationController
   def test
     @extraction_definition = ExtractionDefinition.new(extraction_definition_params)
 
-    render json: DocumentExtraction.new(@extraction_definition).extract
+    render json: Extraction::DocumentExtraction.new(@extraction_definition).extract
   end
 
   def destroy

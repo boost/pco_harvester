@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe ExtractionExecution do
+RSpec.describe Extraction::Execution do
   let(:full_job) { create(:job) }
   let(:sample_job) { create(:job, kind: 'sample') }
   let(:ed) { create(:extraction_definition, base_url: 'http://google.com/?url_param=url_value', jobs: [full_job, sample_job]) }

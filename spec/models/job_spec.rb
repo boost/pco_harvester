@@ -121,7 +121,7 @@ RSpec.describe Job, type: :model do
     end
 
     it 'returns the size of the extraction folder in bytes' do
-      ExtractionExecution.new(subject, ed).call
+      Extraction::Execution.new(subject, ed).call
 
       expect(subject.extraction_folder_size_in_bytes).to eq 24
     end

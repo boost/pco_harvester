@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe DocumentExtraction do
+RSpec.describe Extraction::DocumentExtraction do
   let(:job) { create(:job) }
   let(:ed) { create(:extraction_definition, base_url: 'http://google.com/?url_param=url_value', jobs: [job]) }
   let(:subject) { described_class.new(ed, job.extraction_folder) }
