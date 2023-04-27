@@ -7,3 +7,10 @@ def fake_response(filename)
   file_content = File.read(path)
   JSON.parse(file_content)
 end
+
+def fake_json_headers
+  {
+    'Content-Type' => 'application/json',
+    'User-Agent' => 'Supplejack Harvester v2.0'
+  }
+end

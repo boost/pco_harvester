@@ -115,7 +115,7 @@ RSpec.describe Job, type: :model do
       (1...6).each do |page|
         stub_request(:get, 'http://google.com/?url_param=url_value').with(
           query: { 'page' => page, 'per_page' => 50 },
-          headers: { 'Content-Type' => 'application/json', 'User-Agent' => 'Supplejack Harvester v2.0' }
+          headers: fake_json_headers
         ).and_return(fake_response('test'))
       end
     end
