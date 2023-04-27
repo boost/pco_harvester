@@ -1,7 +1,8 @@
 <%= render 'shared/breadcrumb_nav' %>
 
 <div class="float-start">
-  <h1><%= @job.updated_at.strftime('%d %b | %l:%M %p') %></h1>
+  <h1><%= @job.extraction_definition.name %></h1>
+  <strong><%= @job.updated_at.strftime('%A %e %B %Y at %l:%M %p') %></strong>
 </div>
 
 <div class="float-end">
