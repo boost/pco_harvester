@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe 'Jobs', type: :request do
-  let(:content_partner) { create(:content_partner) }
-  let!(:extraction_definition) { create(:extraction_definition, content_partner:) }
-  subject! { create(:job) }
+  let(:content_partner) { create(:content_partner, :ngataonga) }
+  let(:extraction_definition) { content_partner.extraction_definitions.first }
+  subject! { create(:job, extraction_definition:) }
 
   describe '#index' do
     it 'returns a successful response' do
@@ -18,14 +18,21 @@ RSpec.describe 'Jobs', type: :request do
   end
 
   describe '#show' do
+    before do
+      # that's to test the display of results
+      stub_ngataonga_harvest_requests(extraction_definition)
+      ExtractionJob.new.perform(subject.id)
+    end
+
     it 'returns a successful response' do
       get content_partner_extraction_definition_job_path(content_partner, extraction_definition, subject)
       expect(response).to be_successful
     end
 
-    it 'displays the date of the jobs' do
+    it 'displays the updated_at of the jobs' do
       get content_partner_extraction_definition_job_path(content_partner, extraction_definition, subject)
-      expect(response.body).to include 'Sunday 16 January 2000 at  2:30 AM'
+      subject.reload
+      expect(response.body).to include subject.updated_at.to_fs(:verbose)
     end
   end
 
