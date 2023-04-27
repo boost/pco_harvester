@@ -1,7 +1,7 @@
 <%= render 'shared/breadcrumb_nav' %>
 
 <div class="float-start">
-  <h1><%= @job.updated_at.strftime('%d %b | %l:%M %p | ') %> Dan Charles</h1>
+  <h1><%= @job.updated_at.strftime('%d %b | %l:%M %p') %></h1>
 </div>
 
 <div class="float-end">
@@ -26,8 +26,11 @@
   <%- if @job.duration_seconds.present? %>
     <li class="list-group-item">Duration: <%= ActiveSupport::Duration.build(@job.duration_seconds).inspect %></li>
   <% end %>
+    <li class="list-group-item">Filesize: <%= number_to_human_size(@job.extraction_folder_size_in_bytes) %></li>
+    <li class="list-group-item">Records Per Page: <%= @extraction_definition.per_page %></li>
+    <li class="list-group-item">Total Pages: <%= @job.documents.total_pages %></li>
+    <li class="list-group-item">Total Records: <%= @extraction_definition.per_page * @job.documents.total_pages %></li>
 </ul>
-
 
 <% if @document.blank? %>
   <p>The extracted page could not be found.</p>

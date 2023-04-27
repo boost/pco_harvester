@@ -3,7 +3,7 @@
     <div class="border p-3 my-2 row justify-content-between">
       <div class="col">
 
-        <h2 class="h4"><%= job.updated_at.strftime('%d %b | %H:%M | ') %> Dan Charles</h2>
+        <h2 class="h4"><%= job.updated_at.strftime('%d %b | %H:%M') %></h2>
 
         <p class="text-secondary mb-0">
           <%= job_status_text(job) %>

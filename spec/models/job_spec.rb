@@ -107,4 +107,26 @@ RSpec.describe Job, type: :model do
       expect(subject.duration_seconds).to eq 300
     end
   end
+
+  describe '#extraction_folder_size_in_bytes' do
+    let(:ed) { create(:extraction_definition, base_url: 'http://google.com/?url_param=url_value', jobs: [subject]) }
+
+    before do
+      (1...6).each do |page|
+        init_params = {
+          url: 'http://google.com/?url_param=url_value',
+          params: { 'page' => page, 'per_page' => 50  },
+          headers: { 'Content-Type' => 'application/json', 'User-Agent' => 'Supplejack Harvester v2.0' }
+        }
+
+        stub_request(**init_params) { 'test' }
+      end
+    end
+
+    it 'returns the size of the extraction folder in bytes' do
+      ExtractionExecution.new(subject, ed).call
+
+      expect(subject.extraction_folder_size_in_bytes).to eq 40
+    end
+  end
 end

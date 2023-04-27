@@ -54,4 +54,8 @@ class Job < ApplicationRecord
 
     end_time - start_time
   end
+
+  def extraction_folder_size_in_bytes
+    `du #{extraction_folder} | cut -f1`.to_i
+  end
 end
