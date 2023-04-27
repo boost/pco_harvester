@@ -8,7 +8,7 @@
 <div class="float-end">
   <% if @job.queued? || @job.running? %>
     <% cancel_path = cancel_content_partner_extraction_definition_job_path(@content_partner, @extraction_definition, @job) %>
-    <%= button_to "Cancel job", cancel_path, class: "btn btn-outline-danger me-1", form_class: 'd-inline' %>
+    <%= button_to "Cancel job", cancel_path, class: "btn btn-outline-danger me-1", form_class: 'd-inline me-1' %>
   <% end %>
   <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">Delete results</button>
 </div>

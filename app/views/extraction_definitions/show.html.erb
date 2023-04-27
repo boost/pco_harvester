@@ -3,8 +3,8 @@
 <h1 class='float-start'><%= @extraction_definition.name %></h1>
 
 <div class="float-end">
-  <%= button_to 'Run full job', content_partner_extraction_definition_jobs_path(@content_partner, @extraction_definition, kind: 'full'), class: 'btn btn-primary', form_class: 'd-inline' %>
-  <%= button_to 'Run sample', content_partner_extraction_definition_jobs_path(@content_partner, @extraction_definition, kind: 'sample'), class: 'btn btn-primary', form_class: 'd-inline' %>
+  <%= button_to 'Run full job', content_partner_extraction_definition_jobs_path(@content_partner, @extraction_definition, kind: 'full'), class: 'btn btn-primary', form_class: 'd-inline me-1' %>
+  <%= button_to 'Run sample', content_partner_extraction_definition_jobs_path(@content_partner, @extraction_definition, kind: 'sample'), class: 'btn btn-primary', form_class: 'd-inline me-1' %>
   <%= link_to 'Edit definition', edit_content_partner_extraction_definition_path(@content_partner, @extraction_definition), class: 'me-1 btn btn-outline-primary' %>
   <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">Delete</button>
 </div>
