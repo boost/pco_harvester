@@ -33,74 +33,79 @@
 <% if @document.blank? %>
   <p>The extracted page could not be found.</p>
 <% else %>
-  <div class="alert border">
-    <div class="row">
-      <div class="col-12">
-        <h2 class="h1">Extracted data</h2>
-        <%= render 'shared/pagination_below_table', items: @documents %>
-      </div>
-      <div class="col">
-        <h3>Request</h3>
 
-        <ol class="list-group">
-          <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="ms-2 me-auto">
-              <div class="fw-bold">URL</div>
-              <a href="<%= @document.url %>"><%= @document.url %></a>
-            </div>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="ms-2 me-auto">
-              <div class="fw-bold">HTTP Method</div>
-              <%= @document.method %>
-            </div>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="ms-2 me-auto">
-              <div class="fw-bold">Params</div>
-              <pre><code><%= JSON.pretty_generate(@document.params) %></code></pre>
-            </div>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="ms-2 me-auto">
-              <div class="fw-bold">Request Headers</div>
-              <% @document.request_headers.each do |header, value| %>
-                  <dt class="d-inline"><%= header %></dt>
-                  <dd class="d-inline"><%= value %></dd>
-                  <br />
-                <% end %>
-            </div>
-          </li>
-        </ol>
-      </div>
-
-      <div class="col">
-        <h3>Response</h3>
-
-        <ol class="list-group">
-          <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="ms-2 me-auto">
-              <div class="fw-bold">Status code</div>
-              <%= @document.status %>
-            </div>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="ms-2 me-auto">
-              <div class="fw-bold">Response Headers</div>
-                <% @document.response_headers.each do |header, value| %>
-                  <dt class="d-inline"><%= header %></dt>
-                  <dd class="d-inline"><%= value %></dd>
-                  <br />
-                <% end %>
-              </dl>
-            </div>
-          </li>
-        </ol>
-      </div>
-
-      <div class="col-12 mt-3">
-        <pre class="bg-dark text-white p-1"><code><%= JSON.pretty_generate(JSON.parse(@document.body)) %></code></pre>
-      </div>
+<ul class="nav nav-tabs" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#result-tab" type="button" role="tab" aria-controls="result-tab" aria-selected="true">Result</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#request-headers-tab" type="button" role="tab" aria-controls="request-headers-tab" aria-selected="false">Request Headers</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#response-headers-tab" type="button" role="tab" aria-controls="response-headers-tab" aria-selected="false">Response Headers</button>
+  </li>
+</ul>
+<div class="tab-content">
+  <div class="tab-pane fade show active" id="result-tab" role="tal" aria-labelledby="result-tab" tabindex="0">
+    <div class="col-12 mt-3">
+      <pre class="bg-dark text-white p-1 extraction-result-viewer"><code><%= JSON.pretty_generate(JSON.parse(@document.body)) %></code></pre>
     </div>
   </div>
+  <div class="tab-pane fade" id="request-headers-tab" role="tal" aria-labelledby="request-headers-tab" tabindex="0">
+    <ol class="list-group">
+      <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+          <div class="fw-bold">URL</div>
+          <a href="<%= @document.url %>"><%= @document.url %></a>
+        </div>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+          <div class="fw-bold">HTTP Method</div>
+          <%= @document.method %>
+        </div>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+          <div class="fw-bold">Params</div>
+          <pre><code><%= JSON.pretty_generate(@document.params) %></code></pre>
+        </div>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+          <div class="fw-bold">Request Headers</div>
+          <% @document.request_headers.each do |header, value| %>
+              <dt class="d-inline"><%= header %></dt>
+              <dd class="d-inline"><%= value %></dd>
+              <br />
+            <% end %>
+        </div>
+      </li>
+    </ol>
+  </div>
+  <div class="tab-pane fade" id="response-headers-tab" role="tal" aria-labelledby="response-headers-tab" tabindex="0">
+    <ol class="list-group">
+      <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+          <div class="fw-bold">Status code</div>
+          <%= @document.status %>
+        </div>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+          <div class="fw-bold">Response Headers</div>
+            <% @document.response_headers.each do |header, value| %>
+              <dt class="d-inline"><%= header %></dt>
+              <dd class="d-inline"><%= value %></dd>
+              <br />
+            <% end %>
+          </dl>
+        </div>
+      </li>
+    </ol>
+  </div>
+</div>
+
+<%= render 'shared/pagination_below_table', items: @documents %>
+
 <% end %>
