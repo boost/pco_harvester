@@ -37,9 +37,12 @@
   <% if @job.errored? %>
     <div class="alert alert-danger" role="alert">
       <h4 class="alert-heading">Error</h4>
-      <hr />
-      <%= @job.error_message %>
+      <p class="mb-0"><%= @job.error_message %></p>
     </div>
+  <% elsif @job.queued? %>
+    <p>The job hasn't started yet so there is no results available.</p>
+  <% elsif @job.running? %>
+    <p>The job is currently running. This page might not be fetched yet.</p>
   <% else %>
     <p>The extracted page could not be found.</p>
   <% end %>

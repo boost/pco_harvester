@@ -11,8 +11,8 @@ RSpec.describe JobsHelper do
   let(:completed_job)      { create(:job, status: 'completed') }
 
   describe '#job_status_text' do
-    it 'returns Queued... for queued jobs' do
-      expect(job_status_text(queued_job)).to eq 'Queued...'
+    it 'returns Waiting in queue... for queued jobs' do
+      expect(job_status_text(queued_job)).to eq 'Waiting in queue...'
     end
 
     it 'returns Running full job... when running a full job' do
@@ -36,4 +36,3 @@ RSpec.describe JobsHelper do
     end
   end
 end
-
