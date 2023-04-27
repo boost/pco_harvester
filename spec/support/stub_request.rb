@@ -2,6 +2,13 @@
 
 require 'webmock/rspec'
 
+RSpec.configure do |config|
+  config.before(:suite) do
+    FileUtils.rm Dir.glob("#{Job::EXTRACTIONS_FOLDER}/*/*")
+    FileUtils.rmdir Dir.glob("#{Job::EXTRACTIONS_FOLDER}/*")
+  end
+end
+
 def fake_response(filename)
   path = Rails.root.join("spec/stub_responses/#{filename}.json")
   file_content = File.read(path)
