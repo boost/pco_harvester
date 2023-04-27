@@ -67,9 +67,13 @@
 </ul>
 <div class="tab-content">
   <div class="tab-pane fade show active" id="result-tab" role="tal" aria-labelledby="result-tab" tabindex="0">
-    <div class="col-12 mt-3">
-      <div id="extraction-result-viewer" data-results="<%= @document.body %>"></div>
-    </div>
+      <div class="col-12 mt-3">
+        <% if @job.extraction_folder_size_in_bytes > 10.megabytes %>
+          <p>This file is too large to display in the browser.</p>
+        <% else %>
+          <div id="extraction-result-viewer" data-results="<%= @document.body %>"></div>
+        <% end %>
+      </div>
   </div>
   <div class="tab-pane fade" id="request-details-tab" role="tal" aria-labelledby="request-details-tab" tabindex="0">
     <ol class="list-group">
