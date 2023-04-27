@@ -10,9 +10,8 @@ RSpec.configure do |config|
 end
 
 def fake_response(filename)
-  path = Rails.root.join("spec/stub_responses/#{filename}.json")
-  file_content = File.read(path)
-  JSON.parse(file_content)
+  path = Rails.root.join("spec/stub_responses/#{filename}.yaml")
+  YAML.load_file(path)
 end
 
 def fake_json_headers
