@@ -33,7 +33,15 @@
 </ul>
 
 <% if @document.blank? %>
-  <p>The extracted page could not be found.</p>
+  <% if @job.errored? %>
+    <div class="alert alert-danger" role="alert">
+      <h4 class="alert-heading">Error</h4>
+      <hr />
+      <%= @job.error_message %>
+    </div>
+  <% else %>
+    <p>The extracted page could not be found.</p>
+  <% end %>
 <% else %>
 
 <ul class="nav nav-tabs" role="tablist">

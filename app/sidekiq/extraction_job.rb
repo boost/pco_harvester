@@ -6,6 +6,7 @@ class ExtractionJob
   sidekiq_retries_exhausted do |job, _ex|
     @job = Job.find(job['args'].first)
     @job.mark_as_errored
+    @job.update(error_message: job['error_message'])
     Sidekiq.logger.warn "Failed #{job['class']} with #{job['args']}: #{job['error_message']}"
   end
 
