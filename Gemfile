@@ -44,9 +44,12 @@ group :development do
 end
 
 group :test do
+  # used in tests
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'shoulda-matchers'
+  gem 'webmock'
 
+  # generates code coverage reports
   gem 'simplecov'
 end

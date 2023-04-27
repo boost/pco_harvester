@@ -113,20 +113,17 @@ RSpec.describe Job, type: :model do
 
     before do
       (1...6).each do |page|
-        init_params = {
-          url: 'http://google.com/?url_param=url_value',
-          params: { 'page' => page, 'per_page' => 50  },
+        stub_request(:get, 'http://google.com/?url_param=url_value').with(
+          query: { 'page' => page, 'per_page' => 50 },
           headers: { 'Content-Type' => 'application/json', 'User-Agent' => 'Supplejack Harvester v2.0' }
-        }
-
-        stub_request(**init_params) { 'test' }
+        ).and_return(fake_response('test'))
       end
     end
 
     it 'returns the size of the extraction folder in bytes' do
       ExtractionExecution.new(subject, ed).call
 
-      expect(subject.extraction_folder_size_in_bytes).to eq 40
+      expect(subject.extraction_folder_size_in_bytes).to eq 24
     end
   end
 end

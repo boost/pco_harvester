@@ -23,14 +23,13 @@ RSpec.describe ExtractionJob, type: :job do
   describe '#perform' do
     before do
       (1..3).each do |page|
-        stub_request(
-          url: ed.base_url,
-          params: { 'page' => page, 'per_page' => ed.per_page },
+        stub_request(:get, ed.base_url).with(
+          query: { 'page' => page, 'per_page' => ed.per_page },
           headers: {
             'Content-Type' => 'application/json',
             'User-Agent' => 'Supplejack Harvester v2.0'
           }
-        ) { "ngataonga_#{page}" }
+        ).to_return(fake_response("ngataonga_#{page}"))
       end
     end
 

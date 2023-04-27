@@ -8,13 +8,10 @@ RSpec.describe DocumentExtraction do
   let(:subject) { described_class.new(ed, job.extraction_folder) }
 
   before do
-    init_params = {
-      url: 'http://google.com/?url_param=url_value',
-      params: { 'page' => 1, 'per_page' => 50  },
+    stub_request(:get, 'http://google.com/?url_param=url_value').with(
+      query: { 'page' => 1, 'per_page' => 50  },
       headers: { 'Content-Type' => 'application/json', 'User-Agent' => 'Supplejack Harvester v2.0' }
-    }
-
-    stub_request(**init_params) { 'test' }
+    ).and_return(fake_response('test'))
   end
 
   describe '#extract' do

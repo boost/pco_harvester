@@ -13,7 +13,7 @@ RSpec.describe 'Jobs', type: :request do
 
     it 'displays the date of the jobs' do
       get jobs_path
-      expect(response.body).to include '15 Jan | 13:30 |'
+      expect(response.body).to include 'Sunday 16 January 2000 |  2:30 AM'
     end
   end
 
@@ -25,7 +25,7 @@ RSpec.describe 'Jobs', type: :request do
 
     it 'displays the date of the jobs' do
       get content_partner_extraction_definition_job_path(content_partner, extraction_definition, subject)
-      expect(response.body).to include '15 Jan | 13:30 |'
+      expect(response.body).to include 'Sunday 16 January 2000 at  2:30 AM'
     end
   end
 
@@ -74,7 +74,7 @@ RSpec.describe 'Jobs', type: :request do
   describe '#destroy' do
     context 'when the destroy is successful' do
       it 'deletes the job' do
-        expect { 
+        expect {
           delete content_partner_extraction_definition_job_path(content_partner, extraction_definition, subject)
         }.to change(Job, :count).by(-1)
       end
@@ -100,7 +100,7 @@ RSpec.describe 'Jobs', type: :request do
       end
 
       it 'does not delete the job' do
-        expect { 
+        expect {
           delete content_partner_extraction_definition_job_path(content_partner, extraction_definition, subject)
         }.to change(Job, :count).by(0)
       end
@@ -124,20 +124,20 @@ RSpec.describe 'Jobs', type: :request do
   describe '#cancel' do
     context 'when the cancellation is successful' do
       it 'sets the job status to be cancelled' do
-        post cancel_content_partner_extraction_definition_job_path(content_partner, extraction_definition, subject) 
+        post cancel_content_partner_extraction_definition_job_path(content_partner, extraction_definition, subject)
 
         subject.reload
         expect(subject.status).to eq 'cancelled'
       end
 
       it 'redirects to the correct path' do
-        post cancel_content_partner_extraction_definition_job_path(content_partner, extraction_definition, subject) 
+        post cancel_content_partner_extraction_definition_job_path(content_partner, extraction_definition, subject)
 
         expect(response).to redirect_to content_partner_extraction_definition_path(content_partner, extraction_definition)
       end
 
       it 'displays an appropriate flash message' do
-        post cancel_content_partner_extraction_definition_job_path(content_partner, extraction_definition, subject) 
+        post cancel_content_partner_extraction_definition_job_path(content_partner, extraction_definition, subject)
 
         follow_redirect!
 
@@ -151,26 +151,26 @@ RSpec.describe 'Jobs', type: :request do
       end
 
       it 'does not set the job status to be cancelled' do
-        post cancel_content_partner_extraction_definition_job_path(content_partner, extraction_definition, subject) 
+        post cancel_content_partner_extraction_definition_job_path(content_partner, extraction_definition, subject)
 
         subject.reload
         expect(subject.status).not_to eq 'cancelled'
       end
-      
+
       it 'redirects to the correct path' do
-        post cancel_content_partner_extraction_definition_job_path(content_partner, extraction_definition, subject) 
+        post cancel_content_partner_extraction_definition_job_path(content_partner, extraction_definition, subject)
 
         expect(response).to redirect_to content_partner_extraction_definition_path(content_partner, extraction_definition)
       end
 
       it 'displays an appropriate flash message' do
-        post cancel_content_partner_extraction_definition_job_path(content_partner, extraction_definition, subject) 
+        post cancel_content_partner_extraction_definition_job_path(content_partner, extraction_definition, subject)
 
         follow_redirect!
 
         expect(response.body).to include 'There was an issue cancelling the job'
       end
-      
+
     end
   end
 end

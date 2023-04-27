@@ -86,7 +86,7 @@ RSpec.describe Extraction::Connection do
     subject { described_class.new(url: 'hello') }
 
     before do
-      stub_request(url: 'http://google.com/hello') { 'test' }
+      stub_request(:get, 'http://google.com/hello').and_return(fake_response('test'))
     end
 
     it 'returns the response' do
