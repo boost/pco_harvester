@@ -59,7 +59,7 @@
 <div class="tab-content">
   <div class="tab-pane fade show active" id="result-tab" role="tal" aria-labelledby="result-tab" tabindex="0">
     <div class="col-12 mt-3">
-      <pre class="bg-dark text-white p-1 extraction-result-viewer"><code><%= JSON.pretty_generate(JSON.parse(@document.body)) %></code></pre>
+      <div id="extraction-result-viewer" data-results="<%= @document.body %>"></div>
     </div>
   </div>
   <div class="tab-pane fade" id="request-headers-tab" role="tal" aria-labelledby="request-headers-tab" tabindex="0">
