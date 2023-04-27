@@ -6,7 +6,7 @@ class JobsController < ApplicationController
   before_action :find_job, only: %i[show destroy cancel]
 
   def index
-    @jobs = Job.order(updated_at: :desc).page(params[:page])
+    @jobs = paginate_and_filter_jobs(Job)
   end
 
   def show

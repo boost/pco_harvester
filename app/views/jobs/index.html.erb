@@ -1,3 +1,10 @@
 <h1>Extraction jobs</h1>
 
+<div class="my-3">
+  <%= link_to 'All', jobs_path, class: "btn btn#{@status.nil? ? '' : '-outline'}-primary" %>
+  <% Job::STATUSES.each do |status| %>
+    <%= link_to status.capitalize, jobs_path(status: status), class: "btn btn#{@status == status ? '' : '-outline'}-primary" %>
+  <% end %>
+</div>
+
 <%= render partial: 'jobs/jobs', locals: { jobs: @jobs } %>
