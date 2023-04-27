@@ -11,6 +11,13 @@
 
 <div class="clearfix"></div>
 
+<div class="my-3">
+  <%= link_to 'All', content_partner_extraction_definition_path(@content_partner, @extraction_definition), class: "btn btn#{@status.nil? ? '' : '-outline'}-primary" %>
+  <% Job::STATUSES.each do |status| %>
+    <%= link_to status.capitalize, content_partner_extraction_definition_path(@content_partner, @extraction_definition, status: status), class: "btn btn#{@status == status ? '' : '-outline'}-primary" %>
+  <% end %>
+</div>
+
 <%= render partial: 'jobs/jobs', locals: { jobs: @jobs } %>
 
 <%# Modal %>

@@ -15,6 +15,35 @@ RSpec.describe 'Jobs', type: :request do
       get jobs_path
       expect(response.body).to include 'Sunday 16 January 2000 |  2:30 AM'
     end
+
+    describe 'filters' do
+      before do
+        Job::STATUSES.excluding(subject.status).each do |status|
+          create(:job, status:)
+        end
+      end
+
+      it 'displays all kind of jobs by default' do
+        get jobs_path
+
+        expect(response.body).to include 'Waiting in queue...'
+        expect(response.body).to include 'Running full job...'
+        expect(response.body).to include 'An error occured'
+        expect(response.body).to include 'Cancelled'
+        expect(response.body).to include 'Completed'
+      end
+
+      it 'can filter on queued jobs',
+         pending: 'waiting on system tests, Cancelled is present on the page because of the filters' do
+        get jobs_path(status: 'queued')
+
+        expect(response.body).to include 'Waiting in queue...'
+        expect(response.body).to_not include 'Running full job...'
+        expect(response.body).to_not include 'An error occured'
+        expect(response.body).to_not include 'Cancelled'
+        expect(response.body).to_not include 'Completed'
+      end
+    end
   end
 
   describe '#show' do

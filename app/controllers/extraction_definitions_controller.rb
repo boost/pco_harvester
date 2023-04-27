@@ -7,7 +7,7 @@ class ExtractionDefinitionsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: %i[test]
 
   def show
-    @jobs = @extraction_definition.jobs.order(updated_at: :desc).page(params[:page])
+    @jobs = paginate_and_filter_jobs(@extraction_definition.jobs)
   end
 
   def new

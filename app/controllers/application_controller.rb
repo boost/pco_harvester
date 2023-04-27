@@ -1,2 +1,9 @@
 class ApplicationController < ActionController::Base
+  def paginate_and_filter_jobs(jobs)
+    @status = params[:status]
+    jobs = jobs.order(updated_at: :desc).page(params[:page])
+    jobs = jobs.where(status: @status) if @status
+
+    jobs
+  end
 end
