@@ -12,6 +12,7 @@ class Job < ApplicationRecord
 
   validates :status, presence: true, inclusion: { in: STATUSES }
   validates :kind, presence: true, inclusion: { in: KINDS }
+  validates :end_time, comparison: { greater_than: :start_time }, if: ->{ end_time.present? }
 
   STATUSES.each do |status_name|
     define_method("#{status_name}?".to_sym) do
@@ -46,5 +47,11 @@ class Job < ApplicationRecord
 
   def documents
     Extraction::Documents.new(extraction_folder)
+  end
+
+  def duration_seconds
+    return if start_time.blank? || end_time.blank?
+
+    end_time - start_time
   end
 end

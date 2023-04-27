@@ -12,9 +12,11 @@ class ExtractionJob
   def perform(job_id)
     @job = Job.find(job_id)
     @job.mark_as_running
+    @job.update(start_time: Time.zone.now)
 
     ExtractionExecution.new(@job, @job.extraction_definition).call
 
     @job.mark_as_completed unless @job.cancelled?
+    @job.update(end_time: Time.zone.now)
   end
 end

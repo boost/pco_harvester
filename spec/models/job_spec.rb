@@ -81,4 +81,30 @@ RSpec.describe Job, type: :model do
       expect(subject.documents).to be_a(Extraction::Documents)
     end
   end
+
+  describe '#timestamps' do
+    it 'can record when the job was started' do
+      subject.update(start_time: Time.now)
+
+      expect(subject.start_time).to be_a(ActiveSupport::TimeWithZone)
+    end
+
+    it 'can record when the job was finished' do
+      subject.update(end_time: 1.day.from_now)
+
+      expect(subject.end_time).to be_a(ActiveSupport::TimeWithZone)
+    end
+
+    it 'does not allow an end date to be before a start date' do
+      subject.start_time = Time.now
+      subject.end_time   = 1.day.ago
+      expect(subject).not_to be_valid
+    end
+
+    it 'returns the number of seconds that the job has been running for' do
+      subject.update(start_time: '2023-03-20 11:00:00' , end_time: '2023-03-20 11:05:00' )
+      subject.reload
+      expect(subject.duration_seconds).to eq 300
+    end
+  end
 end

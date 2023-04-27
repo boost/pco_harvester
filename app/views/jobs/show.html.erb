@@ -1,8 +1,7 @@
 <%= render 'shared/breadcrumb_nav' %>
 
 <div class="float-start">
-  <h1><%= @job.updated_at.strftime('%d %b | %H:%M | ') %> Dan Charles</h1>
-  <h2 class="text-success"><%= job_status_text(@job) %></h2>
+  <h1><%= @job.updated_at.strftime('%d %b | %l:%M %p | ') %> Dan Charles</h1>
 </div>
 
 <div class="float-end">
@@ -21,14 +20,14 @@
   <p>It will delete all the data related to it.</p>
 <% end %>
 
-<div class="alert alert-success border-success text-dark">
-  <h4 class="alert-heading">This job is currently <%= @job.status %></h4>
-  <p>
-    It has been running for XX mins.
-    This is some more information about what you can currently do while the job is running,
-    and some ways you may be able to pass your time.
-  </p>
-</div>
+<ul class="list-group list-group-horizontal my-4">
+  <li class="list-group-item">Status: <%= job_status_text(@job) %></li>
+
+  <%- if @job.duration_seconds.present? %>
+    <li class="list-group-item">Duration: <%= ActiveSupport::Duration.build(@job.duration_seconds).inspect %></li>
+  <% end %>
+</ul>
+
 
 <% if @document.blank? %>
   <p>The extracted page could not be found.</p>

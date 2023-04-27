@@ -19,7 +19,10 @@ class ExtractionExecution
       sleep @extraction_definition.throttle / 1000.0
       @job.reload
 
-      break if @job.cancelled?
+      if @job.cancelled?
+        @job.update(end_time: Time.zone.now)
+        break
+      end
     end
   end
 end
