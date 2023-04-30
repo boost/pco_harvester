@@ -22,6 +22,9 @@ gem 'kaminari'
 
 gem 'foreman'
 
+# For code commenting
+gem 'yard'
+
 # extraction related
 gem 'faraday', '~> 2.7'
 gem 'faraday-follow_redirects'

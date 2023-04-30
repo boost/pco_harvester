@@ -253,6 +253,7 @@ GEM
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    yard (0.9.34)
     zeitwerk (2.6.7)
 
 PLATFORMS
@@ -281,6 +282,7 @@ DEPENDENCIES
   tzinfo-data
   vite_rails
   webmock
+  yard
 
 RUBY VERSION
    ruby 3.2.2p53
