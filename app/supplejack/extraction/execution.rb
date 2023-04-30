@@ -1,5 +1,7 @@
+# frozen_string_literal: true
 
 module Extraction
+  # Performs the work as defined in the document extraction
   class Execution
     def initialize(job, extraction_definition)
       @job = job
