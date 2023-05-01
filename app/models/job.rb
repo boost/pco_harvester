@@ -67,4 +67,8 @@ class Job < ApplicationRecord
   def extraction_folder_size_in_bytes
     `du #{extraction_folder} | cut -f1`.to_i
   end
+
+  def name
+    updated_at.to_fs(:light)  
+  end
 end

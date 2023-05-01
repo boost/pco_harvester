@@ -14,6 +14,8 @@ Rails.application.routes.draw do
         post :cancel, on: :member
       end
     end
+
+    resources :transformations, only: %i[new create]
   end
 
   get :jobs, to: 'jobs#index', as: :jobs

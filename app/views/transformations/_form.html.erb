@@ -1,0 +1,30 @@
+<%= vertical_form_with model: [@content_partner, @transformation], class: { row: true } do |form| %>
+  <%= form.hidden_field :content_partner_id, value: @content_partner.id %>
+
+  <div class="mb-3 col-12">
+    <%= form.label :name, 'Name', class: "form-label" %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="mb-3 col-12">
+    <%= form.label :record_selector, 'Record Selector', class: "form-label" %>
+    <%= form.text_field :record_selector, class: "form-control" %>
+  </div>
+
+  <div class="mb-3 col-12">
+    <%= form.label :job_id, 'Job', class: "form-label" %>
+    <%= form.select(:job_id, options_from_collection_for_select(@jobs, :id, :name), {}, class: 'form-select') %>
+  </div>
+
+  <div class="col-12">
+    <button type="button" class="btn btn-secondary me-1" id="test-transformation">
+      Test Record Selector
+    </button>
+  
+    <button type="submit" class="btn btn-primary">
+      Save
+    </button>
+  </div>
+<% end %>
+
+<div id="test-transformation-result"></div>

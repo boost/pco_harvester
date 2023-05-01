@@ -2,14 +2,17 @@
 
 <%= render 'shared/breadcrumb_nav' %>
 
-<h1 class="float-start"><%= @content_partner.name_in_database %></h1>
+<h1 class="float-start mb-4"><%= @content_partner.name_in_database %></h1>
 
-<div class="float-end">
-  <%= link_to new_content_partner_extraction_definition_path(@content_partner), class: 'btn btn-primary me-1' do %>
-    <%= bootstrap_icon('plus-circle') %>Add new definition
-  <% end %>
-  <%= link_to 'Edit content partner', edit_content_partner_path(@content_partner), class: 'btn btn-outline-primary' %>
-</div>
+<%= link_to 'Edit content partner', edit_content_partner_path(@content_partner), class: 'btn btn-outline-primary float-end' %>
+
+<div class="clearfix"></div>
+
+<h2 class="float-start">Extraction Definitions</h2>
+
+<%= link_to new_content_partner_extraction_definition_path(@content_partner), class: 'btn btn-primary float-end' do %>
+  <%= bootstrap_icon('plus-circle') %>Add new Extraction Definition
+<% end %>
 
 <div class="clearfix"></div>
 
@@ -28,5 +31,33 @@
 
   <%= render 'shared/pagination_below_table', items: @extraction_definitions %>
 <% else %>
-  <p>There are currently no extraction definitions for this content partner.</p>
+  <p>There are currently no extraction definitions for <%= @content_partner.name_in_database %>.</p>
 <% end %>
+
+<h2 class="float-start">Transformations</h2>
+
+<%= link_to new_content_partner_transformation_path(@content_partner), class: 'btn btn-primary float-end' do %>
+  <%= bootstrap_icon('plus-circle') %>Add new Transformation
+<% end %>
+
+<div class="clearfix"></div>
+
+<%- if @transformations.any? %>
+  <%- @transformations.each do |transformation| %>
+    <div class="border p-3 my-2">
+      <span class="float-start">
+        <%= transformation.name %>
+      </span>
+
+      <%= link_to "Details", content_partner_extraction_definition_path(@content_partner, extraction_definition), class: "btn btn-outline-primary float-end" %>
+
+      <div class="clearfix"></div>
+    </div>
+  <%- end %>
+
+  <%= render 'shared/pagination_below_table', items: @transformations %>
+<% else %>
+  <p>There are currently no transformations for <%= @content_partner.name_in_database %>.</p>
+<% end %>
+
+
