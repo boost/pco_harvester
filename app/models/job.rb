@@ -9,7 +9,7 @@ class Job < ApplicationRecord
   KINDS = %w[full sample].freeze
 
   enum :status, STATUSES
-  enum :kind, KINDS, prefix: :kind
+  enum :kind, KINDS, prefix: :is
 
   belongs_to :extraction_definition
 

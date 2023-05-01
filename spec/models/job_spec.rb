@@ -23,11 +23,11 @@ RSpec.describe Job, type: :model do
 
   describe 'kind checks' do
     Job::KINDS.each do |kind|
-      it "defines the check kind_#{kind}?" do
+      it "defines the check is_#{kind}?" do
         subject.kind = kind
-        expect(subject.send("kind_#{kind}?")).to be true
+        expect(subject.send("is_#{kind}?")).to be true
         subject.kind = Job::KINDS.without(kind).sample
-        expect(subject.send("kind_#{kind}?")).to be false
+        expect(subject.send("is_#{kind}?")).to be false
       end
     end
   end
