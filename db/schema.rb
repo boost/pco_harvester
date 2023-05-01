@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_30_235230) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_01_032012) do
   create_table "content_partners", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -48,6 +48,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_30_235230) do
     t.timestamp "end_time"
     t.text "error_message"
     t.index ["extraction_definition_id"], name: "index_jobs_on_extraction_definition_id"
+  end
+
+  create_table "transformations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_selector", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "content_partner_id", null: false
+    t.bigint "job_id", null: false
+    t.index ["content_partner_id", "job_id"], name: "index_transformations_on_content_partner_id_and_job_id", unique: true
+    t.index ["content_partner_id"], name: "index_transformations_on_content_partner_id"
+    t.index ["job_id"], name: "index_transformations_on_job_id"
+    t.index ["name"], name: "index_transformations_on_name"
   end
 
 end
