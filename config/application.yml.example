@@ -1,5 +1,9 @@
 default: &default
   MYSQL_SOCKET: null
+  SJ_USER_AGENT: Supplejack Harvester v2.0
 
 development:
+  <<: *default
+
+test:
   <<: *default

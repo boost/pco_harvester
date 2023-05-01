@@ -18,7 +18,7 @@ require "rails/test_unit/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-ENV.update YAML.load_file('config/application.yml')[Rails.env] rescue nil
+ENV.update YAML.load_file('config/application.yml', aliases: true)[Rails.env] rescue nil
 
 module Harvester
   class Application < Rails::Application
@@ -32,6 +32,7 @@ module Harvester
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.eager_load_paths << Rails.root.join('supplejack')
 
     # Don't generate system test files.
     config.generators.system_tests = nil

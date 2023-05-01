@@ -2,92 +2,18 @@
 
 <h1 class='float-start'><%= @extraction_definition.name %></h1>
 
-<button type="button" class="float-end btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">
-  Delete
-</button>
-<%= link_to 'Edit definition', edit_content_partner_extraction_definition_path(@content_partner, @extraction_definition), class: 'float-end me-1 btn btn-outline-primary' %>
+<div class="float-end">
+  <%= button_to 'Run full job', content_partner_extraction_definition_jobs_path(@content_partner, @extraction_definition, kind: 'full'), class: 'btn btn-primary', form_class: 'd-inline' %>
+  <%= button_to 'Run sample', content_partner_extraction_definition_jobs_path(@content_partner, @extraction_definition, kind: 'sample'), class: 'btn btn-primary', form_class: 'd-inline' %>
+  <%= link_to 'Edit definition', edit_content_partner_extraction_definition_path(@content_partner, @extraction_definition), class: 'me-1 btn btn-outline-primary' %>
+  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">Delete</button>
+</div>
 
 <div class="clearfix"></div>
 
-<div class="row">
-  <div class="col-6">
-    <h2>Common settings</h2>
+<%= render partial: 'jobs/jobs', locals: { jobs: @jobs } %>
 
-    <ol class="list-group">
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto">
-          <div class="fw-bold">Name</div>
-          <%= @extraction_definition.name %>
-        </div>
-      </li>
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto">
-          <div class="fw-bold">Format</div>
-          <%= @extraction_definition.format %>
-        </div>
-      </li>
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto">
-          <div class="fw-bold">Base URL</div>
-          <%= @extraction_definition.base_url %>
-        </div>
-      </li>
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto">
-          <div class="fw-bold">Throttle</div>
-          <%= @extraction_definition.throttle %>
-        </div>
-      </li>
-    </ol>
-  </div>
-
-  <div class="col-6">
-    <h2>Pagination settings</h2>
-
-    <ol class="list-group">
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto">
-          <div class="fw-bold">Type</div>
-          <%= @extraction_definition.pagination_type %>
-        </div>
-      </li>
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto">
-          <div class="fw-bold">Page</div>
-          <%= @extraction_definition.page_parameter %>: <%= @extraction_definition.page %>
-        </div>
-      </li>
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto">
-          <div class="fw-bold">Per page</div>
-          <%= @extraction_definition.per_page_parameter %>: <%= @extraction_definition.per_page %>
-        </div>
-      </li>
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto">
-          <div class="fw-bold">Total selector</div>
-          <%= @extraction_definition.total_selector %>
-        </div>
-      </li>
-    </ol>
-  </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="Delete extraction definition" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Delete it</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Are you sure you want to delete "<%= @extraction_definition.name %>"?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <%= button_to("Delete", content_partner_extraction_definition_path(@content_partner, @extraction_definition), method: :delete, class: "btn btn-danger") %>
-      </div>
-    </div>
-  </div>
-</div>
+<%# Modal %>
+<%= render layout: 'shared/delete-modal', locals: { path: content_partner_extraction_definition_path(@content_partner, @extraction_definition) } do %>
+  Are you sure you want to delete "<%= @extraction_definition.name %>"?
+<% end %>

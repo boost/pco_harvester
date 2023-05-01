@@ -18,6 +18,17 @@
 !/tmp/pids/
 !/tmp/pids/.keep
 
+# Ignore extraction files, but the keep the directory
+/extractions/test/*
+/extractions/development/*
+/extractions/staging/*
+/extractions/production/*
+
+!/extractions/
+!/extractions/test/.keep
+!/extractions/development/.keep
+!/extractions/staging/.keep
+!/extractions/production/.keep
 
 /public/assets
 
@@ -38,3 +49,6 @@ node_modules
 
 /config/application.yml
 
+# rspec
+/spec/examples.txt
+/coverage

@@ -4,7 +4,11 @@ class ExtractionDefinitionsController < ApplicationController
   before_action :find_content_partner
   before_action :find_extraction_definition, only: %i[show edit update destroy]
 
-  def show; end
+  skip_before_action :verify_authenticity_token, only: %i[test]
+
+  def show
+    @jobs = @extraction_definition.jobs.order(updated_at: :desc).page(params[:page])
+  end
 
   def new
     @extraction_definition = ExtractionDefinition.new
@@ -24,11 +28,18 @@ class ExtractionDefinitionsController < ApplicationController
 
   def update
     if @extraction_definition.update(extraction_definition_params)
-      redirect_to content_partner_extraction_definition_path(@content_partner, @extraction_definition), notice: 'Extraction Definition updated successfully'
+      flash.notice = 'Extraction Definition updated successfully'
+      redirect_to content_partner_extraction_definition_path(@content_partner, @extraction_definition)
     else
       flash.alert = 'There was an issue updating your Extraction Definition'
       render 'edit'
     end
+  end
+
+  def test
+    @extraction_definition = ExtractionDefinition.new(extraction_definition_params)
+
+    render json: DocumentExtraction.new(@extraction_definition).extract
   end
 
   def destroy
@@ -36,7 +47,7 @@ class ExtractionDefinitionsController < ApplicationController
       redirect_to content_partner_path(@content_partner), notice: 'Extraction Definition deleted successfully'
     else
       flash.alert = 'There was an issue deleting your Extraction Definition'
-      render 'show'
+      redirect_to content_partner_extraction_definition_path(@content_partner, @extraction_definition)
     end
   end
 

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'ExtractionDefinitions', type: :request do
   let(:content_partner) { create(:content_partner) }
-  let!(:extraction_definition) { create(:extraction_definition, content_partner: content_partner) }
+  let!(:extraction_definition) { create(:extraction_definition, content_partner:) }
 
   describe '#show' do
     it 'renders a specific extraction definition' do
@@ -24,22 +24,18 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
   describe '#create' do
     context 'with valid parameters' do
       it 'creates a new extraction definition' do
-        expect {
+        extraction_definition2 = build(:extraction_definition, content_partner:)
+        expect do
           post content_partner_extraction_definitions_path(content_partner), params: {
-            extraction_definition: {
-              name: 'Name',
-              content_partner_id: content_partner.id
-            }
+            extraction_definition: extraction_definition2.attributes
           }
-        }.to change(ExtractionDefinition, :count).by(1)
+        end.to change(ExtractionDefinition, :count).by(1)
       end
 
       it 'redirects to the content_partner_path' do
+        extraction_definition2 = build(:extraction_definition, content_partner:)
         post content_partner_extraction_definitions_path(content_partner), params: {
-          extraction_definition: {
-            name: 'Name',
-            content_partner_id: content_partner.id
-          }
+          extraction_definition: extraction_definition2.attributes
         }
 
         expect(response).to redirect_to content_partner_path(content_partner)
@@ -48,16 +44,18 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
 
     context 'with invalid parameters' do
       it 'does not create a new extraction definition' do
-        expect {
+        extraction_definition2 = build(:extraction_definition, name: nil, content_partner:)
+        expect do
           post content_partner_extraction_definitions_path(content_partner), params: {
-            extraction_definition: { name: nil }
+            extraction_definition: extraction_definition2.attributes
           }
-        }.to change(ExtractionDefinition, :count).by(0)
+        end.to change(ExtractionDefinition, :count).by(0)
       end
 
       it 'renders the form again' do
+        extraction_definition2 = build(:extraction_definition, name: nil, content_partner:)
         post content_partner_extraction_definitions_path(content_partner), params: {
-          extraction_definition: { name: nil }
+          extraction_definition: extraction_definition2.attributes
         }
 
         expect(response.status).to eq 200
@@ -108,6 +106,36 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
     end
   end
 
+  describe '#test' do
+    let(:ed) { create(:extraction_definition, base_url: 'http://google.com/?url_param=url_value') }
+    
+    before do
+      init_params = {
+        url: 'http://google.com/?url_param=url_value',
+        params: { 'page' => 1, 'per_page' => 50  },
+        headers: { 'Content-Type' => 'application/json', 'User-Agent' => 'Supplejack Harvester v2.0' }
+      }
+
+      stub_request(**init_params) { 'test' }
+    end
+
+    it 'returns a document extraction as JSON' do
+      post test_content_partner_extraction_definitions_path(content_partner), params: {
+        extraction_definition: ed.attributes
+      }
+
+      expect(response.status).to eq 200
+
+      json_data = JSON.parse(response.body)
+
+      expected_keys = ["url", "method", "params", "request_headers", "status", "response_headers", "body"]
+
+      expected_keys.each do |key|
+        expect(json_data).to have_key(key)
+      end
+    end
+  end  
+
   describe '#destroy' do
     it 'destroys the extraction definition' do
       delete content_partner_extraction_definition_path(content_partner, extraction_definition)
@@ -120,6 +148,7 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
     it 'displays a message when failing' do
       allow_any_instance_of(ExtractionDefinition).to receive(:destroy).and_return false
       delete content_partner_extraction_definition_path(content_partner, extraction_definition)
+      follow_redirect!
 
       expect(response.body).to include('There was an issue deleting your Extraction Definition')
     end

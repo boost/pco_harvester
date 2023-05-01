@@ -25,6 +25,12 @@
         display: request.path.match?(/\/extraction_definitions\/\d+/)) %>
 
       <%= breadcrumb_item(
+        text: @job&.id,
+        path: (content_partner_extraction_definition_job_path(partner_id, definition_id, @job) rescue nil),
+        active: current_page(:jobs, %w[show]),
+        display: request.path.match?(/\/jobs\/\d+/)) %>
+
+      <%= breadcrumb_item(
         text: 'Edit',
         active: action_name.in?(%w[edit update]),
         display: action_name.in?(%w[edit update])) %>

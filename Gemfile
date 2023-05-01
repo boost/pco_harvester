@@ -22,6 +22,12 @@ gem 'kaminari'
 
 gem 'foreman'
 
+# extraction related
+gem 'faraday', '~> 2.7'
+gem 'faraday-follow_redirects'
+gem 'jsonpath'
+gem 'sidekiq'
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
@@ -40,4 +46,7 @@ end
 group :test do
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'shoulda-matchers'
+
+  gem 'simplecov'
 end
