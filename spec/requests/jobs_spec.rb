@@ -183,7 +183,7 @@ RSpec.describe 'Jobs', type: :request do
 
     context 'when the cancellation is unsuccessful' do
       before do
-        allow_any_instance_of(Job).to receive(:update).and_return(false)
+        allow_any_instance_of(Job).to receive(:cancelled!).and_return(false)
       end
 
       it 'does not set the job status to be cancelled' do

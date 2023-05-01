@@ -38,7 +38,7 @@ class JobsController < ApplicationController
   end
 
   def cancel
-    if @job.mark_as_cancelled
+    if @job.cancelled!
       flash.notice = 'Job cancelled successfully'
     else
       flash.alert = 'There was an issue cancelling the job'

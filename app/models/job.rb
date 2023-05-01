@@ -3,47 +3,22 @@
 # Used to store information about a Job
 #
 class Job < ApplicationRecord
+
   EXTRACTIONS_FOLDER = "#{Rails.root}/extractions/#{Rails.env}".freeze
+  STATUSES = %w[queued cancelled running completed errored].freeze
+  KINDS = %w[full sample].freeze
+
+  enum :status, STATUSES
+  enum :kind, KINDS, prefix: :kind
 
   belongs_to :extraction_definition
 
   after_create :create_folder
   after_destroy :delete_folder
 
-  STATUSES = %w[queued cancelled running completed errored].freeze
-  KINDS = %w[full sample].freeze
-
-  validates :status, presence: true, inclusion: { in: STATUSES }
-  validates :kind, presence: true, inclusion: { in: KINDS }
-  validates :end_time, comparison: { greater_than: :start_time }, if: ->{ end_time.present? }
-
-  STATUSES.each do |status_name|
-    # A helper method to determine the status of a job
-    # 
-    # @example job.queued? #=> true
-    # @return [true, false] depending on the status of the job
-    define_method("#{status_name}?".to_sym) do
-      status == status_name
-    end
-
-    # A helper method to update the status of the job
-    #
-    # @example job.mark_as_cancelled #=> true
-    # @return [true, false] depending on success of update method
-    define_method("mark_as_#{status_name}".to_sym) do
-      update(status: status_name)
-    end
-  end
-
-  KINDS.each do |kind_name|
-    # A helper method to determine the kind of job
-    #
-    # @example job.full? #=> true
-    # @return [true, false] depending on kind of job
-    define_method("#{kind_name}?".to_sym) do
-      kind == kind_name
-    end
-  end
+  validates :status, presence: true, inclusion: { in: STATUSES }, if: -> { status.present? }
+  validates :kind, presence: true, inclusion: { in: KINDS },      if: -> { kind.present? }
+  validates :end_time, comparison: { greater_than: :start_time }, if: -> { end_time.present? }
 
   # Returns the fullpath to the extraction folder for this job
   #

@@ -8,13 +8,13 @@ RSpec.describe Job, type: :model do
       it "defines the check #{status}?" do
         subject.status = status
         expect(subject.send("#{status}?")).to be true
-        subject.status = 'test'
+        subject.status = Job::STATUSES.without(status).sample
         expect(subject.send("#{status}?")).to be false
       end
 
-      it "defines a way to update the status with mark_as_#{status}" do
+      it "defines a way to update the status with #{status}!" do
         subject.status = status
-        expect(subject.send("mark_as_#{status}")).to be true
+        expect(subject.send("#{status}!")).to be true
         subject.reload
         expect(subject.send("#{status}?")).to be true
       end
@@ -23,19 +23,17 @@ RSpec.describe Job, type: :model do
 
   describe 'kind checks' do
     Job::KINDS.each do |kind|
-      it "defines the check #{kind}?" do
+      it "defines the check kind_#{kind}?" do
         subject.kind = kind
-        expect(subject.send("#{kind}?")).to be true
-        subject.kind = 'test'
-        expect(subject.send("#{kind}?")).to be false
+        expect(subject.send("kind_#{kind}?")).to be true
+        subject.kind = Job::KINDS.without(kind).sample
+        expect(subject.send("kind_#{kind}?")).to be false
       end
     end
   end
 
   describe 'validations' do
     it { should validate_presence_of(:extraction_definition).with_message('must exist') }
-    it { should validate_inclusion_of(:status).in_array(Job::STATUSES).with_message('is not included in the list') }
-    it { should validate_inclusion_of(:kind).in_array(Job::KINDS).with_message('is not included in the list') }
   end
 
   describe '#associations' do

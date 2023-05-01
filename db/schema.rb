@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_27_033740) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_30_235230) do
   create_table "content_partners", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -38,12 +38,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_27_033740) do
 
   create_table "jobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
-    t.string "status", default: "queued"
+    t.integer "status"
     t.string "result_location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "extraction_definition_id", null: false
-    t.string "kind", default: "full", null: false
+    t.integer "kind", default: 0, null: false
     t.timestamp "start_time"
     t.timestamp "end_time"
     t.text "error_message"

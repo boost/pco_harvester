@@ -14,8 +14,6 @@ module JobsHelper
       'Cancelled'
     elsif job.completed?
       'Completed'
-    else
-      raise ArgumentError, 'Unknown job status'
     end
   end
 end

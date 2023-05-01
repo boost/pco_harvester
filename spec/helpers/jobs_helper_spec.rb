@@ -34,10 +34,5 @@ RSpec.describe JobsHelper do
     it 'returns Completed when a job is completed' do
       expect(job_status_text(completed_job)).to eq 'Completed'
     end
-
-    it 'raises an Argument error if the status is not known' do
-      completed_job.status = 'abc'
-      expect { job_status_text(completed_job) }.to raise_error(ArgumentError, 'Unknown job status')
-    end
   end
 end
