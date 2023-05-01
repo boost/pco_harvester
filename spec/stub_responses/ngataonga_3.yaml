@@ -1,0 +1,575 @@
+---
+status: 200
+headers:
+  date: Thu, 27 Apr 2023 19:21:34 GMT
+  server: Apache/2.4.25 (Debian)
+  cache-control: max-age=0, private, must-revalidate
+  x-frame-options: SAMEORIGIN
+  x-xss-protection: 1; mode=block
+  x-content-type-options: nosniff
+  x-runtime: '0.018642'
+  x-request-id: 2bc7064f-b07f-423a-b17e-318f865f0375
+  x-powered-by: Phusion Passenger 5.0.30
+  etag: W/"84479b965b85259183e589a9a616b59a"
+  status: 200 OK
+  transfer-encoding: chunked
+  content-type: application/json; charset=utf-8
+body: |-
+  {
+    "search": {
+      "result_count": 12,
+      "results": [
+        {
+          "created_at": "2016-01-17T22:09:26.381Z",
+          "updated_at": "2018-09-10T04:29:26.399Z",
+          "record_id": 154020,
+          "reference_number": "141465",
+          "media_type": "AUDIO",
+          "thumbnail_url": null,
+          "genre": [
+            "Radio news programs",
+            "Nonfiction radio programs",
+            "Radio programs",
+            "Sound recordings"
+          ],
+          "creator": null,
+          "place_of_production": null,
+          "photographer": null,
+          "authors": [
+            "RNZ Collection",
+            "National Radio (N.Z.) (estab. 1986, closed 2007), Broadcaster"
+          ],
+          "corp_author": [
+
+          ],
+          "state_of_resp": [
+
+          ],
+          "series_title": null,
+          "location_all": null,
+          "subject_headings_calc": null,
+          "taonga_maori_collection": null,
+          "category": null,
+          "title": "Checkpoint. 1993-03-17",
+          "other_title": null,
+          "description": "PETERS RESIGNATION: Winston Peters today took the plunge and stepped down from parliament.\nReport by Jonathan Schwass/Debra Harrington\nWinston Peters, audio\nJohn Collinge, National Party President\nNeil Atwood, Chmn, Winston by-election campaign\nFISHING: Last minute snags have appeared in the Government's programme to get Māori into the fishing industry.\nReport by Robin Hapi, General Manager, Treat of Waitangi Fisheries Commission\nDoug Kidd, Minister of Fisheries\nDEFAMATION: A Wellington lawyer says charlatans operating on the fringes of the business world are being protected by outdated defamation laws inspite of recent changes to the legislation.\nReport by Debra Harrington\nNick Davidson, Wellington Lawyer",
+          "full_page_content": null,
+          "credits": [
+
+          ],
+          "year": [
+            1993
+          ],
+          "landing_url": null,
+          "duration": null,
+          "form": null,
+          "viewing_location": null,
+          "production_company": null,
+          "linked_name1": null,
+          "linked_name2": null,
+          "linked_name3": null,
+          "linked_name4": null,
+          "linked_name5": null,
+          "linked_url1": null,
+          "linked_url2": null,
+          "linked_url3": null,
+          "linked_url4": null,
+          "linked_url5": null,
+          "medianet": null,
+          "online_content": null,
+          "source": "Sound Collection",
+          "file": [
+            "http://boost.ngataonga.org.nz/Audio/141465.mp3"
+          ],
+          "member_object": null,
+          "related_object": null,
+          "phase_desc": null,
+          "item_count_notes": null,
+          "orientation_desc": null,
+          "group_notes": null,
+          "prov_notes": null,
+          "assoc_notes": null,
+          "subject_class": null,
+          "subject_place": null,
+          "subject_event": null,
+          "subject_date": null,
+          "au_related": null,
+          "subject_person": null,
+          "documentation": null,
+          "contest": null,
+          "primary_prod_place": null,
+          "primary_prod_date": null,
+          "au_next_term": null,
+          "publisher": null,
+          "restriction": null,
+          "credit_line": null,
+          "name_notes": null,
+          "place_made": null,
+          "variant_title": null,
+          "proportion_title": null,
+          "date": "17 Mar 1993",
+          "subject": [
+
+          ],
+          "person": [
+
+          ],
+          "group_broadcaster": [
+
+          ],
+          "person_names": null,
+          "transmission_date": null,
+          "personalities": null,
+          "rights_information": null,
+          "digital_bundle_path": null,
+          "in_point": null,
+          "out_point": null,
+          "department": null,
+          "has_media": true,
+          "sortable_year": 1993
+        },
+        {
+          "created_at": "2016-01-17T22:09:39.186Z",
+          "updated_at": "2019-08-20T13:20:36.728Z",
+          "record_id": 154091,
+          "reference_number": "139674",
+          "media_type": "AUDIO",
+          "thumbnail_url": null,
+          "genre": [
+            "Radio speeches",
+            "Nonfiction radio programs",
+            "Radio programs",
+            "Sound recordings"
+          ],
+          "creator": null,
+          "place_of_production": null,
+          "photographer": null,
+          "authors": [
+            "RNZ Collection",
+            "McCarthy, Winston John, 1908-1984, Speaker/Kaikōrero"
+          ],
+          "corp_author": [
+
+          ],
+          "state_of_resp": [
+
+          ],
+          "series_title": null,
+          "location_all": null,
+          "subject_headings_calc": null,
+          "taonga_maori_collection": null,
+          "category": null,
+          "title": "Rugby Portraits - Programme 4, Wild Bill Cerutti Rugby Portraits - Programme 11, Bob Scott",
+          "other_title": null,
+          "description": "Side 1:\nWinston McCarthy narrates a portrait of Australian rugby player W. H. 'Wild Bill' Cerutti. On the field, he was the hardest, roughest, toughest forward Australia ever produced. Off the field, he was the biggest, softest-hearted man you could ever hope to meet. Cerutti began his rugby in New South Wales, getting representative honours against Victoria in 1927, in the days when front row props fought for the loosehead.\nHe visited New Zealand three times as a player - in 1928, 1931, and 1936. He was an Australian grand prop and forward, the type that never gives up; a great character with a quick tongue and a grand sense of humour.\n\nSide 2:\nWinston McCarthy narrates a portrait of genius rugby player, Bob Scott, who he says was the greatest player he has ever seen, calling him a grand student and player of the game. One of the secrets to his success is that he enjoys his game. The balance of the man 'is like that of a ballet dancer'. He was famous for kicking goal in bare feet from the half way line.\n\nIn Australia in 1947 Scott had an incredible season with his goal kicking. In two games on the Sydney cricket ground he kicked five penalties and nine conversions (33 points), and was presented by officials with a special tray with an inlaid inscription. According to Winston McCarthy \"he'll always be the greatest rugby player that has been my privilege to see...The Great Scott, Bob Scott, the master\".",
+          "full_page_content": null,
+          "credits": [
+
+          ],
+          "year": [
+
+          ],
+          "landing_url": null,
+          "duration": "00:24:39",
+          "form": null,
+          "viewing_location": null,
+          "production_company": null,
+          "linked_name1": null,
+          "linked_name2": null,
+          "linked_name3": null,
+          "linked_name4": null,
+          "linked_name5": null,
+          "linked_url1": null,
+          "linked_url2": null,
+          "linked_url3": null,
+          "linked_url4": null,
+          "linked_url5": null,
+          "medianet": null,
+          "online_content": null,
+          "source": "Sound Collection",
+          "file": [
+            "http://boost.ngataonga.org.nz/Audio/139674.mp3"
+          ],
+          "member_object": null,
+          "related_object": null,
+          "phase_desc": null,
+          "item_count_notes": null,
+          "orientation_desc": null,
+          "group_notes": null,
+          "prov_notes": null,
+          "assoc_notes": null,
+          "subject_class": null,
+          "subject_place": null,
+          "subject_event": null,
+          "subject_date": null,
+          "au_related": null,
+          "subject_person": null,
+          "documentation": null,
+          "contest": null,
+          "primary_prod_place": null,
+          "primary_prod_date": null,
+          "au_next_term": null,
+          "publisher": null,
+          "restriction": null,
+          "credit_line": null,
+          "name_notes": null,
+          "place_made": null,
+          "variant_title": null,
+          "proportion_title": null,
+          "date": null,
+          "subject": [
+
+          ],
+          "person": [
+
+          ],
+          "group_broadcaster": [
+
+          ],
+          "person_names": null,
+          "transmission_date": null,
+          "personalities": null,
+          "rights_information": null,
+          "digital_bundle_path": null,
+          "in_point": null,
+          "out_point": null,
+          "department": null,
+          "has_media": true,
+          "sortable_year": 0
+        },
+        {
+          "created_at": "2016-01-17T22:10:01.831Z",
+          "updated_at": "2018-09-10T04:27:30.220Z",
+          "record_id": 154215,
+          "reference_number": "140534",
+          "media_type": "AUDIO",
+          "thumbnail_url": null,
+          "genre": [
+            "Radio news programs",
+            "Nonfiction radio programs",
+            "Radio programs",
+            "Sound recordings"
+          ],
+          "creator": null,
+          "place_of_production": null,
+          "photographer": null,
+          "authors": [
+            "RNZ Collection",
+            "Evans, Bronwen, Presenter",
+            "National Radio (N.Z.) (estab. 1986, closed 2007), Broadcaster"
+          ],
+          "corp_author": [
+
+          ],
+          "state_of_resp": [
+
+          ],
+          "series_title": null,
+          "location_all": null,
+          "subject_headings_calc": null,
+          "taonga_maori_collection": null,
+          "category": null,
+          "title": "Checkpoint. 1989-06-15.",
+          "other_title": null,
+          "description": "UNEMPLOYMENT: After a four month reprieve, unemployment in New Zealand is rising again. According to the latest Labour Department figures.\nReport by Bronwen Evans\nDavid Lange, Prime Minister\nPetrus Simon, Integrated Economic Services\n\nWHANGANUI RIVER: September is when the Planning Appeal Authority hears Electricorp challenge the Whanganui River's rights to its own waters, following a decision by a tribunal appointed by the Rangitikei-Whanganui Catchment Board.\nReport by Philip Whaanga\nDavid Young, Author of book on rivers of New Zealand\nJuliet Hensley, Corporate Affairs Manager, Electricorp\n\nCHINA: Five New Zealand students who've been studying in Beijing on a government-sponsored exchange programme are meeting government officials this week to discuss their return to China.\nReport by Jenny Davies\nMatthew Overell, NZ Student formally studying in China",
+          "full_page_content": null,
+          "credits": [
+
+          ],
+          "year": [
+            1989
+          ],
+          "landing_url": null,
+          "duration": "00:30:10",
+          "form": null,
+          "viewing_location": null,
+          "production_company": null,
+          "linked_name1": null,
+          "linked_name2": null,
+          "linked_name3": null,
+          "linked_name4": null,
+          "linked_name5": null,
+          "linked_url1": null,
+          "linked_url2": null,
+          "linked_url3": null,
+          "linked_url4": null,
+          "linked_url5": null,
+          "medianet": null,
+          "online_content": null,
+          "source": "Sound Collection",
+          "file": [
+            "http://boost.ngataonga.org.nz/Audio/140534.mp3"
+          ],
+          "member_object": null,
+          "related_object": null,
+          "phase_desc": null,
+          "item_count_notes": null,
+          "orientation_desc": null,
+          "group_notes": null,
+          "prov_notes": null,
+          "assoc_notes": null,
+          "subject_class": null,
+          "subject_place": null,
+          "subject_event": null,
+          "subject_date": null,
+          "au_related": null,
+          "subject_person": null,
+          "documentation": null,
+          "contest": null,
+          "primary_prod_place": null,
+          "primary_prod_date": null,
+          "au_next_term": null,
+          "publisher": null,
+          "restriction": null,
+          "credit_line": null,
+          "name_notes": null,
+          "place_made": null,
+          "variant_title": null,
+          "proportion_title": null,
+          "date": "15 Jun 1989",
+          "subject": [
+
+          ],
+          "person": [
+
+          ],
+          "group_broadcaster": [
+
+          ],
+          "person_names": null,
+          "transmission_date": null,
+          "personalities": null,
+          "rights_information": null,
+          "digital_bundle_path": null,
+          "in_point": null,
+          "out_point": null,
+          "department": null,
+          "has_media": true,
+          "sortable_year": 1989
+        },
+        {
+          "created_at": "2016-01-17T22:10:25.744Z",
+          "updated_at": "2019-08-20T13:20:39.284Z",
+          "record_id": 154289,
+          "reference_number": "141399",
+          "media_type": "AUDIO",
+          "thumbnail_url": null,
+          "genre": [
+            "Radio news programs",
+            "Nonfiction radio programs",
+            "Radio programs",
+            "Sound recordings"
+          ],
+          "creator": null,
+          "place_of_production": null,
+          "photographer": null,
+          "authors": [
+            "RNZ Collection",
+            "National Radio (N.Z.) (estab. 1986, closed 2007), Broadcaster"
+          ],
+          "corp_author": [
+
+          ],
+          "state_of_resp": [
+
+          ],
+          "series_title": null,
+          "location_all": null,
+          "subject_headings_calc": null,
+          "taonga_maori_collection": null,
+          "category": null,
+          "title": "Checkpoint. 1992-11-23",
+          "other_title": null,
+          "description": "UPTON ON MAT: There's been more criticism of the Minister of Health today...over the issue of ministerial responsibility.\nReport by Bronwen Evans\nJim Bolger, PM\nGATT RESCUE: A month after the GATT talks on international trade collapsed in a heap, negotiators and politicians are now once again talking about a breakthrough.\nReport by Jonathan Schwass\nTim Groser, MERT\nJim Bolger, PM\nRoland Dubois, French politician (wires)\nJohn Falloon, Ag. Minister\nSCHOOL MANAGEMENT: Since the launch of Tomorrow's Schools, the education sector has been caught up in a process of continual reform.\nReport by Patricia Herbert\nBrent Ingram, Principal, Hagley High\nMartin Cooney, Pres, PPTA\nPRIEST/BABY: The Catholic church says its order of Capuchin Friars in Auckland has agreed to accept responsibility for the young son of one of its priests, even though it's not legally obliged to.\nReport by Debra Harrington\nLyndsay Freer, Dir, Communications Catholic Churchy\nNoelene Marinovich, Mother baby\nFr. Matthais Murphy, Capuchin Friars\nStephenie Wenman, IRD",
+          "full_page_content": null,
+          "credits": [
+
+          ],
+          "year": [
+            1992
+          ],
+          "landing_url": null,
+          "duration": null,
+          "form": null,
+          "viewing_location": null,
+          "production_company": null,
+          "linked_name1": null,
+          "linked_name2": null,
+          "linked_name3": null,
+          "linked_name4": null,
+          "linked_name5": null,
+          "linked_url1": null,
+          "linked_url2": null,
+          "linked_url3": null,
+          "linked_url4": null,
+          "linked_url5": null,
+          "medianet": null,
+          "online_content": null,
+          "source": "Sound Collection",
+          "file": [
+            "http://boost.ngataonga.org.nz/Audio/141399.mp3"
+          ],
+          "member_object": null,
+          "related_object": null,
+          "phase_desc": null,
+          "item_count_notes": null,
+          "orientation_desc": null,
+          "group_notes": null,
+          "prov_notes": null,
+          "assoc_notes": null,
+          "subject_class": null,
+          "subject_place": null,
+          "subject_event": null,
+          "subject_date": null,
+          "au_related": null,
+          "subject_person": null,
+          "documentation": null,
+          "contest": null,
+          "primary_prod_place": null,
+          "primary_prod_date": null,
+          "au_next_term": null,
+          "publisher": null,
+          "restriction": null,
+          "credit_line": null,
+          "name_notes": null,
+          "place_made": null,
+          "variant_title": null,
+          "proportion_title": null,
+          "date": "23 Nov 1992",
+          "subject": [
+
+          ],
+          "person": [
+
+          ],
+          "group_broadcaster": [
+
+          ],
+          "person_names": null,
+          "transmission_date": null,
+          "personalities": null,
+          "rights_information": null,
+          "digital_bundle_path": null,
+          "in_point": null,
+          "out_point": null,
+          "department": null,
+          "has_media": true,
+          "sortable_year": 1992
+        },
+        {
+          "created_at": "2016-01-17T22:10:28.229Z",
+          "updated_at": "2018-09-10T02:37:50.472Z",
+          "record_id": 154302,
+          "reference_number": "141975",
+          "media_type": "AUDIO",
+          "thumbnail_url": null,
+          "genre": [
+            "Radio news programs",
+            "Nonfiction radio programs",
+            "Radio programs",
+            "Sound recordings"
+          ],
+          "creator": null,
+          "place_of_production": null,
+          "photographer": null,
+          "authors": [
+            "RNZ Collection",
+            "National Radio (N.Z.) (estab. 1986, closed 2007), Broadcaster"
+          ],
+          "corp_author": [
+
+          ],
+          "state_of_resp": [
+
+          ],
+          "series_title": null,
+          "location_all": null,
+          "subject_headings_calc": null,
+          "taonga_maori_collection": null,
+          "category": null,
+          "title": "Checkpoint. 1995-05-15",
+          "other_title": null,
+          "description": "There's been a categorical \"no\" from the Government today to the idea of decriminalising marijuana - despite research showing almost half of all people under 45 have used it at some stage.\nThe co ordinator of the marijuana law reform group NORML, is Mike Finlayson and he joins us now\nA legal landmark was set today when the High Court overturned a commercial rate increase set by the Wellington City Council.\nMeanwhile Wellington's Mayor, Fran Wilde, is putting a positive spin on the High Court finding.\nActivist Mike Smith has appeared in the Auckland district court on charges telating to his attack on One Tree Hill's pine.\n1720 2.00 HEADS:\n5.00 TODAY IN AUSTRALIA: main item;\nThe Kashmir valley in northern India remains tense following a fact finding mission to the area by two senior cabinet ministers\nA short time ago I asked Political Scientist Raj Vasil whether the government will continue with it's plans for elections in Kashmir despite the latest violence there.\n[illegible] 3.00 SPORTS:\n1740 2.00 NEWS:\nWeek two of the trial of David Cullen Bain for the murder of his family has begun in the high court in Dunedin today.\n\nIt seems red socks are only the start of it. As the news of Team New Zealand's America's Cup win sinks in, the merchandising is starting to be churned out.\n\nPlastic money is all the rage. The Bankers Association annual review has revealed that cheques now make up less than half of all non-cash bank transactions. Simon Carlaw of the Bankers Association comments. Wellington retailer Mark Blumsky explains the appeal of EFTPOS transactions. Police Fraud Squad spokesman Hugh McRae comments on cheque fraud.\n\n2.00 BUSINESS NEWS:\n1800 6.00 NEWS, TRAIL AND WEATHER\nDespite the reassuring words from the world Health Organisation there is growing concern in the Zairiean Capital Kinshasa, about the possible spread of",
+          "full_page_content": null,
+          "credits": [
+
+          ],
+          "year": [
+            1995
+          ],
+          "landing_url": null,
+          "duration": null,
+          "form": null,
+          "viewing_location": null,
+          "production_company": null,
+          "linked_name1": null,
+          "linked_name2": null,
+          "linked_name3": null,
+          "linked_name4": null,
+          "linked_name5": null,
+          "linked_url1": null,
+          "linked_url2": null,
+          "linked_url3": null,
+          "linked_url4": null,
+          "linked_url5": null,
+          "medianet": null,
+          "online_content": null,
+          "source": "Sound Collection",
+          "file": [
+            "http://boost.ngataonga.org.nz/Audio/141975.mp3"
+          ],
+          "member_object": null,
+          "related_object": null,
+          "phase_desc": null,
+          "item_count_notes": null,
+          "orientation_desc": null,
+          "group_notes": null,
+          "prov_notes": null,
+          "assoc_notes": null,
+          "subject_class": null,
+          "subject_place": null,
+          "subject_event": null,
+          "subject_date": null,
+          "au_related": null,
+          "subject_person": null,
+          "documentation": null,
+          "contest": null,
+          "primary_prod_place": null,
+          "primary_prod_date": null,
+          "au_next_term": null,
+          "publisher": null,
+          "restriction": null,
+          "credit_line": null,
+          "name_notes": null,
+          "place_made": null,
+          "variant_title": null,
+          "proportion_title": null,
+          "date": "15 May 1995",
+          "subject": [
+
+          ],
+          "person": [
+
+          ],
+          "group_broadcaster": [
+
+          ],
+          "person_names": null,
+          "transmission_date": null,
+          "personalities": null,
+          "rights_information": null,
+          "digital_bundle_path": null,
+          "in_point": null,
+          "out_point": null,
+          "department": null,
+          "has_media": true,
+          "sortable_year": 1995
+        }
+      ],
+      "per_page": 5,
+      "page": 3,
+      "request_url": "http://api.ngataonga.org.nz/records.json/?and%5Bhas_media%5D=true&api_key=_yvmC1WsNazhasMgiVkx&page=3&per_page=5",
+      "facets": {
+      }
+    }
+  }

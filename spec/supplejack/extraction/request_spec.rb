@@ -5,8 +5,8 @@ require 'rails_helper'
 RSpec.describe Extraction::Request do
   describe '#get' do
     it 'returns a document' do
-      stub_request(url: 'http://google.com/') { 'test' }
-      expect(described_class.new(url: 'http://google.com/').get).to be_a Extraction::Document
+      stub_request(:get, 'http://google.com/hello').and_return(fake_response('test'))
+      expect(described_class.new(url: 'http://google.com/hello').get).to be_a Extraction::Document
     end
 
     it 'has a well formed document' do
@@ -16,7 +16,11 @@ RSpec.describe Extraction::Request do
         headers: { 'Authentication-Token' => 'my-auth-token' }
       }
 
-      stub_request(**init_params) { 'test' }
+      stub_request(:get, init_params[:url]).with(
+        query: init_params[:params],
+        headers: init_params[:headers]
+      ).and_return(fake_response('test'))
+
       doc = described_class.new(**init_params).get
 
       expect(doc.url.to_s).to eq 'http://google.com/?param_param=param_value&url_param=url_value'

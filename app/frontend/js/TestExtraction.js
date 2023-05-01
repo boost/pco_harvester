@@ -38,8 +38,12 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   const button = this.getElementById('test-extraction');
-  const form = button.closest("form");
-  button.addEventListener("click", (event) => {
-    sendData(form);
-  });
+
+  if(button) {
+    const form = button.closest("form");
+    button.addEventListener("click", (event) => {
+      sendData(form);
+    });
+  }
+
 }, false);

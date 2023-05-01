@@ -1,3 +1,6 @@
+# Can be improved by using this: AbstractFactoryFactoryInterfaces
+# or the iterator interface?
+
 module Extraction
   # Currently used for the view to generate kaminari paginations
   class Documents
@@ -6,12 +9,12 @@ module Extraction
     def initialize(folder)
       @folder = folder
       @per_page = 1
-      @limit_value = -1
+      @limit_value = nil
     end
 
     def [](key)
       @current_page = key&.to_i || 1
-      return nil if documents_filepath[@current_page - 1].nil?
+      return nil unless in_bounds?(@current_page)
 
       Document.load_from_file(documents_filepath[@current_page - 1])
     end
@@ -21,6 +24,10 @@ module Extraction
     end
 
     private
+
+    def in_bounds?(current_page)
+      current_page.in?(1..documents_filepath.length)
+    end
 
     def documents_filepath
       @documents_filepath ||= Dir.glob("#{@folder}/*.json")

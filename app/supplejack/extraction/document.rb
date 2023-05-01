@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Extraction
   # Manages the filesystem part of the request object
   # Saves it to filesystem and loads it in memory

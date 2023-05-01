@@ -34,6 +34,8 @@ module Harvester
     # config.eager_load_paths << Rails.root.join("extras")
     config.eager_load_paths << Rails.root.join('supplejack')
 
+    config.time_zone = ENV.fetch('TIME_ZONE', 'Auckland')
+
     # Don't generate system test files.
     config.generators.system_tests = nil
   end

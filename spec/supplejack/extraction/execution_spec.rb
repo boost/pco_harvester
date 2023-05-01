@@ -2,20 +2,17 @@
 
 require 'rails_helper'
 
-RSpec.describe ExtractionExecution do
+RSpec.describe Extraction::Execution do
   let(:full_job) { create(:job) }
   let(:sample_job) { create(:job, kind: 'sample') }
   let(:ed) { create(:extraction_definition, base_url: 'http://google.com/?url_param=url_value', jobs: [full_job, sample_job]) }
 
   before do
     (1...6).each do |page|
-      init_params = {
-        url: 'http://google.com/?url_param=url_value',
-        params: { 'page' => page, 'per_page' => 50  },
-        headers: { 'Content-Type' => 'application/json', 'User-Agent' => 'Supplejack Harvester v2.0' }
-      }
-
-      stub_request(**init_params) { 'test' }
+      stub_request(:get, 'http://google.com/?url_param=url_value').with(
+        query: { 'page' => page, 'per_page' => 50 },
+        headers: fake_json_headers
+      ).and_return(fake_response('test'))
     end
   end
 

@@ -22,6 +22,9 @@ gem 'kaminari'
 
 gem 'foreman'
 
+# For code commenting
+gem 'yard'
+
 # extraction related
 gem 'faraday', '~> 2.7'
 gem 'faraday-follow_redirects'
@@ -44,9 +47,12 @@ group :development do
 end
 
 group :test do
+  # used in tests
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'shoulda-matchers'
+  gem 'webmock'
 
+  # generates code coverage reports
   gem 'simplecov'
 end

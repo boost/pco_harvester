@@ -1,3 +1,9 @@
+# frozen_string_literal: true
+
+# Wrapper interface for the HTTP Client used in Supplejack
+# Intended on making transitioning to different HTTP Clients easier in the future
+# As the client itself is abstracted away from our HTTP calls
+#
 module Extraction
   class Connection
     attr_reader :url, :params, :headers
@@ -18,8 +24,6 @@ module Extraction
     private
 
     def connection(url, params, headers)
-      raise 'This code should not be executed in tests' if Rails.env.test?
-
       Faraday.new(url:, params:, headers:) do |f|
         f.response :follow_redirects, limit: 5
         f.adapter Faraday.default_adapter

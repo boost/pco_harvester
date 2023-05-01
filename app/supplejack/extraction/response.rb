@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Extraction
   class Response
     attr_reader :status, :headers, :body

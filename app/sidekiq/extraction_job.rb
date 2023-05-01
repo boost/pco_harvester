@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ExtractionJob
   include Sidekiq::Job
 
@@ -5,16 +7,19 @@ class ExtractionJob
 
   sidekiq_retries_exhausted do |job, _ex|
     @job = Job.find(job['args'].first)
-    @job.mark_as_errored
+    @job.errored!
+    @job.update(error_message: job['error_message'])
     Sidekiq.logger.warn "Failed #{job['class']} with #{job['args']}: #{job['error_message']}"
   end
 
   def perform(job_id)
     @job = Job.find(job_id)
-    @job.mark_as_running
+    @job.running!
+    @job.update(start_time: Time.zone.now)
 
-    ExtractionExecution.new(@job, @job.extraction_definition).call
+    Extraction::Execution.new(@job, @job.extraction_definition).call
 
-    @job.mark_as_completed unless @job.cancelled?
+    @job.completed! unless @job.cancelled?
+    @job.update(end_time: Time.zone.now)
   end
 end

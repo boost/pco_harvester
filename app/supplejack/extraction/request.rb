@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Extraction
   # Makes the actual request
   # Stores the request and response details
@@ -6,6 +8,9 @@ module Extraction
       @connection = Connection.new(url:, params:, headers:)
     end
 
+    # Returns a document based on the given request
+    #
+    # @return Document object
     def get
       @response = @connection.get
       Document.new(

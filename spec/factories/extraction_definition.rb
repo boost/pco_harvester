@@ -15,6 +15,7 @@ FactoryBot.define do
     trait :ngataonga do
       name { 'api.ngataonga.org.nz' }
       base_url { 'http://api.ngataonga.org.nz/records.json/?api_key=MYAPIKEY&and[has_media]=true' }
+      throttle { 0 }
       page_parameter { 'page' }
       page { 1 }
       per_page_parameter { 'per_page' }

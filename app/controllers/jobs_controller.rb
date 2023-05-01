@@ -6,7 +6,7 @@ class JobsController < ApplicationController
   before_action :find_job, only: %i[show destroy cancel]
 
   def index
-    @jobs = Job.order(updated_at: :desc).page(params[:page])
+    @jobs = paginate_and_filter_jobs(Job)
   end
 
   def show
@@ -38,7 +38,7 @@ class JobsController < ApplicationController
   end
 
   def cancel
-    if @job.mark_as_cancelled
+    if @job.cancelled!
       flash.notice = 'Job cancelled successfully'
     else
       flash.alert = 'There was an issue cancelling the job'

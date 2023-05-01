@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# Used to store the inforamation for running an extraction
+#
 class ExtractionDefinition < ApplicationRecord
   belongs_to :content_partner
   has_many :jobs
