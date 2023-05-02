@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
     })
   }
 
-  const button = this.getElementById('test-extraction');
+  const button = this.getElementById('js-test-extraction');
 
   if(button) {
     const form = button.closest("form");

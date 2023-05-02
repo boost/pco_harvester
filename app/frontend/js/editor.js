@@ -40,7 +40,7 @@ if(raw_data_record_viewer) {
 const transformation_record_viewer = document.querySelector("#transformation-record-viewer");
 
 if(transformation_record_viewer) {
-    let transformation_record_viewer_editor = new EditorView({
+  let transformation_record_viewer_editor = new EditorView({
     state: EditorState.create({
       extensions: [basicSetup, json(), EditorState.readOnly.of(true)],
       doc: JSON.stringify(JSON.parse(transformation_record_viewer.dataset.record), null, 2),

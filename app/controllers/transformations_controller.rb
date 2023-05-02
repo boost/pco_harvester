@@ -4,6 +4,8 @@ class TransformationsController < ApplicationController
   before_action :find_content_partner
   before_action :find_transformation, only: %w(show edit update destroy)
   before_action :find_jobs, only: %w(edit new create update)
+  
+  skip_before_action :verify_authenticity_token, only: %i[test]
 
   def show
     @raw_data = @transformation.records.first
@@ -45,6 +47,11 @@ class TransformationsController < ApplicationController
       flash.alert = 'There was an issue deleting your Transformation'
       redirect_to content_partner_transformation_path(@content_partner, @transformation)
     end
+  end
+
+  def test
+    @transformation = Transformation.new(transformation_params)
+    render json: @transformation.records.first || []
   end
 
   private

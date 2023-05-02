@@ -7,7 +7,7 @@ class Transformation < ApplicationRecord
   validates :name, presence: true
 
   def records
-    return [] if job.documents[1].nil?
+    return [] if record_selector.blank? || job.documents[1].nil?
 
     JsonPath.new(record_selector)
             .on(job.documents[1].body)

@@ -73,7 +73,6 @@ RSpec.describe "Transformations", type: :request do
       expect(response.status).to eq 200
     end
   end
-
   
   describe '#update' do
     context 'with valid parameters' do
@@ -132,6 +131,36 @@ RSpec.describe "Transformations", type: :request do
       follow_redirect!
 
       expect(response.body).to include('There was an issue deleting your Transformation')
+    end
+  end
+
+  describe '#test' do
+    let(:content_partner) { create(:content_partner, :ngataonga) } 
+    let(:extraction_definition) { content_partner.extraction_definitions.first }
+    let(:job)             { create(:job, extraction_definition:) } 
+    let(:subject)         { create(:transformation, content_partner: content_partner, job: job) }
+
+    before do
+      # that's to test the display of results
+      stub_ngataonga_harvest_requests(extraction_definition)
+      ExtractionJob.new.perform(job.id)
+    end
+    
+    it 'returns a JSON object containing the result of the selected job and the applied record selector' do
+      
+      post test_content_partner_transformations_path(content_partner), params: {
+        transformation: subject.attributes
+      }
+
+      expect(response.status).to eq 200
+
+      json_data = JSON.parse(response.body)
+
+      expected_keys = %w[record_id created_at updated_at reference_number thumbnail_url genre authors]
+
+      expected_keys.each do |key|
+        expect(json_data).to have_key(key)
+      end
     end
   end
 end
