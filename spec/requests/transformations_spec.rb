@@ -116,4 +116,22 @@ RSpec.describe "Transformations", type: :request do
       end
     end
   end
+
+  describe '#destroy' do
+    it 'destroys the transformation' do
+      delete content_partner_transformation_path(content_partner, transformation)
+
+      expect(response).to redirect_to(content_partner_path(content_partner))
+      follow_redirect!
+      expect(response.body).to include('Transformation deleted successfully')
+    end
+
+    it 'displays a message when failing' do
+      allow_any_instance_of(Transformation).to receive(:destroy).and_return false
+      delete content_partner_transformation_path(content_partner, transformation)
+      follow_redirect!
+
+      expect(response.body).to include('There was an issue deleting your Transformation')
+    end
+  end
 end

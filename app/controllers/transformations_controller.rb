@@ -2,7 +2,7 @@
 
 class TransformationsController < ApplicationController
   before_action :find_content_partner
-  before_action :find_transformation, only: %w(show edit update)
+  before_action :find_transformation, only: %w(show edit update destroy)
   before_action :find_jobs, only: %w(edit new create update)
 
   def show
@@ -35,6 +35,15 @@ class TransformationsController < ApplicationController
     else
       flash.alert = 'There was an issue updating your Transformation'
       render 'edit'
+    end
+  end
+
+  def destroy
+    if @transformation.destroy
+      redirect_to content_partner_path(@content_partner), notice: 'Transformation deleted successfully'
+    else
+      flash.alert = 'There was an issue deleting your Transformation'
+      redirect_to content_partner_transformation_path(@content_partner, @transformation)
     end
   end
 
