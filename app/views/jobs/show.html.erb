@@ -73,7 +73,9 @@
         <% if @job.extraction_folder_size_in_bytes > 10.megabytes %>
           <p>This file is too large to display in the browser.</p>
         <% else %>
-          <div id="extraction-result-viewer" data-results="<%= @document.body %>"></div>
+          <div class="record-view record-view--extraction-result">
+            <div id="extraction-result-viewer" data-results="<%= @document.body %>"></div>
+          </div>
         <% end %>
       </div>
   </div>

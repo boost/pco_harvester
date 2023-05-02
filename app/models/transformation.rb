@@ -3,5 +3,10 @@
 class Transformation < ApplicationRecord
   belongs_to :content_partner  
   belongs_to :job
- 
-end
+
+  def records
+    JsonPath.new(record_selector)
+            .on(job.documents[1].body)
+            .flatten
+  end
+ end

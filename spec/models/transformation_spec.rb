@@ -1,9 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe Transformation, type: :model do
-  let(:content_partner) { create(:content_partner) } 
-  let(:job)             { create(:job) } 
+  let(:content_partner) { create(:content_partner, :ngataonga) } 
+  let(:extraction_definition) { content_partner.extraction_definitions.first }
+  let(:job)             { create(:job, extraction_definition:) } 
   let(:subject)         { create(:transformation, content_partner: content_partner, job: job) }
+  
+  before do
+    # that's to test the display of results
+    stub_ngataonga_harvest_requests(extraction_definition)
+    ExtractionJob.new.perform(job.id)
+  end
   
   describe '#attributes' do
     it 'has a name' do
@@ -21,5 +28,11 @@ RSpec.describe Transformation, type: :model do
     it 'has a job' do
       expect(subject.job).to eq job
    end
+  end
+
+  describe '#records' do
+    it 'returns the records from the job documents' do
+      expect(subject.records.first).to have_key 'record_id'
+    end
   end
 end

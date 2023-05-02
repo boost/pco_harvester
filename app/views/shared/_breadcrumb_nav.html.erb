@@ -25,6 +25,12 @@
         display: request.path.match?(/\/extraction_definitions\/\d+/)) %>
 
       <%= breadcrumb_item(
+        text: @transformation&.name_in_database,
+        path: (content_partner_transformation_path(partner_id, transformation_id) rescue nil),
+        active: current_page(:transformation, %w[show]),
+        display: request.path.match?(/\/transformations\/\d+/)) %>
+
+      <%= breadcrumb_item(
         text: @job&.id,
         path: (content_partner_extraction_definition_job_path(partner_id, definition_id, @job) rescue nil),
         active: current_page(:jobs, %w[show]),

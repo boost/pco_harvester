@@ -1,0 +1,17 @@
+.record-view {
+  @include modifier('extraction-result') {
+    #extraction-result-viewer {
+      height: 750px;
+    }
+  }
+
+  @include modifier('transformation') {
+    #raw-data-record-viewer, #transformation-record-viewer {
+      height: 300px;
+      width: 630px;
+    }
+  }
+  
+  .cm-editor { height: 100% }
+  .cm-scroller { overflow: auto }
+}

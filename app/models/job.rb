@@ -69,6 +69,6 @@ class Job < ApplicationRecord
   end
 
   def name
-    updated_at.to_fs(:light)  
+    updated_at.to_fs(:light)
   end
 end
