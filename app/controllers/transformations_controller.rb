@@ -65,7 +65,9 @@ class TransformationsController < ApplicationController
   end
 
   def find_jobs
-    @jobs = @content_partner.extraction_definitions.flat_map(&:jobs)
+    @jobs = @content_partner.extraction_definitions.map do |ed|
+      [ed.name, ed.jobs.map { |job| [job.name, job.id] }]
+    end
   end
 
   def transformation_params
