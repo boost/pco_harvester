@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :transformations, only: %i[new create show]
+    resources :transformations, only: %i[new create show edit update]
   end
 
   get :jobs, to: 'jobs#index', as: :jobs

@@ -4,6 +4,11 @@
 
 <h1 class='float-start mb-4'><%= @transformation.name %></h1>
 
+<div class="float-end">
+  <%= link_to 'Edit transformation', edit_content_partner_transformation_path(@content_partner, @transformation), class: 'me-1 btn btn-outline-primary' %>
+  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">Delete</button>
+</div>
+
 <div class="clearfix"></div>
 
 <div class="row">
@@ -18,3 +23,5 @@
     </div>
   </div>
 </div>
+
+

@@ -35,4 +35,8 @@ RSpec.describe Transformation, type: :model do
       expect(subject.records.first).to have_key 'record_id'
     end
   end
+  
+  describe '#validations presence of' do
+    it { should validate_presence_of(:name).with_message("can't be blank") }
+  end
 end
