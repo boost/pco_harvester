@@ -6,10 +6,10 @@ RSpec.describe Transformation, type: :model do
   let(:job)             { create(:job, extraction_definition:) } 
   let(:subject)         { create(:transformation, content_partner: content_partner, job: job) }
 
-  let!(:attribute_one)   { create(:attribute, name: 'title', block: "JsonPath.new('title').on(record).first", transformation: subject) }
-  let!(:attribute_two)   { create(:attribute, name: 'source', block: "JsonPath.new('source').on(record).first", transformation: subject) }
-  let!(:attribute_three) { create(:attribute, name: 'dc_identifier', block: "JsonPath.new('reference_number').on(record).first", transformation: subject) }
-  let!(:attribute_four) { create(:attribute, name: 'landing_url', block: '"http://www.ngataonga.org.nz/collections/catalogue/catalogue-item?record_id=#{record[\'record_id\']}"', transformation: subject) }
+  let!(:field_one)   { create(:field, name: 'title', block: "JsonPath.new('title').on(record).first", transformation: subject) }
+  let!(:field_two)   { create(:field, name: 'source', block: "JsonPath.new('source').on(record).first", transformation: subject) }
+  let!(:field_three) { create(:field, name: 'dc_identifier', block: "JsonPath.new('reference_number').on(record).first", transformation: subject) }
+  let!(:field_four) { create(:field, name: 'landing_url', block: '"http://www.ngataonga.org.nz/collections/catalogue/catalogue-item?record_id=#{record[\'record_id\']}"', transformation: subject) }
   
   before do
     # that's to test the display of results

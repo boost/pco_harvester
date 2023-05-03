@@ -4,8 +4,13 @@ class Transformation < ApplicationRecord
   belongs_to :content_partner  
   belongs_to :job
 
+  has_many :fields
+
   validates :name, presence: true
 
+  # Returns the records from the job based on the given record_selector
+  #
+  # @return Array
   def records
     return [] if record_selector.blank? || job.documents[1].nil?
 
@@ -14,19 +19,16 @@ class Transformation < ApplicationRecord
             .flatten
   end
 
+  # Returns the records from the job having applied the attributes in the transformation
+  #
+  # @return Array 
   def transformed_records
-    # TODO rename attribute class as it conflicts with 
-    # the attributes method from active record :(
-
-    # Very basic initial implementation
-
     records.map do |record|
-      Attribute.where(transformation_id: id).each_with_object({}) do |attribute, hash|
+      fields.each_with_object({}) do |attribute, hash|
         block = ->(record) { eval(attribute.block) }
 
         hash[attribute.name] = block.call(record)
       end
     end
-    
   end
  end

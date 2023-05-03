@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :attribute do
+  factory :field do
     name        { 'Title' }
-    description { 'Description' }
+    block       { "JsonPath.new('title').on(record).first" }
    end
 end

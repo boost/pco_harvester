@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-class Attribute < ApplicationRecord
+class Field < ApplicationRecord
   belongs_to :transformation
 end

@@ -11,16 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2023_05_03_010840) do
-  create_table "attributes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "description"
-    t.text "block", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "transformation_id", null: false
-    t.index ["transformation_id"], name: "index_attributes_on_transformation_id"
-  end
-
   create_table "content_partners", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -44,6 +34,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_03_010840) do
     t.index ["content_partner_id", "name"], name: "index_extraction_definitions_on_content_partner_id_and_name", unique: true
     t.index ["content_partner_id"], name: "index_extraction_definitions_on_content_partner_id"
     t.index ["name"], name: "index_extraction_definitions_on_name"
+  end
+
+  create_table "fields", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "block", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "transformation_id", null: false
+    t.index ["transformation_id"], name: "index_fields_on_transformation_id"
   end
 
   create_table "jobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
