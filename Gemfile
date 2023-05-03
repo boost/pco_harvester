@@ -46,6 +46,8 @@ group :development do
   # gem 'spring'
 end
 
+gem 'codeclimate_diff', github: 'boost/codeclimate_diff', tag: 'v0.1.9'
+
 group :test do
   # used in tests
   gem 'factory_bot_rails'
