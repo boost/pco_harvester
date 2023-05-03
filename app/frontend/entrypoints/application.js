@@ -1,5 +1,5 @@
 // To see this message, add the following to the `<head>` section in your
-// views/layouts/application.html.erb
+// views/layouts/application.html.l
 //
 //    <%= vite_client_tag %>
 //    <%= vite_javascript_tag 'application' %>
@@ -34,3 +34,7 @@ const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
 import '/js/editor';
+
+import '/js/react';
+
+
