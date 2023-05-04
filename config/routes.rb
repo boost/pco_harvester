@@ -14,6 +14,10 @@ Rails.application.routes.draw do
         post :cancel, on: :member
       end
     end
+
+    resources :transformations, only: %i[new create show edit update destroy] do
+      post :test, on: :collection
+    end
   end
 
   get :jobs, to: 'jobs#index', as: :jobs

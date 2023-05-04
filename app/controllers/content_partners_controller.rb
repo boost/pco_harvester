@@ -9,6 +9,8 @@ class ContentPartnersController < ApplicationController
 
   def show
     @extraction_definitions = @content_partner.extraction_definitions.order(created_at: :desc).page(params[:page])
+
+    @transformations = @content_partner.transformations.order(created_at: :desc).page(params[:page])
   end
 
   def new
