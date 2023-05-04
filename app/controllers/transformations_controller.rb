@@ -10,7 +10,8 @@ class TransformationsController < ApplicationController
   def show
     @props = {
       rawRecord: @transformation.records.first,
-      transformedRecord: {}
+      transformedRecord: {},
+      fields: @transformation.fields.map { |field| { id: field.id, name: field.name, block: field.block } }
     }.to_json
   end
 
