@@ -34,6 +34,13 @@ const Field = ({ id, name, block }) => {
         <div id={`field-${id}`} className="accordion-collapse collapse">
           <div className="accordion-body">
 
+            <label className="form-label">Field Name</label>
+            <p className='form-text'>This is the field name that the result of this transformation will appear under on the transformed record.</p>
+            <input type="text" className="form-control" required="required" placeholder='New field' />
+ 
+            <label className="form-label mt-4">Field Code</label>
+            <p className='form-text'>This is the code that is applied to create this field on the transformed record.</p>
+
             <div ref={editor}></div>
 
             <div className='mt-4 float-end'>

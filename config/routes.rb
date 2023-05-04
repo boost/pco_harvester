@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
     resources :transformations, only: %i[new create show edit update destroy] do
       post :test, on: :collection
+
+      resources :fields, only: %i[create]
     end
   end
 

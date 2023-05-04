@@ -37,8 +37,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_03_010840) do
   end
 
   create_table "fields", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "name", null: false
-    t.text "block", null: false
+    t.string "name"
+    t.text "block"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "transformation_id", null: false
