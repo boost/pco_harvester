@@ -32,6 +32,12 @@ const TransformationApp = ({rawRecord, transformedRecord, fields}) => {
 
       { fieldComponents }      
 
+      <div className="mt-2 float-end">
+        <span className="btn btn-primary me-2">Add Field</span>
+        <span className="btn btn-success">Run</span>
+      </div>
+
+      <div className="clearfix"></div>
     </>
   );
 };
