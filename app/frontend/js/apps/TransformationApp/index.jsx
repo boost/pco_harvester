@@ -1,10 +1,25 @@
+// Library Imports
+
 import React from 'react';
 import { map } from 'lodash';
+import { useSelector } from 'react-redux';
+
+// Fields from state
+
+import { selectFields } from '~/js/features/FieldsSlice';
+import { selectRawRecord } from '~/js/features/RawRecordSlice';
+import { selectTransformedRecord } from '~/js/features/TransformedRecordSlice';
+
+// Components
 
 import RecordViewer from '~/js/apps/TransformationApp/components/RecordViewer';
 import Field        from '~/js/apps/TransformationApp/components/Field';
 
-const TransformationApp = ({rawRecord, transformedRecord, fields}) => {
+const TransformationApp = ({}) => {
+
+  const fields = useSelector(selectFields);
+  const rawRecord = useSelector(selectRawRecord);
+  const transformedRecord = useSelector(selectTransformedRecord);
 
   const fieldComponents = map(fields, (field) => (
     <Field 
