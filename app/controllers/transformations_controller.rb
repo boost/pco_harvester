@@ -8,8 +8,10 @@ class TransformationsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: %i[test]
 
   def show
-    @raw_data = @transformation.records.first
-    @transformation_preview = {}
+    @props = {
+      rawRecord: @transformation.records.first,
+      transformedRecord: {}
+    }.to_json
   end
 
   def edit; end

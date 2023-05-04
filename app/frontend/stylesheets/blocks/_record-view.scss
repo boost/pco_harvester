@@ -6,7 +6,7 @@
   }
 
   @include modifier('transformation') {
-    #raw-data-record-viewer, #transformation-record-viewer {
+    .record-view__container {
       height: 300px;
       width: 630px;
     }

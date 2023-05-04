@@ -5,11 +5,14 @@ import ReactDOM from 'react-dom/client';
 
 import TransformationApp from '~/js/apps/TransformationApp';
 
-const root = ReactDOM.createRoot(document.getElementById('js-transformation-app'));
+const transformationAppHTMLElement = document.querySelector("#js-transformation-app")
+
+const root = ReactDOM.createRoot(transformationAppHTMLElement);
+const props = JSON.parse(transformationAppHTMLElement.dataset.props);
 
 root.render(
   <React.StrictMode>
-    <TransformationApp />
+    <TransformationApp {...props} />
   </React.StrictMode>
 );
 

@@ -11,7 +11,7 @@
 
 <div class="clearfix"></div>
 
-<div id="js-transformation-app"></div>
+<div id="js-transformation-app" data-props="<%= @props %>"></div>
 
 <%# Modal %>
 <%= render layout: 'shared/delete-modal', locals: { path: content_partner_transformation_path(@content_partner, @transformation) } do %>

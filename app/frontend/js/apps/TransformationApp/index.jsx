@@ -1,24 +1,19 @@
 import React from 'react';
 
-const TransformationApp = () => {
+import RecordViewer from '~/js/apps/TransformationApp/components/RecordViewer';
+
+const TransformationApp = ({rawRecord, transformedRecord, attributes}) => {
   return (
     <React.Fragment>
-  
+ 
       <div className="row">
-
         <div className="col align-self-start">
-          <div className="record-view record-view--transformation">
-            Raw Record Viewer
-          </div>
+          <RecordViewer record={rawRecord} />
         </div>
-
 
         <div className="col align-self-center">
-          <div className="record-view record-view--transformation">
-            Transformed Record Viewer
-          </div>
+          <RecordViewer record={transformedRecord} />
         </div>
-      
       </div>
 
       <div className="mt-4"></div>
