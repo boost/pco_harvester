@@ -1,5 +1,5 @@
 import axios, {isCancel, AxiosError} from 'axios';
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, createEntityAdapter } from "@reduxjs/toolkit";
 import { remove } from 'lodash';
 
 export const addField = createAsyncThunk(
@@ -37,6 +37,28 @@ export const deleteField = createAsyncThunk(
   }
 );
 
+export const updateField = createAsyncThunk(
+  "fields/updateFieldStatus",
+  async (payload) => {
+
+    const { id, contentPartnerId, transformationId, name, block } = payload; 
+
+    const response = axios.patch(`/content_partners/${contentPartnerId}/transformations/${transformationId}/fields/${id}`, {
+      field: {
+        name: name,
+        block: block
+      }
+    })
+      .then(response => {
+      return response.data;
+    });
+
+    return response;
+  }
+);
+
+const fieldsAdapter = createEntityAdapter();
+
 const fieldsSlice = createSlice({
   name: "fieldsSlice",
   initialState: {},
@@ -44,19 +66,22 @@ const fieldsSlice = createSlice({
   extraReducers: (builder) => {
     builder
     .addCase(addField.fulfilled, (state, action) => {
-      state.push(action.payload);
+      fieldsAdapter.upsertOne(state, action.payload);
     })
     .addCase(deleteField.fulfilled, (state, action) => {
-      remove(state, (field) => {
-        return field.id === action.payload;
-      })
+      fieldsAdapter.removeOne(state, action.payload);
+    })
+    .addCase(updateField.fulfilled, (state, action) => {
+      fieldsAdapter.setOne(state, action.payload);
     })
   }
 });
 
-export const selectFields = (state) => state.entities.fields;
-
 const { actions, reducer } = fieldsSlice;
+
+export const {
+  selectAll: selectAllFields,
+} = fieldsAdapter.getSelectors((state) => state.entities.fields);
 
 export const {} = actions;
 

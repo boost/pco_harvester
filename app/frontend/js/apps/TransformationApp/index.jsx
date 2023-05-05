@@ -10,7 +10,7 @@ import { addField }                from '~/js/features/FieldsSlice';
 
 // Fields from state
 
-import { selectFields }            from '~/js/features/FieldsSlice';
+import { selectAllFields }            from '~/js/features/FieldsSlice';
 import { selectRawRecord }         from '~/js/features/RawRecordSlice';
 import { selectTransformedRecord } from '~/js/features/TransformedRecordSlice';
 import { selectContentPartner }    from '~/js/features/ContentPartnerSlice';
@@ -26,7 +26,7 @@ const TransformationApp = ({}) => {
 
   const dispatch = useDispatch();
   
-  const fields = useSelector(selectFields);
+  const fields = useSelector(selectAllFields);
   const rawRecord = useSelector(selectRawRecord);
   const transformedRecord = useSelector(selectTransformedRecord);
   const contentPartner = useSelector(selectContentPartner);
@@ -71,7 +71,7 @@ const TransformationApp = ({}) => {
 
       <h5 className='mt-4'>Fields</h5>
 
-      { fieldComponents }      
+      { fieldComponents }
 
       <div className="mt-2 float-end">
         <span className="btn btn-primary me-2" onClick={ () => addNewField()}>Add Field</span>

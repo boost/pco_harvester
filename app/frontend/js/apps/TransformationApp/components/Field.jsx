@@ -1,10 +1,15 @@
 import React, { useRef, useEffect } from 'react';
 import {EditorState} from "@codemirror/state"
 import {EditorView, basicSetup} from "codemirror"
+
 import { useSelector, useDispatch } from 'react-redux';
+
+import { updateField } from '~/js/features/FieldsSlice';
 import { deleteField } from '~/js/features/FieldsSlice';
+
 import { selectContentPartner }    from '~/js/features/ContentPartnerSlice';
 import { selectTransformation }    from '~/js/features/TransformationSlice';
+
 import {StreamLanguage} from "@codemirror/language"
 import {ruby} from "@codemirror/legacy-modes/mode/ruby"
 
@@ -15,6 +20,21 @@ const Field = ({ id, name, block }) => {
 
   const dispatch = useDispatch();
   const editor = useRef();
+
+  const nameRef = useRef();
+  const blockRef = useRef();
+
+  const update = async () => {
+    dispatch(
+      updateField(
+        {
+          id: id,
+          name: nameRef.current.value,
+          block: blockRef.current
+        }
+      )
+    )
+  }
 
   const destroy = async () => {
     await dispatch(
@@ -34,6 +54,9 @@ const Field = ({ id, name, block }) => {
       extensions: [
         basicSetup,
         StreamLanguage.define(ruby),
+        EditorView.updateListener.of(function(e) {
+          blockRef.current = e.state.doc.toString();
+        })
       ],
     })
 
@@ -57,16 +80,16 @@ const Field = ({ id, name, block }) => {
 
             <label className="form-label">Field Name</label>
             <p className='form-text'>This is the field name that the result of this transformation will appear under on the transformed record.</p>
-            <input type="text" className="form-control" required="required" placeholder='New field' />
+            <input type="text" className="form-control" required="required" placeholder='New field' defaultValue={name} ref={nameRef}/>
  
-            <label className="form-label mt-4">Field Code</label>
+            <label className="form-label mt-4">Field Block</label>
             <p className='form-text'>This is the code that is applied to create this field on the transformed record.</p>
 
             <div ref={editor}></div>
 
             <div className='mt-4 float-end'>
               <span className="btn btn-danger me-2" onClick={ () => { destroy() } }>Delete</span>
-              <span className="btn btn-primary me-2">Save</span>
+              <span className="btn btn-primary me-2" onClick={ () => {update() }}>Save</span>
               <span className="btn btn-success">Run</span>
             </div>
 

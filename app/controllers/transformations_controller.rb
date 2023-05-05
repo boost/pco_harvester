@@ -8,11 +8,16 @@ class TransformationsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: %i[test]
 
   def show
+    @fields = @transformation.fields.map { |field| { id: field.id, name: field.name, block: field.block } }
+
     @props = {
       entities: {
+        fields: {
+          ids: @transformation.fields.map(&:id),
+          entities: @fields.index_by { |field| field[:id] }
+        },
         rawRecord: @transformation.records.first,
         transformedRecord: @transformation.transformed_records.first,
-        fields: @transformation.fields.map { |field| { id: field.id, name: field.name, block: field.block } },
         contentPartner: @content_partner,
         transformation: @transformation
       },
