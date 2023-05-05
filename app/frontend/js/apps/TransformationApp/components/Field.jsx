@@ -1,11 +1,32 @@
 import React, { useRef, useEffect } from 'react';
 import {EditorState} from "@codemirror/state"
 import {EditorView, basicSetup} from "codemirror"
+import { useSelector, useDispatch } from 'react-redux';
+import { deleteField } from '~/js/features/FieldsSlice';
+import { selectContentPartner }    from '~/js/features/ContentPartnerSlice';
+import { selectTransformation }    from '~/js/features/TransformationSlice';
 import {StreamLanguage} from "@codemirror/language"
 import {ruby} from "@codemirror/legacy-modes/mode/ruby"
 
 const Field = ({ id, name, block }) => {
+  
+  const contentPartner = useSelector(selectContentPartner);
+  const transformation = useSelector(selectTransformation);
+
+  const dispatch = useDispatch();
   const editor = useRef();
+
+  const destroy = async () => {
+    await dispatch(
+      deleteField(
+        {
+          id: id,
+          contentPartnerId: contentPartner.id,
+          transformationId: transformation.id
+        }
+      )
+    )
+  }
 
   useEffect(() => {
     const state = EditorState.create({
@@ -44,7 +65,7 @@ const Field = ({ id, name, block }) => {
             <div ref={editor}></div>
 
             <div className='mt-4 float-end'>
-              <span className="btn btn-danger me-2">Delete</span>
+              <span className="btn btn-danger me-2" onClick={ () => { destroy() } }>Delete</span>
               <span className="btn btn-primary me-2">Save</span>
               <span className="btn btn-success">Run</span>
             </div>

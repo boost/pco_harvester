@@ -13,6 +13,8 @@ import { addField }                from '~/js/features/FieldsSlice';
 import { selectFields }            from '~/js/features/FieldsSlice';
 import { selectRawRecord }         from '~/js/features/RawRecordSlice';
 import { selectTransformedRecord } from '~/js/features/TransformedRecordSlice';
+import { selectContentPartner }    from '~/js/features/ContentPartnerSlice';
+import { selectTransformation }    from '~/js/features/TransformationSlice';
 
 
 // Components
@@ -27,6 +29,8 @@ const TransformationApp = ({}) => {
   const fields = useSelector(selectFields);
   const rawRecord = useSelector(selectRawRecord);
   const transformedRecord = useSelector(selectTransformedRecord);
+  const contentPartner = useSelector(selectContentPartner);
+  const transformation = useSelector(selectTransformation);
 
   const fieldComponents = map(fields, (field) => (
     <Field 
@@ -38,13 +42,13 @@ const TransformationApp = ({}) => {
   ))
 
   const addNewField = async () => {
-    const response = await dispatch(
+    await dispatch(
       addField(
         {
-          name: 'name',
-          block: 'block',
-          contentPartnerId: 1,
-          transformationId: 5
+          name: '',
+          block: '',
+          contentPartnerId: contentPartner.id,
+          transformationId: transformation.id,
         }
       )
     )
