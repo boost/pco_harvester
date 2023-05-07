@@ -32,6 +32,6 @@ class FieldsController < ApplicationController
   end
 
   def field_params
-    params.require(:field).permit(:name, :block, :transformation_id)
+    params.require(:field).permit(:name, :block, :transformation_definition_id)
   end
 end

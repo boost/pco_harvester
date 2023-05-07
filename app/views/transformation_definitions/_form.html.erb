@@ -1,4 +1,4 @@
-<%= vertical_form_with model: [@content_partner, @transformation], class: { row: true } do |form| %>
+<%= vertical_form_with model: [@content_partner, @transformation_definition], class: { row: true } do |form| %>
   <%= form.hidden_field :content_partner_id, value: @content_partner.id %>
 
   <div class="mb-3 col-12">
@@ -8,7 +8,7 @@
   
   <div class="mb-3 col-12">
     <%= form.label :job_id, 'Job', class: "form-label" %>
-    <%= form.select(:job_id, grouped_options_for_select(@jobs, @transformation.job_id), {}, class: 'form-select') %>
+    <%= form.select(:job_id, grouped_options_for_select(@jobs, @transformation_definition.job_id), {}, class: 'form-select') %>
   </div>
 
   <div class="mb-3 col-12">

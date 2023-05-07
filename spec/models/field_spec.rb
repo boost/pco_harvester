@@ -6,8 +6,8 @@ RSpec.describe Field, type: :model do
   let(:content_partner)       { create(:content_partner, :ngataonga) }
   let(:extraction_definition) { content_partner.extraction_definitions.first }
   let(:job)                   { create(:job, extraction_definition:) } 
-  let(:transformation)        { create(:transformation, content_partner:, job:)}
-  let(:subject)               { create(:field, transformation:) }
+  let(:transformation_definition) { create(:transformation_definition, content_partner:, job:)}
+  let(:subject)               { create(:field, transformation_definition:) }
   
   describe '#attributes' do
     it 'has a name' do
@@ -19,7 +19,7 @@ RSpec.describe Field, type: :model do
     end
 
     it 'belongs to a transformation' do
-      expect(subject.transformation).to eq transformation
+      expect(subject.transformation_definition).to eq transformation_definition
     end
   end
 end
