@@ -69,9 +69,7 @@ const Field = ({ id, name, block }) => {
 
     const view = new EditorView({ state, parent: editor.current });
 
-    return () => {
-      view.destroy();
-    };
+    return () => view.destroy();
   }, []);
 
   return (

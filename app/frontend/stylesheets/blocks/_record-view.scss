@@ -8,10 +8,10 @@
   @include modifier('transformation') {
     .record-view__container {
       height: 300px;
-      width: 630px;
+      width: 100%;
     }
   }
-  
+
   .cm-editor { height: 100% }
   .cm-scroller { overflow: auto }
 }

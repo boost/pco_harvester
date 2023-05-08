@@ -57,45 +57,43 @@ const TransformationApp = ({}) => {
   };
 
   return (
-    <>
-      <div className="row gy-4 mt-4">
-        <div className="col-6">
-          <div className="border p-2">
-            <h5>Raw Record</h5>
-            <RecordViewer record={appDetails.rawRecord} />
-          </div>
-        </div>
-
-        <div className="col-6">
-          <div className="border p-2">
-            <h5>Transformed Record</h5>
-            <RecordViewer record={appDetails.transformedRecord} />
-          </div>
-        </div>
-
-        <div className="col-12">
-          <div className="border p-2">
-            <h5 className="mt-4">Fields</h5>
-
-            {fieldComponents}
-
-            <div className="mt-2 float-end">
-              <span
-                className="btn btn-primary me-2"
-                onClick={() => addNewField()}
-              >
-                Add Field
-              </span>
-              <span className="btn btn-success" onClick={() => runAllFields()}>
-                Run All
-              </span>
-            </div>
-
-            <div className="clearfix"></div>
-          </div>
+    <div className="row gy-4 mt-1">
+      <div className="col-6">
+        <div className="border p-2">
+          <h5>Raw Record</h5>
+          <RecordViewer record={appDetails.rawRecord} />
         </div>
       </div>
-    </>
+
+      <div className="col-6">
+        <div className="border p-2">
+          <h5>Transformed Record</h5>
+          <RecordViewer record={appDetails.transformedRecord} />
+        </div>
+      </div>
+
+      <div className="col-12">
+        <div className="border p-2">
+          <h5 className="mt-4">Fields</h5>
+
+          {fieldComponents}
+
+          <div className="mt-2 float-end">
+            <span
+              className="btn btn-primary me-2"
+              onClick={() => addNewField()}
+            >
+              Add Field
+            </span>
+            <span className="btn btn-success" onClick={() => runAllFields()}>
+              Run All
+            </span>
+          </div>
+
+          <div className="clearfix"></div>
+        </div>
+      </div>
+    </div>
   );
 };
 
