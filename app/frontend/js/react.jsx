@@ -1,14 +1,16 @@
 // Use this file for importing React apps
 
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React from "react";
+import ReactDOM from "react-dom/client";
 
-import TransformationApp from '~/js/apps/TransformationApp';
+import TransformationApp from "~/js/apps/TransformationApp";
 
 import { Provider } from "react-redux";
-import configureAppStore from '~/js/store';
+import configureAppStore from "~/js/store";
 
-const transformationAppHTMLElement = document.querySelector("#js-transformation-app")
+const transformationAppHTMLElement = document.querySelector(
+  "#js-transformation-app"
+);
 
 const root = ReactDOM.createRoot(transformationAppHTMLElement);
 const props = JSON.parse(transformationAppHTMLElement.dataset.props);
@@ -20,4 +22,3 @@ root.render(
     </Provider>
   </React.StrictMode>
 );
-

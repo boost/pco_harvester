@@ -20,7 +20,7 @@
 !/tmp/pids/
 !/tmp/pids/.keep
 
-# Ignore extraction files, but the keep the directory
+# Ignore extraction files, but keep the directory
 /extractions/test/*
 /extractions/development/*
 /extractions/staging/*
@@ -54,3 +54,6 @@ node_modules
 # rspec
 /spec/examples.txt
 /coverage
+
+# from code editors
+/.vscode
