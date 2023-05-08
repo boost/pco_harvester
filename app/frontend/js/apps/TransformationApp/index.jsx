@@ -24,8 +24,6 @@ const TransformationApp = ({}) => {
   const fields     = useSelector(selectAllFields);
   const appDetails = useSelector(selectAppDetails);
 
-  console.log(appDetails);
-
   const fieldComponents = map(fields, (field) => (
     <Field 
       id={field.id}
@@ -87,7 +85,7 @@ const TransformationApp = ({}) => {
 
       <div className="mt-2 float-end">
         <span className="btn btn-primary me-2" onClick={ () => addNewField()}>Add Field</span>
-        <span className="btn btn-success" onClick={ () => runAllFields()}>Run</span>
+        <span className="btn btn-success" onClick={ () => runAllFields()}>Run All</span>
       </div>
 
       <div className="clearfix"></div>

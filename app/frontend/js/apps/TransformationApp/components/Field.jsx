@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateField } from '~/js/features/FieldsSlice';
 import { deleteField } from '~/js/features/FieldsSlice';
 
-import { selectAppDetails }    from '~/js/features/AppDetailsSlice';
+import { selectAppDetails, updateTransformedRecord }    from '~/js/features/AppDetailsSlice';
 
 import {StreamLanguage} from "@codemirror/language"
 import {ruby} from "@codemirror/legacy-modes/mode/ruby"
@@ -41,6 +41,19 @@ const Field = ({ id, name, block }) => {
           id: id,
           contentPartnerId: appDetails.contentPartner.id,
           transformationDefinitionId: appDetails.transformationDefinition.id
+        }
+      )
+    )
+  }
+
+  const runField = async (fieldId) => {
+    await dispatch(
+      updateTransformedRecord(
+        {
+          contentPartnerId: appDetails.contentPartner.id,
+          transformationDefinitionId: appDetails.transformationDefinition.id,
+          record: appDetails.rawRecord,
+          fields: [fieldId]
         }
       )
     )
@@ -87,8 +100,8 @@ const Field = ({ id, name, block }) => {
 
             <div className='mt-4 float-end'>
               <span className="btn btn-danger me-2" onClick={ () => { destroy() } }>Delete</span>
-              <span className="btn btn-primary me-2" onClick={ () => {update() }}>Save</span>
-              <span className="btn btn-success">Run</span>
+              <span className="btn btn-primary me-2" onClick={ () => { update() }}>Save</span>
+              <span className="btn btn-success" onClick={ () => { runField(id) }}>Run</span>
             </div>
 
             <div className="clearfix"></div>
