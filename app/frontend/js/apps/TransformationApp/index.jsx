@@ -6,12 +6,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 // Actions from state
 
-import { addField }                from '~/js/features/FieldsSlice';
+import { addField, selectAllFields } from '~/js/features/FieldsSlice';
 
 // Fields from state
 
-import { selectAllFields }            from '~/js/features/FieldsSlice';
-import { selectAppDetails }           from '~/js/features/AppDetailsSlice';
+import { selectAppDetails, updateTransformedRecord }           from '~/js/features/AppDetailsSlice';
 
 // Components
 
@@ -43,7 +42,25 @@ const TransformationApp = ({}) => {
           name: '',
           block: '',
           contentPartnerId: appDetails.contentPartner.id,
-          transformationId: appDetails.transformationDefinition.id,
+          transformationDefinitionId: appDetails.transformationDefinition.id,
+        }
+      )
+    )
+  }
+
+  const runAllFields = async () => {
+
+    const fieldsToRun = map(fields, (field) => {
+      return field.id
+    });
+
+    await dispatch(
+      updateTransformedRecord(
+        {
+          contentPartnerId: appDetails.contentPartner.id,
+          transformationDefinitionId: appDetails.transformationDefinition.id,
+          record: appDetails.rawRecord,
+          fields: fieldsToRun
         }
       )
     )
@@ -70,7 +87,7 @@ const TransformationApp = ({}) => {
 
       <div className="mt-2 float-end">
         <span className="btn btn-primary me-2" onClick={ () => addNewField()}>Add Field</span>
-        <span className="btn btn-success">Run</span>
+        <span className="btn btn-success" onClick={ () => runAllFields()}>Run</span>
       </div>
 
       <div className="clearfix"></div>

@@ -21,7 +21,7 @@ const RecordViewer = ({record}) => {
     return () => {
       view.destroy()
     }
-  }, [])
+  }, [record])
   
   return (
     <div className="record-view record-view--transformation">

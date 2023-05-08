@@ -25,6 +25,17 @@ class FieldsController < ApplicationController
     render json: {}, status: 200
   end
 
+  def run
+    record = params['record']
+    fields = params['fields'].map { |id| Field.find(id) }
+
+    transformed_record = fields.each_with_object({}) do |field, transformed_record|
+      transformed_record[field.name] = Transformation::Execution.new(record, field).call
+    end
+
+    render json: transformed_record
+  end
+
   private
 
   def find_field

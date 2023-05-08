@@ -70,4 +70,41 @@ RSpec.describe "Fields", type: :request do
       expect(response.status).to eq(200)
     end
   end
+
+  
+  describe "#run" do
+    context 'with a valid fields' do
+
+      let!(:field_one)   { create(:field, name: 'title', block: "JsonPath.new('title').on(record).first", transformation_definition: transformation_definition) }
+      let!(:field_two)   { create(:field, name: 'source', block: "JsonPath.new('source').on(record).first", transformation_definition: transformation_definition) }
+      let!(:field_three) { create(:field, name: 'dc_identifier', block: "JsonPath.new('reference_number').on(record).first", transformation_definition: transformation_definition) }
+      let!(:field_four) { create(:field, name: 'landing_url', block: '"http://www.ngataonga.org.nz/collections/catalogue/catalogue-item?record_id=#{record[\'record_id\']}"', transformation_definition: transformation_definition) }
+
+      it 'returns a new record made up of the given transformation fields' do
+        post run_content_partner_transformation_definition_fields_path(content_partner, transformation_definition), params: {
+          record: { 
+            title: 'title',
+            source: 'source',
+            reference_number: '111',
+            record_id: '128'
+          },
+          fields: [field_one.id, field_two.id, field_three.id, field_four.id]
+        }
+
+        transformed_record = JSON.parse(response.body)
+
+        expect(transformed_record['title']).to eq 'title'
+        expect(transformed_record['source']).to eq 'source'
+        expect(transformed_record['dc_identifier']).to eq '111'
+        expect(transformed_record['landing_url']).to eq 'http://www.ngataonga.org.nz/collections/catalogue/catalogue-item?record_id=128'
+      end
+    end
+
+    context 'with invalid transformations' do
+      it 'returns the errors from the given transformation fields' do
+        pending 'not yet implemented'
+        raise
+      end
+    end
+  end
 end

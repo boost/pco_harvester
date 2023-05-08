@@ -19,15 +19,13 @@ class TransformationDefinition < ApplicationRecord
             .flatten
   end
 
-  # Returns the records from the job having applied the attributes in the transformation
+  # Returns the records from the job having applied the fields in the transformation
   #
   # @return Array 
   def transformed_records
     records.map do |record|
-      fields.each_with_object({}) do |attribute, hash|
-        block = ->(record) { eval(attribute.block) }
-
-        hash[attribute.name] = block.call(record)
+      fields.each_with_object({}) do |field, transformed_record|
+        transformed_record[field.name] = Transformation::Execution.new(record, field).call
       end
     end
   end

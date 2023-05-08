@@ -5,13 +5,13 @@ import { remove } from 'lodash';
 export const addField = createAsyncThunk(
   "fields/addFieldStatus",
   async (payload) => {
-    const { name, block, contentPartnerId, transformationId } = payload;
+    const { name, block, contentPartnerId, transformationDefinitionId } = payload;
 
     const response = axios.post(
-      `/content_partners/${contentPartnerId}/transformation_definitions/${transformationId}/fields`, {
+      `/content_partners/${contentPartnerId}/transformation_definitions/${transformationDefinitionId}/fields`, {
         field: {
           content_partner_id: contentPartnerId,
-          transformation_definition_id: transformationId,
+          transformation_definition_id: transformationDefinitionId,
           name: name,
           block: block
         }
@@ -26,9 +26,9 @@ export const addField = createAsyncThunk(
 export const deleteField = createAsyncThunk(
   "fields/deleteFieldStatus",
   async (payload) => {
-    const { id, contentPartnerId, transformationId } = payload;
+    const { id, contentPartnerId, transformationDefinitionId } = payload;
 
-    const response = axios.delete(`/content_partners/${contentPartnerId}/transformation_definitions/${transformationId}/fields/${id}`)
+    const response = axios.delete(`/content_partners/${contentPartnerId}/transformation_definitions/${transformationDefinitionId}/fields/${id}`)
       .then(response => {
         return id;
       })
@@ -41,9 +41,9 @@ export const updateField = createAsyncThunk(
   "fields/updateFieldStatus",
   async (payload) => {
 
-    const { id, contentPartnerId, transformationId, name, block } = payload; 
+    const { id, contentPartnerId, transformationDefinitionId, name, block } = payload; 
 
-    const response = axios.patch(`/content_partners/${contentPartnerId}/transformation_definitions/${transformationId}/fields/${id}`, {
+    const response = axios.patch(`/content_partners/${contentPartnerId}/transformation_definitions/${transformationDefinitionId}/fields/${id}`, {
       field: {
         name: name,
         block: block
