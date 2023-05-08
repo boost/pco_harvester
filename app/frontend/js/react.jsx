@@ -12,13 +12,15 @@ const transformationAppHTMLElement = document.querySelector(
   "#js-transformation-app"
 );
 
-const root = ReactDOM.createRoot(transformationAppHTMLElement);
-const props = JSON.parse(transformationAppHTMLElement.dataset.props);
+if (transformationAppHTMLElement !== null) {
+  const root = ReactDOM.createRoot(transformationAppHTMLElement);
+  const props = JSON.parse(transformationAppHTMLElement.dataset.props);
 
-root.render(
-  <React.StrictMode>
-    <Provider store={configureAppStore(props)}>
-      <TransformationApp />
-    </Provider>
-  </React.StrictMode>
-);
+  root.render(
+    <React.StrictMode>
+      <Provider store={configureAppStore(props)}>
+        <TransformationApp />
+      </Provider>
+    </React.StrictMode>
+  );
+}

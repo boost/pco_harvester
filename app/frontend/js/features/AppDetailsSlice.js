@@ -1,5 +1,5 @@
-import axios, { isCancel, AxiosError } from "axios";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { request } from "/js/utils/request";
 
 export const clickedOnRunAttributes = createAsyncThunk(
   "appDetails/clickedOnRunAttributesStatus",
@@ -7,7 +7,7 @@ export const clickedOnRunAttributes = createAsyncThunk(
     const { contentPartnerId, transformationDefinitionId, fields, record } =
       payload;
 
-    const response = axios
+    const response = request
       .post(
         `/content_partners/${contentPartnerId}/transformation_definitions/${transformationDefinitionId}/fields/run`,
         {

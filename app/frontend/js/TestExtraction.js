@@ -1,3 +1,5 @@
+import { request } from "./utils/request";
+
 document.addEventListener(
   "DOMContentLoaded",
   function () {
@@ -24,20 +26,17 @@ document.addEventListener(
 
       const path = `${form.action.replace(/\/\d+$/, "")}/test`;
       // Fetches the response
-      fetch(path, {
-        method: "POST",
-        body: FD,
-      })
+      request
+        .post(path, FD)
         .then(function (response) {
-          return response.ok ? response.json() : Promise.reject();
-        })
-        .then(function (data) {
           document.getElementById(
             "test-result"
-          ).innerHTML = `<div className="${alertClass(
-            data.status
+          ).innerHTML = `<div class="${alertClass(
+            response.data.status
           )}" role="alert">
-          <a href="${data.url}" target="_blank">${data.url}</a>
+          <a href="${response.data.url}" target="_blank">${
+            response.data.url
+          }</a>
         </div>`;
         })
         .catch(function (error) {

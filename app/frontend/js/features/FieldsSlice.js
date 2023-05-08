@@ -1,9 +1,9 @@
-import axios, { isCancel, AxiosError } from "axios";
 import {
   createAsyncThunk,
   createSlice,
   createEntityAdapter,
 } from "@reduxjs/toolkit";
+import { request } from "/js/utils/request";
 
 export const addField = createAsyncThunk(
   "fields/addFieldStatus",
@@ -11,7 +11,7 @@ export const addField = createAsyncThunk(
     const { name, block, contentPartnerId, transformationDefinitionId } =
       payload;
 
-    const response = axios
+    const response = request
       .post(
         `/content_partners/${contentPartnerId}/transformation_definitions/${transformationDefinitionId}/fields`,
         {
@@ -36,7 +36,7 @@ export const deleteField = createAsyncThunk(
   async (payload) => {
     const { id, contentPartnerId, transformationDefinitionId } = payload;
 
-    const response = axios
+    const response = request
       .delete(
         `/content_partners/${contentPartnerId}/transformation_definitions/${transformationDefinitionId}/fields/${id}`
       )
@@ -54,7 +54,7 @@ export const updateField = createAsyncThunk(
     const { id, contentPartnerId, transformationDefinitionId, name, block } =
       payload;
 
-    const response = axios
+    const response = request
       .patch(
         `/content_partners/${contentPartnerId}/transformation_definitions/${transformationDefinitionId}/fields/${id}`,
         {

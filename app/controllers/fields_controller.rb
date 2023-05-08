@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class FieldsController < ApplicationController
-  skip_before_action :verify_authenticity_token
-
   before_action :find_field, only: %i[update destroy]
 
   def create

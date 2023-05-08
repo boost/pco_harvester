@@ -5,8 +5,6 @@ class TransformationDefinitionsController < ApplicationController
   before_action :find_transformation_definition, only: %w[show edit update destroy]
   before_action :find_jobs, only: %w[new create edit update]
 
-  skip_before_action :verify_authenticity_token, only: %i[test]
-
   def show
     @fields = @transformation_definition.fields.map { |field| { id: field.id, name: field.name, block: field.block } }
 
