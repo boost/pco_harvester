@@ -5,23 +5,27 @@ import { updateField, deleteField } from "/js/features/FieldsSlice";
 import { selectFieldById } from "/js/features/FieldsSlice";
 import {
   selectAppDetails,
-  updateTransformedRecord,
+  clickedOnRunAttributes,
 } from "/js/features/AppDetailsSlice";
 
 import { EditorState } from "@codemirror/state";
 import { EditorView, basicSetup } from "codemirror";
 import { StreamLanguage } from "@codemirror/language";
 import { ruby } from "@codemirror/legacy-modes/mode/ruby";
+import { selectUiFieldById } from "/js/features/UiFieldsSlice";
 
 const Field = ({ id }) => {
   const appDetails = useSelector(selectAppDetails);
   const { name, block } = useSelector((state) => selectFieldById(state, id));
+  const { saved, saving, running } = useSelector((state) =>
+    selectUiFieldById(state, id)
+  );
 
   const dispatch = useDispatch();
   const editorRef = useRef();
 
-  const [nameValue, setNameValue] = useState("");
-  const [blockValue, setBlockValue] = useState("");
+  const [nameValue, setNameValue] = useState(name);
+  const [blockValue, setBlockValue] = useState(block);
 
   const handleSaveClick = () => {
     dispatch(
@@ -45,13 +49,25 @@ const Field = ({ id }) => {
 
   const handleRunClick = () => {
     dispatch(
-      updateTransformedRecord({
+      clickedOnRunAttributes({
         contentPartnerId: appDetails.contentPartner.id,
         transformationDefinitionId: appDetails.transformationDefinition.id,
         record: appDetails.rawRecord,
         fields: [id],
       })
     );
+  };
+
+  const isValid = () => {
+    return nameValue.trim() !== "" && blockValue.trim() !== "";
+  };
+
+  const hasChanged = () => {
+    return name !== nameValue.trim() || block !== blockValue.trim();
+  };
+
+  const isSaveable = () => {
+    return isValid() && hasChanged();
   };
 
   useEffect(() => {
@@ -117,17 +133,17 @@ const Field = ({ id }) => {
               </button>
               <button
                 className="btn btn-primary"
-                disabled={nameValue.trim() === "" || blockValue.trim() === ""}
+                disabled={!isSaveable()}
                 onClick={handleSaveClick}
               >
-                Save
+                {saving ? "Saving..." : "Save"}
               </button>
               <button
                 className="btn btn-success"
-                disabled={nameValue.trim() === "" || blockValue.trim() === ""}
+                disabled={!saved || hasChanged()}
                 onClick={handleRunClick}
               >
-                Run
+                {running ? "Running..." : "Run"}
               </button>
             </div>
           </div>

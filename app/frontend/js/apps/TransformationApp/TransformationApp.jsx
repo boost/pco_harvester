@@ -12,7 +12,7 @@ import { addField, selectFieldIds } from "/js/features/FieldsSlice";
 
 import {
   selectAppDetails,
-  updateTransformedRecord,
+  clickedOnRunAttributes,
 } from "/js/features/AppDetailsSlice";
 
 // Components
@@ -43,7 +43,7 @@ const TransformationApp = ({}) => {
 
   const runAllFields = async () => {
     await dispatch(
-      updateTransformedRecord({
+      clickedOnRunAttributes({
         contentPartnerId: appDetails.contentPartner.id,
         transformationDefinitionId: appDetails.transformationDefinition.id,
         record: appDetails.rawRecord,

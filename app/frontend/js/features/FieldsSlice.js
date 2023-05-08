@@ -4,7 +4,6 @@ import {
   createSlice,
   createEntityAdapter,
 } from "@reduxjs/toolkit";
-import { remove } from "lodash";
 
 export const addField = createAsyncThunk(
   "fields/addFieldStatus",

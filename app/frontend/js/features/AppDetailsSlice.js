@@ -1,8 +1,8 @@
 import axios, { isCancel, AxiosError } from "axios";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-export const updateTransformedRecord = createAsyncThunk(
-  "appDetails/updateTransformedRecordStatus",
+export const clickedOnRunAttributes = createAsyncThunk(
+  "appDetails/clickedOnRunAttributesStatus",
   async (payload) => {
     const { contentPartnerId, transformationDefinitionId, fields, record } =
       payload;
@@ -28,7 +28,7 @@ const AppDetailsSlice = createSlice({
   initialState: {},
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(updateTransformedRecord.fulfilled, (state, action) => {
+    builder.addCase(clickedOnRunAttributes.fulfilled, (state, action) => {
       state.transformedRecord = action.payload;
     });
   },
