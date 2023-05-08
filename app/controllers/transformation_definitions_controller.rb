@@ -68,10 +68,6 @@ class TransformationDefinitionsController < ApplicationController
     render json: @transformation_definition.records.first || []
   end
 
-  def run
-
-  end
-
   private
   
   def find_content_partner

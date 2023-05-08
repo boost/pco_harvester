@@ -99,9 +99,9 @@ const Field = ({ id, name, block }) => {
             <div ref={editor}></div>
 
             <div className='mt-4 float-end'>
-              <span className="btn btn-danger me-2" onClick={ () => { destroy() } }>Delete</span>
+              <span className="btn btn-danger me-2"  onClick={ () => { destroy() } }>Delete</span>
               <span className="btn btn-primary me-2" onClick={ () => { update() }}>Save</span>
-              <span className="btn btn-success" onClick={ () => { runField(id) }}>Run</span>
+              <span className="btn btn-success"      onClick={ () => { runField(id) }}>Run</span>
             </div>
 
             <div className="clearfix"></div>
