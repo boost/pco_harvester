@@ -20,12 +20,12 @@ import Field        from '~/js/apps/TransformationApp/components/Field';
 const TransformationApp = ({}) => {
 
   const dispatch = useDispatch();
-  
+
   const fields     = useSelector(selectAllFields);
   const appDetails = useSelector(selectAppDetails);
 
   const fieldComponents = map(fields, (field) => (
-    <Field 
+    <Field
       id={field.id}
       key={field.id}
       name={field.name}
@@ -63,32 +63,39 @@ const TransformationApp = ({}) => {
       )
     )
   }
-  
+
   return (
     <>
- 
-      <div className="row mt-4">
-        <div className="col align-self-start">
-          <h5>Raw Record</h5>
-          <RecordViewer record={appDetails.rawRecord} />
+      <div className="row gy-4 mt-4">
+        <div className="col-6">
+          <div class="border p-2">
+            <h5>Raw Record</h5>
+            <RecordViewer record={appDetails.rawRecord} />
+          </div>
         </div>
 
-        <div className="col align-self-center">
-          <h5>Transformed Record</h5>
-          <RecordViewer record={appDetails.transformedRecord} />
+        <div className="col-6">
+          <div class="border p-2">
+            <h5>Transformed Record</h5>
+            <RecordViewer record={appDetails.transformedRecord} />
+          </div>
+        </div>
+
+        <div className="col-12">
+          <div className="border p-2">
+            <h5 className='mt-4'>Fields</h5>
+
+            { fieldComponents }
+
+            <div className="mt-2 float-end">
+              <span className="btn btn-primary me-2" onClick={ () => addNewField()}>Add Field</span>
+              <span className="btn btn-success" onClick={ () => runAllFields()}>Run All</span>
+            </div>
+
+            <div className="clearfix"></div>
+          </div>
         </div>
       </div>
-
-      <h5 className='mt-4'>Fields</h5>
-
-      { fieldComponents }
-
-      <div className="mt-2 float-end">
-        <span className="btn btn-primary me-2" onClick={ () => addNewField()}>Add Field</span>
-        <span className="btn btn-success" onClick={ () => runAllFields()}>Run All</span>
-      </div>
-
-      <div className="clearfix"></div>
     </>
   );
 };
