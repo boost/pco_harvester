@@ -1,6 +1,6 @@
 import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
 
-import { updateField } from "./FieldsSlice";
+import { deleteField, updateField } from "./FieldsSlice";
 import { clickedOnRunAttributes } from "./AppDetailsSlice";
 
 const uiFieldsAdapter = createEntityAdapter();
@@ -37,6 +37,12 @@ const uiFieldsSlice = createSlice({
         uiFieldsAdapter.updateOne(state, {
           id: action.meta.arg.id,
           changes: { saving: false },
+        });
+      })
+      .addCase(deleteField.pending, (state, action) => {
+        uiFieldsAdapter.updateOne(state, {
+          id: action.meta.arg.id,
+          changes: { deleting: true },
         });
       });
   },

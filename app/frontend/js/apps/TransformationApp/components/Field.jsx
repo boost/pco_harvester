@@ -17,7 +17,7 @@ import { selectUiFieldById } from "/js/features/UiFieldsSlice";
 const Field = ({ id }) => {
   const appDetails = useSelector(selectAppDetails);
   const { name, block } = useSelector((state) => selectFieldById(state, id));
-  const { saved, saving, running } = useSelector((state) =>
+  const { saved, deleting, saving, running } = useSelector((state) =>
     selectUiFieldById(state, id)
   );
 
@@ -129,7 +129,7 @@ const Field = ({ id }) => {
             <div className="mt-4 hstack gap-2">
               <div className="ms-auto"></div>
               <button className="btn btn-danger" onClick={handleDeleteClick}>
-                Delete
+                {deleting ? "Deleting..." : "Delete"}
               </button>
               <button
                 className="btn btn-primary"
