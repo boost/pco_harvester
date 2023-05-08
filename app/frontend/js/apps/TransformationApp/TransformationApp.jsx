@@ -6,19 +6,19 @@ import { useDispatch, useSelector } from "react-redux";
 
 // Actions from state
 
-import { addField, selectAllFields } from "~/js/features/FieldsSlice";
+import { addField, selectFieldIds } from "/js/features/FieldsSlice";
 
 // Fields from state
 
 import {
   selectAppDetails,
   updateTransformedRecord,
-} from "~/js/features/AppDetailsSlice";
+} from "/js/features/AppDetailsSlice";
 
 // Components
 
-import RecordViewer from "~/js/apps/TransformationApp/components/RecordViewer";
-import Field from "~/js/apps/TransformationApp/components/Field";
+import RecordViewer from "/js/apps/TransformationApp/components/RecordViewer";
+import Field from "/js/apps/TransformationApp/components/Field";
 
 const TransformationApp = ({}) => {
   const dispatch = useDispatch();

@@ -4,16 +4,16 @@ import { EditorView, basicSetup } from "codemirror";
 
 import { useSelector, useDispatch } from "react-redux";
 
-import { updateField } from "~/js/features/FieldsSlice";
-import { deleteField } from "~/js/features/FieldsSlice";
+import { updateField, deleteField } from "/js/features/FieldsSlice";
 
 import {
   selectAppDetails,
   updateTransformedRecord,
-} from "~/js/features/AppDetailsSlice";
+} from "/js/features/AppDetailsSlice";
 
 import { StreamLanguage } from "@codemirror/language";
 import { ruby } from "@codemirror/legacy-modes/mode/ruby";
+import { selectFieldById } from "/js/features/FieldsSlice";
 
 const Field = ({ id, name, block }) => {
   const appDetails = useSelector(selectAppDetails);

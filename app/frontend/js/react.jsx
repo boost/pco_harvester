@@ -3,10 +3,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-import TransformationApp from "~/js/apps/TransformationApp/TransformationApp";
+import TransformationApp from "/js/apps/TransformationApp/TransformationApp";
 
 import { Provider } from "react-redux";
-import configureAppStore from "~/js/store";
+import configureAppStore from "/js/store";
 
 const transformationAppHTMLElement = document.querySelector(
   "#js-transformation-app"
