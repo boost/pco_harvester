@@ -18,7 +18,7 @@ export const addField = createAsyncThunk(
     }).then(function  (response) {
       return response.data;
     })
-    
+
     return response;
   }
 );
@@ -41,7 +41,7 @@ export const updateField = createAsyncThunk(
   "fields/updateFieldStatus",
   async (payload) => {
 
-    const { id, contentPartnerId, transformationDefinitionId, name, block } = payload; 
+    const { id, contentPartnerId, transformationDefinitionId, name, block } = payload;
 
     const response = axios.patch(`/content_partners/${contentPartnerId}/transformation_definitions/${transformationDefinitionId}/fields/${id}`, {
       field: {
@@ -86,4 +86,3 @@ export const {
 export const {} = actions;
 
 export default reducer;
-
