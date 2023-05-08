@@ -1,42 +1,40 @@
-import React, { useRef, useEffect } from "react";
-import { EditorState } from "@codemirror/state";
-import { EditorView, basicSetup } from "codemirror";
-
+import React, { useRef, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { updateField, deleteField } from "/js/features/FieldsSlice";
-
+import { selectFieldById } from "/js/features/FieldsSlice";
 import {
   selectAppDetails,
   updateTransformedRecord,
 } from "/js/features/AppDetailsSlice";
 
+import { EditorState } from "@codemirror/state";
+import { EditorView, basicSetup } from "codemirror";
 import { StreamLanguage } from "@codemirror/language";
 import { ruby } from "@codemirror/legacy-modes/mode/ruby";
-import { selectFieldById } from "/js/features/FieldsSlice";
 
 const Field = ({ id }) => {
   const appDetails = useSelector(selectAppDetails);
   const { name, block } = useSelector((state) => selectFieldById(state, id));
 
   const dispatch = useDispatch();
-  const editor = useRef();
+  const editorRef = useRef();
 
-  const nameRef = useRef();
-  const blockRef = useRef();
+  const [nameValue, setNameValue] = useState("");
+  const [blockValue, setBlockValue] = useState("");
 
-  const handleSaveClick = async () => {
+  const handleSaveClick = () => {
     dispatch(
       updateField({
         id: id,
-        name: nameRef.current.value,
-        block: blockRef.current,
+        name: nameValue,
+        block: blockValue,
       })
     );
   };
 
-  const handleDeleteClick = async () => {
-    await dispatch(
+  const handleDeleteClick = () => {
+    dispatch(
       deleteField({
         id: id,
         contentPartnerId: appDetails.contentPartner.id,
@@ -45,13 +43,13 @@ const Field = ({ id }) => {
     );
   };
 
-  const handleRunClick = async (fieldId) => {
-    await dispatch(
+  const handleRunClick = () => {
+    dispatch(
       updateTransformedRecord({
         contentPartnerId: appDetails.contentPartner.id,
         transformationDefinitionId: appDetails.transformationDefinition.id,
         record: appDetails.rawRecord,
-        fields: [fieldId],
+        fields: [id],
       })
     );
   };
@@ -63,12 +61,12 @@ const Field = ({ id }) => {
         basicSetup,
         StreamLanguage.define(ruby),
         EditorView.updateListener.of(function (e) {
-          blockRef.current = e.state.doc.toString();
+          setBlockValue(e.state.doc.toString());
         }),
       ],
     });
 
-    const view = new EditorView({ state, parent: editor.current });
+    const view = new EditorView({ state, parent: editorRef.current });
 
     return () => view.destroy();
   }, []);
@@ -101,7 +99,7 @@ const Field = ({ id }) => {
               required="required"
               placeholder="New field"
               defaultValue={name}
-              ref={nameRef}
+              onChange={(e) => setNameValue(e.target.value)}
             />
 
             <label className="form-label mt-4">Field Block</label>
@@ -110,36 +108,28 @@ const Field = ({ id }) => {
               transformed record.
             </p>
 
-            <div ref={editor}></div>
+            <div ref={editorRef}></div>
 
-            <div className="mt-4 float-end">
-              <button
-                className="btn btn-danger me-2"
-                onClick={() => {
-                  handleDeleteClick();
-                }}
-              >
+            <div className="mt-4 hstack gap-2">
+              <div className="ms-auto"></div>
+              <button className="btn btn-danger" onClick={handleDeleteClick}>
                 Delete
               </button>
               <button
-                className="btn btn-primary me-2"
-                onClick={() => {
-                  handleSaveClick();
-                }}
+                className="btn btn-primary"
+                disabled={nameValue.trim() === "" || blockValue.trim() === ""}
+                onClick={handleSaveClick}
               >
                 Save
               </button>
               <button
                 className="btn btn-success"
-                onClick={() => {
-                  handleRunClick(id);
-                }}
+                disabled={nameValue.trim() === "" || blockValue.trim() === ""}
+                onClick={handleRunClick}
               >
                 Run
               </button>
             </div>
-
-            <div className="clearfix"></div>
           </div>
         </div>
       </div>
