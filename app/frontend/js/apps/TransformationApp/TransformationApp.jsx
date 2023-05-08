@@ -23,11 +23,11 @@ import Field from "/js/apps/TransformationApp/components/Field";
 const TransformationApp = ({}) => {
   const dispatch = useDispatch();
 
-  const fields = useSelector(selectAllFields);
+  const fieldIds = useSelector(selectFieldIds);
   const appDetails = useSelector(selectAppDetails);
 
-  const fieldComponents = map(fields, (field) => (
-    <Field id={field.id} key={field.id} name={field.name} block={field.block} />
+  const fieldComponents = map(fieldIds, (fieldId) => (
+    <Field id={fieldId} key={fieldId} />
   ));
 
   const addNewField = async () => {
@@ -42,16 +42,12 @@ const TransformationApp = ({}) => {
   };
 
   const runAllFields = async () => {
-    const fieldsToRun = map(fields, (field) => {
-      return field.id;
-    });
-
     await dispatch(
       updateTransformedRecord({
         contentPartnerId: appDetails.contentPartner.id,
         transformationDefinitionId: appDetails.transformationDefinition.id,
         record: appDetails.rawRecord,
-        fields: fieldsToRun,
+        fields: fieldIds,
       })
     );
   };

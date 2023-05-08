@@ -15,8 +15,9 @@ import { StreamLanguage } from "@codemirror/language";
 import { ruby } from "@codemirror/legacy-modes/mode/ruby";
 import { selectFieldById } from "/js/features/FieldsSlice";
 
-const Field = ({ id, name, block }) => {
+const Field = ({ id }) => {
   const appDetails = useSelector(selectAppDetails);
+  const { name, block } = useSelector((state) => selectFieldById(state, id));
 
   const dispatch = useDispatch();
   const editor = useRef();

@@ -95,9 +95,11 @@ const fieldsSlice = createSlice({
 
 const { actions, reducer } = fieldsSlice;
 
-export const { selectAll: selectAllFields } = fieldsAdapter.getSelectors(
-  (state) => state.entities.fields
-);
+export const {
+  selectById: selectFieldById,
+  selectIds: selectFieldIds,
+  selectAll: selectAllFields,
+} = fieldsAdapter.getSelectors((state) => state.entities.fields);
 
 export const {} = actions;
 
