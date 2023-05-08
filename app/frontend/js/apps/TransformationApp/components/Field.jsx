@@ -13,7 +13,7 @@ import {StreamLanguage} from "@codemirror/language"
 import {ruby} from "@codemirror/legacy-modes/mode/ruby"
 
 const Field = ({ id, name, block }) => {
-  
+
   const appDetails = useSelector(selectAppDetails);
 
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ const Field = ({ id, name, block }) => {
   const nameRef = useRef();
   const blockRef = useRef();
 
-  const update = async () => {
+  const handleSaveClick = async () => {
     dispatch(
       updateField(
         {
@@ -34,7 +34,7 @@ const Field = ({ id, name, block }) => {
     )
   }
 
-  const destroy = async () => {
+  const handleDeleteClick = async () => {
     await dispatch(
       deleteField(
         {
@@ -46,7 +46,7 @@ const Field = ({ id, name, block }) => {
     )
   }
 
-  const runField = async (fieldId) => {
+  const handleRunClick = async (fieldId) => {
     await dispatch(
       updateTransformedRecord(
         {
@@ -77,7 +77,7 @@ const Field = ({ id, name, block }) => {
       view.destroy()
     }
   }, [])
-  
+
   return (
     <div className="accordion accordion-flush mb-2">
       <div className="accordion-item">
@@ -92,16 +92,16 @@ const Field = ({ id, name, block }) => {
             <label className="form-label">Field Name</label>
             <p className='form-text'>This is the field name that the result of this transformation will appear under on the transformed record.</p>
             <input type="text" className="form-control" required="required" placeholder='New field' defaultValue={name} ref={nameRef}/>
- 
+
             <label className="form-label mt-4">Field Block</label>
             <p className='form-text'>This is the code that is applied to create this field on the transformed record.</p>
 
             <div ref={editor}></div>
 
             <div className='mt-4 float-end'>
-              <span className="btn btn-danger me-2"  onClick={ () => { destroy() } }>Delete</span>
-              <span className="btn btn-primary me-2" onClick={ () => { update() }}>Save</span>
-              <span className="btn btn-success"      onClick={ () => { runField(id) }}>Run</span>
+              <span className="btn btn-danger me-2"  onClick={ () => { handleDeleteClick() } }>Delete</span>
+              <span className="btn btn-primary me-2" onClick={ () => { handleSaveClick() }}>Save</span>
+              <span className="btn btn-success"      onClick={ () => { handleRunClick(id) }}>Run</span>
             </div>
 
             <div className="clearfix"></div>

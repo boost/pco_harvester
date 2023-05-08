@@ -68,14 +68,14 @@ const TransformationApp = ({}) => {
     <>
       <div className="row gy-4 mt-4">
         <div className="col-6">
-          <div class="border p-2">
+          <div className="border p-2">
             <h5>Raw Record</h5>
             <RecordViewer record={appDetails.rawRecord} />
           </div>
         </div>
 
         <div className="col-6">
-          <div class="border p-2">
+          <div className="border p-2">
             <h5>Transformed Record</h5>
             <RecordViewer record={appDetails.transformedRecord} />
           </div>

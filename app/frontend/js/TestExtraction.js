@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function somethingWentWrong() {
     document.getElementById("test-result").innerHTML =
-      `<div class="alert alert-danger my-2" role="alert">
+      `<div className="alert alert-danger my-2" role="alert">
         Something went wrong.
       </div>`
   }
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
     })
     .then(function(data) {
       document.getElementById("test-result").innerHTML =
-        `<div class="${alertClass(data.status)}" role="alert">
+        `<div className="${alertClass(data.status)}" role="alert">
           <a href="${data.url}" target="_blank">${data.url}</a>
         </div>`
     }).catch(function(error) {
