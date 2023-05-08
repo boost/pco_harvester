@@ -8,10 +8,10 @@ export const addField = createAsyncThunk(
     const { name, block, contentPartnerId, transformationId } = payload;
 
     const response = axios.post(
-      `/content_partners/${contentPartnerId}/transformations/${transformationId}/fields`, {
+      `/content_partners/${contentPartnerId}/transformation_definitions/${transformationId}/fields`, {
         field: {
           content_partner_id: contentPartnerId,
-          transformation_id: transformationId,
+          transformation_definition_id: transformationId,
           name: name,
           block: block
         }
@@ -28,7 +28,7 @@ export const deleteField = createAsyncThunk(
   async (payload) => {
     const { id, contentPartnerId, transformationId } = payload;
 
-    const response = axios.delete(`/content_partners/${contentPartnerId}/transformations/${transformationId}/fields/${id}`)
+    const response = axios.delete(`/content_partners/${contentPartnerId}/transformation_definitions/${transformationId}/fields/${id}`)
       .then(response => {
         return id;
       })
@@ -43,7 +43,7 @@ export const updateField = createAsyncThunk(
 
     const { id, contentPartnerId, transformationId, name, block } = payload; 
 
-    const response = axios.patch(`/content_partners/${contentPartnerId}/transformations/${transformationId}/fields/${id}`, {
+    const response = axios.patch(`/content_partners/${contentPartnerId}/transformation_definitions/${transformationId}/fields/${id}`, {
       field: {
         name: name,
         block: block

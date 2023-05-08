@@ -7,16 +7,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateField } from '~/js/features/FieldsSlice';
 import { deleteField } from '~/js/features/FieldsSlice';
 
-import { selectContentPartner }    from '~/js/features/ContentPartnerSlice';
-import { selectTransformation }    from '~/js/features/TransformationSlice';
+import { selectAppDetails }    from '~/js/features/AppDetailsSlice';
 
 import {StreamLanguage} from "@codemirror/language"
 import {ruby} from "@codemirror/legacy-modes/mode/ruby"
 
 const Field = ({ id, name, block }) => {
   
-  const contentPartner = useSelector(selectContentPartner);
-  const transformation = useSelector(selectTransformation);
+  const appDetails = useSelector(selectAppDetails);
 
   const dispatch = useDispatch();
   const editor = useRef();
@@ -41,8 +39,8 @@ const Field = ({ id, name, block }) => {
       deleteField(
         {
           id: id,
-          contentPartnerId: contentPartner.id,
-          transformationId: transformation.id
+          contentPartnerId: appDetails.contentPartner.id,
+          transformationDefinitionId: appDetails.transformationDefinition.id
         }
       )
     )

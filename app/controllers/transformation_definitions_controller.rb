@@ -16,10 +16,12 @@ class TransformationDefinitionsController < ApplicationController
           ids: @transformation_definition.fields.map(&:id),
           entities: @fields.index_by { |field| field[:id] }
         },
-        rawRecord: @transformation_definition.records.first,
-        transformedRecord: @transformation_definition.transformed_records.first,
-        contentPartner: @content_partner,
-        transformation_definition: @transformation_definition
+        appDetails: {
+          rawRecord: @transformation_definition.records.first,
+          transformedRecord: @transformation_definition.transformed_records.first,
+          contentPartner: @content_partner,
+          transformationDefinition: @transformation_definition
+        }
       },
     }.to_json
   end

@@ -20,19 +20,3 @@ if (extraction_result_viewer) {
 
   document.querySelector('#extraction-result-viewer').append(extraction_result_viewer_editor.dom)
 }
-
-// Attribute Editor
-
-// const attribute_editor_element = document.querySelector("#js-attribute-editor");
-
-// if(attribute_editor_element) {
-//   let attribute_editor = new EditorView({
-//     state: EditorState.create({
-//       extensions: [basicSetup, StreamLanguage.define(ruby)],
-//       doc: attribute_editor_element.dataset.block
-//     }),
-//     parent: document.body,
-//   });
-
-//   document.querySelector('#js-attribute-editor').append(attribute_editor.dom)
-// }

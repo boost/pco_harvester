@@ -11,11 +11,7 @@ import { addField }                from '~/js/features/FieldsSlice';
 // Fields from state
 
 import { selectAllFields }            from '~/js/features/FieldsSlice';
-import { selectRawRecord }         from '~/js/features/RawRecordSlice';
-import { selectTransformedRecord } from '~/js/features/TransformedRecordSlice';
-import { selectContentPartner }    from '~/js/features/ContentPartnerSlice';
-import { selectTransformation }    from '~/js/features/TransformationSlice';
-
+import { selectAppDetails }           from '~/js/features/AppDetailsSlice';
 
 // Components
 
@@ -26,11 +22,10 @@ const TransformationApp = ({}) => {
 
   const dispatch = useDispatch();
   
-  const fields = useSelector(selectAllFields);
-  const rawRecord = useSelector(selectRawRecord);
-  const transformedRecord = useSelector(selectTransformedRecord);
-  const contentPartner = useSelector(selectContentPartner);
-  const transformation = useSelector(selectTransformation);
+  const fields     = useSelector(selectAllFields);
+  const appDetails = useSelector(selectAppDetails);
+
+  console.log(appDetails);
 
   const fieldComponents = map(fields, (field) => (
     <Field 
@@ -47,8 +42,8 @@ const TransformationApp = ({}) => {
         {
           name: '',
           block: '',
-          contentPartnerId: contentPartner.id,
-          transformationId: transformation.id,
+          contentPartnerId: appDetails.contentPartner.id,
+          transformationId: appDetails.transformationDefinition.id,
         }
       )
     )
@@ -60,12 +55,12 @@ const TransformationApp = ({}) => {
       <div className="row mt-4">
         <div className="col align-self-start">
           <h5>Raw Record</h5>
-          <RecordViewer record={rawRecord} />
+          <RecordViewer record={appDetails.rawRecord} />
         </div>
 
         <div className="col align-self-center">
           <h5>Transformed Record</h5>
-          <RecordViewer record={transformedRecord} />
+          <RecordViewer record={appDetails.transformedRecord} />
         </div>
       </div>
 

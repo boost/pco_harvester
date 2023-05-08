@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', function () {
       return response.ok ? response.json() : Promise.reject()
     })
     .then(function(data) {
-      console.log(data);
       
       let record_selector_viewer_editor = new EditorView({
         state: EditorState.create({
