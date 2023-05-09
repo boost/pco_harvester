@@ -24,14 +24,12 @@ class FieldsController < ApplicationController
   end
 
   def run
-    record = params['record']
+    record = params['record'].to_unsafe_h
     fields = params['fields'].map { |id| Field.find(id) }
 
-    transformed_record = fields.each_with_object({}) do |field, transformed_record|
-      transformed_record[field.name] = Transformation::Execution.new(record, field).call
-    end
+    result = Transformation::Execution.new([record], fields).call
 
-    render json: transformed_record
+    render json: result.transformed_records.first
   end
 
   private

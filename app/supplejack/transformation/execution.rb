@@ -18,11 +18,11 @@ module Transformation
     def transform_records
       @records.map do |record|
         @fields.each_with_object({}) do |field, transformed_record|
-          block = ->(record) { eval(field.block) }
-
           begin
+            block = ->(record) { eval(field.block) }
+
             transformed_record[field.name] = block.call(record)
-          rescue => error
+          rescue Exception => error
           end
         end
       end

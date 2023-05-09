@@ -24,7 +24,7 @@ const uiFieldsSlice = createSlice({
         uiFieldsAdapter.updateMany(
           state,
           action.meta.arg.fields.map((id) => {
-            return { id: id, changes: { running: true } };
+            return { id: id, changes: { running: true, error: false } };
           })
         );
       })
@@ -35,6 +35,7 @@ const uiFieldsSlice = createSlice({
             return {
               id: id,
               changes: {
+                running: false,
                 error: {
                   title: "Error",
                   description:
