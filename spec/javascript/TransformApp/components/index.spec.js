@@ -4,7 +4,7 @@ import { act } from 'react-dom/test-utils';
 import TransformationApp from 'js/apps/TransformationApp/TransformationApp';
 import { renderWithProviders } from '../../test-utils';
 
-// This issue appears solves textRange(...).getClientRects error
+// This issue solves the error 'textRange(...).getClientRects'
 // Which appears to be an issue between Jest / React and CodeMirror
 // https://github.com/jsdom/jsdom/issues/3002
 

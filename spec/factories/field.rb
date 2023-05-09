@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :field do
-    name        { 'Title' }
+    name        { 'title' }
     block       { "JsonPath.new('title').on(record).first" }
    end
 end

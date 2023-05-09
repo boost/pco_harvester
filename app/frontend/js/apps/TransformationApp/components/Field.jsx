@@ -126,6 +126,12 @@ const Field = ({ id }) => {
 
             <div ref={editorRef}></div>
 
+            <div className="alert alert-danger mt-4" role="alert">
+              <h4 className="alert-heading">Error</h4>            
+              <hr />
+              <p className="mb-0">uninitialized constant Transformation::Execution::Error</p>
+            </div>
+
             <div className="mt-4 hstack gap-2">
               <div className="ms-auto"></div>
               <button className="btn btn-danger" onClick={handleDeleteClick}>

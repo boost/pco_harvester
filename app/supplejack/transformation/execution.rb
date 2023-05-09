@@ -9,9 +9,13 @@ module Transformation
     end
 
     def call
-      block = ->(record) { eval(@field.block) }
+      begin
+        block = ->(record) { eval(@field.block) }
 
-      block.call(@record)
+        block.call(@record)
+      rescue => error
+        error.message
+      end
     end
   end
 end
