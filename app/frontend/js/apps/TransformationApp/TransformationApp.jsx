@@ -19,6 +19,7 @@ import {
 
 import RecordViewer from "~/js/apps/TransformationApp/components/RecordViewer";
 import Field from "~/js/apps/TransformationApp/components/Field";
+import AddField from "~/js/apps/TransformationApp/components/AddField";
 
 const TransformationApp = ({}) => {
   const dispatch = useDispatch();
@@ -30,16 +31,6 @@ const TransformationApp = ({}) => {
     <Field id={fieldId} key={fieldId} />
   ));
 
-  const addNewField = async () => {
-    await dispatch(
-      addField({
-        name: "",
-        block: "",
-        contentPartnerId: appDetails.contentPartner.id,
-        transformationDefinitionId: appDetails.transformationDefinition.id,
-      })
-    );
-  };
 
   const runAllFields = async () => {
     await dispatch(
@@ -79,12 +70,7 @@ const TransformationApp = ({}) => {
           {fieldComponents}
 
           <div className="mt-2 float-end">
-            <span
-              className="btn btn-primary me-2"
-              onClick={() => addNewField()}
-            >
-              Add Field
-            </span>
+            <AddField />
             <span className="btn btn-success" onClick={() => runAllFields()}>
               Run All
             </span>

@@ -7,6 +7,11 @@
 
   @include modifier('transformation') {
     .record-view__container {
+
+    @include media-breakpoint-up(xxl) {
+      height: 60vh;
+    }
+      
       height: 300px;
       width: 100%;
     }

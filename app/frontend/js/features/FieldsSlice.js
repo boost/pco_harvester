@@ -1,3 +1,5 @@
+import { some } from 'lodash';
+
 import {
   createAsyncThunk,
   createSlice,
@@ -71,6 +73,10 @@ export const updateField = createAsyncThunk(
     return response;
   }
 );
+
+export const hasEmptyFields = (state) => {
+  return some(selectAllFields(state), { 'name': '' });
+}
 
 const fieldsAdapter = createEntityAdapter();
 

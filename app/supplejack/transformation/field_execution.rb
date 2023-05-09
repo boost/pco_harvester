@@ -12,7 +12,9 @@ module Transformation
     # rubocop:disable Lint/RescueException
     def execute(api_record)
       begin
-        block = ->(record) { eval(@field.block) }
+        block = ->(record) { 
+          eval(@field.block) 
+        }
 
         @value = block.call(api_record)
       rescue Exception => e
