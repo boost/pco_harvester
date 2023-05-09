@@ -28,6 +28,23 @@ const uiFieldsSlice = createSlice({
           })
         );
       })
+      .addCase(clickedOnRunFields.rejected, (state, action) => {
+        uiFieldsAdapter.updateMany(
+          state,
+          action.meta.arg.fields.map((id) => {
+            return {
+              id: id,
+              changes: {
+                error: {
+                  title: "Error",
+                  description:
+                    "Something unexpected outside of your code happened. Let the developers know.",
+                },
+              },
+            };
+          })
+        );
+      })
       .addCase(clickedOnRunFields.fulfilled, (state, action) => {
         uiFieldsAdapter.updateMany(
           state,

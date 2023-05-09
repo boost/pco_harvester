@@ -14,7 +14,7 @@ module Transformation
         errored_records: []
       )
     end
-    
+
     def transform_records
       @records.map do |record|
         @fields.each_with_object({}) do |field, transformed_record|
@@ -24,11 +24,8 @@ module Transformation
             transformed_record[field.name] = block.call(record)
           rescue => error
           end
-
         end
       end
-
     end
-
   end
 end

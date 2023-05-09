@@ -19,7 +19,7 @@ Rails.application.routes.draw do
       post :test, on: :collection
 
       resources :fields, only: %i[create update destroy] do
-        post :run,  on: :collection
+        post :run, on: :collection
       end
     end
   end

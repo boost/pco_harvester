@@ -17,7 +17,7 @@ import { selectUiFieldById } from "~/js/features/UiFieldsSlice";
 const Field = ({ id }) => {
   const appDetails = useSelector(selectAppDetails);
   const { name, block } = useSelector((state) => selectFieldById(state, id));
-  const { saved, deleting, saving, running } = useSelector((state) =>
+  const { saved, deleting, saving, running, error } = useSelector((state) =>
     selectUiFieldById(state, id)
   );
 
@@ -67,7 +67,7 @@ const Field = ({ id }) => {
   };
 
   const isSaveable = () => {
-    return isValid() && hasChanged();
+    return isValid() && hasChanged() && !saving;
   };
 
   useEffect(() => {
@@ -88,7 +88,7 @@ const Field = ({ id }) => {
   }, []);
 
   return (
-    <div className="accordion accordion-flush mb-2" data-testid='field'>
+    <div className="accordion accordion-flush mb-2" data-testid="field">
       <div className="accordion-item">
         <h2 className="accordion-header">
           <button
@@ -126,11 +126,13 @@ const Field = ({ id }) => {
 
             <div ref={editorRef}></div>
 
-            <div className="alert alert-danger mt-4" role="alert">
-              <h4 className="alert-heading">Error</h4>            
-              <hr />
-              <p className="mb-0">uninitialized constant Transformation::Execution::Error</p>
-            </div>
+            {error && (
+              <div className="alert alert-danger mt-4" role="alert">
+                <h4 className="alert-heading">{error.title}</h4>
+                <hr />
+                <p className="mb-0">{error.description}</p>
+              </div>
+            )}
 
             <div className="mt-4 hstack gap-2">
               <div className="ms-auto"></div>
@@ -146,7 +148,7 @@ const Field = ({ id }) => {
               </button>
               <button
                 className="btn btn-success"
-                disabled={!saved || hasChanged()}
+                disabled={!saved || hasChanged() || running}
                 onClick={handleRunClick}
               >
                 {running ? "Running..." : "Run"}

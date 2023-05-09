@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TransformationDefinition < ApplicationRecord
-  belongs_to :content_partner  
+  belongs_to :content_partner
   belongs_to :job
 
   has_many :fields
@@ -18,4 +18,4 @@ class TransformationDefinition < ApplicationRecord
             .on(job.documents[1].body)
             .flatten
   end
- end
+end
