@@ -25,7 +25,7 @@ class TransformationDefinitionsController < ApplicationController
         fields: {
           ids: @transformation_definition.fields.map(&:id),
           entities: @fields.map do |field|
-            { id: field[:id], saved: true, deleting: false, saving: false, running: false }
+            { id: field[:id], saved: true, deleting: false, saving: false, running: false, hasRun: false }
           end.index_by { |field| field[:id] }
         }
       }
