@@ -3,19 +3,32 @@
 module Transformation
   # Performs the transformation details as described in a field of a transformation definition
   class Execution
-    def initialize(record, field)
-      @record = record
-      @field = field
+    def initialize(records, fields)
+      @records = records
+      @fields = fields
     end
 
     def call
-      begin
-        block = ->(record) { eval(@field.block) }
-
-        block.call(@record)
-      rescue => error
-        error.message
-      end
+      OpenStruct.new(
+        transformed_records: transform_records,
+        errored_records: []
+      )
     end
+    
+    def transform_records
+      @records.map do |record|
+        @fields.each_with_object({}) do |field, transformed_record|
+          block = ->(record) { eval(field.block) }
+
+          begin
+            transformed_record[field.name] = block.call(record)
+          rescue => error
+          end
+
+        end
+      end
+
+    end
+
   end
 end

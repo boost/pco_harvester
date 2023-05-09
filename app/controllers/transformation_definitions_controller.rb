@@ -16,9 +16,9 @@ class TransformationDefinitionsController < ApplicationController
         },
         appDetails: {
           rawRecord: @transformation_definition.records.first,
-          transformedRecord: @transformation_definition.transformed_records.first,
+          transformedRecord: Transformation::Execution.new(@transformation_definition.records, @transformation_definition.fields).call.transformed_records.first,
           contentPartner: @content_partner,
-          transformationDefinition: @transformation_definition
+          transformationDefinition: @transformation_definition,
         }
       },
       ui: {
