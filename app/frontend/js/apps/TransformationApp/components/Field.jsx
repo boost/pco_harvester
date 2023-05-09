@@ -1,18 +1,18 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { updateField, deleteField } from "/js/features/FieldsSlice";
-import { selectFieldById } from "/js/features/FieldsSlice";
+import { updateField, deleteField } from "~/js/features/FieldsSlice";
+import { selectFieldById } from "~/js/features/FieldsSlice";
 import {
   selectAppDetails,
-  clickedOnRunAttributes,
-} from "/js/features/AppDetailsSlice";
+  clickedOnRunFields,
+} from "~/js/features/AppDetailsSlice";
 
 import { EditorState } from "@codemirror/state";
 import { EditorView, basicSetup } from "codemirror";
 import { StreamLanguage } from "@codemirror/language";
 import { ruby } from "@codemirror/legacy-modes/mode/ruby";
-import { selectUiFieldById } from "/js/features/UiFieldsSlice";
+import { selectUiFieldById } from "~/js/features/UiFieldsSlice";
 
 const Field = ({ id }) => {
   const appDetails = useSelector(selectAppDetails);
@@ -49,7 +49,7 @@ const Field = ({ id }) => {
 
   const handleRunClick = () => {
     dispatch(
-      clickedOnRunAttributes({
+      clickedOnRunFields({
         contentPartnerId: appDetails.contentPartner.id,
         transformationDefinitionId: appDetails.transformationDefinition.id,
         record: appDetails.rawRecord,

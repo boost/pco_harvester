@@ -1,7 +1,7 @@
 import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
 
 import { addField, deleteField, updateField } from "./FieldsSlice";
-import { clickedOnRunAttributes } from "./AppDetailsSlice";
+import { clickedOnRunFields } from "./AppDetailsSlice";
 
 const uiFieldsAdapter = createEntityAdapter();
 
@@ -20,7 +20,7 @@ const uiFieldsSlice = createSlice({
           running: false,
         });
       })
-      .addCase(clickedOnRunAttributes.pending, (state, action) => {
+      .addCase(clickedOnRunFields.pending, (state, action) => {
         uiFieldsAdapter.updateMany(
           state,
           action.meta.arg.fields.map((id) => {
@@ -28,7 +28,7 @@ const uiFieldsSlice = createSlice({
           })
         );
       })
-      .addCase(clickedOnRunAttributes.fulfilled, (state, action) => {
+      .addCase(clickedOnRunFields.fulfilled, (state, action) => {
         uiFieldsAdapter.updateMany(
           state,
           action.meta.arg.fields.map((id) => {

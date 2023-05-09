@@ -3,7 +3,7 @@ import {
   createSlice,
   createEntityAdapter,
 } from "@reduxjs/toolkit";
-import { request } from "/js/utils/request";
+import { request } from "~/js/utils/request";
 
 export const addField = createAsyncThunk(
   "fields/addFieldStatus",

@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { request } from "/js/utils/request";
+import { request } from "~/js/utils/request";
 
-export const clickedOnRunAttributes = createAsyncThunk(
-  "appDetails/clickedOnRunAttributesStatus",
+export const clickedOnRunFields = createAsyncThunk(
+  "appDetails/clickedOnRunFieldsStatus",
   async (payload) => {
     const { contentPartnerId, transformationDefinitionId, fields, record } =
       payload;
@@ -28,7 +28,7 @@ const AppDetailsSlice = createSlice({
   initialState: {},
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(clickedOnRunAttributes.fulfilled, (state, action) => {
+    builder.addCase(clickedOnRunFields.fulfilled, (state, action) => {
       state.transformedRecord = action.payload;
     });
   },

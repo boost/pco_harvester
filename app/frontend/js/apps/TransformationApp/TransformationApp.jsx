@@ -6,19 +6,19 @@ import { useDispatch, useSelector } from "react-redux";
 
 // Actions from state
 
-import { addField, selectFieldIds } from "/js/features/FieldsSlice";
+import { addField, selectFieldIds } from "~/js/features/FieldsSlice";
 
 // Fields from state
 
 import {
   selectAppDetails,
-  clickedOnRunAttributes,
-} from "/js/features/AppDetailsSlice";
+  clickedOnRunFields,
+} from "~/js/features/AppDetailsSlice";
 
 // Components
 
-import RecordViewer from "/js/apps/TransformationApp/components/RecordViewer";
-import Field from "/js/apps/TransformationApp/components/Field";
+import RecordViewer from "~/js/apps/TransformationApp/components/RecordViewer";
+import Field from "~/js/apps/TransformationApp/components/Field";
 
 const TransformationApp = ({}) => {
   const dispatch = useDispatch();
@@ -43,7 +43,7 @@ const TransformationApp = ({}) => {
 
   const runAllFields = async () => {
     await dispatch(
-      clickedOnRunAttributes({
+      clickedOnRunFields({
         contentPartnerId: appDetails.contentPartner.id,
         transformationDefinitionId: appDetails.transformationDefinition.id,
         record: appDetails.rawRecord,
