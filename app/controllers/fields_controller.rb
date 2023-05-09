@@ -27,9 +27,9 @@ class FieldsController < ApplicationController
     record = params['record'].to_unsafe_h
     fields = params['fields'].map { |id| Field.find(id) }
 
-    result = Transformation::Execution.new([record], fields).call
+    transformation = Transformation::Execution.new([record], fields).call.first
 
-    render json: result.transformed_records.first
+    render json: transformation.to_json
   end
 
   private

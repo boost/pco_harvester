@@ -9,22 +9,8 @@ module Transformation
     end
 
     def call
-      OpenStruct.new(
-        transformed_records: transform_records,
-        errored_records: []
-      )
-    end
-
-    def transform_records
       @records.map do |record|
-        @fields.each_with_object({}) do |field, transformed_record|
-          begin
-            block = ->(record) { eval(field.block) }
-
-            transformed_record[field.name] = block.call(record)
-          rescue Exception => error
-          end
-        end
+        RecordTransformation.new(record, @fields).transform
       end
     end
   end
