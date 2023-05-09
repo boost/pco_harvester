@@ -1,5 +1,7 @@
 <%= content_for(:title) { @transformation_definition.name_in_database } %>
 
+<%= content_for(:root_class) { 'container-fluid' } %>
+
 <%= render 'shared/breadcrumb_nav' %>
 
 <h1 class='float-start mb-4'><%= @transformation_definition.name %></h1>

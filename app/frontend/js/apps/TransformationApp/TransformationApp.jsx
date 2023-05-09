@@ -54,23 +54,27 @@ const TransformationApp = ({}) => {
 
   return (
     <div className="row gy-4 mt-1">
-      <div className="col-6">
-        <div className="border p-2">
-          <h5>Raw Record</h5>
-          <RecordViewer record={appDetails.rawRecord} />
+      <div className="col-6 col-xxl-4 order-1">
+        <div className="sticky-xxl-top">
+          <div className="border p-2">
+            <h5>Raw Record</h5>
+            <RecordViewer record={appDetails.rawRecord} />
+          </div>
         </div>
       </div>
 
-      <div className="col-6">
-        <div className="border p-2">
-          <h5>Transformed Record</h5>
-          <RecordViewer record={appDetails.transformedRecord} />
+      <div className="col-6 col-xxl-4 order-2 order-xxl-3">
+        <div className="sticky-xxl-top">
+          <div className="border p-2">
+            <h5>Transformed Record</h5>
+            <RecordViewer record={appDetails.transformedRecord} />
+          </div>
         </div>
       </div>
 
-      <div className="col-12">
+      <div className="col-12 col-xxl-4 order-3 order-xxl-2">
         <div className="border p-2">
-          <h5 className="mt-4">Fields</h5>
+          <h5>Fields</h5>
 
           {fieldComponents}
 
