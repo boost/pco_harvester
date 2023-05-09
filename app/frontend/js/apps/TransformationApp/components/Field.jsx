@@ -88,7 +88,7 @@ const Field = ({ id }) => {
   }, []);
 
   return (
-    <div className="accordion accordion-flush mb-2">
+    <div className="accordion accordion-flush mb-2" data-testid='field'>
       <div className="accordion-item">
         <h2 className="accordion-header">
           <button

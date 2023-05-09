@@ -1,15 +1,33 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
+
+// entities
+
+import fields from "~/js/features/FieldsSlice";
 import appDetails from '~/js/features/AppDetailsSlice';
+
+// ui
+
+import uiFields from "~/js/features/UiFieldsSlice";
 
 export function renderWithProviders(
   ui,
   {
-    preloadedState = {},
-    // Automatically create a store instance if no store was passed in
-    store = configureStore({ reducer: { user: appDetails }, preloadedState }),
+    preloadedState,
+    store = configureStore({
+      reducer: combineReducers({
+        entities: combineReducers({
+          fields,
+          appDetails,
+        }),
+        ui: combineReducers({
+          fields: uiFields,
+        }),
+      }),
+      preloadedState,
+    }),
     ...renderOptions
   } = {}
 ) {

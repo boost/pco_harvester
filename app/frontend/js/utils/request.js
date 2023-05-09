@@ -1,11 +1,23 @@
 import axios, { isCancel, AxiosError } from "axios";
 
 export function csrfParam() {
-  return document.head.querySelector("[name=csrf-param][content]").content;
+  const csrfParamDOMElement = document.head.querySelector("[name=csrf-param][content]");
+
+  if (csrfParamDOMElement) {
+    return csrfParamDOMElement.content;
+  } else {
+    return '';
+  }
 }
 
 export function csrfToken() {
-  return document.head.querySelector("[name=csrf-token][content]").content;
+  const csrfTokenDOMElement = document.head.querySelector("[name=csrf-token][content]");
+
+  if (csrfTokenDOMElement) {
+    return csrfTokenDOMElement.content;
+  } else {
+    return '';
+  }
 }
 
 export const request = axios.create({
