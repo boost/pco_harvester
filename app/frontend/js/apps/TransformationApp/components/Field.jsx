@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import classnames from 'classnames';
+import classnames from "classnames";
 
 import { updateField, deleteField } from "~/js/features/FieldsSlice";
 import { selectFieldById } from "~/js/features/FieldsSlice";
@@ -18,9 +18,8 @@ import { selectUiFieldById } from "~/js/features/UiFieldsSlice";
 const Field = ({ id }) => {
   const appDetails = useSelector(selectAppDetails);
   const { name, block } = useSelector((state) => selectFieldById(state, id));
-  const { saved, deleting, saving, running, error, hasRun, successfulRun } = useSelector((state) =>
-    selectUiFieldById(state, id)
-  );
+  const { saved, deleting, saving, running, error, hasRun, successfulRun } =
+    useSelector((state) => selectUiFieldById(state, id));
 
   const dispatch = useDispatch();
   const editorRef = useRef();
@@ -72,12 +71,12 @@ const Field = ({ id }) => {
   };
 
   const badgeClasses = classnames({
-    'badge': true,
-    'ms-2': true,
-    'bg-primary': saved,
-    'bg-success': hasRun && !error,
-    'bg-secondary': hasChanged(),
-    'bg-danger': hasRun && error
+    badge: true,
+    "ms-2": true,
+    "bg-primary": saved,
+    "bg-success": hasRun && !error,
+    "bg-secondary": hasChanged(),
+    "bg-danger": hasRun && error,
   });
 
   useEffect(() => {
@@ -98,19 +97,22 @@ const Field = ({ id }) => {
   }, []);
 
   const badgeText = () => {
-    if(hasRun && !error) {
-      return 'success';
-    } else if(hasChanged()) {
-      return 'unsaved';
-    } else if(hasRun && error) {
-      return 'error';
-    } else if(saved) {
-      return 'saved';
+    if (hasRun && !error) {
+      return "success";
+    } else if (hasChanged()) {
+      return "unsaved";
+    } else if (hasRun && error) {
+      return "error";
+    } else if (saved) {
+      return "saved";
     }
-  } 
+  };
 
   return (
-    <div className="accordion accordion-flush mb-2" data-testid="field">
+    <div
+      className="accordion accordion-flush mb-2"
+      id={`accordion-field-${id}`}
+    >
       <div className="accordion-item">
         <h2 className="accordion-header">
           <button
@@ -122,8 +124,7 @@ const Field = ({ id }) => {
             aria-controls={`#field-${id}`}
           >
             {name}
-            { name != '' && <span className={ badgeClasses }>{ badgeText() }</span> }
-
+            {name != "" && <span className={badgeClasses}>{badgeText()}</span>}
           </button>
         </h2>
         <div id={`field-${id}`} className="accordion-collapse collapse">
