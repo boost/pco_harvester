@@ -109,12 +109,9 @@ const Field = ({ id }) => {
   };
 
   return (
-    <div
-      className="accordion accordion-flush mb-2"
-      id={`accordion-field-${id}`}
-    >
-      <div className="accordion-item">
-        <h2 className="accordion-header">
+    <div className="accordion accordion-flush mb-2">
+      <div className="accordion-item" id={`accordion-field-${id}`}>
+        <h2 className="accordion-header" >
           <button
             className="accordion-button collapsed"
             type="button"

@@ -44,36 +44,32 @@ const TransformationApp = ({}) => {
   };
 
   return (
-    <div className="row gy-4 mt-1">
-      <div className="col-2 col-xxl-2 order-3 order-xxl-1">
-        <div className="border p-2 sticky-xxl-top">
-          <h5>Navigation</h5>
+    <div className="text-bg-light p-2 row gy-4 mt-1">
+      <div className="col-1 col-xxl-1 order-3 order-xxl-1">
+        <div className="p-2 sticky-xxl-top">
           <NavigationPanel />
         </div>
       </div>
       <div className="col-6 col-xxl-3 order-2">
-        <div className="border p-2 sticky-xxl-top">
-          <h5>Raw Record</h5>
+        <div className="p-2 sticky-xxl-top">
           <RecordViewer record={appDetails.rawRecord} />
         </div>
       </div>
 
       <div className="col-6 col-xxl-4 order-2 order-xxl-4">
-        <div className="border p-2 sticky-xxl-top">
-          <h5>Transformed Record</h5>
+        <div className="p-2 sticky-xxl-top">
           <RecordViewer record={appDetails.transformedRecord} />
         </div>
       </div>
 
-      <div className="col-10 col-xxl-3 order-3 order-xxl-3">
+      <div className="col-10 col-xxl-4 order-3 order-xxl-3">
         <div
-          className="border p-2"
+          className="p-2"
           data-bs-spy="scroll"
           data-bs-target="#simple-list-example"
           data-bs-offset="0"
           data-bs-smooth-scroll="true"
         >
-          <h5>Fields</h5>
 
           {fieldComponents}
 
