@@ -31,6 +31,9 @@ gem 'faraday-follow_redirects'
 gem 'jsonpath'
 gem 'sidekiq'
 
+# transformation related
+gem 'webmock'
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
@@ -53,7 +56,6 @@ group :test do
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'shoulda-matchers'
-  gem 'webmock'
 
   # generates code coverage reports
   gem 'simplecov'
