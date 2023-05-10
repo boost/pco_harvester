@@ -1,30 +1,27 @@
 // Library Imports
-
 import React from "react";
 import { map } from "lodash";
 import { useDispatch, useSelector } from "react-redux";
 import classnames from "classnames";
 
 // Actions from state
-
-import { addField, selectFieldIds } from "~/js/features/FieldsSlice";
+import { selectFieldIds } from "~/js/features/FieldsSlice";
 import { selectUiAppDetails } from "~/js/features/UiAppDetailsSlice";
+import { toggleSection } from "~/js/features/UiAppDetailsSlice";
 
 // Fields from state
-
 import {
   selectAppDetails,
   clickedOnRunFields,
 } from "~/js/features/AppDetailsSlice";
 
-import { toggleSection } from "~/js/features/UiAppDetailsSlice";
-
 // Components
-
 import NavigationPanel from "~/js/apps/TransformationApp/components/NavigationPanel";
 import RecordViewer from "~/js/apps/TransformationApp/components/RecordViewer";
 import Field from "~/js/apps/TransformationApp/components/Field";
 import AddField from "~/js/apps/TransformationApp/components/AddField";
+import { ReactComponent as ArrowBarLeft } from "bootstrap-icons/icons/arrow-bar-left.svg";
+import { ReactComponent as ArrowBarRight } from "bootstrap-icons/icons/arrow-bar-right.svg";
 
 const TransformationApp = ({}) => {
   const dispatch = useDispatch();
@@ -65,9 +62,9 @@ const TransformationApp = ({}) => {
 
   const expandCollapseText = (section) => {
     if (uiAppDetails[section]) {
-      return "Collapse";
+      return <ArrowBarLeft aria-label="collapse" />;
     } else {
-      return "Expand";
+      return <ArrowBarRight aria-label="expand" />;
     }
   };
 
