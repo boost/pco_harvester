@@ -7,19 +7,17 @@ const NavigationPanel = () => {
   const fields = useSelector(selectAllFields);
 
   return (
-    <div id="simple-list-example" className="d-flex flex-column gap-2 ">
+    <ul id="field-list" className="nav flex-column navigation-panel">
       {fields.map((field) => {
         return (
-          <a
-            href={`#field-${field.id}`}
-            key={field.id}
-            className="p1"
-          >
-            { field.name || 'New Field' }
-          </a>
+          <li className="nav-item" key={field.id}>
+            <a className="nav-link p-1" href={`#field-${field.id}`}>
+              {field.name || "New Field"}
+            </a>
+          </li>
         );
       })}
-    </div>
+    </ul>
   );
 };
 

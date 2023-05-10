@@ -2,7 +2,7 @@
 import React from "react";
 import { map } from "lodash";
 import { useDispatch, useSelector } from "react-redux";
-import classnames from "classnames";
+import classNames from "classnames";
 
 // Actions from state
 import { selectFieldIds } from "~/js/features/FieldsSlice";
@@ -45,18 +45,22 @@ const TransformationApp = ({}) => {
     );
   };
 
-  const rawRecordClasses = classnames({
+  const jumpToClasses = classNames({
+    "col-1": true,
+  });
+
+  const rawRecordClasses = classNames({
     "col-3": uiAppDetails.rawRecordExpanded === true,
     "col-1": uiAppDetails.rawRecordExpanded === false,
   });
 
-  const fieldsClasses = classnames({
-    col: uiAppDetails.fieldsExpanded === true,
+  const fieldsClasses = classNames({
+    "col-5": uiAppDetails.fieldsExpanded === true,
     "col-1": uiAppDetails.fieldsExpanded === false,
   });
 
-  const transformedRecordClasses = classnames({
-    col: uiAppDetails.transformedRecordExpanded === true,
+  const transformedRecordClasses = classNames({
+    "col-3": uiAppDetails.transformedRecordExpanded === true,
     "col-1": uiAppDetails.transformedRecordExpanded === false,
   });
 
@@ -78,8 +82,8 @@ const TransformationApp = ({}) => {
 
   return (
     <div className="text-bg-light p-2 row gy-4 mt-1">
-      <div className="col-1">
-        <div className="sticky-xxl-top">
+      <div className={jumpToClasses}>
+        <div className="sticky-top vh-100 pb-2">
           <h5>Jump To</h5>
 
           <button
@@ -95,7 +99,7 @@ const TransformationApp = ({}) => {
       </div>
 
       <div className={rawRecordClasses}>
-        <div className="sticky-xxl-top">
+        <div className="sticky-top vh-100">
           <h5 className="float-start">Raw</h5>
           <button
             onClick={() => clickToggleSection("rawRecordExpanded")}
@@ -124,9 +128,8 @@ const TransformationApp = ({}) => {
 
         <div className="mb-4"></div>
         <div
-          className="p-2"
           data-bs-spy="scroll"
-          data-bs-target="#simple-list-example"
+          data-bs-target="#field-list"
           data-bs-offset="0"
           data-bs-smooth-scroll="true"
         >
@@ -137,7 +140,7 @@ const TransformationApp = ({}) => {
       </div>
 
       <div className={transformedRecordClasses}>
-        <div className="sticky-xxl-top">
+        <div className="sticky-top vh-100">
           <h5 className="float-start">Transformed</h5>
 
           <button
