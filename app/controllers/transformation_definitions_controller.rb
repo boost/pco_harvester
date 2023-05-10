@@ -33,6 +33,9 @@ class TransformationDefinitionsController < ApplicationController
           fieldsExpanded: true,
           transformedRecordExpanded: true,
         }
+      },
+      config: {
+        environment: Rails.env
       }
     }.to_json
   end

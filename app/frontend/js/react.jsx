@@ -7,6 +7,7 @@ import TransformationApp from "/js/apps/TransformationApp/TransformationApp";
 
 import { Provider } from "react-redux";
 import configureAppStore from "/js/store";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 const transformationAppHTMLElement = document.querySelector(
   "#js-transformation-app"
@@ -18,9 +19,11 @@ if (transformationAppHTMLElement !== null) {
 
   root.render(
     <React.StrictMode>
-      <Provider store={configureAppStore(props)}>
-        <TransformationApp />
-      </Provider>
+      <ErrorBoundary environment={props.config.environment}>
+        <Provider store={configureAppStore(props)}>
+          <TransformationApp />
+        </Provider>
+      </ErrorBoundary>
     </React.StrictMode>
   );
 }
