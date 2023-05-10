@@ -7,23 +7,19 @@ const NavigationPanel = () => {
   const fields = useSelector(selectAllFields);
 
   return (
-    <ul id="simple-list-example" className="nav flex-column">
+    <div id="simple-list-example" className="d-flex flex-column gap-2 ">
       {fields.map((field) => {
         return (
-          <li className="nav-item" key={field.id}>
-            <a
-              href={`#accordion-field-${field.id}`}
-              // data-bs-toggle="collapse"
-              // data-bs-target={`#field-${field.id}`}
-              // aria-expanded="false"
-              // aria-controls={`#field-${field.id}`}
-            >
-              {field.name}
-            </a>
-          </li>
+          <a
+            href={`#field-${field.id}`}
+            key={field.id}
+            className="p1"
+          >
+            { field.name || 'New Field' }
+          </a>
         );
       })}
-    </ul>
+    </div>
   );
 };
 

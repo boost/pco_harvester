@@ -47,22 +47,42 @@ const TransformationApp = ({}) => {
     <div className="text-bg-light p-2 row gy-4 mt-1">
       <div className="col-1 col-xxl-1 order-3 order-xxl-1">
         <div className="p-2 sticky-xxl-top">
+          <h5 className="float-start">Jump To</h5>
+
+          <button className="btn btn-success float-end" onClick={() => runAllFields()}>
+            Run All
+          </button>
+          <div className="clearfix"></div>
+
+          <div className="mb-4"></div>
           <NavigationPanel />
+
+          <AddField />
         </div>
       </div>
       <div className="col-6 col-xxl-3 order-2">
         <div className="p-2 sticky-xxl-top">
+          <h5>Raw Record</h5>
+
+          <div className="mb-4"></div>
           <RecordViewer record={appDetails.rawRecord} />
         </div>
       </div>
 
       <div className="col-6 col-xxl-4 order-2 order-xxl-4">
         <div className="p-2 sticky-xxl-top">
+          <h5>Transformed Record</h5>
+          <div className="mb-4"></div>
           <RecordViewer record={appDetails.transformedRecord} />
         </div>
       </div>
 
       <div className="col-10 col-xxl-4 order-3 order-xxl-3">
+        <h5 className="float-start">Fields</h5>
+
+        <div className="clearfix"></div>
+
+        <div className="mb-4"></div>
         <div
           className="p-2"
           data-bs-spy="scroll"
@@ -72,13 +92,6 @@ const TransformationApp = ({}) => {
         >
 
           {fieldComponents}
-
-          <div className="mt-2 float-end">
-            <AddField />
-            <span className="btn btn-success" onClick={() => runAllFields()}>
-              Run All
-            </span>
-          </div>
 
           <div className="clearfix"></div>
         </div>

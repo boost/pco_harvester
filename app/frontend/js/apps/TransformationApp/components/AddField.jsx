@@ -22,13 +22,15 @@ const AddField = () => {
   };
 
   return (
-    <button
-      disabled={emptyFields}
-      className="btn btn-primary me-2"
-      onClick={() => addNewField()}
-    >
-      Add Field
-    </button>
+    <div class="d-grid gap-2 mt-4">
+      <button
+        disabled={emptyFields}
+        className="btn btn-primary me-2"
+        onClick={() => addNewField()}
+      >
+        Add Field
+      </button>
+    </div>
   );
 };
 

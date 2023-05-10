@@ -109,74 +109,62 @@ const Field = ({ id }) => {
   };
 
   return (
-    <div className="accordion accordion-flush mb-2">
-      <div className="accordion-item" id={`accordion-field-${id}`}>
-        <h2 className="accordion-header" >
-          <button
-            className="accordion-button collapsed"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target={`#field-${id}`}
-            aria-expanded="false"
-            aria-controls={`#field-${id}`}
-          >
-            {name}
-            {name != "" && <span className={badgeClasses}>{badgeText()}</span>}
-          </button>
-        </h2>
-        <div id={`field-${id}`} className="accordion-collapse collapse">
-          <div className="accordion-body">
-            <label className="form-label">Field Name</label>
-            <p className="form-text">
-              This is the field name that the result of this transformation will
-              appear under on the transformed record.
-            </p>
-            <input
-              type="text"
-              className="form-control"
-              required="required"
-              placeholder="New field"
-              defaultValue={name}
-              onChange={(e) => setNameValue(e.target.value)}
-            />
+    <div className="card mb-4" data-bs-spy="scroll" data-bs-target="#simple-list-example" data-bs-offset="0" data-bs-smooth-scroll="true" tabindex="0" id={`field-${id}`}>
+      <div className="card-body">
+        <h5 className="card-title mb-4">
+          { name }
+          {name != "" && <span className={badgeClasses}>{badgeText()}</span> }
+        </h5>
 
-            <label className="form-label mt-4">Field Block</label>
-            <p className="form-text">
-              This is the code that is applied to create this field on the
-              transformed record.
-            </p>
+        <label className="form-label">Field Name</label>
+        <p className="form-text">
+          This is the field name that the result of this transformation will
+          appear under on the transformed record.
+        </p>
+        <input
+          type="text"
+          className="form-control"
+          required="required"
+          placeholder="New field"
+          defaultValue={name}
+          onChange={(e) => setNameValue(e.target.value)}
+        />
 
-            <div ref={editorRef}></div>
+        <label className="form-label mt-4">Field Block</label>
+        <p className="form-text">
+          This is the code that is applied to create this field on the
+          transformed record.
+        </p>
 
-            {error && (
-              <div className="alert alert-danger mt-4" role="alert">
-                <h4 className="alert-heading">{error.title}</h4>
-                <hr />
-                <p className="mb-0">{error.description}</p>
-              </div>
-            )}
+        <div ref={editorRef}></div>
 
-            <div className="mt-4 hstack gap-2">
-              <div className="ms-auto"></div>
-              <button className="btn btn-danger" onClick={handleDeleteClick}>
-                {deleting ? "Deleting..." : "Delete"}
-              </button>
-              <button
-                className="btn btn-primary"
-                disabled={!isSaveable()}
-                onClick={handleSaveClick}
-              >
-                {saving ? "Saving..." : "Save"}
-              </button>
-              <button
-                className="btn btn-success"
-                disabled={!saved || hasChanged() || running}
-                onClick={handleRunClick}
-              >
-                {running ? "Running..." : "Run"}
-              </button>
-            </div>
+        {error && (
+          <div className="alert alert-danger mt-4" role="alert">
+            <h4 className="alert-heading">{error.title}</h4>
+            <hr />
+            <p className="mb-0">{error.description}</p>
           </div>
+        )}
+
+        <div className="mt-4 hstack gap-2">
+          <div className="ms-auto"></div>
+          <button className="btn btn-danger" onClick={handleDeleteClick}>
+            {deleting ? "Deleting..." : "Delete"}
+          </button>
+          <button
+            className="btn btn-primary"
+            disabled={!isSaveable()}
+            onClick={handleSaveClick}
+          >
+            {saving ? "Saving..." : "Save"}
+          </button>
+          <button
+            className="btn btn-success"
+            disabled={!saved || hasChanged() || running}
+            onClick={handleRunClick}
+          >
+            {running ? "Running..." : "Run"}
+          </button>
         </div>
       </div>
     </div>
