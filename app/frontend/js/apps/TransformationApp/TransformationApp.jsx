@@ -51,7 +51,7 @@ const TransformationApp = ({}) => {
   };
 
   const rawRecordClasses = classnames({
-    "col-4": uiAppDetails.rawRecordExpanded === true,
+    "col-3": uiAppDetails.rawRecordExpanded === true,
     "col-1": uiAppDetails.rawRecordExpanded === false
   });
 
