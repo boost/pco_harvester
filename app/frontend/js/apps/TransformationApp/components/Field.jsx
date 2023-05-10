@@ -16,6 +16,8 @@ import { ruby } from "@codemirror/legacy-modes/mode/ruby";
 import { selectUiFieldById } from "~/js/features/UiFieldsSlice";
 import Tooltip from "~/js/components/Tooltip";
 
+import { ReactComponent as QuestionCircle } from "bootstrap-icons/icons/question-circle.svg";
+
 const Field = ({ id }) => {
   const appDetails = useSelector(selectAppDetails);
   const { name, block } = useSelector((state) => selectFieldById(state, id));
@@ -127,7 +129,7 @@ const Field = ({ id }) => {
         <label className="form-label" htmlFor="name">
           Field Name{" "}
           <Tooltip data-bs-title="This is the field name that the result of this transformation will appear under on the transformed record.">
-            ?
+            <QuestionCircle />
           </Tooltip>
         </label>
         <input
@@ -143,7 +145,7 @@ const Field = ({ id }) => {
         <label className="form-label mt-4" htmlFor="block">
           Field Block{" "}
           <Tooltip data-bs-title="This is the code that is applied to create this field on the transformed record.">
-            ?
+            <QuestionCircle />
           </Tooltip>
         </label>
         <div id="block" ref={editorRef}></div>
