@@ -1,5 +1,6 @@
 <% partner_id = @content_partner&.id %>
-<% definition_id = @extraction_definition&.id %>
+<% extraction_id = @extraction_definition&.id %>
+<% transformation_id = @transformation_definition&.id %>
 
 <div class="my-4">
   <nav aria-label="breadcrumb">
@@ -20,19 +21,19 @@
 
       <%= breadcrumb_item(
         text: @extraction_definition&.name_in_database,
-        path: (content_partner_extraction_definition_path(partner_id, definition_id) rescue nil),
+        path: (content_partner_extraction_definition_path(partner_id, extraction_id) rescue nil),
         active: current_page(:extraction_definitions, %w[show]),
         display: request.path.match?(/\/extraction_definitions\/\d+/)) %>
 
       <%= breadcrumb_item(
-        text: @transformation&.name_in_database,
-        path: (content_partner_transformation_path(partner_id, transformation_id) rescue nil),
-        active: current_page(:transformation, %w[show]),
-        display: request.path.match?(/\/transformations\/\d+/)) %>
+        text: @transformation_definition&.name_in_database,
+        path: (content_partner_transformation_definition_path(partner_id, transformation_id) rescue nil),
+        active: current_page(:transformation_definition, %w[show]),
+        display: request.path.match?(/\/transformation_definitions\/\d+/)) %>
 
       <%= breadcrumb_item(
         text: @job&.id,
-        path: (content_partner_extraction_definition_job_path(partner_id, definition_id, @job) rescue nil),
+        path: (content_partner_extraction_definition_job_path(partner_id, extraction_id, @job) rescue nil),
         active: current_page(:jobs, %w[show]),
         display: request.path.match?(/\/jobs\/\d+/)) %>
 
