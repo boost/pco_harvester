@@ -14,6 +14,7 @@ import { EditorView, basicSetup } from "codemirror";
 import { StreamLanguage } from "@codemirror/language";
 import { ruby } from "@codemirror/legacy-modes/mode/ruby";
 import { selectUiFieldById } from "~/js/features/UiFieldsSlice";
+import Tooltip from "~/js/components/Tooltip";
 
 const Field = ({ id }) => {
   const appDetails = useSelector(selectAppDetails);
@@ -109,19 +110,28 @@ const Field = ({ id }) => {
   };
 
   return (
-    <div className="card mb-4" data-bs-spy="scroll" data-bs-target="#simple-list-example" data-bs-offset="0" data-bs-smooth-scroll="true" id={`field-${id}`}>
+    <div
+      className="card mb-4"
+      data-bs-spy="scroll"
+      data-bs-target="#simple-list-example"
+      data-bs-offset="0"
+      data-bs-smooth-scroll="true"
+      id={`field-${id}`}
+    >
       <div className="card-body">
         <h5 className="card-title mb-4">
-          { name }
-          {name != "" && <span className={badgeClasses}>{badgeText()}</span> }
+          {name}
+          {name != "" && <span className={badgeClasses}>{badgeText()}</span>}
         </h5>
 
-        <label className="form-label">Field Name</label>
-        <p className="form-text">
-          This is the field name that the result of this transformation will
-          appear under on the transformed record.
-        </p>
+        <label className="form-label" htmlFor="name">
+          Field Name{" "}
+          <Tooltip data-bs-title="This is the field name that the result of this transformation will appear under on the transformed record.">
+            ?
+          </Tooltip>
+        </label>
         <input
+          id="name"
           type="text"
           className="form-control"
           required="required"
@@ -130,13 +140,13 @@ const Field = ({ id }) => {
           onChange={(e) => setNameValue(e.target.value)}
         />
 
-        <label className="form-label mt-4">Field Block</label>
-        <p className="form-text">
-          This is the code that is applied to create this field on the
-          transformed record.
-        </p>
-
-        <div ref={editorRef}></div>
+        <label className="form-label mt-4" htmlFor="block">
+          Field Block{" "}
+          <Tooltip data-bs-title="This is the code that is applied to create this field on the transformed record.">
+            ?
+          </Tooltip>
+        </label>
+        <div id="block" ref={editorRef}></div>
 
         {error && (
           <div className="alert alert-danger mt-4" role="alert">
