@@ -83,16 +83,14 @@ const TransformationApp = ({}) => {
   return (
     <div className="text-bg-light p-2 row gy-4 mt-1">
       <div className={jumpToClasses}>
-        <div className="sticky-top vh-100 pb-2">
+        <div className="sticky-top vh-100 pb-2 d-flex flex-column">
           <h5>Jump To</h5>
-
           <button
             className="btn btn-success mb-4"
             onClick={() => runAllFields()}
           >
             Run All
           </button>
-
           <NavigationPanel />
           <AddField />
         </div>
