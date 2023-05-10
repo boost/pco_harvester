@@ -78,9 +78,21 @@ const Field = ({ id }) => {
     "ms-2": true,
     "bg-primary": saved,
     "bg-success": hasRun && !error,
+    "bg-danger": !hasChanged() && hasRun && error,
     "bg-secondary": hasChanged(),
-    "bg-danger": hasRun && error,
   });
+
+  const badgeText = () => {
+    if (hasRun && !error) {
+      return "success";
+    } else if (hasChanged()) {
+      return "unsaved";
+    } else if (hasRun && error) {
+      return "error";
+    } else if (saved) {
+      return "saved";
+    }
+  };
 
   useEffect(() => {
     const state = EditorState.create({
@@ -98,18 +110,6 @@ const Field = ({ id }) => {
 
     return () => view.destroy();
   }, []);
-
-  const badgeText = () => {
-    if (hasRun && !error) {
-      return "success";
-    } else if (hasChanged()) {
-      return "unsaved";
-    } else if (hasRun && error) {
-      return "error";
-    } else if (saved) {
-      return "saved";
-    }
-  };
 
   return (
     <div

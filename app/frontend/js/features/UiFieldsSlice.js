@@ -18,7 +18,7 @@ const uiFieldsSlice = createSlice({
           deleting: false,
           saving: false,
           running: false,
-          hasRun: false
+          hasRun: false,
         });
       })
       .addCase(clickedOnRunFields.pending, (state, action) => {
@@ -54,7 +54,11 @@ const uiFieldsSlice = createSlice({
           action.meta.arg.fields.map((id) => {
             return {
               id: id,
-              changes: { running: false, error: action.payload.errors[id], hasRun: true },
+              changes: {
+                running: false,
+                error: action.payload.errors[id],
+                hasRun: true,
+              },
             };
           })
         );
@@ -62,7 +66,7 @@ const uiFieldsSlice = createSlice({
       .addCase(updateField.pending, (state, action) => {
         uiFieldsAdapter.updateOne(state, {
           id: action.meta.arg.id,
-          changes: { saving: true },
+          changes: { saving: true, error: false, hasRun: false },
         });
       })
       .addCase(updateField.fulfilled, (state, action) => {

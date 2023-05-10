@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { selectAllFields } from "~/js/features/FieldsSlice";
-import { Collapse } from "bootstrap";
 
 const NavigationPanel = () => {
   const fields = useSelector(selectAllFields);
@@ -9,7 +8,7 @@ const NavigationPanel = () => {
   return (
     <ul
       id="field-list"
-      className="nav flex-column navigation-panel flex-grow-1 overflow-auto flex-nowrap"
+      className="nav flex-column flex-grow-1 overflow-auto flex-nowrap"
     >
       {fields.map((field) => {
         return (
