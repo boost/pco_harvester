@@ -109,7 +109,7 @@ const Field = ({ id }) => {
   };
 
   return (
-    <div className="card mb-4" data-bs-spy="scroll" data-bs-target="#simple-list-example" data-bs-offset="0" data-bs-smooth-scroll="true" tabindex="0" id={`field-${id}`}>
+    <div className="card mb-4" data-bs-spy="scroll" data-bs-target="#simple-list-example" data-bs-offset="0" data-bs-smooth-scroll="true" id={`field-${id}`}>
       <div className="card-body">
         <h5 className="card-title mb-4">
           { name }

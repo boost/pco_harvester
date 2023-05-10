@@ -27,6 +27,11 @@ class TransformationDefinitionsController < ApplicationController
           entities: @fields.map do |field|
             { id: field[:id], saved: true, deleting: false, saving: false, running: false, hasRun: false }
           end.index_by { |field| field[:id] }
+        },
+        appDetails: {
+          rawRecordExpanded: true,
+          fieldsExpanded: true,
+          transformedRecordExpanded: true,
         }
       }
     }.to_json

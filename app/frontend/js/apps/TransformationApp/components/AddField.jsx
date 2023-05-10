@@ -22,10 +22,10 @@ const AddField = () => {
   };
 
   return (
-    <div class="d-grid gap-2 mt-4">
+    <div className="d-grid gap-2 mt-4">
       <button
         disabled={emptyFields}
-        className="btn btn-primary me-2"
+        className="btn btn-primary"
         onClick={() => addNewField()}
       >
         Add Field
