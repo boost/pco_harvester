@@ -1,0 +1,27 @@
+<%= content_for(:title) { @destination.name_in_database } %>
+
+<%= render 'shared/breadcrumb_nav' %>
+
+<h1 class="float-start mb-4"><%= @destination.name_in_database %></h1>
+
+<%= link_to 'Edit destination', edit_destination_path(@destination), class: 'btn btn-outline-primary float-end' %>
+
+<div class="clearfix"></div>
+
+<div class='mt-4'></div>
+
+<h5>Name</h5>
+
+<p><%= @destination.name %></p>
+
+<h5>URL</h5>
+
+<p><%= @destination.url %></p>
+
+<h5>API Key</h5>
+
+<p><%= @destination.api_key %></p>
+
+
+
+

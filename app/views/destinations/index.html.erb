@@ -1,0 +1,32 @@
+<%= content_for(:title) { 'Destinations' } %>
+
+<%= render 'shared/breadcrumb_nav' %>
+
+<h1 class="float-start">Destinations</h1>
+
+<%= link_to new_destination_path, class: 'btn btn-primary float-end' do %>
+  <%= bootstrap_icon('plus-circle') %>Add new destination
+<% end %>
+
+<div class="clearfix"></div>
+
+<div class="mt-3"></div>
+
+
+<%- if @destinations.any? %>
+  <%- @destinations.each do |content_partner| %>
+    <div class="border p-3 my-2">
+      <span class="float-start">
+        <%= content_partner.name %>
+      </span>
+
+      <%= link_to "Details", content_partner, class: "btn btn-outline-primary float-end" %>
+
+      <div class="clearfix"></div>
+    </div>
+  <%- end %>
+
+  <%= render 'shared/pagination_below_table', items: @destinations %>
+<% else %>
+  <p>There are currently no destinations.</p>
+<% end %>
