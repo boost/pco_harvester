@@ -51,6 +51,22 @@ RSpec.describe "Destinations", type: :request do
     end
   end
 
+  describe 'DELETE /destroy' do
+    let!(:destination) { create(:destination) }
+
+    it 'deletes a destination' do
+      expect {
+        delete destination_path(destination)        
+      }.to change(Destination, :count).by(-1)
+    end
+
+    it 'redirects to the destinations page' do
+      delete destination_path(destination)        
+
+      expect(response).to redirect_to destinations_path
+    end
+  end
+
   describe 'PATCH /update' do
     context 'with valid attributes' do
       it 'updates an existing destination' do

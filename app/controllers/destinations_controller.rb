@@ -35,6 +35,16 @@ class DestinationsController < ApplicationController
     end
   end
 
+  def destroy
+    if @destination.destroy
+      redirect_to destinations_path, notice: 'Destination deleted successfully'
+    else
+      flash.alert = 'There was an issue deleting your Destination'
+
+      redirect_to destination_path(@destination)
+    end
+  end
+
   private
 
   def find_destination
