@@ -40,17 +40,6 @@ RSpec.describe TransformationDefinition, type: :model do
       expect(subject.records.first).to have_key 'record_id'
     end
   end
-
-  describe '#transformed_records' do
-    it 'returns the records having applied the attributes to them' do
-      subject.records.zip(subject.transformed_records).each do |record, transformed_record|
-        expect(transformed_record['title']).to eq record['title']
-        expect(transformed_record['source']).to eq record['source']
-        expect(transformed_record['dc_identifier']).to eq record['reference_number']
-        expect(transformed_record['landing_url']).to eq "http://www.ngataonga.org.nz/collections/catalogue/catalogue-item?record_id=#{record['record_id']}"
-      end
-    end
-  end
   
   describe '#validations presence of' do
     it { should validate_presence_of(:name).with_message("can't be blank") }

@@ -26,7 +26,7 @@ RSpec.describe "Fields", type: :request do
 
         field = JSON.parse(response.body)
 
-        expect(field['name']).to eq 'Title'
+        expect(field['name']).to eq 'title'
         expect(field['block']).to eq "JsonPath.new('title').on(record).first"
      
       end
@@ -91,7 +91,7 @@ RSpec.describe "Fields", type: :request do
           fields: [field_one.id, field_two.id, field_three.id, field_four.id]
         }
 
-        transformed_record = JSON.parse(response.body)
+        transformed_record = JSON.parse(response.body)['transformed_record']
 
         expect(transformed_record['title']).to eq 'title'
         expect(transformed_record['source']).to eq 'source'

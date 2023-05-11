@@ -11,7 +11,7 @@ RSpec.describe Field, type: :model do
   
   describe '#attributes' do
     it 'has a name' do
-      expect(subject.name).to eq 'Title'
+      expect(subject.name).to eq 'title'
     end
 
     it 'has a block' do

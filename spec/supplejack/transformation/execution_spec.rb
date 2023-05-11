@@ -16,17 +16,22 @@ RSpec.describe Transformation::Execution do
     }
   }
   let(:field) { create(:field, transformation_definition:) }
-  let(:field_with_error) { create(:field, transformation_definition:, block: 'Error')}
+  let(:field_with_error) { create(:field, transformation_definition:, block: 'result.title')}
 
   describe '#call' do
     it 'returns the result of applying the field to the record' do
-      expect(described_class.new(record, field).call).to eq 'The title of the record'
+      transformation = described_class.new([record], [field]).call.first.transformed_record
+
+      expect(transformation['title']).to eq 'The title of the record'
     end
 
     it 'updates the error message on the field if an error has occured applying the field' do
-      described_class.new(record, field_with_error).call
-      field_with_error.reload
-      expect(field_with_error.error).to eq 'uninitialized constant Transformation::Execution::Error'
+      errors = described_class.new([record], [field_with_error]).call.first.errors
+
+      expect(errors[field_with_error.id][:title]).to eq NameError
+      expect(errors[field_with_error.id][:description]).to include "undefined local variable or method `result'"
+
+
     end
   end
 end
