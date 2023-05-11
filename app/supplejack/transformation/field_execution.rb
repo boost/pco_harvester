@@ -15,7 +15,7 @@ module Transformation
     # rubocop:disable Security/Eval
     # rubocop:disable Lint/RescueException
     def execute(api_record)
-      WebMock.enable!
+      WebMock.enable! unless Rails.env.test?
       begin
         block = ->(record) { eval(@field.block) }
 
@@ -24,7 +24,7 @@ module Transformation
         @error = e
       end
 
-      WebMock.disable!
+      WebMock.disable! unless Rails.env.test?
       Transformation::Field.new(@field.id, @field.name, @value, @error)
     end
     # rubocop:enable Lint/UnusedBlockArgument
