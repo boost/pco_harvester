@@ -20,8 +20,6 @@ import NavigationPanel from "~/js/apps/TransformationApp/components/NavigationPa
 import RecordViewer from "~/js/apps/TransformationApp/components/RecordViewer";
 import Field from "~/js/apps/TransformationApp/components/Field";
 import AddField from "~/js/apps/TransformationApp/components/AddField";
-import { ReactComponent as ArrowBarLeft } from "bootstrap-icons/icons/arrow-bar-left.svg";
-import { ReactComponent as ArrowBarRight } from "bootstrap-icons/icons/arrow-bar-right.svg";
 
 const TransformationApp = ({}) => {
   const dispatch = useDispatch();
@@ -66,9 +64,9 @@ const TransformationApp = ({}) => {
 
   const expandCollapseText = (section) => {
     if (uiAppDetails[section]) {
-      return <ArrowBarLeft aria-label="collapse" />;
+      return <i className="bi bi-arrow-bar-left" aria-label="collapse"></i>;
     } else {
-      return <ArrowBarRight aria-label="expand" />;
+      return <i className="bi bi-arrow-bar-right" aria-label="expand"></i>;
     }
   };
 

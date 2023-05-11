@@ -11,6 +11,7 @@ import appDetails from '~/js/features/AppDetailsSlice';
 // ui
 
 import uiFields from "~/js/features/UiFieldsSlice";
+import uiAppDetails from "~/js/features/UiAppDetailsSlice";
 
 export function renderWithProviders(
   ui,
@@ -24,6 +25,7 @@ export function renderWithProviders(
         }),
         ui: combineReducers({
           fields: uiFields,
+          appDetails: uiAppDetails,
         }),
       }),
       preloadedState,

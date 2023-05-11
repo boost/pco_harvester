@@ -95,11 +95,11 @@ describe("<TransformationApp />", () => {
   });
 
   it("displays the raw record", () => {
-    expect(screen.queryByText("Raw Record")).toBeTruthy();
+    expect(screen.queryByText("Raw")).toBeTruthy();
   });
   
   it("displays the transformed record", () => {
-    expect(screen.queryByText("Transformed Record")).toBeTruthy();
+    expect(screen.queryByText("Transformed")).toBeTruthy();
   });
 
   it("displays the fields for the transformation", () => {
@@ -116,6 +116,6 @@ describe("<TransformationApp />", () => {
     const button = screen.getByText('Add Field');
     fireEvent.click(button)
 
-    expect(await screen.findByText('Additional Field')).toBeTruthy();
+    expect(await screen.findAllByText('Additional Field')).toBeTruthy();
   })
 });
