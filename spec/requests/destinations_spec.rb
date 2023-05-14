@@ -100,4 +100,48 @@ RSpec.describe "Destinations", type: :request do
       end
     end
   end
+
+  describe 'POST /test' do
+    it 'returns success if the details provided are valid' do
+      stub_request(:get, "http://localhost:5000/harvester/users?api_key=testkey").
+         with(
+           headers: {
+       	 'Accept'=>'*/*',
+       	 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+       	 'User-Agent'=>'Supplejack Harvester v2.0'
+           }).
+         to_return(status: 200, body: "", headers: {})
+
+      post test_destinations_path, params: {
+        destination: {
+          name: 'localhost',
+          url: 'http://localhost:5000',
+          api_key: 'testkey'
+        }
+      }
+
+      expect(JSON.parse(response.body)['status']).to eq 200
+    end
+
+    it 'returns error if the details provided are invalid' do
+     stub_request(:get, "http://localhost:5000/harvester/users?api_key=testkey").
+       with(
+         headers: {
+     	 'Accept'=>'*/*',
+     	 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+     	 'User-Agent'=>'Supplejack Harvester v2.0'
+         }).
+       to_return(status: 403, body: "", headers: {})      
+
+      post test_destinations_path, params: {
+        destination: {
+          name: 'localhost',
+          url: 'http://localhost:5000',
+          api_key: 'testkey'
+        }
+      }
+
+      expect(JSON.parse(response.body)['status']).to eq 403
+    end
+  end
 end

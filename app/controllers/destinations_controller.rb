@@ -12,6 +12,12 @@ class DestinationsController < ApplicationController
     @destination = Destination.new
   end
 
+  def test
+    test_url = "#{destination_params['url']}/harvester/users?api_key=#{destination_params['api_key']}"
+
+    render json: { status: Faraday.get(test_url).status }
+  end
+
   def create
     @destination = Destination.new(destination_params)
 

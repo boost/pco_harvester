@@ -6,7 +6,7 @@
   </div>
 
   <div class="mb-3">
-    <%= form.label :url, 'Url', class: "form-label" %>
+    <%= form.label :url, 'URL', class: "form-label" %>
     <%= form.text_field :url, class: {"form-control": true, "is-invalid": @destination.errors[:url].any? } %>
   </div>
   
@@ -16,8 +16,14 @@
   </div>
 
   <div class="col-12">
+    <button type="button" class="btn btn-secondary me-1" id="js-test-destination">
+      Test
+    </button>
+
     <button type="submit" class="btn btn-primary">
       Save
     </button>
   </div>
 <% end %>
+
+<div id="test-result"></div>

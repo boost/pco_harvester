@@ -26,7 +26,9 @@ Rails.application.routes.draw do
 
   get :jobs, to: 'jobs#index', as: :jobs
 
-  resources :destinations
+  resources :destinations do
+    post :test, on: :collection
+  end
 
   mount Sidekiq::Web => '/sidekiq'
 end
