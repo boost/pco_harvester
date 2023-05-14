@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_11_033325) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_14_223436) do
   create_table "content_partners", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -51,6 +51,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_11_033325) do
     t.datetime "updated_at", null: false
     t.bigint "transformation_definition_id", null: false
     t.index ["transformation_definition_id"], name: "index_fields_on_transformation_definition_id"
+  end
+
+  create_table "harvest_definitions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "extraction_definition_id"
+    t.bigint "job_id"
+    t.bigint "transformation_definition_id"
+    t.bigint "destination_id"
+    t.index ["destination_id"], name: "index_harvest_definitions_on_destination_id"
+    t.index ["extraction_definition_id"], name: "index_harvest_definitions_on_extraction_definition_id"
+    t.index ["job_id"], name: "index_harvest_definitions_on_job_id"
+    t.index ["transformation_definition_id"], name: "index_harvest_definitions_on_transformation_definition_id"
   end
 
   create_table "jobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
