@@ -8,9 +8,6 @@ module Load
 
     def call
       record = JSON.parse(@record.to_json)['transformed_record']
-
-      # Where we get the source_id to be confirmed
-      record.merge!(source_id: 'test', data_type: 'record')
       
       conn = connection("#{@destination.url}", {}, { 'Authentication-Token' => @destination.api_key})
         .post(

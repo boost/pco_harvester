@@ -2,5 +2,7 @@
 
 # Used to store information about a Harvest Job
 class HarvestJob < ApplicationRecord
+  include Job
+
   belongs_to :harvest_definition
 end

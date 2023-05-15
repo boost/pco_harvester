@@ -10,11 +10,22 @@
   <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">Delete</button>
 </div>
 
+<div class="clearfix"></div>
+
 <%# Modal %>
 
 <%= render layout: 'shared/delete-modal', locals: { path: content_partner_harvest_definition_path(@content_partner, @harvest_definition) } do %>
   Are you sure you want to delete "<%= @harvest_definition.name %>"?
 <% end %>
+
+<div class="my-3">
+  <%= link_to 'All', content_partner_harvest_definition_path(@content_partner, @harvest_definition), class: "btn btn#{@status.nil? ? '' : '-outline'}-primary" %>
+  <% HarvestJob::STATUSES.each do |status| %>
+    <%= link_to status.capitalize, content_partner_harvest_definition_path(@content_partner, @harvest_definition, status: status), class: "btn btn#{@status == status ? '' : '-outline'}-primary" %>
+  <% end %>
+</div>
+
+<%= render partial: 'jobs/jobs', locals: { jobs: @harvest_jobs, type: 'harvest', content_partner: @content_partner, definition: @harvest_definition  } %>
 
 
 

@@ -5,7 +5,9 @@ class HarvestDefinitionsController < ApplicationController
   before_action :find_harvest_definition, only: %i[show edit update destroy]
   before_action :find_destinations
 
-  def show; end
+  def show
+    @harvest_jobs = paginate_and_filter_jobs(@harvest_definition.harvest_jobs)
+  end
 
   def new
     @harvest_definition = HarvestDefinition.new

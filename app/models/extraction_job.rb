@@ -3,11 +3,11 @@
 # Used to store information about a Job
 #
 class ExtractionJob < ApplicationRecord
+  include Job
+
   EXTRACTIONS_FOLDER = "#{Rails.root}/extractions/#{Rails.env}".freeze
-  STATUSES = %w[queued cancelled running completed errored].freeze
   KINDS = %w[full sample].freeze
 
-  enum :status, STATUSES
   enum :kind, KINDS, prefix: :is
 
   belongs_to :extraction_definition
@@ -15,9 +15,7 @@ class ExtractionJob < ApplicationRecord
   after_create :create_folder
   after_destroy :delete_folder
 
-  validates :status, presence: true, inclusion: { in: STATUSES }, if: -> { status.present? }
   validates :kind, presence: true, inclusion: { in: KINDS },      if: -> { kind.present? }
-  validates :end_time, comparison: { greater_than: :start_time }, if: -> { end_time.present? }
 
   # Returns the fullpath to the extraction folder for this job
   #
@@ -51,23 +49,11 @@ class ExtractionJob < ApplicationRecord
     Extraction::Documents.new(extraction_folder)
   end
 
-  # Returns the number of seconds a job has been running for
-  #
-  # @return Integer
-  def duration_seconds
-    return if start_time.blank? || end_time.blank?
-
-    end_time - start_time
-  end
 
   # Returns the size of the extraction folder in bytes
   #
   # @return Integer
   def extraction_folder_size_in_bytes
     `du #{extraction_folder} | cut -f1`.to_i
-  end
-
-  def name
-    updated_at.to_fs(:light)
   end
 end

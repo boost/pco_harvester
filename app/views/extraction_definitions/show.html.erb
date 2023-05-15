@@ -20,7 +20,7 @@
   <% end %>
 </div>
 
-<%= render partial: 'jobs/jobs', locals: { jobs: @extraction_jobs } %>
+<%= render partial: 'jobs/jobs', locals: { jobs: @extraction_jobs, type: 'extraction', content_partner: @content_partner, definition: @extraction_definition } %>
 
 <%# Modal %>
 <%= render layout: 'shared/delete-modal', locals: { path: content_partner_extraction_definition_path(@content_partner, @extraction_definition) } do %>

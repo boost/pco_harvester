@@ -19,7 +19,7 @@ class HarvestWorker
     @extraction_job.update(end_time: Time.zone.now)
 
     @transformation = TransformationDefinition.new(
-      @harvest_definition.transformation_definition.attributes.merge('job_id' => @extraction_job.id)
+      @harvest_definition.transformation_definition.attributes.merge('extraction_job_id' => @extraction_job.id)
     )
 
     transformed_records = Transformation::Execution.new(@transformation.records, @transformation.fields).call
