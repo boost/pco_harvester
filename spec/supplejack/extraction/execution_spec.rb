@@ -3,9 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe Extraction::Execution do
-  let(:full_job) { create(:job) }
-  let(:sample_job) { create(:job, kind: 'sample') }
-  let(:ed) { create(:extraction_definition, base_url: 'http://google.com/?url_param=url_value', jobs: [full_job, sample_job]) }
+  let(:full_job) { create(:extraction_job) }
+  let(:sample_job) { create(:extraction_job, kind: 'sample') }
+  let(:ed) { create(:extraction_definition, base_url: 'http://google.com/?url_param=url_value', extraction_jobs: [full_job, sample_job]) }
 
   before do
     (1...6).each do |page|
@@ -44,9 +44,9 @@ RSpec.describe Extraction::Execution do
     end
 
     context 'when the extraction definition has a throttle' do
-      let(:job) { create(:job) }
-      let(:ed) { create(:extraction_definition, base_url: 'http://google.com/?url_param=url_value', throttle: 500, jobs: [job]) }
-      let(:subject) { described_class.new(job, ed) }
+      let(:extraction_job) { create(:extraction_job) }
+      let(:ed) { create(:extraction_definition, base_url: 'http://google.com/?url_param=url_value', throttle: 500, extraction_jobs: [extraction_job]) }
+      let(:subject) { described_class.new(extraction_job, ed) }
 
       it 'it respects the throttle set in the extraction_definition' do
         start_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
@@ -61,15 +61,15 @@ RSpec.describe Extraction::Execution do
     end
 
     context 'when the job has been cancelled' do
-      let(:job) { create(:job, status: 'cancelled') }
-      let(:ed) { create(:extraction_definition, base_url: 'http://google.com/?url_param=url_value', throttle: 500, jobs: [job]) }
-      let(:subject) { described_class.new(job, ed) }
+      let(:extraction_job) { create(:extraction_job, status: 'cancelled') }
+      let(:ed) { create(:extraction_definition, base_url: 'http://google.com/?url_param=url_value', throttle: 500, extraction_jobs: [extraction_job]) }
+      let(:subject) { described_class.new(extraction_job, ed) }
 
       it 'it does not extract further pages' do
         subject.call
 
-        expect(File.exist?(job.extraction_folder)).to eq true
-        extracted_files = Dir.glob("#{job.extraction_folder}/*").select { |e| File.file? e }
+        expect(File.exist?(extraction_job.extraction_folder)).to eq true
+        extracted_files = Dir.glob("#{extraction_job.extraction_folder}/*").select { |e| File.file? e }
 
         expect(extracted_files.count).to eq 2
       end

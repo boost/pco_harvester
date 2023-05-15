@@ -4,14 +4,14 @@ require 'rails_helper'
 
 RSpec.describe "Fields", type: :request do
   let(:content_partner) { create(:content_partner) }
-  let(:job)             { create(:job) }
-  let!(:transformation_definition)  { create(:transformation_definition, content_partner:, job:) }
+  let(:extraction_job)             { create(:extraction_job) }
+  let!(:transformation_definition)  { create(:transformation_definition, content_partner:, extraction_job:) }
 
   describe '#create' do
     let(:field)           { build(:field, transformation_definition:) }
 
     context 'with valid parameters' do
-      it 'creates a new field' do 
+      it 'creates a new field' do
         expect do
           post content_partner_transformation_definition_fields_path(content_partner, transformation_definition), params: {
             field: field.attributes
@@ -28,7 +28,7 @@ RSpec.describe "Fields", type: :request do
 
         expect(field['name']).to eq 'title'
         expect(field['block']).to eq "JsonPath.new('title').on(record).first"
-     
+
       end
     end
   end
@@ -65,13 +65,13 @@ RSpec.describe "Fields", type: :request do
     end
 
     it 'returns a successful response' do
-      delete content_partner_transformation_definition_field_path(content_partner, transformation_definition, field)  
+      delete content_partner_transformation_definition_field_path(content_partner, transformation_definition, field)
 
       expect(response.status).to eq(200)
     end
   end
 
-  
+
   describe "#run" do
     context 'with a valid fields' do
 
@@ -82,7 +82,7 @@ RSpec.describe "Fields", type: :request do
 
       it 'returns a new record made up of the given transformation fields' do
         post run_content_partner_transformation_definition_fields_path(content_partner, transformation_definition), params: {
-          record: { 
+          record: {
             title: 'title',
             source: 'source',
             reference_number: '111',

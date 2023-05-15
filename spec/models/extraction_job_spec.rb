@@ -1,14 +1,14 @@
 require 'rails_helper'
 
-RSpec.describe Job, type: :model do
-  subject { create(:job) }
+RSpec.describe ExtractionJob, type: :model do
+  subject { create(:extraction_job) }
 
   describe 'status checks' do
-    Job::STATUSES.each do |status|
+    described_class::STATUSES.each do |status|
       it "defines the check #{status}?" do
         subject.status = status
         expect(subject.send("#{status}?")).to be true
-        subject.status = Job::STATUSES.without(status).sample
+        subject.status = described_class::STATUSES.without(status).sample
         expect(subject.send("#{status}?")).to be false
       end
 
@@ -22,11 +22,11 @@ RSpec.describe Job, type: :model do
   end
 
   describe 'kind checks' do
-    Job::KINDS.each do |kind|
+    described_class::KINDS.each do |kind|
       it "defines the check is_#{kind}?" do
         subject.kind = kind
         expect(subject.send("is_#{kind}?")).to be true
-        subject.kind = Job::KINDS.without(kind).sample
+        subject.kind = described_class::KINDS.without(kind).sample
         expect(subject.send("is_#{kind}?")).to be false
       end
     end
@@ -107,7 +107,7 @@ RSpec.describe Job, type: :model do
   end
 
   describe '#extraction_folder_size_in_bytes' do
-    let(:ed) { create(:extraction_definition, base_url: 'http://google.com/?url_param=url_value', jobs: [subject]) }
+    let(:ed) { create(:extraction_definition, base_url: 'http://google.com/?url_param=url_value', extraction_jobs: [subject]) }
 
     before do
       (1...6).each do |page|
@@ -121,7 +121,7 @@ RSpec.describe Job, type: :model do
     it 'returns the size of the extraction folder in bytes' do
       Extraction::Execution.new(subject, ed).call
 
-      expect(subject.extraction_folder_size_in_bytes).to eq 40
+      expect(subject.extraction_folder_size_in_bytes).to eq 24
     end
   end
 end

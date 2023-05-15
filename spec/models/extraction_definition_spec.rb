@@ -76,11 +76,11 @@ RSpec.describe ExtractionDefinition, type: :model do
   end
 
   describe '#associations' do
-    let(:job) { create(:job) }
-    let(:ed)  { create(:extraction_definition, jobs: [job]) }
+    let(:extraction_job) { create(:extraction_job) }
+    let(:ed) { create(:extraction_definition, extraction_jobs: [extraction_job]) }
 
     it 'has many jobs' do
-      expect(ed.jobs).to include job
+      expect(ed.extraction_jobs).to include extraction_job
     end
 
     it 'belongs to a content partner' do

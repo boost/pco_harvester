@@ -2,7 +2,7 @@
 
 class TransformationDefinition < ApplicationRecord
   belongs_to :content_partner
-  belongs_to :job
+  belongs_to :extraction_job
 
   has_many :fields
 
@@ -12,10 +12,10 @@ class TransformationDefinition < ApplicationRecord
   #
   # @return Array
   def records
-    return [] if record_selector.blank? || job.documents[1].nil?
+    return [] if record_selector.blank? || extraction_job.documents[1].nil?
 
     JsonPath.new(record_selector)
-            .on(job.documents[1].body)
+            .on(extraction_job.documents[1].body)
             .flatten
   end
 end

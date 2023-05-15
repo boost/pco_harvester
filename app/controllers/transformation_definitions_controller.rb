@@ -93,12 +93,12 @@ class TransformationDefinitionsController < ApplicationController
   end
 
   def find_extraction_jobs
-    @jobs = @content_partner.extraction_definitions.map do |ed|
-      [ed.name, ed.jobs.map { |job| [job.name, job.id] }]
+    @extraction_jobs = @content_partner.extraction_definitions.map do |ed|
+      [ed.name, ed.extraction_jobs.map { |job| [job.name, job.id] }]
     end
   end
 
   def transformation_definition_params
-    params.require(:transformation_definition).permit(:content_partner_id, :name, :job_id, :record_selector)
+    params.require(:transformation_definition).permit(:content_partner_id, :name, :extraction_job_id, :record_selector)
   end
 end

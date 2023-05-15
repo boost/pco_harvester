@@ -4,7 +4,7 @@
 #
 class ExtractionDefinition < ApplicationRecord
   belongs_to :content_partner
-  has_many :jobs
+  has_many :extraction_jobs
 
   # find good regex or another implementation
   FORMAT_SELECTOR_REGEX_MAP = {

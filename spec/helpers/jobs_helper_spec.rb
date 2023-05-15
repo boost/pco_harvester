@@ -3,12 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe JobsHelper do
-  let(:queued_job)         { create(:job) }
-  let(:full_running_job)   { create(:job, status: 'running') }
-  let(:sample_running_job) { create(:job, kind: 'sample', status: 'running') }
-  let(:errored_job)        { create(:job, status: 'errored') }
-  let(:cancelled_job)      { create(:job, status: 'cancelled') }
-  let(:completed_job)      { create(:job, status: 'completed') }
+  let(:queued_job)         { create(:extraction_job) }
+  let(:full_running_job)   { create(:extraction_job, status: 'running') }
+  let(:sample_running_job) { create(:extraction_job, kind: 'sample', status: 'running') }
+  let(:errored_job)        { create(:extraction_job, status: 'errored') }
+  let(:cancelled_job)      { create(:extraction_job, status: 'cancelled') }
+  let(:completed_job)      { create(:extraction_job, status: 'completed') }
 
   describe '#job_status_text' do
     it 'returns Waiting in queue... for queued jobs' do

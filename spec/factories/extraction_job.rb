@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :job do
+  factory :extraction_job do
     status { 'queued' }
     kind   { 'full' }
 

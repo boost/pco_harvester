@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe "HarvestDefinitions", type: :request do
-  let(:content_partner)           { create(:content_partner, :ngataonga) } 
+  let(:content_partner)           { create(:content_partner, :ngataonga) }
   let(:extraction_definition)     { content_partner.extraction_definitions.first }
-  let(:job)                       { create(:job, extraction_definition:) } 
-  let(:transformation_definition) { create(:transformation_definition, content_partner:, job:) }
+  let(:extraction_job)                       { create(:extraction_job, extraction_definition:) }
+  let(:transformation_definition) { create(:transformation_definition, content_partner:, extraction_job:) }
   let(:destination)               { create(:destination) }
 
   describe 'GET /new' do
@@ -20,7 +20,7 @@ RSpec.describe "HarvestDefinitions", type: :request do
       it 'creates a new harvest definition' do
         expect {
           post content_partner_harvest_definitions_path(content_partner), params: {
-            harvest_definition: { 
+            harvest_definition: {
               name: 'Staging',
               content_partner_id: content_partner.id,
               extraction_definition_id: extraction_definition.id,
@@ -33,7 +33,7 @@ RSpec.describe "HarvestDefinitions", type: :request do
 
       it 'redirects to the content_partner path' do
         post content_partner_harvest_definitions_path(content_partner), params: {
-          harvest_definition: { 
+          harvest_definition: {
               name: 'Staging',
               content_partner_id: content_partner.id,
               extraction_definition_id: extraction_definition.id,

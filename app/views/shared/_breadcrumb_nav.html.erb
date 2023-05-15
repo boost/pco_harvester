@@ -26,7 +26,7 @@
         path: destinations_path,
         active: current_page?(destinations_path),
         display: request.path.include?(destinations_path)) %>
-        
+
       <%= breadcrumb_item(
         text: @destination&.name_in_database,
         path: (destination_path(partner_id) rescue nil),
@@ -35,9 +35,9 @@
 
       <%= breadcrumb_item(
         text: 'Extraction Jobs',
-        path: jobs_path,
-        active: current_page?(jobs_path),
-        display: request.path.include?(jobs_path)) %>
+        path: extraction_jobs_path,
+        active: current_page?(extraction_jobs_path),
+        display: request.path.include?(extraction_jobs_path)) %>
 
       <%= breadcrumb_item(
         text: @extraction_definition&.name_in_database,
@@ -58,8 +58,8 @@
         display: request.path.match?(/\/harvest_definitions\/\d+/)) %>
 
       <%= breadcrumb_item(
-        text: @job&.id,
-        path: (content_partner_extraction_definition_job_path(partner_id, extraction_id, @job) rescue nil),
+        text: @extraction_job&.id,
+        path: (content_partner_extraction_definition_extraction_job_path(partner_id, extraction_id, @extraction_job) rescue nil),
         active: current_page(:jobs, %w[show]),
         display: request.path.match?(/\/jobs\/\d+/)) %>
 

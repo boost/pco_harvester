@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "Transformation Definitions", type: :request do
   let(:content_partner) { create(:content_partner) }
-  let(:job)             { create(:job) }
-  let(:transformation_definition)  { create(:transformation_definition, content_partner:, job:) }
+  let(:extraction_job) { create(:extraction_job) }
+  let(:transformation_definition) { create(:transformation_definition, content_partner:, extraction_job:) }
 
   describe '#new' do
     it 'renders the new form' do
@@ -23,7 +23,7 @@ RSpec.describe "Transformation Definitions", type: :request do
 
   describe '#create' do
     context 'with valid parameters' do
-      let(:transformation_definition) { build(:transformation_definition, content_partner:, job:) }
+      let(:transformation_definition) { build(:transformation_definition, content_partner:, extraction_job:) }
 
       it 'creates a new transformation_definition' do
         expect do
@@ -34,9 +34,9 @@ RSpec.describe "Transformation Definitions", type: :request do
       end
 
       it 'redirects to the content partner path' do
-          post content_partner_transformation_definitions_path(content_partner), params: {
-            transformation_definition: transformation_definition.attributes
-          }
+        post content_partner_transformation_definitions_path(content_partner), params: {
+          transformation_definition: transformation_definition.attributes
+        }
 
         expect(response).to redirect_to content_partner_path(content_partner)
       end
@@ -65,7 +65,7 @@ RSpec.describe "Transformation Definitions", type: :request do
   end
 
   describe '#show' do
-    let(:transformation_definition) { create(:transformation_definition, content_partner:, job:) }
+    let(:transformation_definition) { create(:transformation_definition, content_partner:, extraction_job:) }
 
     it 'shows the details for a transformation_definition' do
       get content_partner_transformation_definition_path(content_partner, transformation_definition)
@@ -73,7 +73,7 @@ RSpec.describe "Transformation Definitions", type: :request do
       expect(response.status).to eq 200
     end
   end
-  
+
   describe '#update' do
     context 'with valid parameters' do
       it 'updates the transformation_definition' do
@@ -135,19 +135,18 @@ RSpec.describe "Transformation Definitions", type: :request do
   end
 
   describe '#test' do
-    let(:content_partner) { create(:content_partner, :ngataonga) } 
+    let(:content_partner) { create(:content_partner, :ngataonga) }
     let(:extraction_definition) { content_partner.extraction_definitions.first }
-    let(:job)             { create(:job, extraction_definition:) } 
-    let(:subject)         { create(:transformation_definition, content_partner: content_partner, job: job) }
+    let(:extraction_job) { create(:extraction_job, extraction_definition:) }
+    let(:subject) { create(:transformation_definition, content_partner:, extraction_job:) }
 
     before do
       # that's to test the display of results
       stub_ngataonga_harvest_requests(extraction_definition)
-      ExtractionJob.new.perform(job.id)
+      ExtractionWorker.new.perform(extraction_job.id)
     end
-    
+
     it 'returns a JSON object containing the result of the selected job and the applied record selector' do
-      
       post test_content_partner_transformation_definitions_path(content_partner), params: {
         transformation_definition: subject.attributes
       }

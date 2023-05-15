@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe ExtractionJob, type: :job do
+RSpec.describe ExtractionWorker, type: :job do
   let(:cp) { create(:content_partner, :ngataonga) }
   let(:ed) { cp.extraction_definitions.first }
-  let(:job) { create(:job, extraction_definition: ed, status: 'queued') }
-  let(:subject) { ExtractionJob.new }
+  let(:extraction_job) { create(:extraction_job, extraction_definition: ed, status: 'queued') }
+  let(:subject) { ExtractionWorker.new }
 
   describe 'options' do
     it 'sets the retry to 0' do
@@ -14,9 +14,9 @@ RSpec.describe ExtractionJob, type: :job do
 
   describe '#sidekiq_retries_exhausted' do
     it 'marks the job as errored in sidekiq_retries_exhausted' do
-      subject.sidekiq_retries_exhausted_block.call({ 'args' => [job.id] }, nil)
-      job.reload
-      expect(job.errored?).to be true
+      subject.sidekiq_retries_exhausted_block.call({ 'args' => [extraction_job.id] }, nil)
+      extraction_job.reload
+      expect(extraction_job.errored?).to be true
     end
   end
 
@@ -24,9 +24,9 @@ RSpec.describe ExtractionJob, type: :job do
     before { stub_ngataonga_harvest_requests(ed) }
 
     it 'marks the job as completed' do
-      subject.perform(job.id)
-      job.reload
-      expect(job.completed?).to be true
+      subject.perform(extraction_job.id)
+      extraction_job.reload
+      expect(extraction_job.completed?).to be true
     end
   end
 end

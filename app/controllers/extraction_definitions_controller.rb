@@ -5,7 +5,7 @@ class ExtractionDefinitionsController < ApplicationController
   before_action :find_extraction_definition, only: %i[show edit update destroy]
 
   def show
-    @jobs = paginate_and_filter_jobs(@extraction_definition.jobs)
+    @extraction_jobs = paginate_and_filter_jobs(@extraction_definition.extraction_jobs)
   end
 
   def new

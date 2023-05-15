@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_15_031520) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_15_145040) do
   create_table "content_partners", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -44,6 +44,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_15_031520) do
     t.index ["name"], name: "index_extraction_definitions_on_name"
   end
 
+  create_table "extraction_jobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "extraction_definition_id", null: false
+    t.integer "kind", default: 0, null: false
+    t.timestamp "start_time"
+    t.timestamp "end_time"
+    t.text "error_message"
+    t.index ["extraction_definition_id"], name: "index_extraction_jobs_on_extraction_definition_id"
+  end
+
   create_table "fields", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.text "block"
@@ -59,13 +71,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_15_031520) do
     t.datetime "updated_at", null: false
     t.bigint "content_partner_id"
     t.bigint "extraction_definition_id"
-    t.bigint "job_id"
+    t.bigint "extraction_job_id"
     t.bigint "transformation_definition_id"
     t.bigint "destination_id"
     t.index ["content_partner_id"], name: "index_harvest_definitions_on_content_partner_id"
     t.index ["destination_id"], name: "index_harvest_definitions_on_destination_id"
     t.index ["extraction_definition_id"], name: "index_harvest_definitions_on_extraction_definition_id"
-    t.index ["job_id"], name: "index_harvest_definitions_on_job_id"
+    t.index ["extraction_job_id"], name: "index_harvest_definitions_on_extraction_job_id"
     t.index ["transformation_definition_id"], name: "index_harvest_definitions_on_transformation_definition_id"
   end
 
@@ -81,27 +93,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_15_031520) do
     t.index ["harvest_definition_id"], name: "index_harvest_jobs_on_harvest_definition_id"
   end
 
-  create_table "jobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "extraction_definition_id", null: false
-    t.integer "kind", default: 0, null: false
-    t.timestamp "start_time"
-    t.timestamp "end_time"
-    t.text "error_message"
-    t.index ["extraction_definition_id"], name: "index_jobs_on_extraction_definition_id"
-  end
-
   create_table "transformation_definitions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_selector", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "content_partner_id", null: false
-    t.bigint "job_id", null: false
+    t.bigint "extraction_job_id", null: false
     t.index ["content_partner_id"], name: "index_transformation_definitions_on_content_partner_id"
-    t.index ["job_id"], name: "index_transformation_definitions_on_job_id"
+    t.index ["extraction_job_id"], name: "index_transformation_definitions_on_extraction_job_id"
     t.index ["name"], name: "index_transformation_definitions_on_name"
   end
 

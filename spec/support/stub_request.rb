@@ -4,8 +4,8 @@ require 'webmock/rspec'
 
 RSpec.configure do |config|
   config.before(:suite) do
-    FileUtils.rm Dir.glob("#{Job::EXTRACTIONS_FOLDER}/*/*")
-    FileUtils.rmdir Dir.glob("#{Job::EXTRACTIONS_FOLDER}/*")
+    FileUtils.rm Dir.glob("#{ExtractionJob::EXTRACTIONS_FOLDER}/*/*")
+    FileUtils.rmdir Dir.glob("#{ExtractionJob::EXTRACTIONS_FOLDER}/*")
   end
 end
 

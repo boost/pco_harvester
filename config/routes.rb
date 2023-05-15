@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     resources :extraction_definitions, only: %i[show new create edit update destroy] do
       post :test, on: :collection
 
-      resources :jobs, only: %i[show create destroy] do
+      resources :extraction_jobs, only: %i[show create destroy] do
         post :cancel, on: :member
       end
     end
@@ -30,7 +30,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get :jobs, to: 'jobs#index', as: :jobs
+  get :jobs, to: 'extraction_jobs#index', as: :extraction_jobs
 
   resources :destinations do
     post :test, on: :collection

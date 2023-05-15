@@ -1,24 +1,24 @@
 # frozen_string_literal: true
 
-class JobsController < ApplicationController
+class ExtractionJobsController < ApplicationController
   before_action :find_content_partner, only: %i[show create destroy cancel]
   before_action :find_extraction_definition, only: %i[show create destroy cancel]
-  before_action :find_job, only: %i[show destroy cancel]
+  before_action :find_extraction_job, only: %i[show destroy cancel]
 
   def index
-    @jobs = paginate_and_filter_jobs(Job)
+    @extraction_jobs = paginate_and_filter_jobs(ExtractionJob)
   end
 
   def show
-    @documents = @job.documents
+    @documents = @extraction_job.documents
     @document = @documents[params[:page]]
   end
 
   def create
-    @job = Job.new(extraction_definition: @extraction_definition, kind: params[:kind])
+    @extraction_job = ExtractionJob.new(extraction_definition: @extraction_definition, kind: params[:kind])
 
-    if @job.save
-      ExtractionJob.perform_async(@job.id)
+    if @extraction_job.save
+      ExtractionWorker.perform_async(@extraction_job.id)
       flash.notice = 'Job queued successfuly'
     else
       flash.alert = 'There was an issue launching the job'
@@ -28,17 +28,17 @@ class JobsController < ApplicationController
   end
 
   def destroy
-    if @job.destroy
+    if @extraction_job.destroy
       flash.notice = 'Results deleted successfully'
       redirect_to content_partner_extraction_definition_path(@content_partner, @extraction_definition)
     else
       flash.alert = 'There was an issue deleting the results'
-      redirect_to content_partner_extraction_definition_job_path(@content_partner, @extraction_definition, @job)
+      redirect_to content_partner_extraction_definition_extraction_job_path(@content_partner, @extraction_definition, @extraction_job)
     end
   end
 
   def cancel
-    if @job.cancelled!
+    if @extraction_job.cancelled!
       flash.notice = 'Job cancelled successfully'
     else
       flash.alert = 'There was an issue cancelling the job'
@@ -57,7 +57,7 @@ class JobsController < ApplicationController
     @extraction_definition = ExtractionDefinition.find(params[:extraction_definition_id])
   end
 
-  def find_job
-    @job = Job.find(params[:id])
+  def find_extraction_job
+    @extraction_job = ExtractionJob.find(params[:id])
   end
 end

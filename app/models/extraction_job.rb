@@ -2,8 +2,7 @@
 
 # Used to store information about a Job
 #
-class Job < ApplicationRecord
-
+class ExtractionJob < ApplicationRecord
   EXTRACTIONS_FOLDER = "#{Rails.root}/extractions/#{Rails.env}".freeze
   STATUSES = %w[queued cancelled running completed errored].freeze
   KINDS = %w[full sample].freeze
@@ -61,7 +60,7 @@ class Job < ApplicationRecord
     end_time - start_time
   end
 
-  # Returns the size of the extraction folder in bytes 
+  # Returns the size of the extraction folder in bytes
   #
   # @return Integer
   def extraction_folder_size_in_bytes
