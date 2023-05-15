@@ -7,8 +7,6 @@ class HarvestDefinitionsController < ApplicationController
 
   def show; end
 
-  def edit; end
-
   def new
     @harvest_definition = HarvestDefinition.new
   end
@@ -23,6 +21,8 @@ class HarvestDefinitionsController < ApplicationController
       render :new
     end
   end
+
+  def edit; end
 
   def update
     if @harvest_definition.update(harvest_definition_params)
@@ -58,6 +58,13 @@ class HarvestDefinitionsController < ApplicationController
   end
 
   def harvest_definition_params
-    params.require(:harvest_definition).permit(:name, :content_partner_id, :extraction_definition_id, :job_id, :transformation_definition_id, :destination_id)
+    params.require(:harvest_definition).permit(
+      :name,
+      :content_partner_id,
+      :extraction_definition_id,
+      :job_id,
+      :transformation_definition_id,
+      :destination_id
+    )
   end
 end
