@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_14_223436) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_15_031520) do
   create_table "content_partners", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -67,6 +67,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_14_223436) do
     t.index ["extraction_definition_id"], name: "index_harvest_definitions_on_extraction_definition_id"
     t.index ["job_id"], name: "index_harvest_definitions_on_job_id"
     t.index ["transformation_definition_id"], name: "index_harvest_definitions_on_transformation_definition_id"
+  end
+
+  create_table "harvest_jobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "status"
+    t.integer "kind", default: 0, null: false
+    t.timestamp "start_time"
+    t.timestamp "end_time"
+    t.text "error_message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "harvest_definition_id"
+    t.index ["harvest_definition_id"], name: "index_harvest_jobs_on_harvest_definition_id"
   end
 
   create_table "jobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

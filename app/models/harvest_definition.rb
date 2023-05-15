@@ -7,5 +7,7 @@ class HarvestDefinition < ApplicationRecord
   belongs_to :transformation_definition
   belongs_to :destination
 
+  has_many :harvest_jobs
+
   validates :name, presence: true
 end
