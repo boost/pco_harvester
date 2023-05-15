@@ -54,12 +54,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_14_223436) do
   end
 
   create_table "harvest_definitions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "content_partner_id"
     t.bigint "extraction_definition_id"
     t.bigint "job_id"
     t.bigint "transformation_definition_id"
     t.bigint "destination_id"
+    t.index ["content_partner_id"], name: "index_harvest_definitions_on_content_partner_id"
     t.index ["destination_id"], name: "index_harvest_definitions_on_destination_id"
     t.index ["extraction_definition_id"], name: "index_harvest_definitions_on_extraction_definition_id"
     t.index ["job_id"], name: "index_harvest_definitions_on_job_id"

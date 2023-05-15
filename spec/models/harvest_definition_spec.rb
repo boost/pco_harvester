@@ -9,9 +9,17 @@ RSpec.describe HarvestDefinition, type: :model do
   let(:transformation_definition) { create(:transformation_definition, content_partner:, job:)}
   let(:destination) { create(:destination) }
 
-  let(:subject) { create(:harvest_definition, extraction_definition:, job:, transformation_definition:, destination:) }
+  let(:subject) { create(:harvest_definition, name: 'Staging Harvest', content_partner:, extraction_definition:, job:, transformation_definition:, destination:) }
 
   describe '#attributes' do
+    it 'has a name' do
+      expect(subject.name).to eq 'Staging Harvest'
+    end
+
+    it 'belongs to a content partner' do
+      expect(subject.content_partner).to eq content_partner
+    end
+    
     it 'has an extraction definition' do
       expect(subject.extraction_definition).to eq extraction_definition
     end

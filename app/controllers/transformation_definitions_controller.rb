@@ -3,7 +3,7 @@
 class TransformationDefinitionsController < ApplicationController
   before_action :find_content_partner
   before_action :find_transformation_definition, only: %w[show edit update destroy]
-  before_action :find_jobs, only: %w[new create edit update]
+  before_action :find_extraction_jobs, only: %w[new create edit update]
 
   def show
     @fields = @transformation_definition.fields.map { |field| { id: field.id, name: field.name, block: field.block } }
@@ -92,7 +92,7 @@ class TransformationDefinitionsController < ApplicationController
     @transformation_definition = TransformationDefinition.find(params[:id])
   end
 
-  def find_jobs
+  def find_extraction_jobs
     @jobs = @content_partner.extraction_definitions.map do |ed|
       [ed.name, ed.jobs.map { |job| [job.name, job.id] }]
     end

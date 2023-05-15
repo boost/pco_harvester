@@ -22,6 +22,8 @@ Rails.application.routes.draw do
         post :run, on: :collection
       end
     end
+
+    resources :harvest_definitions
   end
 
   get :jobs, to: 'jobs#index', as: :jobs

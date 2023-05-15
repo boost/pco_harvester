@@ -1,0 +1,18 @@
+<%= content_for(:title) { @harvest_definition.name_in_database } %>
+
+<%= render 'shared/breadcrumb_nav' %>
+
+<h1 class='float-start'><%= @harvest_definition.name %></h1>
+
+<div class="float-end">
+  <%= link_to 'Edit Harvest Definition', edit_content_partner_harvest_definition_path(@content_partner, @harvest_definition), class: 'me-1 btn btn-outline-primary' %>
+  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">Delete</button>
+</div>
+
+<%# Modal %>
+<%= render layout: 'shared/delete-modal', locals: { path: content_partner_harvest_definition_path(@content_partner, @harvest_definition) } do %>
+  Are you sure you want to delete "<%= @harvest_definition.name %>"?
+<% end %>
+
+
+
