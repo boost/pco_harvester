@@ -5,11 +5,13 @@
 <h1 class='float-start'><%= @harvest_definition.name %></h1>
 
 <div class="float-end">
+  <%= button_to 'Run harvest', content_partner_harvest_definition_harvest_jobs_path(@content_partner, @harvest_definition), class: 'btn btn-primary', form_class: 'd-inline me-1' %>
   <%= link_to 'Edit Harvest Definition', edit_content_partner_harvest_definition_path(@content_partner, @harvest_definition), class: 'me-1 btn btn-outline-primary' %>
   <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">Delete</button>
 </div>
 
 <%# Modal %>
+
 <%= render layout: 'shared/delete-modal', locals: { path: content_partner_harvest_definition_path(@content_partner, @harvest_definition) } do %>
   Are you sure you want to delete "<%= @harvest_definition.name %>"?
 <% end %>

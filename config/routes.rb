@@ -23,7 +23,11 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :harvest_definitions
+    resources :harvest_definitions do
+      resources :harvest_jobs, only: %i[show create destroy] do
+        post :cancel, on: :member
+      end
+    end
   end
 
   get :jobs, to: 'jobs#index', as: :jobs
