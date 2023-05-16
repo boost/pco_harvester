@@ -26,6 +26,6 @@ class ApplicationWorker
 
   def job_end
     @job.completed! unless @job.cancelled?
-    @job.update(end_time: Time.zone.now)
+    @job.update(end_time: Time.zone.now) if @job.end_time.blank?
   end
 end

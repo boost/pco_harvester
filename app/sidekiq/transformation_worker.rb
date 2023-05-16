@@ -1,32 +1,40 @@
 # frozen_string_literal: true
 
-class TransformationWorker
-  include Sidekiq::Job
-
-  def perform(transformation_job_id, page)
-    @transformation_job = TransformationJob.find(transformation_job_id)
-    @transformation_job.running!
-    @transformation_job.update(start_time: Time.zone.now) unless @transformation_job.start_time.present?
-
+class TransformationWorker < ApplicationWorker
+  def child_perform(transformation_job, page)
+    @transformation_job = transformation_job
     @harvest_job = @transformation_job.harvest_job
 
-    transformation = if @harvest_job.present?
-                       TransformationDefinition.new(
-                         @harvest_job.transformation_definition.attributes.merge(
-                           'extraction_job_id' => @harvest_job.extraction_job.id
-                         )
-                       )
-                     else
-                       TransformationDefinition.find(@transformation_job.transformation_definition_id)
-                     end
+    transformed_records = transform_records(page)
+    queue_load_worker(transformed_records)
 
-    transformed_records = Transformation::Execution.new(transformation.records(page), transformation.fields).call
+    update_transformation_report(transformed_records)
+  end
 
-    @transformation_job.completed!
-    records_count = @transformation_job.records_transformed + transformed_records.count
+  def find_transformation_definition
+    if @harvest_job.present?
+      TransformationDefinition.new(
+        @harvest_job.transformation_definition.attributes.merge(
+          'extraction_job_id' => @harvest_job.extraction_job.id
+        )
+      )
+    else
+      TransformationDefinition.find(@transformation_job.transformation_definition_id)
+    end
+  end
 
-    @transformation_job.update(end_time: Time.zone.now, records_transformed: records_count)
+  def transform_records(page)
+    transformation = find_transformation_definition
+    Transformation::Execution.new(transformation.records(page), transformation.fields).call
+  end
 
+  def queue_load_worker(transformed_records)
     LoadWorker.perform_async(@harvest_job.load_job.id, @harvest_job.id, transformed_records.map(&:to_hash))
+  end
+
+  def update_transformation_report(transformed_records)
+    @transformation_job.reload
+    records_count = @transformation_job.records_transformed + transformed_records.count
+    @transformation_job.update(records_transformed: records_count)
   end
 end
