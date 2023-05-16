@@ -1,0 +1,106 @@
+<%= content_for(:title) { "#{@harvest_definition.name} job" } %>
+<%= render 'shared/breadcrumb_nav' %>
+
+<div class="float-start">
+  <h1><%= @harvest_job.harvest_definition.name %></h1>
+  <strong><%= @harvest_job.updated_at.to_fs(:verbose) %></strong>
+</div>
+
+<div class="clearfix"></div>
+
+<table class="table my-4">
+  <tbody>
+
+    <tr>
+      <th scope="row">Extraction Status</th>
+      <td><%= job_status_text(@harvest_job.extraction_job) %></td>
+    </tr>
+
+    <tr>
+      <th scope="row">Extraction Start Time</th>
+      <td><%= @harvest_job.extraction_job.start_time.to_fs(:light) %></td>
+    </tr>
+
+    <% if @harvest_job.extraction_job.end_time.present? %>
+      <tr>
+        <th scope="row">Extraction End Time</th>
+        <td><%= @harvest_job.extraction_job.end_time.to_fs(:light) %></td>
+      </tr>
+    <% end %>
+
+    <% if @harvest_job.extraction_job.end_time.present? %>
+      <tr>
+        <th scope="row">Extraction Duration</th>
+        <td><%= ActiveSupport::Duration.build(@harvest_job.extraction_job.duration_seconds).inspect %></td>
+      </tr>
+    <% end %>
+
+    <tr>
+      <th scope="row">Estimated Records Extracted</th>
+      <td>
+        <%=
+        @harvest_job.extraction_definition.per_page * @harvest_job.extraction_job.documents.total_pages      
+        %>
+      </td>
+    </tr>
+    
+    <tr>
+      <th scope="row"></th>
+      <td>
+        <% path = content_partner_extraction_definition_extraction_job_path(@content_partner, @harvest_job.extraction_definition, @harvest_job.extraction_job) %>
+        <%= link_to "View Extraction Results", path, class: "btn btn-outline-primary" %>
+      </td>
+    </tr>
+    
+    <tr>
+      <th scope="row">Transformation Status</th>
+      <td><%= job_status_text(@harvest_job.transformation_job) %></td>
+    </tr>
+    
+    <tr>
+      <th scope="row">Transformation Start Time</th>        
+      <td><%= @harvest_job.transformation_job.start_time.to_fs(:light) %></td>
+    </tr>
+    
+    <tr>
+      <th scope="row">Transformation End Time</th>
+      <td><%= @harvest_job.transformation_job.end_time.to_fs(:light) %></td>
+    </tr>
+
+    <tr>
+      <th scope="row">Transformation Duration</th>
+      <td><%= ActiveSupport::Duration.build(@harvest_job.transformation_job.duration_seconds).inspect %></td>
+    </tr>
+
+    <tr>
+      <th scope="row">Records Transformed</th>
+      <td><%= @harvest_job.transformation_job.records_transformed %></td>
+    </tr>
+
+    <tr>
+      <th scope="row">Load Destination</th>
+      <td><%= @harvest_job.harvest_definition.destination.url %></td>
+    </tr>
+    
+    <tr>
+      <th scope="row">Load Start Time</th>
+      <td><%= @harvest_job.load_job.start_time.to_fs(:light) %></td>
+    </tr>
+    
+    <tr>
+      <th scope="row">Load End Time</th>
+      <td><%= @harvest_job.load_job.end_time.to_fs(:light) %></td>
+    </tr>
+
+    <tr>
+      <th scope="row">Load Duration</th>
+      <td><%= ActiveSupport::Duration.build(@harvest_job.load_job.duration_seconds).inspect %></td>
+    </tr>
+    
+    <tr>
+      <th scope="row">Records sent to <%= @harvest_job.destination.name %></th>
+      <td><%= @harvest_job.load_job.records_sent_to_api %></td>
+    </tr>
+  </tbody>
+</table>
+

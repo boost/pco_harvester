@@ -4,6 +4,10 @@ class HarvestJobsController < ApplicationController
   before_action :find_content_partner
   before_action :find_harvest_definition
 
+  def show
+    @harvest_job = HarvestJob.find(params[:id])
+  end
+
   def create
     @harvest_job = HarvestJob.new(harvest_definition: @harvest_definition)
 

@@ -11,11 +11,11 @@ class TransformationDefinition < ApplicationRecord
   # Returns the records from the job based on the given record_selector
   #
   # @return Array
-  def records
-    return [] if record_selector.blank? || extraction_job.documents[1].nil?
+  def records(page = 1)
+    return [] if record_selector.blank? || extraction_job.documents[page].nil?
 
     JsonPath.new(record_selector)
-            .on(extraction_job.documents[1].body)
+            .on(extraction_job.documents[page].body)
             .flatten
   end
 end

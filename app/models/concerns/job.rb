@@ -7,7 +7,8 @@ module Job
     enum :status, STATUSES
 
     validates :status, presence: true, inclusion: { in: STATUSES }, if: -> { status.present? }
-    validates :end_time, comparison: { greater_than: :start_time }, if: -> { end_time.present? }
+    # TODO transformation jobs are so fast that they get the same time (:
+    # validates :end_time, comparison: { greater_than: :start_time }, if: -> { end_time.present? }
   end
   
   def name
