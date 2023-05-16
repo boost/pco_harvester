@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_16_042611) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_16_215626) do
   create_table "content_partners", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -100,10 +100,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_16_042611) do
     t.integer "kind", default: 0, null: false
     t.timestamp "start_time"
     t.timestamp "end_time"
-    t.integer "records_sent_to_api", default: 0
+    t.integer "records_loaded", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "harvest_job_id"
+    t.integer "page", default: 1, null: false
     t.index ["harvest_job_id"], name: "index_load_jobs_on_harvest_job_id"
   end
 

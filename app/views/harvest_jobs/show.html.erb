@@ -8,7 +8,7 @@
 
 <div class="clearfix"></div>
 
-<% if @harvest_job.load_job.present? %>
+<% if @harvest_job.extraction_job.present? %>
   <table class="table my-4">
     <tbody>
       <tr>
@@ -48,54 +48,112 @@
         </td>
       </tr>
 
-      <tr>
-        <th scope="row">Transformation Status</th>
-        <td><%= job_status_text(@harvest_job.transformation_job) %></td>
-      </tr>
+      <% @harvest_job.transformation_jobs.each do |transformation_job| %>
+        <tr>
+          <th scope="row">Transformation Page</th>
+          <td>
+            <%= transformation_job.page %>
+          </td>
+        </tr>
 
-      <tr>
-        <th scope="row">Transformation Start Time</th>
-        <td><%= job_start_time(@harvest_job.transformation_job) %></td>
-      </tr>
+        <tr>
+          <th scope="row">Start Time</th>
+          <td>
+            <%= job_start_time(transformation_job) %>
+          </td>
+        </tr>
+        
+        <tr>
+          <th scope="row">End Time</th>
+          <td>
+            <%= job_end_time(transformation_job) %>
+          </td>
+        </tr>
 
-      <tr>
-        <th scope="row">Transformation End Time</th>
-        <td><%= job_end_time(@harvest_job.transformation_job) %></td>
-      </tr>
-
-      <tr>
-        <th scope="row">Transformation Duration</th>
-        <td><%= job_duration(@harvest_job.transformation_job) %></td>
-      </tr>
-
-      <tr>
-        <th scope="row">Records Transformed</th>
-        <td><%= @harvest_job.transformation_job.records_transformed %></td>
-      </tr>
+        <tr>
+          <th scope="row">Duration</th>
+          <td>
+            <%= job_duration(transformation_job) %>
+          </td>
+        </tr>
+        
+        <tr>
+          <th scope="row">Status</th>
+          <td>
+            <%= job_status_text(transformation_job) %>
+          </td>
+        </tr>
+        
+        <tr>
+          <th scope="row">Records Transformed</th>
+          <td>
+            <%= transformation_job.records_transformed %>
+          </td>
+        </tr>
+      <% end %>
 
       <tr>
         <th scope="row">Load Destination</th>
         <td><%= @harvest_job.harvest_definition.destination.url %></td>
       </tr>
+      
+      <% @harvest_job.load_jobs.each do |load_job| %>
+        <tr>
+          <th scope="row">Load Page</th>
+          <td>
+            <%= load_job.page %>
+          </td>
+        </tr>
 
+        <tr>
+          <th scope="row">Start Time</th>
+          <td>
+            <%= job_start_time(load_job) %>
+          </td>
+        </tr>
+        
+        <tr>
+          <th scope="row">End Time</th>
+          <td>
+            <%= job_end_time(load_job) %>
+          </td>
+        </tr>
+
+        <tr>
+          <th scope="row">Duration</th>
+          <td>
+            <%= job_duration(load_job) %>
+          </td>
+        </tr>
+        
+        <tr>
+          <th scope="row">Status</th>
+          <td>
+            <%= job_status_text(load_job) %>
+          </td>
+        </tr>
+        
+        <tr>
+          <th scope="row">Records Loaded</th>
+          <td>
+            <%= load_job.records_loaded %>
+          </td>
+        </tr>
+      <% end %>
+      
       <tr>
-        <th scope="row">Load Start Time</th>
-        <td><%= job_start_time(@harvest_job.load_job) %></td>
+        <th scope="row">Total Time</th>
+        <td><%= job_duration(@harvest_job) %></td>
       </tr>
-
+      
       <tr>
-        <th scope="row">Load End Time</th>
-        <td><%= job_end_time(@harvest_job.load_job) %></td>
+        <th scope="row">Total Records Transformed</th>
+        <td><%= @harvest_job.transformation_jobs.sum(:records_transformed) %></td>
       </tr>
-
+      
       <tr>
-        <th scope="row">Load Duration</th>
-        <td><%= job_duration(@harvest_job.load_job) %></td>
-      </tr>
-
-      <tr>
-        <th scope="row">Records sent to <%= @harvest_job.destination.name %></th>
-        <td><%= @harvest_job.load_job.records_sent_to_api %></td>
+        <th scope="row">Total Records Loaded</th>
+        <td><%= @harvest_job.load_jobs.sum(:records_loaded) %></td>
       </tr>
     </tbody>
   </table>

@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 class TransformationWorker < ApplicationWorker
-  def child_perform(transformation_job, page)
+  def child_perform(transformation_job)
     @transformation_job = transformation_job
     @harvest_job = @transformation_job.harvest_job
 
-    transformed_records = transform_records(page)
+    transformed_records = transform_records(transformation_job.page)
     queue_load_worker(transformed_records)
 
     update_transformation_report(transformed_records)
@@ -29,7 +29,8 @@ class TransformationWorker < ApplicationWorker
   end
 
   def queue_load_worker(transformed_records)
-    LoadWorker.perform_async(@harvest_job.load_job.id, @harvest_job.id, transformed_records.map(&:to_hash))
+    load_job = LoadJob.create(harvest_job: @harvest_job, page: @transformation_job.page)
+    LoadWorker.perform_async(load_job.id, transformed_records.map(&:to_hash).to_json)
   end
 
   def update_transformation_report(transformed_records)
