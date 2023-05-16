@@ -27,21 +27,6 @@ class TransformationWorker
 
     @transformation_job.update(end_time: Time.zone.now, records_transformed: records_count)
 
-    # TODO: refactor into a worker that sends batches of records
-
-    @load_job = @harvest_job.load_job
-    @load_job.running!
-    @load_job.update(start_time: Time.zone.now) unless @load_job.start_time.present?
-
-    transformed_records.each do |transformed_record|
-      Load::Execution.new(transformed_record, @harvest_job.destination).call
-      @load_job.records_sent_to_api += 1
-      @load_job.save!
-    end
-
-    @load_job.completed!
-    @load_job.update(end_time: Time.zone.now)
-
-    Sidekiq.logger.info 'Complete'
+    LoadWorker.perform_async(@harvest_job.load_job.id, @harvest_job.id, transformed_records.map(&:to_hash))
   end
 end

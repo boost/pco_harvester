@@ -19,7 +19,7 @@ class HarvestJobsController < ApplicationController
       render :new
     end
 
-    redirect_to content_partner_harvest_definition_path(@content_partner, @harvest_definition)
+    redirect_to content_partner_harvest_definition_harvest_job_path(@content_partner, @harvest_definition, @harvest_job)
   end
 
   private
