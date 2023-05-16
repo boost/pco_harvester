@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class LoadWorker < ApplicationWorker
-  include Sidekiq::Job
-
   def child_perform(load_job, harvest_job_id, transformed_records)
     harvest_job = HarvestJob.find(harvest_job_id)
     sent_records = 0
