@@ -2,7 +2,7 @@
 
 module FormHelper
   def vertical_form_with(**options, &)
-    options.merge!(builder: VerticalFormBuilder)
+    options[:builder] = VerticalFormBuilder
     form_with(**options, &)
   end
 

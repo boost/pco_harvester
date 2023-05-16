@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :extraction_definition do
     name { Faker::Internet.domain_name }

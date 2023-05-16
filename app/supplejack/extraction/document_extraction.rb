@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Extraction
   class DocumentExtraction
     attr_reader :document

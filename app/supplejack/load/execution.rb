@@ -10,14 +10,14 @@ module Load
     def call
       record = JSON.parse(@record.to_json)['transformed_record']
 
-      conn = connection("#{@destination.url}", {}, { 'Authentication-Token' => @destination.api_key })
-             .post(
-               '/harvester/records',
-               {
-                 record:
-               }.to_json,
-               'Content-Type' => 'application/json'
-             )
+      connection(@destination.url, {}, { 'Authentication-Token' => @destination.api_key })
+        .post(
+          '/harvester/records',
+          {
+            record:
+          }.to_json,
+          'Content-Type' => 'application/json'
+        )
     end
 
     private

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe ExtractionJob, type: :model do
@@ -82,7 +84,7 @@ RSpec.describe ExtractionJob, type: :model do
 
   describe '#timestamps' do
     it 'can record when the job was started' do
-      subject.update(start_time: Time.now)
+      subject.update(start_time: Time.zone.now)
 
       expect(subject.start_time).to be_a(ActiveSupport::TimeWithZone)
     end
@@ -94,7 +96,7 @@ RSpec.describe ExtractionJob, type: :model do
     end
 
     it 'does not allow an end date to be before a start date' do
-      subject.start_time = Time.now
+      subject.start_time = Time.zone.now
       subject.end_time   = 1.day.ago
       expect(subject).not_to be_valid
     end

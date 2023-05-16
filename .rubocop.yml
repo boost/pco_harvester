@@ -1,3 +1,5 @@
+inherit_from: .rubocop_todo.yml
+
 require:
   - rubocop-factory_bot
   - rubocop-performance
@@ -12,3 +14,6 @@ AllCops:
     - "db/schema.rb"
     - "Rakefile"
     - "config.ru"
+
+Style/Documentation:
+  Enabled: false

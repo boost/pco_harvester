@@ -31,7 +31,7 @@ class TransformationWorker
 
     @load_job = @harvest_job.load_job
     @load_job.running!
-    @load_job.update(start_time: Time.now) unless @load_job.start_time.present?
+    @load_job.update(start_time: Time.zone.now) unless @load_job.start_time.present?
 
     transformed_records.each do |transformed_record|
       Load::Execution.new(transformed_record, @harvest_job.destination).call

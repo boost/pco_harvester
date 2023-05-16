@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 [
   { name: 'AntarcticaNZ' },
   { name: 'AWS Comprehend' },

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   def paginate_and_filter_jobs(jobs)
     @status = params[:status]

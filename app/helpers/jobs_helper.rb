@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module JobsHelper
   # Returns the human readable text for the status of a given job
   #

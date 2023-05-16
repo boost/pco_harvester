@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Can be improved by using this: AbstractFactoryFactoryInterfaces
 # or the iterator interface?
 

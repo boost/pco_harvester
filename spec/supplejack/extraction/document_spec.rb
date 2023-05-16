@@ -31,7 +31,7 @@ RSpec.describe Extraction::Document do
     let(:file_path) { Rails.root.join('extractions/test_file') }
 
     before { subject.save(file_path) }
-    after { FileUtils.rm(file_path) if File.exist?(file_path) }
+    after { FileUtils.rm_f(file_path) }
 
     it 'creates a file' do
       expect(File.exist?(file_path)).to be true
@@ -64,7 +64,7 @@ RSpec.describe Extraction::Document do
     let(:file_path) { Rails.root.join('extractions/test_file') }
 
     before { subject.save(file_path) }
-    after { FileUtils.rm(file_path) if File.exist?(file_path) }
+    after { FileUtils.rm_f(file_path) }
 
     it 'returns an Extraction::Document' do
       expect(described_class.load_from_file(file_path)).to be_a described_class

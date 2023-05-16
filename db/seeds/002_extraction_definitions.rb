@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 cp = ContentPartner.first
 
 ExtractionDefinition.create(
