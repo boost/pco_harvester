@@ -13,6 +13,8 @@ class HarvestDefinitionsController < ApplicationController
     @harvest_definition = HarvestDefinition.new
   end
 
+  def edit; end
+
   def create
     @harvest_definition = HarvestDefinition.new(harvest_definition_params)
 
@@ -23,8 +25,6 @@ class HarvestDefinitionsController < ApplicationController
       render :new
     end
   end
-
-  def edit; end
 
   def update
     if @harvest_definition.update(harvest_definition_params)

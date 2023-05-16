@@ -3,10 +3,11 @@
 require 'rails_helper'
 
 RSpec.describe Extraction::Documents do
+  subject { extraction_job.documents }
+
   let(:content_partner) { create(:content_partner, :ngataonga) }
   let(:extraction_definition) { content_partner.extraction_definitions.first }
   let(:extraction_job) { create(:extraction_job, extraction_definition:) }
-  subject { extraction_job.documents }
 
   before do
     # that's to test the display of results

@@ -11,15 +11,14 @@ class TransformationWorker
     @harvest_job = @transformation_job.harvest_job
 
     transformation = if @harvest_job.present?
-                      TransformationDefinition.new(
-                        @harvest_job.transformation_definition.attributes.merge(
-                          'extraction_job_id' => @harvest_job.extraction_job.id
-                        )  
-                      )
-                    else
-                      TransformationDefinition.find(@transformation_job.transformation_definition_id)
-                    end
-
+                       TransformationDefinition.new(
+                         @harvest_job.transformation_definition.attributes.merge(
+                           'extraction_job_id' => @harvest_job.extraction_job.id
+                         )
+                       )
+                     else
+                       TransformationDefinition.find(@transformation_job.transformation_definition_id)
+                     end
 
     transformed_records = Transformation::Execution.new(transformation.records(page), transformation.fields).call
 
@@ -28,7 +27,7 @@ class TransformationWorker
 
     @transformation_job.update(end_time: Time.zone.now, records_transformed: records_count)
 
-    # TODO refactor into a worker that sends batches of records
+    # TODO: refactor into a worker that sends batches of records
 
     @load_job = @harvest_job.load_job
     @load_job.running!

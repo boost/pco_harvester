@@ -10,7 +10,6 @@ RSpec.describe ContentPartner, type: :model do
   end
 
   describe '#validations' do
-
     it 'requires a name' do
       content_partner.name = nil
       expect(content_partner).not_to be_valid
@@ -22,7 +21,7 @@ RSpec.describe ContentPartner, type: :model do
       content_partner_2 = ContentPartner.new(name: 'National Library of New Zealand')
       expect(content_partner_2).not_to be_valid
 
-      expect(content_partner_2.errors.messages[:name]).to include "has already been taken"
+      expect(content_partner_2.errors.messages[:name]).to include 'has already been taken'
     end
   end
 end

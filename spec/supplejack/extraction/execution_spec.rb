@@ -48,7 +48,7 @@ RSpec.describe Extraction::Execution do
       let(:ed) { create(:extraction_definition, base_url: 'http://google.com/?url_param=url_value', throttle: 500, extraction_jobs: [extraction_job]) }
       let(:subject) { described_class.new(extraction_job, ed) }
 
-      it 'it respects the throttle set in the extraction_definition' do
+      it 'respects the throttle set in the extraction_definition' do
         start_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
 
         subject.call
@@ -65,7 +65,7 @@ RSpec.describe Extraction::Execution do
       let(:ed) { create(:extraction_definition, base_url: 'http://google.com/?url_param=url_value', throttle: 500, extraction_jobs: [extraction_job]) }
       let(:subject) { described_class.new(extraction_job, ed) }
 
-      it 'it does not extract further pages' do
+      it 'does not extract further pages' do
         subject.call
 
         expect(File.exist?(extraction_job.extraction_folder)).to eq true

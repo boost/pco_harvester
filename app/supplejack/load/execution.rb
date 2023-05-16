@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Load
   class Execution
     def initialize(record, destination)
@@ -8,15 +9,15 @@ module Load
 
     def call
       record = JSON.parse(@record.to_json)['transformed_record']
-      
-      conn = connection("#{@destination.url}", {}, { 'Authentication-Token' => @destination.api_key})
-        .post(
-          '/harvester/records',
-          {
-            record: record
-          }.to_json,
-          "Content-Type" => "application/json"
-        )
+
+      conn = connection("#{@destination.url}", {}, { 'Authentication-Token' => @destination.api_key })
+             .post(
+               '/harvester/records',
+               {
+                 record:
+               }.to_json,
+               'Content-Type' => 'application/json'
+             )
     end
 
     private

@@ -20,7 +20,7 @@ class FieldsController < ApplicationController
   def destroy
     @field.destroy!
 
-    render json: {}, status: 200
+    render json: {}, status: :ok
   end
 
   def run

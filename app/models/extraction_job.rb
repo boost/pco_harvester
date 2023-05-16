@@ -16,7 +16,7 @@ class ExtractionJob < ApplicationRecord
   after_create :create_folder
   after_destroy :delete_folder
 
-  validates :kind, presence: true, inclusion: { in: KINDS },      if: -> { kind.present? }
+  validates :kind, presence: true, inclusion: { in: KINDS }, if: -> { kind.present? }
 
   # Returns the fullpath to the extraction folder for this job
   #
@@ -49,7 +49,6 @@ class ExtractionJob < ApplicationRecord
   def documents
     Extraction::Documents.new(extraction_folder)
   end
-
 
   # Returns the size of the extraction folder in bytes
   #

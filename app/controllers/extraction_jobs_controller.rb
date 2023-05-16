@@ -33,7 +33,8 @@ class ExtractionJobsController < ApplicationController
       redirect_to content_partner_extraction_definition_path(@content_partner, @extraction_definition)
     else
       flash.alert = 'There was an issue deleting the results'
-      redirect_to content_partner_extraction_definition_extraction_job_path(@content_partner, @extraction_definition, @extraction_job)
+      redirect_to content_partner_extraction_definition_extraction_job_path(@content_partner, @extraction_definition,
+                                                                            @extraction_job)
     end
   end
 

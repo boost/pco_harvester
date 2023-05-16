@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class DestinationsController < ApplicationController
-  before_action :find_destination, only: %i(show edit update destroy)
+  before_action :find_destination, only: %i[show edit update destroy]
   def index
     @destinations = Destination.order(:name).page(params[:page])
   end

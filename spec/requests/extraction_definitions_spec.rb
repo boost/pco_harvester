@@ -49,7 +49,7 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
           post content_partner_extraction_definitions_path(content_partner), params: {
             extraction_definition: extraction_definition2.attributes
           }
-        end.to change(ExtractionDefinition, :count).by(0)
+        end.not_to change(ExtractionDefinition, :count)
       end
 
       it 'renders the form again' do
@@ -81,7 +81,8 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
           extraction_definition: { name: 'Flickr' }
         }
 
-        expect(response).to redirect_to(content_partner_extraction_definition_path(content_partner, extraction_definition))
+        expect(response).to redirect_to(content_partner_extraction_definition_path(content_partner,
+                                                                                   extraction_definition))
       end
     end
 
@@ -111,7 +112,7 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
 
     before do
       stub_request(:get, 'http://google.com/?url_param=url_value').with(
-        query: { 'page' => 1, 'per_page' => 50  },
+        query: { 'page' => 1, 'per_page' => 50 },
         headers: fake_json_headers
       ).and_return(fake_response('test'))
     end

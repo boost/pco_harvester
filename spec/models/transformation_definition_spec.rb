@@ -6,9 +6,16 @@ RSpec.describe TransformationDefinition, type: :model do
   let(:extraction_job) { create(:extraction_job, extraction_definition:) }
   let(:subject) { create(:transformation_definition, content_partner:, extraction_job:) }
 
-  let!(:field_one) { create(:field, name: 'title', block: "JsonPath.new('title').on(record).first", transformation_definition: subject) }
-  let!(:field_two) { create(:field, name: 'source', block: "JsonPath.new('source').on(record).first", transformation_definition: subject) }
-  let!(:field_three) { create(:field, name: 'dc_identifier', block: "JsonPath.new('reference_number').on(record).first", transformation_definition: subject) }
+  let!(:field_one) do
+    create(:field, name: 'title', block: "JsonPath.new('title').on(record).first", transformation_definition: subject)
+  end
+  let!(:field_two) do
+    create(:field, name: 'source', block: "JsonPath.new('source').on(record).first", transformation_definition: subject)
+  end
+  let!(:field_three) do
+    create(:field, name: 'dc_identifier', block: "JsonPath.new('reference_number').on(record).first",
+                   transformation_definition: subject)
+  end
   let!(:field_four) { create(:field, name: 'landing_url', block: '"http://www.ngataonga.org.nz/collections/catalogue/catalogue-item?record_id=#{record[\'record_id\']}"', transformation_definition: subject) }
 
   before do
@@ -42,6 +49,6 @@ RSpec.describe TransformationDefinition, type: :model do
   end
 
   describe '#validations presence of' do
-    it { should validate_presence_of(:name).with_message("can't be blank") }
+    it { is_expected.to validate_presence_of(:name).with_message("can't be blank") }
   end
 end

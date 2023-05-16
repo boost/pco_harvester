@@ -1,0 +1,14 @@
+require:
+  - rubocop-factory_bot
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - "config/**/*"
+    - "bin/**/*"
+    - "db/schema.rb"
+    - "Rakefile"
+    - "config.ru"

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Transformation Definitions", type: :request do
+RSpec.describe 'Transformation Definitions', type: :request do
   let(:content_partner) { create(:content_partner) }
   let(:extraction_job) { create(:extraction_job) }
   let(:transformation_definition) { create(:transformation_definition, content_partner:, extraction_job:) }
@@ -50,7 +50,7 @@ RSpec.describe "Transformation Definitions", type: :request do
           post content_partner_transformation_definitions_path(content_partner), params: {
             transformation_definition: transformation_definition.attributes
           }
-        end.to change(TransformationDefinition, :count).by(0)
+        end.not_to change(TransformationDefinition, :count)
       end
 
       it 'rerenders the new form' do
@@ -91,7 +91,8 @@ RSpec.describe "Transformation Definitions", type: :request do
           transformation_definition: { name: 'Flickr' }
         }
 
-        expect(response).to redirect_to(content_partner_transformation_definition_path(content_partner, transformation_definition))
+        expect(response).to redirect_to(content_partner_transformation_definition_path(content_partner,
+                                                                                       transformation_definition))
       end
     end
 
@@ -162,5 +163,4 @@ RSpec.describe "Transformation Definitions", type: :request do
       end
     end
   end
-
 end

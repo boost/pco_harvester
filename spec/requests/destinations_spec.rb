@@ -2,10 +2,10 @@
 
 require 'rails_helper'
 
-RSpec.describe "Destinations", type: :request do
+RSpec.describe 'Destinations', type: :request do
   let(:destination) { create(:destination) }
 
-  describe "GET /index" do
+  describe 'GET /index' do
     it 'displays a list of destinations' do
       get destinations_path
 
@@ -13,7 +13,7 @@ RSpec.describe "Destinations", type: :request do
     end
   end
 
-  describe "GET /show" do
+  describe 'GET /show' do
     it 'displays a particular destination' do
       get destination_path(destination)
 
@@ -21,7 +21,7 @@ RSpec.describe "Destinations", type: :request do
     end
   end
 
-  describe "POST /create" do
+  describe 'POST /create' do
     context 'with valid attributes' do
       it 'creates a new destination' do
         expect do
@@ -46,7 +46,7 @@ RSpec.describe "Destinations", type: :request do
           post destinations_path, params: {
             destination: { name: 'hello' }
           }
-        end.to change(Destination, :count).by(0)
+        end.not_to change(Destination, :count)
       end
     end
   end
@@ -55,13 +55,13 @@ RSpec.describe "Destinations", type: :request do
     let!(:destination) { create(:destination) }
 
     it 'deletes a destination' do
-      expect {
-        delete destination_path(destination)        
-      }.to change(Destination, :count).by(-1)
+      expect do
+        delete destination_path(destination)
+      end.to change(Destination, :count).by(-1)
     end
 
     it 'redirects to the destinations page' do
-      delete destination_path(destination)        
+      delete destination_path(destination)
 
       expect(response).to redirect_to destinations_path
     end
@@ -103,14 +103,15 @@ RSpec.describe "Destinations", type: :request do
 
   describe 'POST /test' do
     it 'returns success if the details provided are valid' do
-      stub_request(:get, "http://localhost:5000/harvester/users?api_key=testkey").
-         with(
-           headers: {
-       	 'Accept'=>'*/*',
-       	 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-       	 'User-Agent'=>'Supplejack Harvester v2.0'
-           }).
-         to_return(status: 200, body: "", headers: {})
+      stub_request(:get, 'http://localhost:5000/harvester/users?api_key=testkey')
+        .with(
+          headers: {
+            'Accept' => '*/*',
+            'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+            'User-Agent' => 'Supplejack Harvester v2.0'
+          }
+        )
+        .to_return(status: 200, body: '', headers: {})
 
       post test_destinations_path, params: {
         destination: {
@@ -124,14 +125,15 @@ RSpec.describe "Destinations", type: :request do
     end
 
     it 'returns error if the details provided are invalid' do
-     stub_request(:get, "http://localhost:5000/harvester/users?api_key=testkey").
-       with(
-         headers: {
-     	 'Accept'=>'*/*',
-     	 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-     	 'User-Agent'=>'Supplejack Harvester v2.0'
-         }).
-       to_return(status: 403, body: "", headers: {})      
+      stub_request(:get, 'http://localhost:5000/harvester/users?api_key=testkey')
+        .with(
+          headers: {
+            'Accept' => '*/*',
+            'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+            'User-Agent' => 'Supplejack Harvester v2.0'
+          }
+        )
+        .to_return(status: 403, body: '', headers: {})
 
       post test_destinations_path, params: {
         destination: {

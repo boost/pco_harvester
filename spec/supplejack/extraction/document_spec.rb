@@ -39,7 +39,7 @@ RSpec.describe Extraction::Document do
 
     it 'the file is JSON formatted' do
       str = File.read(file_path)
-      expect { JSON.parse(str) }.to_not raise_error
+      expect { JSON.parse(str) }.not_to raise_error
     end
 
     it 'the file contains the hash' do

@@ -33,7 +33,7 @@ RSpec.describe ExtractionJob, type: :model do
   end
 
   describe 'validations' do
-    it { should validate_presence_of(:extraction_definition).with_message('must exist') }
+    it { is_expected.to validate_presence_of(:extraction_definition).with_message('must exist') }
   end
 
   describe '#associations' do
@@ -100,7 +100,7 @@ RSpec.describe ExtractionJob, type: :model do
     end
 
     it 'returns the number of seconds that the job has been running for' do
-      subject.update(start_time: '2023-03-20 11:00:00' , end_time: '2023-03-20 11:05:00' )
+      subject.update(start_time: '2023-03-20 11:00:00', end_time: '2023-03-20 11:05:00')
       subject.reload
       expect(subject.duration_seconds).to eq 300
     end

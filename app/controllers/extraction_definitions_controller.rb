@@ -12,6 +12,8 @@ class ExtractionDefinitionsController < ApplicationController
     @extraction_definition = ExtractionDefinition.new
   end
 
+  def edit; end
+
   def create
     @extraction_definition = ExtractionDefinition.new(extraction_definition_params)
     if @extraction_definition.save
@@ -21,8 +23,6 @@ class ExtractionDefinitionsController < ApplicationController
       render :new
     end
   end
-
-  def edit; end
 
   def update
     if @extraction_definition.update(extraction_definition_params)

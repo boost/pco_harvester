@@ -1,5 +1,4 @@
 module JobsHelper
-
   # Returns the human readable text for the status of a given job
   #
   # @return String

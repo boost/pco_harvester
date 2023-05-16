@@ -6,7 +6,7 @@ RSpec.describe HarvestDefinition, type: :model do
   let(:content_partner) { create(:content_partner, :ngataonga) }
   let(:extraction_definition) { content_partner.extraction_definitions.first }
   let(:extraction_job) { create(:extraction_job, extraction_definition:) }
-  let(:transformation_definition) { create(:transformation_definition, content_partner:, extraction_job:)}
+  let(:transformation_definition) { create(:transformation_definition, content_partner:, extraction_job:) }
   let(:destination) { create(:destination) }
 
   let(:subject) do

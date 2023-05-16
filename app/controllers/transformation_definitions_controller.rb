@@ -18,7 +18,7 @@ class TransformationDefinitionsController < ApplicationController
           rawRecord: @transformation_definition.records.first,
           transformedRecord: {},
           contentPartner: @content_partner,
-          transformationDefinition: @transformation_definition,
+          transformationDefinition: @transformation_definition
         }
       },
       ui: {
@@ -31,7 +31,7 @@ class TransformationDefinitionsController < ApplicationController
         appDetails: {
           rawRecordExpanded: true,
           fieldsExpanded: true,
-          transformedRecordExpanded: true,
+          transformedRecordExpanded: true
         }
       },
       config: {
@@ -40,11 +40,11 @@ class TransformationDefinitionsController < ApplicationController
     }.to_json
   end
 
-  def edit; end
-
   def new
     @transformation_definition = TransformationDefinition.new
   end
+
+  def edit; end
 
   def create
     @transformation_definition = TransformationDefinition.new(transformation_definition_params)
