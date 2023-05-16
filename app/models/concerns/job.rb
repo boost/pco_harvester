@@ -25,10 +25,4 @@ module Job
 
     end_time - start_time
   end
-
-  def human_duration
-    return if duration_seconds.blank?
-
-    ActiveSupport::Duration.build(duration_seconds).inspect
-  end
 end

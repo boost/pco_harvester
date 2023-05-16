@@ -17,4 +17,18 @@ module JobsHelper
       'Completed'
     end
   end
+
+  def job_start_time(job)
+    job.start_time.present? ? job.start_time.to_fs(:light) : '-'
+  end
+
+  def job_end_time(job)
+    job.end_time.present? ? job.end_time.to_fs(:light) : '-'
+  end
+
+  def job_duration(job)
+    return '-' if job.duration_seconds.blank?
+
+    ActiveSupport::Duration.build(job.duration_seconds).inspect
+  end
 end
