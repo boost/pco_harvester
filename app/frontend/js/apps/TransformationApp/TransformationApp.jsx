@@ -47,19 +47,34 @@ const TransformationApp = ({}) => {
     "col-1": true,
   });
 
+  const { rawRecordExpanded, fieldsExpanded, transformedRecordExpanded } =
+    uiAppDetails;
+
   const rawRecordClasses = classNames({
-    "col-3": uiAppDetails.rawRecordExpanded === true,
-    "col-1": uiAppDetails.rawRecordExpanded === false,
+    "col-3": rawRecordExpanded && fieldsExpanded && transformedRecordExpanded,
+    "col-5":
+      (rawRecordExpanded && !fieldsExpanded && transformedRecordExpanded) ||
+      (rawRecordExpanded && fieldsExpanded && !transformedRecordExpanded),
+    "col-9": rawRecordExpanded && !fieldsExpanded && !transformedRecordExpanded,
+    "col-1": !rawRecordExpanded,
   });
 
   const fieldsClasses = classNames({
-    "col-5": uiAppDetails.fieldsExpanded === true,
-    "col-1": uiAppDetails.fieldsExpanded === false,
+    "col-5":
+      (fieldsExpanded && rawRecordExpanded && transformedRecordExpanded) ||
+      (fieldsExpanded && !rawRecordExpanded && transformedRecordExpanded) ||
+      (fieldsExpanded && rawRecordExpanded && !transformedRecordExpanded),
+    "col-9": fieldsExpanded && !rawRecordExpanded && !transformedRecordExpanded,
+    "col-1": !fieldsExpanded,
   });
 
   const transformedRecordClasses = classNames({
-    "col-3": uiAppDetails.transformedRecordExpanded === true,
-    "col-1": uiAppDetails.transformedRecordExpanded === false,
+    "col-3": transformedRecordExpanded && fieldsExpanded && rawRecordExpanded,
+    "col-5":
+      (transformedRecordExpanded && !fieldsExpanded && rawRecordExpanded) ||
+      (transformedRecordExpanded && fieldsExpanded && !rawRecordExpanded),
+    "col-9": transformedRecordExpanded && !fieldsExpanded && !rawRecordExpanded,
+    "col-1": !transformedRecordExpanded,
   });
 
   const expandCollapseText = (section) => {
