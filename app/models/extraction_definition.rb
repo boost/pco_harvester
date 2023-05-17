@@ -27,8 +27,7 @@ class ExtractionDefinition < ApplicationRecord
     OAI: %r{^/}
   }.freeze
 
-  # TODO conflicts with creating copies of the extraction definition
-  # validates :name, presence: true, uniqueness: { scope: :content_partner_id }
+  validates :name, presence: true, uniqueness: { scope: :content_partner_id }, if: -> { original_extraction_definition_id.nil? }
   validates :format, presence: true, inclusion: { in: %w[JSON HTML XML OAI] }
   validates :base_url, presence: true, format: { with: URI::DEFAULT_PARSER.make_regexp }
   validates :throttle, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 60_000 }
