@@ -7,8 +7,8 @@
   </div>
 
   <div class="mb-3 col-12">
-    <%= form.label :job_id, 'Job', class: "form-label" %>
-    <%= form.select(:job_id, grouped_options_for_select(@extraction_jobs, @transformation_definition.extraction_job_id), {}, class: 'form-select') %>
+    <%= form.label :extraction_job_id, 'Job', class: "form-label" %>
+    <%= form.select(:extraction_job_id, grouped_options_for_select(@extraction_jobs, @transformation_definition.extraction_job_id), {}, class: 'form-select') %>
   </div>
 
   <div class="mb-3 col-12">

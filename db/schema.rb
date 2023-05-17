@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_16_215626) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_16_222755) do
   create_table "content_partners", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -115,9 +115,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_16_215626) do
     t.datetime "updated_at", null: false
     t.bigint "content_partner_id", null: false
     t.bigint "extraction_job_id", null: false
+    t.bigint "original_transformation_definition_id"
     t.index ["content_partner_id"], name: "index_transformation_definitions_on_content_partner_id"
     t.index ["extraction_job_id"], name: "index_transformation_definitions_on_extraction_job_id"
     t.index ["name"], name: "index_transformation_definitions_on_name"
+    t.index ["original_transformation_definition_id"], name: "index_tds_on_original_td_id"
   end
 
   create_table "transformation_jobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

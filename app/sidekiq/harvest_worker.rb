@@ -7,6 +7,7 @@ class HarvestWorker
     @harvest_job        = HarvestJob.find(harvest_job_id)
     @extraction_job     = ExtractionJob.create(extraction_definition: @harvest_job.extraction_definition,
                                                harvest_job: @harvest_job, kind: 'full')
+
     ExtractionWorker.perform_async(@extraction_job.id)
   end
 end
