@@ -12,8 +12,8 @@ class TransformationWorker < ApplicationWorker
   end
 
   def transform_records(page)
-    transformation = @transformation_job.transformation_definition
-    Transformation::Execution.new(transformation.records(page), transformation.fields).call
+    transformation_definition = @transformation_job.transformation_definition
+    Transformation::Execution.new(@transformation_job.records(page), transformation_definition.fields).call
   end
 
   def queue_load_worker(transformed_records)

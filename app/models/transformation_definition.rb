@@ -2,7 +2,7 @@
 
 class TransformationDefinition < ApplicationRecord
   belongs_to :content_partner
-  belongs_to :extraction_job
+  belongs_to :extraction_job # used for previewing, needs to be refactored
   has_many :fields
 
   # feature allows editing a transformation definition without impacting a running harvest
@@ -21,6 +21,7 @@ class TransformationDefinition < ApplicationRecord
   validates :name, presence: true, uniqueness: { scope: :content_partner_id }
 
   # Returns the records from the job based on the given record_selector
+  # Used for previewing, needs to be refactored
   #
   # @return Array
   def records(page = 1)

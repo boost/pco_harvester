@@ -38,6 +38,7 @@ module Extraction
 
     def enqueue_record_transformation
       transformation_job = TransformationJob.create(
+        extraction_job: @extraction_job,
         transformation_definition: @harvest_job.transformation_definition,
         harvest_job: @harvest_job,
         page: @extraction_definition.page

@@ -25,6 +25,7 @@ class HarvestWorker < ApplicationWorker
 
     (extraction_job.extraction_definition.page..extraction_job.documents.total_pages).each do |page|
       transformation_job = TransformationJob.create(
+        extraction_job:,
         transformation_definition: @harvest_job.transformation_definition,
         harvest_job: @harvest_job,
         page:
