@@ -1,0 +1,6 @@
+ngataonga:
+  name: HD api.ngataonga.org.nz
+  content_partner: antarctica_nz
+  extraction_definition: ngataonga
+  transformation_definition: ngataonga
+  destination: local_api

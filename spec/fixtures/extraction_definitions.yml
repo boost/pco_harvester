@@ -1,0 +1,12 @@
+ngataonga:
+  name: ED api.ngataonga.org.nz
+  format: 'JSON'
+  base_url: 'http://api.ngataonga.org.nz/records.json/?api_key=<%= ENV.fetch('NGATAONGA_API_KEY', '') %>&and[has_media]=true'
+  throttle: 0
+  pagination_type: 'page'
+  page_parameter: 'page'
+  page: 1
+  per_page_parameter: 'per_page'
+  per_page: 100
+  total_selector: '$..result_count'
+  content_partner: antarctica_nz

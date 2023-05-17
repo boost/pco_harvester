@@ -1,0 +1,76 @@
+content_partner:
+  name: content_partner
+  block: '["Ngā Taonga Sound & Vision"]'
+  transformation_definition: ngataonga
+
+display_content_partner:
+  name: display_content_partner
+  block: '["Ngā Taonga Sound & Vision"]'
+  transformation_definition: ngataonga
+
+display_collection:
+  name: display_collection
+  block: '["Ngā Taonga Sound & Vision"]'
+  transformation_definition: ngataonga
+
+primary_collection:
+  name: primary_collection
+  block: '["Ngā Taonga Sound & Vision"]'
+  transformation_definition: ngataonga
+
+collection_title:
+  name: collection_title
+  block: "[record['source']]"
+  transformation_definition: ngataonga
+
+title:
+  name: title
+  block: "[record['title']]"
+  transformation_definition: ngataonga
+
+usage:
+  name: usage
+  block: '["All rights reserved"]'
+  transformation_definition: ngataonga
+
+copyright:
+  name: copyright
+  block: '["All rights reserved"]'
+  transformation_definition: ngataonga
+
+rights_url:
+  name: rights_url
+  block: '["https://www.ngataonga.org.nz/about/privacy-and-rights/rights-information"]'
+  transformation_definition: ngataonga
+
+dc_identifier:
+  name: dc_identifier
+  block: "[record['reference_number']]"
+  transformation_definition: ngataonga
+
+landing_url:
+  name: landing_url
+  block: >
+    ["https://www.ngataonga.org.nz/collections/catalogue/catalogue-item?record_id=#{record['record_id']}"]
+  transformation_definition: ngataonga
+
+internal_identifier:
+  name: internal_identifier
+  block: >
+    ["http://www.ngataonga.org.nz/collections/catalogue/catalogue-item?record_id=#{record['record_id']}"]
+  transformation_definition: ngataonga
+
+display_date:
+  name: display_date
+  block: "[record['date']]"
+  transformation_definition: ngataonga
+
+date:
+  name: date
+  block: "[record['date'].to_date]"
+  transformation_definition: ngataonga
+
+source_id:
+  name: source_id
+  block: "['test']"
+  transformation_definition: ngataonga

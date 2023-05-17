@@ -1,0 +1,6 @@
+ngataonga_sample:
+  status: 'completed'
+  extraction_definition: ngataonga
+  kind: 'sample'
+  start_time: <%= DateTime.parse('Mon, 15 May 2023 14:22:25.000000000 NZST +12:00') %>
+  end_time: <%= DateTime.parse('Mon, 15 May 2023 14:22:54.000000000 NZST +12:00') %>

@@ -1,0 +1,4 @@
+local_api:
+  name: Local API
+  url: http://localhost:3000
+  api_key: <%= ENV.fetch('API_KEY', 'API_KEY') %>
