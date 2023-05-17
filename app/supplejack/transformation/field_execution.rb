@@ -17,7 +17,7 @@ module Transformation
     def execute(api_record)
       # WebMock.enable! unless Rails.env.test?
       begin
-        block = ->(record) { eval(@field.block) }
+        block = ->(record) { [eval(@field.block)] }
 
         @value = block.call(api_record)
       rescue Exception => e
