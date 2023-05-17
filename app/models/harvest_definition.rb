@@ -16,6 +16,7 @@ class HarvestDefinition < ApplicationRecord
 
   def clone_transformation_definition
     safe_transformation = transformation_definition.dup
+    safe_transformation.name = "[#{id}] #{safe_transformation.name}"
     transformation_definition.fields.each do |field|
       safe_transformation.fields.push(field.dup)
     end
@@ -33,6 +34,7 @@ class HarvestDefinition < ApplicationRecord
 
   def clone_extraction_definition
     safe_extraction = extraction_definition.dup
+    safe_extraction.name = "[#{id}] #{safe_extraction.name}"
     safe_extraction.original_extraction_definition = extraction_definition
     safe_extraction.save
     self.extraction_definition = safe_extraction

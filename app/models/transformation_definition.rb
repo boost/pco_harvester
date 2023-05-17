@@ -3,6 +3,7 @@
 class TransformationDefinition < ApplicationRecord
   belongs_to :content_partner
   belongs_to :extraction_job
+  has_many :fields
 
   # feature allows editing a transformation definition without impacting a running harvest
   belongs_to(
@@ -16,8 +17,6 @@ class TransformationDefinition < ApplicationRecord
     foreign_key: 'original_transformation_definition_id',
     inverse_of: 'original_transformation_definition'
   )
-
-  has_many :fields
 
   validates :name, presence: true, uniqueness: { scope: :content_partner_id }
 

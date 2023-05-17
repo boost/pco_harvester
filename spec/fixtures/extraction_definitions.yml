@@ -2,7 +2,7 @@ ngataonga:
   name: ED api.ngataonga.org.nz
   format: 'JSON'
   base_url: 'http://api.ngataonga.org.nz/records.json/?api_key=<%= ENV.fetch('NGATAONGA_API_KEY', '') %>&and[has_media]=true'
-  throttle: 0
+  throttle: 1000
   pagination_type: 'page'
   page_parameter: 'page'
   page: 1
