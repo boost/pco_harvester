@@ -39,7 +39,8 @@ module Extraction
     def enqueue_record_transformation
       transformation_job = TransformationJob.create(
         transformation_definition: @harvest_job.transformation_definition,
-        harvest_job: @harvest_job, page: @extraction_definition.page
+        harvest_job: @harvest_job,
+        page: @extraction_definition.page
       )
       TransformationWorker.perform_async(transformation_job.id)
     end

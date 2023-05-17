@@ -11,20 +11,8 @@ class TransformationWorker < ApplicationWorker
     update_transformation_report(transformed_records)
   end
 
-  def find_transformation_definition
-    if @harvest_job.present?
-      TransformationDefinition.new(
-        @harvest_job.transformation_definition.attributes.merge(
-          'extraction_job_id' => @harvest_job.extraction_job.id
-        )
-      )
-    else
-      TransformationDefinition.find(@transformation_job.transformation_definition_id)
-    end
-  end
-
   def transform_records(page)
-    transformation = find_transformation_definition
+    transformation = @transformation_job.transformation_definition
     Transformation::Execution.new(transformation.records(page), transformation.fields).call
   end
 

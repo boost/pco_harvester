@@ -7,6 +7,7 @@ class HarvestDefinitionsController < ApplicationController
 
   def show
     @harvest_jobs = paginate_and_filter_jobs(@harvest_definition.harvest_jobs)
+    @harvest_job = HarvestJob.new(harvest_definition: @harvest_definition)
   end
 
   def new

@@ -25,4 +25,8 @@ module Job
 
     end_time - start_time
   end
+
+  def finished?
+    status.in? %w[cancelled running completed errored]
+  end
 end

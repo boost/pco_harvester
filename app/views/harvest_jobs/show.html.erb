@@ -8,62 +8,64 @@
 
 <div class="clearfix"></div>
 
-<% if @harvest_job.extraction_job.present? %>
+<% if @harvest_job.running? || @harvest_job.finished? %>
   <table class="table my-4">
     <tbody>
-      <tr>
-        <th scope="row">Extraction Status</th>
-        <td><%= job_status_text(@harvest_job.extraction_job) %></td>
-      </tr>
+      <% if @harvest_job.extraction_job %>
+        <tr>
+          <th scope="row">Extraction Status</th>
+          <td><%= job_status_text(@harvest_job.extraction_job) %></td>
+        </tr>
 
-      <tr>
-        <th scope="row">Extraction Start Time</th>
-        <td><%= job_start_time(@harvest_job.extraction_job) %></td>
-      </tr>
+        <tr>
+          <th scope="row">Extraction Start Time</th>
+          <td><%= job_start_time(@harvest_job.extraction_job) %></td>
+        </tr>
 
-      <tr>
-        <th scope="row">Extraction End Time</th>
-        <td><%= job_end_time(@harvest_job.extraction_job) %></td>
-      </tr>
+        <tr>
+          <th scope="row">Extraction End Time</th>
+          <td><%= job_end_time(@harvest_job.extraction_job) %></td>
+        </tr>
 
-      <tr>
-        <th scope="row">Extraction Duration</th>
-        <td><%= job_duration(@harvest_job.extraction_job) %></td>
-      </tr>
+        <tr>
+          <th scope="row">Extraction Duration</th>
+          <td><%= job_duration(@harvest_job.extraction_job) %></td>
+        </tr>
 
-      <tr>
-        <th scope="row">Estimated Records Extracted</th>
-        <td>
-          <%=
-          @harvest_job.extraction_definition.per_page * @harvest_job.extraction_job.documents.total_pages
-          %>
-        </td>
-      </tr>
+        <tr>
+          <th scope="row">Estimated Records Extracted</th>
+          <td>
+            <%=
+            @harvest_job.extraction_definition.per_page * @harvest_job.extraction_job.documents.total_pages
+            %>
+          </td>
+        </tr>
 
-      <tr>
-        <th scope="row"></th>
-        <td>
-          <% path = content_partner_extraction_definition_extraction_job_path(@content_partner, @harvest_job.extraction_definition, @harvest_job.extraction_job) %>
-          <%= link_to "View Extraction Results", path, class: "btn btn-outline-primary" %>
-        </td>
-      </tr>
+        <tr>
+          <th scope="row"></th>
+          <td>
+            <% path = content_partner_extraction_definition_extraction_job_path(@content_partner, @harvest_job.extraction_definition, @harvest_job.extraction_job) %>
+            <%= link_to "View Extraction Results", path, class: "btn btn-outline-primary" %>
+          </td>
+        </tr>
+      <% end %>
 
 
       <tr>
         <th scope="row">Load Destination</th>
         <td><%= @harvest_job.harvest_definition.destination.url %></td>
       </tr>
-      
+
       <tr>
         <th scope="row">Total Time</th>
         <td><%= job_duration(@harvest_job) %></td>
       </tr>
-      
+
       <tr>
         <th scope="row">Total Records Transformed</th>
         <td><%= @harvest_job.transformation_jobs.sum(:records_transformed) %></td>
       </tr>
-      
+
       <tr>
         <th scope="row">Total Records Loaded</th>
         <td><%= @harvest_job.load_jobs.sum(:records_loaded) %></td>
@@ -71,7 +73,7 @@
     </tbody>
 
   </table>
-  
+
   <h3 class='my-4'>Transformation Jobs</h3>
 
   <% @harvest_job.transformation_jobs.each do |transformation_job| %>
@@ -87,20 +89,20 @@
 
           <dt class="col-sm-2">Duration</dt>
           <dd class="col-sm-10"><%= job_duration(transformation_job) %></dd>
-          
+
           <dt class="col-sm-2">Status</dt>
           <dd class="col-sm-10"><%= job_status_text(transformation_job) %></dd>
-          
+
           <dt class="col-sm-2">Records Transformed</dt>
           <dd class="col-sm-10"><%= transformation_job.records_transformed %></dd>
         </dl>
       </div>
     </div>
   <% end %>
-  
+
   <h3 class='my-4'>Load Jobs</h3>
 
-  
+
   <% @harvest_job.load_jobs.each do |load_job| %>
     <div class="card my-2">
       <div class="card-body">
@@ -114,10 +116,10 @@
 
           <dt class="col-sm-2">Duration</dt>
           <dd class="col-sm-10"><%= job_duration(load_job) %></dd>
-          
+
           <dt class="col-sm-2">Status</dt>
           <dd class="col-sm-10"><%= job_status_text(load_job) %></dd>
-          
+
           <dt class="col-sm-2">Records Loaded</dt>
           <dd class="col-sm-10"><%= load_job.records_loaded %></dd>
         </dl>

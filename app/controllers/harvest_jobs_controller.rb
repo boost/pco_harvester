@@ -9,10 +9,10 @@ class HarvestJobsController < ApplicationController
   end
 
   def create
-    @harvest_job = HarvestJob.new(harvest_definition: @harvest_definition)
+    @harvest_job = HarvestJob.new(harvest_job_params.except(:extraction_job_id))
 
     if @harvest_job.save
-      HarvestWorker.perform_async(@harvest_job.id)
+      HarvestWorker.perform_async(@harvest_job.id, harvest_job_params[:extraction_job_id])
       flash.notice = 'Job queued successfuly'
     else
       flash.alert = 'There was an issue launching the job'
@@ -30,5 +30,9 @@ class HarvestJobsController < ApplicationController
 
   def find_harvest_definition
     @harvest_definition = HarvestDefinition.find(params[:harvest_definition_id])
+  end
+
+  def harvest_job_params
+    params.require(:harvest_job).permit(:extraction_job_id, :harvest_definition_id)
   end
 end

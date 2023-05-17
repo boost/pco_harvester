@@ -15,8 +15,12 @@ class HarvestJob < ApplicationRecord
   delegate :destination, to: :harvest_definition
 
   def duration_seconds
-    return if extraction_job.start_time.nil? || load_jobs.empty?
+    return if extraction_job.nil? || load_jobs.empty?
 
-    load_jobs.maximum(:end_time) - extraction_job.start_time
+    end_time = load_jobs.maximum(:end_time)
+    start_time = extraction_job.start_time
+    return if end_time.nil? || start_time.nil?
+
+    end_time - start_time
   end
 end

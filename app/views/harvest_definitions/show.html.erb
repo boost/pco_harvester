@@ -5,18 +5,19 @@
 <h1 class='float-start'><%= @harvest_definition.name %></h1>
 
 <div class="float-end">
-  <%= button_to 'Run harvest', content_partner_harvest_definition_harvest_jobs_path(@content_partner, @harvest_definition), class: 'btn btn-primary', form_class: 'd-inline me-1' %>
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#run-from-extraction-job">Run from extraction job</button>
+  <%= button_to(
+    'Run harvest',
+    content_partner_harvest_definition_harvest_jobs_path(@content_partner, @harvest_definition),
+    params: { harvest_job: { harvest_definition_id: @harvest_definition.id } },
+    class: 'btn btn-primary',
+    form_class: 'd-inline me-1'
+  ) %>
   <%= link_to 'Edit Harvest Definition', edit_content_partner_harvest_definition_path(@content_partner, @harvest_definition), class: 'me-1 btn btn-outline-primary' %>
   <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">Delete</button>
 </div>
 
 <div class="clearfix"></div>
-
-<%# Modal %>
-
-<%= render layout: 'shared/delete-modal', locals: { path: content_partner_harvest_definition_path(@content_partner, @harvest_definition) } do %>
-  Are you sure you want to delete "<%= @harvest_definition.name %>"?
-<% end %>
 
 <div class="my-3">
   <%= link_to 'All', content_partner_harvest_definition_path(@content_partner, @harvest_definition), class: "btn btn#{@status.nil? ? '' : '-outline'}-primary" %>
@@ -27,5 +28,37 @@
 
 <%= render partial: 'jobs/jobs', locals: { jobs: @harvest_jobs, type: 'harvest', content_partner: @content_partner, definition: @harvest_definition  } %>
 
+<%# Modals %>
+<%= render layout: 'shared/delete-modal', locals: { path: content_partner_harvest_definition_path(@content_partner, @harvest_definition) } do %>
+  Are you sure you want to delete "<%= @harvest_definition.name %>"?
+<% end %>
 
-
+<div
+  class="modal fade"
+  id="run-from-extraction-job"
+  tabindex="-1"
+  aria-labelledby="Delete"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <%= vertical_form_with model: [@content_partner, @harvest_definition, @harvest_job], class: 'modal-content' do |form| %>
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Run from extraction job</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= form.hidden_field :harvest_definition_id, value: @harvest_definition.id %>
+        <div class="mb-3">
+          <%= form.label :extraction_job, 'Choose the extraction job:', class: "form-label" %>
+          <%= form.collection_select(:extraction_job_id, @harvest_definition.extraction_definition.extraction_jobs, :id, :name, {}, class: 'form-select') %>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">
+          Save
+        </button>
+      </div>
+    <% end %>
+  </div>
+</div>
