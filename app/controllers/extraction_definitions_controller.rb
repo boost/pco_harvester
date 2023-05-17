@@ -3,10 +3,13 @@
 class ExtractionDefinitionsController < ApplicationController
   before_action :find_content_partner
   before_action :find_extraction_definition, only: %i[show edit update destroy update_harvest_definitions]
-  before_action :find_related_harvest_definitions, only: %i[edit update]
 
   def show
     @extraction_jobs = paginate_and_filter_jobs(@extraction_definition.extraction_jobs)
+
+    @related_harvest_definitions = @extraction_definition.copies.map do |copy|
+      HarvestDefinition.find_by(extraction_definition_id: copy.id)
+    end
   end
 
   def new
@@ -64,12 +67,6 @@ class ExtractionDefinitionsController < ApplicationController
 
   def find_content_partner
     @content_partner = ContentPartner.find(params[:content_partner_id])
-  end
-
-  def find_related_harvest_definitions
-    @related_harvest_definitions = @extraction_definition.copies.map do |copy|
-      HarvestDefinition.find_by(extraction_definition_id: copy.id)
-    end
   end
 
   def find_extraction_definition

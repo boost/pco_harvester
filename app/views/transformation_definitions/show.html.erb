@@ -23,33 +23,12 @@
   Are you sure you want to delete "<%= @transformation_definition.name %>"?
 <% end %>
 
-<%= render layout: 'shared/update-harvest-definition-modal' %>
-
-<div
-  class="modal fade",
-  id="update-harvest-definition-modal",
-  tabindex="-1",
-  aria-labelledby="Update harvest definitions",
-  aria-hidden="true"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Update harvest definitions</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        This transformation definition is used by these harvest definitions:
-        <ul>
-          <% @related_harvest_definitions.each do |harvest_definition| %>
-            <li><%= harvest_definition.name %></li>
-          <% end %>
-        </ul>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <%= button_to("Update", update_harvest_definitions_content_partner_transformation_definition_path(@content_partner, @transformation_definition), method: :post, class: "btn btn-primary") %>
-      </div>
-    </div>
-  </div>
-</div>
+<% path = update_harvest_definitions_content_partner_transformation_definition_path(@content_partner, @transformation_definition) %>
+<%= render layout: 'shared/update-harvest-definition-modal', locals: { path: path } do %>
+  This transformation definition is used by these harvest definitions:
+  <ul>
+    <% @related_harvest_definitions.each do |harvest_definition| %>
+      <li><%= harvest_definition.name %></li>
+    <% end %>
+  </ul>
+<% end %>

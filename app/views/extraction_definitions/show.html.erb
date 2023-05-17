@@ -8,6 +8,11 @@
   <%= button_to 'Run full job', content_partner_extraction_definition_extraction_jobs_path(@content_partner, @extraction_definition, kind: 'full'), class: 'btn btn-primary', form_class: 'd-inline me-1' %>
   <%= button_to 'Run sample', content_partner_extraction_definition_extraction_jobs_path(@content_partner, @extraction_definition, kind: 'sample'), class: 'btn btn-primary', form_class: 'd-inline me-1' %>
   <%= link_to 'Edit definition', edit_content_partner_extraction_definition_path(@content_partner, @extraction_definition), class: 'me-1 btn btn-outline-primary' %>
+
+  <% if @related_harvest_definitions&.any? %>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update-harvest-definition-modal">Update harvest definitions</button>
+  <% end %>
+
   <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">Delete</button>
 </div>
 
@@ -25,4 +30,15 @@
 <%# Modal %>
 <%= render layout: 'shared/delete-modal', locals: { path: content_partner_extraction_definition_path(@content_partner, @extraction_definition) } do %>
   Are you sure you want to delete "<%= @extraction_definition.name %>"?
+<% end %>
+
+
+<% path = update_harvest_definitions_content_partner_extraction_definition_path(@content_partner, @extraction_definition) %>
+<%= render layout: 'shared/update-harvest-definition-modal', locals: { path: path } do %>
+  This extraction definition is used by these harvest definitions:
+  <ul>
+    <% @related_harvest_definitions.each do |harvest_definition| %>
+      <li><%= harvest_definition.name %></li>
+    <% end %>
+  </ul>
 <% end %>
