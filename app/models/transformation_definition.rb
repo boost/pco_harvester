@@ -19,7 +19,7 @@ class TransformationDefinition < ApplicationRecord
 
   has_many :fields
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: { scope: :content_partner_id }
 
   # Returns the records from the job based on the given record_selector
   #

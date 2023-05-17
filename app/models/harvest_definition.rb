@@ -9,7 +9,7 @@ class HarvestDefinition < ApplicationRecord
 
   has_many :harvest_jobs, dependent: :destroy
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: { scope: :content_partner_id }
 
   before_create :clone_transformation_definition
   before_create :clone_extraction_definition
