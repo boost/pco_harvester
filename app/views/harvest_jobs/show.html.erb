@@ -48,98 +48,11 @@
         </td>
       </tr>
 
-      <% @harvest_job.transformation_jobs.each do |transformation_job| %>
-        <tr>
-          <th scope="row">Transformation Page</th>
-          <td>
-            <%= transformation_job.page %>
-          </td>
-        </tr>
-
-        <tr>
-          <th scope="row">Start Time</th>
-          <td>
-            <%= job_start_time(transformation_job) %>
-          </td>
-        </tr>
-        
-        <tr>
-          <th scope="row">End Time</th>
-          <td>
-            <%= job_end_time(transformation_job) %>
-          </td>
-        </tr>
-
-        <tr>
-          <th scope="row">Duration</th>
-          <td>
-            <%= job_duration(transformation_job) %>
-          </td>
-        </tr>
-        
-        <tr>
-          <th scope="row">Status</th>
-          <td>
-            <%= job_status_text(transformation_job) %>
-          </td>
-        </tr>
-        
-        <tr>
-          <th scope="row">Records Transformed</th>
-          <td>
-            <%= transformation_job.records_transformed %>
-          </td>
-        </tr>
-      <% end %>
 
       <tr>
         <th scope="row">Load Destination</th>
         <td><%= @harvest_job.harvest_definition.destination.url %></td>
       </tr>
-      
-      <% @harvest_job.load_jobs.each do |load_job| %>
-        <tr>
-          <th scope="row">Load Page</th>
-          <td>
-            <%= load_job.page %>
-          </td>
-        </tr>
-
-        <tr>
-          <th scope="row">Start Time</th>
-          <td>
-            <%= job_start_time(load_job) %>
-          </td>
-        </tr>
-        
-        <tr>
-          <th scope="row">End Time</th>
-          <td>
-            <%= job_end_time(load_job) %>
-          </td>
-        </tr>
-
-        <tr>
-          <th scope="row">Duration</th>
-          <td>
-            <%= job_duration(load_job) %>
-          </td>
-        </tr>
-        
-        <tr>
-          <th scope="row">Status</th>
-          <td>
-            <%= job_status_text(load_job) %>
-          </td>
-        </tr>
-        
-        <tr>
-          <th scope="row">Records Loaded</th>
-          <td>
-            <%= load_job.records_loaded %>
-          </td>
-        </tr>
-      <% end %>
       
       <tr>
         <th scope="row">Total Time</th>
@@ -156,7 +69,61 @@
         <td><%= @harvest_job.load_jobs.sum(:records_loaded) %></td>
       </tr>
     </tbody>
+
   </table>
+  
+  <h3 class='my-4'>Transformation Jobs</h3>
+
+  <% @harvest_job.transformation_jobs.each do |transformation_job| %>
+    <div class="card my-2">
+      <div class="card-body">
+        <h5 class="card-title mb-4">Page <%= transformation_job.page %></h5>
+        <dl class="row">
+          <dt class="col-sm-2">Start Time</dt>
+          <dd class="col-sm-10"><%= job_start_time(transformation_job) %></dd>
+
+          <dt class="col-sm-2">End Time</dt>
+          <dd class="col-sm-10"><%= job_end_time(transformation_job) %></dd>
+
+          <dt class="col-sm-2">Duration</dt>
+          <dd class="col-sm-10"><%= job_duration(transformation_job) %></dd>
+          
+          <dt class="col-sm-2">Status</dt>
+          <dd class="col-sm-10"><%= job_status_text(transformation_job) %></dd>
+          
+          <dt class="col-sm-2">Records Transformed</dt>
+          <dd class="col-sm-10"><%= transformation_job.records_transformed %></dd>
+        </dl>
+      </div>
+    </div>
+  <% end %>
+  
+  <h3 class='my-4'>Load Jobs</h3>
+
+  
+  <% @harvest_job.load_jobs.each do |load_job| %>
+    <div class="card my-2">
+      <div class="card-body">
+        <h5 class="card-title mb-4">Page <%= load_job.page %></h5>
+        <dl class="row">
+          <dt class="col-sm-2">Start Time</dt>
+          <dd class="col-sm-10"><%= job_start_time(load_job) %></dd>
+
+          <dt class="col-sm-2">End Time</dt>
+          <dd class="col-sm-10"><%= job_end_time(load_job) %></dd>
+
+          <dt class="col-sm-2">Duration</dt>
+          <dd class="col-sm-10"><%= job_duration(load_job) %></dd>
+          
+          <dt class="col-sm-2">Status</dt>
+          <dd class="col-sm-10"><%= job_status_text(load_job) %></dd>
+          
+          <dt class="col-sm-2">Records Loaded</dt>
+          <dd class="col-sm-10"><%= load_job.records_loaded %></dd>
+        </dl>
+      </div>
+    </div>
+  <% end %>
 <% else %>
   <p class="my-4">The job hasn't started yet.</p>
 <% end %>
