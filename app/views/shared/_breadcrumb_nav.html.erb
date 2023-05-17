@@ -1,6 +1,7 @@
 <% partner_id = @content_partner&.id %>
 <% extraction_id = @extraction_definition&.id %>
 <% transformation_id = @transformation_definition&.id %>
+<% destination_id = @destination&.id %>
 
 <div class="my-4">
   <nav aria-label="breadcrumb">
@@ -18,6 +19,24 @@
         path: (content_partner_path(partner_id) rescue nil),
         active: (current_page?(content_partner_path(partner_id)) rescue false),
         display: request.path.match?(/^\/content_partners\/\d+/)) %>
+
+      <%= breadcrumb_item(
+        text: 'Destinations',
+        path: destinations_path,
+        active: current_page?(destinations_path),
+        display: request.path.include?(destinations_path)) %>
+        
+      <%= breadcrumb_item(
+        text: @destination&.name_in_database,
+        path: (destination_path(partner_id) rescue nil),
+        active: (current_page?(destination_path(partner_id)) rescue false),
+        display: request.path.match?(/^\/destinations\/\d+/)) %>
+        
+      <%= breadcrumb_item(
+        text: 'Extraction Jobs',
+        path: jobs_path,
+        active: current_page?(jobs_path),
+        display: request.path.include?(jobs_path)) %>
 
       <%= breadcrumb_item(
         text: @extraction_definition&.name_in_database,

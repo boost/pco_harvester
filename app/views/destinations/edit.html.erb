@@ -1,0 +1,9 @@
+<%= content_for(:title) { "Editing #{@destination.name_in_database}" } %>
+
+<%= render 'shared/breadcrumb_nav' %>
+
+<h1><%= @destination.name_in_database %></h1>
+
+<div class="mt-4"></div>
+
+<%= render 'form' %>

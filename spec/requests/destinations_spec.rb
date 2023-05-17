@@ -1,0 +1,147 @@
+# frozen_string_literal: true
+
+require 'rails_helper'
+
+RSpec.describe "Destinations", type: :request do
+  let(:destination) { create(:destination) }
+
+  describe "GET /index" do
+    it 'displays a list of destinations' do
+      get destinations_path
+
+      expect(response.status).to eq 200
+    end
+  end
+
+  describe "GET /show" do
+    it 'displays a particular destination' do
+      get destination_path(destination)
+
+      expect(response.status).to eq 200
+    end
+  end
+
+  describe "POST /create" do
+    context 'with valid attributes' do
+      it 'creates a new destination' do
+        expect do
+          post destinations_path, params: {
+            destination: attributes_for(:destination)
+          }
+        end.to change(Destination, :count).by(1)
+      end
+
+      it 'redirects to the destinations page' do
+        post destinations_path, params: {
+          destination: attributes_for(:destination)
+        }
+
+        expect(response).to redirect_to destinations_path
+      end
+    end
+
+    context 'with invalid attributes' do
+      it 'does not create a new destination' do
+        expect do
+          post destinations_path, params: {
+            destination: { name: 'hello' }
+          }
+        end.to change(Destination, :count).by(0)
+      end
+    end
+  end
+
+  describe 'DELETE /destroy' do
+    let!(:destination) { create(:destination) }
+
+    it 'deletes a destination' do
+      expect {
+        delete destination_path(destination)        
+      }.to change(Destination, :count).by(-1)
+    end
+
+    it 'redirects to the destinations page' do
+      delete destination_path(destination)        
+
+      expect(response).to redirect_to destinations_path
+    end
+  end
+
+  describe 'PATCH /update' do
+    context 'with valid attributes' do
+      it 'updates an existing destination' do
+        patch destination_path(destination), params: {
+          destination: { name: 'Updated Destination' }
+        }
+
+        destination.reload
+
+        expect(destination.name).to eq 'Updated Destination'
+      end
+
+      it 'redirects to the destinations page' do
+        patch destination_path(destination), params: {
+          destination: { name: 'Updated Destination' }
+        }
+
+        expect(response).to redirect_to destinations_path
+      end
+    end
+
+    context 'with invalid attributes' do
+      it 'does not update an existing destination' do
+        patch destination_path(destination), params: {
+          destination: { name: nil }
+        }
+
+        destination.reload
+
+        expect(destination.name).not_to eq nil
+      end
+    end
+  end
+
+  describe 'POST /test' do
+    it 'returns success if the details provided are valid' do
+      stub_request(:get, "http://localhost:5000/harvester/users?api_key=testkey").
+         with(
+           headers: {
+       	 'Accept'=>'*/*',
+       	 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+       	 'User-Agent'=>'Supplejack Harvester v2.0'
+           }).
+         to_return(status: 200, body: "", headers: {})
+
+      post test_destinations_path, params: {
+        destination: {
+          name: 'localhost',
+          url: 'http://localhost:5000',
+          api_key: 'testkey'
+        }
+      }
+
+      expect(JSON.parse(response.body)['status']).to eq 200
+    end
+
+    it 'returns error if the details provided are invalid' do
+     stub_request(:get, "http://localhost:5000/harvester/users?api_key=testkey").
+       with(
+         headers: {
+     	 'Accept'=>'*/*',
+     	 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+     	 'User-Agent'=>'Supplejack Harvester v2.0'
+         }).
+       to_return(status: 403, body: "", headers: {})      
+
+      post test_destinations_path, params: {
+        destination: {
+          name: 'localhost',
+          url: 'http://localhost:5000',
+          api_key: 'testkey'
+        }
+      }
+
+      expect(JSON.parse(response.body)['status']).to eq 403
+    end
+  end
+end
