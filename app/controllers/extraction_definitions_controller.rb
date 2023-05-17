@@ -4,8 +4,6 @@ class ExtractionDefinitionsController < ApplicationController
   before_action :find_content_partner
   before_action :find_extraction_definition, only: %i[show edit update destroy]
 
-  skip_before_action :verify_authenticity_token, only: %i[test]
-
   def show
     @jobs = paginate_and_filter_jobs(@extraction_definition.jobs)
   end

@@ -6,12 +6,17 @@
   }
 
   @include modifier('transformation') {
-    #raw-data-record-viewer, #transformation-record-viewer {
-      height: 300px;
-      width: 630px;
+    .record-view__container {
+      height: 90vh;
+      width: 100%;
     }
   }
-  
-  .cm-editor { height: 100% }
-  .cm-scroller { overflow: auto }
+
+  .cm-editor {
+    height: 100%;
+
+    .cm-scroller {
+      overflow: auto;
+    }
+  }
 }

@@ -1,0 +1,9 @@
+# Ignore everything recursively
+/**/*
+
+# But not the JS front end files
+!/app/frontend/**/*.js
+!/app/frontend/**/*.jsx
+
+# Check subdirectories too
+!*/

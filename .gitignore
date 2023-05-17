@@ -20,7 +20,7 @@
 !/tmp/pids/
 !/tmp/pids/.keep
 
-# Ignore extraction files, but the keep the directory
+# Ignore extraction files, but keep the directory
 /extractions/test/*
 /extractions/development/*
 /extractions/staging/*
@@ -45,6 +45,7 @@
 # Vite Ruby
 /public/vite*
 node_modules
+/yarn-error.log
 # Vite uses dotenv and suggests to ignore local-only env files. See
 # https://vitejs.dev/guide/env-and-mode.html#env-files
 *.local
@@ -54,3 +55,7 @@ node_modules
 # rspec
 /spec/examples.txt
 /coverage
+
+# from code editors
+/.vscode
+/app/frontend/jsconfig.json

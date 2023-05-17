@@ -1,0 +1,21 @@
+<%= content_for(:title) { @transformation_definition.name_in_database } %>
+
+<%= content_for(:root_class) { 'container-fluid' } %>
+
+<%= render 'shared/breadcrumb_nav' %>
+
+<h1 class='float-start mb-4'><%= @transformation_definition.name %></h1>
+
+<div class="float-end">
+  <%= link_to 'Edit transformation', edit_content_partner_transformation_definition_path(@content_partner, @transformation_definition), class: 'me-1 btn btn-outline-primary' %>
+  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">Delete</button>
+</div>
+
+<div class="clearfix"></div>
+
+<div id="js-transformation-app" data-props="<%= @props %>"></div>
+
+<%# Modal %>
+<%= render layout: 'shared/delete-modal', locals: { path: content_partner_transformation_definition_path(@content_partner, @transformation_definition) } do %>
+  Are you sure you want to delete "<%= @transformation_definition.name %>"?
+<% end %>

@@ -1,11 +1,16 @@
 # frozen_string_literal: true
 
-class Transformation < ApplicationRecord
-  belongs_to :content_partner  
+class TransformationDefinition < ApplicationRecord
+  belongs_to :content_partner
   belongs_to :job
+
+  has_many :fields
 
   validates :name, presence: true
 
+  # Returns the records from the job based on the given record_selector
+  #
+  # @return Array
   def records
     return [] if record_selector.blank? || job.documents[1].nil?
 
@@ -13,4 +18,4 @@ class Transformation < ApplicationRecord
             .on(job.documents[1].body)
             .flatten
   end
- end
+end

@@ -34,10 +34,10 @@
   <p>There are currently no extraction definitions for <%= @content_partner.name_in_database %>.</p>
 <% end %>
 
-<h2 class="float-start">Transformations</h2>
+<h2 class="float-start">Transformation Definitions</h2>
 
-<%= link_to new_content_partner_transformation_path(@content_partner), class: 'btn btn-primary float-end' do %>
-  <%= bootstrap_icon('plus-circle') %>Add new Transformation
+<%= link_to new_content_partner_transformation_definition_path(@content_partner), class: 'btn btn-primary float-end' do %>
+  <%= bootstrap_icon('plus-circle') %>Add new Transformation Definition
 <% end %>
 
 <div class="clearfix"></div>
@@ -49,7 +49,7 @@
         <%= transformation.name %>
       </span>
 
-      <%= link_to "Details", content_partner_transformation_path(@content_partner, transformation), class: "btn btn-outline-primary float-end" %>
+      <%= link_to "Details", content_partner_transformation_definition_path(@content_partner, transformation), class: "btn btn-outline-primary float-end" %>
 
       <div class="clearfix"></div>
     </div>
@@ -57,7 +57,7 @@
 
   <%= render 'shared/pagination_below_table', items: @transformations %>
 <% else %>
-  <p>There are currently no transformations for <%= @content_partner.name_in_database %>.</p>
+  <p>There are currently no transformation definitions for <%= @content_partner.name_in_database %>.</p>
 <% end %>
 
 

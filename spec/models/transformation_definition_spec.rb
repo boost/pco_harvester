@@ -1,10 +1,15 @@
 require 'rails_helper'
 
-RSpec.describe Transformation, type: :model do
+RSpec.describe TransformationDefinition, type: :model do
   let(:content_partner) { create(:content_partner, :ngataonga) } 
   let(:extraction_definition) { content_partner.extraction_definitions.first }
   let(:job)             { create(:job, extraction_definition:) } 
-  let(:subject)         { create(:transformation, content_partner: content_partner, job: job) }
+  let(:subject)         { create(:transformation_definition, content_partner: content_partner, job: job) }
+
+  let!(:field_one)   { create(:field, name: 'title', block: "JsonPath.new('title').on(record).first", transformation_definition: subject) }
+  let!(:field_two)   { create(:field, name: 'source', block: "JsonPath.new('source').on(record).first", transformation_definition: subject) }
+  let!(:field_three) { create(:field, name: 'dc_identifier', block: "JsonPath.new('reference_number').on(record).first", transformation_definition: subject) }
+  let!(:field_four) { create(:field, name: 'landing_url', block: '"http://www.ngataonga.org.nz/collections/catalogue/catalogue-item?record_id=#{record[\'record_id\']}"', transformation_definition: subject) }
   
   before do
     # that's to test the display of results

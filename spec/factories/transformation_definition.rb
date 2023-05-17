@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :transformation do
+  factory :transformation_definition do    
     name { 'Name' }
     record_selector { '$..results' }
    
