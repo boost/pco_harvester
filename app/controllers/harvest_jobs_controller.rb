@@ -9,10 +9,10 @@ class HarvestJobsController < ApplicationController
   end
 
   def create
-    @harvest_job = HarvestJob.new(harvest_job_params.except(:extraction_job_id))
+    @harvest_job = HarvestJob.new(harvest_job_params)
 
     if @harvest_job.save
-      HarvestWorker.perform_async(@harvest_job.id, harvest_job_params[:extraction_job_id])
+      HarvestWorker.perform_async(@harvest_job.id)
       flash.notice = 'Job queued successfuly'
     else
       flash.alert = 'There was an issue launching the job'

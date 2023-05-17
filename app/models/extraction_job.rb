@@ -11,7 +11,7 @@ class ExtractionJob < ApplicationRecord
   enum :kind, KINDS, prefix: :is
 
   belongs_to :extraction_definition
-  belongs_to :harvest_job, optional: true
+  has_one :harvest_job
 
   after_create :create_folder
   after_destroy :delete_folder

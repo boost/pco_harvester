@@ -5,7 +5,7 @@ class HarvestJob < ApplicationRecord
   include Job
 
   belongs_to :harvest_definition
-  has_one    :extraction_job
+  belongs_to :extraction_job, optional: true
   has_many   :transformation_jobs
   has_many   :load_jobs
 
