@@ -4,7 +4,7 @@ class TransformationDefinition < ApplicationRecord
   belongs_to :content_partner
   belongs_to :extraction_job
 
-  # feature allows editing a transformation without impacting a harvest
+  # feature allows editing a transformation definition without impacting a running harvest
   belongs_to(
     :original_transformation_definition,
     class_name: 'TransformationDefinition',

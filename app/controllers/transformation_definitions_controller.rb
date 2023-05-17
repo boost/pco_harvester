@@ -88,7 +88,7 @@ class TransformationDefinitionsController < ApplicationController
   def update_harvest_definitions
     @transformation_definition.copies.each do |copy|
       harvest_definition = HarvestDefinition.find_by(transformation_definition: copy)
-      harvest_definition.update_clone(@transformation_definition)
+      harvest_definition.update_transformation_definition_clone(@transformation_definition)
     end
 
     flash.notice = 'Harvest definitions updated.'
