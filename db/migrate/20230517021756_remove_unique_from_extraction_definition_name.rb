@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RemoveUniqueFromExtractionDefinitionName < ActiveRecord::Migration[7.0]
   def up
     change_column :extraction_definitions, :name, :string, unique: false

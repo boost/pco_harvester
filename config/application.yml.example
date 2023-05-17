@@ -5,7 +5,8 @@ default: &default
 
 development:
   <<: *default
-  API_KEY: your_supplejack_api_key_used_for_fixtures
+  SUPPLEJACK_API: http://localhost:3000
+  HARVESTER_API_KEY: your_supplejack_api_key_used_for_fixtures
   NGATAONGA_API_KEY: used_for_fixtures
 
 test:
