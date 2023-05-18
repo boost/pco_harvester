@@ -1,27 +1,27 @@
 source_id:
   name: source_id
   transformation_definition: ngataonga
-  block: 'test'
+  block: "'test'"
 
 content_partner:
   name: content_partner
   transformation_definition: ngataonga
-  block: "Ngā Taonga Sound & Vision"
+  block: "\"Ngā Taonga Sound & Vision\""
 
 display_content_partner:
   name: display_content_partner
   transformation_definition: ngataonga
-  block: "Ngā Taonga Sound & Vision"
+  block: "\"Ngā Taonga Sound & Vision\""
 
 display_collection:
   name: display_collection
   transformation_definition: ngataonga
-  block: "Ngā Taonga Sound & Vision"
+  block: "\"Ngā Taonga Sound & Vision\""
 
 primary_collection:
   name: primary_collection
   transformation_definition: ngataonga
-  block: "Ngā Taonga Sound & Vision"
+  block: "\"Ngā Taonga Sound & Vision\""
 
 collection_title:
   name: collection_title
@@ -36,17 +36,17 @@ title:
 usage:
   name: usage
   transformation_definition: ngataonga
-  block: "All rights reserved"
+  block: "\"All rights reserved\""
 
 copyright:
   name: copyright
   transformation_definition: ngataonga
-  block: "All rights reserved"
+  block: "\"All rights reserved\""
 
 rights_url:
   name: rights_url
   transformation_definition: ngataonga
-  block: "https://www.ngataonga.org.nz/about/privacy-and-rights/rights-information"
+  block: "\"https://www.ngataonga.org.nz/about/privacy-and-rights/rights-information\""
 
 dc_identifier:
   name: dc_identifier
@@ -56,12 +56,12 @@ dc_identifier:
 landing_url:
   name: landing_url
   transformation_definition: ngataonga
-  block: "https://www.ngataonga.org.nz/collections/catalogue/catalogue-item?record_id=#{record['record_id']}"
+  block: "\"https://www.ngataonga.org.nz/collections/catalogue/catalogue-item?record_id=#{record['record_id']}\""
 
 internal_identifier:
   name: internal_identifier
   transformation_definition: ngataonga
-  block: "http://www.ngataonga.org.nz/collections/catalogue/catalogue-item?record_id=#{record['record_id']}"
+  block: "\"http://www.ngataonga.org.nz/collections/catalogue/catalogue-item?record_id=#{record['record_id']}\""
 
 display_date:
   name: display_date
@@ -76,11 +76,11 @@ date:
 description:
   name: description
   transformation_definition: ngataonga
-  block:
-    description = record['description'].truncate(350)
-    credits     = record['credits'].join('; ').truncate(100)
+  block: |
+      description = record['description'].truncate(350)
+      credits     = record['credits'].join('; ').truncate(100)
 
-    "#{description} #{credits}"
+      "#{description} #{credits}"
 
 category:
   name: category
@@ -116,7 +116,7 @@ format:
   block: |
     return if record['duration'].include?("00.00.00")
 
-    "Duration: #{record['duration']}"
+    "\"Duration: #{record['duration']}\""
 
 subject:
   name: subject
