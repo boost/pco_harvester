@@ -26,7 +26,7 @@
   <% end %>
 </div>
 
-<%= render partial: 'jobs/jobs', locals: { jobs: @harvest_jobs, type: 'harvest', content_partner: @content_partner, definition: @harvest_definition  } %>
+<%= render partial: 'jobs/jobs', locals: { jobs: @harvest_jobs, type: 'harvest'  } %>
 
 <%# Modals %>
 <%= render layout: 'shared/delete-modal', locals: { path: content_partner_harvest_definition_path(@content_partner, @harvest_definition) } do %>
