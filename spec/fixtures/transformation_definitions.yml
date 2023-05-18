@@ -1,5 +1,5 @@
-ngataonga:
+figshare:
   content_partner: antarctica_nz
-  extraction_job: ngataonga_sample
-  name: TD api.ngataonga.org.nz
-  record_selector: $..results
+  extraction_job: figshare_sample
+  name: TD api.figshare.org.nz
+  record_selector: $.items

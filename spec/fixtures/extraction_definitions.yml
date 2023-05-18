@@ -1,12 +1,12 @@
-ngataonga:
-  name: ED api.ngataonga.org.nz
+figshare:
+  name: ED api.figshare.com
   format: 'JSON'
-  base_url: 'http://api.ngataonga.org.nz/records.json/?api_key=<%= ENV.fetch('NGATAONGA_API_KEY', '') %>&and[has_media]=true'
+  base_url: 'https://api.figshare.com/v1/articles/search?search_for=zealand'
   throttle: 1000
   pagination_type: 'page'
   page_parameter: 'page'
   page: 1
-  per_page_parameter: 'per_page'
-  per_page: 100
-  total_selector: '$..result_count'
+  per_page_parameter: 'itemsPerPage'
+  per_page: 10
+  total_selector: '$.items_found'
   content_partner: antarctica_nz
