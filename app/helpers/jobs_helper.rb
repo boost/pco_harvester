@@ -29,6 +29,12 @@ module JobsHelper
   def job_duration(job)
     return '-' if job.duration_seconds.blank?
 
-    ActiveSupport::Duration.build(job.duration_seconds).inspect
+    job_duration_seconds(job.duration_seconds)
+  end
+
+  def job_duration_seconds(seconds)
+    return '-' if seconds.nil?
+
+    ActiveSupport::Duration.build(seconds).inspect
   end
 end

@@ -57,6 +57,11 @@
       </tr>
 
       <tr>
+        <th scope="row">Total transformation and load time</th>
+        <td><%= job_duration_seconds(@harvest_job.transformation_and_load_duration_seconds) %></td>
+      </tr>
+
+      <tr>
         <th scope="row">Total Time</th>
         <td><%= job_duration(@harvest_job) %></td>
       </tr>

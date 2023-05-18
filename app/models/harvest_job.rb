@@ -23,4 +23,14 @@ class HarvestJob < ApplicationRecord
 
     end_time - start_time
   end
+
+  def transformation_and_load_duration_seconds
+    return if transformation_jobs.empty? || load_jobs.empty?
+
+    start_time = transformation_jobs.minimum(:start_time)
+    end_time = load_jobs.maximum(:end_time)
+    return if end_time.nil? || start_time.nil?
+
+    end_time - start_time
+  end
 end
