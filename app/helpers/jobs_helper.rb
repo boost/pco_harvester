@@ -8,7 +8,7 @@ module JobsHelper
     if job.queued?
       'Waiting in queue...'
     elsif job.running?
-      "Running #{job.kind} job..."
+      job.instance_of?(ExtractionJob) ? "Running #{job.kind} job..." : 'Running...'
     elsif job.errored?
       'An error occured'
     elsif job.cancelled?
