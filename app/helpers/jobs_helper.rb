@@ -27,8 +27,6 @@ module JobsHelper
   end
 
   def job_duration(job)
-    return '-' if job.duration_seconds.blank?
-
     job_duration_seconds(job.duration_seconds)
   end
 
