@@ -123,10 +123,10 @@ RSpec.describe ExtractionJob, type: :model do
     it 'returns the size of the extraction folder in bytes' do
       Extraction::Execution.new(subject, ed).call
 
-      expect(subject.extraction_folder_size_in_bytes).to eq 40
+      expect(subject.extraction_folder_size_in_bytes).to eq 1515
     end
   end
-  
+
   describe '#finished?' do
     let(:finished_ej) { create(:extraction_job, status: 'completed') }
     let(:unfinished_ej) { create(:extraction_job, status: 'running') }

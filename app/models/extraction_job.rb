@@ -54,7 +54,7 @@ class ExtractionJob < ApplicationRecord
   #
   # @return Integer
   def extraction_folder_size_in_bytes
-    `du #{extraction_folder} | cut -f1`.to_i
+    Dir.glob("#{extraction_folder}/*").sum { |f| File.size(f) }
   end
 
   def name
