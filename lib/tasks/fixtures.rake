@@ -7,6 +7,9 @@ namespace :fixtures do
     FileUtils.rm Dir.glob("#{ExtractionJob::EXTRACTIONS_FOLDER}/*/*")
     FileUtils.rmdir Dir.glob("#{ExtractionJob::EXTRACTIONS_FOLDER}/*")
 
+    puts 'Clearing the Extraction Jobs...'
+    ExtractionJob.destroy_all
+
     puts 'Loading the fixtures...'
     `bin/rails db:fixtures:load`
 

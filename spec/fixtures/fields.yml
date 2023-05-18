@@ -1,76 +1,156 @@
+source_id:
+  name: source_id
+  transformation_definition: ngataonga
+  block: 'test'
+
 content_partner:
   name: content_partner
-  block: '["Ngā Taonga Sound & Vision"]'
   transformation_definition: ngataonga
+  block: "Ngā Taonga Sound & Vision"
 
 display_content_partner:
   name: display_content_partner
-  block: '["Ngā Taonga Sound & Vision"]'
   transformation_definition: ngataonga
+  block: "Ngā Taonga Sound & Vision"
 
 display_collection:
   name: display_collection
-  block: '["Ngā Taonga Sound & Vision"]'
   transformation_definition: ngataonga
+  block: "Ngā Taonga Sound & Vision"
 
 primary_collection:
   name: primary_collection
-  block: '["Ngā Taonga Sound & Vision"]'
   transformation_definition: ngataonga
+  block: "Ngā Taonga Sound & Vision"
 
 collection_title:
   name: collection_title
-  block: "[record['source']]"
   transformation_definition: ngataonga
+  block: record['source']
 
 title:
   name: title
-  block: "[record['title']]"
   transformation_definition: ngataonga
+  block: record['title']
 
 usage:
   name: usage
-  block: '["All rights reserved"]'
   transformation_definition: ngataonga
+  block: "All rights reserved"
 
 copyright:
   name: copyright
-  block: '["All rights reserved"]'
   transformation_definition: ngataonga
+  block: "All rights reserved"
 
 rights_url:
   name: rights_url
-  block: '["https://www.ngataonga.org.nz/about/privacy-and-rights/rights-information"]'
   transformation_definition: ngataonga
+  block: "https://www.ngataonga.org.nz/about/privacy-and-rights/rights-information"
 
 dc_identifier:
   name: dc_identifier
-  block: "[record['reference_number']]"
   transformation_definition: ngataonga
+  block: record['reference_number']
 
 landing_url:
   name: landing_url
-  block: >
-    ["https://www.ngataonga.org.nz/collections/catalogue/catalogue-item?record_id=#{record['record_id']}"]
   transformation_definition: ngataonga
+  block: "https://www.ngataonga.org.nz/collections/catalogue/catalogue-item?record_id=#{record['record_id']}"
 
 internal_identifier:
   name: internal_identifier
-  block: >
-    ["http://www.ngataonga.org.nz/collections/catalogue/catalogue-item?record_id=#{record['record_id']}"]
   transformation_definition: ngataonga
+  block: "http://www.ngataonga.org.nz/collections/catalogue/catalogue-item?record_id=#{record['record_id']}"
 
 display_date:
   name: display_date
-  block: "[record['date']]"
   transformation_definition: ngataonga
+  block: record['date']
 
 date:
   name: date
-  block: "[record['date'].to_date]"
   transformation_definition: ngataonga
+  block: record['date'].to_date
 
-source_id:
-  name: source_id
-  block: "['test']"
+description:
+  name: description
   transformation_definition: ngataonga
+  block:
+    description = record['description'].truncate(350)
+    credits     = record['credits'].join('; ').truncate(100)
+
+    "#{description} #{credits}"
+
+category:
+  name: category
+  transformation_definition: ngataonga
+  block: |
+    media_type = record['media_type'].downcase
+
+    if media_type.include?('audio')
+      return ['Audio']
+    elsif media_type.include?('moving image')
+      return ['Videos']
+    elsif media_type.include?('stills') || media_type.include?('posters')
+      return ['Images']
+    end
+
+dc_type:
+  name: dc_type
+  transformation_definition: ngataonga
+  block: |
+    media_type = record['media_type'].downcase
+
+    if media_type.include?('moving image')
+      return ['MovingImage']
+    elsif media_type.include?('audio')
+      return ['Sound']
+    elsif media_type.include?('stills') || media_type.include?('posters')
+      return ['StillImage']
+    end
+
+format:
+  name: format
+  transformation_definition: ngataonga
+  block: |
+    return if record['duration'].include?("00.00.00")
+
+    "Duration: #{record['duration']}"
+
+subject:
+  name: subject
+  transformation_definition: ngataonga
+  block: record['genre']
+
+thumbnail_url:
+  name: thumbnail_url
+  transformation_definition: ngataonga
+  block: |
+    return if record['thumbnail_url'].blank?
+
+    "https://i.vimeocdn.com/video/#{record['thumbnail_url']}_250"
+
+large_thumbnail_url:
+  name: large_thumbnail_url
+  transformation_definition: ngataonga
+  block: |
+    return if record['thumbnail_url'].blank?
+
+    "https://i.vimeocdn.com/video/#{record['thumbnail_url']}_500"
+
+contributor:
+  name: contributor
+  transformation_definition: ngataonga
+  block: |
+    contributor = record['credits']
+
+    if record['authors'].present?
+      contributor.push("Authors: #{record['authors'].join}")
+    end
+
+    if record['production_company'].present?
+      contributor.push("Production Company: #{record['production_company'].join}")
+    end
+
+    contributor.join
