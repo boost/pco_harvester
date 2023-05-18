@@ -25,7 +25,10 @@ module Job
     end_time - start_time
   end
 
+  # Returns true if a job is considered finished
+  #
+  # @return Boolean
   def finished?
-    status.in? %w[cancelled running completed errored]
+    status.in? %w[cancelled completed errored]
   end
 end

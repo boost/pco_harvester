@@ -126,4 +126,17 @@ RSpec.describe ExtractionJob, type: :model do
       expect(subject.extraction_folder_size_in_bytes).to eq 40
     end
   end
+  
+  describe '#finished?' do
+    let(:finished_ej) { create(:extraction_job, status: 'completed') }
+    let(:unfinished_ej) { create(:extraction_job, status: 'running') }
+
+    it 'returns true if the job has finished' do
+      expect(finished_ej.finished?).to eq true
+    end
+
+    it 'returns false if the job has not finished' do
+      expect(unfinished_ej.finished?).to eq false
+    end
+  end
 end
