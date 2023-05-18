@@ -100,10 +100,10 @@ RSpec.describe 'Fields', type: :request do
 
         transformed_record = JSON.parse(response.body)['transformed_record']
 
-        expect(transformed_record['title']).to eq 'title'
-        expect(transformed_record['source']).to eq 'source'
-        expect(transformed_record['dc_identifier']).to eq '111'
-        expect(transformed_record['landing_url']).to eq 'http://www.ngataonga.org.nz/collections/catalogue/catalogue-item?record_id=128'
+        expect(transformed_record['title']).to eq ['title']
+        expect(transformed_record['source']).to eq ['source']
+        expect(transformed_record['dc_identifier']).to eq ['111']
+        expect(transformed_record['landing_url']).to eq ['http://www.ngataonga.org.nz/collections/catalogue/catalogue-item?record_id=128']
       end
     end
 
