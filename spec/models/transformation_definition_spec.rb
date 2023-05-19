@@ -6,7 +6,7 @@ RSpec.describe TransformationDefinition, type: :model do
   let(:content_partner) { create(:content_partner, :ngataonga) }
   let(:extraction_definition) { content_partner.extraction_definitions.first }
   let(:extraction_job) { create(:extraction_job, extraction_definition:) }
-  let(:subject) { create(:transformation_definition, content_partner:, extraction_job:) }
+  let(:subject) { create(:transformation_definition, content_partner:, extraction_job:, name: 'Name') }
 
   let!(:field_one) do
     create(:field, name: 'title', block: "JsonPath.new('title').on(record).first", transformation_definition: subject)

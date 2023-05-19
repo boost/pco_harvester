@@ -9,7 +9,6 @@ RSpec.describe HarvestDefinition, type: :model do
       name: 'Staging Harvest',
       content_partner:,
       extraction_definition:,
-      extraction_job:,
       transformation_definition:,
       destination:
     )
@@ -33,10 +32,6 @@ RSpec.describe HarvestDefinition, type: :model do
 
     it 'has a copy of the provided extraction definition' do
       expect(subject.extraction_definition.original_extraction_definition).to eq extraction_definition
-    end
-
-    it 'has a job' do
-      expect(subject.extraction_job).to eq extraction_job
     end
 
     it 'has a transformation definition' do
