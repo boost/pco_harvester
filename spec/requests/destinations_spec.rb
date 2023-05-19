@@ -21,6 +21,14 @@ RSpec.describe 'Destinations', type: :request do
     end
   end
 
+  describe 'GET /new' do
+    it 'displays the new destination form' do
+      get new_destination_path
+
+      expect(response.status).to eq 200
+    end
+  end
+
   describe 'POST /create' do
     context 'with valid attributes' do
       it 'creates a new destination' do
@@ -64,6 +72,14 @@ RSpec.describe 'Destinations', type: :request do
       delete destination_path(destination)
 
       expect(response).to redirect_to destinations_path
+    end
+
+    it 'does not delete the destination if something goes wrong' do
+      allow_any_instance_of(Destination).to receive(:destroy).and_return(false)
+
+      delete destination_path(destination)
+
+      expect(response).to redirect_to destination_path(destination)
     end
   end
 

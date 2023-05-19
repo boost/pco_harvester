@@ -8,10 +8,19 @@ RSpec.describe 'HarvestDefinitions', type: :request do
   let(:extraction_job) { create(:extraction_job, extraction_definition:) }
   let(:transformation_definition) { create(:transformation_definition, content_partner:, extraction_job:) }
   let(:destination)               { create(:destination) }
+  let(:harvest_definition)        { create(:harvest_definition) }
 
   describe 'GET /new' do
     it 'has a successful response' do
       get new_content_partner_harvest_definition_path(content_partner)
+
+      expect(response.status).to eq 200
+    end
+  end
+
+  describe 'GET /show' do
+    it 'has a successful response' do
+      get content_partner_harvest_definition_path(content_partner, harvest_definition)
 
       expect(response.status).to eq 200
     end
@@ -133,6 +142,14 @@ RSpec.describe 'HarvestDefinitions', type: :request do
       delete content_partner_harvest_definition_path(content_partner, harvest_definition)
 
       expect(response).to redirect_to content_partner_path(content_partner)
+    end
+
+    it 'does not delete the harvest definition if something has gone wrong' do
+      allow_any_instance_of(HarvestDefinition).to receive(:destroy).and_return(false)
+      
+      delete content_partner_harvest_definition_path(content_partner, harvest_definition)
+
+      expect(response).to redirect_to content_partner_harvest_definition_path(content_partner, harvest_definition)
     end
   end
 end

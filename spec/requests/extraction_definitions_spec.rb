@@ -3,8 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe 'ExtractionDefinitions', type: :request do
-  let(:content_partner) { create(:content_partner) }
+  let(:content_partner)        { create(:content_partner) }
   let!(:extraction_definition) { create(:extraction_definition, content_partner:) }
+  let!(:ed_copy)               { create(:extraction_definition, original_extraction_definition: extraction_definition) }
+  let!(:harvest_definition)     { create(:harvest_definition, extraction_definition: ed_copy) }
 
   describe '#show' do
     it 'renders a specific extraction definition' do
@@ -12,6 +14,13 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
 
       expect(response.status).to eq 200
       expect(response.body).to include extraction_definition.name
+    end
+
+    it 'fetches the copies of a specific extraction_definition' do
+      get content_partner_extraction_definition_path(extraction_definition.content_partner, extraction_definition)
+
+      expect(response.status).to eq 200
+      expect(response.body).to include ed_copy.name
     end
   end
 
