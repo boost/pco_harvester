@@ -3,13 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe HarvestDefinition, type: :model do
-  let(:content_partner) { create(:content_partner, :ngataonga) }
-  let(:extraction_definition) { content_partner.extraction_definitions.first }
-  let(:extraction_job) { create(:extraction_job, extraction_definition:) }
-  let(:transformation_definition) { create(:transformation_definition, content_partner:, extraction_job:) }
-  let(:destination) { create(:destination) }
-
-  let(:subject) do
+  subject do
     create(
       :harvest_definition,
       name: 'Staging Harvest',
@@ -20,6 +14,13 @@ RSpec.describe HarvestDefinition, type: :model do
       destination:
     )
   end
+
+  let(:content_partner) { create(:content_partner, :ngataonga) }
+  let(:extraction_definition) { content_partner.extraction_definitions.first }
+  let(:extraction_job) { create(:extraction_job, extraction_definition:) }
+  let(:transformation_definition) { create(:transformation_definition, content_partner:, extraction_job:) }
+  let(:destination) { create(:destination) }
+
 
   describe '#attributes' do
     it 'has a name' do

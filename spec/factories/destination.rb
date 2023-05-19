@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :destination do
-    name { 'API' }
+    name { Faker::Company.name }
     url  { 'www.google.co.nz' }
     api_key { 'testkey' }
   end

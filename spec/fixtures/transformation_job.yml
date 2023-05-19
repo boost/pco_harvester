@@ -1,0 +1,19 @@
+figshare_1:
+  status: completed
+  page: 1
+  start_time: <%= 30.minutes.ago %>
+  end_time: <%= 29.minutes.ago %>
+  records_transformed: 10
+  transformation_definition: figshare
+  harvest_job: figshare
+  extraction_job: figshare_full
+
+figshare_2:
+  status: completed
+  page: 2
+  start_time: <%= 29.minutes.ago %>
+  end_time: <%= 28.minutes.ago %>
+  records_transformed: 10
+  transformation_definition: figshare
+  harvest_job: figshare
+  extraction_job: figshare_full

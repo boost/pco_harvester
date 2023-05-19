@@ -2,9 +2,10 @@
 
 FactoryBot.define do
   factory :harvest_definition do
+    name { Faker::Company.name }
+
     association :content_partner
     association :extraction_definition
-    association :extraction_job
     association :transformation_definition
     association :destination
   end
