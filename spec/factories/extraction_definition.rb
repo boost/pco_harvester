@@ -25,6 +25,19 @@ FactoryBot.define do
       total_selector { '$..result_count' }
     end
 
+    trait :figshare do
+      name     { 'api.figshare.com' }
+      format   { 'JSON' }
+      base_url { 'https://api.figshare.com/v1/articles/search?search_for=zealand' }
+      throttle { 1000 }
+      pagination_type { 'page' }
+      page_parameter { 'page' }
+      page { 1 }
+      per_page { 10 }
+      total_selector { '$.items_found' }
+      per_page_parameter { 'itemsPerPage' }
+    end
+
     association :content_partner
   end
 end

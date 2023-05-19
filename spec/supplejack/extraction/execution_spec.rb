@@ -76,9 +76,11 @@ RSpec.describe Extraction::Execution do
     end
 
     context 'when the job is part of a harvest' do
-      let(:ej) { extraction_jobs(:figshare_full) }
-      let(:sample_ej) { extraction_jobs(:figshare_sample) }
-      let(:ed) { extraction_definitions(:figshare) }
+      let(:ej)  { create(:extraction_job) }
+      let(:sample_ej) { create(:extraction_job, :sample) }
+      let(:ed)  { create(:extraction_definition, :figshare) }
+      let!(:hj) { create(:harvest_job, extraction_job: ej) }
+      let!(:sample_hj) { create(:harvest_job, extraction_job: sample_ej) }
 
       before do
         stub_figshare_harvest_requests(ed)
@@ -86,10 +88,6 @@ RSpec.describe Extraction::Execution do
       end
 
       context 'when it is a full harvest' do
-        before do
-          ej.create_folder
-        end
-
         let(:subject) { described_class.new(ej, ed) }
 
         it 'creates TransformationJobs for each page' do
@@ -105,10 +103,6 @@ RSpec.describe Extraction::Execution do
       end
       
       context 'when it is a sample harvest' do
-        before do
-          sample_ej.create_folder
-        end
-
         let(:subject) { described_class.new(sample_ej, ed) }
     
         it 'creates TransformationJobs for the first page' do
