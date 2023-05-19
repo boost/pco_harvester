@@ -30,6 +30,8 @@ class ExtractionJob < ApplicationRecord
   #
   # @return [true, false] depending on success of the folder creation
   def create_folder
+    return if Dir.exist?(extraction_folder)
+
     Dir.mkdir(extraction_folder)
   end
 

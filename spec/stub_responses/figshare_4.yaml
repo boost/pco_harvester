@@ -1,0 +1,316 @@
+---
+status: 200
+headers:
+  date: Fri, 19 May 2023 02:07:05 GMT
+  content-type: application/json
+  transfer-encoding: chunked
+  connection: keep-alive
+  server: nginx
+  vary: Accept-Encoding
+  access-control-allow-origin: https://api.figshare.com
+  access-control-allow-methods: GET, POST, PUT, DELETE, OPTIONS
+  access-control-allow-headers: Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization
+  access-control-max-age: '3600'
+  content-encoding: gzip
+body: |-
+  {
+    "items_found": 24906,
+    "page_nr": 4,
+    "items": [
+      {
+        "article_id": 22944686,
+        "title": "Indigenous peoples and saltwater / freshwater governance",
+        "DOI": null,
+        "description": "From an Indigenous worldview, land and water are one. This separation of how the law ‘deals’ with land and sea is a Western construct. We can see that ‘deconstructing aqua nullius’ - both in terms of salt and freshwater - continues to be a major cultural and governance challenge. This challenge is particularly apparent when we are considering Indigenous environmental governance of saltwater and freshwater. In February 2016, we convened an international workshop in Tasmania, on the land and water of the Mouheneenner people, to explore these and other issues in the relationships between Indigenous peoples and their marine and freshwater environments, and the role of law in mediating those relationships. Entitled ‘Indigenous Peoples and Saltwater/ Freshwater Governance for a Sustainable Future’, this gathering featured Indigenous and non-Indigenous speakers, of diverse academic and community backgrounds, from Aotearoa/New Zealand, Canada and the United States, as well as presenters from across Australia.",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22944686",
+        "published_date": "23:10, 18 May, 2023",
+        "authors": [
+          {
+            "author_name": "Butterly, L"
+          },
+          {
+            "author_name": "Benjamin Richardson"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "23:10, 18 May, 2023"
+      },
+      {
+        "article_id": 22944683,
+        "title": "Native ecosystem engineer facilitates recruitment of invasive crab and native invertebrates",
+        "DOI": null,
+        "description": "Native ecosystem engineers that add physical structure to ecosystems can facilitate invasive species. In this study we determined the effects of the native tube-forming serpulid worm, <em>Galeolaria caespitose</em> on the recruitment of the invasive New Zealand porcelain crab, <em>Petrolisthes elongatus</em>, and whether invasive crab recruitment was related to the recruitment of native species. <em>P. elongatus</em> is abundant beneath intertidal rocks around Tasmania, southern Australia, and the underside of these rocks is usually covered with a calcareous matrix formed by the serpulid. We used an experimental approach to investigate whether rocks, serpulids on the underside of rocks and adult <em>P. elongatus</em> influenced the recruitment <em>P. elongatus</em> and native communities. <em>P. elongatus</em> and native invertebrates only recruited in the presence of rocks indicating the importance of rock as primary recruitment habitat. Moreover, the presence of serpulids on the underside of rocks significantly increased the recruitment of <em>P. elongatus</em> and native invertebrates compared to rocks without serpulids. Rocks with higher densities of adult <em>P. elongatus</em> at the end of the experiment also had higher densities of <em>P. elongatus</em> recruits. The density of <em>P. elongatus</em> recruits did not influence native species richness and abundance although there was some evidence that high <em>P. elongatus</em> recruitment was correlated with shifts in native community structure. We have shown that a native ecosystem engineer facilitates recruitment of an invasive crab but this does not appear to influence the recruitment of native species.",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22944683",
+        "published_date": "23:10, 18 May, 2023",
+        "authors": [
+          {
+            "author_name": "Jeffrey Wright"
+          },
+          {
+            "author_name": "Gribben, PE"
+          },
+          {
+            "author_name": "Latzel, S"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "23:10, 18 May, 2023"
+      },
+      {
+        "article_id": 22944674,
+        "title": "An assessment of the opportunities to improve strategic decision-making in emergency and disaster management",
+        "DOI": null,
+        "description": "<p>The management of major emergencies is strongly influenced by the decisions made during the event. Decisions guide the distribution and subsequent deployment of assets, the removal of people from harm’s way, how objectives are established and a myriad of other actions. Decision-making is therefore an important skill for emergency managers that permeates every emergency event and every level of disaster management. The vast majority of decisions made during an incident are effective enough in both process and outcome, but the drive for continual improvement and the need to manage more extreme events requires decision-making to become sophisticated and to achieve even higher levels of reliability. </p>    <p>So how well are emergency management organisations integrating acknowledged developments in the understanding of decisionmaking? Where are the opportunities for continual improvement? What are some of the challenges that the expert decision-maker is required to balance across an event? </p>    <p>This paper examines key concepts that have progressed the understanding of decision-making. A review of preliminary interactions with end-users of the Bushfire and Natural Hazards CRC (CRC) research project ‘Practical decision tools for improved decision-making in complex situations’ considers how Australian and New Zealand are using this knowledge to make decisions. Opportunities for improvement and the approaches being taken to evaluate cognitive decision tools for end-users are identified.</p>",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22944674",
+        "published_date": "23:09, 18 May, 2023",
+        "authors": [
+          {
+            "author_name": "Benjamin Brooks"
+          },
+          {
+            "author_name": "Steven Curnin"
+          },
+          {
+            "author_name": "Bearman, C"
+          },
+          {
+            "author_name": "Christine Owen"
+          },
+          {
+            "author_name": "Rainbird, S"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "23:09, 18 May, 2023"
+      },
+      {
+        "article_id": 22922291,
+        "title": "‘QUICKDASH’ TO FIND UNIQUE GENES AND BIOLOGICAL PROCESSES ASSOCIATED WITH SHOULDER OSTEOARTHRITIS: A PROSPECTIVE CASE-CONTROL STUDY",
+        "DOI": null,
+        "description": "Osteoarthritis (OA) is a disease of the synovial joint with synovial inflammation, capsular contracture, articular cartilage degradation, subchondral sclerosis and osteophyte formation contributing to pain and disability. Transcriptomic datasets have identified genetic loci in hip and knee OA demonstrating joint specificity. A limited number of studies have directly investigated transcriptional changes in shoulder OA. Further, gene expression patterns of periarticular tissues in OA have not been thoroughly investigated. This prospective case control series details transcriptomic expression of shoulder OA by analysing periarticular tissues in patients undergoing shoulder replacement for OA as correlated with a validated patient reported outcome measure of shoulder function, an increasing (clinically worsening) QuickDASH score. We then compared transcriptomic expression profiles in capsular tissue biopsies from the OA group (N=6) as compared to patients undergoing shoulder stabilisation for recurrent instability (the control group, N=26). Results indicated that top ranked genes associated with increasing QuickDASH score across all tissues involved inflammation and response to stress, namely interleukins, chemokines, complement components, nuclear response factors and immediate early response genes. Some of these genes were upregulated, and some downregulated, suggestive of a state of flux between inflammatory and anti-inflammatory signalling pathways. We have also described gene expression pathways in shoulder OA not previously identified in hip and knee OA, as well as novel genes involved in shoulder OA.",
+        "type": "conference contribution",
+        "url": "https://api.figshare.com/v1/articles/22922291",
+        "published_date": "23:05, 18 May, 2023",
+        "authors": [
+          {
+            "author_name": "SJ Lynskey"
+          },
+          {
+            "author_name": "M Ziemann"
+          },
+          {
+            "author_name": "N Jamnick"
+          },
+          {
+            "author_name": "SD Gill"
+          },
+          {
+            "author_name": "Sean Mcgee"
+          },
+          {
+            "author_name": "Luba Sominsky"
+          },
+          {
+            "author_name": "Richard Page"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "conference contribution",
+        "modified_date": "23:05, 18 May, 2023"
+      },
+      {
+        "article_id": 22922366,
+        "title": "DOES HEALTHCARE SETTING INFLUENCE OUTCOMES FOLLOWING SHOULDER ARTHROPLASTY?",
+        "DOI": null,
+        "description": "DOES HEALTHCARE SETTING INFLUENCE OUTCOMES FOLLOWING SHOULDER ARTHROPLASTY?",
+        "type": "conference contribution",
+        "url": "https://api.figshare.com/v1/articles/22922366",
+        "published_date": "23:05, 18 May, 2023",
+        "authors": [
+          {
+            "author_name": "Nick Paltoglou"
+          },
+          {
+            "author_name": "Richard Page"
+          },
+          {
+            "author_name": "Stephen Gill"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "conference contribution",
+        "modified_date": "23:05, 18 May, 2023"
+      },
+      {
+        "article_id": 22922471,
+        "title": "TOTAL SHOULDER ARTHROPLASTY STEMS IN OSTEOARTHRITIS: SHORT, LONG OR REVERSE? AN ANALYSIS OF THE IMPACT OF CROSS-LINKED POLYETHYLENE",
+        "DOI": null,
+        "description": "TOTAL SHOULDER ARTHROPLASTY STEMS IN OSTEOARTHRITIS: SHORT, LONG OR REVERSE? AN ANALYSIS OF THE IMPACT OF CROSS-LINKED POLYETHYLENE",
+        "type": "conference contribution",
+        "url": "https://api.figshare.com/v1/articles/22922471",
+        "published_date": "23:05, 18 May, 2023",
+        "authors": [
+          {
+            "author_name": "Michael Sandow"
+          },
+          {
+            "author_name": "Richard Page"
+          },
+          {
+            "author_name": "Alisha Hatton"
+          },
+          {
+            "author_name": "Y Peng"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "conference contribution",
+        "modified_date": "23:05, 18 May, 2023"
+      },
+      {
+        "article_id": 22944491,
+        "title": "Outlier SNPs enable food traceability of the southern rock lobster, Jasus edwardsii",
+        "DOI": null,
+        "description": "Recent advances in next-generation sequencing have enhanced the resolution of population genetic studies of non-model organisms through increased marker generation and sample throughput. Using double digest restriction site-associated DNA sequencing (ddRADseq), we investigated the population structure of the commercially important southern rock lobster, <em>Jasus edwardsii,</em> in Australia and New Zealand with the aim of identifying a panel of SNP markers that could be used to trace country of origin. Four ddRADseq libraries comprising a total of 88 individuals were sequenced on the Illumina MiSeq platform, and demultiplexed reads were used to create a reference catalog of loci. Individual reads were then mapped to the reference catalog, and variant calling was performed. We have characterized two single-nucleotide polymorphism (SNP) panels comprised in total of 656 SNPs. The first panel contained 535 neutral SNPs and the second, 121 outlier SNPs that were characteristic of being putatively under selection. Both neutral and outlier SNP panels showed significant differentiation between the two countries, with the outlier loci demonstrating much larger <em>F</em><sub>ST</sub> values (<em>F</em><sub>ST</sub> outlier SNP panel = 0.134, <em>P</em> < 0.0001; <em>F</em><sub>ST</sub> neutral SNP panel = 0.022, <em>P</em> < 0.0001). Assignment tests performed with the outlier SNP panel allocated 100 % of the individuals to country of origin, demonstrating the usefulness of these markers for food traceability of <em>J. edwardsii</em>.",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22944491",
+        "published_date": "23:00, 18 May, 2023",
+        "authors": [
+          {
+            "author_name": "Villacorta-Rath, C"
+          },
+          {
+            "author_name": "Ilyushkina, I"
+          },
+          {
+            "author_name": "Strugnell, JM"
+          },
+          {
+            "author_name": "Bridget Green"
+          },
+          {
+            "author_name": "Murphy, NP"
+          },
+          {
+            "author_name": "Doyle, SR"
+          },
+          {
+            "author_name": "Hall, NE"
+          },
+          {
+            "author_name": "Robinson, AJ"
+          },
+          {
+            "author_name": "Bell, JJ"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "23:00, 18 May, 2023"
+      },
+      {
+        "article_id": 22944488,
+        "title": "Differing environmental drivers of settlement across the range of southern rock lobster (Jasus edwardsii) suggest resilience of the fishery to climate change",
+        "DOI": null,
+        "description": "Temporal and spatial trends in settlement of the southern rock lobster, <em>Jasus edwardsii</em>, were examined to identify the influence of environmental variables over different spatial scales. Settlement data were collected from 1994 to 2011 along the Southern Australian and New Zealand coasts. We identified common settlement trends at a regional scale (100–500 km): the magnitude of settlement at sites from South Australia (SA) and Victoria (VIC) were similar, but different to sites in Tasmania (TAS). In New Zealand, three spatial regions were identified: northern (NNZ), middle (MNZ) and southern regions (SNZ). Higher settlement in SA, VIC and MNZ occurred in years with higher rainfall and storms in spring and El Niño conditions. In TAS and SNZ, higher settlement occurred during La Niña conditions. These results suggest that settlement over regional scales is modulated by oceanic processes, but outcomes vary between regions. At a local scale, a higher wave period and wind relaxation were relatively more important than the sea surface temperature (SST) in SA and VIC. In TAS, the current velocity also influenced the strength of settlement. However, much of the local settlement variability was not explained by the models suggesting that settlement in <em>J. edwardsii</em> is a complex process where larval behaviour, biological factors and oceanographic processes interact over different scales. The apparently complex processes affecting settlement showed that environmental conditions that reduced settlement strength in one region of the fishery often increased settlement strength in other regions. This could provide resilience to climate change at the stock level.",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22944488",
+        "published_date": "23:00, 18 May, 2023",
+        "authors": [
+          {
+            "author_name": "Hinojosa, IA"
+          },
+          {
+            "author_name": "Caleb Gardner"
+          },
+          {
+            "author_name": "Bridget Green"
+          },
+          {
+            "author_name": "Jeffs, A"
+          },
+          {
+            "author_name": "Rafael Leon"
+          },
+          {
+            "author_name": "Linnane, A"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "23:00, 18 May, 2023"
+      },
+      {
+        "article_id": 22944434,
+        "title": "Positive beliefs about anorexia nervosa and muscle dysmorphia are associated with eating disorder symptomatology",
+        "DOI": null,
+        "description": "<p><strong>OBJECTIVE:</strong>  The ego-syntonic nature of anorexia nervosa means that sufferers often deny their symptoms or experience them as positive or comforting. Positive beliefs about eating disorder symptoms may contribute to the development and/or maintenance of eating-disordered behaviour. To date, however, research in this field has been confined to women and anorexia nervosa. Given increasing scientific interest in muscle dysmorphia, a potential eating disorder with ego-syntonic qualities, there is a need to extend current research to include men and muscle dysmorphia. The present study examined whether positive beliefs about anorexia nervosa and muscle dysmorphia were associated with more marked eating disorder symptoms and explored sex differences in these associations.</p>    <p><strong>METHOD:</strong>  Male and female university students (n = 492) read descriptions of a male or female character with clinically significant symptoms of anorexia nervosa or muscle dysmorphia. Participants subsequently answered questions about the characters and completed a measure of disordered eating. Knowledge, personal history and interpersonal familiarity with the conditions were assessed.</p>    <p><strong>RESULTS:</strong>  Results from two simultaneous multiple regressions showed that more positive beliefs about anorexia nervosa and muscle dysmorphia were uniquely associated with more eating disorder symptoms for both male and female participants. Effect sizes for these relationships were medium to large (partial eta-squared = 0.09-0.10). The relationships were not moderated by the sex of the participant, nor the sex of the character.</p>    <p><strong>CONCLUSIONS:</strong>  Although preliminary, these findings suggest that, among young men and women, positive beliefs about anorexia nervosa and muscle dysmorphia may contribute to the development and maintenance of these conditions. Some symptoms of muscle dysmorphia may be perceived as ego-syntonic, providing another parallel with anorexia nervosa.</p>",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22944434",
+        "published_date": "22:57, 18 May, 2023",
+        "authors": [
+          {
+            "author_name": "Griffiths, S"
+          },
+          {
+            "author_name": "Jon Mond"
+          },
+          {
+            "author_name": "Murray, SB"
+          },
+          {
+            "author_name": "Touyz, S"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "22:57, 18 May, 2023"
+      },
+      {
+        "article_id": 22944080,
+        "title": "Suicidal women may risk their lives but not their social relationships",
+        "DOI": null,
+        "description": "<strong>Objective:</strong>     Risk-taking is an important but understudied suicidal factor, particularly concerning women. This study examined a broad range of risk behaviours and perceptions that might aid the early detection of suicidality by clinicians and gatekeepers.<p></p>    <p><strong>Method:</strong>     A purposive anonymous online survey, preferable for collecting data on stigmatised issues, produced a sample of 273 Australian/New Zealand women (aged 18–67 years) covering a broad spectrum of suicidal factors and risk-taking behaviours. Participants completed items on risk-taking perceptions and behavioural willingness, and the Suicidal Affect-Behavior-Cognition Scale. Demographic factors were controlled for in partial correlations and hierarchical regression modelling, which tested the validity of risk-taking variables as predictors of suicidality.</p>    <p><strong>Results:</strong>     Suicidality was positively associated with willingness to engage in infidelity, not wearing seatbelts or motorcycle helmets, and negatively associated with interpersonal risk-taking (unwillingness to endanger social relationships). Hierarchical regression modelling revealed these risk-taking perceptions and behaviours explained 34% of the variance in women's suicidality, after accounting for age and ethnicity.</p>    <p><strong>Conclusions:</strong>     This study demonstrated that some types of commonplace risk-taking, or avoidance, may serve as important indicators or warning signs for suicidal crises in women. Clinicians should consider possible underlying psychological distress when encountering these symptoms and behaviours.</p>",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22944080",
+        "published_date": "22:37, 18 May, 2023",
+        "authors": [
+          {
+            "author_name": "Pasculli, AJ"
+          },
+          {
+            "author_name": "Harris, KM"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "22:37, 18 May, 2023"
+      }
+    ]
+  }
