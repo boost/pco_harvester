@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe HarvestJob, type: :model do
-  subject(:harvest_job) { harvest_jobs(:figshare) }
+  let(:harvest_job) { create(:harvest_job, :completed) }
 
   describe '#duration_seconds' do
     it 'returns nil if extraction_job is nil' do
