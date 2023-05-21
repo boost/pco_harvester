@@ -40,4 +40,12 @@ FactoryBot.define do
 
     association :content_partner
   end
+
+  trait :harvest do
+    kind { 0 }
+  end
+
+  trait :enrichment do
+    kind { 1 }
+  end
 end

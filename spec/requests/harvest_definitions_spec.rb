@@ -146,7 +146,7 @@ RSpec.describe 'HarvestDefinitions', type: :request do
 
     it 'does not delete the harvest definition if something has gone wrong' do
       allow_any_instance_of(HarvestDefinition).to receive(:destroy).and_return(false)
-      
+
       delete content_partner_harvest_definition_path(content_partner, harvest_definition)
 
       expect(response).to redirect_to content_partner_harvest_definition_path(content_partner, harvest_definition)

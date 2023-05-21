@@ -17,7 +17,7 @@ class TransformationDefinition < ApplicationRecord
     foreign_key: 'original_transformation_definition_id',
     inverse_of: 'original_transformation_definition'
   )
-  
+
   default_scope { where(original_transformation_definition_id: nil) }
 
   validates :name, presence: true, uniqueness: { scope: :content_partner_id }

@@ -37,7 +37,7 @@ class ExtractionDefinitionsController < ApplicationController
       render 'edit'
     end
   end
- 
+
   def update_harvest_definitions
     @extraction_definition.copies.each do |copy|
       harvest_definition = HarvestDefinition.find_by(extraction_definition: copy)

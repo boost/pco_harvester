@@ -6,7 +6,7 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
   let(:content_partner)        { create(:content_partner) }
   let!(:extraction_definition) { create(:extraction_definition, content_partner:) }
   let!(:ed_copy)               { create(:extraction_definition, original_extraction_definition: extraction_definition) }
-  let!(:harvest_definition)     { create(:harvest_definition, extraction_definition: ed_copy) }
+  let!(:harvest_definition) { create(:harvest_definition, extraction_definition: ed_copy) }
 
   describe '#show' do
     it 'renders a specific extraction definition' do

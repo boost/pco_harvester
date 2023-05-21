@@ -4,6 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'HarvestJobs', type: :request do
   subject!                    { create(:harvest_job, harvest_definition:) }
+
   let(:extraction_job)        { create(:extraction_job, extraction_definition:, harvest_job: subject) }
   let(:content_partner)       { create(:content_partner, :figshare) }
   let(:harvest_definition)    { content_partner.harvest_definitions.first }

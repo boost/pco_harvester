@@ -22,7 +22,7 @@ RSpec.describe Extraction::Execution do
 
       it 'saves the full response from the content partner to the filesystem' do
         subject.call
-        
+
         expect(File.exist?(full_job.extraction_folder)).to eq true
         extracted_files = Dir.glob("#{full_job.extraction_folder}/*").select { |e| File.file? e }
 
@@ -76,7 +76,7 @@ RSpec.describe Extraction::Execution do
     end
 
     context 'when the job is part of a harvest' do
-      let(:ej)  { create(:extraction_job) }
+      let(:ej) { create(:extraction_job) }
       let(:sample_ej) { create(:extraction_job, :sample) }
       let(:ed)  { create(:extraction_definition, :figshare) }
       let!(:hj) { create(:harvest_job, extraction_job: ej) }
@@ -101,17 +101,17 @@ RSpec.describe Extraction::Execution do
           subject.call
         end
       end
-      
+
       context 'when it is a sample harvest' do
         let(:subject) { described_class.new(sample_ej, ed) }
-    
+
         it 'creates TransformationJobs for the first page' do
           expect { subject.call }.to change(TransformationJob, :count).by(1)
           expect(TransformationJob.last(1).map(&:page)).to eq [1]
         end
 
         it 'enqueues 1 TransformationWorker in sidekiq' do
-          expect(TransformationWorker).to receive(:perform_async).exactly(1).times.and_call_original
+          expect(TransformationWorker).to receive(:perform_async).once.and_call_original
 
           subject.call
         end

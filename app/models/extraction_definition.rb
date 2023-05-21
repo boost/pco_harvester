@@ -6,6 +6,8 @@ class ExtractionDefinition < ApplicationRecord
   belongs_to :content_partner
   has_many :extraction_jobs
 
+  KINDS = %w[harvest enrichment].freeze
+  enum :kind, KINDS
 
   # feature allows editing an extraction definition  without impacting a running harvest
   belongs_to(

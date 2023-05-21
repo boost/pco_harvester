@@ -96,10 +96,25 @@ RSpec.describe ExtractionDefinition, type: :model do
 
   describe 'default_scope' do
     let(:extraction_definition) { create(:extraction_definition, :ngataonga) }
-    let(:copy_ed)               { create(:extraction_definition, original_extraction_definition: extraction_definition) }
+    let(:copy_ed)               do
+      create(:extraction_definition, original_extraction_definition: extraction_definition)
+    end
 
     it 'does not return extraction definition copies' do
-      expect(ExtractionDefinition.all).not_to include(copy_ed)    
+      expect(ExtractionDefinition.all).not_to include(copy_ed)
+    end
+  end
+
+  describe 'type' do
+    let(:harvest_ed) { create(:extraction_definition, :harvest) }
+    let(:enrichment_ed) { create(:extraction_definition, :enrichment) }
+
+    it 'can be a harvest' do
+      expect(harvest_ed.harvest?).to eq true
+    end
+
+    it 'can be an enrichment' do
+      expect(enrichment_ed.enrichment?).to eq true
     end
   end
 end

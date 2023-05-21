@@ -20,7 +20,6 @@ RSpec.describe HarvestDefinition, type: :model do
   let(:transformation_definition) { create(:transformation_definition, content_partner:, extraction_job:) }
   let(:destination) { create(:destination) }
 
-
   describe '#attributes' do
     it 'has a name' do
       expect(subject.name).to eq 'Staging Harvest'
