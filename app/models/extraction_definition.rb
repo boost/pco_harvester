@@ -3,9 +3,12 @@
 # Used to store the inforamation for running an extraction
 #
 class ExtractionDefinition < ApplicationRecord
+  scope :harvests,    -> { where(kind: 0) }
+  scope :enrichments, -> { where(kind: 1) }
+
   belongs_to :content_partner
   has_many :extraction_jobs
-
+  
   KINDS = %w[harvest enrichment].freeze
   enum :kind, KINDS
 

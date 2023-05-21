@@ -16,8 +16,8 @@
 
 <div class="clearfix"></div>
 
-<%- if @extraction_definitions.any? %>
-  <%- @extraction_definitions.each do |extraction_definition| %>
+<%- if @harvest_extraction_definitions.any? %>
+<%- @harvest_extraction_definitions.each do |extraction_definition| %>
     <div class="border p-3 my-2">
       <span class="float-start">
         <%= extraction_definition.name %>
@@ -29,7 +29,7 @@
     </div>
   <%- end %>
 
-  <%= render 'shared/pagination_below_table', items: @extraction_definitions %>
+<%= render 'shared/pagination_below_table', items: @harvest_extraction_definitions %>
 <% else %>
   <p>There are currently no extraction definitions for <%= @content_partner.name_in_database %>.</p>
 <% end %>
@@ -85,6 +85,34 @@
   <%= render 'shared/pagination_below_table', items: @harvest_definitions %>
 <% else %>
   <p>There are currently no harvest definitions for <%= @content_partner.name_in_database %>.</p>
+<% end %>
+
+<h2 class="float-start">Enrichment Extraction Definitions</h2>
+
+<%= link_to new_content_partner_extraction_definition_path(@content_partner, '?type=enrichment'), class: 'btn btn-primary float-end' do %>
+  <%= bootstrap_icon('plus-circle') %>Add new Enrichment Extraction Definition
+<% end %>
+
+<div class="clearfix"></div>
+
+
+<%- if @enrichment_extraction_definitions.any? %>
+  <%- @enrichment_extraction_definitions.each do |extraction_definition| %>
+    <div class="border p-3 my-2">
+      <span class="float-start">
+        <%= extraction_definition.name %>
+      </span>
+
+      <%= link_to "Details", content_partner_extraction_definition_path(@content_partner, extraction_definition), class: "btn btn-outline-primary float-end" %>
+
+      <div class="clearfix"></div>
+    </div>
+  <%- end %>
+
+<%= render 'shared/pagination_below_table', items: @enrichment_extraction_definitions %>
+
+<% else %>
+  <p>There are currently no enrichment extraction definitions for <%= @content_partner.name_in_database %>.</p>
 <% end %>
 
 
