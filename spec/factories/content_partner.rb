@@ -10,5 +10,14 @@ FactoryBot.define do
         create(:extraction_definition, :ngataonga, content_partner:)
       end
     end
+
+    trait :figshare do
+      name { 'Figshare' }
+
+      after :create do |content_partner|
+        create(:harvest_definition, content_partner:)
+        create(:extraction_definition, content_partner:)
+      end
+    end
   end
 end
