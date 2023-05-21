@@ -18,8 +18,6 @@ class TransformationDefinition < ApplicationRecord
     inverse_of: 'original_transformation_definition'
   )
 
-  default_scope { where(original_transformation_definition_id: nil) }
-
   validates :name, presence: true, uniqueness: { scope: :content_partner_id }
 
   # Returns the records from the job based on the given record_selector

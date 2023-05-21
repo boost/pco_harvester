@@ -22,8 +22,6 @@ class ExtractionDefinition < ApplicationRecord
     inverse_of: 'original_extraction_definition'
   )
 
-  default_scope { where(original_extraction_definition_id: nil) }
-
   # find good regex or another implementation
   FORMAT_SELECTOR_REGEX_MAP = {
     JSON: /^\$\./,
