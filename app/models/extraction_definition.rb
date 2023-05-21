@@ -6,6 +6,7 @@ class ExtractionDefinition < ApplicationRecord
   belongs_to :content_partner
   has_many :extraction_jobs
 
+
   # feature allows editing an extraction definition  without impacting a running harvest
   belongs_to(
     :original_extraction_definition,
@@ -18,6 +19,8 @@ class ExtractionDefinition < ApplicationRecord
     foreign_key: 'original_extraction_definition_id',
     inverse_of: 'original_extraction_definition'
   )
+
+  default_scope { where(original_extraction_definition_id: nil) }
 
   # find good regex or another implementation
   FORMAT_SELECTOR_REGEX_MAP = {

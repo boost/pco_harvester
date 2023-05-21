@@ -53,4 +53,13 @@ RSpec.describe TransformationDefinition, type: :model do
   describe '#validations presence of' do
     it { is_expected.to validate_presence_of(:name).with_message("can't be blank") }
   end
+  
+  describe 'default_scope' do
+    let(:transformation_definition) { create(:transformation_definition) }
+    let(:copy_td)                   { create(:transformation_definition, original_transformation_definition: transformation_definition) }
+
+    it 'does not return transformation definition copies' do
+      expect(TransformationDefinition.all).not_to include(copy_td)    
+    end
+  end
 end

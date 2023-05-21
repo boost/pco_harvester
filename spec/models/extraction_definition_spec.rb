@@ -93,4 +93,13 @@ RSpec.describe ExtractionDefinition, type: :model do
       expect(subject.content_partner).to be_a ContentPartner
     end
   end
+
+  describe 'default_scope' do
+    let(:extraction_definition) { create(:extraction_definition, :ngataonga) }
+    let(:copy_ed)               { create(:extraction_definition, original_extraction_definition: extraction_definition) }
+
+    it 'does not return extraction definition copies' do
+      expect(ExtractionDefinition.all).not_to include(copy_ed)    
+    end
+  end
 end
