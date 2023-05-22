@@ -39,13 +39,16 @@ FactoryBot.define do
     end
 
     association :content_partner
-  end
 
-  trait :harvest do
-    kind { 0 }
-  end
+    trait :harvest do
+      kind { 0 }
+    end
 
-  trait :enrichment do
-    kind { 1 }
+    trait :enrichment do
+      kind { 1 }
+      source_id { 'test' }
+      enrichment_url { 'http://www.google.co.nz' }
+      throttle { 1000 }
+    end
   end
 end

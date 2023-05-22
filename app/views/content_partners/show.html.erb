@@ -10,7 +10,7 @@
 
 <h2 class="float-start">Extraction Definitions</h2>
 
-<%= link_to new_content_partner_extraction_definition_path(@content_partner), class: 'btn btn-primary float-end' do %>
+<%= link_to new_content_partner_extraction_definition_path(@content_partner, kind: 'harvest'), class: 'btn btn-primary float-end' do %>
   <%= bootstrap_icon('plus-circle') %>Add new Extraction Definition
 <% end %>
 
@@ -89,7 +89,7 @@
 
 <h2 class="float-start">Enrichment Extraction Definitions</h2>
 
-<%= link_to new_content_partner_extraction_definition_path(@content_partner, '?type=enrichment'), class: 'btn btn-primary float-end' do %>
+<%= link_to new_content_partner_extraction_definition_path(@content_partner, kind: 'enrichment'), class: 'btn btn-primary float-end' do %>
   <%= bootstrap_icon('plus-circle') %>Add new Enrichment Extraction Definition
 <% end %>
 

@@ -32,6 +32,7 @@ console.log(
 
 import * as bootstrap from "bootstrap";
 import "/js/TestExtraction";
+import "/js/TestRecordExtraction";
 import "/js/TestTransformation";
 import "/js/TestDestination";
 const tooltipTriggerList = document.querySelectorAll(

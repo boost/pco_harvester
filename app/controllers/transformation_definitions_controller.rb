@@ -7,9 +7,10 @@ class TransformationDefinitionsController < ApplicationController
 
   def show
     @fields = @transformation_definition.fields.map { |field| { id: field.id, name: field.name, block: field.block } }
+
     @related_harvest_definitions = @transformation_definition.copies.map do |copy|
       HarvestDefinition.find_by(transformation_definition_id: copy.id)
-    end
+    end.compact
 
     @props = {
       entities: {
@@ -88,6 +89,8 @@ class TransformationDefinitionsController < ApplicationController
   def update_harvest_definitions
     @transformation_definition.copies.each do |copy|
       harvest_definition = HarvestDefinition.find_by(transformation_definition: copy)
+      next if harvest_definition.nil?
+
       harvest_definition.update_transformation_definition_clone(@transformation_definition)
     end
 

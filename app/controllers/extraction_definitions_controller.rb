@@ -3,6 +3,7 @@
 class ExtractionDefinitionsController < ApplicationController
   before_action :find_content_partner
   before_action :find_extraction_definition, only: %i[show edit update destroy update_harvest_definitions]
+  before_action :find_destinations, only: %i[new create edit update]
 
   def show
     @extraction_jobs = paginate_and_filter_jobs(@extraction_definition.extraction_jobs)
@@ -13,7 +14,7 @@ class ExtractionDefinitionsController < ApplicationController
   end
 
   def new
-    @extraction_definition = ExtractionDefinition.new
+    @extraction_definition = ExtractionDefinition.new(kind: params[:kind])
   end
 
   def edit; end
@@ -54,6 +55,13 @@ class ExtractionDefinitionsController < ApplicationController
     render json: Extraction::DocumentExtraction.new(@extraction_definition).extract
   end
 
+  def test_record_extraction
+    @extraction_definition = ExtractionDefinition.new(extraction_definition_params)
+
+    records = Extraction::RecordExtraction.new(@extraction_definition).extract
+    render json: JSON.parse(records.body)['records']
+  end
+
   def destroy
     if @extraction_definition.destroy
       redirect_to content_partner_path(@content_partner), notice: 'Extraction Definition deleted successfully'
@@ -73,12 +81,17 @@ class ExtractionDefinitionsController < ApplicationController
     @extraction_definition = ExtractionDefinition.find(params[:id])
   end
 
+  def find_destinations
+    @destinations = Destination.all
+  end
+
   def extraction_definition_params
     params.require(:extraction_definition).permit(
       :content_partner_id,
       :name, :format, :base_url, :throttle, :pagination_type,
       :page_parameter, :per_page_parameter, :page, :per_page,
-      :total_selector
+      :total_selector,
+      :kind, :destination_id, :source_id, :enrichment_url
     )
   end
 end
