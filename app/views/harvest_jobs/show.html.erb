@@ -6,7 +6,7 @@
   <strong><%= @harvest_job.updated_at.to_fs(:verbose) %></strong>
 </div>
 
-<% if @harvest_job.extraction_job.queued? || @harvest_job.extraction_job.running? %>
+<% if @harvest_job&.extraction_job&.queued? || @harvest_job&.extraction_job&.running? %>
   <div class="float-end">
     <% cancel_path = cancel_content_partner_harvest_definition_harvest_job_path(@content_partner, @harvest_definition, @harvest_job) %>
     <%= button_to "Cancel job", cancel_path, class: "btn btn-outline-danger me-1", form_class: 'd-inline me-1' %>
