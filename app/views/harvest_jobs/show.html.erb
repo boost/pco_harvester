@@ -6,7 +6,7 @@
   <strong><%= @harvest_job.updated_at.to_fs(:verbose) %></strong>
 </div>
 
-<% if @harvest_job.extraction_job.queued? || @harvest_job.extraction_job.running? %>
+<% if @harvest_job&.extraction_job&.queued? || @harvest_job&.extraction_job&.running? %>
   <div class="float-end">
     <% cancel_path = cancel_content_partner_harvest_definition_harvest_job_path(@content_partner, @harvest_definition, @harvest_job) %>
     <%= button_to "Cancel job", cancel_path, class: "btn btn-outline-danger me-1", form_class: 'd-inline me-1' %>
@@ -109,10 +109,7 @@
             <th scope="row">Transformation Definition</th>
             <td>
               <% transformation_definition = @harvest_job.harvest_definition.transformation_definition %>
-              <%= link_to(
-                transformation_definition.name,
-                content_partner_transformation_definition_path(@harvest_job.content_partner, transformation_definition)
-              ) %>
+              <%= transformation_definition.name %>
             </td>
           </tr>
           <% TransformationJob.statuses.keys.each do |status| %>
