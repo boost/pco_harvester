@@ -5,28 +5,25 @@ require 'rails_helper'
 RSpec.describe 'ExtractionDefinitions', type: :request do
   let(:content_partner)        { create(:content_partner) }
   let!(:extraction_definition) { create(:extraction_definition, content_partner:) }
-  let!(:ed_copy)               { create(:extraction_definition, original_extraction_definition: extraction_definition) }
-  let!(:harvest_definition) { create(:harvest_definition, extraction_definition: ed_copy) }
+  let!(:harvest_definition) { create(:harvest_definition, extraction_definition: extraction_definition) }
 
   describe '#show' do
     it 'renders a specific extraction definition' do
       get content_partner_extraction_definition_path(extraction_definition.content_partner, extraction_definition)
-
       expect(response.status).to eq 200
       expect(response.body).to include extraction_definition.name
     end
 
-    it 'fetches the copies of a specific extraction_definition' do
+    it 'fetches the associated harvest_definitions' do
       get content_partner_extraction_definition_path(extraction_definition.content_partner, extraction_definition)
-
       expect(response.status).to eq 200
-      expect(response.body).to include ed_copy.name
+      expect(response.body).to include harvest_definition.name
     end
   end
 
   describe '#new' do
     it 'renders the new form' do
-      get new_content_partner_extraction_definition_path(content_partner, extraction_definition)
+      get new_content_partner_extraction_definition_path(content_partner, kind: 'harvest')
 
       expect(response.status).to eq 200
     end

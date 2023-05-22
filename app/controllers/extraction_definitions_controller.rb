@@ -10,7 +10,7 @@ class ExtractionDefinitionsController < ApplicationController
 
     @related_harvest_definitions = @extraction_definition.copies.map do |copy|
       HarvestDefinition.find_by(extraction_definition_id: copy.id)
-    end
+    end.compact
   end
 
   def new
