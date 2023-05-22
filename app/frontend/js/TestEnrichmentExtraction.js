@@ -1,3 +1,4 @@
+
 import { request } from "./utils/request";
 import { EditorState } from "@codemirror/state";
 import { EditorView, basicSetup } from "codemirror";
@@ -11,7 +12,7 @@ document.addEventListener(
       const FD = new FormData(form);
       FD.set("_method", "post");
 
-      const path = `${form.action.replace(/\/\d+$/, "")}/test_record_extraction`;
+      const path = `${form.action.replace(/\/\d+$/, "")}/test_enrichment_extraction`;
       // Fetches the response
       
       request.post(path, FD).then(function (response) {
@@ -23,14 +24,14 @@ document.addEventListener(
           parent: document.body,
         });
 
-        document.querySelector("#js-record-extraction-result").innerHTML = "";
+        document.querySelector("#js-enrichment-extraction-result").innerHTML = "";
         document
-          .querySelector("#js-record-extraction-result")
+          .querySelector("#js-enrichment-extraction-result")
           .append(record_selector_viewer_editor.dom);
       });
     }
 
-    const button = this.getElementById("js-test-record-extraction");
+    const button = this.getElementById("js-test-enrichment-extraction");
 
     if (button) {
       const form = button.closest("form");

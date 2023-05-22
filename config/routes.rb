@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :extraction_definitions, only: %i[show new create edit update destroy] do
       post :test, on: :collection
       post :test_record_extraction, on: :collection
+      post :test_enrichment_extraction, on: :collection
       post :update_harvest_definitions, on: :member
 
       resources :extraction_jobs, only: %i[show create destroy] do
