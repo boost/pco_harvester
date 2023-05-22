@@ -8,10 +8,9 @@ class ContentPartnersController < ApplicationController
   end
 
   def show
-    @harvest_extraction_definitions = @content_partner.extraction_definitions.harvests.order(created_at: :desc).page(params[:page])
-    @enrichment_extraction_definitions = @content_partner.extraction_definitions.enrichments.order(created_at: :desc).page(params[:page])
-
-    @transformation_definitions = @content_partner.transformation_definitions.order(created_at: :desc).page(params[:page])
+    @harvest_extraction_definitions = @content_partner.extraction_definitions.originals.harvests.order(created_at: :desc).page(params[:page])
+    @enrichment_extraction_definitions = @content_partner.extraction_definitions.originals.enrichments.order(created_at: :desc).page(params[:page])
+    @transformation_definitions = @content_partner.transformation_definitions.originals.order(created_at: :desc).page(params[:page])
 
     @harvest_definitions = @content_partner.harvest_definitions.order(created_at: :desc).page(params[:page])
   end

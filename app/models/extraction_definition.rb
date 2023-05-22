@@ -5,6 +5,7 @@
 class ExtractionDefinition < ApplicationRecord
   scope :harvests,    -> { where(kind: 0) }
   scope :enrichments, -> { where(kind: 1) }
+  scope :originals,   -> { where(original_extraction_definition: nil) }
 
   belongs_to :content_partner
   has_many :extraction_jobs
