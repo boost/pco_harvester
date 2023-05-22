@@ -8,12 +8,12 @@
 
   <div class="mb-3 col-12">
     <%= form.label :extraction_definition_id, 'Extraction Definition', class: "form-label" %>
-    <%= form.select :extraction_definition_id, options_from_collection_for_select(@content_partner.extraction_definitions, 'id', 'name'), {},  class: "form-select" %>
+    <%= form.select :extraction_definition_id, options_from_collection_for_select(@content_partner.extraction_definitions.where(original_extraction_definition: nil), 'id', 'name'), {},  class: "form-select" %>
   </div>
 
   <div class="mb-3 col-12">
     <%= form.label :transformation_definition_id, 'Transformation Definition', class: "form-label" %>
-    <%= form.select :transformation_definition_id, options_from_collection_for_select(@content_partner.transformation_definitions, 'id', 'name'), {},  class: "form-select" %>
+    <%= form.select :transformation_definition_id, options_from_collection_for_select(@content_partner.transformation_definitions.where(original_transformation_definition: nil), 'id', 'name'), {},  class: "form-select" %>
   </div>
 
   <div class="mb-3 col-12">
