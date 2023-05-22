@@ -50,7 +50,7 @@
         <%= form.hidden_field :harvest_definition_id, value: @harvest_definition.id %>
         <div class="mb-3">
           <%= form.label :extraction_job, 'Choose the extraction job:', class: "form-label" %>
-          <%= form.collection_select(:extraction_job_id, @harvest_definition.extraction_definition.extraction_jobs, :id, :name, {}, class: 'form-select') %>
+          <%= form.collection_select(:extraction_job_id, @harvest_definition.extraction_definition.original_extraction_definition.extraction_jobs, :id, :name, {}, class: 'form-select') %>
         </div>
       </div>
       <div class="modal-footer">
