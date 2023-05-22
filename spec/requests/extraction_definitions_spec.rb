@@ -145,6 +145,83 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
     end
   end
 
+  describe '#test_record_extraction' do
+    let(:destination) { create(:destination) }
+    let(:ed) { create(:extraction_definition, :enrichment, destination:) }
+    
+    before do
+     stub_request(:get, "#{destination.url}/harvester/records").
+       with(
+        query: {
+          'api_key' => 'testkey',
+          'search' => {
+              'fragments.source_id' => 'test'
+            },
+          'search_options' => {
+              'page' => 1
+            }
+        },
+        headers: fake_json_headers
+        ).to_return(fake_response('test_api_records'))
+    end
+
+    it 'returns a document extraction of API records' do
+      post test_record_extraction_content_partner_extraction_definitions_path(content_partner), params: {
+        extraction_definition: ed.attributes
+      }
+
+      expect(response.status).to eq 200
+
+      json_response = JSON.parse(response.body)['body']
+      records = JSON.parse(json_response)['records']
+
+      records.each do |record|
+        expect(record).to have_key('dc_identifier')        
+        expect(record).to have_key('internal_identifier')        
+      end
+    end
+  end
+
+  describe '#test_enrichment_extraction' do
+    let(:destination) { create(:destination) }
+    let(:ed) { create(:extraction_definition, :enrichment, destination:) }
+    
+    before do
+     stub_request(:get, "#{destination.url}/harvester/records").
+       with(
+        query: {
+          'api_key' => 'testkey',
+          'search' => {
+              'fragments.source_id' => 'test'
+            },
+          'search_options' => {
+              'page' => 1
+            }
+        },
+        headers: fake_json_headers
+        ).to_return(fake_response('test_api_records'))
+
+     stub_request(:get, "https://api.figshare.com/v1/articles/123").
+       with(headers: fake_json_headers).
+       to_return(fake_response('test_figshare_enrichment'))      
+    end
+
+    it 'returns a document extraction of data for an enrichment' do
+      post test_enrichment_extraction_content_partner_extraction_definitions_path(content_partner), params: {
+        extraction_definition: ed.attributes
+      }
+
+      expect(response.status).to eq 200
+
+      json_response = JSON.parse(response.body)['body']
+      records = JSON.parse(json_response)['items']
+
+      records.each do |record|
+        expect(record).to have_key('article_id')
+      end
+    end
+  end
+
   describe '#destroy' do
     it 'destroys the extraction definition' do
       delete content_partner_extraction_definition_path(content_partner, extraction_definition)
