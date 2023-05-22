@@ -109,10 +109,7 @@
             <th scope="row">Transformation Definition</th>
             <td>
               <% transformation_definition = @harvest_job.harvest_definition.transformation_definition %>
-              <%= link_to(
-                transformation_definition.name,
-                content_partner_transformation_definition_path(@harvest_job.content_partner, transformation_definition)
-              ) %>
+              <%= transformation_definition.name %>
             </td>
           </tr>
           <% TransformationJob.statuses.keys.each do |status| %>
