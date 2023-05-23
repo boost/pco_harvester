@@ -26,7 +26,7 @@ class HarvestJobsController < ApplicationController
       @harvest_job.extraction_job.cancelled!
       flash.notice = 'Harvest job cancelled successfully'
     else
-      flash.notice 'There was an issue cancelling the harvest job'
+      flash.alert = 'There was an issue cancelling the harvest job'
     end
 
     redirect_to content_partner_harvest_definition_path(@content_partner, @harvest_definition)
