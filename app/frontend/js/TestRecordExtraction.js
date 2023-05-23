@@ -1,4 +1,4 @@
-import { bindTestForm } from './utils/TestForm';
+import { bindTestForm } from './utils/test-form';
 import { EditorState } from "@codemirror/state";
 import { EditorView, basicSetup } from "codemirror";
 import { json } from "@codemirror/lang-json";

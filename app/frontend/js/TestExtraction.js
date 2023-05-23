@@ -1,4 +1,4 @@
-import { bindTestForm } from './utils/TestForm';
+import { bindTestForm } from './utils/test-form';
 
 bindTestForm('test', 'js-test-extraction', (response, alertClass) => {
    document.getElementById(
