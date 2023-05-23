@@ -38,7 +38,7 @@ module Extraction
     def file_path
       name_str = @extraction_definition.name.parameterize(separator: '_')
       page_str = format('%09d', @page)[-9..]
-      "#{@extraction_folder}/#{@record['id']}__#{page_str}.json"
+      "#{@extraction_folder}/#{name_str}__#{@record['id']}__#{page_str}.json"
     end
 
     def params; end
