@@ -5,7 +5,7 @@ class TransformationDefinition < ApplicationRecord
   belongs_to :extraction_job # used for previewing, needs to be refactored
   has_many :fields
 
-  scope :originals,   -> { where(original_transformation_definition: nil) }
+  scope :originals, -> { where(original_transformation_definition: nil) }
 
   # feature allows editing a transformation definition without impacting a running harvest
   belongs_to(

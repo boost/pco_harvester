@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe 'ExtractionDefinitions', type: :request do
   let(:content_partner)        { create(:content_partner) }
   let!(:extraction_definition) { create(:extraction_definition, content_partner:) }
-  let!(:harvest_definition) { create(:harvest_definition, extraction_definition: extraction_definition) }
+  let!(:harvest_definition) { create(:harvest_definition, extraction_definition:) }
 
   describe '#show' do
     it 'renders a specific extraction definition' do
@@ -145,20 +145,20 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
   describe '#test_record_extraction' do
     let(:destination) { create(:destination) }
     let(:ed) { create(:extraction_definition, :enrichment, destination:) }
-    
+
     before do
-     stub_request(:get, "#{destination.url}/harvester/records").
-       with(
-        query: {
-          'api_key' => 'testkey',
-          'search' => {
+      stub_request(:get, "#{destination.url}/harvester/records")
+        .with(
+          query: {
+            'api_key' => 'testkey',
+            'search' => {
               'fragments.source_id' => 'test'
             },
-          'search_options' => {
+            'search_options' => {
               'page' => 1
             }
-        },
-        headers: fake_json_headers
+          },
+          headers: fake_json_headers
         ).to_return(fake_response('test_api_records'))
     end
 
@@ -173,8 +173,8 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
       records = JSON.parse(json_response)['records']
 
       records.each do |record|
-        expect(record).to have_key('dc_identifier')        
-        expect(record).to have_key('internal_identifier')        
+        expect(record).to have_key('dc_identifier')
+        expect(record).to have_key('internal_identifier')
       end
     end
   end
@@ -182,25 +182,25 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
   describe '#test_enrichment_extraction' do
     let(:destination) { create(:destination) }
     let(:ed) { create(:extraction_definition, :enrichment, destination:) }
-    
+
     before do
-     stub_request(:get, "#{destination.url}/harvester/records").
-       with(
-        query: {
-          'api_key' => 'testkey',
-          'search' => {
+      stub_request(:get, "#{destination.url}/harvester/records")
+        .with(
+          query: {
+            'api_key' => 'testkey',
+            'search' => {
               'fragments.source_id' => 'test'
             },
-          'search_options' => {
+            'search_options' => {
               'page' => 1
             }
-        },
-        headers: fake_json_headers
+          },
+          headers: fake_json_headers
         ).to_return(fake_response('test_api_records'))
 
-     stub_request(:get, "https://api.figshare.com/v1/articles/123").
-       with(headers: fake_json_headers).
-       to_return(fake_response('test_figshare_enrichment'))      
+      stub_request(:get, 'https://api.figshare.com/v1/articles/123')
+        .with(headers: fake_json_headers)
+        .to_return(fake_response('test_figshare_enrichment'))
     end
 
     it 'returns a document extraction of data for an enrichment' do

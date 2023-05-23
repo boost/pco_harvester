@@ -10,7 +10,7 @@ class ExtractionDefinition < ApplicationRecord
   belongs_to :content_partner
   has_many :extraction_jobs
   belongs_to :destination, optional: true
-  
+
   KINDS = %w[harvest enrichment].freeze
   enum :kind, KINDS
 
@@ -39,12 +39,12 @@ class ExtractionDefinition < ApplicationRecord
   validates :throttle, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 60_000 }
 
   # Harvest related validation
-  validates :format, presence: true, inclusion: { in: %w[JSON HTML XML OAI] },            if: ->{ harvest? }
-  validates :base_url, presence: true, format: { with: URI::DEFAULT_PARSER.make_regexp }, if: ->{ harvest? }
-  validate :total_selector_format,                                                        if: ->{ harvest? }
+  validates :format, presence: true, inclusion: { in: %w[JSON HTML XML OAI] },            if: -> { harvest? }
+  validates :base_url, presence: true, format: { with: URI::DEFAULT_PARSER.make_regexp }, if: -> { harvest? }
+  validate :total_selector_format,                                                        if: -> { harvest? }
 
   # pagination fields
-  validates :pagination_type, presence: true, inclusion: { in: %w[item page] },           if: ->{ harvest? }
+  validates :pagination_type, presence: true, inclusion: { in: %w[item page] },           if: -> { harvest? }
 
   validates :page, numericality: { only_integer: true }
   validates :per_page, numericality: { only_integer: true }
@@ -52,9 +52,9 @@ class ExtractionDefinition < ApplicationRecord
 
   # Enrichment related validation
 
-  validates :destination_id, presence: true,                                              if: ->{ enrichment? }
-  validates :source_id, presence: true,                                                   if: ->{ enrichment? }
-  validates :enrichment_url, presence: true,                                              if: ->{ enrichment? }
+  validates :destination_id, presence: true,                                              if: -> { enrichment? }
+  validates :source_id, presence: true,                                                   if: -> { enrichment? }
+  validates :enrichment_url, presence: true,                                              if: -> { enrichment? }
 
   def total_selector_format
     return if FORMAT_SELECTOR_REGEX_MAP[format&.to_sym]&.match?(total_selector)

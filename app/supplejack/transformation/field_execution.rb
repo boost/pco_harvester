@@ -26,12 +26,12 @@ module Transformation
 
       # WebMock.disable! unless Rails.env.test?
 
-      # TODO 
+      # TODO
       # The source_id shouldnt need to be set through the Transformation App
       # The API is also not expecting it to be an array.
-      # Re home me to a more sensible place in the UI and then remove this code. 
+      # Re home me to a more sensible place in the UI and then remove this code.
       @value = @value.first if @field.name == 'source_id'
-      
+
       Transformation::Field.new(@field.id, @field.name, @value, @error)
     end
     # rubocop:enable Lint/UnusedBlockArgument

@@ -10,7 +10,7 @@ module Extraction
     end
 
     def extract
-      Sidekiq.logger.info "Fetching records from the Enrichment Source"
+      Sidekiq.logger.info 'Fetching records from the Enrichment Source'
       @document = Extraction::Request.new(url:, params:, headers:).get
     end
 
@@ -29,7 +29,7 @@ module Extraction
     private
 
     def url
-      block = ->(record) { eval(@extraction_definition.enrichment_url) }
+      block = ->(_record) { eval(@extraction_definition.enrichment_url) }
       block.call(@record)
     end
 

@@ -1,15 +1,15 @@
 module Extraction
   class RecordExtraction
-    attr_accessor :document 
+    attr_accessor :document
 
     def initialize(extraction_definition, page)
       @extraction_definition = extraction_definition
       @api_source            = extraction_definition.destination
       @page = page
     end
-    
+
     def extract
-      Sidekiq.logger.info "Fetching records from the API"
+      Sidekiq.logger.info 'Fetching records from the API'
       @document = Extraction::Request.new(url:, params:, headers:).get
     end
 
@@ -22,7 +22,7 @@ module Extraction
     def params
       {
         search: {
-          "fragments.source_id" => @extraction_definition.source_id,
+          'fragments.source_id' => @extraction_definition.source_id
         },
         search_options: {
           page: @page

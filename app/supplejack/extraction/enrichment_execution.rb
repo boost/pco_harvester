@@ -15,8 +15,8 @@ module Extraction
       return if @extraction_job.is_sample?
 
       (@extraction_definition.page...max_pages).each do
-        @extraction_definition.page += 1 
-        
+        @extraction_definition.page += 1
+
         re = RecordExtraction.new(@extraction_definition, @extraction_definition.page).extract
         records = JSON.parse(re.body)['records']
 

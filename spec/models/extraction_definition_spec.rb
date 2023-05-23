@@ -27,8 +27,9 @@ RSpec.describe ExtractionDefinition, type: :model do
     end
 
     context 'when the extraction definition is for an enrichment' do
-      let(:destination) { create(:destination) }
       subject! { create(:extraction_definition, :enrichment, content_partner: cp1, name: 'Flickr API', destination:) }
+
+      let(:destination) { create(:destination) }
 
       it { is_expected.to validate_presence_of(:name).with_message("can't be blank") }
       it { is_expected.to validate_presence_of(:throttle).with_message('is not a number') }
