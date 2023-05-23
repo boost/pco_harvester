@@ -45,11 +45,10 @@ class ExtractionDefinition < ApplicationRecord
 
   # pagination fields
   validates :pagination_type, presence: true, inclusion: { in: %w[item page] },           if: ->{ harvest? }
-  validates :page, numericality: { only_integer: true },                                  if: ->{ harvest? }
-  validates :per_page, numericality: { only_integer: true },                              if: ->{ harvest? }
 
-  validates :total_selector, presence: true,                                              if: ->{ harvest? }
-
+  validates :page, numericality: { only_integer: true }
+  validates :per_page, numericality: { only_integer: true }
+  validates :total_selector, presence: true
 
   # Enrichment related validation
 
