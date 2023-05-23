@@ -93,17 +93,14 @@ RSpec.describe ExtractionDefinition, type: :model do
       expect(subject.content_partner).to be_a ContentPartner
     end
   end
+  
+  describe '#kinds' do
+    KINDS = { harvest: 0, enrichment: 1 }
 
-  describe 'type' do
-    let(:harvest_ed) { create(:extraction_definition, :harvest) }
-    let(:enrichment_ed) { create(:extraction_definition, :enrichment) }
-
-    it 'can be a harvest' do
-      expect(harvest_ed.harvest?).to eq true
-    end
-
-    it 'can be an enrichment' do
-      expect(enrichment_ed.enrichment?).to eq true
+    KINDS.each do |key, value|
+      it "can be #{key}" do
+        expect(ExtractionDefinition.new(kind: value).kind).to eq(key.to_s)
+      end
     end
   end
 end
