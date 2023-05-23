@@ -19,7 +19,7 @@ document.addEventListener(
         let record_selector_viewer_editor = new EditorView({
           state: EditorState.create({
             extensions: [basicSetup, json(), EditorState.readOnly.of(true)],
-            doc: JSON.stringify(response.data, null, 2),
+            doc: JSON.stringify(JSON.parse(response.data.body), null, 2),
           }),
           parent: document.body,
         });

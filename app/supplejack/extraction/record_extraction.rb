@@ -2,9 +2,10 @@ module Extraction
   class RecordExtraction
     attr_accessor :document 
 
-    def initialize(extraction_definition)
+    def initialize(extraction_definition, page)
       @extraction_definition = extraction_definition
       @api_source            = extraction_definition.destination
+      @page = page
     end
     
     def extract
@@ -24,7 +25,7 @@ module Extraction
           "fragments.source_id" => @extraction_definition.source_id,
         },
         search_options: {
-          page: 1
+          page: @page
         },
         api_key: @api_source.api_key
       }

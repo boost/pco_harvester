@@ -22,6 +22,10 @@
     <%= form.hidden_field :enrichment_url, class: "form-control", id: 'js-enrichment-url' %>
     <div id="js-enrichment-editor"></div>
   </div>
+  
+  <%= form.hidden_field :page, value: 1 %>
+  <%= form.hidden_field :per_page, value: 20 %>
+  <%= form.hidden_field :total_selector, value: '$.meta.total_pages' %>
 
   <div class="mb-3 col-12">
     <%= form.label :throttle, 'Enrichment Throttle (in ms)', class: "form-label" %>

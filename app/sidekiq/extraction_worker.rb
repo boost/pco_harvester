@@ -9,6 +9,10 @@ class ExtractionWorker < ApplicationWorker
   end
 
   def child_perform(extraction_job)
-    Extraction::Execution.new(extraction_job, extraction_job.extraction_definition).call
+    if extraction_job.extraction_definition.harvest?
+      Extraction::Execution.new(extraction_job, extraction_job.extraction_definition).call
+    else
+      Extraction::EnrichmentExecution.new(extraction_job).call
+    end
   end
 end
