@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Extraction
   class EnrichmentExtraction
     attr_accessor :document
@@ -5,8 +7,8 @@ module Extraction
     def initialize(extraction_definition, record, page, extraction_folder = nil)
       @extraction_definition = extraction_definition
       @record = record
-      @extraction_folder = extraction_folder
       @page = page
+      @extraction_folder = extraction_folder
     end
 
     def extract
