@@ -19,14 +19,14 @@
   
   <div class="mb-3 col-12">
     <%= form.label :enrichment_url, 'Enrichment URL', class: "form-label" %>
-    <%= form.text_field :enrichment_url, class: "form-control" %>
+    <%= form.hidden_field :enrichment_url, class: "form-control", id: 'js-enrichment-url' %>
+    <div id="js-enrichment-editor"></div>
   </div>
 
   <div class="mb-3 col-12">
     <%= form.label :throttle, 'Enrichment Throttle (in ms)', class: "form-label" %>
     <%= form.number_field :throttle, class: "form-control" %>
   </div>
-
   
   <div class="col-12">
     <button type="button" class="btn btn-secondary me-1" id="js-test-record-extraction">

@@ -28,3 +28,34 @@ if (extraction_result_viewer) {
     .querySelector("#extraction-result-viewer")
     .append(extraction_result_viewer_editor.dom);
 }
+
+// Enrichment URL Editor
+const enrichment_field = document.querySelector(
+  "#js-enrichment-url"
+);
+
+
+function updateEnrichmentUrl(value) {
+  enrichment_field.value = value;
+}
+
+if (enrichment_field) {
+  let enrichment_field_editor = new EditorView({
+    state: EditorState.create({
+      extensions: [
+        basicSetup, 
+        StreamLanguage.define(ruby),
+        EditorView.updateListener.of(function (e) {
+          updateEnrichmentUrl(e.state.doc.toString());
+        })
+      ],
+      doc: enrichment_field.value,
+    }),
+    parent: document.body,
+  });
+
+  document
+    .querySelector("#js-enrichment-editor")
+    .append(enrichment_field_editor.dom);
+}
+
