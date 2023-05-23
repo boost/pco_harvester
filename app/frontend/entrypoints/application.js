@@ -34,7 +34,7 @@ import * as bootstrap from "bootstrap";
 import "/js/TestExtraction";
 import "/js/TestRecordExtraction";
 import "/js/TestEnrichmentExtraction";
-import "/js/TestTransformation";
+import "/js/TestTransformationRecordSelector";
 import "/js/TestDestination";
 const tooltipTriggerList = document.querySelectorAll(
   '[data-bs-toggle="tooltip"]'
