@@ -28,10 +28,12 @@ module Extraction
 
     private
 
+    # rubocop:disable Lint/UnusedBlockArgument
     def url
-      block = ->(_record) { eval(@extraction_definition.enrichment_url) }
+      block = ->(record) { eval(@extraction_definition.enrichment_url) }
       block.call(@record)
     end
+    # rubocop:enable Lint/UnusedBlockArgument
 
     def file_path
       name_str = @extraction_definition.name.parameterize(separator: '_')

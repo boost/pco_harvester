@@ -58,16 +58,16 @@ class ExtractionDefinitionsController < ApplicationController
   def test_record_extraction
     @extraction_definition = ExtractionDefinition.new(extraction_definition_params)
 
-    render json: Extraction::RecordExtraction.new(@extraction_definition).extract
+    render json: Extraction::RecordExtraction.new(@extraction_definition, 1).extract
   end
 
   def test_enrichment_extraction
     @extraction_definition = ExtractionDefinition.new(extraction_definition_params)
 
-    api_records = Extraction::RecordExtraction.new(@extraction_definition).extract
+    api_records = Extraction::RecordExtraction.new(@extraction_definition, 1).extract
     records = JSON.parse(api_records.body)['records']
 
-    render json: Extraction::EnrichmentExtraction.new(@extraction_definition, records.first).extract
+    render json: Extraction::EnrichmentExtraction.new(@extraction_definition, records.first, 1).extract
   end
 
   def destroy
