@@ -139,4 +139,24 @@ RSpec.describe ExtractionJob, type: :model do
       expect(unfinished_ej.finished?).to eq false
     end
   end
+
+  describe '#statuses' do
+    STATUSES = { queued: 0, cancelled: 1, running: 2, completed: 3, errored: 4 }
+
+    STATUSES.each do |key, value|
+      it "can be #{key}" do
+        expect(ExtractionJob.new(status: value).status).to eq(key.to_s)
+      end
+    end
+  end
+  
+  describe '#kinds' do
+    KINDS = { full: 0, sample: 1 }
+
+    KINDS.each do |key, value|
+      it "can be #{key}" do
+        expect(ExtractionJob.new(kind: value).kind).to eq(key.to_s)
+      end
+    end
+  end
 end
