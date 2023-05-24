@@ -55,5 +55,20 @@ RSpec.describe Extraction::EnrichmentExecution do
         expect(total_time.ceil).to eq 2
       end
     end
+
+    
+    context 'when the job has been cancelled' do
+      let(:extraction_definition) { create(:extraction_definition, :enrichment, destination:, throttle: 50) }
+      let(:job) { create(:extraction_job, extraction_definition: extraction_definition, kind: 'sample', status: 'cancelled') }
+
+      it 'does not extract further pages' do
+        described_class.new(job).call
+        
+        expect(File.exist?(job.extraction_folder)).to eq true
+        extracted_files = Dir.glob("#{job.extraction_folder}/*").select { |e| File.file? e }
+
+        expect(extracted_files.count).to eq 1
+      end
+    end
   end
 end
