@@ -11,23 +11,7 @@ RSpec.describe Extraction::EnrichmentExtraction do
   let(:subject) { described_class.new(ed, records.first, 1, extraction_job.extraction_folder) }
 
   before do
-    stub_request(:get, "#{destination.url}/harvester/records")
-      .with(
-        query: {
-          'api_key' => 'testkey',
-          'search' => {
-            'fragments.source_id' => 'test'
-          },
-          'search_options' => {
-            'page' => 1
-          }
-        },
-        headers: fake_json_headers
-      ).to_return(fake_response('test_api_records'))
-
-    stub_request(:get, 'https://api.figshare.com/v1/articles/123')
-      .with(headers: fake_json_headers)
-      .to_return(fake_response('test_figshare_enrichment'))
+    stub_figshare_enrichment_page_1(destination)
   end
 
   describe '#extract' do

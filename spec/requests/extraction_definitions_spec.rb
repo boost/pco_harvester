@@ -147,19 +147,7 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
     let(:ed) { create(:extraction_definition, :enrichment, destination:) }
 
     before do
-      stub_request(:get, "#{destination.url}/harvester/records")
-        .with(
-          query: {
-            'api_key' => 'testkey',
-            'search' => {
-              'fragments.source_id' => 'test'
-            },
-            'search_options' => {
-              'page' => 1
-            }
-          },
-          headers: fake_json_headers
-        ).to_return(fake_response('test_api_records'))
+      stub_figshare_enrichment_page_1(destination)
     end
 
     it 'returns a document extraction of API records' do
@@ -184,23 +172,7 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
     let(:ed) { create(:extraction_definition, :enrichment, destination:) }
 
     before do
-      stub_request(:get, "#{destination.url}/harvester/records")
-        .with(
-          query: {
-            'api_key' => 'testkey',
-            'search' => {
-              'fragments.source_id' => 'test'
-            },
-            'search_options' => {
-              'page' => 1
-            }
-          },
-          headers: fake_json_headers
-        ).to_return(fake_response('test_api_records'))
-
-      stub_request(:get, 'https://api.figshare.com/v1/articles/123')
-        .with(headers: fake_json_headers)
-        .to_return(fake_response('test_figshare_enrichment'))
+      stub_figshare_enrichment_page_1(destination)
     end
 
     it 'returns a document extraction of data for an enrichment' do
