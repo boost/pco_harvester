@@ -14,6 +14,11 @@ class HarvestDefinition < ApplicationRecord
   before_create :clone_transformation_definition
   before_create :clone_extraction_definition
 
+  # Creates a safe copy of the provided transformation definition
+  # So that edits made to the visible transformation definition
+  # do not affect the running harvests / enrichments
+  #
+  # @return void
   def clone_transformation_definition
     safe_transformation = transformation_definition.dup
     count = transformation_definition.copies.count + 1
@@ -28,13 +33,28 @@ class HarvestDefinition < ApplicationRecord
     self.transformation_definition = safe_transformation
   end
 
+  # Updates the safe copy of the transformation definition
+  # To match the details of the provided transformation definition
+  #
+  # @param transformation_definition, a TransformationDefinition instance
+  # @return void
   def update_transformation_definition_clone(transformation_definition)
-    self.transformation_definition.destroy
-    self.transformation_definition = transformation_definition
-    clone_transformation_definition
-    save
+    self.transformation_definition.update(
+      record_selector: transformation_definition.record_selector
+    )
+
+    self.transformation_definition.fields.destroy_all
+
+    transformation_definition.fields.each do |field|
+      self.transformation_definition.fields.push(field.dup)
+    end
   end
 
+  # Creates a safe copy of the provided extraction definition
+  # So that edits made to the visible extraction definition
+  # do not affect the running harvests / enrichments
+  #
+  # @return void
   def clone_extraction_definition
     safe_extraction = extraction_definition.dup
     count = extraction_definition.copies.count + 1
@@ -45,10 +65,12 @@ class HarvestDefinition < ApplicationRecord
     self.extraction_definition = safe_extraction
   end
 
+  # Updates the safe copy of the extraction definition
+  # so that it has the same attributes as the provided extraction definition
+  #
+  # @param extraction_definition, an ExtractionDefinition.instance
+  # @return void
   def update_extraction_definition_clone(extraction_definition)
-    self.extraction_definition.destroy
-    self.extraction_definition = extraction_definition
-    clone_extraction_definition
-    save
+    self.extraction_definition.update(extraction_definition.dup.attributes.except('name').compact)
   end
 end
