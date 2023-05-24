@@ -236,4 +236,20 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
       expect(response.body).to include('There was an issue deleting your Extraction Definition')
     end
   end
+
+  describe 'POST /update_harvest_definitions' do
+    let!(:extraction_definition) { create(:extraction_definition, content_partner:, base_url: 'http://test.co.nz') }
+    let(:harvest_definition)    { create(:harvest_definition, extraction_definition:) }
+
+    it 'updates associated harvest definitions' do
+      expect(harvest_definition.extraction_definition.base_url).to eq 'http://test.co.nz'
+
+      extraction_definition.update(base_url: 'http://testing.co.nz')
+      post update_harvest_definitions_content_partner_extraction_definition_path(content_partner, extraction_definition)
+
+      harvest_definition.reload
+
+      expect(harvest_definition.extraction_definition.base_url).to eq 'http://testing.co.nz'
+    end
+  end
 end

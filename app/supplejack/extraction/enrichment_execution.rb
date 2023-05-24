@@ -1,8 +1,8 @@
 module Extraction
   class EnrichmentExecution
-    def initialize(job)
-      @extraction_job = job
-      @extraction_definition = job.extraction_definition
+    def initialize(extraction_job)
+      @extraction_job = extraction_job
+      @extraction_definition = extraction_job.extraction_definition
     end
 
     def call
@@ -10,6 +10,7 @@ module Extraction
       max_pages = JsonPath.new(@extraction_definition.total_selector).on(re.body).first.to_i
 
       records = JSON.parse(re.body)['records']
+
       extract_and_save_enrichment_documents(records)
 
       return if @extraction_job.is_sample?
