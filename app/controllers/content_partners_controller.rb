@@ -8,14 +8,18 @@ class ContentPartnersController < ApplicationController
   end
 
   def show
-    @extraction_definitions = @content_partner.extraction_definitions.order(created_at: :desc).page(params[:page])
+    @extraction_definitions = @content_partner.extraction_definitions.where(original_extraction_definition: nil).order(created_at: :desc).page(params[:page])
 
-    @transformations = @content_partner.transformation_definitions.order(created_at: :desc).page(params[:page])
+    @transformation_definitions = @content_partner.transformation_definitions.where(original_transformation_definition: nil).order(created_at: :desc).page(params[:page])
+
+    @harvest_definitions = @content_partner.harvest_definitions.order(created_at: :desc).page(params[:page])
   end
 
   def new
     @content_partner = ContentPartner.new
   end
+
+  def edit; end
 
   def create
     @content_partner = ContentPartner.new(content_partner_params)
@@ -27,8 +31,6 @@ class ContentPartnersController < ApplicationController
       render :new
     end
   end
-
-  def edit; end
 
   def update
     if @content_partner.update(content_partner_params)

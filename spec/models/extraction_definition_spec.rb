@@ -1,9 +1,12 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe ExtractionDefinition, type: :model do
+  subject! { create(:extraction_definition, content_partner: cp1, name: 'Flickr API') }
+
   let!(:cp1) { create(:content_partner) }
   let!(:cp2) { create(:content_partner) }
-  subject! { create(:extraction_definition, content_partner: cp1, name: 'Flickr API') }
 
   describe '#attributes' do
     it 'has a name' do
@@ -12,26 +15,29 @@ RSpec.describe ExtractionDefinition, type: :model do
   end
 
   describe '#validations presence of' do
-    it { should validate_presence_of(:name).with_message("can't be blank") }
-    it { should validate_presence_of(:format).with_message("can't be blank") }
-    it { should validate_presence_of(:base_url).with_message("can't be blank") }
-    it { should validate_presence_of(:throttle).with_message('is not a number') }
+    it { is_expected.to validate_presence_of(:name).with_message("can't be blank") }
+    it { is_expected.to validate_presence_of(:format).with_message("can't be blank") }
+    it { is_expected.to validate_presence_of(:base_url).with_message("can't be blank") }
+    it { is_expected.to validate_presence_of(:throttle).with_message('is not a number') }
   end
 
   describe '#validation numericality' do
     it do
-      should validate_numericality_of(:throttle)
+      expect(subject).to validate_numericality_of(:throttle)
         .only_integer
         .is_greater_than_or_equal_to(0)
         .is_less_than_or_equal_to(60_000)
     end
 
-    it { should validate_numericality_of(:page).only_integer }
-    it { should validate_numericality_of(:per_page).only_integer }
+    it { is_expected.to validate_numericality_of(:page).only_integer }
+    it { is_expected.to validate_numericality_of(:per_page).only_integer }
   end
 
   describe '#validation' do
-    it { should validate_inclusion_of(:format).in_array(%w[JSON HTML XML OAI]).with_message('is not included in the list') }
+    it {
+      expect(subject).to validate_inclusion_of(:format).in_array(%w[JSON HTML XML
+                                                                    OAI]).with_message('is not included in the list')
+    }
 
     it 'requires a unique name scoped to content partner' do
       ed2 = build(:extraction_definition, content_partner: cp2, name: 'Flickr API')
@@ -39,7 +45,7 @@ RSpec.describe ExtractionDefinition, type: :model do
       expect(ed2).to be_valid
 
       ed2.content_partner = cp1
-      expect(ed2).to_not be_valid
+      expect(ed2).not_to be_valid
     end
 
     it 'requires a content partner' do
@@ -64,27 +70,37 @@ RSpec.describe ExtractionDefinition, type: :model do
       'http://google.com/page?param=value',
       'http://google.com/page?param[sub_param]=value'
     ].each do |base_url|
-      it { should allow_value(base_url).for(:base_url) }
+      it { is_expected.to allow_value(base_url).for(:base_url) }
     end
 
     [
       'google',
       'google.com'
     ].each do |base_url|
-      it { should_not allow_value(base_url).for(:base_url) }
+      it { is_expected.not_to allow_value(base_url).for(:base_url) }
     end
   end
 
   describe '#associations' do
-    let(:job) { create(:job) }
-    let(:ed)  { create(:extraction_definition, jobs: [job]) }
+    let(:extraction_job) { create(:extraction_job) }
+    let(:ed) { create(:extraction_definition, extraction_jobs: [extraction_job]) }
 
     it 'has many jobs' do
-      expect(ed.jobs).to include job
+      expect(ed.extraction_jobs).to include extraction_job
     end
 
     it 'belongs to a content partner' do
       expect(subject.content_partner).to be_a ContentPartner
+    end
+  end
+  
+  describe '#kinds' do
+    KINDS = { harvest: 0, enrichment: 1 }
+
+    KINDS.each do |key, value|
+      it "can be #{key}" do
+        expect(ExtractionDefinition.new(kind: value).kind).to eq(key.to_s)
+      end
     end
   end
 end

@@ -3,13 +3,13 @@
 require 'rails_helper'
 
 RSpec.describe Extraction::DocumentExtraction do
-  let(:job) { create(:job) }
-  let(:ed) { create(:extraction_definition, base_url: 'http://google.com/?url_param=url_value', jobs: [job]) }
-  let(:subject) { described_class.new(ed, job.extraction_folder) }
+  let(:extraction_job) { create(:extraction_job) }
+  let(:ed) { create(:extraction_definition, base_url: 'http://google.com/?url_param=url_value', extraction_jobs: [extraction_job]) }
+  let(:subject) { described_class.new(ed, extraction_job.extraction_folder) }
 
   before do
     stub_request(:get, 'http://google.com/?url_param=url_value').with(
-      query: { 'page' => 1, 'per_page' => 50  },
+      query: { 'page' => 1, 'per_page' => 50 },
       headers: fake_json_headers
     ).and_return(fake_response('test'))
   end

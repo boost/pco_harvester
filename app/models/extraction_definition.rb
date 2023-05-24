@@ -4,7 +4,23 @@
 #
 class ExtractionDefinition < ApplicationRecord
   belongs_to :content_partner
-  has_many :jobs
+  has_many :extraction_jobs
+
+  KINDS = %w[harvest enrichment].freeze
+  enum :kind, KINDS
+
+  # feature allows editing an extraction definition  without impacting a running harvest
+  belongs_to(
+    :original_extraction_definition,
+    class_name: 'ExtractionDefinition',
+    optional: true
+  )
+  has_many(
+    :copies,
+    class_name: 'ExtractionDefinition',
+    foreign_key: 'original_extraction_definition_id',
+    inverse_of: 'original_extraction_definition'
+  )
 
   # find good regex or another implementation
   FORMAT_SELECTOR_REGEX_MAP = {

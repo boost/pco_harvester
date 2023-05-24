@@ -1,9 +1,12 @@
 default: &default
   MYSQL_SOCKET: null
   SJ_USER_AGENT: Supplejack Harvester v2.0
+  FIXTURES_PATH: spec/fixtures
 
 development:
   <<: *default
+  SUPPLEJACK_API: http://localhost:3000
+  HARVESTER_API_KEY: your_supplejack_api_key_used_for_fixtures
 
 test:
   <<: *default

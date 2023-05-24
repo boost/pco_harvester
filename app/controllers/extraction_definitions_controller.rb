@@ -2,15 +2,21 @@
 
 class ExtractionDefinitionsController < ApplicationController
   before_action :find_content_partner
-  before_action :find_extraction_definition, only: %i[show edit update destroy]
+  before_action :find_extraction_definition, only: %i[show edit update destroy update_harvest_definitions]
 
   def show
-    @jobs = paginate_and_filter_jobs(@extraction_definition.jobs)
+    @extraction_jobs = paginate_and_filter_jobs(@extraction_definition.extraction_jobs)
+
+    @related_harvest_definitions = @extraction_definition.copies.map do |copy|
+      HarvestDefinition.find_by(extraction_definition_id: copy.id)
+    end
   end
 
   def new
     @extraction_definition = ExtractionDefinition.new
   end
+
+  def edit; end
 
   def create
     @extraction_definition = ExtractionDefinition.new(extraction_definition_params)
@@ -22,8 +28,6 @@ class ExtractionDefinitionsController < ApplicationController
     end
   end
 
-  def edit; end
-
   def update
     if @extraction_definition.update(extraction_definition_params)
       flash.notice = 'Extraction Definition updated successfully'
@@ -32,6 +36,16 @@ class ExtractionDefinitionsController < ApplicationController
       flash.alert = 'There was an issue updating your Extraction Definition'
       render 'edit'
     end
+  end
+
+  def update_harvest_definitions
+    @extraction_definition.copies.each do |copy|
+      harvest_definition = HarvestDefinition.find_by(extraction_definition: copy)
+      harvest_definition.update_extraction_definition_clone(@extraction_definition)
+    end
+
+    flash.notice = 'Harvest definitions updated.'
+    redirect_to content_partner_extraction_definition_path(@content_partner, @extraction_definition)
   end
 
   def test

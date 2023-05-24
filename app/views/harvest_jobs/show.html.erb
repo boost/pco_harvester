@@ -1,0 +1,207 @@
+<%= content_for(:title) { "#{@harvest_definition.name} job" } %>
+<%= render 'shared/breadcrumb_nav' %>
+
+<div class="float-start">
+  <h1><%= @harvest_job.harvest_definition.name %></h1>
+  <strong><%= @harvest_job.updated_at.to_fs(:verbose) %></strong>
+</div>
+
+<% if @harvest_job&.extraction_job&.queued? || @harvest_job&.extraction_job&.running? %>
+  <div class="float-end">
+    <% cancel_path = cancel_content_partner_harvest_definition_harvest_job_path(@content_partner, @harvest_definition, @harvest_job) %>
+    <%= button_to "Cancel job", cancel_path, class: "btn btn-outline-danger me-1", form_class: 'd-inline me-1' %>
+  </div>
+<% end %>
+
+<div class="clearfix"></div>
+
+<% if @harvest_job.running? || @harvest_job.finished? %>
+  <table class="table my-4">
+    <tbody>
+      <% if @harvest_job.extraction_job %>
+        <tr>
+          <th scope="row">Extraction Status</th>
+          <td><%= job_status_text(@harvest_job.extraction_job) %></td>
+        </tr>
+
+        <tr>
+          <th scope="row">Extraction Start Time</th>
+          <td><%= job_start_time(@harvest_job.extraction_job) %></td>
+        </tr>
+
+        <tr>
+          <th scope="row">Extraction End Time</th>
+          <td><%= job_end_time(@harvest_job.extraction_job) %></td>
+        </tr>
+
+        <tr>
+          <th scope="row">Extraction Duration</th>
+          <td><%= job_duration(@harvest_job.extraction_job) %></td>
+        </tr>
+
+        <tr>
+          <th scope="row">Estimated Records Extracted</th>
+          <td>
+            <%=
+            @harvest_job.extraction_definition.per_page * @harvest_job.extraction_job.documents.total_pages
+            %>
+          </td>
+        </tr>
+
+        <tr>
+          <th scope="row"></th>
+          <td>
+            <% path = content_partner_extraction_definition_extraction_job_path(@content_partner, @harvest_job.extraction_definition, @harvest_job.extraction_job) %>
+            <%= link_to "View Extraction Results", path, class: "btn btn-outline-primary" %>
+          </td>
+        </tr>
+      <% end %>
+
+
+      <tr>
+        <th scope="row">Load Destination</th>
+        <td><%= @harvest_job.harvest_definition.destination.url %></td>
+      </tr>
+
+      <tr>
+        <th scope="row">Total transformation and load time</th>
+        <td><%= job_duration_seconds(@harvest_job.transformation_and_load_duration_seconds) %></td>
+      </tr>
+
+      <tr>
+        <th scope="row">Total Time</th>
+        <td><%= job_duration(@harvest_job) %></td>
+      </tr>
+
+      <tr>
+        <th scope="row">Total Records Transformed</th>
+        <td><%= @harvest_job.transformation_jobs.sum(:records_transformed) %></td>
+      </tr>
+
+      <tr>
+        <th scope="row">Total Records Loaded</th>
+        <td><%= @harvest_job.load_jobs.sum(:records_loaded) %></td>
+      </tr>
+    </tbody>
+
+  </table>
+
+  <h3 class='my-4'>Transformation Jobs</h3>
+
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#transformation-summary-tab" type="button" role="tab" aria-controls="transformation-summary-tab" aria-selected="true">
+        Summary
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" data-bs-toggle="tab" data-bs-target="#transformation-details-tab" type="button" role="tab" aria-controls="transformation-details-tab" aria-selected="true">
+        Details
+      </button>
+    </li>
+  </ul>
+
+  <div class="tab-content">
+    <div class="tab-pane fade show active" id="transformation-summary-tab" role="tab" aria-labelledby="transformation-summary-tab" tabindex="0">
+      <table class="table my-4">
+        <tbody>
+          <tr>
+            <th scope="row">Transformation Definition</th>
+            <td>
+              <% transformation_definition = @harvest_job.harvest_definition.transformation_definition %>
+              <%= transformation_definition.name %>
+            </td>
+          </tr>
+          <% TransformationJob.statuses.keys.each do |status| %>
+            <tr>
+              <th scope="row">Number <%= status %></th>
+              <td><%= TransformationJob.where(status: status).count %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tab-pane fade show" id="transformation-details-tab" role="tab" aria-labelledby="transformation-details-tab" tabindex="0">
+      <% @harvest_job.transformation_jobs.each do |transformation_job| %>
+        <div class="card my-2">
+          <div class="card-body">
+            <h5 class="card-title mb-4">Page <%= transformation_job.page %></h5>
+            <dl class="row">
+              <dt class="col-sm-2">Start Time</dt>
+              <dd class="col-sm-10"><%= job_start_time(transformation_job) %></dd>
+
+              <dt class="col-sm-2">End Time</dt>
+              <dd class="col-sm-10"><%= job_end_time(transformation_job) %></dd>
+
+              <dt class="col-sm-2">Duration</dt>
+              <dd class="col-sm-10"><%= job_duration(transformation_job) %></dd>
+
+              <dt class="col-sm-2">Status</dt>
+              <dd class="col-sm-10"><%= job_status_text(transformation_job) %></dd>
+
+              <dt class="col-sm-2">Records Transformed</dt>
+              <dd class="col-sm-10"><%= transformation_job.records_transformed %></dd>
+            </dl>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <h3 class='my-4'>Load Jobs</h3>
+
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#load-summary-tab" type="button" role="tab" aria-controls="load-summary-tab" aria-selected="true">
+        Summary
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" data-bs-toggle="tab" data-bs-target="#load-details-tab" type="button" role="tab" aria-controls="load-details-tab" aria-selected="true">
+        Details
+      </button>
+    </li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane fade show active" id="load-summary-tab" role="tab" aria-labelledby="load-summary-tab" tabindex="0">
+      <table class="table my-4">
+        <tbody>
+          <% LoadJob.statuses.keys.each do |status| %>
+            <tr>
+              <th scope="row">Number <%= status %></th>
+              <td><%= LoadJob.where(status: status).count %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="tab-pane fade show" id="load-details-tab" role="tab" aria-labelledby="load-details-tab" tabindex="0">
+      <% @harvest_job.load_jobs.each do |load_job| %>
+        <div class="card my-2">
+          <div class="card-body">
+            <h5 class="card-title mb-4">Page <%= load_job.page %></h5>
+            <dl class="row">
+              <dt class="col-sm-2">Start Time</dt>
+              <dd class="col-sm-10"><%= job_start_time(load_job) %></dd>
+
+              <dt class="col-sm-2">End Time</dt>
+              <dd class="col-sm-10"><%= job_end_time(load_job) %></dd>
+
+              <dt class="col-sm-2">Duration</dt>
+              <dd class="col-sm-10"><%= job_duration(load_job) %></dd>
+
+              <dt class="col-sm-2">Status</dt>
+              <dd class="col-sm-10"><%= job_status_text(load_job) %></dd>
+
+              <dt class="col-sm-2">Records Loaded</dt>
+              <dd class="col-sm-10"><%= load_job.records_loaded %></dd>
+            </dl>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  <p class="my-4">The job hasn't started yet.</p>
+<% end %>

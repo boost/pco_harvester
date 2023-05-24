@@ -1,0 +1,15 @@
+figshare_1:
+  status: completed
+  page: 1
+  start_time: <%= 28.minutes.ago %>
+  end_time: <%= 27.minutes.ago %>
+  records_loaded: 10
+  harvest_job: figshare
+
+figshare_2:
+  status: completed
+  page: 2
+  start_time: <%= 25.minutes.ago %>
+  end_time: <%= 24.minutes.ago %>
+  records_loaded: 10
+  harvest_job: figshare

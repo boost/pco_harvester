@@ -1,0 +1,5 @@
+figshare:
+  content_partner: antarctica_nz
+  extraction_job: figshare_sample
+  name: TD api.figshare.org.nz
+  record_selector: $.items

@@ -1,0 +1,13 @@
+figshare:
+  status: 'Completed'
+  start_time: <%= 1.hour.ago %>
+  end_time: <%= 1.minute.ago %>
+  harvest_definition: figshare
+  extraction_job: figshare_full
+
+figshare_sample:
+  status: 'Completed'
+  start_time: <%= 1.hour.ago %>
+  end_time: <%= 1.minute.ago %>
+  harvest_definition: figshare
+  extraction_job: figshare_sample

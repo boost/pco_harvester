@@ -8,34 +8,14 @@ module Transformation
     def initialize(record, fields)
       @record = record
       @fields = fields
-      @results = []
     end
 
     def transform
-      @results = @fields.map do |field|
+      transformed_fields = @fields.map do |field|
         FieldExecution.new(field).execute(@record)
       end
 
-      self
-    end
-
-    def transformed_record
-      @results.each_with_object({}) do |field, transformed_record|
-        transformed_record[field.name] = field.value if field.error.nil?
-      end
-    end
-
-    def errors
-      @results.each_with_object({}) do |field, errors|
-        errors[field.id] = field.error.to_hash if field.error.present?
-      end
-    end
-
-    def to_hash
-      {
-        transformed_record:,
-        errors:
-      }
+      TransformedRecord.new(transformed_fields)
     end
   end
 end

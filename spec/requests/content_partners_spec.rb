@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "ContentPartners", type: :request do
+RSpec.describe 'ContentPartners', type: :request do
   let!(:content_partner) { create(:content_partner) }
 
   describe '#index' do
@@ -8,7 +10,7 @@ RSpec.describe "ContentPartners", type: :request do
       get content_partners_path
 
       expect(response.status).to eq 200
-      expect(response.body).to include CGI::escapeHTML(content_partner.name)
+      expect(response.body).to include CGI.escapeHTML(content_partner.name)
     end
   end
 
@@ -60,11 +62,11 @@ RSpec.describe "ContentPartners", type: :request do
 
     context 'with invalid parameters' do
       it 'does not create a new content partner' do
-        expect {
+        expect do
           post content_partners_path, params: {
             content_partner: { name: nil }
           }
-        }.to change(ContentPartner, :count).by(0)
+        end.not_to change(ContentPartner, :count)
       end
 
       it 'renders the form again' do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Extraction
   class DocumentExtraction
     attr_reader :document
@@ -8,7 +10,7 @@ module Extraction
     end
 
     def extract
-      Sidekiq.logger.info "Fetching from page #{@extraction_definition.page}" unless Rails.env.test?
+      Sidekiq.logger.info "Fetching page #{@extraction_definition.page}"
       @document = Extraction::Request.new(url:, params:, headers:).get
     end
 

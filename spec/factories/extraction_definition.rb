@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :extraction_definition do
     name { Faker::Internet.domain_name }
@@ -23,6 +25,27 @@ FactoryBot.define do
       total_selector { '$..result_count' }
     end
 
+    trait :figshare do
+      name     { 'api.figshare.com' }
+      format   { 'JSON' }
+      base_url { 'https://api.figshare.com/v1/articles/search?search_for=zealand' }
+      throttle { 1000 }
+      pagination_type { 'page' }
+      page_parameter { 'page' }
+      page { 1 }
+      per_page { 10 }
+      total_selector { '$.items_found' }
+      per_page_parameter { 'itemsPerPage' }
+    end
+
     association :content_partner
+  end
+
+  trait :harvest do
+    kind { 0 }
+  end
+
+  trait :enrichment do
+    kind { 1 }
   end
 end

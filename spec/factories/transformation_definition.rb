@@ -1,7 +1,11 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
-  factory :transformation_definition do    
-    name { 'Name' }
+  factory :transformation_definition do
+    name { Faker::Company.name }
     record_selector { '$..results' }
-   
+
+    extraction_job
+    content_partner
   end
 end

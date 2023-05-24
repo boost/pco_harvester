@@ -1,0 +1,6 @@
+figshare:
+  name: HD api.figshare.org.nz
+  content_partner: antarctica_nz
+  extraction_definition: figshare
+  transformation_definition: figshare
+  destination: local_api

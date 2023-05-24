@@ -2,16 +2,16 @@
 
 require 'rails_helper'
 
-RSpec.describe "Fields", type: :request do
+RSpec.describe 'Fields', type: :request do
   let(:content_partner) { create(:content_partner) }
-  let(:job)             { create(:job) }
-  let!(:transformation_definition)  { create(:transformation_definition, content_partner:, job:) }
+  let(:extraction_job) { create(:extraction_job) }
+  let!(:transformation_definition) { create(:transformation_definition, content_partner:, extraction_job:) }
 
   describe '#create' do
-    let(:field)           { build(:field, transformation_definition:) }
+    let(:field) { build(:field, transformation_definition:) }
 
     context 'with valid parameters' do
-      it 'creates a new field' do 
+      it 'creates a new field' do
         expect do
           post content_partner_transformation_definition_fields_path(content_partner, transformation_definition), params: {
             field: field.attributes
@@ -28,7 +28,6 @@ RSpec.describe "Fields", type: :request do
 
         expect(field['name']).to eq 'title'
         expect(field['block']).to eq "JsonPath.new('title').on(record).first"
-     
       end
     end
   end
@@ -61,28 +60,36 @@ RSpec.describe "Fields", type: :request do
     let!(:field) { create(:field, transformation_definition:) }
 
     it 'deletes the field' do
-      expect { delete content_partner_transformation_definition_field_path(content_partner, transformation_definition, field) }.to change(Field, :count).by(-1)
+      expect do
+        delete content_partner_transformation_definition_field_path(content_partner, transformation_definition,
+                                                                    field)
+      end.to change(Field, :count).by(-1)
     end
 
     it 'returns a successful response' do
-      delete content_partner_transformation_definition_field_path(content_partner, transformation_definition, field)  
+      delete content_partner_transformation_definition_field_path(content_partner, transformation_definition, field)
 
       expect(response.status).to eq(200)
     end
   end
 
-  
-  describe "#run" do
+  describe '#run' do
     context 'with a valid fields' do
-
-      let!(:field_one)   { create(:field, name: 'title', block: "JsonPath.new('title').on(record).first", transformation_definition: transformation_definition) }
-      let!(:field_two)   { create(:field, name: 'source', block: "JsonPath.new('source').on(record).first", transformation_definition: transformation_definition) }
-      let!(:field_three) { create(:field, name: 'dc_identifier', block: "JsonPath.new('reference_number').on(record).first", transformation_definition: transformation_definition) }
-      let!(:field_four) { create(:field, name: 'landing_url', block: '"http://www.ngataonga.org.nz/collections/catalogue/catalogue-item?record_id=#{record[\'record_id\']}"', transformation_definition: transformation_definition) }
+      let!(:field_one) do
+        create(:field, name: 'title', block: "JsonPath.new('title').on(record).first", transformation_definition:)
+      end
+      let!(:field_two) do
+        create(:field, name: 'source', block: "JsonPath.new('source').on(record).first", transformation_definition:)
+      end
+      let!(:field_three) do
+        create(:field, name: 'dc_identifier', block: "JsonPath.new('reference_number').on(record).first",
+                       transformation_definition:)
+      end
+      let!(:field_four) { create(:field, name: 'landing_url', block: '"http://www.ngataonga.org.nz/collections/catalogue/catalogue-item?record_id=#{record[\'record_id\']}"', transformation_definition:) }
 
       it 'returns a new record made up of the given transformation fields' do
         post run_content_partner_transformation_definition_fields_path(content_partner, transformation_definition), params: {
-          record: { 
+          record: {
             title: 'title',
             source: 'source',
             reference_number: '111',
@@ -93,10 +100,10 @@ RSpec.describe "Fields", type: :request do
 
         transformed_record = JSON.parse(response.body)['transformed_record']
 
-        expect(transformed_record['title']).to eq 'title'
-        expect(transformed_record['source']).to eq 'source'
-        expect(transformed_record['dc_identifier']).to eq '111'
-        expect(transformed_record['landing_url']).to eq 'http://www.ngataonga.org.nz/collections/catalogue/catalogue-item?record_id=128'
+        expect(transformed_record['title']).to eq ['title']
+        expect(transformed_record['source']).to eq ['source']
+        expect(transformed_record['dc_identifier']).to eq ['111']
+        expect(transformed_record['landing_url']).to eq ['http://www.ngataonga.org.nz/collections/catalogue/catalogue-item?record_id=128']
       end
     end
 

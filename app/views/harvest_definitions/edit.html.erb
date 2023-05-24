@@ -1,0 +1,9 @@
+<%= content_for(:title) { "Editing #{@harvest_definition.name_in_database}" } %>
+
+<%= render 'shared/breadcrumb_nav' %>
+
+<h1><%= @harvest_definition.name_in_database %></h1>
+
+<%= render 'form' %>
+
+

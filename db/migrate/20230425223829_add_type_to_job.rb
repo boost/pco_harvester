@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddTypeToJob < ActiveRecord::Migration[7.0]
   def change
     add_column :jobs, :kind, :string, null: false, default: 'full'

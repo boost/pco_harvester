@@ -1,0 +1,13 @@
+figshare_sample:
+  status: 'completed'
+  extraction_definition: figshare
+  kind: 'sample'
+  start_time: <%= 2.hours.ago %>
+  end_time: <%= 1.hour.ago %>
+
+figshare_full:
+  status: 'completed'
+  extraction_definition: figshare
+  kind: 'full'
+  start_time: <%= 2.hours.ago %>
+  end_time: <%= 1.hour.ago %>

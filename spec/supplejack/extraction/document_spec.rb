@@ -31,7 +31,7 @@ RSpec.describe Extraction::Document do
     let(:file_path) { Rails.root.join('extractions/test_file') }
 
     before { subject.save(file_path) }
-    after { FileUtils.rm(file_path) if File.exist?(file_path) }
+    after { FileUtils.rm_f(file_path) }
 
     it 'creates a file' do
       expect(File.exist?(file_path)).to be true
@@ -39,7 +39,7 @@ RSpec.describe Extraction::Document do
 
     it 'the file is JSON formatted' do
       str = File.read(file_path)
-      expect { JSON.parse(str) }.to_not raise_error
+      expect { JSON.parse(str) }.not_to raise_error
     end
 
     it 'the file contains the hash' do
@@ -64,7 +64,7 @@ RSpec.describe Extraction::Document do
     let(:file_path) { Rails.root.join('extractions/test_file') }
 
     before { subject.save(file_path) }
-    after { FileUtils.rm(file_path) if File.exist?(file_path) }
+    after { FileUtils.rm_f(file_path) }
 
     it 'returns an Extraction::Document' do
       expect(described_class.load_from_file(file_path)).to be_a described_class

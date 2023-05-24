@@ -1,0 +1,4 @@
+local_api:
+  name: Local API
+  url: <%= ENV.fetch('SUPPLEJACK_API', 'http://localhost:3000') %>
+  api_key: <%= ENV.fetch('HARVESTER_API_KEY', 'HARVESTER_API_KEY') %>

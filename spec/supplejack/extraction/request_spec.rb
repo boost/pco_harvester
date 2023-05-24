@@ -25,8 +25,8 @@ RSpec.describe Extraction::Request do
 
       expect(doc.url.to_s).to eq 'http://google.com/?param_param=param_value&url_param=url_value'
       expect(doc.method).to eq 'GET'
-      expect(doc.params).to eq({ 'url_param' => 'url_value', 'param_param' => :param_value})
-      expect(doc.request_headers).to eq init_params[:headers].merge('User-Agent' => ENV['SJ_USER_AGENT'])
+      expect(doc.params).to eq({ 'url_param' => 'url_value', 'param_param' => :param_value })
+      expect(doc.request_headers).to eq init_params[:headers].merge('User-Agent' => ENV.fetch('SJ_USER_AGENT', nil))
       expect(doc.status).to eq 200
       expect(doc.response_headers).to eq({})
       expect(doc.body).to eq('{"totalObjects": 200}')

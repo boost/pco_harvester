@@ -64,7 +64,7 @@ const Field = ({ id }) => {
   };
 
   const hasChanged = () => {
-    return name !== nameValue.trim() || block !== blockValue.trim();
+    return name !== nameValue || block !== blockValue;
   };
 
   const isSaveable = () => {

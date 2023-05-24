@@ -63,12 +63,12 @@ RSpec.describe Extraction::Connection do
 
     it 'returns the User-Agent by default' do
       conn = described_class.new(url: '/hello')
-      expect(conn.headers).to eq({ 'User-Agent' => ENV['SJ_USER_AGENT'] })
+      expect(conn.headers).to eq({ 'User-Agent' => ENV.fetch('SJ_USER_AGENT', nil) })
     end
 
     it 'returns the User-Agent when nil is given' do
       conn = described_class.new(url: '/hello', headers: nil)
-      expect(conn.headers).to eq({ 'User-Agent' => ENV['SJ_USER_AGENT'] })
+      expect(conn.headers).to eq({ 'User-Agent' => ENV.fetch('SJ_USER_AGENT', nil) })
     end
 
     it 'returns a custom User-Agent when needed' do
@@ -78,7 +78,7 @@ RSpec.describe Extraction::Connection do
 
     it 'returns given headers with User-Agent algonside it' do
       conn = described_class.new(url: '/hello', headers: { 'My-Header': 'Hello world' })
-      expect(conn.headers).to eq({ 'User-Agent' => ENV['SJ_USER_AGENT'], 'My-header' => 'Hello world' })
+      expect(conn.headers).to eq({ 'User-Agent' => ENV.fetch('SJ_USER_AGENT', nil), 'My-header' => 'Hello world' })
     end
   end
 

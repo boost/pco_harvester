@@ -12,8 +12,8 @@ class VerticalFormBuilder < ActionView::Helpers::FormBuilder
     end.join.html_safe
   end
 
-  def error_wrapper(method, &block)
-    block.call + errors(method)
+  def error_wrapper(method)
+    yield + errors(method)
   end
 
   ############################################

@@ -1,8 +1,12 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'ExtractionDefinitions', type: :request do
-  let(:content_partner) { create(:content_partner) }
+  let(:content_partner)        { create(:content_partner) }
   let!(:extraction_definition) { create(:extraction_definition, content_partner:) }
+  let!(:ed_copy)               { create(:extraction_definition, original_extraction_definition: extraction_definition) }
+  let!(:harvest_definition) { create(:harvest_definition, extraction_definition: ed_copy) }
 
   describe '#show' do
     it 'renders a specific extraction definition' do
@@ -10,6 +14,13 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
 
       expect(response.status).to eq 200
       expect(response.body).to include extraction_definition.name
+    end
+
+    it 'fetches the copies of a specific extraction_definition' do
+      get content_partner_extraction_definition_path(extraction_definition.content_partner, extraction_definition)
+
+      expect(response.status).to eq 200
+      expect(response.body).to include ed_copy.name
     end
   end
 
@@ -49,7 +60,7 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
           post content_partner_extraction_definitions_path(content_partner), params: {
             extraction_definition: extraction_definition2.attributes
           }
-        end.to change(ExtractionDefinition, :count).by(0)
+        end.not_to change(ExtractionDefinition, :count)
       end
 
       it 'renders the form again' do
@@ -81,7 +92,8 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
           extraction_definition: { name: 'Flickr' }
         }
 
-        expect(response).to redirect_to(content_partner_extraction_definition_path(content_partner, extraction_definition))
+        expect(response).to redirect_to(content_partner_extraction_definition_path(content_partner,
+                                                                                   extraction_definition))
       end
     end
 
@@ -111,7 +123,7 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
 
     before do
       stub_request(:get, 'http://google.com/?url_param=url_value').with(
-        query: { 'page' => 1, 'per_page' => 50  },
+        query: { 'page' => 1, 'per_page' => 50 },
         headers: fake_json_headers
       ).and_return(fake_response('test'))
     end

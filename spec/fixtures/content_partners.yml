@@ -1,0 +1,98 @@
+antarctica_nz:
+  name: AntarcticaNZ
+
+aws_comprehend:
+  name: AWS Comprehend
+
+beacon_pathway_ltd:
+  name: Beacon Pathway Ltd
+
+central_hawkes_bay_museum:
+  name: Central Hawkes Bay Museum
+
+central_otago_memory_bank:
+  name: Central Otago Memory Bank
+
+cromwell_museum:
+  name: Cromwell Museum
+
+culture_grid:
+  name: Culture Grid
+
+figshare:
+  name: FigShare
+
+figure_nz:
+  name: Figure nz
+
+howick_historical_village:
+  name: Howick Historical Village
+
+huntly_museum_te_whare_taonga_o_raahui_pookeka:
+  name: Huntly Museum Te Whare Taonga O Raahui Pookeka
+
+manyanswers:
+  name: ManyAnswers
+
+massey_university:
+  name: Massey University
+
+national_army_museum:
+  name: National Army Museum
+
+national_digital_forum:
+  name: National Digital Forum
+
+new_zealand_police:
+  name: New Zealand Police
+
+new_zealand_portrait_gallery:
+  name: New Zealand Portrait Gallery
+
+nz_museums:
+  name: NZ Museums
+
+nz_musician:
+  name: NZ Musician
+
+pitt_rivers_museum:
+  name: Pitt Rivers Museum
+
+plant_and_food_research:
+  name: Plant and food research
+
+schools:
+  name: Schools
+
+science_learning_hub:
+  name: Science Learning Hub
+
+state_library_of_victoria:
+  name: State Library of Victoria
+
+statistics_new_zealand:
+  name: Statistics New Zealand
+
+teviot_district_museum:
+  name: Teviot District Museum
+
+thames_museum:
+  name: Thames Museum
+
+trove:
+  name: Trove
+
+tusk_culture:
+  name: Tusk Culture
+
+university_of_otago:
+  name: University of Otago
+
+university_of_waikato:
+  name: University of Waikato
+
+wikimedia_commons:
+  name: Wikimedia Commons
+
+wikipedia:
+  name: Wikipedia

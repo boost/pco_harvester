@@ -1,0 +1,84 @@
+display_content_partner:
+  name: display_content_partner
+  transformation_definition: figshare
+  block: "\"FigShare\""
+
+content_partner:
+  name: content_partner
+  transformation_definition: figshare
+  block: "\"FigShare\""
+
+display_collection:
+  name: display_collection
+  transformation_definition: figshare
+  block: "\"FigShare\""
+
+primary_collection:
+  name: primary_collection
+  transformation_definition: figshare
+  block: "\"FigShare\""
+
+collection_title:
+  name: collection_title
+  transformation_definition: figshare
+  block: "\"FigShare\""
+
+usage:
+  name: usage
+  transformation_definition: figshare
+  block: "[\"Share\", \"Modify\", \"Use commercially\"]"
+
+copyright:
+  name: copyright
+  transformation_definition: figshare
+  block: "\"Some rights reserved\""
+
+rights:
+  name: rights
+  transformation_definition: figshare
+  block: "\"http://figshare.com/licensing\""
+
+dc_identifier:
+  name: dc_identifier
+  transformation_definition: figshare
+  block: "record['article_id']"
+
+landing_url:
+  name: landing_url
+  transformation_definition: figshare
+  block: "landing = record[\"DOI\"]\nif landing.kind_of?(Array)\n  landing.first\nelse\n  landing\nend"
+
+internal_identifier:
+  name: internal_identifier
+  transformation_definition: figshare
+  block: "\"figshare_id:#{record['article_id']}\""
+
+title:
+  name: title
+  transformation_definition: figshare
+  block: "CGI.unescapeHTML(\n  record[\"title\"].gsub('/\u0026lt;(?!\u0026gt;).*?\u0026gt;/', '')\n)\n"
+
+creator:
+  name: creator
+  transformation_definition: figshare
+  block: "JsonPath.new('authors..author_name').on(record)"
+
+dc_type:
+  name: dc_type
+  transformation_definition: figshare
+  block: "record['defined_type']"
+
+category:
+  name: category
+  transformation_definition: figshare
+  block: "case(record['defined_type'])\nwhen /dataset/\n  \"Data\"\nwhen /(figure|poster)/\n  \"Images\"\nwhen /media/\n  \"Videos\"\nwhen /paper/\n  \"Research papers\"\nelse\n  \"Other\"\nend"
+
+rights_url:
+  name: rights_url
+  transformation_definition: figshare
+  block: "case(record['defined_type'])\nwhen /dataset/\n  \"http://creativecommons.org/publicdomain/zero/1.0/\"\nwhen /code/\n  \"http://opensource.org/licenses/MIT\"\nwhen /media/\n  \"Videos\"\nwhen /paper/\n  \"Research papers\"\nelse\n  \"http://creativecommons.org/licenses/by/4.0\"\nend"
+
+source_id:
+  name: source_id
+  transformation_definition: figshare
+  block: "'figshare'"

@@ -3,20 +3,21 @@
 require 'rails_helper'
 
 RSpec.describe Extraction::Documents do
+  subject { extraction_job.documents }
+
   let(:content_partner) { create(:content_partner, :ngataonga) }
   let(:extraction_definition) { content_partner.extraction_definitions.first }
-  let(:job) { create(:job, extraction_definition:) }
-  subject { job.documents }
+  let(:extraction_job) { create(:extraction_job, extraction_definition:) }
 
   before do
     # that's to test the display of results
     stub_ngataonga_harvest_requests(extraction_definition)
-    ExtractionJob.new.perform(job.id)
+    ExtractionWorker.new.perform(extraction_job.id)
   end
 
   describe '#initialize' do
     it 'saves the folder in the instance variables' do
-      expect(subject.instance_variable_get(:@folder)).to eq job.extraction_folder
+      expect(subject.instance_variable_get(:@folder)).to eq extraction_job.extraction_folder
     end
 
     it 'sets the per_page to 1' do
@@ -48,7 +49,7 @@ RSpec.describe Extraction::Documents do
 
   describe '#total_pages' do
     it 'returns the number of documents into the folder' do
-      expect(subject.total_pages).to eq Dir.glob("#{job.extraction_folder}/*").length
+      expect(subject.total_pages).to eq Dir.glob("#{extraction_job.extraction_folder}/*").length
     end
   end
 end

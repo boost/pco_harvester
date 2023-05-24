@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_11_033325) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_21_223927) do
   create_table "content_partners", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -39,9 +39,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_11_033325) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "content_partner_id", null: false
+    t.bigint "original_extraction_definition_id"
+    t.integer "kind", default: 0
     t.index ["content_partner_id", "name"], name: "index_extraction_definitions_on_content_partner_id_and_name", unique: true
     t.index ["content_partner_id"], name: "index_extraction_definitions_on_content_partner_id"
     t.index ["name"], name: "index_extraction_definitions_on_name"
+    t.index ["original_extraction_definition_id"], name: "index_eds_on_original_ed_id"
+  end
+
+  create_table "extraction_jobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "extraction_definition_id", null: false
+    t.integer "kind", default: 0, null: false
+    t.timestamp "start_time"
+    t.timestamp "end_time"
+    t.text "error_message"
+    t.index ["extraction_definition_id"], name: "index_extraction_jobs_on_extraction_definition_id"
   end
 
   create_table "fields", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -53,16 +68,46 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_11_033325) do
     t.index ["transformation_definition_id"], name: "index_fields_on_transformation_definition_id"
   end
 
-  create_table "jobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "status"
+  create_table "harvest_definitions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "extraction_definition_id", null: false
+    t.bigint "content_partner_id"
+    t.bigint "extraction_definition_id"
+    t.bigint "transformation_definition_id"
+    t.bigint "destination_id"
+    t.index ["content_partner_id", "name"], name: "index_harvest_definitions_on_content_partner_id_and_name", unique: true
+    t.index ["content_partner_id"], name: "index_harvest_definitions_on_content_partner_id"
+    t.index ["destination_id"], name: "index_harvest_definitions_on_destination_id"
+    t.index ["extraction_definition_id"], name: "index_harvest_definitions_on_extraction_definition_id"
+    t.index ["transformation_definition_id"], name: "index_harvest_definitions_on_transformation_definition_id"
+  end
+
+  create_table "harvest_jobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "status", default: 0
     t.integer "kind", default: 0, null: false
     t.timestamp "start_time"
     t.timestamp "end_time"
     t.text "error_message"
-    t.index ["extraction_definition_id"], name: "index_jobs_on_extraction_definition_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "harvest_definition_id"
+    t.bigint "extraction_job_id"
+    t.index ["extraction_job_id"], name: "index_harvest_jobs_on_extraction_job_id"
+    t.index ["harvest_definition_id"], name: "index_harvest_jobs_on_harvest_definition_id"
+  end
+
+  create_table "load_jobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "status", default: 0
+    t.integer "kind", default: 0, null: false
+    t.timestamp "start_time"
+    t.timestamp "end_time"
+    t.integer "records_loaded", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "harvest_job_id"
+    t.integer "page", default: 1, null: false
+    t.index ["harvest_job_id"], name: "index_load_jobs_on_harvest_job_id"
   end
 
   create_table "transformation_definitions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -71,10 +116,31 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_11_033325) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "content_partner_id", null: false
-    t.bigint "job_id", null: false
+    t.bigint "extraction_job_id", null: false
+    t.bigint "original_transformation_definition_id"
+    t.index ["content_partner_id", "name"], name: "index_transformation_definitions_on_content_partner_id_and_name", unique: true
     t.index ["content_partner_id"], name: "index_transformation_definitions_on_content_partner_id"
-    t.index ["job_id"], name: "index_transformation_definitions_on_job_id"
+    t.index ["extraction_job_id"], name: "index_transformation_definitions_on_extraction_job_id"
     t.index ["name"], name: "index_transformation_definitions_on_name"
+    t.index ["original_transformation_definition_id"], name: "index_tds_on_original_td_id"
+  end
+
+  create_table "transformation_jobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "status", default: 0
+    t.integer "kind", default: 0, null: false
+    t.integer "page"
+    t.timestamp "start_time"
+    t.timestamp "end_time"
+    t.text "error_message"
+    t.integer "records_transformed", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "transformation_definition_id"
+    t.bigint "harvest_job_id"
+    t.bigint "extraction_job_id"
+    t.index ["extraction_job_id"], name: "index_transformation_jobs_on_extraction_job_id"
+    t.index ["harvest_job_id"], name: "index_transformation_jobs_on_harvest_job_id"
+    t.index ["transformation_definition_id"], name: "index_transformation_jobs_on_transformation_definition_id"
   end
 
 end

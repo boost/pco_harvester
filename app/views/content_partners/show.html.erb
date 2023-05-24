@@ -42,22 +42,49 @@
 
 <div class="clearfix"></div>
 
-<%- if @transformations.any? %>
-  <%- @transformations.each do |transformation| %>
+<%- if @transformation_definitions.any? %>
+  <%- @transformation_definitions.each do |transformation_definition| %>
     <div class="border p-3 my-2">
       <span class="float-start">
-        <%= transformation.name %>
+        <%= transformation_definition.name %>
       </span>
 
-      <%= link_to "Details", content_partner_transformation_definition_path(@content_partner, transformation), class: "btn btn-outline-primary float-end" %>
+      <%= link_to "Details", content_partner_transformation_definition_path(@content_partner, transformation_definition), class: "btn btn-outline-primary float-end" %>
 
       <div class="clearfix"></div>
     </div>
   <%- end %>
 
-  <%= render 'shared/pagination_below_table', items: @transformations %>
+  <%= render 'shared/pagination_below_table', items: @transformation_definitions %>
 <% else %>
   <p>There are currently no transformation definitions for <%= @content_partner.name_in_database %>.</p>
+<% end %>
+
+
+<h2 class="float-start">Harvest Definitions</h2>
+
+<%= link_to new_content_partner_harvest_definition_path(@content_partner), class: 'btn btn-primary float-end' do %>
+  <%= bootstrap_icon('plus-circle') %>Add new Harvest Definition
+<% end %>
+
+<div class="clearfix"></div>
+
+<%- if @harvest_definitions.any? %>
+  <%- @harvest_definitions.each do |harvest_definition| %>
+    <div class="border p-3 my-2">
+      <span class="float-start">
+        <%= harvest_definition.name %>
+      </span>
+
+      <%= link_to "Details", content_partner_harvest_definition_path(@content_partner, harvest_definition), class: "btn btn-outline-primary float-end" %>
+
+      <div class="clearfix"></div>
+    </div>
+  <%- end %>
+
+  <%= render 'shared/pagination_below_table', items: @harvest_definitions %>
+<% else %>
+  <p>There are currently no harvest definitions for <%= @content_partner.name_in_database %>.</p>
 <% end %>
 
 
