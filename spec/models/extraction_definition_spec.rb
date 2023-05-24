@@ -116,9 +116,9 @@ RSpec.describe ExtractionDefinition, type: :model do
   end
   
   describe '#kinds' do
-    KINDS = { harvest: 0, enrichment: 1 }
+    kinds = { harvest: 0, enrichment: 1 }
 
-    KINDS.each do |key, value|
+    kinds.each do |key, value|
       it "can be #{key}" do
         expect(ExtractionDefinition.new(kind: value).kind).to eq(key.to_s)
       end

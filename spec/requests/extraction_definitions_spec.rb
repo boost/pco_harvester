@@ -67,7 +67,7 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
         }
 
         expect(response.status).to eq 200
-        expect(response.body).to include 'New extraction definition'
+        expect(response.body).to include 'There was an issue creating your Extraction Definition'
       end
     end
   end

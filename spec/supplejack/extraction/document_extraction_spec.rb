@@ -39,7 +39,7 @@ RSpec.describe Extraction::DocumentExtraction do
 
     context 'when there is not a document to save' do
       it 'returns a helpful error message' do
-        expect { subject.save }.to raise_error('#extract must be called before #save DocumentExtraction')
+        expect { subject.save }.to raise_error('#extract must be called before #save AbstractExtraction')
       end
     end
   end
