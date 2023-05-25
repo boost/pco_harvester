@@ -6,7 +6,6 @@ RSpec.describe HarvestDefinition, type: :model do
   subject do
     create(
       :harvest_definition,
-      name: 'Staging Harvest',
       content_partner:,
       extraction_definition:,
       transformation_definition:,
@@ -14,17 +13,13 @@ RSpec.describe HarvestDefinition, type: :model do
     )
   end
 
-  let(:content_partner) { create(:content_partner, :ngataonga) }
+  let(:content_partner) { create(:content_partner, :ngataonga, name: 'National Library of New Zealand') }
   let(:extraction_definition) { content_partner.extraction_definitions.first }
   let(:extraction_job) { create(:extraction_job, extraction_definition:) }
   let(:transformation_definition) { create(:transformation_definition, content_partner:, extraction_job:) }
   let(:destination) { create(:destination) }
 
   describe '#attributes' do
-    it 'has a name' do
-      expect(subject.name).to eq 'Staging Harvest'
-    end
-
     it 'belongs to a content partner' do
       expect(subject.content_partner).to eq content_partner
     end
@@ -140,6 +135,12 @@ RSpec.describe HarvestDefinition, type: :model do
       subject.reload
 
       expect(subject.extraction_definition.id).to eq copy.id
+    end
+  end
+
+  describe '#name' do
+    it 'automatically generates a sensible name' do
+      expect(subject.name).to eq "national-library-of-new-zealand__harvest-definition__#{subject.id}"
     end
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_24_233500) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_25_042038) do
   create_table "content_partners", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -26,7 +26,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_24_233500) do
   end
 
   create_table "extraction_definitions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "name", null: false
+    t.string "name"
     t.string "format"
     t.string "base_url"
     t.integer "throttle", default: 0, null: false
@@ -60,6 +60,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_24_233500) do
     t.timestamp "start_time"
     t.timestamp "end_time"
     t.text "error_message"
+    t.text "name"
     t.index ["extraction_definition_id"], name: "index_extraction_jobs_on_extraction_definition_id"
   end
 
@@ -80,6 +81,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_24_233500) do
     t.bigint "extraction_definition_id"
     t.bigint "transformation_definition_id"
     t.bigint "destination_id"
+    t.string "source_id"
     t.index ["content_partner_id", "name"], name: "index_harvest_definitions_on_content_partner_id_and_name", unique: true
     t.index ["content_partner_id"], name: "index_harvest_definitions_on_content_partner_id"
     t.index ["destination_id"], name: "index_harvest_definitions_on_destination_id"
@@ -97,6 +99,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_24_233500) do
     t.datetime "updated_at", null: false
     t.bigint "harvest_definition_id"
     t.bigint "extraction_job_id"
+    t.string "name"
     t.index ["extraction_job_id"], name: "index_harvest_jobs_on_extraction_job_id"
     t.index ["harvest_definition_id"], name: "index_harvest_jobs_on_harvest_definition_id"
   end
@@ -111,11 +114,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_24_233500) do
     t.datetime "updated_at", null: false
     t.bigint "harvest_job_id"
     t.integer "page", default: 1, null: false
+    t.text "name"
     t.index ["harvest_job_id"], name: "index_load_jobs_on_harvest_job_id"
   end
 
   create_table "transformation_definitions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "name", null: false
+    t.string "name"
     t.string "record_selector", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -143,6 +147,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_24_233500) do
     t.bigint "transformation_definition_id"
     t.bigint "harvest_job_id"
     t.bigint "extraction_job_id"
+    t.text "name"
     t.index ["extraction_job_id"], name: "index_transformation_jobs_on_extraction_job_id"
     t.index ["harvest_job_id"], name: "index_transformation_jobs_on_harvest_job_id"
     t.index ["transformation_definition_id"], name: "index_transformation_jobs_on_transformation_definition_id"

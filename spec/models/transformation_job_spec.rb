@@ -3,5 +3,14 @@
 require 'rails_helper'
 
 RSpec.describe TransformationJob, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:content_partner) { create(:content_partner, name: 'National Library of New Zealand') }
+  let(:extraction_job) { create(:extraction_job) }
+  let(:transformation_definition) { create(:transformation_definition, content_partner:) }
+  let(:subject) { create(:transformation_job, extraction_job:, transformation_definition:) }
+
+  describe '#name' do
+    it 'automatically generates a sensible name' do
+      expect(subject.name).to eq "#{transformation_definition.name}__transformation-job__#{subject.id}"
+    end
+  end
 end

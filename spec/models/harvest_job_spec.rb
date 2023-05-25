@@ -3,7 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe HarvestJob, type: :model do
-  let(:harvest_job) { create(:harvest_job, :completed) }
+  let(:content_partner)    { create(:content_partner, name: 'National Library of New Zealand') }
+  let(:harvest_definition) { create(:harvest_definition, content_partner:) }
+  let(:harvest_job) { create(:harvest_job, :completed, harvest_definition:) }
 
   describe '#duration_seconds' do
     it 'returns nil if extraction_job is nil' do
@@ -54,6 +56,12 @@ RSpec.describe HarvestJob, type: :model do
 
     it 'returns the number of seconds between the extraction start_time and the max load_job end_time' do
       expect(harvest_job.transformation_and_load_duration_seconds).to eq 360.0
+    end
+  end
+
+  describe '#name' do
+    it 'automatically generates a sensible name' do
+      expect(harvest_job.name).to eq "#{harvest_job.harvest_definition.name}__harvest-job__#{harvest_job.id}"
     end
   end
 end

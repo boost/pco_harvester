@@ -13,6 +13,11 @@ class HarvestJob < ApplicationRecord
   delegate :extraction_definition, to: :harvest_definition
   delegate :transformation_definition, to: :harvest_definition
   delegate :destination, to: :harvest_definition
+  
+  after_create do
+    self.name = "#{harvest_definition.name}__#{self.class.to_s.underscore.dasherize}__#{self.id}"
+    save!
+  end
 
   def duration_seconds
     return if extraction_job.nil? || load_jobs.empty?

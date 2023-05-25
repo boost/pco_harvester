@@ -11,6 +11,11 @@ class TransformationDefinition < ApplicationRecord
   
   KINDS = %w[harvest enrichment].freeze
   enum :kind, KINDS
+  
+  after_create do
+    self.name = "#{content_partner.name.parameterize}__#{kind}-#{self.class.to_s.underscore.dasherize}__#{self.id}"
+    save!
+  end
 
   # feature allows editing a transformation definition without impacting a running harvest
   belongs_to(
@@ -25,8 +30,6 @@ class TransformationDefinition < ApplicationRecord
     foreign_key: 'original_transformation_definition_id',
     inverse_of: 'original_transformation_definition'
   )
-
-  validates :name, presence: true, uniqueness: { scope: :content_partner_id }
 
   # Returns the records from the job based on the given record_selector
   # Used for previewing, needs to be refactored

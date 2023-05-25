@@ -17,7 +17,12 @@ class ExtractionJob < ApplicationRecord
   after_destroy :delete_folder
 
   validates :kind, presence: true, inclusion: { in: KINDS }, if: -> { kind.present? }
-
+  
+  after_create do
+    self.name = "#{extraction_definition.name}__#{kind}-#{self.class.to_s.underscore.dasherize}__#{self.id}"
+    save!
+  end
+  
   # Returns the fullpath to the extraction folder for this job
   #
   # @example job.extraction_folder #=> /app/extractions/development/2023-04-28_08-51-16_-_19
@@ -57,9 +62,5 @@ class ExtractionJob < ApplicationRecord
   # @return Integer
   def extraction_folder_size_in_bytes
     Dir.glob("#{extraction_folder}/*").sum { |f| File.size(f) }
-  end
-
-  def name
-    "[#{kind.capitalize}] #{super}"
   end
 end

@@ -13,6 +13,11 @@ class HarvestDefinition < ApplicationRecord
 
   before_create :clone_transformation_definition
   before_create :clone_extraction_definition
+  
+  after_create do
+    self.name = "#{content_partner.name.parameterize}__#{self.class.to_s.underscore.dasherize}__#{self.id}"
+    save!
+  end
 
   # Creates a safe copy of the provided transformation definition
   # So that edits made to the visible transformation definition

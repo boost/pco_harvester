@@ -14,6 +14,11 @@ class ExtractionDefinition < ApplicationRecord
   KINDS = %w[harvest enrichment].freeze
   enum :kind, KINDS
 
+  after_create do
+    self.name = "#{content_partner.name.parameterize}__#{kind}-#{self.class.to_s.underscore.dasherize}__#{self.id}"
+    save!
+  end
+
   # feature allows editing an extraction definition  without impacting a running harvest
   belongs_to(
     :original_extraction_definition,
@@ -35,7 +40,6 @@ class ExtractionDefinition < ApplicationRecord
     OAI: %r{^/}
   }.freeze
 
-  validates :name, presence: true, uniqueness: { scope: :content_partner_id }
   validates :throttle, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 60_000 }
 
   # Harvest related validation
