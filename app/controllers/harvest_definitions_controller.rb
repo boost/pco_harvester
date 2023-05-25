@@ -62,12 +62,12 @@ class HarvestDefinitionsController < ApplicationController
 
   def harvest_definition_params
     params.require(:harvest_definition).permit(
-      :name,
       :content_partner_id,
       :extraction_definition_id,
       :job_id,
       :transformation_definition_id,
-      :destination_id
+      :destination_id,
+      :source_id
     )
   end
 end

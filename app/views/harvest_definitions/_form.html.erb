@@ -15,6 +15,11 @@
     <%= form.label :destination_id, 'Destination', class: "form-label" %>
     <%= form.select :destination_id, options_from_collection_for_select(@destinations, 'id', 'name'), {},  class: "form-select" %>
   </div>
+  
+  <div class="mb-3 col-12">
+    <%= form.label :source_id, 'Source ID', class: "form-label" %>
+    <%= form.text_field :source_id, class: "form-control" %>
+  </div>
 
   <div class="col-12">
     <button type="submit" class="btn btn-primary">

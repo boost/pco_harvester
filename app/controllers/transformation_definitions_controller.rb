@@ -109,7 +109,7 @@ class TransformationDefinitionsController < ApplicationController
   end
 
   def find_extraction_jobs
-    @extraction_jobs = @content_partner.extraction_definitions.map do |ed|
+    @extraction_jobs = @content_partner.extraction_definitions.originals.map do |ed|
       [ed.name, ed.extraction_jobs.map { |job| [job.name, job.id] }]
     end
   end

@@ -9,10 +9,10 @@ class HarvestDefinition < ApplicationRecord
 
   has_many :harvest_jobs, dependent: :destroy
 
-  validates :name, presence: true, uniqueness: { scope: :content_partner_id }
-
   before_create :clone_transformation_definition
   before_create :clone_extraction_definition
+
+  validates :source_id, presence: true
   
   after_create do
     self.name = "#{content_partner.name.parameterize}__#{self.class.to_s.underscore.dasherize}__#{self.id}"
