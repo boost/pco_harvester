@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_22_040101) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_24_233500) do
   create_table "content_partners", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -122,6 +122,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_22_040101) do
     t.bigint "content_partner_id", null: false
     t.bigint "extraction_job_id", null: false
     t.bigint "original_transformation_definition_id"
+    t.integer "kind", default: 0
     t.index ["content_partner_id", "name"], name: "index_transformation_definitions_on_content_partner_id_and_name", unique: true
     t.index ["content_partner_id"], name: "index_transformation_definitions_on_content_partner_id"
     t.index ["extraction_job_id"], name: "index_transformation_definitions_on_extraction_job_id"

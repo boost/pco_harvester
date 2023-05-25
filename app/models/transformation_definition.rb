@@ -5,7 +5,12 @@ class TransformationDefinition < ApplicationRecord
   belongs_to :extraction_job # used for previewing, needs to be refactored
   has_many :fields
 
+  scope :harvests,    -> { where(kind: 0) }
+  scope :enrichments, -> { where(kind: 1) }
   scope :originals, -> { where(original_transformation_definition: nil) }
+  
+  KINDS = %w[harvest enrichment].freeze
+  enum :kind, KINDS
 
   # feature allows editing a transformation definition without impacting a running harvest
   belongs_to(
@@ -13,6 +18,7 @@ class TransformationDefinition < ApplicationRecord
     class_name: 'TransformationDefinition',
     optional: true
   )
+
   has_many(
     :copies,
     class_name: 'TransformationDefinition',

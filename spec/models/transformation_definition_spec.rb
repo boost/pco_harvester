@@ -53,4 +53,17 @@ RSpec.describe TransformationDefinition, type: :model do
   describe '#validations presence of' do
     it { is_expected.to validate_presence_of(:name).with_message("can't be blank") }
   end
+
+  describe 'kinds' do
+    let(:harvest_transformation_definition) { create(:transformation_definition, kind: 0) }
+    let(:enrichment_transformation_definition) { create(:transformation_definition, kind: 1) }
+
+    it 'can be for a harvest' do
+      expect(harvest_transformation_definition.harvest?).to eq true      
+    end
+
+    it 'can be for an enrichment' do
+      expect(enrichment_transformation_definition.enrichment?).to eq true      
+    end
+  end
 end

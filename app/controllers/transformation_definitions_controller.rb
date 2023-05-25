@@ -45,7 +45,7 @@ class TransformationDefinitionsController < ApplicationController
   end
 
   def new
-    @transformation_definition = TransformationDefinition.new
+    @transformation_definition = TransformationDefinition.new(kind: params[:kind])
   end
 
   def edit; end
