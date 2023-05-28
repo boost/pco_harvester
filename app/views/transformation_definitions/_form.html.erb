@@ -2,7 +2,9 @@
   <%= form.hidden_field :content_partner_id, value: @content_partner.id %>
 
   <div class="mb-3 col-12">
-    <%= form.label :extraction_job_id, 'Transformation Preview Result', class: "form-label" %>
+    <%= form.label :extraction_job_id, 'Preview Records', class: "form-label" %>
+
+    <p>Please select the extraction job you would like to use while you develop your transformation.</p>
     <%= form.select(:extraction_job_id, grouped_options_for_select(@extraction_jobs, @transformation_definition.extraction_job_id), {}, class: 'form-select') %>
   </div>
 
