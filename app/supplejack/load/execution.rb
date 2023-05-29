@@ -27,7 +27,7 @@ module Load
           )
       elsif @harvest_definition.enrichment?
         required_fragments = [@harvest_definition.source_id] if @harvest_definition.required_for_active_record?
-        
+
         connection(@destination.url, {}, { 'Authentication-Token' => @destination.api_key })
           .post(
             "/harvester/records/#{@load_job.api_record_id}/fragments.json",

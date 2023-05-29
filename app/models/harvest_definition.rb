@@ -16,12 +16,12 @@ class HarvestDefinition < ApplicationRecord
 
   KINDS = %w[harvest enrichment].freeze
   enum :kind, KINDS
-  
+
   scope :harvests,    -> { where(kind: 0) }
   scope :enrichments, -> { where(kind: 1) }
 
   after_create do
-    self.name = "#{content_partner.name.parameterize}__#{kind}-definition__#{self.id}"
+    self.name = "#{content_partner.name.parameterize}__#{kind}-definition__#{id}"
     save!
   end
 

@@ -36,32 +36,33 @@ def stub_figshare_enrichment_page_1(destination)
       headers: fake_json_headers
     ).to_return(fake_response('test_api_records'))
 
-  [23029880, 23029811, 23029790, 23029787, 23029784, 23029733, 23029685, 23029673, 23029661, 23029634, 23072123, 23072120, 23072033, 23071937, 23071886, 23071577, 23071553, 23071328, 23071295, 23071220].each do |article_id|
+  [23_029_880, 23_029_811, 23_029_790, 23_029_787, 23_029_784, 23_029_733, 23_029_685, 23_029_673, 23_029_661, 23_029_634, 23_072_123,
+   23_072_120, 23_072_033, 23_071_937, 23_071_886, 23_071_577, 23_071_553, 23_071_328, 23_071_295, 23_071_220].each do |article_id|
     stub_request(:get, "https://api.figshare.com/v1/articles/#{article_id}")
       .with(headers: fake_json_headers)
       .to_return(fake_response('figshare_enrichment_1'))
   end
 end
 
-
 def stub_figshare_enrichment_page_2(destination)
-    stub_request(:get, "#{destination.url}/harvester/records")
-      .with(
-        query: {
-          'api_key' => 'testkey',
-          'search' => {
-            'fragments.source_id' => 'test'
-          },
-          'search_options' => {
-            'page' => 2
-          }
+  stub_request(:get, "#{destination.url}/harvester/records")
+    .with(
+      query: {
+        'api_key' => 'testkey',
+        'search' => {
+          'fragments.source_id' => 'test'
         },
-        headers: fake_json_headers
-      ).to_return(fake_response('test_api_records_2'))
+        'search_options' => {
+          'page' => 2
+        }
+      },
+      headers: fake_json_headers
+    ).to_return(fake_response('test_api_records_2'))
 
-  [23071181, 23071178, 23071055, 23070764, 23070638, 23070551, 23070341, 23070317, 23070134, 23069885, 23069813, 23069708, 23069609, 23069582, 23069567, 23069555, 23069426, 23069324, 23069303, 23068361].each do |article_id|
-      stub_request(:get, "https://api.figshare.com/v1/articles/#{article_id}")
-        .with(headers: fake_json_headers)
-        .to_return(fake_response('figshare_enrichment_1'))
+  [23_071_181, 23_071_178, 23_071_055, 23_070_764, 23_070_638, 23_070_551, 23_070_341, 23_070_317, 23_070_134, 23_069_885, 23_069_813,
+   23_069_708, 23_069_609, 23_069_582, 23_069_567, 23_069_555, 23_069_426, 23_069_324, 23_069_303, 23_068_361].each do |article_id|
+    stub_request(:get, "https://api.figshare.com/v1/articles/#{article_id}")
+      .with(headers: fake_json_headers)
+      .to_return(fake_response('figshare_enrichment_1'))
   end
 end

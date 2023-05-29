@@ -165,7 +165,7 @@ RSpec.describe 'Transformation Definitions', type: :request do
       end
     end
   end
-  
+
   describe 'POST /update_harvest_definitions' do
     let(:field)                     { build(:field, block: 'test') }
     let(:transformation_definition) { create(:transformation_definition, content_partner:, fields: [field]) }
@@ -175,7 +175,8 @@ RSpec.describe 'Transformation Definitions', type: :request do
       expect(harvest_definition.transformation_definition.fields.first.block).to eq 'test'
 
       transformation_definition.fields.first.update(block: 'testing')
-      post update_harvest_definitions_content_partner_transformation_definition_path(content_partner, transformation_definition)
+      post update_harvest_definitions_content_partner_transformation_definition_path(content_partner,
+                                                                                     transformation_definition)
 
       harvest_definition.reload
 

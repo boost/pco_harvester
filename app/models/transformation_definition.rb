@@ -8,12 +8,12 @@ class TransformationDefinition < ApplicationRecord
   scope :harvests,    -> { where(kind: 0) }
   scope :enrichments, -> { where(kind: 1) }
   scope :originals, -> { where(original_transformation_definition: nil) }
-  
+
   KINDS = %w[harvest enrichment].freeze
   enum :kind, KINDS
-  
+
   after_create do
-    self.name = "#{content_partner.name.parameterize}__#{kind}-#{self.class.to_s.underscore.dasherize}__#{self.id}"
+    self.name = "#{content_partner.name.parameterize}__#{kind}-#{self.class.to_s.underscore.dasherize}__#{id}"
     save!
   end
 

@@ -51,11 +51,11 @@ RSpec.describe TransformationDefinition, type: :model do
     let(:enrichment_transformation_definition) { create(:transformation_definition, kind: 1) }
 
     it 'can be for a harvest' do
-      expect(harvest_transformation_definition.harvest?).to eq true      
+      expect(harvest_transformation_definition.harvest?).to eq true
     end
 
     it 'can be for an enrichment' do
-      expect(enrichment_transformation_definition.enrichment?).to eq true      
+      expect(enrichment_transformation_definition.enrichment?).to eq true
     end
   end
 

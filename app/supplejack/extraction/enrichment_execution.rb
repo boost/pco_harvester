@@ -49,7 +49,7 @@ module Extraction
         end
       end
     end
-    
+
     def enqueue_record_transformation(record)
       transformation_job = TransformationJob.create(
         extraction_job: @extraction_job,

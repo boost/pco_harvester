@@ -211,7 +211,7 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
 
   describe 'POST /update_harvest_definitions' do
     let!(:extraction_definition) { create(:extraction_definition, content_partner:, base_url: 'http://test.co.nz') }
-    let(:harvest_definition)    { create(:harvest_definition, extraction_definition:) }
+    let(:harvest_definition) { create(:harvest_definition, extraction_definition:) }
 
     it 'updates associated harvest definitions' do
       expect(harvest_definition.extraction_definition.base_url).to eq 'http://test.co.nz'

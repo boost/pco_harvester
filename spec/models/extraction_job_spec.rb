@@ -3,9 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe ExtractionJob, type: :model do
+  subject { create(:extraction_job, extraction_definition:) }
+
   let(:content_partner) { create(:content_partner, name: 'National Library of New Zealand') }
   let(:extraction_definition) { create(:extraction_definition, content_partner:) }
-  subject { create(:extraction_job, extraction_definition:) }
 
   describe '#name' do
     it 'autogenerates a sensible name' do
@@ -157,7 +158,7 @@ RSpec.describe ExtractionJob, type: :model do
       end
     end
   end
-  
+
   describe '#kinds' do
     kinds = { full: 0, sample: 1 }
 

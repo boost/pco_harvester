@@ -29,21 +29,21 @@ RSpec.describe Extraction::EnrichmentExtraction do
         expect(File.exist?(subject.send(:file_path))).to eq true
       end
     end
-    
+
     context 'when there is no extraction_folder' do
       it 'returns an extracted document from a content partner' do
         doc = described_class.new(ed, records.first, 1)
         expect { doc.save }.to raise_error(ArgumentError, 'extraction_folder was not provided in #new')
       end
     end
-    
+
     context 'when there is not a document to save' do
       it 'returns a helpful error message' do
         expect { subject.save }.to raise_error('#extract must be called before #save AbstractExtraction')
       end
     end
   end
-  
+
   describe '#extract_and_save' do
     it 'calls both extract and save' do
       expect(subject).to receive(:extract)
@@ -53,4 +53,3 @@ RSpec.describe Extraction::EnrichmentExtraction do
     end
   end
 end
-

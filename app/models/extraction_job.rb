@@ -4,7 +4,7 @@
 #
 class ExtractionJob < ApplicationRecord
   include Job
-  
+
   scope :harvests,    -> { where(kind: 0) }
   scope :enrichments, -> { where(kind: 1) }
 
@@ -20,12 +20,12 @@ class ExtractionJob < ApplicationRecord
   after_destroy :delete_folder
 
   validates :kind, presence: true, inclusion: { in: KINDS }, if: -> { kind.present? }
-  
+
   after_create do
-    self.name = "#{extraction_definition.name}__#{kind}-#{self.class.to_s.underscore.dasherize}__#{self.id}"
+    self.name = "#{extraction_definition.name}__#{kind}-#{self.class.to_s.underscore.dasherize}__#{id}"
     save!
   end
-  
+
   # Returns the fullpath to the extraction folder for this job
   #
   # @example job.extraction_folder #=> /app/extractions/development/2023-04-28_08-51-16_-_19

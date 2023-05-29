@@ -17,7 +17,8 @@ class TransformationWorker < ApplicationWorker
   end
 
   def queue_load_worker(transformed_records)
-    load_job = LoadJob.create(harvest_job: @harvest_job, page: @transformation_job.page, api_record_id: @transformation_job.api_record_id)
+    load_job = LoadJob.create(harvest_job: @harvest_job, page: @transformation_job.page,
+                              api_record_id: @transformation_job.api_record_id)
     LoadWorker.perform_async(load_job.id, transformed_records.map(&:to_hash).to_json)
   end
 
