@@ -38,7 +38,7 @@ module Extraction
 
         ee.extract_and_save
 
-        enqueue_record_transformation(record) if @harvest_job.present?
+        enqueue_record_transformation(record, ee.document)
 
         sleep @extraction_definition.throttle / 1000.0
         @extraction_job.reload
@@ -50,7 +50,9 @@ module Extraction
       end
     end
 
-    def enqueue_record_transformation(record)
+    def enqueue_record_transformation(record, document)
+      return if @harvest_job.present? && document.successful?
+
       transformation_job = TransformationJob.create(
         extraction_job: @extraction_job,
         transformation_definition: @harvest_job.transformation_definition,

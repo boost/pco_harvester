@@ -60,6 +60,25 @@ RSpec.describe Extraction::Document do
     end
   end
 
+  describe '#successful?' do
+    it 'returns true if status_code is between 200 and 299' do
+      (200..299).each do |status_code|
+        document = described_class.new(status: status_code)
+        expect(document.successful?).to be true
+      end
+    end
+
+    it 'returns false if status_code is less than 200' do
+      document = described_class.new(status: 199)
+      expect(document.successful?).to be false
+    end
+
+    it 'returns false if status_code is greater than 299' do
+      document = described_class.new(status: 300)
+      expect(document.successful?).to be false
+    end
+  end
+
   describe '#load_from_file' do
     let(:file_path) { Rails.root.join('extractions/test_file') }
 

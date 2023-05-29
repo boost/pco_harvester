@@ -13,7 +13,7 @@ module Extraction
       de = DocumentExtraction.new(@extraction_definition, @extraction_job.extraction_folder)
       de.extract_and_save
 
-      enqueue_record_transformation if @harvest_job.present?
+      enqueue_record_transformation(de.document)
 
       return if @extraction_job.is_sample?
 
@@ -24,7 +24,7 @@ module Extraction
         @extraction_definition.page += 1
         de.extract_and_save
 
-        enqueue_record_transformation if @harvest_job.present?
+        enqueue_record_transformation(de.document)
 
         sleep @extraction_definition.throttle / 1000.0
         @extraction_job.reload
@@ -36,7 +36,9 @@ module Extraction
       end
     end
 
-    def enqueue_record_transformation
+    def enqueue_record_transformation(document)
+      return if @harvest_job.present? && document.successful?
+
       transformation_job = TransformationJob.create(
         extraction_job: @extraction_job,
         transformation_definition: @harvest_job.transformation_definition,
