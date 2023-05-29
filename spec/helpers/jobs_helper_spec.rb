@@ -10,6 +10,7 @@ RSpec.describe JobsHelper do
     let(:errored_job)        { create(:extraction_job, status: 'errored') }
     let(:cancelled_job)      { create(:extraction_job, status: 'cancelled') }
     let(:completed_job)      { create(:extraction_job, status: 'completed') }
+    let(:harvest_job)        { create(:harvest_job,    status: 'completed') }
 
     it 'returns Waiting in queue... for queued jobs' do
       expect(job_status_text(queued_job)).to eq 'Waiting in queue...'
@@ -38,6 +39,10 @@ RSpec.describe JobsHelper do
 
     it 'returns Completed when a job is completed' do
       expect(job_status_text(completed_job)).to eq 'Completed'
+    end
+
+    it 'returns triggered successfully when a harvest job is completed' do
+      expect(job_status_text(harvest_job)).to eq 'Triggered Successfully'
     end
   end
 

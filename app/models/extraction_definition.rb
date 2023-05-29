@@ -15,7 +15,7 @@ class ExtractionDefinition < ApplicationRecord
   enum :kind, KINDS
 
   after_create do
-    self.name = "#{content_partner.name.parameterize}__#{kind}-#{self.class.to_s.underscore.dasherize}__#{id}"
+    self.name = "#{content_partner.name.parameterize}__#{kind}-#{self.class.to_s.underscore.dasherize}-#{id}"
     save!
   end
 

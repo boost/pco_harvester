@@ -9,7 +9,7 @@ class LoadJob < ApplicationRecord
   delegate :harvest_definition, to: :harvest_job
 
   after_create do
-    self.name = "#{harvest_definition.name}__#{self.class.to_s.underscore.dasherize}__#{id}"
+    self.name = "#{harvest_definition.name}__#{self.class.to_s.underscore.dasherize}-#{id}"
     save!
   end
 end
