@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'ContentPartners', type: :request do
-  let!(:content_partner) { create(:content_partner) }
+  let!(:content_partner) { create(:content_partner, name: 'National Library of New Zealand') }
 
   describe '#index' do
     it 'displays a list of content partners' do

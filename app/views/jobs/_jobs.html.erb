@@ -8,6 +8,7 @@
         <h2 class="h4"><%= job.name %></h2>
 
         <p class="text-secondary mb-0">
+          <%= job.updated_at.to_fs(:light) %> |
           <%= job_status_text(job) %>
         </p>
 

@@ -52,7 +52,7 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
 
     context 'with invalid parameters' do
       it 'does not create a new extraction definition' do
-        extraction_definition2 = build(:extraction_definition, name: nil, content_partner:)
+        extraction_definition2 = build(:extraction_definition, format: nil, content_partner:)
         expect do
           post content_partner_extraction_definitions_path(content_partner), params: {
             extraction_definition: extraction_definition2.attributes
@@ -61,7 +61,7 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
       end
 
       it 'renders the form again' do
-        extraction_definition2 = build(:extraction_definition, name: nil, content_partner:)
+        extraction_definition2 = build(:extraction_definition, format: nil, content_partner:)
         post content_partner_extraction_definitions_path(content_partner), params: {
           extraction_definition: extraction_definition2.attributes
         }
@@ -97,17 +97,17 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
     context 'with invalid paramaters' do
       it 'does not update the content partner' do
         patch content_partner_extraction_definition_path(content_partner, extraction_definition), params: {
-          extraction_definition: { name: nil }
+          extraction_definition: { format: nil }
         }
 
         extraction_definition.reload
 
-        expect(extraction_definition.name).not_to eq nil
+        expect(extraction_definition.format).not_to eq nil
       end
 
       it 're renders the form' do
         patch content_partner_extraction_definition_path(content_partner, extraction_definition), params: {
-          extraction_definition: { name: nil }
+          extraction_definition: { format: nil }
         }
 
         expect(response.body).to include extraction_definition.name_in_database

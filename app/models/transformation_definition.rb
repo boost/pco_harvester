@@ -12,6 +12,8 @@ class TransformationDefinition < ApplicationRecord
   KINDS = %w[harvest enrichment].freeze
   enum :kind, KINDS
 
+  validates :record_selector, presence: true
+
   after_create do
     self.name = "#{content_partner.name.parameterize}__#{kind}-#{self.class.to_s.underscore.dasherize}__#{id}"
     save!

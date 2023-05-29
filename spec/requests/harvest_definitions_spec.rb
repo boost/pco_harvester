@@ -12,7 +12,7 @@ RSpec.describe 'HarvestDefinitions', type: :request do
 
   describe 'GET /new' do
     it 'has a successful response' do
-      get new_content_partner_harvest_definition_path(content_partner)
+      get new_content_partner_harvest_definition_path(content_partner, kind: 'harvest')
 
       expect(response.status).to eq 200
     end
@@ -36,7 +36,8 @@ RSpec.describe 'HarvestDefinitions', type: :request do
               content_partner_id: content_partner.id,
               extraction_definition_id: extraction_definition.id,
               transformation_definition_id: transformation_definition.id,
-              destination_id: destination.id
+              destination_id: destination.id,
+              source_id: 'test'
             }
           }
         end.to change(HarvestDefinition, :count).by(1)
@@ -49,7 +50,8 @@ RSpec.describe 'HarvestDefinitions', type: :request do
             content_partner_id: content_partner.id,
             extraction_definition_id: extraction_definition.id,
             transformation_definition_id: transformation_definition.id,
-            destination_id: destination.id
+            destination_id: destination.id,
+            source_id: 'test'
           }
         }
 
@@ -91,13 +93,13 @@ RSpec.describe 'HarvestDefinitions', type: :request do
       it 'updates the harvest definition' do
         patch content_partner_harvest_definition_path(content_partner, harvest_definition), params: {
           harvest_definition: {
-            name: 'Production'
+            source_id: 'testing'
           }
         }
 
         harvest_definition.reload
 
-        expect(harvest_definition.name).to eq 'Production'
+        expect(harvest_definition.source_id).to eq 'testing'
       end
 
       it 'redirects to the harvest definition path' do
