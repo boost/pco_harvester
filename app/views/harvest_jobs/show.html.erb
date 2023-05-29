@@ -115,7 +115,7 @@
           <% TransformationJob.statuses.keys.each do |status| %>
             <tr>
               <th scope="row">Number <%= status %></th>
-              <td><%= TransformationJob.where(status: status).count %></td>
+              <td><%= @harvest_job.transformation_jobs.where(status: status).count %></td>
             </tr>
           <% end %>
         </tbody>
@@ -175,7 +175,7 @@
           <% LoadJob.statuses.keys.each do |status| %>
             <tr>
               <th scope="row">Number <%= status %></th>
-              <td><%= LoadJob.where(status: status).count %></td>
+              <td><%= @harvest_job.load_jobs.where(status: status).count %></td>
             </tr>
           <% end %>
         </tbody>
