@@ -28,9 +28,10 @@ RSpec.describe HarvestJob, type: :model do
       expect(harvest_job.duration_seconds).to be_nil
     end
 
-    it 'returns the number of seconds between the extraction start_time and the max load_job end_time' do
-      expect(harvest_job.duration_seconds).to eq 5_760.0
+    it 'returns the number of seconds between the extraction start_time ignoring idle time between jobs and the max load_job end_time' do
+      expect(harvest_job.duration_seconds).to eq 3_960.0
     end
+
   end
 
   describe '#transformation_and_load_duration_seconds' do
