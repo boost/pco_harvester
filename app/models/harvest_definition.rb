@@ -14,6 +14,8 @@ class HarvestDefinition < ApplicationRecord
 
   validates :source_id, presence: true
 
+  # add validation so that you can't have an original td or ed
+
   KINDS = %w[harvest enrichment].freeze
   enum :kind, KINDS
 
