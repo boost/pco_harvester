@@ -3,7 +3,9 @@
 class LoadJob < ApplicationRecord
   include Job
 
-  belongs_to :harvest_job
+  belongs_to :harvest_job, optional: true
+  belongs_to :enrichment_job, optional: true
+
   delegate :harvest_definition, to: :harvest_job
   
   after_create do

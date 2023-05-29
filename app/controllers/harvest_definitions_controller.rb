@@ -11,7 +11,7 @@ class HarvestDefinitionsController < ApplicationController
   end
 
   def new
-    @harvest_definition = HarvestDefinition.new
+    @harvest_definition = HarvestDefinition.new(kind: params[:kind])
   end
 
   def edit; end
@@ -67,7 +67,10 @@ class HarvestDefinitionsController < ApplicationController
       :job_id,
       :transformation_definition_id,
       :destination_id,
-      :source_id
+      :source_id,
+      :priority,
+      :kind,
+      :required_for_active_record
     )
   end
 end

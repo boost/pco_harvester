@@ -14,7 +14,8 @@ class ContentPartnersController < ApplicationController
     @harvest_transformation_definitions = @content_partner.transformation_definitions.originals.harvests.order(created_at: :desc).page(params[:page])
     @enrichment_transformation_definitions = @content_partner.transformation_definitions.originals.enrichments.order(created_at: :desc).page(params[:page])
 
-    @harvest_definitions = @content_partner.harvest_definitions.order(created_at: :desc).page(params[:page])
+    @harvest_definitions = @content_partner.harvest_definitions.harvests.order(created_at: :desc).page(params[:page])
+    @enrichment_definitions = @content_partner.harvest_definitions.enrichments.order(created_at: :desc).page(params[:page])
   end
 
   def new

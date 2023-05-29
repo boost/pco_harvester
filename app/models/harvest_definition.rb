@@ -13,9 +13,15 @@ class HarvestDefinition < ApplicationRecord
   before_create :clone_extraction_definition
 
   validates :source_id, presence: true
+
+  KINDS = %w[harvest enrichment].freeze
+  enum :kind, KINDS
   
+  scope :harvests,    -> { where(kind: 0) }
+  scope :enrichments, -> { where(kind: 1) }
+
   after_create do
-    self.name = "#{content_partner.name.parameterize}__#{self.class.to_s.underscore.dasherize}__#{self.id}"
+    self.name = "#{content_partner.name.parameterize}__#{kind}-definition__#{self.id}"
     save!
   end
 

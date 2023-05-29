@@ -1,5 +1,6 @@
 <%= vertical_form_with model: [@content_partner, @harvest_definition], class: { row: true } do |form| %>
   <%= form.hidden_field :content_partner_id, value: @content_partner.id %>
+  <%= form.hidden_field :kind,               value: @harvest_definition.kind %>
 
   <div class="mb-3 col-12">
     <%= form.label :extraction_definition_id, 'Extraction Definition', class: "form-label" %>
@@ -20,6 +21,22 @@
     <%= form.label :source_id, 'Source ID', class: "form-label" %>
     <%= form.text_field :source_id, class: "form-control" %>
   </div>
+
+  <% if @harvest_definition.harvest? %>
+    <%= form.hidden_field :priority, value: 0 %>
+  <% else %>
+    <div class="mb-3 col-12">
+      <%= form.label :priority, 'Priority', class: "form-label" %>
+      <%= form.number_field :priority, class: "form-control" %>
+    </div>
+    
+    <div class="mb-3 col-12">
+      <div class="form-check">
+        <%= form.label :required_for_active_record, 'Required for active record', class: "form-check-label" %>
+        <%= form.check_box :required_for_active_record, class: "form-check-input" %>
+      </div>
+    </div>
+  <% end %>
 
   <div class="col-12">
     <button type="submit" class="btn btn-primary">

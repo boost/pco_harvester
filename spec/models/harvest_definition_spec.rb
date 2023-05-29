@@ -9,7 +9,8 @@ RSpec.describe HarvestDefinition, type: :model do
       content_partner:,
       extraction_definition:,
       transformation_definition:,
-      destination:
+      destination:,
+      source_id: 'test'
     )
   end
 
@@ -36,6 +37,7 @@ RSpec.describe HarvestDefinition, type: :model do
       expect(subject.destination).to eq destination
     end
   end
+
 
   describe '#clone_transformation_definition' do
     let(:field) { build(:field) }
@@ -141,6 +143,45 @@ RSpec.describe HarvestDefinition, type: :model do
   describe '#name' do
     it 'automatically generates a sensible name' do
       expect(subject.name).to eq "national-library-of-new-zealand__harvest-definition__#{subject.id}"
+    end
+  end
+  
+  describe 'safe_copy' do
+    let(:content_partner)           { create(:content_partner, :ngataonga) }
+    let(:extraction_definition)     { content_partner.extraction_definitions.first }
+    let(:transformation_definition) { create(:transformation_definition, content_partner:, extraction_job:) }
+    let(:destination)               { create(:destination) }
+
+    it 'creates a safe copy of the extraction_definition' do
+      hd = described_class.new(content_partner:, extraction_definition:, transformation_definition:, destination:, source_id: 'test')
+      hd.save!
+
+      hd.reload
+
+      expect(hd.extraction_definition.original_extraction_definition).to eq extraction_definition
+    end
+
+    it 'creates a safe copy of the transformation_definition' do
+      hd = described_class.new(content_partner:, extraction_definition:, transformation_definition:, destination:, source_id: 'test')
+      hd.save!
+
+      hd.reload
+
+      expect(hd.transformation_definition.original_transformation_definition).to eq transformation_definition
+    end
+  end
+
+  describe '#kinds' do
+    it 'can be for a harvest' do
+      subject.update(kind: 0)
+      subject.reload
+      expect(subject.harvest?).to eq true
+    end
+
+    it 'can be for an enrichment' do
+      subject.update(kind: 1)
+      subject.reload
+      expect(subject.enrichment?).to eq true
     end
   end
 end

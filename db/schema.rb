@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_28_205324) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_29_015101) do
   create_table "content_partners", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -80,6 +80,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_28_205324) do
     t.bigint "transformation_definition_id"
     t.bigint "destination_id"
     t.string "source_id"
+    t.integer "kind", default: 0
+    t.integer "priority", default: 0
+    t.boolean "required_for_active_record", default: false
     t.index ["content_partner_id"], name: "index_harvest_definitions_on_content_partner_id"
     t.index ["destination_id"], name: "index_harvest_definitions_on_destination_id"
     t.index ["extraction_definition_id"], name: "index_harvest_definitions_on_extraction_definition_id"
@@ -112,6 +115,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_28_205324) do
     t.bigint "harvest_job_id"
     t.integer "page", default: 1, null: false
     t.text "name"
+    t.string "api_record_id"
     t.index ["harvest_job_id"], name: "index_load_jobs_on_harvest_job_id"
   end
 
@@ -143,6 +147,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_28_205324) do
     t.bigint "harvest_job_id"
     t.bigint "extraction_job_id"
     t.text "name"
+    t.string "api_record_id"
     t.index ["extraction_job_id"], name: "index_transformation_jobs_on_extraction_job_id"
     t.index ["harvest_job_id"], name: "index_transformation_jobs_on_harvest_job_id"
     t.index ["transformation_definition_id"], name: "index_transformation_jobs_on_transformation_definition_id"

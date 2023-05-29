@@ -119,7 +119,8 @@ class TransformationDefinitionsController < ApplicationController
       :content_partner_id,
       :name,
       :extraction_job_id,
-      :record_selector
+      :record_selector,
+      :kind
     )
   end
 end

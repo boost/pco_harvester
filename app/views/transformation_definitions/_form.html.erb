@@ -1,5 +1,6 @@
 <%= vertical_form_with model: [@content_partner, @transformation_definition], class: { row: true } do |form| %>
   <%= form.hidden_field :content_partner_id, value: @content_partner.id %>
+  <%= form.hidden_field :kind,               value: @transformation_definition.kind %>
 
   <div class="mb-3 col-12">
     <%= form.label :extraction_job_id, 'Preview Records', class: "form-label" %>
