@@ -9,14 +9,26 @@
     </div>
   <% end %>
 
+  <% if @harvest_definition.enrichment? %>
+    <% extraction_definitions = @content_partner.extraction_definitions.enrichments.originals %>
+  <% else %>
+    <% extraction_definitions = @content_partner.extraction_definitions.harvests.originals %>
+  <% end %>
+
   <div class="mb-3 col-12">
     <%= form.label :extraction_definition_id, 'Extraction Definition', class: "form-label" %>
-    <%= form.select :extraction_definition_id, options_from_collection_for_select(@content_partner.extraction_definitions.originals, 'id', 'name'), {},  class: "form-select" %>
+    <%= form.select :extraction_definition_id, options_from_collection_for_select(extraction_definitions, 'id', 'name'), {},  class: "form-select" %>
   </div>
+  
+  <% if @harvest_definition.enrichment? %>
+    <% transformation_definitions = @content_partner.transformation_definitions.enrichments.originals %>
+  <% else %>
+    <% transformation_definitions = @content_partner.transformation_definitions.harvests.originals %>
+  <% end %>
 
   <div class="mb-3 col-12">
     <%= form.label :transformation_definition_id, 'Transformation Definition', class: "form-label" %>
-    <%= form.select :transformation_definition_id, options_from_collection_for_select(@content_partner.transformation_definitions.originals, 'id', 'name'), {},  class: "form-select" %>
+    <%= form.select :transformation_definition_id, options_from_collection_for_select(transformation_definitions, 'id', 'name'), {},  class: "form-select" %>
   </div>
 
   <div class="mb-3 col-12">

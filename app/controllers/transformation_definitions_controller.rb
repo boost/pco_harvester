@@ -109,7 +109,13 @@ class TransformationDefinitionsController < ApplicationController
   end
 
   def find_extraction_jobs
-    @extraction_jobs = @content_partner.extraction_definitions.originals.map do |ed|
+    if params['kind'] == 'enrichment'
+      extraction_definitions = @content_partner.extraction_definitions.enrichments.originals
+    else
+      extraction_definitions = @content_partner.extraction_definitions.harvests.originals
+    end
+    
+    @extraction_jobs = extraction_definitions.map do |ed|
       [ed.name, ed.extraction_jobs.map { |job| [job.name, job.id] }]
     end
   end

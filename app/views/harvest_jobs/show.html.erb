@@ -42,9 +42,11 @@
         <tr>
           <th scope="row">Estimated Records Extracted</th>
           <td>
-            <%=
-            @harvest_job.extraction_definition.per_page * @harvest_job.extraction_job.documents.total_pages
-            %>
+            <% if @harvest_job.extraction_definition.enrichment? %>
+              <%= 1 * @harvest_job.extraction_job.documents.total_pages %>
+            <% else %>
+              <%= @harvest_job.extraction_definition.per_page * @harvest_job.extraction_job.documents.total_pages %>
+            <% end %>
           </td>
         </tr>
 
