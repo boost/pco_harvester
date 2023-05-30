@@ -71,5 +71,23 @@ RSpec.describe Extraction::EnrichmentExecution do
         expect(extracted_files.count).to eq 1
       end
     end
+    
+    context 'when the document has failed to be extracted' do
+      before do
+        stub_failed_figshare_enrichment_page_1(destination)
+      end
+      
+      let(:subject) { described_class.new(sample_job) }
+
+      it 'does not create TransformationJobs for failed pages' do
+        expect { subject.call }.to change(TransformationJob, :count).by(0)
+      end
+
+      it 'enqueues 0 TransformationWorkers in sidekiq' do
+        expect(TransformationWorker).to receive(:perform_async).exactly(0).times.and_call_original
+
+        subject.call
+      end
+    end
   end
 end

@@ -1,0 +1,373 @@
+---
+status: 500
+headers:
+  date: Fri, 19 May 2023 02:07:08 GMT
+  content-type: application/json
+  transfer-encoding: chunked
+  connection: keep-alive
+  server: nginx
+  vary: Accept-Encoding
+  access-control-allow-origin: https://api.figshare.com
+  access-control-allow-methods: GET, POST, PUT, DELETE, OPTIONS
+  access-control-allow-headers: Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization
+  access-control-max-age: '3600'
+  content-encoding: gzip
+body: |-
+  {
+    "items_found": 24906,
+    "page_nr": 5,
+    "items": [
+      {
+        "article_id": 22943738,
+        "title": "History, origin and classification of persimmon cultivars",
+        "DOI": null,
+        "description": "Persimmons have been produced in China for over two thousand years with some 950 known cultivars currently existing. The majority of persimmons produced around the world are astringent types, but recent trends in breeding programs in China, Japan, Brazil and Europe, and new plantings in many producing countries around the world, show non-astringent types are gaining in popularity. Worldwide, persimmons are available year round as fresh, dried or processed fruit. Persimmons from Israel can be purchased in Hong Kong and Singapore as “Sharon fruit”. Dried persimmons from China are available throughout the year in most Asian markets. Australian and New Zealand persimmons are now marketed in a number of Southeast Asian countries. In many Asian cultures persimmons hold special significance and are used in religious offerings during festive seasons. The aim of this review is to provide researchers, extension officers and growers with a clear understanding of the origin, botanical taxonomy, classification of persimmons and the varieties available worldwide.",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22943738",
+        "published_date": "22:16, 18 May, 2023",
+        "authors": [
+          {
+            "author_name": "Nissen, R"
+          },
+          {
+            "author_name": "Roberts, RE"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "22:16, 18 May, 2023"
+      },
+      {
+        "article_id": 22943693,
+        "title": "Purpose, Practice and Theory: teacher educators’ beliefs about professional experience",
+        "DOI": null,
+        "description": "Abstract: The purposes of professional experience within initial teacher education programs are varied (Russell, 2005). However, there is limited literature explaining (a) university-based teacher educators’ beliefs about its purposes and (b) how these purposes are reflected in practice. This study investigated these themes. A pragmatic mixed-method research design (Tashakkori & Teddlie, 2010) was developed to survey teacher educators from two Australian and New Zealand universities (n = 56). Participants were anonymously surveyed using a diamond ranking activity (requiring placement of 9 of 11 professional experience purpose statement cards, pre-determined from literature) and open response items seeking explanations of placement determining criteria and statement elimination. Following analysis of questionnaire data, focus groups were utilised to further explore the aggregated findings. Survey data were analysed by weighting frequencies of each statement. Analysis of the data indicated significant variation of perspectives amongst the teacher educators and resulted in the clustering of purposes into four groups. This paper presents these data from the Australian university cohort (n = 26). This study, the first of a series designed to elucidate understandings of teacher educators’ purposes for professional experience, reinforces the importance of professional experience as authentic workplace learning within initial teacher education. The findings also reveal the complex beliefs that underpin teacher educators’ practices when preparing, mentoring and supervising preservice teachers for and within professional experience.",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22943693",
+        "published_date": "22:14, 18 May, 2023",
+        "authors": [
+          {
+            "author_name": "Morrison, CM"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "22:14, 18 May, 2023"
+      },
+      {
+        "article_id": 22943690,
+        "title": "Ovarian hyperstimulation syndrome: A case control study investigating risk factors",
+        "DOI": null,
+        "description": "<p><strong>Background:</strong>     Ovarian hyperstimulation syndrome (OHSS) is a complication of in vitro fertilisation (IVF) treatment associated with significant morbidity and mortality.</p>    <p><strong>Aims:</strong>     To assess the severity of OHSS in patients admitted to a tertiary hospital in Melbourne, Australia, and identify risk factors for the condition.</p>    <p><strong>Material and methods:</strong>     The files of patients admitted with OHSS over a five-year period between 2008 and 2013 were reviewed. Baseline characteristics of OHSS patients were compared with IVF patients who did not develop OHSS to establish risk factors for the OHSS patient group. Relative risk was estimated using multivariate Poisson regression. A risk score was then developed using the coefficients from the Poisson regression to aid identification of patients at high risk for the condition.</p>    <p><strong>Results: </strong>    The following risk factors were associated with an increased risk of developing OHSS: younger age, higher oestradiol (E2) concentration (relative risk (RR) 1.43, <em>P</em> < 0.001), and higher follicle count (RR 1.40, <em>P</em> < 0.001). Lower body mass index (BMI) was not correlated with an increased risk of developing OHSS (RR 1.1, <em>P</em> = 0.19).</p>    <p><strong>Conclusions:</strong>     This study demonstrates that a risk score can be calculated from routinely taken measurements to identify patients at high risk of OHSS. Using this risk score could help clinicians reduce the incidence of OHSS by employing preventative strategies in high-risk patients.</p>",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22943690",
+        "published_date": "22:14, 18 May, 2023",
+        "authors": [
+          {
+            "author_name": "Shields, R"
+          },
+          {
+            "author_name": "Vollenhoven, B"
+          },
+          {
+            "author_name": "Kiran Ahuja"
+          },
+          {
+            "author_name": "Talmor, A"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "22:14, 18 May, 2023"
+      },
+      {
+        "article_id": 22943567,
+        "title": "Dinoflagellate cysts in recent marine sediments from Tasmania, Australia",
+        "DOI": null,
+        "description": "Thirty-four cyst types capable of seeding plankton dinoflagellate populations have been identified in Tasmanian  estuarine sediments. The most common cysts were those of <i>Gonyaulax grindleyi, G. spinifera, Gymnodinium  catenatum, Gyrodinium sp., Polykrikos schwartzii, Protoperidinium conicum, P. pentagonum, P. subinerme,  Scrippsiella spp. and Zygabikodiniwn lenticuiatum</i>. Also common were ovoid to spherical <i>Alexandrium  tamarense-</i>like cysts, which lack distinctive taxonomic features and mucilaginous covering. These latter cysts  could only be identified by incubation experiments, which produced living cells of <i>Scrippsiella </i>(2 spp.),  <i>Gyrodinium sp. and Alexandrium cf. excavatum</i>. While Tasmanian dinoflagellate cyst assemblages resemble  those of New South Wales, Australia, and New Zealand, one notable difference is the cyst of the toxic  dinoflagellate <i>Gymnodinium catenatum</i> which appears to be confined to south-eastern Tasmania.",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22943567",
+        "published_date": "22:09, 18 May, 2023",
+        "authors": [
+          {
+            "author_name": "Christopher Bolch"
+          },
+          {
+            "author_name": "Gustaaf Hallegraeff"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "22:09, 18 May, 2023"
+      },
+      {
+        "article_id": 22943489,
+        "title": "Tasmanian macular hole study: whole population-based incidence of full thickness macular hole",
+        "DOI": null,
+        "description": "<p><strong>Purpose:</strong>    To determine the incidence of full thickness macular hole in the Tasmanian population.</p>    <p><strong>Design:</strong>    A whole population retrospective case series in Tasmania, Australia.</p>    <p><strong>Methods:</strong>    Patients diagnosed with full thickness macular hole (confirmed by optical coherence tomography (OCT) imaging) of both idiopathic and secondary causes were identified from April 2005 to April 2011 by a sole vitreoretinal surgeon servicing Tasmania. Baseline characteristics were recorded. The six-year incidence rate was calculated, based on the 2006 and 2011 Tasmanian census data. Incidence rates were age and sex standardized.</p>    <p><strong>Participants:</strong>    One hundred forty-seven eyes of 136 patients.</p>    <p><strong>Main Outcome Measures:</strong>    To determine the incidence (age and sex standardized) of full thickness macular holes in Tasmania, Australia.</p><p>    <strong>Results:</strong>    Idiopathic macular holes comprised 128 (87.1%). There were 116 cases of idiopathic Full Thickness Macular Hole in one or both eyes between 1 April 2005 and 31 April 2011. The six-year incidence of idiopathic full-thickness macular holes was 24.3 per 100 000 people, 4.05 per 100 000 per year, with the highest six-year incidence observed among women aged 70-79 years.</p>    <p><strong>Conclusion:</strong>    This is the first global study to report OCT confirmed incidence rates of full thickness macular holes in a relatively static Australian population sub-group.</p>",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22943489",
+        "published_date": "22:05, 18 May, 2023",
+        "authors": [
+          {
+            "author_name": "Darian-Smith, E"
+          },
+          {
+            "author_name": "Howie, AR"
+          },
+          {
+            "author_name": "Allen, PL"
+          },
+          {
+            "author_name": "Vote, BJ"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "22:05, 18 May, 2023"
+      },
+      {
+        "article_id": 22943378,
+        "title": "The Kerguelen Plateau: new paleontologic and paleomagnetic age constraints on growth history from ODP Leg 183 drilling",
+        "DOI": null,
+        "description": "Although the submergent Kerguelen Plateau  (KP), a large igneous province in the Southern Indian Ocean,  was initiated after the rifting of India from Antarctica, i ts  construction, fed by the Kerguelen hot spot, has taken place  over the past c. 114 m. y. Preliminary shipboard paleontologic  and paleomagnetic dates from ODP Leg 183 on marine  sediments above igneous basement help constraint the  growth history of this feature. The oldest such date is late  Albian (105- 106 Ma or younger) from Site 1136 on the  southern K.P, whereas the youngest is early Oligocene (more  precisely, 34 Ma) from Sites 1139 and 1140 on the northern  KP. Elan Bank provided intermediate ages of late Campanian  (c. 75 Ma); however, Site. 1 138 on the central KP yielded  lower Turonian (c. 93.5 Ma) marine sediments (Cenomanian/  Turonian boundary \"black shales\") above upper Albian -  lowest Cenomanian (c. 102-96 Ma) non-marine (fluvial)  claystones, sandstones, and conglomerates. This latter date  (from shore-based palynology) diminishes considerably the  previously inferred age difference between the southern and  central KP and, in so doing, tends to blur the geophysical  distinction between these two domains.",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22943378",
+        "published_date": "21:58, 18 May, 2023",
+        "authors": [
+          {
+            "author_name": "Wise, SW"
+          },
+          {
+            "author_name": "Coxall, HK"
+          },
+          {
+            "author_name": "Wahnert, V"
+          },
+          {
+            "author_name": "Antretter, MJ"
+          },
+          {
+            "author_name": "Inokuchi, H"
+          },
+          {
+            "author_name": "Mike Coffin"
+          },
+          {
+            "author_name": "Frey, FA"
+          },
+          {
+            "author_name": "Wallace, PJ"
+          },
+          {
+            "author_name": "McArthur, JM"
+          },
+          {
+            "author_name": "Weis, D"
+          },
+          {
+            "author_name": "Zhao, X"
+          },
+          {
+            "author_name": "Teagle, DAH"
+          },
+          {
+            "author_name": "Saccocia, PJ"
+          },
+          {
+            "author_name": "Reusch, DN"
+          },
+          {
+            "author_name": "Pringle, MS"
+          },
+          {
+            "author_name": "Nicolaysen, KE"
+          },
+          {
+            "author_name": "Neal, CR"
+          },
+          {
+            "author_name": "Muller, RD"
+          },
+          {
+            "author_name": "Moore, CL"
+          },
+          {
+            "author_name": "Mahoney, JJL"
+          },
+          {
+            "author_name": "Keszthelyi, L"
+          },
+          {
+            "author_name": "Duncan, RA"
+          },
+          {
+            "author_name": "Delius, H"
+          },
+          {
+            "author_name": "Damuth, JE"
+          },
+          {
+            "author_name": "Damasceno, D"
+          },
+          {
+            "author_name": "Boore, MK"
+          },
+          {
+            "author_name": "Boehm, F"
+          },
+          {
+            "author_name": "Barling, J"
+          },
+          {
+            "author_name": "Arndt, NT"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "21:58, 18 May, 2023"
+      },
+      {
+        "article_id": 22943366,
+        "title": "Utility of antenatal clinical factors for prediction of postpartum outcomes in women with gestational diabetes mellitus (GDM)",
+        "DOI": null,
+        "description": "<p><strong>Background:</strong>    Gestational diabetes mellitus (GDM) is associated with life-long increased risk of type 2 diabetes: affected women are advised to undergo oral glucose tolerance testing (OGTT) at 6-12 weeks postpartum, then glucose screening every 1-3 years.</p>    <p><strong>Aims:</strong>    We investigated whether in women with GDM, antenatal clinical factors predicted postpartum abnormal glucose tolerance and compliance with screening.</p>    <p><strong>Materials and methods:</strong>    In women with GDM delivering 2007 to mid-2009 in a single hospital, antenatal/obstetric data and glucose tests at 6-12 weeks postpartum and during 5.5 years post-pregnancy were retrospectively collected. Predictors of return for testing and abnormal glucose tolerance were identified using multivariate analysis.</p>    <p><strong>Results:</strong>    Of 165 women, 117 (70.9%) returned for 6-12 week postpartum OGTT: 23 (19.6%) were abnormal. Smoking and parity, independent of socioeconomic status, were associated with non-return for testing. Fasting glucose ≥ 5.4 mmol/L on pregnancy OGTT predicted both non-return for testing and abnormal OGTT. During 5.5 years post-pregnancy, 148 (89.7%) women accessed glucose screening: nine (6.1%) developed diabetes, 33 (22.3%) had impaired fasting glucose / impaired glucose tolerance. Predictors of abnormal glucose tolerance were fasting glucose ≥ 5.4 mmol/L and 2-h glucose ≥ 9.3 mmol/L on pregnancy OGTT (~2.5-fold increased risk), and polycystic ovary syndrome (~3.4 fold increased risk). Risk score calculation, based on combined antenatal factors, did not improve predictions.</p>    <p><strong>Conclusions:</strong>    Antenatal clinical factors were modestly predictive of return for testing and abnormal glucose tolerance post-pregnancy in women with GDM. Risk score calculations were ineffective in predicting outcomes: risk scores developed in other populations require validation. Ongoing glucose screening is indicated for all women with GDM.</p>",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22943366",
+        "published_date": "21:58, 18 May, 2023",
+        "authors": [
+          {
+            "author_name": "Emily Ingram"
+          },
+          {
+            "author_name": "Iain Robertson"
+          },
+          {
+            "author_name": "Kathryn Ogden"
+          },
+          {
+            "author_name": "Dennis, AE"
+          },
+          {
+            "author_name": "Campbell, JE"
+          },
+          {
+            "author_name": "Anne Corbould"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "21:58, 18 May, 2023"
+      },
+      {
+        "article_id": 22943279,
+        "title": "Determinants of patient compliance, control, presence of complications, and handicap in non-insulin-dependent diabetes",
+        "DOI": null,
+        "description": "Factors affecting patient compliance with diet and medication, clinical control, complications, and handicap were studied in 114 subjects with non-insulin-dependent diabetes mellitus who were attending a hospital diabetic clinic. Compliance with diet and hypoglycemic medication was correlated. The perceived importance, and the ease of compliance were the principal correlates of patient compliance. Factors independently related to diabetic control were compliance with diet, and the quality of the patient's diet. Diabetes which was poorly controlled, and which was of several-years' standing, was more likely to involve complications. Both poor control and the presence of complications contributed to handicap. Increased dietary education and counselling, with emphasis placed on the importance and benefits of compliance with prescribed diets, may improve control, decrease the incidence of complications, and ultimately minimise handicap due to diabetes in non-insulin-dependent patients.",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22943279",
+        "published_date": "21:54, 18 May, 2023",
+        "authors": [
+          {
+            "author_name": "Gregory Peterson"
+          },
+          {
+            "author_name": "Stuart McLean"
+          },
+          {
+            "author_name": "Senator, GB"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "21:54, 18 May, 2023"
+      },
+      {
+        "article_id": 22943126,
+        "title": "A long term follow-up study of carriers of hypertrophic cardiomyopathy mutations",
+        "DOI": null,
+        "description": "<p><strong>Background:</strong>    Adults who test positive for a mutation associated with the development of hypertrophic cardiomyopathy (HCM) but who have not manifested left ventricular hypertrophy (LVH) at the time of that diagnosis are now commonly identified in the era of genetic testing. There are little published data, however, on the long-term outlook for these phenotypically normal gene carriers.</p>    <p><strong>Methods:</strong>    Fifteen genotype positive/LVH negative patients with HCM were identified, seven of which were children when first diagnosed as gene carriers. Fourteen were followed up with clinical examinations, electrocardiography and echocardiography to determine if their clinical status had changed over time. Measurements included electrocardiographic changes, changes in wall thickness, diastolic function and global longitudinal stain.</p>    <p><strong>Results:</strong>    Ten participants were followed up for a total of 18 years, two for a total of 17 years, one for 11 years and one for 8 years. In addition, magnetic resonance imaging (MRI) studies were performed on 11 participants. Eleven participants carried a mutation for the MYBPC3 gene and three carried a mutation for the MYH7 gene. One patient, an adult at the time of initial investigation, developed phenotypic features of HCM on echocardiography and MRI, one an increase in wall thickness diagnostic for HCM only on MRI and another to be borderline for HCM on MRI.</p>    <p><strong>Conclusion:</strong>    Hypertrophic cardiomyopathy can develop in adult life in carriers who may be negative for LVH at the time of gene diagnosis and warrants periodic supervision of carriers throughout their lives.</p>",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22943126",
+        "published_date": "21:46, 18 May, 2023",
+        "authors": [
+          {
+            "author_name": "McTaggart, DR"
+          },
+          {
+            "author_name": "Kathryn Ogden"
+          },
+          {
+            "author_name": "Marathe, JA"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "21:46, 18 May, 2023"
+      },
+      {
+        "article_id": 22943078,
+        "title": "Intravenous ferric carboxymaltose versus standard care in the management of postoperative anaemia: a prospective, open-label, randomised controlled trial",
+        "DOI": null,
+        "description": "<strong>Background:</strong> Despite increasing efforts in perioperative management, postoperative iron deficiency anaemia persists, and few data are available about the management of this condition. In this study, we aimed to determine whether giving postoperative intravenous iron (in the form of ferric carboxymaltose) improved iron stores, haemoglobin concentrations, and outcomes following surgery.<p></p>    <p><strong>Methods:</strong> We did a prospective, open-label, randomised, controlled study of patients at two centres (a general hospital and a private health-care centre) in Tasmania, Australia, undergoing elective surgery with functional iron deficiency anaemia (haemoglobin 70–120 g/L and ferritin ≤100 μg/L or iron saturation ≤20%), measured at day 1 postoperatively. Consecutive routine elective surgical patients who were having major orthopaedic surgery, abdominal, and genitourinary surgery, and other surgeries were recruited. Via computer-generated randomisation, patients were randomly assigned (1:1) to either a single dose of intravenous 1000 mg ferric carboxymaltose (intervention group) or standard care, consisting of observation (control group). The primary endpoints were changes in haemoglobin concentrations and iron stores at 4 weeks postoperatively, and the number of transfused units of blood required postoperatively until discharge. Analyses were done on an intention-to-treat basis. This trial is registered with the Australian New Zealand Clinical Trials Registry and the WHO International Clinical Trials Registry platform (number ACTRN12614001261606).</p>    <p><strong>Findings:</strong> Between Dec 17, 2014, and May 7, 2015, we recruited 201 eligible patients, assigning 103 to intravenous ferric carboxymaltose and 98 to standard care only. Baseline mean haemoglobin was 105·5 g/L (SD 13·8) in the standard care group versus 106·2 g/L (11·9) in the ferric carboxymaltose group, improving at 4 weeks to 121·5 g/L (SD 14·5) in the standard group and 130·1 g/L (11·3) in the ferric carboxymaltose group (mean difference of 7·84 g/L, 95% CI 3·79–11·9; p<0·0001 in favour of the ferric carboxymaltose group). Significant improvements in serum iron (5·36 μmol/L, 95% CI 3·62–7·09; p<0·0001), iron saturation (11·40%, 95% CI 8·33–14·50; p<0·0001), and serum ferritin concentrations (468 μg/L, 95% CI 355–582; p<0·0001) were also noted in the ferric carboxymaltose group at 4 weeks compared with standard care, although no differences were noted in transferrin concentrations (0·06 g/L, 95% CI −0·97 to 1·09; p=0·62). Fewer transfused blood units were given in the ferric carboxymaltose group (to one of 103 patients [<1%]) than in the standard care group (to five of 98 patients [5%]; incidence rate ratio 0·10; 95% CI 0·01–0·85; p=0·035). No adverse events were observed with ferric carboxymaltose treatment.</p>    <p><strong>Interpretation:</strong> Postoperative intravenous ferric carboxymaltose is a feasible and pragmatic management approach in surgical patients with functional iron deficiency anaemia. Our study suggests that patient blood management guidelines should be updated, incorporating the use of postoperative intravenous iron infusion to optimise patient outcomes. Further trials to assess our approach are warranted.</p>",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22943078",
+        "published_date": "21:43, 18 May, 2023",
+        "authors": [
+          {
+            "author_name": "Alhossain Khalafallah"
+          },
+          {
+            "author_name": "Yan, C"
+          },
+          {
+            "author_name": "Al-Badri, R"
+          },
+          {
+            "author_name": "Robinson, E"
+          },
+          {
+            "author_name": "Kirkby, BE"
+          },
+          {
+            "author_name": "Ingram, E"
+          },
+          {
+            "author_name": "Gray, Z"
+          },
+          {
+            "author_name": "Khelgi, V"
+          },
+          {
+            "author_name": "Iain Robertson"
+          },
+          {
+            "author_name": "Kirkby, BP"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "21:43, 18 May, 2023"
+      }
+    ]
+  }
