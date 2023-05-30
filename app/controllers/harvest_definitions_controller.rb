@@ -29,11 +29,16 @@ class HarvestDefinitionsController < ApplicationController
 
   def update
     if @harvest_definition.update(harvest_definition_params.except('extraction_definition_id', 'transformation_definition_id'))
-      extraction_definition = ExtractionDefinition.find(harvest_definition_params['extraction_definition_id'])
-      transformation_definition = TransformationDefinition.find(harvest_definition_params['transformation_definition_id'])
 
-      @harvest_definition.update_extraction_definition_clone(extraction_definition)
-      @harvest_definition.update_transformation_definition_clone(transformation_definition)
+      if harvest_definition_params.include?('extraction_definition_id')
+        extraction_definition = ExtractionDefinition.find(harvest_definition_params['extraction_definition_id'])
+        @harvest_definition.update_extraction_definition_clone(extraction_definition)
+      end
+
+      if harvest_definition_params.include?('transformation_definition_id')
+        transformation_definition = TransformationDefinition.find(harvest_definition_params['transformation_definition_id'])
+        @harvest_definition.update_transformation_definition_clone(transformation_definition)
+      end
       
       flash.notice = 'Harvest Definition updated successfully'
       redirect_to content_partner_harvest_definition_path(@content_partner, @harvest_definition)

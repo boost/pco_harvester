@@ -117,13 +117,13 @@ RSpec.describe 'HarvestDefinitions', type: :request do
       it 'does not update the harvest definition' do
         patch content_partner_harvest_definition_path(content_partner, harvest_definition), params: {
           harvest_definition: {
-            name: nil
+            source_id: nil
           }
         }
 
         harvest_definition.reload
 
-        expect(harvest_definition.name).not_to eq nil
+        expect(harvest_definition.source_id).not_to eq nil
       end
     end
   end
