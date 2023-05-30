@@ -5,6 +5,7 @@
 // Modules
 
 @import "../stylesheets/modules/colors";
+@import "../stylesheets/modules/fonts";
 
 // Blocks
 
@@ -20,4 +21,6 @@
 
 body {
   background-color: $bleached-silk;
+  color: $antarctic-deep;
+  font-family: 'Lato', sans-serif;
 }
