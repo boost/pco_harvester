@@ -15,7 +15,7 @@
     </button>
 
     <% content_partners_classes = class_names('nav-link', active: request.path.include?('content_partners')) %>
-    <% destinations_classes = class_names('nav-link', active: current_page?(destinations_path)) %>
+    <% destinations_classes = class_names('nav-link', active: request.path.include?('destinations')) %>
     <% extraction_jobs_classes = class_names('nav-link', active: current_page?(extraction_jobs_path)) %>
 
     <div class="collapse navbar-collapse" id="navbar-nav">

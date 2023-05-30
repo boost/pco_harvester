@@ -1,7 +1,11 @@
 <%= content_for(:title) { "Editing #{@content_partner.name_in_database}" } %>
 
-<%= render 'shared/breadcrumb_nav' %>
+<%= content_for :header do %>
+  <%= render 'shared/breadcrumb_nav' %>
 
-<h1><%= @content_partner.name_in_database %></h1>
+  <h1 class="float-start"><%= @content_partner.name_in_database %></h1>
+
+  <div class="clearfix"></div>
+<% end %>
 
 <%= render 'form' %>

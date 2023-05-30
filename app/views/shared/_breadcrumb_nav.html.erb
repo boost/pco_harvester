@@ -28,8 +28,8 @@
 
     <%= breadcrumb_item(
       text: @destination&.name_in_database,
-      path: (destination_path(partner_id) rescue nil),
-      active: (current_page?(destination_path(partner_id)) rescue false),
+      path: (destination_path(destination_id) rescue nil),
+      active: (current_page?(destination_path(destination_id)) rescue false),
       display: request.path.match?(/^\/destinations\/\d+/)) %>
 
     <%= breadcrumb_item(

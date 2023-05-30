@@ -1,7 +1,9 @@
 <%= content_for(:title) { 'New Content partners' } %>
 
-<%= render 'shared/breadcrumb_nav' %>
+<%= content_for :header do %>
+  <%= render 'shared/breadcrumb_nav' %>
 
-<h1>Add New Content Partner</h1>
+  <h1>Add New Content Partner</h1>
+<% end %>
 
 <%= render 'form' %>

@@ -1,12 +1,14 @@
 <%= content_for(:title) { @content_partner.name_in_database } %>
 
-<%= render 'shared/breadcrumb_nav' %>
+<%= content_for :header do %>
+  <%= render 'shared/breadcrumb_nav' %>
 
-<h1 class="float-start mb-4"><%= @content_partner.name_in_database %></h1>
+  <h1 class="float-start"><%= @content_partner.name_in_database %></h1>
 
-<%= link_to 'Edit content partner', edit_content_partner_path(@content_partner), class: 'btn btn-outline-primary float-end' %>
+  <%= link_to 'Edit content partner', edit_content_partner_path(@content_partner), class: 'btn btn-outline-primary float-end' %>
 
-<div class="clearfix"></div>
+  <div class="clearfix"></div>
+<% end %>
 
 <h2 class="float-start">Extraction Definitions</h2>
 
