@@ -13,8 +13,8 @@ class HarvestDefinition < ApplicationRecord
   before_create :clone_extraction_definition
 
   validates :source_id, presence: true
-
-  # add validation so that you can't have an original td or ed
+  validate :extraction_definition_is_a_copy, on: :update
+  validate :transformation_definition_is_a_copy, on: :update
 
   KINDS = %w[harvest enrichment].freeze
   enum :kind, KINDS
@@ -87,5 +87,17 @@ class HarvestDefinition < ApplicationRecord
   def update_extraction_definition_clone(extraction_definition)
     self.extraction_definition.update(extraction_definition.dup.attributes.except('name').compact)
     self.extraction_definition.update(original_extraction_definition: extraction_definition)
+  end
+
+  def extraction_definition_is_a_copy
+    return if extraction_definition.copy?
+
+    errors.add(:extraction_definition_original, 'Harvest Definition cannot be associated with an original extraction definition')
+  end
+  
+  def transformation_definition_is_a_copy
+    return if transformation_definition.copy?
+
+    errors.add(:transformation_definition_original, 'Harvest Definition cannot be associated with an original transformation definition')
   end
 end

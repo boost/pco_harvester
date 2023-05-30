@@ -190,4 +190,19 @@ RSpec.describe HarvestDefinition, type: :model do
       expect(subject.enrichment?).to eq true
     end
   end
+
+  describe '#extraction_definition_is_a_copy' do
+    it 'does not allow being associated with an original extraction definition' do
+      subject.extraction_definition = extraction_definition      
+      expect(subject).not_to be_valid
+    end
+  end
+
+ 
+  describe '#transformation_definition_is_a_copy' do
+    it 'does not allow being associated with an original transformation definition' do
+      subject.transformation_definition = transformation_definition      
+      expect(subject).not_to be_valid
+    end
+  end
 end
