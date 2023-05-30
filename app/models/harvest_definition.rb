@@ -53,7 +53,8 @@ class HarvestDefinition < ApplicationRecord
   # @return void
   def update_transformation_definition_clone(transformation_definition)
     self.transformation_definition.update(
-      record_selector: transformation_definition.record_selector
+      record_selector: transformation_definition.record_selector,
+      original_transformation_definition: transformation_definition
     )
 
     self.transformation_definition.fields.destroy_all
@@ -85,5 +86,6 @@ class HarvestDefinition < ApplicationRecord
   # @return void
   def update_extraction_definition_clone(extraction_definition)
     self.extraction_definition.update(extraction_definition.dup.attributes.except('name').compact)
+    self.extraction_definition.update(original_extraction_definition: extraction_definition)
   end
 end

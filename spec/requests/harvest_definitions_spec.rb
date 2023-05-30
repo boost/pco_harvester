@@ -90,6 +90,10 @@ RSpec.describe 'HarvestDefinitions', type: :request do
     end
 
     context 'with valid params' do
+      let!(:updated_extraction_definition)     { create(:extraction_definition, base_url: 'http://test.com') }
+      let(:updated_field)                      { build(:field, block: 'hello!') }
+      let!(:updated_transformation_definition) { create(:transformation_definition, content_partner:, extraction_job:, fields: [updated_field]) }
+
       it 'updates the harvest definition' do
         patch content_partner_harvest_definition_path(content_partner, harvest_definition), params: {
           harvest_definition: {
@@ -110,6 +114,36 @@ RSpec.describe 'HarvestDefinitions', type: :request do
         }
 
         expect(response).to redirect_to content_partner_harvest_definition_path(content_partner, harvest_definition)
+      end
+
+      it 'updates the extraction_definition clone' do
+        expect(harvest_definition.extraction_definition.original_extraction_definition).to eq extraction_definition
+
+        patch content_partner_harvest_definition_path(content_partner, harvest_definition), params: {
+          harvest_definition: {
+            extraction_definition_id: updated_extraction_definition.id
+          }
+        }
+
+        harvest_definition.reload
+        
+        expect(harvest_definition.extraction_definition.original_extraction_definition).to eq updated_extraction_definition
+
+        expect(harvest_definition.extraction_definition.base_url).to eq updated_extraction_definition.base_url
+      end
+
+      it 'updates the transformation_definition clone' do
+        expect(harvest_definition.transformation_definition.original_transformation_definition).to eq transformation_definition
+
+        patch content_partner_harvest_definition_path(content_partner, harvest_definition), params: {
+          harvest_definition: {
+            transformation_definition_id: updated_transformation_definition.id
+          }
+        }
+
+        harvest_definition.reload
+        expect(harvest_definition.transformation_definition.original_transformation_definition).to eq updated_transformation_definition
+        expect(harvest_definition.transformation_definition.fields.first.block).to eq updated_transformation_definition.fields.first.block
       end
     end
 
