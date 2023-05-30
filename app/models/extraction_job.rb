@@ -5,8 +5,8 @@
 class ExtractionJob < ApplicationRecord
   include Job
 
-  scope :harvests,    -> { where(kind: 0) }
-  scope :enrichments, -> { where(kind: 1) }
+  scope :harvests,    -> { where(kind: :full) }
+  scope :enrichments, -> { where(kind: :sample) }
 
   EXTRACTIONS_FOLDER = "#{Rails.root}/extractions/#{Rails.env}".freeze
   KINDS = %w[full sample].freeze

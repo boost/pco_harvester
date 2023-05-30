@@ -3,8 +3,8 @@
 # Used to store the inforamation for running an extraction
 #
 class ExtractionDefinition < ApplicationRecord
-  scope :harvests,    -> { where(kind: 0) }
-  scope :enrichments, -> { where(kind: 1) }
+  scope :harvests,    -> { where(kind: :harvest) }
+  scope :enrichments, -> { where(kind: :enrichment) }
   scope :originals,   -> { where(original_extraction_definition: nil) }
 
   belongs_to :content_partner
@@ -68,7 +68,7 @@ class ExtractionDefinition < ApplicationRecord
 
     errors.add(:total_selector, "invalid selector for the #{format} format")
   end
-  
+
   def copy?
     original_extraction_definition.present?
   end

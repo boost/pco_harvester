@@ -179,29 +179,29 @@ RSpec.describe HarvestDefinition, type: :model do
 
   describe '#kinds' do
     it 'can be for a harvest' do
-      subject.update(kind: 0)
+      subject.update(kind: :harvest)
       subject.reload
-      expect(subject.harvest?).to eq true
+      expect(subject.harvest?).to be true
     end
 
     it 'can be for an enrichment' do
-      subject.update(kind: 1)
+      subject.update(kind: :enrichment)
       subject.reload
-      expect(subject.enrichment?).to eq true
+      expect(subject.enrichment?).to be true
     end
   end
 
   describe '#extraction_definition_is_a_copy' do
     it 'does not allow being associated with an original extraction definition' do
-      subject.extraction_definition = extraction_definition      
+      subject.extraction_definition = extraction_definition
       expect(subject).not_to be_valid
     end
   end
 
- 
+
   describe '#transformation_definition_is_a_copy' do
     it 'does not allow being associated with an original transformation definition' do
-      subject.transformation_definition = transformation_definition      
+      subject.transformation_definition = transformation_definition
       expect(subject).not_to be_valid
     end
   end

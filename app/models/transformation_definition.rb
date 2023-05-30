@@ -5,8 +5,8 @@ class TransformationDefinition < ApplicationRecord
   belongs_to :extraction_job # used for previewing, needs to be refactored
   has_many :fields
 
-  scope :harvests,    -> { where(kind: 0) }
-  scope :enrichments, -> { where(kind: 1) }
+  scope :harvests,    -> { where(kind: :harvest) }
+  scope :enrichments, -> { where(kind: :enrichment) }
   scope :originals, -> { where(original_transformation_definition: nil) }
 
   KINDS = %w[harvest enrichment].freeze
@@ -45,7 +45,7 @@ class TransformationDefinition < ApplicationRecord
             .on(extraction_job.documents[page].body)
             .flatten
   end
-  
+
   def copy?
     original_transformation_definition.present?
   end

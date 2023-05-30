@@ -53,30 +53,29 @@ RSpec.describe TransformationDefinition, type: :model do
     end
   end
 
-  
   describe "#copy?" do
     let(:original) { create(:transformation_definition) }
     let(:copy)     { create(:transformation_definition, original_transformation_definition: original) }
 
     it 'returns true if the transformation definition is a copy' do
-      expect(copy.copy?).to eq true
+      expect(copy.copy?).to be true
     end
 
     it 'returns false if the transformation definition is an original' do
-      expect(original.copy?).to eq false
+      expect(original.copy?).to be false
     end
   end
 
   describe 'kinds' do
-    let(:harvest_transformation_definition) { create(:transformation_definition, kind: 0) }
-    let(:enrichment_transformation_definition) { create(:transformation_definition, kind: 1) }
+    let(:harvest_transformation_definition) { create(:transformation_definition, kind: :harvest) }
+    let(:enrichment_transformation_definition) { create(:transformation_definition, kind: :enrichment) }
 
     it 'can be for a harvest' do
-      expect(harvest_transformation_definition.harvest?).to eq true
+      expect(harvest_transformation_definition.harvest?).to be true
     end
 
     it 'can be for an enrichment' do
-      expect(enrichment_transformation_definition.enrichment?).to eq true
+      expect(enrichment_transformation_definition.enrichment?).to be true
     end
   end
 

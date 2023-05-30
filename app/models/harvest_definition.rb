@@ -19,8 +19,8 @@ class HarvestDefinition < ApplicationRecord
   KINDS = %w[harvest enrichment].freeze
   enum :kind, KINDS
 
-  scope :harvests,    -> { where(kind: 0) }
-  scope :enrichments, -> { where(kind: 1) }
+  scope :harvests,    -> { where(kind: :harvest) }
+  scope :enrichments, -> { where(kind: :enrichment) }
 
   after_create do
     self.name = "#{content_partner.name.parameterize}__#{kind}-#{id}"
@@ -94,7 +94,7 @@ class HarvestDefinition < ApplicationRecord
 
     errors.add(:extraction_definition_original, 'Harvest Definition cannot be associated with an original extraction definition')
   end
-  
+
   def transformation_definition_is_a_copy
     return if transformation_definition.copy?
 
