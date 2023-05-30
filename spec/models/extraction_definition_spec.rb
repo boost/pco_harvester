@@ -64,6 +64,11 @@ RSpec.describe ExtractionDefinition, type: :model do
 
       expect(extraction_definition.errors[:content_partner]).to include 'must exist'
     end
+
+    it 'cannot be a copy of itself' do
+      subject.original_extraction_definition = subject
+      expect(subject).not_to be_valid
+    end
   end
 
   describe '#validations base_url' do
@@ -111,6 +116,20 @@ RSpec.describe ExtractionDefinition, type: :model do
       it "can be #{key}" do
         expect(ExtractionDefinition.new(kind: value).kind).to eq(key.to_s)
       end
+    end
+  end
+
+  describe "#copy?" do
+    let(:destination) { create(:destination) }
+    let(:original) { create(:extraction_definition, :enrichment, content_partner: cp1, name: 'Flickr API', destination:) }
+    let(:copy) { create(:extraction_definition, :enrichment, content_partner: cp1, name: 'Flickr API', destination:, original_extraction_definition: original) }
+
+    it 'returns true if the extraction definition is a copy' do
+      expect(copy.copy?).to eq true
+    end
+
+    it 'returns false if the extraction definition is an original' do
+      expect(original.copy?).to eq false
     end
   end
 end

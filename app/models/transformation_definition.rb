@@ -13,6 +13,7 @@ class TransformationDefinition < ApplicationRecord
   enum :kind, KINDS
 
   validates :record_selector, presence: true
+  validate :cannot_be_a_copy_of_self
 
   after_create do
     self.name = "#{content_partner.name.parameterize}__#{kind}-transformation-#{id}"
@@ -43,5 +44,15 @@ class TransformationDefinition < ApplicationRecord
     JsonPath.new(record_selector)
             .on(extraction_job.documents[page].body)
             .flatten
+  end
+  
+  def copy?
+    original_transformation_definition.present?
+  end
+
+  def cannot_be_a_copy_of_self
+    if original_transformation_definition == self
+      errors.add(:copy, 'Transformation Definition cannot be a copy of itself')
+    end
   end
 end

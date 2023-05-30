@@ -25,6 +25,7 @@ class ExtractionDefinition < ApplicationRecord
     class_name: 'ExtractionDefinition',
     optional: true
   )
+
   has_many(
     :copies,
     class_name: 'ExtractionDefinition',
@@ -41,6 +42,7 @@ class ExtractionDefinition < ApplicationRecord
   }.freeze
 
   validates :throttle, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 60_000 }
+  validate :cannot_be_a_copy_of_self
 
   # Harvest related validation
   with_options if: :harvest? do
@@ -65,5 +67,15 @@ class ExtractionDefinition < ApplicationRecord
     return if FORMAT_SELECTOR_REGEX_MAP[format&.to_sym]&.match?(total_selector)
 
     errors.add(:total_selector, "invalid selector for the #{format} format")
+  end
+  
+  def copy?
+    original_extraction_definition.present?
+  end
+
+  def cannot_be_a_copy_of_self
+    if original_extraction_definition == self
+      errors.add(:copy, 'Extraction Definition cannot be a copy of itself')
+    end
   end
 end

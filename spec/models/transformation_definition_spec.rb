@@ -46,6 +46,27 @@ RSpec.describe TransformationDefinition, type: :model do
     end
   end
 
+  describe "#validation" do
+    it 'cannot be a copy of itself' do
+      subject.original_transformation_definition = subject
+      expect(subject).not_to be_valid
+    end
+  end
+
+  
+  describe "#copy?" do
+    let(:original) { create(:transformation_definition) }
+    let(:copy)     { create(:transformation_definition, original_transformation_definition: original) }
+
+    it 'returns true if the transformation definition is a copy' do
+      expect(copy.copy?).to eq true
+    end
+
+    it 'returns false if the transformation definition is an original' do
+      expect(original.copy?).to eq false
+    end
+  end
+
   describe 'kinds' do
     let(:harvest_transformation_definition) { create(:transformation_definition, kind: 0) }
     let(:enrichment_transformation_definition) { create(:transformation_definition, kind: 1) }
