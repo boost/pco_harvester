@@ -5,9 +5,6 @@
 class ExtractionJob < ApplicationRecord
   include Job
 
-  scope :harvests,    -> { where(kind: :full) }
-  scope :enrichments, -> { where(kind: :sample) }
-
   EXTRACTIONS_FOLDER = "#{Rails.root}/extractions/#{Rails.env}".freeze
 
   enum :kind, { full: 0, sample: 1 }, prefix: :is

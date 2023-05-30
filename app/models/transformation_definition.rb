@@ -5,11 +5,9 @@ class TransformationDefinition < ApplicationRecord
   belongs_to :extraction_job # used for previewing, needs to be refactored
   has_many :fields
 
-  scope :harvests,    -> { where(kind: :harvest) }
-  scope :enrichments, -> { where(kind: :enrichment) }
   scope :originals, -> { where(original_transformation_definition: nil) }
 
-  enum :kind, { harvest: 0, enrichment: 1}
+  enum :kind, { harvest: 0, enrichment: 1 }
 
   validates :record_selector, presence: true
   validate :cannot_be_a_copy_of_self

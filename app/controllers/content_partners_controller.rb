@@ -8,14 +8,14 @@ class ContentPartnersController < ApplicationController
   end
 
   def show
-    @harvest_extraction_definitions = @content_partner.extraction_definitions.originals.harvests.order(created_at: :desc).page(params[:page])
-    @enrichment_extraction_definitions = @content_partner.extraction_definitions.originals.enrichments.order(created_at: :desc).page(params[:page])
+    @harvest_extraction_definitions = @content_partner.extraction_definitions.originals.harvest.order(created_at: :desc).page(params[:page])
+    @enrichment_extraction_definitions = @content_partner.extraction_definitions.originals.enrichment.order(created_at: :desc).page(params[:page])
 
-    @harvest_transformation_definitions = @content_partner.transformation_definitions.originals.harvests.order(created_at: :desc).page(params[:page])
-    @enrichment_transformation_definitions = @content_partner.transformation_definitions.originals.enrichments.order(created_at: :desc).page(params[:page])
+    @harvest_transformation_definitions = @content_partner.transformation_definitions.originals.harvest.order(created_at: :desc).page(params[:page])
+    @enrichment_transformation_definitions = @content_partner.transformation_definitions.originals.enrichment.order(created_at: :desc).page(params[:page])
 
-    @harvest_definitions = @content_partner.harvest_definitions.harvests.order(created_at: :desc).page(params[:page])
-    @enrichment_definitions = @content_partner.harvest_definitions.enrichments.order(created_at: :desc).page(params[:page])
+    @harvest_definitions = @content_partner.harvest_definitions.harvest.order(created_at: :desc).page(params[:page])
+    @enrichment_definitions = @content_partner.harvest_definitions.enrichment.order(created_at: :desc).page(params[:page])
   end
 
   def new

@@ -3,8 +3,6 @@
 # Used to store the inforamation for running an extraction
 #
 class ExtractionDefinition < ApplicationRecord
-  scope :harvests,    -> { where(kind: :harvest) }
-  scope :enrichments, -> { where(kind: :enrichment) }
   scope :originals,   -> { where(original_extraction_definition: nil) }
 
   belongs_to :content_partner

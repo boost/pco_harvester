@@ -154,17 +154,15 @@ RSpec.describe ExtractionJob, type: :model do
 
     statuses.each do |key, value|
       it "can be #{key}" do
-        expect(ExtractionJob.new(status: value).status).to eq(key.to_s)
+        expect(described_class.new(status: value).status).to eq(key.to_s)
       end
     end
   end
 
   describe '#kinds' do
-    kinds = { full: 0, sample: 1 }
-
-    kinds.each do |key, value|
+    described_class.kinds.each do |key, value|
       it "can be #{key}" do
-        expect(ExtractionJob.new(kind: value).kind).to eq(key.to_s)
+        expect(described_class.new(kind: value).kind).to eq(key.to_s)
       end
     end
   end
