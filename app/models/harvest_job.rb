@@ -15,7 +15,7 @@ class HarvestJob < ApplicationRecord
   delegate :destination, to: :harvest_definition
 
   after_create do
-    self.name = "#{harvest_definition.name}__#{self.class.to_s.underscore.dasherize}-#{id}"
+    self.name = "#{harvest_definition.name}__job-#{id}"
     save!
   end
 

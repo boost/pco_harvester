@@ -23,7 +23,7 @@ class HarvestDefinition < ApplicationRecord
   scope :enrichments, -> { where(kind: 1) }
 
   after_create do
-    self.name = "#{content_partner.name.parameterize}__#{kind}-definition-#{id}"
+    self.name = "#{content_partner.name.parameterize}__#{kind}-#{id}"
     save!
   end
 

@@ -9,7 +9,7 @@ class TransformationJob < ApplicationRecord
   belongs_to :harvest_job, optional: true
 
   after_create do
-    self.name = "#{transformation_definition.name}__#{self.class.to_s.underscore.dasherize}-#{id}"
+    self.name = "#{transformation_definition.name}__job-#{id}"
     save!
   end
 

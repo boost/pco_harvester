@@ -10,7 +10,7 @@ RSpec.describe TransformationJob, type: :model do
 
   describe '#name' do
     it 'automatically generates a sensible name' do
-      expect(subject.name).to eq "#{transformation_definition.name}__transformation-job__#{subject.id}"
+      expect(subject.name).to eq "#{transformation_definition.name}__job-#{subject.id}"
     end
   end
 end

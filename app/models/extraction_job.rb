@@ -22,7 +22,7 @@ class ExtractionJob < ApplicationRecord
   validates :kind, presence: true, inclusion: { in: KINDS }, if: -> { kind.present? }
 
   after_create do
-    self.name = "#{extraction_definition.name}__#{kind}-#{self.class.to_s.underscore.dasherize}-#{id}"
+    self.name = "#{extraction_definition.name}__#{kind}-job-#{id}"
     save!
   end
 

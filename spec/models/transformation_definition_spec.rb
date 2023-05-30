@@ -61,7 +61,7 @@ RSpec.describe TransformationDefinition, type: :model do
 
   describe '#name' do
     it 'automatically generates a sensible name' do
-      expect(subject.name).to eq "national-library-of-new-zealand__harvest-transformation-definition__#{subject.id}"
+      expect(subject.name).to eq "national-library-of-new-zealand__harvest-transformation-#{subject.id}"
     end
   end
 end

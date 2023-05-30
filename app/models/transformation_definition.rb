@@ -15,7 +15,7 @@ class TransformationDefinition < ApplicationRecord
   validates :record_selector, presence: true
 
   after_create do
-    self.name = "#{content_partner.name.parameterize}__#{kind}-#{self.class.to_s.underscore.dasherize}-#{id}"
+    self.name = "#{content_partner.name.parameterize}__#{kind}-transformation-#{id}"
     save!
   end
 

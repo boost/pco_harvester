@@ -36,8 +36,10 @@ module Extraction
       end
     end
 
+    private
+
     def enqueue_record_transformation(document)
-      return if @harvest_job.present? && document.successful?
+      return unless @harvest_job.present? && document.successful?
 
       transformation_job = TransformationJob.create(
         extraction_job: @extraction_job,

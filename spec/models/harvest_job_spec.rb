@@ -62,7 +62,7 @@ RSpec.describe HarvestJob, type: :model do
 
   describe '#name' do
     it 'automatically generates a sensible name' do
-      expect(harvest_job.name).to eq "#{harvest_job.harvest_definition.name}__harvest-job__#{harvest_job.id}"
+      expect(harvest_job.name).to eq "#{harvest_job.harvest_definition.name}__job-#{harvest_job.id}"
     end
   end
 end

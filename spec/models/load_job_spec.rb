@@ -10,7 +10,7 @@ RSpec.describe LoadJob, type: :model do
 
   describe '#name' do
     it 'automatically generates a sensible name' do
-      expect(load_job.name).to eq "#{harvest_definition.name}__load-job__#{load_job.id}"
+      expect(load_job.name).to eq "#{harvest_definition.name}__load-job-#{load_job.id}"
     end
   end
 end

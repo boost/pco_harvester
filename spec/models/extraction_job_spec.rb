@@ -10,7 +10,7 @@ RSpec.describe ExtractionJob, type: :model do
 
   describe '#name' do
     it 'autogenerates a sensible name' do
-      expect(subject.name).to eq "#{extraction_definition.name}__full-extraction-job__#{subject.id}"
+      expect(subject.name).to eq "#{extraction_definition.name}__full-job-#{subject.id}"
     end
   end
 
