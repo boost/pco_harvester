@@ -76,7 +76,8 @@ class HarvestDefinitionsController < ApplicationController
       :source_id,
       :priority,
       :kind,
-      :required_for_active_record
+      :required_for_active_record,
+      :name
     )
   end
 end

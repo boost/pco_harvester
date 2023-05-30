@@ -1,6 +1,13 @@
 <%= vertical_form_with model: [@content_partner, @harvest_definition], class: { row: true } do |form| %>
   <%= form.hidden_field :content_partner_id, value: @content_partner.id %>
   <%= form.hidden_field :kind,               value: @harvest_definition.kind %>
+  
+  <% if @harvest_definition.name.present? %> 
+    <div class="mb-3 col-12">
+      <%= form.label :name, 'Name', class: "form-label" %>
+      <%= form.text_field :name, class: "form-control" %>
+    </div>
+  <% end %>
 
   <div class="mb-3 col-12">
     <%= form.label :extraction_definition_id, 'Extraction Definition', class: "form-label" %>
