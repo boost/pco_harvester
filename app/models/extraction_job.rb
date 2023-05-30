@@ -9,9 +9,8 @@ class ExtractionJob < ApplicationRecord
   scope :enrichments, -> { where(kind: :sample) }
 
   EXTRACTIONS_FOLDER = "#{Rails.root}/extractions/#{Rails.env}".freeze
-  KINDS = %w[full sample].freeze
 
-  enum :kind, KINDS, prefix: :is
+  enum :kind, { full: 0, sample: 1 }, prefix: :is
 
   belongs_to :extraction_definition
   has_one :harvest_job
@@ -19,7 +18,7 @@ class ExtractionJob < ApplicationRecord
   after_create :create_folder
   after_destroy :delete_folder
 
-  validates :kind, presence: true, inclusion: { in: KINDS }, if: -> { kind.present? }
+  validates :kind, presence: true, inclusion: { in: kinds.keys }, if: -> { kind.present? }
 
   after_create do
     self.name = "#{extraction_definition.name}__#{kind}-job-#{id}"

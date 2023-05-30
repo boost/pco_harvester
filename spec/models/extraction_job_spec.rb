@@ -33,11 +33,11 @@ RSpec.describe ExtractionJob, type: :model do
   end
 
   describe 'kind checks' do
-    described_class::KINDS.each do |kind|
+    described_class.kinds.each_key do |kind|
       it "defines the check is_#{kind}?" do
         subject.kind = kind
         expect(subject.send("is_#{kind}?")).to be true
-        subject.kind = described_class::KINDS.without(kind).sample
+        subject.kind = described_class.kinds.keys.without(kind).sample
         expect(subject.send("is_#{kind}?")).to be false
       end
     end

@@ -16,8 +16,7 @@ class HarvestDefinition < ApplicationRecord
   validate :extraction_definition_is_a_copy, on: :update
   validate :transformation_definition_is_a_copy, on: :update
 
-  KINDS = %w[harvest enrichment].freeze
-  enum :kind, KINDS
+  enum :kind, { harvest: 0, enrichment: 1}
 
   scope :harvests,    -> { where(kind: :harvest) }
   scope :enrichments, -> { where(kind: :enrichment) }

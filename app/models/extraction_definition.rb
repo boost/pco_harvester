@@ -11,8 +11,7 @@ class ExtractionDefinition < ApplicationRecord
   has_many :extraction_jobs
   belongs_to :destination, optional: true
 
-  KINDS = %w[harvest enrichment].freeze
-  enum :kind, KINDS
+  enum :kind, { harvest: 0, enrichment: 1 }
 
   after_create do
     self.name = "#{content_partner.name.parameterize}__#{kind}-extraction-#{id}"

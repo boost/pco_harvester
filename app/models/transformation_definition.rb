@@ -9,8 +9,7 @@ class TransformationDefinition < ApplicationRecord
   scope :enrichments, -> { where(kind: :enrichment) }
   scope :originals, -> { where(original_transformation_definition: nil) }
 
-  KINDS = %w[harvest enrichment].freeze
-  enum :kind, KINDS
+  enum :kind, { harvest: 0, enrichment: 1}
 
   validates :record_selector, presence: true
   validate :cannot_be_a_copy_of_self
