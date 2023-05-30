@@ -3,7 +3,7 @@
 # Used to store the inforamation for running an extraction
 #
 class ExtractionDefinition < ApplicationRecord
-  scope :originals,   -> { where(original_extraction_definition: nil) }
+  scope :originals, -> { where(original_extraction_definition: nil) }
 
   belongs_to :content_partner
   has_many :extraction_jobs

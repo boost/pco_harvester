@@ -110,7 +110,7 @@ class TransformationDefinitionsController < ApplicationController
 
   def find_extraction_jobs
     if params['kind'] == 'enrichment'
-      extraction_definitions = @content_partner.extraction_definitions.enrichments.originals
+      extraction_definitions = @content_partner.extraction_definitions.enrichment.originals
     else
       extraction_definitions = @content_partner.extraction_definitions.harvest.originals
     end
