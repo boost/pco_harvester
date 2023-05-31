@@ -53,10 +53,10 @@
 
   <div class="mb-3 col-6">
     <%= form.label :page, class: "form-label" do %>
-      Page
+      Starting page
       <span
         data-bs-toggle="tooltip"
-        data-bs-title="First page which being requested"
+        data-bs-title="First page being requested"
       ><i class="bi bi-question-circle" aria-label="helper text"></i>
     <% end %>
     <%= form.number_field :page, class: "form-control" %>
@@ -74,7 +74,13 @@
   </div>
 
   <div class="mb-3 col-6">
-    <%= form.label :per_page, 'Per page', class: "form-label" %>
+    <%= form.label :per_page, class: "form-label" do %>
+      Per page
+      <span
+        data-bs-toggle="tooltip"
+        data-bs-title="Number indicating the number of items per page"
+      ><i class="bi bi-question-circle" aria-label="helper text"></i>
+    <% end %>
     <%= form.number_field :per_page, class: "form-control" %>
   </div>
 
