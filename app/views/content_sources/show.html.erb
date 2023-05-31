@@ -6,7 +6,7 @@
   <h1 class="float-start"><%= @content_source.name_in_database %></h1>
 
   <%= link_to edit_content_source_path(@content_source), class: 'btn btn-primary float-end' do %>
-    <i class="bi bi-pencil-square"></i> Edit content source
+    <i class="bi bi-pencil-square" aria-hidden="true"></i> Edit content source
   <% end %>
 
   <div class="clearfix"></div>
@@ -63,7 +63,7 @@
   <div class='col-3 align-self-center mb-3'>
     <div class="d-grid gap-2">
       <%= link_to new_content_source_extraction_definition_path(@content_source, kind: 'harvest'), class: 'btn btn-lg btn-outline-primary' do %>
-        <%= bootstrap_icon('plus') %>Create extraction
+        <i class="bi bi-plus" aria-hidden="true"></i> Create extraction
       <% end %>
     </div>
   </div>
@@ -94,7 +94,7 @@
   <div class='col-3 align-self-center mb-3'>
     <div class="d-grid gap-2">
       <%= link_to new_content_source_transformation_definition_path(@content_source, kind: 'harvest'), class: 'btn btn-lg btn-outline-primary' do %>
-        <%= bootstrap_icon('plus') %>Create transformation
+        <i class="bi bi-plus" aria-hidden="true"></i> Create transformation
       <% end %>
     </div>
   </div>
@@ -140,7 +140,7 @@
   <div class='col-3 align-self-center mb-3'>
     <div class="d-grid gap-2">
       <%= link_to new_content_source_harvest_definition_path(@content_source, kind: @kind), class: 'btn btn-lg btn-outline-primary' do %>
-        <%= bootstrap_icon('plus') %>Create <%= @kind %>
+        <i class="bi bi-plus" aria-hidden="true"></i> Create <%= @kind %>
       <% end %>
     </div>
   </div>

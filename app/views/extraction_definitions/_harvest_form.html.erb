@@ -16,7 +16,7 @@
       <span
         data-bs-toggle="tooltip"
         data-bs-title="The format the API returns"
-      ><%= bootstrap_icon('question-circle') %></span>
+      ><i class="bi bi-question-circle" aria-label="helper text"></i>
     <% end %>
     <% options = find_options_from_validations(ExtractionDefinition, :format) %>
     <%= form.select :format, options, {}, class: "form-select" %>
@@ -46,7 +46,7 @@
       <span
         data-bs-toggle="tooltip"
         data-bs-title="This parameter will be appended to the base_url for selecting the page. It will be incremented until the extraction reaches the limit."
-      ><%= bootstrap_icon('question-circle') %></span>
+      ><i class="bi bi-question-circle" aria-label="helper text"></i>
     <% end %>
     <%= form.text_field :page_parameter, class: "form-control" %>
   </div>
@@ -57,7 +57,7 @@
       <span
         data-bs-toggle="tooltip"
         data-bs-title="First page which being requested"
-      ><%= bootstrap_icon('question-circle') %></span>
+      ><i class="bi bi-question-circle" aria-label="helper text"></i>
     <% end %>
     <%= form.number_field :page, class: "form-control" %>
   </div>
@@ -68,7 +68,7 @@
       <span
         data-bs-toggle="tooltip"
         data-bs-title="This parameter will be appended to the base_url"
-      ><%= bootstrap_icon('question-circle') %></span>
+      ><i class="bi bi-question-circle" aria-label="helper text"></i>
     <% end %>
     <%= form.text_field :per_page_parameter, class: "form-control" %>
   </div>
@@ -84,7 +84,7 @@
       <span
         data-bs-toggle="tooltip"
         data-bs-title="Used to calculate the number of pages to extract"
-      ><%= bootstrap_icon('question-circle') %></span>
+      ><i class="bi bi-question-circle" aria-label="helper text"></i>
     <% end %>
     <%= form.text_field :total_selector, class: "form-control" %>
   </div>

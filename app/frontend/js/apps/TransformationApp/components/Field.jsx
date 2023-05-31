@@ -128,7 +128,7 @@ const Field = ({ id }) => {
         <label className="form-label" htmlFor="name">
           Field Name{" "}
           <Tooltip data-bs-title="This is the field name that the result of this transformation will appear under on the transformed record.">
-            <i className="bi bi-question-circle"></i>
+            <i className="bi bi-question-circle" aria-label="help text"></i>
           </Tooltip>
         </label>
         <input
@@ -144,7 +144,7 @@ const Field = ({ id }) => {
         <label className="form-label mt-4" htmlFor="block">
           Field Block{" "}
           <Tooltip data-bs-title="This is the code that is applied to create this field on the transformed record.">
-            <i className="bi bi-question-circle"></i>
+            <i className="bi bi-question-circle" aria-label="help text"></i>
           </Tooltip>
         </label>
         <div id="block" ref={editorRef}></div>
