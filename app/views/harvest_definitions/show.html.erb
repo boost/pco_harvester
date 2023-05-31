@@ -19,14 +19,22 @@
   </div>
 
   <div class="clearfix"></div>
+  
+  <div class='mt-4'></div>
+  <ul class="nav nav-tabs">
+
+    <li class='nav-item'>
+      <%= link_to 'All', content_source_harvest_definition_path(@content_source, @harvest_definition), class: "nav-link #{@status.nil? ? 'active' : ''}" %>
+    </li>
+
+    <% HarvestJob::STATUSES.each do |status| %>
+      <li class='nav-item'>
+        <%= link_to status.capitalize, content_source_harvest_definition_path(@content_source, @harvest_definition, status: status), class: "nav-link #{@status == status ? 'active' : ''}" %>
+      </li>
+    <% end %>
+  </ul>
 <% end %>
 
-<div class="my-3">
-  <%= link_to 'All', content_source_harvest_definition_path(@content_source, @harvest_definition), class: "btn btn#{@status.nil? ? '' : '-outline'}-primary" %>
-  <% HarvestJob::STATUSES.each do |status| %>
-    <%= link_to status.capitalize, content_source_harvest_definition_path(@content_source, @harvest_definition, status: status), class: "btn btn#{@status == status ? '' : '-outline'}-primary" %>
-  <% end %>
-</div>
 
 <%= render partial: 'jobs/jobs', locals: { jobs: @harvest_jobs, type: 'harvest'  } %>
 

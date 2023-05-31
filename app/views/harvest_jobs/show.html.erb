@@ -1,19 +1,23 @@
 <%= content_for(:title) { "#{@harvest_definition.name} job" } %>
-<%= render 'shared/breadcrumb_nav' %>
 
-<div class="float-start">
-  <h1><%= @harvest_job.harvest_definition.name %></h1>
-  <strong><%= @harvest_job.updated_at.to_fs(:verbose) %></strong>
-</div>
+<%= content_for(:header) do %>
 
-<% if @harvest_job&.extraction_job&.queued? || @harvest_job&.extraction_job&.running? %>
-  <div class="float-end">
-    <% cancel_path = cancel_content_source_harvest_definition_harvest_job_path(@content_source, @harvest_definition, @harvest_job) %>
-    <%= button_to "Cancel job", cancel_path, class: "btn btn-outline-danger me-1", form_class: 'd-inline me-1' %>
+  <%= render 'shared/breadcrumb_nav' %>
+
+  <div class="float-start">
+    <h1><%= @harvest_job.harvest_definition.name %></h1>
+    <strong><%= @harvest_job.updated_at.to_fs(:verbose) %></strong>
   </div>
-<% end %>
 
-<div class="clearfix"></div>
+  <% if @harvest_job&.extraction_job&.queued? || @harvest_job&.extraction_job&.running? %>
+    <div class="float-end">
+      <% cancel_path = cancel_content_source_harvest_definition_harvest_job_path(@content_source, @harvest_definition, @harvest_job) %>
+      <%= button_to "Cancel job", cancel_path, class: "btn btn-outline-danger me-1", form_class: 'd-inline me-1' %>
+    </div>
+  <% end %>
+
+  <div class="clearfix"></div>
+<% end %>
 
 <% if @harvest_job.running? || @harvest_job.finished? %>
   <table class="table my-4">
