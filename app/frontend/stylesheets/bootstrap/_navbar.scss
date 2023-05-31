@@ -1,6 +1,9 @@
 // adding styles to existing Bootstrap styles
-
 .navbar {
+  .nav-link {
+    --bs-nav-link-font-weight: 500;
+  }
+
   .active {
     position: relative;
     &:after {

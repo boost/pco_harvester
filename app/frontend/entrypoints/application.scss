@@ -1,3 +1,12 @@
+// Libraries
+
+@import "~bootstrap/scss/bootstrap";
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
+
+// Bootstrap overrides
+@import "../stylesheets/bootstrap/navbar";
+@import "../stylesheets/bootstrap/breadcrumb";
+
 // Mixins
 
 @import "../stylesheets/mixins/bem";
@@ -9,18 +18,11 @@
 
 // Blocks
 
-@import "../stylesheets/blocks/icons";
-@import "../stylesheets/blocks/record-view";
-@import "../stylesheets/blocks/header";
-@import "../stylesheets/blocks/navbar";
 @import "../stylesheets/blocks/card";
-@import "../stylesheets/blocks/breadcrumb";
 @import "../stylesheets/blocks/form-in-dropdown";
+@import "../stylesheets/blocks/header";
+@import "../stylesheets/blocks/record-view";
 
-// Libraries
-
-@import "~bootstrap/scss/bootstrap";
-@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
 
 h1, h2, h3, h4 {
   font-weight: 700;
