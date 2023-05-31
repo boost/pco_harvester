@@ -2,8 +2,31 @@
   background-color: $doctor;
   padding: 2rem;
   border-bottom: 1px solid $bright-star;
+  position: relative;
 
   h1 {
     margin-bottom: 0;
+  }
+
+  .nav-tabs {
+    position: absolute;
+    bottom: -1px;
+
+    .nav-link {
+      &:hover {
+        border-color: $doctor;
+        border-bottom-color: $bleached-silk;
+      }
+    }
+
+    .nav-link.active {
+      background-color: $bleached-silk;
+      border-bottom: 1px solid $bleached-silk;
+
+      &:hover {
+        border-color: $bright-star;
+        border-bottom-color: $bleached-silk;
+      }
+    }
   }
 }
