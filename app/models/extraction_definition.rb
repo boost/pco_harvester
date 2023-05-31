@@ -3,16 +3,18 @@
 # Used to store the inforamation for running an extraction
 #
 class ExtractionDefinition < ApplicationRecord
-  scope :harvests,    -> { where(kind: 0) }
-  scope :enrichments, -> { where(kind: 1) }
-  scope :originals,   -> { where(original_extraction_definition: nil) }
+  scope :originals, -> { where(original_extraction_definition: nil) }
 
   belongs_to :content_partner
   has_many :extraction_jobs
   belongs_to :destination, optional: true
 
-  KINDS = %w[harvest enrichment].freeze
-  enum :kind, KINDS
+  enum :kind, { harvest: 0, enrichment: 1 }
+
+  after_create do
+    self.name = "#{content_partner.name.parameterize}__#{kind}-extraction-#{id}"
+    save!
+  end
 
   # feature allows editing an extraction definition  without impacting a running harvest
   belongs_to(
@@ -20,6 +22,7 @@ class ExtractionDefinition < ApplicationRecord
     class_name: 'ExtractionDefinition',
     optional: true
   )
+
   has_many(
     :copies,
     class_name: 'ExtractionDefinition',
@@ -35,8 +38,8 @@ class ExtractionDefinition < ApplicationRecord
     OAI: %r{^/}
   }.freeze
 
-  validates :name, presence: true, uniqueness: { scope: :content_partner_id }
   validates :throttle, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 60_000 }
+  validate :cannot_be_a_copy_of_self
 
   # Harvest related validation
   with_options if: :harvest? do
@@ -61,5 +64,15 @@ class ExtractionDefinition < ApplicationRecord
     return if FORMAT_SELECTOR_REGEX_MAP[format&.to_sym]&.match?(total_selector)
 
     errors.add(:total_selector, "invalid selector for the #{format} format")
+  end
+
+  def copy?
+    original_extraction_definition.present?
+  end
+
+  def cannot_be_a_copy_of_self
+    if original_extraction_definition == self
+      errors.add(:copy, 'Extraction Definition cannot be a copy of itself')
+    end
   end
 end

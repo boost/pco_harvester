@@ -45,7 +45,7 @@ class TransformationDefinitionsController < ApplicationController
   end
 
   def new
-    @transformation_definition = TransformationDefinition.new
+    @transformation_definition = TransformationDefinition.new(kind: params[:kind])
   end
 
   def edit; end
@@ -109,7 +109,13 @@ class TransformationDefinitionsController < ApplicationController
   end
 
   def find_extraction_jobs
-    @extraction_jobs = @content_partner.extraction_definitions.map do |ed|
+    if params['kind'] == 'enrichment'
+      extraction_definitions = @content_partner.extraction_definitions.enrichment.originals
+    else
+      extraction_definitions = @content_partner.extraction_definitions.harvest.originals
+    end
+
+    @extraction_jobs = extraction_definitions.map do |ed|
       [ed.name, ed.extraction_jobs.map { |job| [job.name, job.id] }]
     end
   end
@@ -119,7 +125,8 @@ class TransformationDefinitionsController < ApplicationController
       :content_partner_id,
       :name,
       :extraction_job_id,
-      :record_selector
+      :record_selector,
+      :kind
     )
   end
 end

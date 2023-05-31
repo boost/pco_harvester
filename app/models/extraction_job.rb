@@ -6,9 +6,8 @@ class ExtractionJob < ApplicationRecord
   include Job
 
   EXTRACTIONS_FOLDER = "#{Rails.root}/extractions/#{Rails.env}".freeze
-  KINDS = %w[full sample].freeze
 
-  enum :kind, KINDS, prefix: :is
+  enum :kind, { full: 0, sample: 1 }, prefix: :is
 
   belongs_to :extraction_definition
   has_one :harvest_job
@@ -16,7 +15,12 @@ class ExtractionJob < ApplicationRecord
   after_create :create_folder
   after_destroy :delete_folder
 
-  validates :kind, presence: true, inclusion: { in: KINDS }, if: -> { kind.present? }
+  validates :kind, presence: true, inclusion: { in: kinds.keys }, if: -> { kind.present? }
+
+  after_create do
+    self.name = "#{extraction_definition.name}__#{kind}-job-#{id}"
+    save!
+  end
 
   # Returns the fullpath to the extraction folder for this job
   #
@@ -57,9 +61,5 @@ class ExtractionJob < ApplicationRecord
   # @return Integer
   def extraction_folder_size_in_bytes
     Dir.glob("#{extraction_folder}/*").sum { |f| File.size(f) }
-  end
-
-  def name
-    "[#{kind.capitalize}] #{super}"
   end
 end

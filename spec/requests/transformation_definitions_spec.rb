@@ -9,7 +9,7 @@ RSpec.describe 'Transformation Definitions', type: :request do
 
   describe '#new' do
     it 'renders the new form' do
-      get new_content_partner_transformation_definition_path(content_partner)
+      get new_content_partner_transformation_definition_path(content_partner, kind: 'harvest')
 
       expect(response.status).to eq 200
     end
@@ -61,7 +61,7 @@ RSpec.describe 'Transformation Definitions', type: :request do
         }
 
         expect(response.status).to eq 200
-        expect(response.body).to include 'New Transformation Definition'
+        expect(response.body).to include 'There was an issue creating your Transformation Definition'
       end
     end
   end
@@ -101,17 +101,17 @@ RSpec.describe 'Transformation Definitions', type: :request do
     context 'with invalid paramaters' do
       it 'does not update the transformation_definition' do
         patch content_partner_transformation_definition_path(content_partner, transformation_definition), params: {
-          transformation_definition: { name: nil }
+          transformation_definition: { record_selector: nil }
         }
 
         transformation_definition.reload
 
-        expect(transformation_definition.name).not_to eq nil
+        expect(transformation_definition.record_selector).not_to eq nil
       end
 
       it 're renders the form' do
         patch content_partner_transformation_definition_path(content_partner, transformation_definition), params: {
-          transformation_definition: { name: nil }
+          transformation_definition: { record_selector: nil }
         }
 
         expect(response.body).to include transformation_definition.name_in_database
@@ -165,7 +165,7 @@ RSpec.describe 'Transformation Definitions', type: :request do
       end
     end
   end
-  
+
   describe 'POST /update_harvest_definitions' do
     let(:field)                     { build(:field, block: 'test') }
     let(:transformation_definition) { create(:transformation_definition, content_partner:, fields: [field]) }
@@ -175,7 +175,8 @@ RSpec.describe 'Transformation Definitions', type: :request do
       expect(harvest_definition.transformation_definition.fields.first.block).to eq 'test'
 
       transformation_definition.fields.first.update(block: 'testing')
-      post update_harvest_definitions_content_partner_transformation_definition_path(content_partner, transformation_definition)
+      post update_harvest_definitions_content_partner_transformation_definition_path(content_partner,
+                                                                                     transformation_definition)
 
       harvest_definition.reload
 

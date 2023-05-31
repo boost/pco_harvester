@@ -1,0 +1,379 @@
+---
+status: 404
+headers:
+  date: Fri, 19 May 2023 02:07:00 GMT
+  content-type: application/json
+  transfer-encoding: chunked
+  connection: keep-alive
+  server: nginx
+  vary: Accept-Encoding
+  access-control-allow-origin: https://api.figshare.com
+  access-control-allow-methods: GET, POST, PUT, DELETE, OPTIONS
+  access-control-allow-headers: Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization
+  access-control-max-age: '3600'
+  content-encoding: gzip
+body: |-
+  {
+    "items_found": 24906,
+    "page_nr": 2,
+    "items": [
+      {
+        "article_id": 22946936,
+        "title": "Implications of the second generation intact stability criteria when applied to a NZ offshore patrol vessel",
+        "DOI": null,
+        "description": "To address the problems of dynamic stability failures, the International Maritime Organisation plan to supersede the intact stability criteria. The draft criteria have been applied to a New Zealand naval patrol vessel to aid in understanding the implication imposed by the revised criteria. This paper addresses how the criteria were applied to the vessel and presents the outcomes of the calculated vulnerabilities. A computational simulation was conducted for the broaching phenomenon using four possible phenomenon-inducing wavelengths. It was found that the patrol vessel broached by more than fifteen degrees over a seven second time period. Therefore, taking into account the simplifications of the analysis, the OPVs, like other vessels, could be deemed vulnerable to the surf-riding and broaching-to phenomenon for these given, operationally avoidable, encounter conditions. Further analysis is recommended when the draft criteria is finalised.",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22946936",
+        "published_date": "01:10, 19 May, 2023",
+        "authors": [
+          {
+            "author_name": "Reay, B"
+          },
+          {
+            "author_name": "Hossein Enshaei"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "01:10, 19 May, 2023"
+      },
+      {
+        "article_id": 22946792,
+        "title": "Diversity and identification of fungi associated with needles of Pinus radiata in Tasmania",
+        "DOI": null,
+        "description": "Needle fungi have been extensively studied in conifers but rarely in <i>Pinus radiata</i>. Previous studies of <i>P. radiata</i> have been based on fungal isolation and not direct PCR detection from needles. This research was a component of a study examining factors linked to spring needle cast (SNC) in Tasmanian <i>P. radiata</i> plantations and aimed to identify as many as possible of the fungal species commonly associated with <i>P. radiata</i> needles in Tasmanian plantations. Needle samples were collected from 13 sites representative of the range of sites in which <i>P. radiata</i> is grown in Tasmania. Fungi were detected by a direct PCR approach and identified using barcode sequences from a reference collection of isolates from Tasmania, mainland Australia and New Zealand as well as sequences from the international nucleotide sequence databases. The total number of molecular operational taxonomic units (MOTUs) was 152, with 127 detected by direct PCR and sequencing, and only 35 operational taxonomic units (OTUs) isolated by culture-based methods. Dothideomycetes was the most diverse class detected in this study, with many MOTUs detected by direct PCR and not isolated. Leotiomycetes was the second-most diverse class and Sordariomycetes third, with several OTUs frequently isolated but rarely or not at all detected by direct PCR. DNA sequence data facilitated the discrimination and identification of OTUs, but some effort was required to avoid confusion caused by poorly identified isolates in public DNA databases. This is the most comprehensive study yet of fungi associated with pine needles in Australia and highlights the hitherto unrecognised diversity of Teratosphaeriaceae in <i>P. radiata</i>.",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22946792",
+        "published_date": "01:02, 19 May, 2023",
+        "authors": [
+          {
+            "author_name": "Prihatini, I"
+          },
+          {
+            "author_name": "Morag Glen"
+          },
+          {
+            "author_name": "Wardlaw, TJ"
+          },
+          {
+            "author_name": "Caroline Mohammed"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "01:02, 19 May, 2023"
+      },
+      {
+        "article_id": 22946699,
+        "title": "Responding to challenges for people with psychotic illness: Updated evidence from the survey of high impact psychosis",
+        "DOI": null,
+        "description": "<strong>OBJECTIVE:</strong> The objective is to summarise recent findings from the 2010 Australian Survey of High Impact Psychosis (SHIP) and examine their implications for future policy and planning to improve mental health, physical health and other circumstances of people with a psychotic disorder.<p></p>    <p><strong>METHODS:</strong> Survey of High Impact Psychosis collected nationally representative data on 1825 people with psychotic illness. Over 60 papers have been published covering key challenges reported by participants: financial problems, loneliness and social isolation, unemployment, poor physical health, uncontrolled symptoms of mental illness, and lack of stable, suitable housing. Findings are summarised under the rubric of participant-ranked top challenges.</p>    <p><strong>RESULTS:</strong> The main income source for the majority (85%) of participants was a government benefit. Only one-third was employed, and the most appropriate employment services for this group were under-utilised. High rates of loneliness and social isolation impacted mental and physical health. The rate of cardiometabolic disease was well above the general population rate, and associated risk factors were present from a very young age. Childhood abuse (30.6%), adult violent victimisation (16.4%) and alcohol and substance abuse/dependence (lifetime rates of 50.5% and 54.5%, respectively) complicated the clinical profile. Treatment with medication was suboptimal, with physical health conditions undertreated, a high rate of psychotropic polypharmacy and underutilisation of clozapine in chronic persistent psychotic illness. Only 38.6% received evidence-based psychosocial therapies. In the previous year, 27.4% had changed housing and 12.8% had been homeless, on average for 155 days.</p>    <p><strong>CONCLUSION:</strong> Money, social engagement and employment are the most important challenges for people with psychotic illness, as well as good physical and mental health. An integrated approach to recovery is needed to optimise service delivery and augment evidence-based clinical practice with measures to improve physical health and social circumstances. Meeting these challenges has the potential to reduce costs to government and society, as well as promote recovery.</p>",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22946699",
+        "published_date": "00:56, 19 May, 2023",
+        "authors": [
+          {
+            "author_name": "Morgan, VA"
+          },
+          {
+            "author_name": "Waterreus, A"
+          },
+          {
+            "author_name": "Carr, V"
+          },
+          {
+            "author_name": "Castle, D"
+          },
+          {
+            "author_name": "Cohen, M"
+          },
+          {
+            "author_name": "Harvey, C"
+          },
+          {
+            "author_name": "Galletly, C"
+          },
+          {
+            "author_name": "Mackinnon, A"
+          },
+          {
+            "author_name": "McGorry, P"
+          },
+          {
+            "author_name": "McGrath, JJ"
+          },
+          {
+            "author_name": "Amanda Neil"
+          },
+          {
+            "author_name": "Saw, S"
+          },
+          {
+            "author_name": "Badcock, JC"
+          },
+          {
+            "author_name": "Foley, DL"
+          },
+          {
+            "author_name": "Waghorn, G"
+          },
+          {
+            "author_name": "Coker, S"
+          },
+          {
+            "author_name": "Jablensky, A"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "00:56, 19 May, 2023"
+      },
+      {
+        "article_id": 22946693,
+        "title": "How consistent is the relationship between improved glucose control and modelled health outcomes for people with type 2 diabetes mellitus? a systematic review",
+        "DOI": null,
+        "description": "<strong>BACKGROUND:</strong> There are an increasing number of studies using simulation models to conduct cost-effectiveness analyses for type 2 diabetes mellitus.<p></p>    <p><strong>OBJECTIVE:</strong> To evaluate the relationship between improvements in glycosylated haemoglobin (HbA<sub>1c</sub>) and simulated health outcomes in type 2 diabetes cost-effectiveness studies.</p>    <p><strong>METHODS:</strong> A systematic review was conducted on MEDLINE and EMBASE to collect cost-effectiveness studies using type 2 diabetes simulation models that reported modelled health outcomes of blood glucose-related interventions in terms of quality-adjusted life-years (QALYs) or life expectancy (LE). The data extracted included information used to characterise the study cohort, the intervention's treatment effects on risk factors and model outcomes. Linear regressions were used to test the relationship between the difference in HbA<sub>1c</sub> (∆HbA<sub>1c</sub>) and incremental QALYs (∆QALYs) or LE (∆LE) of intervention and control groups. The ratio between the ∆QALYs and ∆LE was calculated and a scatterplot between the ratio and ∆HbA<sub>1c</sub> was used to explore the relationship between these two.</p>    <p><strong>RESULTS:</strong> Seventy-six studies were included in this research, contributing to 124 pair of comparators. The pooled regressions indicated that the marginal effect of a 1% HbA<sub>1c</sub> decrease in intervention resulted in an increase in life-time QALYs and LE of 0.371 (95% confidence interval 0.286-0.456) and 0.642 (95% CI 0.494-0.790), respectively. No evidence of heterogeneity between models was found. An inverse exponential relationship was found and fitted between the ratio (∆QALY/∆LE) and ∆HbA<sub>1c</sub>.</p>    <p><strong>CONCLUSION:</strong> There is a consistent relationship between ∆HbA<sub>1c</sub> and ∆QALYs or ∆LE in cost-effectiveness analyses using type 2 diabetes simulation models. This relationship can be used as a diagnostic tool for decision makers.</p>",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22946693",
+        "published_date": "00:56, 19 May, 2023",
+        "authors": [
+          {
+            "author_name": "Hua, X"
+          },
+          {
+            "author_name": "Lung, TWC"
+          },
+          {
+            "author_name": "Andrew Palmer"
+          },
+          {
+            "author_name": "Lei Si"
+          },
+          {
+            "author_name": "Herman, WH"
+          },
+          {
+            "author_name": "Clarke, P"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "00:56, 19 May, 2023"
+      },
+      {
+        "article_id": 22827428,
+        "title": "Whole-body side-alternating vibration therapy diaries: 9- and 15-minute protocols",
+        "DOI": "https://doi.org/10.17608/k6.auckland.22827428.v2",
+        "description": "<p>These diaries contain the training protocols for 9- and 15-minute sessions of whole-body side-alternating vibration therapy we used in previous studies (please see list below). We have made these publicly available to assist other researchers when developing similar studies, since creating these documents from a blank page is rather time-consuming. </p>\n<p>We only request that our authorship of these diaries be recognised in any studies they are used. We suggest the following citation: </p>\n<p><em>Gusso S, Adaikina A, Derraik JGB, Hofman PL. Whole-body side-alternating vibration therapy diaries: 9- and 15-minute protocols. University of Auckland, Auckland, New Zealand; 2023. https://doi.org/10.17608/k6.auckland.22827428 </em></p>\n<p>Also, we would like to acknowledge the generous funding from the Jubilee Crippled Children Foundation Trust (New Zealand), which made the developing of these protocols possible.</p>\n<p>Studies from our group that have used either protocol:</p>\n<ul>\n  <li>Adaikina A, Derraik JGB, Hofman PL, Gusso S. Vibration therapy in young children with mild to moderate cerebral palsy: does frequency and treatment duration matter? A randomised-controlled study. BMC Pediatr 2023;23:4. doi: 10.1186/s12887-022-03786-1</li>\n  <li>Adaikina A, Derraik JGB, Power LC, Grady GO, Munns CF, Hofman PL, Gusso S. Feasibility, safety, and efficacy of 12-week side-to-side vibration therapy in children and adolescents with congenital myopathy in New Zealand. Neuromuscul Disord 2022;32:820-828. doi: 10.1016/j.nmd.2022.07.398</li>\n  <li>Adaikina A, Derraik JGB, Taylor J, O'Grady GL, Hofman PL, Gusso S. Vibration therapy as an early intervention for children aged 2–4 years with cerebral palsy: a feasibility study. Physical & Occupational Therapy in Pediatrics 2023;[online ahead of print]. doi: 10.1080/01942638.2023.2181723</li>\n  <li>Gusso S, Munns CF, Colle P, Derraik JGB, Biggs JB, Cutfield WS, Hofman PL. Effects of whole-body vibration training on physical function, bone and muscle mass in adolescents and young adults with cerebral palsy. Scientific Reports 2016;6:22518. doi: 10.1038/srep22518</li>\n  <li>Gusso S, Vesey RM, Derraik JGB, Munns CF, Colle P, Biggs JB, Hofman PL. The effects of 20 weeks of side-alternating vibration therapy on physical function, bone and muscle health in adolescents with Down Syndrome. Phys Occup Ther Pediatr 2021;41:44-55.  doi: 10.1080/01942638.2020.1758983</li>\n  <li>Vesey RM, Hofman PL, Derraik JGB, Colle P, Biggs JB, Munns CF, Cutfield WS, Gusso S. Safety, feasibility and efficacy of side-alternating vibration therapy on bone and muscle health in children and adolescents with musculoskeletal disorders: A pilot trial. J Paediatr Child Health 2020;56:1257-1262. doi: 10.1111/jpc.14913</li>\n</ul>\n<p>For any queries, please contact: Dr Silmara Gusso, Department of Exercise Sciences, University of Auckland, Auckland, New Zealand; s.gusso@auckland.ac.nz </p>\n<p><br></p>",
+        "type": "online resource",
+        "url": "https://api.figshare.com/v1/articles/22827428",
+        "published_date": "00:51, 19 May, 2023",
+        "authors": [
+          {
+            "author_name": "Silmara Gusso"
+          },
+          {
+            "author_name": "Alena Adaikina"
+          },
+          {
+            "author_name": "José Derraik"
+          },
+          {
+            "author_name": "Paul Hofman"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "online resource",
+        "modified_date": "00:51, 19 May, 2023"
+      },
+      {
+        "article_id": 22946363,
+        "title": "Vitamin D supplementation in Tasmanian nursing home residents",
+        "DOI": null,
+        "description": "<strong>BACKGROUND:</strong> It is currently recommended in Australia that nursing home residents are supplemented daily with 1000 IU vitamin D as they are at an increased risk of fractures. Historically, supplementation has been low, and current supplementation prevalence is not known.<p></p>    <p><strong>OBJECTIVE:</strong> The aim of this study was to determine the prevalence of vitamin D supplementation amongst nursing home residents in Tasmania, Australia.</p>    <p><strong>METHODS:</strong> Resident data, including demographics, medical conditions and medications (including vitamin D and calcium supplement use), exercise and sun exposure, were obtained from residents' files and staff in consenting nursing homes. Dietary calcium intake was estimated from the weekly menu of one nursing home and total calcium intake estimated from this and calcium supplement use. The prevalence of vitamin D supplementation was compared by resident characteristics and fracture risk factors.</p>    <p><strong>RESULTS:</strong> Of 811 residents, 409 (50 %) received daily vitamin D supplementation of at least 1000 IU. Residents receiving vitamin D supplementation were slightly younger (mean 83 vs. 85 years for supplemented and unsupplemented groups, respectively, <i>p</i> = 0.003) and more likely to have osteoporosis (29 vs. 22 % for supplemented and unsupplemented groups, respectively, <i>p</i> = 0.019). Only 43 % of residents with osteoporosis received vitamin D supplements. Most residents (86 %) did not have regular sunlight exposure. The median estimated total calcium intake of 800 ± 275 mg daily was below guideline recommendations of 1000-1300 mg daily.</p>    <p><strong>CONCLUSIONS:</strong> The prevalence of vitamin D supplementation in nursing home residents was relatively low, suggesting poor adherence to the relevant clinical guidelines. Additionally, most residents do not access sunlight. Interventions addressing this evidence-practice gap are needed.</p>",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22946363",
+        "published_date": "00:39, 19 May, 2023",
+        "authors": [
+          {
+            "author_name": "Colin Curtain"
+          },
+          {
+            "author_name": "Mackenzie Williams"
+          },
+          {
+            "author_name": "Justin Cousins"
+          },
+          {
+            "author_name": "Gregory Peterson"
+          },
+          {
+            "author_name": "Tania Winzenberg"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "00:39, 19 May, 2023"
+      },
+      {
+        "article_id": 22946102,
+        "title": "Gender differences in the dialysis treatment of Indigenous and non-Indigenous Australians",
+        "DOI": null,
+        "description": "<b>Objective:</b> Access to dialysis treatment and the types of treatments employed in Australia differs by Indigenous status. We examined whether dialysis treatment utilisation in Indigenous and non-Indigenous Australians also differs by gender. <br>  <b>Methods:</b> Using registry data we evaluated 21,832 incident patients (aged ≥18 years) commencing dialysis, 2001-2013. Incidence rates were calculated and multivariate regression modelling used to examine differences in dialysis treatment (modality, location and vascular access creation) by race and gender.<br>  <b>Results:</b> Dialysis incidence was consistently higher in Indigenous women compared to all other groups. Compared to Indigenous women, both non-Indigenous women and men were more likely to receive peritoneal dialysis as their initial treatment (non-Indigenous women RR=1.91, 95%CI 1.55-2.35; non-Indigenous men RR=1.73, 1.40-2.14) and were more likely to commence initial treatment at home (non-Indigenous women RR=2.07, 1.66-2.59; non-Indigenous men RR=1.95, 1.56-2.45). All groups were significantly more likely than Indigenous women to receive their final treatment at home.<br>  <b>Conclusions:</b> Contemporary dialysis treatment in Australia continues to benefit the dominant non-Indigenous population over the Indigenous population, with non-Indigenous men being particularly advantaged. <br>  <b>Implications for Public Health</b>: Treatment guidelines that incorporate a  ecognition of genderbased preferences and dialysis treatment options specific to Indigenous Australians may assist in addressing this disparity.",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22946102",
+        "published_date": "00:26, 19 May, 2023",
+        "authors": [
+          {
+            "author_name": "Charlotte McKercher"
+          },
+          {
+            "author_name": "Matthew Jose"
+          },
+          {
+            "author_name": "Grace, B"
+          },
+          {
+            "author_name": "Clayton, PA"
+          },
+          {
+            "author_name": "Margaret Walter"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "00:26, 19 May, 2023"
+      },
+      {
+        "article_id": 22945694,
+        "title": "Review of the fish-parasitic genus Cymothoa Fabricius, 1793 (Crustacea: Isopoda: Cymothoidae) from Australia",
+        "DOI": null,
+        "description": "The genus <em>Cymothoa</em> Fabricius, 1793 is revised for Australian waters. <em>Cymothoa</em> <em>hermani</em> Hadfield, Bruce & Smit, 2011, previously known from Tanzania on the host <em>Selar</em> <em>crumenophthalmus</em> (Bloch, 1793) is new to Australian waters. <em>Cymothoa carangi</em> Avdeev, 1979; <em>Cymothoa epimerica</em> Avdeev, 1979; <em>Cymothoa parupenei</em> Avdeev, 1979; <em>Cymothoa propria</em> Avdeev, 1979; <em>Cymothoa rotunda</em> Avdeev, 1979 and<em> Cymothoa</em> <em>pulchrum</em> Lanchester, 1902 are redescribed. <em>Cymothoa</em> <em>curta</em> Schioedte & Meinert, 1884, first described from the host <em>Anableps anableps</em> (Linnaeus, 1758); and <em>Cymothoa</em> <em>plebeia</em> Schioedte & Meinert, 1884, first described from Cape Verde; are redescribed and excluded from the Australian fauna. <em>Cymothoa</em> <em>limbata </em>Schioedte & Meinert, 1884 is placed into junior synonymy with <em>Cymothoa</em> <em>eremita </em>(Brünnich, 1783). A key to the Australian species of <em>Cymothoa</em> is presented.",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22945694",
+        "published_date": "00:06, 19 May, 2023",
+        "authors": [
+          {
+            "author_name": "Martin, MB"
+          },
+          {
+            "author_name": "Bruce, NL"
+          },
+          {
+            "author_name": "Barbara Nowak"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "00:06, 19 May, 2023"
+      },
+      {
+        "article_id": 22945559,
+        "title": "Revisiting the microlensing event Ogle 2012-Blg-0026: a solar mass star with two cold giant planets",
+        "DOI": null,
+        "description": "Two cold gas giant planets orbiting a G-type main-sequence star in the galactic disk were previously discovered in the high-magnification microlensing event OGLE-2012-BLG-0026. Here, we present revised host star flux measurements and a refined model for the two-planet system using additional light curve data. We performed high angular resolution adaptive optics imaging with the Keck and Subaru telescopes at two epochs while the source star was still amplified. We detected the lens flux, <i>H</i> = 16.39 ± 0.08. The lens, a disk star, is brighter than predicted from the modeling in the original study. We revisited the light curve modeling using additional photometric data from the B&C telescope in New Zealand and CTIO 1.3 m <i>H</i>-band light curve. We then include the Keck and Subaru adaptive optic observation constraints. The system is composed of a ~4–9 Gyr lens star of <i>M</i><sub>lens</sub> = 1.06 ± 0.05 <i>M</i><sub>⊙</sub> at a distance of <i>D</i><sub>lens</sub> = 4.0 ± 0.3 kpc, orbited by two giant planets of 0.145 ± 0.008 <i>M</i><sub>Jup</sub> and 0.86 ± 0.06 <i>M</i><sub>Jup</sub>, with projected separations of 4.0 ± 0.5 au and 4.8 ± 0.7 au, respectively. Because the lens is brighter than the source star by 16 ± 8% in H, with no other blend within one arcsec, it will be possible to estimate its metallicity using subsequent IR spectroscopy with 8–10 m class telescopes. By adding a constraint on the metallicity it will be possible to refine the age of the system.",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22945559",
+        "published_date": "23:58, 18 May, 2023",
+        "authors": [
+          {
+            "author_name": "Jean-Philippe Beaulieu"
+          },
+          {
+            "author_name": "Bennett, DP"
+          },
+          {
+            "author_name": "Batista, V"
+          },
+          {
+            "author_name": "Fukui, A"
+          },
+          {
+            "author_name": "Marquette, J-B"
+          },
+          {
+            "author_name": "Brillant, S"
+          },
+          {
+            "author_name": "Andrew Cole"
+          },
+          {
+            "author_name": "Rogers, LA"
+          },
+          {
+            "author_name": "Sumi, T"
+          },
+          {
+            "author_name": "Abe, F"
+          },
+          {
+            "author_name": "Bhattacharya, A"
+          },
+          {
+            "author_name": "Koshimoto, N"
+          },
+          {
+            "author_name": "Suzuki, D"
+          },
+          {
+            "author_name": "Tristram, PJ"
+          },
+          {
+            "author_name": "Han, C"
+          },
+          {
+            "author_name": "Gould, A"
+          },
+          {
+            "author_name": "Pogge, R"
+          },
+          {
+            "author_name": "Yee, J"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "23:58, 18 May, 2023"
+      },
+      {
+        "article_id": 22945538,
+        "title": "Follow up of post-traumatic stress disorder symptoms in Australian servicemen hospitalized in 1942-1952",
+        "DOI": null,
+        "description": "<p><strong>OBJECTIVE:</strong>  To follow up survivors of Australian services hospitalized in 1942-1952 and compare their reported symptoms of post-traumatic stress disorder (PTSD) with symptoms in their hospital files.</p>  <p><strong>METHOD:</strong>  Twelve survivors were interviewed and combatants completed the revised Impact of Event Scale.</p>  <p><strong>RESULTS:</strong>  Eight survivors had symptoms satisfying a diagnosis of PTSD at the time of the study. There was underreporting of most relevant symptoms in their hospital files.</p>  <p><strong>CONCLUSIONS:</strong>  PTSD symptoms were probably common during and after World War II. The findings have implications for the management of PTSD generally and the treatment of ageing WWII veterans in particular.</p>",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22945538",
+        "published_date": "23:56, 18 May, 2023",
+        "authors": [
+          {
+            "author_name": "Burges Watson, IP"
+          },
+          {
+            "author_name": "Daniels, BA"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "23:56, 18 May, 2023"
+      }
+    ]
+  }

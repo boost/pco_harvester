@@ -1,0 +1,298 @@
+---
+status: 500
+headers:
+  date: Fri, 19 May 2023 02:06:58 GMT
+  content-type: application/json
+  transfer-encoding: chunked
+  connection: keep-alive
+  server: nginx
+  vary: Accept-Encoding
+  access-control-allow-origin: https://api.figshare.com
+  access-control-allow-methods: GET, POST, PUT, DELETE, OPTIONS
+  access-control-allow-headers: Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization
+  access-control-max-age: '3600'
+  content-encoding: gzip
+body: |-
+  {
+    "items_found": 24906,
+    "page_nr": 1,
+    "items": [
+      {
+        "article_id": 22947914,
+        "title": "Visual outcomes with femtosecond laser-assisted cataract surgery versus conventional cataract surgery in toric IOL insertion",
+        "DOI": null,
+        "description": "<p><strong>Background: </strong>    To evaluate the visual outcomes of femtosecond laser-assisted cataract surgery (LCS) compared with phacoemulsification cataract surgery (PCS) in patients undergoing Toric IOL insertion.</p>    <p><strong>Design: </strong>  A non-randomized, single surgeon, prospective, comparative cohort case series.</p>    <p><strong>Participants: </strong>    Patients undergoing LCS and PCS between January 2012 and July 2014 at a single center.</p>    <p><strong></strong></p><p><strong>Methods: </strong>    The LCS group underwent femtosecond laser pretreatment for the anterior capsulotomy and lens fragmentation. Otherwise standard phacoemulsification surgery and foldable toric intraocular lens insertion proceeded.</p>    <p><strong>Main Outcome Measures: </strong>    Best corrected visual acuity (BCVA), uncorrected visual acuity (UCVA), pre and post operative cylinder and mean absolute refractive error.</p>    <p><strong>Results: </strong>    A total of 418 eyes from 323 patients were included in the study; with 95 eyes in the PCS group and 323 in the LCS group. There were 243 (75.5%) LCS eyes with a pre-operative BCVA of 20/40 or better and 54 (56.8%) in the PCS group (<i>p</i> < 0.001). For post-operative BCVA, 315 (97.5 %) LCS and 81 (85.3%) PCS eyes had a BCVA of 20/40 or better (<i>p</i> = <0.001). However, there was no significant difference for change in BCVA between the groups (mean gain in EDTRS letter 11.0 for LCS and 10.3 for PCS<i> p</i> = 0.64) or in MAE (mean 0.56D PCS vs 0.65D LCS <i>p</i> = 0.18).</p>    <p><strong>Conclusion: </strong>    In patients receiving toric intraocular lenses, there is similar improvement in terms of letters gained with LCS and PCS. Overall, there is no additional benefit for patients undergoing LCS in this cohort.</p>",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22947914",
+        "published_date": "02:04, 19 May, 2023",
+        "authors": [
+          {
+            "author_name": "Oakley, CL"
+          },
+          {
+            "author_name": "Ewe, SY"
+          },
+          {
+            "author_name": "Allen, PL"
+          },
+          {
+            "author_name": "Vote, BJ"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "02:04, 19 May, 2023"
+      },
+      {
+        "article_id": 22947866,
+        "title": "Effectiveness of lobster fisheries management in New Zealand and Nova Scotia from multi-species and ecosystem perspectives",
+        "DOI": null,
+        "description": "In New Zealand and Nova Scotia, lobster (<em>Jasus edwardsii</em> and <em>Homarus americanus</em>, respectively) is the most valuable export fishery. Although stock assessments and indicators assist in evaluating lobster fisheries, ecosystem effects are largely unknown, hindering ecosystem-based fisheries management (EBFM). We employed ecosystem models for the Cook Strait, New Zealand and western Scotian Shelf, Nova Scotia, Canada, to evaluate trade-offs between catches and ecosystem impacts in lobster fisheries from single- and multi-species perspectives. We ran simulations to independently determine exploitation rates that produced maximum sustainable yield (MSY) for lobster, and for all fished groups. We then ran simulations using these MSY exploitation rates simultaneously, and simulations to maximize multi-species MSY (MMSY). Our results indicate that current lobster exploitation rates in both regions are greater than those producing MSY, and have significant ecosystem impacts. Simulating multi-species fisheries, in both systems the sum of single-species MSY for all fished groups was less than the sum of catches where exploitation rates were run simultaneously. Runs maximizing MMSY across the entire ecosystem increased exploitation rates on many fished groups, and produced even greater total catch—yet with much greater ecological costs—and in Nova Scotia, collapses of sharks, large predators, and lobster themselves. As fisheries management moves towards multi-species and ecosystem-based approaches, we suggest that MMSY targets should be treated similarly to MSY—not as a target, but a limit. Even then, careful evaluation is required before implementation to ensure that there are no undesirable economic or ecological consequences.",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22947866",
+        "published_date": "02:02, 19 May, 2023",
+        "authors": [
+          {
+            "author_name": "Eddy, TD"
+          },
+          {
+            "author_name": "Araujo, JN"
+          },
+          {
+            "author_name": "Bundy, A"
+          },
+          {
+            "author_name": "Elizabeth Fulton"
+          },
+          {
+            "author_name": "Lotze, HK"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "02:02, 19 May, 2023"
+      },
+      {
+        "article_id": 22947590,
+        "title": "Neo-tribes and Antarctic expedition cruise ship tourists",
+        "DOI": null,
+        "description": "Recent research has explored the size and nature of the cruise ship industry and to a lesser extent the impacts of social interaction upon the experiences of individuals while cruising. However, there is little research that examines the performative aspects of social groups that form as a result of social interaction. Using a neo-tribal lens, we examine this phenomenon in the context of passengers on board an Antarctic expedition cruise ship. The neo-tribal lens offers insights into the lifestyles, sense of belonging, rituals and meeting places that form amongst groups of passengers. This research progresses the conceptualization of neo-tribes by suggesting that neo-tribes are a phenomenon that may occur in confined, liminal places. In doing so it advances an understanding of the outcomes of the cruise ship experience by looking past individualistic outcomes, to the behavioural aspects that can result from undertaking a cruise ship holiday in Antarctica.",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22947590",
+        "published_date": "01:45, 19 May, 2023",
+        "authors": [
+          {
+            "author_name": "Kriwoken, L"
+          },
+          {
+            "author_name": "Anne Hardy"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "01:45, 19 May, 2023"
+      },
+      {
+        "article_id": 22947572,
+        "title": "Whose history and who is denied? Politics and the history curriculum in Lebanon and Australia",
+        "DOI": null,
+        "description": "<p>This paper seeks to explain and develop a better understanding of the relationship between the History curriculum and the consequences of political motive. It compares the History curricula of Australia and Lebanon, and is relevant to understanding the purpose of the History curricula in the two countries as well as, more generally, other countries. In Lebanon, the teaching of that nation’s experience of the 1975-90 Civil War has been withdrawn from schools. In Australia, meanwhile, it now appears that the national curriculum that took shape in 2010 under the Rudd Labor Government has been replaced by what the new Federal Coalition Government wants. Important changes have been made to the nations’ History curricula with different political groups urging the inclusions of different topics.</p>    <p>This paper considers the question of the effect of wholesale deletions from the curriculum of a nation’s history, as in the case of Lebanon. Will such changes affect the development of students’ higher-order historical understanding, historical consciousness and historical literacy? And will such changes influence students’ appreciation of historiography? Advanced in this paper is an argument that, generally, History curricula are so politicised that there should be a historiographical component that requires students to understand that history is about many different points of view. Furthermore, students should be taught that it is the understanding of the development of evidence for the various perspectives that matters.</p>",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22947572",
+        "published_date": "01:44, 19 May, 2023",
+        "authors": [
+          {
+            "author_name": "Maadad, N"
+          },
+          {
+            "author_name": "Rodwell, G"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "01:44, 19 May, 2023"
+      },
+      {
+        "article_id": 22947353,
+        "title": "Learning style and task performance in synchronous computer-mediated communication: a case study of Iranian EFL learners",
+        "DOI": null,
+        "description": "The study reported here explores whether English as a foreign Language (EFL) learners’ preferred ways of learning (i.e., learning styles) affect their task performance in computer-mediated communication (CMC). As Ellis (2010) points out, while the increasing use of different sorts of technology is witnessed in language learning contexts, it is worth studying the conditions in which the most second language (L2) production would be accomplished. The participants were 40 advanced-level Iranian EFL learners enrolled at a language institute in Tehran. Learners’ individual learning styles were probed by Felder-Soloman (1991) Index of Learning Style (ILS) and they were categorized into 8 groups, within 4 dimensions: Active vs. Reflective, Sensing vs. Intuitive, Visual vs. Verbal, and Sequential vs. Global learners. Then, the participants were given the opinion-gap tasks in 6 consecutive online chat sessions within a 3-week period. The participants’ produced language was analyzed at two levels: vocabulary, and grammar. Independent samples t-test were conducted to check if the differences between the groups were significant. The results reveal that the Reflective learners and Visual Learners produced grammatically more complex and lexically denser sentences than the other groups, which suggests that learners’ learning styles may affect their task performance in synchronous computer-mediated communication.",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22947353",
+        "published_date": "01:32, 19 May, 2023",
+        "authors": [
+          {
+            "author_name": "Hedayati, M"
+          },
+          {
+            "author_name": "Foomani, EM"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "01:32, 19 May, 2023"
+      },
+      {
+        "article_id": 22947263,
+        "title": "Midsagittal corpus callosum area and conversion to multiple sclerosis after clinically isolated syndrome: A multicentre Australian cohort study",
+        "DOI": null,
+        "description": "<strong>INTRODUCTION:</strong> Patients presenting with clinically isolated syndrome (CIS) may proceed to clinically definite multiple sclerosis (CDMS). Midsagittal corpus callosum area (CCA) is a surrogate marker for callosal atrophy, and can be obtained from a standard MRI study. This study explores the relationship between CCA measured at CIS presentation (baseline) and at 5 years post presentation, with conversion from CIS to CDMS. The association between CCA and markers of disability progression is explored.<p></p>    <p><strong>METHODS:</strong> Corpus callosum area was measured on MRI scans at presentation and 5-year review following diagnosis of a first demyelinating event, or evidence of progressive MS, in 143 participants in the Ausimmune/AusLong Study. Relationships between CCA (at baseline and follow-up) and clinical outcomes were assessed.</p>    <p><strong>RESULTS:</strong> Mean CCA at baseline study was 6.63 cm<sup>2</sup> (SD 1.01). Patients who converted to MS by 5-year review (<i>n</i> = 100) had a significantly smaller mean CCA at follow-up (6.22 vs. 6.74, <i>P</i> = 0.007). Greater CCA reduction was associated with higher annualized relapse rate over follow-up.</p>    <p><strong>CONCLUSION:</strong> Baseline CCA obtained from standard MRI protocols may be compared with subsequent MRI examinations as a surrogate for neurodegeneration and cerebral atrophy in patients with MS. This study demonstrates an association between CCA and disability in individuals presenting with CIS who convert to MS.</p>",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22947263",
+        "published_date": "01:26, 19 May, 2023",
+        "authors": [
+          {
+            "author_name": "Odenthal, C"
+          },
+          {
+            "author_name": "Steve Simpson JR"
+          },
+          {
+            "author_name": "Oughton, J"
+          },
+          {
+            "author_name": "Ingrid van der Mei"
+          },
+          {
+            "author_name": "Rose, S"
+          },
+          {
+            "author_name": "Fripp, J"
+          },
+          {
+            "author_name": "Lucas, R"
+          },
+          {
+            "author_name": "Bruce Taylor"
+          },
+          {
+            "author_name": "Dear, K"
+          },
+          {
+            "author_name": "Ponsonby, A-L"
+          },
+          {
+            "author_name": "Coulthard, A"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "01:26, 19 May, 2023"
+      },
+      {
+        "article_id": 22947215,
+        "title": "Cost-effectiveness of different population screening strategies for hereditary haemochromatosis in Australia",
+        "DOI": null,
+        "description": "<strong>Introduction:</strong>     Amongst populations of northern European ancestry, <i>HFE</i>-associated haemochromatosis is a common genetic disorder characterised by iron overload. In the absence of treatment, excess iron is stored in parenchymal tissues, causing morbidity and mortality. Population screening programmes may increase early diagnosis and reduce associated disease. No contemporary health economic evaluation has been published for Australia. The objective of this study was to identify cost-effective screening strategies for haemochromatosis in the Australian setting.<p></p>    <p><strong>Methods:</strong>     A Markov model using probabilistic decision analysis was developed comparing four adult screening strategies: the status quo (cascade and incidental screening), genotyping with blood and buccal samples and transferrin saturation followed by genotyping (TfS). Target populations were males (30 years) and females (45 years) of northern European ancestry. Cost-effectiveness was estimated from the government perspective over a lifetime horizon.</p>    <p><strong>Results:</strong> All strategies for males were cost-effective compared to the status quo. The incremental costs (standard deviation) associated with genotyping (blood) were AUD7 (56), TfS AUD15 (45) and genotyping (buccal) AUD63 (56), producing ICERs of AUD1673, 4103 and 15,233/quality-adjusted life-year (QALY) gained, respectively. For females, only the TfS strategy was cost-effective, producing an ICER of AUD10,195/QALY gained. Approximately 3% of C282Y homozygotes were estimated to be identified with the status quo approach, compared with 40% with the proposed screening strategies.</p>    <p><strong>Conclusion:</strong>     This model estimated that genotyping and TfS strategies are likely to be more cost-effective screening strategies than the status quo.</p>",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22947215",
+        "published_date": "01:24, 19 May, 2023",
+        "authors": [
+          {
+            "author_name": "Barbara de Graaff"
+          },
+          {
+            "author_name": "Amanda Neil"
+          },
+          {
+            "author_name": "Lei Si"
+          },
+          {
+            "author_name": "Kwang Yee"
+          },
+          {
+            "author_name": "Kristy Sanderson"
+          },
+          {
+            "author_name": "Gurrin, L"
+          },
+          {
+            "author_name": "Andrew Palmer"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "01:24, 19 May, 2023"
+      },
+      {
+        "article_id": 22947206,
+        "title": "Politics and school buildings: constructing an educational infrastructure for free trade New South Wales, 1889-1891",
+        "DOI": null,
+        "description": "This essay considers the architectural interface between political ideology and educational reform in the fifth and final government of Sir Henry Parkes (8 March 1889–22 October 1891). It examines the interconnected roles of the New South Wales Minister of Public Instruction, Joseph Hector McNeil Carruthers, and the Architect for Public Schools, William Edmund Kemp. The period, close to three years, during which the pair worked together led to a series of remarkable buildings, including the Sydney Technical College, the Sydney Technological Museum and fine public school buildings, such as Kogarah, Albury Boys’ and Wagga Wagga South. These buildings reflect Carruthers’ philosophical commitment to the ideology of liberalism and free trade and an enhanced school curriculum to support it, elucidated in his prolific public speeches and annual ministerial reports. The buildings also reflect an evolution in Kemp’s school architecture in response to the new curriculum and Carruthers’ desire to give public education a civic presence. Together, Carruthers’ and Kemp’s shared belief in architecture’s fundamental role as expressing material progress and promoting an informed citizenry supported architectural experimentation that delivered distinctive government buildings. The significance of the relationship between this politician and architect is recognised for the first time.",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22947206",
+        "published_date": "01:23, 19 May, 2023",
+        "authors": [
+          {
+            "author_name": "Orr, K"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "01:23, 19 May, 2023"
+      },
+      {
+        "article_id": 22947164,
+        "title": "Explaining the information systems auditor role in the public sector financial audit",
+        "DOI": null,
+        "description": "This paper addresses the research questions, “What is the role of the IS auditor in supporting the financial audit?” and “What key determinants affect that role?” through the development of an explanation theory for the role of the IS auditor in the public sector financial audit. Results are based on semi-structured interviews with 55 senior auditors and IS auditors. These auditors worked in ten practice offices in the Australian, Canadian, New Zealand and United Kingdom public sectors. We manually coded 23 interview transcripts and used the Leximancer tool to extend this coding to the remaining transcripts through automated text analysis. The analysis allowed the identification of relevant “common statements” representing the prominent and shared perceptions of the IS auditor role amongst these auditors. These common statements provided a basis for the development of an initial explanation theory. One new construct presented in this theory is the practice office's “IS audit emphasis”, which represents the practice office's emphasis upon the relationship between the IS auditor role and the audit team. The explanation theory provides a richer description of current audit practice regarding the IS auditor's role in public sector financial audit than currently exists. Consequently, this research provides insights for those involved in the education and training of auditors by developing a foundation for a more complete understanding of the IS auditor role.",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22947164",
+        "published_date": "01:21, 19 May, 2023",
+        "authors": [
+          {
+            "author_name": "Axelsen, M"
+          },
+          {
+            "author_name": "Green, P"
+          },
+          {
+            "author_name": "Ridley, G"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "01:21, 19 May, 2023"
+      },
+      {
+        "article_id": 22947071,
+        "title": "Experts, outsiders or strangers? The self-positioning of highly skilled contractors",
+        "DOI": null,
+        "description": "Low and high-skilled contractors are often positioned in an analogous way within the literature  drawing attention to the benefits of highly skilled contracting in contrast to the precarious nature  of low-skilled contracting. Highly skilled contractors are largely identified within the free agent  view; as self-directed professionals who add significant value to client organisations. However, very  little research has focused specifically on how highly skilled contractors identify themselves through  the process of positioning. We present the findings of a qualitative study of 34 highly skilled  contractors. We found that participants positioned themselves in three specific ways: as expert,  outsider and stranger and theorise about why highly skilled contractors construct simultaneous but  diverse positions of themselves. In doing so, we argue that developing a more thorough  understanding of how highly skilled contractors identify themselves provides valuable insights for  those tasked with managing different groups of workers in the one workplace.",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22947071",
+        "published_date": "01:18, 19 May, 2023",
+        "authors": [
+          {
+            "author_name": "Melanie Bryant"
+          },
+          {
+            "author_name": "McKeown, T"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "01:18, 19 May, 2023"
+      }
+    ]
+  }

@@ -2,7 +2,6 @@
 
 FactoryBot.define do
   factory :extraction_definition do
-    name { Faker::Internet.domain_name }
     format { 'JSON' }
     base_url { "#{Faker::Internet.url}?param=value" }
     throttle { 0 }

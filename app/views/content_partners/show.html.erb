@@ -36,26 +36,26 @@
 
 <h2 class="float-start">Transformation Definitions</h2>
 
-<%= link_to new_content_partner_transformation_definition_path(@content_partner), class: 'btn btn-primary float-end' do %>
+<%= link_to new_content_partner_transformation_definition_path(@content_partner, kind: 'harvest'), class: 'btn btn-primary float-end' do %>
   <%= bootstrap_icon('plus-circle') %>Add new Transformation Definition
 <% end %>
 
 <div class="clearfix"></div>
 
-<%- if @transformation_definitions.any? %>
-  <%- @transformation_definitions.each do |transformation_definition| %>
+<%- if @harvest_transformation_definitions.any? %>
+  <%- @harvest_transformation_definitions.each do |harvest_transformation_definition| %>
     <div class="border p-3 my-2">
       <span class="float-start">
-        <%= transformation_definition.name %>
+        <%= harvest_transformation_definition.name %>
       </span>
 
-      <%= link_to "Details", content_partner_transformation_definition_path(@content_partner, transformation_definition), class: "btn btn-outline-primary float-end" %>
+      <%= link_to "Details", content_partner_transformation_definition_path(@content_partner, harvest_transformation_definition), class: "btn btn-outline-primary float-end" %>
 
       <div class="clearfix"></div>
     </div>
   <%- end %>
 
-  <%= render 'shared/pagination_below_table', items: @transformation_definitions %>
+  <%= render 'shared/pagination_below_table', items: @harvest_transformation_definitions %>
 <% else %>
   <p>There are currently no transformation definitions for <%= @content_partner.name_in_database %>.</p>
 <% end %>
@@ -63,7 +63,7 @@
 
 <h2 class="float-start">Harvest Definitions</h2>
 
-<%= link_to new_content_partner_harvest_definition_path(@content_partner), class: 'btn btn-primary float-end' do %>
+<%= link_to new_content_partner_harvest_definition_path(@content_partner, kind: 'harvest'), class: 'btn btn-primary float-end' do %>
   <%= bootstrap_icon('plus-circle') %>Add new Harvest Definition
 <% end %>
 
@@ -116,3 +116,50 @@
 <% end %>
 
 
+<h2 class="float-start">Enrichment Transformation Definitions</h2>
+
+<%= link_to new_content_partner_transformation_definition_path(@content_partner, kind: 'enrichment'), class: 'btn btn-primary float-end' do %>
+  <%= bootstrap_icon('plus-circle') %>Add new Enrichment Transformation Definition
+<% end %>
+
+<div class="clearfix"></div>
+
+<%- if @enrichment_transformation_definitions.any? %>
+  <%- @enrichment_transformation_definitions.each do |enrichment_transformation_definition| %>
+    <div class="border p-3 my-2">
+      <span class="float-start">
+        <%= enrichment_transformation_definition.name %>
+      </span>
+
+      <%= link_to "Details", content_partner_transformation_definition_path(@content_partner, enrichment_transformation_definition), class: "btn btn-outline-primary float-end" %>
+
+      <div class="clearfix"></div>
+    </div>
+  <%- end %>
+
+  <%= render 'shared/pagination_below_table', items: @enrichment_transformation_definitions %>
+<% else %>
+  <p>There are currently no transformation definitions for <%= @content_partner.name_in_database %>.</p>
+<% end %>
+
+<h2 class="float-start">Enrichment Definitions</h2>
+
+<%= link_to new_content_partner_harvest_definition_path(@content_partner, kind: 'enrichment'), class: 'btn btn-primary float-end' do %>
+  <%= bootstrap_icon('plus-circle') %>Add new Enrichment Definition
+<% end %>
+
+<div class="clearfix"></div>
+
+<%- if @enrichment_definitions.any? %>
+  <%- @enrichment_definitions.each do |enrichment_definition| %>
+    <div class="border p-3 my-2">
+      <span class="float-start">
+        <%= enrichment_definition.name %>
+      </span>
+
+      <%= link_to "Details", content_partner_harvest_definition_path(@content_partner, enrichment_definition), class: "btn btn-outline-primary float-end" %>
+
+      <div class="clearfix"></div>
+    </div>
+  <%- end %>
+<%- end %>

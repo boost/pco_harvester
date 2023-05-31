@@ -116,6 +116,25 @@ RSpec.describe Extraction::Execution do
           subject.call
         end
       end
+
+      context 'when the document has failed to be extracted' do
+        before do
+          stub_failed_figshare_harvest_requests(ed)
+          allow(JsonPath).to receive_message_chain(:new, :on).and_return([40])
+        end
+        
+        let(:subject) { described_class.new(ej, ed) }
+
+        it 'does not create TransformationJobs for failed pages' do
+          expect { subject.call }.to change(TransformationJob, :count).by(0)
+        end
+
+        it 'enqueues 0 TransformationWorkers in sidekiq' do
+          expect(TransformationWorker).to receive(:perform_async).exactly(0).times.and_call_original
+
+          subject.call
+        end
+      end
     end
   end
 end

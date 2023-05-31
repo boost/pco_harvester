@@ -15,7 +15,7 @@ class HarvestWorker < ApplicationWorker
     extraction_job = ExtractionJob.create(
       extraction_definition: @harvest_job.extraction_definition,
       harvest_job: @harvest_job,
-      kind: 'full'
+      kind: :full
     )
     ExtractionWorker.perform_async(extraction_job.id)
   end

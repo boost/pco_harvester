@@ -16,7 +16,7 @@ RSpec.describe 'ExtractionJobs', type: :request do
 
     it 'displays the date of the jobs' do
       get extraction_jobs_path
-      expect(response.body).to include 'Sunday 16 January 2000 |  2:30 AM'
+      expect(response.body).to include(subject.updated_at.to_fs(:light))
     end
 
     describe 'filters' do

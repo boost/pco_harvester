@@ -1,0 +1,75 @@
+---
+status: 500
+headers:
+  date: Tue, 23 May 2023 21:39:13 GMT
+  content-type: application/json
+  transfer-encoding: chunked
+  connection: keep-alive
+  server: nginx
+  vary: Accept-Encoding
+  access-control-allow-origin: https://api.figshare.com
+  access-control-allow-methods: GET, POST, PUT, DELETE, OPTIONS
+  access-control-allow-headers: Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization
+  access-control-max-age: '3600'
+  content-encoding: gzip
+body: |-
+  {
+    "count": 1,
+    "items": [
+      {
+        "article_id": 23029880,
+        "views": 0,
+        "downloads": 0,
+        "shares": 0,
+        "title": "Self-enucleation of one eye",
+        "doi": null,
+        "defined_type": "journal contribution",
+        "status": "Public",
+        "version": 1,
+        "published_date": "23:15, 21 May, 2023",
+        "description": "No description available",
+        "description_nohtml": "No description available",
+        "total_size": "0.00 KB",
+        "thumb": "",
+        "owner": {
+          "id": 3562768,
+          "full_name": "Repository Admin"
+        },
+        "authors": [
+          {
+            "id": 15766751,
+            "full_name": "Kimber, V",
+            "first_name": "V",
+            "last_name": "Kimber"
+          },
+          {
+            "id": 14747149,
+            "full_name": "Saxby Pridmore",
+            "first_name": "Saxby",
+            "last_name": "Pridmore"
+          }
+        ],
+        "tags": [
+          {
+            "name": "No keyword provided"
+          }
+        ],
+        "categories": [
+          {
+            "id": 33866,
+            "name": "Mental health services"
+          }
+        ],
+        "files": [
+
+        ],
+        "figshare_url": "https://figshare.com/articles/journal_contribution/Self-enucleation_of_one_eye/23029880",
+        "publisher_doi": "",
+        "publisher_citation": "",
+        "links": [
+
+        ],
+        "master_publisher_id": 0
+      }
+    ]
+  }

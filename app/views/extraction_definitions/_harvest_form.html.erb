@@ -1,12 +1,14 @@
 <%= vertical_form_with model: [@content_partner, @extraction_definition], class: { row: true } do |form| %>
   <%= form.hidden_field :content_partner_id, value: @content_partner.id %>
 
-  <h2>Common settings</h2>
+  <% if @extraction_definition.name.present? %>
+    <div class="mb-3 col-12">
+      <%= form.label :name, 'Name', class: "form-label" %>
+      <%= form.text_field :name, class: "form-control" %>
+    </div>
+  <% end %>
 
-  <div class="mb-3 col-12">
-    <%= form.label :name, 'Name', class: "form-label" %>
-    <%= form.text_field :name, class: "form-control" %>
-  </div>
+  <h2>Common settings</h2>
 
   <div class="mb-3 col-auto">
     <%= form.label :format, class: "form-label" do %>

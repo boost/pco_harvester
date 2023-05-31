@@ -3,10 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe TransformationDefinition, type: :model do
-  let(:content_partner) { create(:content_partner, :ngataonga) }
+  let(:content_partner) { create(:content_partner, :ngataonga, name: 'National Library of New Zealand') }
   let(:extraction_definition) { content_partner.extraction_definitions.first }
   let(:extraction_job) { create(:extraction_job, extraction_definition:) }
-  let(:subject) { create(:transformation_definition, content_partner:, extraction_job:, name: 'Name') }
+  let(:subject) { create(:transformation_definition, content_partner:, extraction_job:) }
 
   let!(:field_one) do
     create(:field, name: 'title', block: "JsonPath.new('title').on(record).first", transformation_definition: subject)
@@ -27,10 +27,6 @@ RSpec.describe TransformationDefinition, type: :model do
   end
 
   describe '#attributes' do
-    it 'has a name' do
-      expect(subject.name).to eq 'Name'
-    end
-
     it 'has a record selector' do
       expect(subject.record_selector).to eq '$..results'
     end
@@ -50,7 +46,42 @@ RSpec.describe TransformationDefinition, type: :model do
     end
   end
 
-  describe '#validations presence of' do
-    it { is_expected.to validate_presence_of(:name).with_message("can't be blank") }
+  describe "#validation" do
+    it 'cannot be a copy of itself' do
+      subject.original_transformation_definition = subject
+      expect(subject).not_to be_valid
+    end
+  end
+
+  describe "#copy?" do
+    let(:original) { create(:transformation_definition) }
+    let(:copy)     { create(:transformation_definition, original_transformation_definition: original) }
+
+    it 'returns true if the transformation definition is a copy' do
+      expect(copy.copy?).to be true
+    end
+
+    it 'returns false if the transformation definition is an original' do
+      expect(original.copy?).to be false
+    end
+  end
+
+  describe 'kinds' do
+    let(:harvest_transformation_definition) { create(:transformation_definition, kind: :harvest) }
+    let(:enrichment_transformation_definition) { create(:transformation_definition, kind: :enrichment) }
+
+    it 'can be for a harvest' do
+      expect(harvest_transformation_definition.harvest?).to be true
+    end
+
+    it 'can be for an enrichment' do
+      expect(enrichment_transformation_definition.enrichment?).to be true
+    end
+  end
+
+  describe '#name' do
+    it 'automatically generates a sensible name' do
+      expect(subject.name).to eq "national-library-of-new-zealand__harvest-transformation-#{subject.id}"
+    end
   end
 end

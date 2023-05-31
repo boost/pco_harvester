@@ -3,7 +3,16 @@
 require 'rails_helper'
 
 RSpec.describe ExtractionJob, type: :model do
-  subject { create(:extraction_job) }
+  subject { create(:extraction_job, extraction_definition:) }
+
+  let(:content_partner) { create(:content_partner, name: 'National Library of New Zealand') }
+  let(:extraction_definition) { create(:extraction_definition, content_partner:) }
+
+  describe '#name' do
+    it 'autogenerates a sensible name' do
+      expect(subject.name).to eq "#{extraction_definition.name}__full-job-#{subject.id}"
+    end
+  end
 
   describe 'status checks' do
     described_class::STATUSES.each do |status|
@@ -24,11 +33,11 @@ RSpec.describe ExtractionJob, type: :model do
   end
 
   describe 'kind checks' do
-    described_class::KINDS.each do |kind|
+    described_class.kinds.each_key do |kind|
       it "defines the check is_#{kind}?" do
         subject.kind = kind
         expect(subject.send("is_#{kind}?")).to be true
-        subject.kind = described_class::KINDS.without(kind).sample
+        subject.kind = described_class.kinds.keys.without(kind).sample
         expect(subject.send("is_#{kind}?")).to be false
       end
     end
@@ -145,17 +154,15 @@ RSpec.describe ExtractionJob, type: :model do
 
     statuses.each do |key, value|
       it "can be #{key}" do
-        expect(ExtractionJob.new(status: value).status).to eq(key.to_s)
+        expect(described_class.new(status: value).status).to eq(key.to_s)
       end
     end
   end
-  
-  describe '#kinds' do
-    kinds = { full: 0, sample: 1 }
 
-    kinds.each do |key, value|
+  describe '#kinds' do
+    described_class.kinds.each do |key, value|
       it "can be #{key}" do
-        expect(ExtractionJob.new(kind: value).kind).to eq(key.to_s)
+        expect(described_class.new(kind: value).kind).to eq(key.to_s)
       end
     end
   end

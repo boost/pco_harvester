@@ -2,22 +2,42 @@
 
 module Load
   class Execution
-    def initialize(record, destination)
+    def initialize(record, load_job)
       @record = record
-      @destination = destination
+      @load_job = load_job
+      @destination = load_job.harvest_job.destination
+      @harvest_definition = load_job.harvest_definition
     end
 
     def call
       record = JSON.parse(@record.to_json)['transformed_record']
 
-      connection(@destination.url, {}, { 'Authentication-Token' => @destination.api_key })
-        .post(
-          '/harvester/records',
-          {
-            record:
-          }.to_json,
-          'Content-Type' => 'application/json'
-        )
+      record['source_id'] = @harvest_definition.source_id
+      record['priority']  = @harvest_definition.priority
+      record['job_id']    = "harvester_#{@harvest_definition.id}"
+
+      if @harvest_definition.harvest?
+        connection(@destination.url, {}, { 'Authentication-Token' => @destination.api_key })
+          .post(
+            '/harvester/records',
+            {
+              record:
+            }.to_json,
+            'Content-Type' => 'application/json'
+          )
+      elsif @harvest_definition.enrichment?
+        required_fragments = [@harvest_definition.source_id] if @harvest_definition.required_for_active_record?
+
+        connection(@destination.url, {}, { 'Authentication-Token' => @destination.api_key })
+          .post(
+            "/harvester/records/#{@load_job.api_record_id}/fragments.json",
+            {
+              fragment: record,
+              required_fragments:
+            }.to_json,
+            'Content-Type' => 'application/json'
+          )
+      end
     end
 
     private

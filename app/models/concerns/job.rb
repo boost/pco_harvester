@@ -12,10 +12,6 @@ module Job
     validates :end_time, comparison: { greater_than_or_equal_to: :start_time }, if: -> { end_time.present? }
   end
 
-  def name
-    updated_at.to_fs(:light)
-  end
-
   # Returns the number of seconds a job has been running for
   #
   # @return Integer

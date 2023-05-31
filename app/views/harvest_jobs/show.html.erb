@@ -42,9 +42,11 @@
         <tr>
           <th scope="row">Estimated Records Extracted</th>
           <td>
-            <%=
-            @harvest_job.extraction_definition.per_page * @harvest_job.extraction_job.documents.total_pages
-            %>
+            <% if @harvest_job.extraction_definition.enrichment? %>
+              <%= @harvest_job.extraction_job.documents.total_pages %>
+            <% else %>
+              <%= @harvest_job.extraction_definition.per_page * @harvest_job.extraction_job.documents.total_pages %>
+            <% end %>
           </td>
         </tr>
 
@@ -115,7 +117,7 @@
           <% TransformationJob.statuses.keys.each do |status| %>
             <tr>
               <th scope="row">Number <%= status %></th>
-              <td><%= TransformationJob.where(status: status).count %></td>
+              <td><%= @harvest_job.transformation_jobs.where(status: status).count %></td>
             </tr>
           <% end %>
         </tbody>
@@ -126,8 +128,13 @@
       <% @harvest_job.transformation_jobs.each do |transformation_job| %>
         <div class="card my-2">
           <div class="card-body">
-            <h5 class="card-title mb-4">Page <%= transformation_job.page %></h5>
             <dl class="row">
+
+              <h5 class="card-title mb-4"><%= transformation_job.name %></h5>
+
+              <dt class="col-sm-2">Page</dt>
+              <dd class="col-sm-10"><%= transformation_job.page %></dd>
+
               <dt class="col-sm-2">Start Time</dt>
               <dd class="col-sm-10"><%= job_start_time(transformation_job) %></dd>
 
@@ -170,7 +177,7 @@
           <% LoadJob.statuses.keys.each do |status| %>
             <tr>
               <th scope="row">Number <%= status %></th>
-              <td><%= LoadJob.where(status: status).count %></td>
+              <td><%= @harvest_job.load_jobs.where(status: status).count %></td>
             </tr>
           <% end %>
         </tbody>
@@ -180,8 +187,13 @@
       <% @harvest_job.load_jobs.each do |load_job| %>
         <div class="card my-2">
           <div class="card-body">
-            <h5 class="card-title mb-4">Page <%= load_job.page %></h5>
+            <h5 class="card-title mb-4"><%= load_job.name %></h5>
+
             <dl class="row">
+
+              <dt class="col-sm-2">Page</dt>
+              <dd class="col-sm-10"><%= load_job.page %></dd>
+
               <dt class="col-sm-2">Start Time</dt>
               <dd class="col-sm-10"><%= job_start_time(load_job) %></dd>
 

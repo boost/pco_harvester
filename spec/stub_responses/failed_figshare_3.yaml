@@ -1,0 +1,349 @@
+---
+status: 500
+headers:
+  date: Fri, 19 May 2023 02:07:02 GMT
+  content-type: application/json
+  transfer-encoding: chunked
+  connection: keep-alive
+  server: nginx
+  vary: Accept-Encoding
+  access-control-allow-origin: https://api.figshare.com
+  access-control-allow-methods: GET, POST, PUT, DELETE, OPTIONS
+  access-control-allow-headers: Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization
+  access-control-max-age: '3600'
+  content-encoding: gzip
+body: |-
+  {
+    "items_found": 24906,
+    "page_nr": 3,
+    "items": [
+      {
+        "article_id": 22945532,
+        "title": "Post-Traumatic Stress Disorder Symptoms in the Files of Australian Servicemen Hospitalized in 1942–1952",
+        "DOI": null,
+        "description": "<p><strong>Objective:</strong> To investigate post-traumatic stress disorder (PTSD) symptomatology in servicemen hospitalized 1942–1952.</p>    <p><strong>Method:</strong> Hospital files of servicemen (n = 590) were studied and PTSD symptoms in groups,   based on service experience, were compared.</p>    <p><strong>Results:</strong> Based on their hospital files, 19% of servicemen were classified as having partial PTSD. No full cases of PTSD were identified, due primarily to the small number of recorded avoidance symptoms and the limited information in relation to the stressor criterion. Prisoners of war had the highest reported avoidance and lowest intrusive symptoms compared with other combatants.</p>    <p><strong>Conclusions: </strong>PTSD symptoms may have been common during and after World War II. At that time avoidance was not considered a symptom of disorder. Intrusive and arousal symptoms may be the core symptoms of PTSD and avoidance symptoms need to be reconsidered.</p>",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22945532",
+        "published_date": "23:56, 18 May, 2023",
+        "authors": [
+          {
+            "author_name": "Burges Watson, IP"
+          },
+          {
+            "author_name": "Daniels, BA"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "23:56, 18 May, 2023"
+      },
+      {
+        "article_id": 22945529,
+        "title": "Multiple Sclerosis impact on employment and income in New Zealand",
+        "DOI": null,
+        "description": "<strong>BACKGROUND AND OBJECTIVES:</strong> We investigated the demographic, social and clinical characteristics associated with employment status and income for people with multiple sclerosis (MS) in New Zealand (NZ).<p></p>    <p><strong>METHODS:</strong> The NZ National MS Prevalence study included all persons resident in NZ on census day 2006 diagnosed with MS (96.7% coverage). Factors associated with employment and income status among the working age population (25-64 years) were identified by linear regression.</p>    <p><strong>RESULTS:</strong> Over 90% of working age people with MS (n=1727) had a work history, but 54% were not working. Work loss occurred early in the disease course, and at low disability (P<.001). Advancing age, progressive disease, longer disease duration, higher disability levels, partner loss and lower education were associated with work loss (P<.001). Working age people with MS had lower income than the NZ population (P<.0001). Higher qualifications yielded no additional income for MS females and about half the additional income for MS males (P<.0001).</p>    <p><strong>CONCLUSIONS:</strong> MS profoundly reduces employment and income early in the disease course, and at low levels of disability, however, unemployment is not entirely accounted for by clinical, social and demographic factors. These findings suggest social supports should be explored early in the disease course to reduce loss of income and unemployment for people with MS.</p>",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22945529",
+        "published_date": "23:56, 18 May, 2023",
+        "authors": [
+          {
+            "author_name": "Pearson, JF"
+          },
+          {
+            "author_name": "Alla, S"
+          },
+          {
+            "author_name": "Clarke, G"
+          },
+          {
+            "author_name": "Mason, DF"
+          },
+          {
+            "author_name": "Anderson, T"
+          },
+          {
+            "author_name": "Richardson, A"
+          },
+          {
+            "author_name": "Miller, DH"
+          },
+          {
+            "author_name": "Sabel, CE"
+          },
+          {
+            "author_name": "Abernethy, DA"
+          },
+          {
+            "author_name": "Willoughby, EW"
+          },
+          {
+            "author_name": "Bruce Taylor"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "23:56, 18 May, 2023"
+      },
+      {
+        "article_id": 22945505,
+        "title": "The ‘NZ’ in Anzac: different remembrance and meaning",
+        "DOI": null,
+        "description": "This article examines differences of emphasis in Australia and New Zealand in the rituals of Anzac Day, the anniversary of the Gallipoli landings on 25 April 1915. Whereas Anzac Day in New Zealand is solemn, with a focus on the laying of wreaths and services at war memorials and churches, in Australia the day is distinguished more by marches of returned servicemen, cheered by large crowds. By exploring the emphasis on different components of what are shared rituals, on the march of the veterans and the laying of wreaths, the article aims to outline and explain how and why Anzac Day is more funereal in New Zealand. It proceeds to highlight the ‘NZ’ in Anzac through a study of myth, ritual, memorialisation, heroes, and reinvention, and finds that, contrary to accepted views, the conscription debate in Australia is insufficient to account for this divergence of emphasis in Anzac formalities from 1916. Rather the article suggests that the coincidence of the South African War and Australian Federation at the dawn of the twentieth century, different nationalisms, and political, social, and cultural disparities between the dominions provided the context for divergent scripts of remembrance and meaning enacted in Anzac Day rituals since the First World War.",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22945505",
+        "published_date": "23:54, 18 May, 2023",
+        "authors": [
+          {
+            "author_name": "Mein Smith, P"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "23:54, 18 May, 2023"
+      },
+      {
+        "article_id": 22945502,
+        "title": "The AUSTRAL VLBI observing program",
+        "DOI": null,
+        "description": "The AUSTRAL observing program was started in 2011, performing geodetic and astrometric very long baseline interferometry (VLBI) sessions using the new Australian AuScope VLBI antennas at Hobart, Katherine, and Yarragadee, with contribution from the Warkworth (New Zealand) 12 m and Hartebeesthoek (South Africa) 15 m antennas to make a southern hemisphere array of telescopes with similar design and capability. Designed in the style of the next-generation VLBI system, these small and fast antennas allow for a new way of observing, comprising higher data rates and more observations than the standard observing sessions coordinated by the International VLBI Service for Geodesy and Astrometry (IVS). In this contribution, the continuous development of the AUSTRAL sessions is described, leading to an improvement of the results in terms of baseline length repeatabilities by a factor of two since the start of this program. The focus is on the scheduling strategy and increased number of observations, aspects of automated operation, and data logistics, as well as results of the 151 AUSTRAL sessions performed so far. The high number of the AUSTRAL sessions makes them an important contributor to VLBI end-products, such as the terrestrial and celestial reference frames and Earth orientation parameters. We compare AUSTRAL results with other IVS sessions and discuss their suitability for the determination of baselines, station coordinates, source coordinates, and Earth orientation parameters.",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22945502",
+        "published_date": "23:54, 18 May, 2023",
+        "authors": [
+          {
+            "author_name": "Lucia McCallum"
+          },
+          {
+            "author_name": "James Lovell"
+          },
+          {
+            "author_name": "Jamie McCallum"
+          },
+          {
+            "author_name": "Mayer, D"
+          },
+          {
+            "author_name": "Reynolds, C"
+          },
+          {
+            "author_name": "Quick, J"
+          },
+          {
+            "author_name": "Weston, S"
+          },
+          {
+            "author_name": "Titov, O"
+          },
+          {
+            "author_name": "Stanislav Shabala"
+          },
+          {
+            "author_name": "Bohm, J"
+          },
+          {
+            "author_name": "Natusch, T"
+          },
+          {
+            "author_name": "Nickola, M"
+          },
+          {
+            "author_name": "Gulyaev, S"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "23:54, 18 May, 2023"
+      },
+      {
+        "article_id": 22945364,
+        "title": "Population Screening for Hereditary Haemochromatosis in Australia: Construction and Validation of a State-Transition Cost-Effectiveness Model",
+        "DOI": null,
+        "description": "<p><strong>Introduction: </strong><i>HFE</i>-associated haemochromatosis, the most  common monogenic disorder amongst populations of  northern European ancestry, is characterised by iron  overload. Excess iron is stored in parenchymal tissues,  leading to morbidity and mortality. Population screening  programmes are likely to improve early diagnosis, thereby  decreasing associated disease. Our aim was to develop and  validate a health economics model of screening using  utilities and costs from a haemochromatosis cohort.</p>    <p><strong>Methods:</strong> A state-transition model was developed with  Markov states based on disease severity. Australian males  (aged 30 years) and females (aged 45 years) of northern  European ancestry were the target populations. The  screening strategy was the status quo approach in Australia;  the model was run over a lifetime horizon. Costs  were estimated from the government perspective and  reported in 2015 Australian dollars ($A); costs and qualityadjusted  life-years (QALYs) were discounted at 5%  annually. Model validity was assessed using goodness-of-  fit analyses. Second-order Monte-Carlo simulation was  used to account for uncertainty in multiple parameters.</p>    <p><strong>Results:</strong> For validity, the model reproduced mortality, life  expectancy (LE) and prevalence rates in line with published  data. LE for C282Y homozygote males and females  were 49.9 and 40.2 years, respectively, slightly lower than  population rates. Mean (95% confidence interval) QALYS  were 15.7 (7.7–23.7) for males and 14.4 (6.7–22.1) for  females. Mean discounted lifetime costs for C282Y  homozygotes were $A22,737 (3670–85,793) for males and  $A13,840 (1335–67,377) for females. Sensitivity analyses  revealed discount rates and prevalence had the greatest  impacts on outcomes.</p>    <p><strong>Conclusion:</strong> We have developed a transparent, validated  health economics model of C282Y homozygote  haemochromatosis. The model will be useful to decision  makers to identify cost-effective screening strategies.</p>",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22945364",
+        "published_date": "23:47, 18 May, 2023",
+        "authors": [
+          {
+            "author_name": "Barbara de Graaff"
+          },
+          {
+            "author_name": "Lei Si"
+          },
+          {
+            "author_name": "Amanda Neil"
+          },
+          {
+            "author_name": "Kwang Yee"
+          },
+          {
+            "author_name": "Kristy Sanderson"
+          },
+          {
+            "author_name": "Gurrin, LC"
+          },
+          {
+            "author_name": "Andrew Palmer"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "23:47, 18 May, 2023"
+      },
+      {
+        "article_id": 22945361,
+        "title": "Suicidal thinking and behaviour as of 600 BCE (Aesop's fables)",
+        "DOI": null,
+        "description": "<p><strong>Objective:</strong>     Psychiatry has ignored history, anthropology, sociology and literature in the search for enlightenment regarding suicide. Our objective was to determine what, if anything, Aesop’s fables had to teach us about suicide in around 600 BCE. Aesop’s account is around two centuries older than the oldest text (Herodotus: <i>The histories</i>) previously examined by our group.</p>    <p><strong>Method:</strong>      We examined two translations of Aesop’s fables, seeking accounts fitting the following categories: (1) suicidal thinking, (2) suicidal behaviour without fatal consequences, and (3) suicidal behaviour with fatal consequences.</p>    <p><strong>Results:</strong>      One account fitting each of these categories was identified. The triggers were: (i) self-doubt and criticism, (ii) unpleasant predicament (constant fear), and (iii) inescapable physical pain.</p>    <p><strong>Conclusion: </strong>     Evidence indicates that around 600 BCE, suicide was practised as a means of coping with self-doubt and criticism, unpleasant predicaments and inescapable physical pain. Recent scientific evidence confirms these observations.</p>",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22945361",
+        "published_date": "23:47, 18 May, 2023",
+        "authors": [
+          {
+            "author_name": "Davis, J"
+          },
+          {
+            "author_name": "Money, TT"
+          },
+          {
+            "author_name": "Saxby Pridmore"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "23:47, 18 May, 2023"
+      },
+      {
+        "article_id": 22945310,
+        "title": "Pterygium and conjunctival ultraviolet autofluorescence in young Australian adults: the Raine study",
+        "DOI": null,
+        "description": "<strong>BACKGROUND:</strong> Sun exposure is associated with several ophthalmic diseases, including pterygium which may develop in adolescence. This study reports the prevalence of pterygium and its associations in a large cohort of young Australian adults. Conjunctival ultraviolet autofluorescence, a biomarker of ocular sun exposure, has recently been characterized in some Australian populations.<p></p>    <p><strong>DESIGN:</strong> Cross-sectional population-based study.</p>    <p><strong>PARTICIPANTS:</strong> One thousand three hundred forty-four subjects aged 18-22 years in the Western Australian Pregnancy Cohort (Raine) Study.</p>    <p><strong>METHODS:</strong> Standardized colour and ultraviolet autofluorescence photographs of the nasal and temporal conjunctiva were taken, and assessed for presence of pterygium and area of autofluorescence. Sun exposure and protective factors were assessed by structured questionnaire.</p>    <p><strong>MAIN OUTCOME MEASURES:</strong> Area of conjunctival ultraviolet autofluorescence in square millimetre (mm<sup>2</sup>) and presence of pterygium.</p>    <p><strong>RESULTS:</strong> Median total conjunctival autofluorescence was 44.2 mm<sup>2</sup> (interquartile range 20.2-69.8 mm<sup>2</sup>). Median conjunctival autofluorescence was higher in nasal than in temporal quadrants (23.8 mm<sup>2</sup> vs. 18.9 mm<sup>2</sup>, <i>P</i> < 0.001), but did not differ according to age or gender. Higher body mass index was associated with lower levels of autofluorescence. Total autofluorescence increased with increasing time spent outdoors. Prevalence of pterygium was 1.2% (95% confidence interval 0.6-1.8%), and was associated with male gender (odds ratio 6.71, <i>P</i> = 0.012). Participants with pterygium had significantly more conjunctival autofluorescence than those without (median 73.4 mm<sup>2</sup> vs. 44.0 mm<sup>2</sup>, <i>P</i> = 0.001).</p>    <p><strong>CONCLUSIONS:</strong> Conjunctival ultraviolet autofluorescence is associated with increased time spent outdoors, and increased prevalence of pterygium. The association of this biomarker with other ophthalmohelioses, including cataract, ocular surface squamous neoplasia and eyelid malignancy, has yet to be determined.</p>",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22945310",
+        "published_date": "23:44, 18 May, 2023",
+        "authors": [
+          {
+            "author_name": "McKnight, CM"
+          },
+          {
+            "author_name": "Sherwin, JC"
+          },
+          {
+            "author_name": "Yazar, S"
+          },
+          {
+            "author_name": "Forward, H"
+          },
+          {
+            "author_name": "Tan, AX"
+          },
+          {
+            "author_name": "Alexander Hewitt"
+          },
+          {
+            "author_name": "Smith, E"
+          },
+          {
+            "author_name": "Turton, D"
+          },
+          {
+            "author_name": "Byrd, P"
+          },
+          {
+            "author_name": "Pennell, CE"
+          },
+          {
+            "author_name": "Coroneo, MT"
+          },
+          {
+            "author_name": "David Mackey"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "23:44, 18 May, 2023"
+      },
+      {
+        "article_id": 22945226,
+        "title": "Recent admiralty decisions in Hong Kong - are the courts ready to deviate from their English predecessors?",
+        "DOI": null,
+        "description": "Admiralty laws in countries in the Asia-Pacific Region, such as Australia, New Zealand, Singapore, and Hong Kong are all influenced by thoughts and principles of law derived from the English Admiralty decisions. Recent cases in Hong Kong (and indeed in other countries in the Asia-Pacific Region) indicated, however, the readiness of judges to depart, where appropriate, from the English authorities. This article considered two such recent Hong Kong cases where in one case the authority of the House of Lords in \"The Indian Grace (No.2)\" was doubted while in the other case the Court of Appeal hinted the possibility of looking for the true owner of the ship beyond the ship registration - deviating from the English authority in \"The Expo Agnic\". This article encourages judges in these countries to deviate from the static and inflexible English laws, where appropriate.",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22945226",
+        "published_date": "23:39, 18 May, 2023",
+        "authors": [
+          {
+            "author_name": "Poomintr Sooksripaisarnkit"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "23:39, 18 May, 2023"
+      },
+      {
+        "article_id": 22945118,
+        "title": "Australian triumphal arches and settler colonial cultural narratives",
+        "DOI": null,
+        "description": "Within the Western architectural canon, the triumphal arch has been used to embody symbolism and meaning in the urban rituals of parades and processions. This paper examines temporary triumphal arches constructed in Australia between 1868 and 1954, to celebrate visits by the British royal family and their representatives. Each of the arches selected for discussion incorporated Australian Indigenous people, buildings or artefacts, which were curated to convey carefully crafted narratives of colonisation. A raft of interpretations can be read into each of the arches because they are intentionally loaded with meaning and symbolism. Particularly evident are the notions of protectionism and assimilation, which were central to the settler colonial narrative. Understandings of the arches is framed by the interpretive information available about them – photographic documentation taken of the <em>in situ</em> arches, drawings and textual descriptions. This paper examines how the triumphal arch form enshrined Australian Indigenous culture into the narrative of colonial experience. It explores how the triumphal arches presented particular representations of Indigenous cultures, both through the allegorical narratives inherent in their physical design, and through the involvement of performers in the events.",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22945118",
+        "published_date": "23:33, 18 May, 2023",
+        "authors": [
+          {
+            "author_name": "Jacqueline Power"
+          },
+          {
+            "author_name": "Helen Norrie"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "23:33, 18 May, 2023"
+      },
+      {
+        "article_id": 22944752,
+        "title": "Research knowledge and skills in primary medical training - a cross-sectional audit",
+        "DOI": null,
+        "description": "<p><strong>Background:</strong>     Internationally, medical education has either adopted, or is moving toward, a Masters level qualification at completion. This reflects the higher-level learning outcomes and potentially facilitation of thinking and decision-making required of medical graduates.  In Australia, the main difference between bachelor and masters programs appears to be the level of research skills training.  This study explores the characteristics of research training in medical schools and alignment with higher education qualification frameworks.</p>    <p><strong>Methods:</strong>     A cross-sectional audit was conducted of 22 medical schools in Australia and New Zealand, seeking information on: degree type, entry requirement, research knowledge and skills taught, teaching format, and barriers to offering students research experiences.</p>    <p><strong>Results:</strong>     Information about 15 medical programs was obtained, with Australian Qualifications Framework or New Zealand Qualifications Framework Level 7, 8 or 9E outcomes.   All included a variety of teaching methods on biomedical ethics, principles of evidence-based practice, and search strategies for medical evidence, critical appraisal of the literature and disease surveillance/epidemiology.  Small projects were available in all programs, although voluntary in Level 7/8 programs and mandatory in Level 9E programs.</p>    <p><strong>Conclusions: </strong>    There appear to be few differences in research training and learning outcomes from Level 7 and Level 9E programs, although Level 9E programs have a more systematic approach and assurance that all graduates can achieve the higher outcomes.  Barriers to successful implementation relate to finding curriculum space and sufficient research training capacity for all medical students.</p>",
+        "type": "journal contribution",
+        "url": "https://api.figshare.com/v1/articles/22944752",
+        "published_date": "23:13, 18 May, 2023",
+        "authors": [
+          {
+            "author_name": "Cheek, C"
+          },
+          {
+            "author_name": "Richard Hays"
+          },
+          {
+            "author_name": "Allen, P"
+          },
+          {
+            "author_name": "Smith, JD"
+          }
+        ],
+        "links": [
+
+        ],
+        "defined_type": "journal contribution",
+        "modified_date": "23:13, 18 May, 2023"
+      }
+    ]
+  }

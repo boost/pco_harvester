@@ -8,6 +8,11 @@ class TransformationJob < ApplicationRecord
   belongs_to :transformation_definition
   belongs_to :harvest_job, optional: true
 
+  after_create do
+    self.name = "#{transformation_definition.name}__job-#{id}"
+    save!
+  end
+
   # Returns the records from the job based on the given record_selector
   #
   # @return Array

@@ -7,13 +7,13 @@
 <div class="float-end">
   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#run-from-extraction-job">Run from extraction job</button>
   <%= button_to(
-    'Run harvest',
+    "Run #{@harvest_definition.kind}",
     content_partner_harvest_definition_harvest_jobs_path(@content_partner, @harvest_definition),
     params: { harvest_job: { harvest_definition_id: @harvest_definition.id } },
     class: 'btn btn-primary',
     form_class: 'd-inline me-1'
   ) %>
-  <%= link_to 'Edit Harvest Definition', edit_content_partner_harvest_definition_path(@content_partner, @harvest_definition), class: 'me-1 btn btn-outline-primary' %>
+  <%= link_to "Edit #{@harvest_definition.kind.capitalize} Definition", edit_content_partner_harvest_definition_path(@content_partner, @harvest_definition), class: 'me-1 btn btn-outline-primary' %>
   <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">Delete</button>
 </div>
 

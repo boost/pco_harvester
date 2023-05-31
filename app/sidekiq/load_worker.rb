@@ -6,7 +6,7 @@ class LoadWorker < ApplicationWorker
 
     sent_records = 0
     transformed_records.each do |transformed_record|
-      Load::Execution.new(transformed_record, load_job.harvest_job.destination).call
+      Load::Execution.new(transformed_record, load_job).call
       sent_records += 1
     end
     update_load_report(load_job, sent_records)

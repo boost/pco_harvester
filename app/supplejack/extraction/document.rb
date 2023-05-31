@@ -16,6 +16,10 @@ module Extraction
       @body = kwargs[:body]
     end
 
+    def successful?
+      status >= 200 && status < 300
+    end
+
     def save(file_path)
       File.write(file_path, to_json)
     end

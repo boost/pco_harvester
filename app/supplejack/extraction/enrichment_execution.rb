@@ -3,6 +3,7 @@ module Extraction
     def initialize(extraction_job)
       @extraction_job = extraction_job
       @extraction_definition = extraction_job.extraction_definition
+      @harvest_job = extraction_job.harvest_job
     end
 
     def call
@@ -37,6 +38,8 @@ module Extraction
 
         ee.extract_and_save
 
+        enqueue_record_transformation(record, ee.document, page)
+
         sleep @extraction_definition.throttle / 1000.0
         @extraction_job.reload
 
@@ -45,6 +48,19 @@ module Extraction
           break
         end
       end
+    end
+
+    def enqueue_record_transformation(record, document, page)
+      return unless @harvest_job.present? && document.successful?
+
+      transformation_job = TransformationJob.create(
+        extraction_job: @extraction_job,
+        transformation_definition: @harvest_job.transformation_definition,
+        harvest_job: @harvest_job,
+        page: page,
+        api_record_id: record['id']
+      )
+      TransformationWorker.perform_async(transformation_job.id)
     end
   end
 end

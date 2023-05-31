@@ -3,20 +3,19 @@
 require 'rails_helper'
 
 RSpec.describe ExtractionDefinition, type: :model do
-  subject! { create(:extraction_definition, content_partner: cp1, name: 'Flickr API') }
+  subject! { create(:extraction_definition, content_partner: cp1) }
 
-  let!(:cp1) { create(:content_partner) }
+  let!(:cp1) { create(:content_partner, name: 'National Library of New Zealand') }
   let!(:cp2) { create(:content_partner) }
 
-  describe '#attributes' do
-    it 'has a name' do
-      expect(subject.name).to eq 'Flickr API'
+  describe '#name' do
+    it 'autogenerates a sensible name' do
+      expect(subject.name).to eq "national-library-of-new-zealand__harvest-extraction-#{subject.id}"
     end
   end
 
   describe '#validations presence of' do
     context 'when the extraction definition is for a harvest' do
-      it { is_expected.to validate_presence_of(:name).with_message("can't be blank") }
       it { is_expected.to validate_presence_of(:format).with_message("can't be blank") }
       it { is_expected.to validate_presence_of(:base_url).with_message("can't be blank") }
       it { is_expected.to validate_presence_of(:throttle).with_message('is not a number') }
@@ -31,7 +30,6 @@ RSpec.describe ExtractionDefinition, type: :model do
 
       let(:destination) { create(:destination) }
 
-      it { is_expected.to validate_presence_of(:name).with_message("can't be blank") }
       it { is_expected.to validate_presence_of(:throttle).with_message('is not a number') }
       it { is_expected.to validate_presence_of(:destination_id).with_message("can't be blank") }
       it { is_expected.to validate_presence_of(:source_id).with_message("can't be blank") }
@@ -60,20 +58,16 @@ RSpec.describe ExtractionDefinition, type: :model do
                                                                     OAI]).with_message('is not included in the list')
     }
 
-    it 'requires a unique name scoped to content partner' do
-      ed2 = build(:extraction_definition, content_partner: cp2, name: 'Flickr API')
-      ed2.content_partner = cp2
-      expect(ed2).to be_valid
-
-      ed2.content_partner = cp1
-      expect(ed2).not_to be_valid
-    end
-
     it 'requires a content partner' do
       extraction_definition = build(:extraction_definition, content_partner: nil)
       expect(extraction_definition).not_to be_valid
 
       expect(extraction_definition.errors[:content_partner]).to include 'must exist'
+    end
+
+    it 'cannot be a copy of itself' do
+      subject.original_extraction_definition = subject
+      expect(subject).not_to be_valid
     end
   end
 
@@ -114,7 +108,7 @@ RSpec.describe ExtractionDefinition, type: :model do
       expect(subject.content_partner).to be_a ContentPartner
     end
   end
-  
+
   describe '#kinds' do
     kinds = { harvest: 0, enrichment: 1 }
 
@@ -122,6 +116,20 @@ RSpec.describe ExtractionDefinition, type: :model do
       it "can be #{key}" do
         expect(ExtractionDefinition.new(kind: value).kind).to eq(key.to_s)
       end
+    end
+  end
+
+  describe "#copy?" do
+    let(:destination) { create(:destination) }
+    let(:original) { create(:extraction_definition, :enrichment, content_partner: cp1, name: 'Flickr API', destination:) }
+    let(:copy) { create(:extraction_definition, :enrichment, content_partner: cp1, name: 'Flickr API', destination:, original_extraction_definition: original) }
+
+    it 'returns true if the extraction definition is a copy' do
+      expect(copy.copy?).to eq true
+    end
+
+    it 'returns false if the extraction definition is an original' do
+      expect(original.copy?).to eq false
     end
   end
 end
