@@ -1,6 +1,7 @@
 <%- if jobs.any? %>
   <%- jobs.each do |job| %>
     <% definition = job.send("#{type}_definition") %>
+    <% next if definition.nil? %>
   
     <div class="border p-3 my-2 row justify-content-between">
       <div class="col">
