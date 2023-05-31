@@ -13,17 +13,17 @@
 <% end %>
 
 <%- if @destinations.any? %>
-  <%- @destinations.each do |content_source| %>
-    <div class="border p-3 my-2">
-      <span class="float-start">
-        <%= content_source.name %>
-      </span>
-
-      <%= link_to "Details", content_source, class: "btn btn-outline-primary float-end" %>
-
-      <div class="clearfix"></div>
-    </div>
-  <%- end %>
+  <div class='row'>
+    <%- @destinations.each do |destination| %>
+      <div class='col-3'>
+        <%= link_to destination, class: "card mb-3" do %>
+          <div class='card-body'>
+              <h5 class='card-title'><%= destination.name %></h5>
+          </div>
+        <% end %>
+      </div>
+    <%- end %>
+  </div>
 
   <%= render 'shared/pagination_below_table', items: @destinations %>
 <% else %>
