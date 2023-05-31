@@ -13,6 +13,29 @@
 <% end %>
 
 <%- if @content_sources.any? %>
+
+  <div class="float-end">
+    <ul class='list-inline'>
+
+      <li class='list-inline-item'>
+        <strong>
+          Sort by:
+        </strong>
+      </li>
+
+      <li class='list-inline-item'>
+        <%= form_with url: '/content_sources', method: :get do |form| %>
+          <%= select_tag(:sort_by, options_for_select([['Alphabetical', 'name'], ['Last Edited', 'updated_at']], @sort_by.first), class: ' form-select', id: 'js-content-source-filter') %>
+        <% end %>
+      </li>
+
+    </ul>
+  </div>
+
+  <div class='clearfix'></div>
+
+  <div class='mb-4'></div>
+
   <div class='row'>
     <%- @content_sources.each do |content_source| %>
       <div class='col-3'>

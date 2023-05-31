@@ -10,12 +10,12 @@
   <% end %>
   
   <div class="mb-3 col-12">
-    <%= form.label :destination_id, 'API Source', class: "form-label" %>
+    <%= form.label :destination_id, 'Enrichment Target', class: "form-label" %>
     <%= form.select :destination_id, options_from_collection_for_select(@destinations, 'id', 'name'), {},  class: "form-select" %>
   </div>
 
   <div class="mb-3 col-12">
-    <%= form.label :source_id, 'Source ID', class: "form-label" %>
+    <%= form.label :source_id, 'Enrichment Target Source ID', class: "form-label" %>
     <%= form.text_field :source_id, class: "form-control" %>
   </div>
   

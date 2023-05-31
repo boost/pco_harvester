@@ -4,7 +4,10 @@ class ContentSourcesController < ApplicationController
   before_action :find_content_source, only: %i[show edit update]
 
   def index
-    @content_sources = ContentSource.order(:name).page(params[:page])
+    @sort_by = { name: :asc }
+    @sort_by = { updated_at: :desc } if params['sort_by'] == 'updated_at'
+
+    @content_sources = ContentSource.order(@sort_by).page(params[:page])
   end
 
   def show

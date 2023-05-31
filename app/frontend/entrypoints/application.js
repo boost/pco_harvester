@@ -36,6 +36,8 @@ import "/js/TestRecordExtraction";
 import "/js/TestEnrichmentExtraction";
 import "/js/TestTransformationRecordSelector";
 import "/js/TestDestination";
+import "/js/ContentSourceFilter.js";
+
 const tooltipTriggerList = document.querySelectorAll(
   '[data-bs-toggle="tooltip"]'
 );
