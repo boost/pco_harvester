@@ -8,20 +8,24 @@
   <div class="float-end">
     <div class="dropdown d-inline me-1">
       <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Run
+        <i class="bi bi-play"></i> Run
       </button>
       <ul class="dropdown-menu">
         <li><%= button_to 'Run full job', content_source_extraction_definition_extraction_jobs_path(@content_source, @extraction_definition, kind: :full), class: 'dropdown-item', form_class: 'dropdown-item' %></li>
         <li><%= button_to 'Run sample', content_source_extraction_definition_extraction_jobs_path(@content_source, @extraction_definition, kind: :sample), class: 'dropdown-item', form_class: 'dropdown-item' %></li>
       </ul>
     </div>
-    <%= link_to 'Edit definition', edit_content_source_extraction_definition_path(@content_source, @extraction_definition), class: 'me-1 btn btn-outline-primary' %>
+    <%= link_to edit_content_source_extraction_definition_path(@content_source, @extraction_definition), class: 'me-1 btn btn-outline-primary' do %>
+      <i class="bi bi-pencil-square"></i> Edit definition
+    <% end %>
 
     <% if @related_harvest_definitions&.any? %>
       <button type="button" class="btn btn-outline-primary me-1" data-bs-toggle="modal" data-bs-target="#update-harvest-definition-modal">Update harvest definitions</button>
     <% end %>
 
-    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">Delete</button>
+    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">
+      <i class="bi bi-trash"></i> Delete
+    </button>
   </div>
 
   <div class="clearfix"></div>
