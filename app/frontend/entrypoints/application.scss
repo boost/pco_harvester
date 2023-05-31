@@ -1,3 +1,8 @@
+// Modules
+
+@import "../stylesheets/modules/colors";
+@import "../stylesheets/modules/fonts";
+
 // Libraries
 
 @import "~bootstrap/scss/bootstrap";
@@ -10,11 +15,6 @@
 // Mixins
 
 @import "../stylesheets/mixins/bem";
-
-// Modules
-
-@import "../stylesheets/modules/colors";
-@import "../stylesheets/modules/fonts";
 
 // Blocks
 
