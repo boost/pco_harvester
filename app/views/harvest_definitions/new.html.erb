@@ -1,9 +1,9 @@
 <%= content_for(:title) { 'New Harvest Definition' } %>
 
-<%= render 'shared/breadcrumb_nav' %>
+<%= content_for(:header) do %>
+  <%= render 'shared/breadcrumb_nav' %>
 
-<h1>Add New <%= @harvest_definition.kind.capitalize %> Definition</h1>
-
-<div class="mt-4"></div>
+  <h1>Add New <%= @harvest_definition.kind.capitalize %></h1>
+<% end %>
 
 <%= render 'form' %>

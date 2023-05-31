@@ -1,7 +1,9 @@
 <%= content_for(:title) { 'Edit Transformation' } %>
 
-<%= render 'shared/breadcrumb_nav' %>
+<%= content_for(:header) do %>
+  <%= render 'shared/breadcrumb_nav' %>
 
-<h1>Edit Transformation Definition</h1>
+  <h1>Edit Transformation</h1>
+<% end %>
 
 <%= render 'form' %>

@@ -2,19 +2,22 @@
 
 <%= content_for(:root_class) { 'container-fluid' } %>
 
-<%= render 'shared/breadcrumb_nav' %>
+<%= content_for(:header) do %>
+  <%= render 'shared/breadcrumb_nav' %>
 
-<h1 class='float-start mb-4'><%= @transformation_definition.name %></h1>
+  <h1 class='float-start mb-4'><%= @transformation_definition.name %></h1>
 
-<div class="float-end">
-  <% if @related_harvest_definitions.any? %>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update-harvest-definition-modal">Update harvest definitions</button>
-  <% end %>
-  <%= link_to 'Edit transformation', edit_content_source_transformation_definition_path(@content_source, @transformation_definition), class: 'me-1 btn btn-outline-primary' %>
-  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">Delete</button>
-</div>
+  <div class="float-end">
+    <% if @related_harvest_definitions.any? %>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update-harvest-definition-modal">Update <%= @transformation_definition.kind %> definitions</button>
+    <% end %>
+    <%= link_to 'Edit transformation', edit_content_source_transformation_definition_path(@content_source, @transformation_definition), class: 'me-1 btn btn-outline-primary' %>
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">Delete</button>
+  </div>
 
-<div class="clearfix"></div>
+  <div class="clearfix"></div>
+
+<% end %>
 
 <div id="js-transformation-app" data-props="<%= @props %>"></div>
 
