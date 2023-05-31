@@ -3,11 +3,13 @@
 <%= content_for :header do %>
   <%= render 'shared/breadcrumb_nav' %>
 
-  <h1 class="float-start">Destinations</h1>
+  <h1 class="header__title">Destinations</h1>
 
-  <%= link_to new_destination_path, class: 'btn btn-primary float-end' do %>
-    <i class="bi bi-plus" aria-hidden="true"></i> Add new destination
-  <% end %>
+  <div class="header__actions">
+    <%= link_to new_destination_path, class: 'btn btn-primary' do %>
+      <i class="bi bi-plus" aria-hidden="true"></i> Add new destination
+    <% end %>
+  </div>
 
   <div class="clearfix"></div>
 <% end %>

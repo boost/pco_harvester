@@ -4,8 +4,14 @@
   border-bottom: 1px solid $bright-star;
   position: relative;
 
-  h1 {
+  @include element('title') {
+    float: left;
     margin-bottom: 0;
+  }
+
+  @include element('actions') {
+    float: right;
+    padding-top: .5rem;
   }
 
   .nav-tabs {

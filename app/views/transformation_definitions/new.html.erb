@@ -3,7 +3,7 @@
 <%= content_for :header do %>
   <%= render 'shared/breadcrumb_nav' %>
 
-  <h1>New <%= @transformation_definition.kind.capitalize %> Transformation</h1>
+  <h1 class="header__title">New <%= @transformation_definition.kind.capitalize %> Transformation</h1>
 <% end %>
 
 <%= render 'form' %>

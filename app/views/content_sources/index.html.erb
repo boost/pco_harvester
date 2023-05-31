@@ -3,11 +3,13 @@
 <%= content_for :header do %>
   <%= render 'shared/breadcrumb_nav' %>
 
-  <h1 class="float-start">Content Sources</h1>
+  <h1 class="header__title">Content Sources</h1>
 
-  <%= link_to new_content_source_path, class: 'btn btn-primary float-end' do %>
-    <i class="bi bi-plus" aria-hidden="true"></i> Add content source
-  <% end %>
+  <div class="header__actions">
+    <%= link_to new_content_source_path, class: 'btn btn-primary' do %>
+      <i class="bi bi-plus" aria-hidden="true"></i> Add content source
+    <% end %>
+  </div>
 
   <div class="clearfix"></div>
 <% end %>

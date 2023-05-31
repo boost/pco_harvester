@@ -3,11 +3,13 @@
 <%= content_for :header do %>
   <%= render 'shared/breadcrumb_nav' %>
 
-  <h1 class="float-start"><%= @content_source.name_in_database %></h1>
+  <h1 class="header__title"><%= @content_source.name_in_database %></h1>
 
-  <%= link_to edit_content_source_path(@content_source), class: 'btn btn-primary float-end' do %>
-    <i class="bi bi-pencil-square" aria-hidden="true"></i> Edit content source
-  <% end %>
+  <div class="header__actions">
+    <%= link_to edit_content_source_path(@content_source), class: 'btn btn-primary' do %>
+      <i class="bi bi-pencil-square" aria-hidden="true"></i> Edit content source
+    <% end %>
+  </div>
 
   <div class="clearfix"></div>
 
