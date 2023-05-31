@@ -19,16 +19,18 @@
 
   <div class="clearfix"></div>
 
-  <div class='mt-4'></div>
-  <ul class="nav nav-tabs">
-
+  <ul class="nav nav-tabs mt-4">
     <li class='nav-item'>
-      <%= link_to 'All', content_source_extraction_definition_path(@content_source, @extraction_definition), class: "nav-link #{@status.nil? ? 'active' : ''}" %>
+      <%= link_to content_source_extraction_definition_path(@content_source, @extraction_definition), class: class_names("nav-link", active: @status.nil?) do %>
+        All (<%= @extraction_definition.extraction_jobs.count %>)
+      <% end %>
     </li>
 
     <% ExtractionJob::STATUSES.each do |status| %>
       <li class='nav-item'>
-        <%= link_to status.capitalize, content_source_extraction_definition_path(@content_source, @extraction_definition, status: status), class: "nav-link #{@status == status ? 'active' : ''}" %>
+        <%= link_to content_source_extraction_definition_path(@content_source, @extraction_definition, status: status), class: class_names("nav-link", active: @status == status) do %>
+          <%= status.capitalize %> (<%= @extraction_definition.extraction_jobs.where(status: status).count %>)
+        <% end %>
       </li>
     <% end %>
   </ul>
