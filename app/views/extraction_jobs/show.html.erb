@@ -13,7 +13,9 @@
       <% cancel_path = cancel_content_source_extraction_definition_extraction_job_path(@content_source, @extraction_definition, @extraction_job) %>
       <%= button_to "Cancel job", cancel_path, class: "btn btn-outline-danger me-1", form_class: 'd-inline me-1' %>
     <% end %>
-    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">Delete results</button>
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">
+      <i class="bi bi-trash" aria-hidden="true"></i> Delete results
+    </button>
   </div>
 
   <div class="clearfix"></div>
