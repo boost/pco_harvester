@@ -10,7 +10,7 @@
   <div class="clearfix"></div>
 
   <div class='mt-4'></div>
-  
+
   <ul class="nav nav-tabs" role="tablist">
     <li class='nav-item'>
       <%= link_to 'Harvests', content_source_path(@content_source, kind: 'harvest'), class: "nav-link #{@kind == 'harvest' ? 'active' : ''}" %>
@@ -30,31 +30,31 @@
       <div class='col-3'>
         <%= link_to content_source_extraction_definition_path(@content_source, extraction_definition), class: 'card mb-3' do %>
           <div class='card-body'>
-          
+
             <h5 class='card-title'><%= extraction_definition.name %></h5>
-            
+
             <span class="badge rounded-pill bg-light text-dark">
               <%= pluralize(extraction_definition.extraction_jobs.queued.count, 'job') %> queued
             </span>
-            
+
             <span class="badge rounded-pill bg-success">
               <%= pluralize(extraction_definition.extraction_jobs.running.count, 'job') %> running
             </span>
-            
+
             <span class="badge rounded-pill bg-light text-dark">
               <%= pluralize(extraction_definition.extraction_jobs.completed.count, 'job') %> completed
             </span>
-            
+
             <span class="badge rounded-pill bg-light text-dark">
               <%= pluralize(extraction_definition.extraction_jobs.cancelled.count, 'job') %> cancelled
             </span>
-            
+
             <span class="badge rounded-pill bg-danger">
               <%= pluralize(extraction_definition.extraction_jobs.errored.count, 'job') %> errored
             </span>
 
           </div>
-        
+
         <% end %>
       </div>
     <%- end %>
@@ -62,7 +62,7 @@
 
   <div class='col-3 align-self-center mb-3'>
     <div class="d-grid gap-2">
-      <%= link_to new_content_source_extraction_definition_path(@content_source, kind: 'harvest'), class: 'btn btn-outline-primary' do %>
+      <%= link_to new_content_source_extraction_definition_path(@content_source, kind: 'harvest'), class: 'btn btn-lg btn-outline-primary' do %>
         <%= bootstrap_icon('plus') %>Create extraction
       <% end %>
     </div>
@@ -77,15 +77,15 @@
       <div class='col-3'>
         <%= link_to content_source_transformation_definition_path(@content_source, transformation_definition), class: 'card mb-3' do %>
           <div class='card-body'>
-          
+
             <h5 class='card-title'><%= transformation_definition.name %></h5>
-            
+
             <span class="badge rounded-pill bg-light text-dark">
               <%= pluralize(transformation_definition.fields.count, 'field') %>
             </span>
 
           </div>
-        
+
         <% end %>
       </div>
     <%- end %>
@@ -93,7 +93,7 @@
 
   <div class='col-3 align-self-center mb-3'>
     <div class="d-grid gap-2">
-      <%= link_to new_content_source_transformation_definition_path(@content_source, kind: 'harvest'), class: 'btn btn-outline-primary' do %>
+      <%= link_to new_content_source_transformation_definition_path(@content_source, kind: 'harvest'), class: 'btn btn-lg btn-outline-primary' do %>
         <%= bootstrap_icon('plus') %>Create transformation
       <% end %>
     </div>
@@ -108,30 +108,30 @@
       <div class='col-3'>
         <%= link_to content_source_harvest_definition_path(@content_source, harvest_definition), class: 'card mb-3' do %>
           <div class='card-body'>
-          
+
             <h5 class='card-title'><%= harvest_definition.name %></h5>
-            
+
             <span class="badge rounded-pill bg-light text-dark">
               <%= pluralize(harvest_definition.harvest_jobs.queued.count, 'job') %> queued
             </span>
-            
+
             <span class="badge rounded-pill bg-success">
               <%= pluralize(harvest_definition.harvest_jobs.running.count, 'job') %> running
             </span>
-            
+
             <span class="badge rounded-pill bg-light text-dark">
               <%= pluralize(harvest_definition.harvest_jobs.completed.count, 'job') %> triggered successfully
             </span>
-            
+
             <span class="badge rounded-pill bg-light text-dark">
               <%= pluralize(harvest_definition.harvest_jobs.cancelled.count, 'job') %> cancelled
             </span>
-            
+
             <span class="badge rounded-pill bg-danger">
               <%= pluralize(harvest_definition.harvest_jobs.errored.count, 'job') %> errored
             </span>
           </div>
-        
+
         <% end %>
       </div>
     <%- end %>
@@ -139,11 +139,9 @@
 
   <div class='col-3 align-self-center mb-3'>
     <div class="d-grid gap-2">
-      <%= link_to new_content_source_harvest_definition_path(@content_source, kind: @kind), class: 'btn btn-outline-primary' do %>
+      <%= link_to new_content_source_harvest_definition_path(@content_source, kind: @kind), class: 'btn btn-lg btn-outline-primary' do %>
         <%= bootstrap_icon('plus') %>Create <%= @kind %>
       <% end %>
     </div>
   </div>
 </div>
-
-
