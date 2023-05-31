@@ -11,14 +11,21 @@ class ContentSourcesController < ApplicationController
   end
 
   def show
-    @harvest_extraction_definitions = @content_source.extraction_definitions.originals.harvests.order(created_at: :desc).page(params[:page])
-    @enrichment_extraction_definitions = @content_source.extraction_definitions.originals.enrichments.order(created_at: :desc).page(params[:page])
+    @kind = params['kind'] || 'harvest'
 
-    @harvest_transformation_definitions = @content_source.transformation_definitions.originals.harvests.order(created_at: :desc).page(params[:page])
-    @enrichment_transformation_definitions = @content_source.transformation_definitions.originals.enrichments.order(created_at: :desc).page(params[:page])
-
-    @harvest_definitions = @content_source.harvest_definitions.harvests.order(created_at: :desc).page(params[:page])
-    @enrichment_definitions = @content_source.harvest_definitions.enrichments.order(created_at: :desc).page(params[:page])
+    if @kind == 'harvest'
+      @extraction_definitions = @content_source.extraction_definitions.originals.harvests.order(created_at: :desc).page(params[:page])
+      
+      @transformation_definitions = @content_source.transformation_definitions.originals.harvests.order(created_at: :desc).page(params[:page])
+      
+      @harvest_definitions = @content_source.harvest_definitions.harvests.order(created_at: :desc).page(params[:page])
+    elsif @kind == 'enrichment'
+      @extraction_definitions = @content_source.extraction_definitions.originals.enrichments.order(created_at: :desc).page(params[:page])
+      
+      @transformation_definitions = @content_source.transformation_definitions.originals.enrichments.order(created_at: :desc).page(params[:page])
+      
+      @harvest_definitions = @content_source.harvest_definitions.enrichments.order(created_at: :desc).page(params[:page])
+    end
   end
 
   def new

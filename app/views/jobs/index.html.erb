@@ -1,8 +1,10 @@
 <%= content_for(:title) { "Jobs" } %>
 
-<%= render 'shared/breadcrumb_nav' %>
+<%= content_for(:header) do %>
+  <%= render 'shared/breadcrumb_nav' %>
 
-<h1 class='my-4'>Extraction jobs</h1>
+  <h1 class='my-4'>Extraction jobs</h1>
+<% end %>
 
 <div class="my-3">
   <%= link_to 'All', extraction_jobs_path, class: "btn btn#{@status.nil? ? '' : '-outline'}-primary" %>
