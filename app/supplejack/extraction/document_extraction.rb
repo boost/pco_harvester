@@ -1,29 +1,11 @@
 # frozen_string_literal: true
 
 module Extraction
-  class DocumentExtraction
-    attr_reader :document
+  class DocumentExtraction < AbstractExtraction
 
     def initialize(extraction_definition, extraction_folder = nil)
       @extraction_definition = extraction_definition
       @extraction_folder = extraction_folder
-    end
-
-    def extract
-      Sidekiq.logger.info "Fetching page #{@extraction_definition.page}"
-      @document = Extraction::Request.new(url:, params:, headers:).get
-    end
-
-    def save
-      raise ArgumentError, 'extraction_folder was not provided in #new' unless @extraction_folder.present?
-      raise '#extract must be called before #save DocumentExtraction' unless @document.present?
-
-      @document.save(file_path)
-    end
-
-    def extract_and_save
-      extract
-      save
     end
 
     private
@@ -42,13 +24,6 @@ module Extraction
       {
         @extraction_definition.page_parameter => @extraction_definition.page,
         @extraction_definition.per_page_parameter => @extraction_definition.per_page
-      }
-    end
-
-    def headers
-      {
-        'Content-Type' => 'application/json',
-        'User-Agent' => 'Supplejack Harvester v2.0'
       }
     end
   end

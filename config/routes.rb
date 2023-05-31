@@ -8,7 +8,11 @@ Rails.application.routes.draw do
 
   resources :content_partners, only: %i[index show create update new edit] do
     resources :extraction_definitions, only: %i[show new create edit update destroy] do
-      post :test, on: :collection
+      collection do
+        post :test
+        post :test_record_extraction
+        post :test_enrichment_extraction
+      end
       post :update_harvest_definitions, on: :member
 
       resources :extraction_jobs, only: %i[show create destroy] do

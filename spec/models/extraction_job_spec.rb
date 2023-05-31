@@ -141,9 +141,9 @@ RSpec.describe ExtractionJob, type: :model do
   end
 
   describe '#statuses' do
-    STATUSES = { queued: 0, cancelled: 1, running: 2, completed: 3, errored: 4 }
+    statuses = { queued: 0, cancelled: 1, running: 2, completed: 3, errored: 4 }
 
-    STATUSES.each do |key, value|
+    statuses.each do |key, value|
       it "can be #{key}" do
         expect(ExtractionJob.new(status: value).status).to eq(key.to_s)
       end
@@ -151,9 +151,9 @@ RSpec.describe ExtractionJob, type: :model do
   end
   
   describe '#kinds' do
-    KINDS = { full: 0, sample: 1 }
+    kinds = { full: 0, sample: 1 }
 
-    KINDS.each do |key, value|
+    kinds.each do |key, value|
       it "can be #{key}" do
         expect(ExtractionJob.new(kind: value).kind).to eq(key.to_s)
       end

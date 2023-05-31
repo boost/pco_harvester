@@ -6,6 +6,7 @@ FactoryBot.define do
     format { 'JSON' }
     base_url { "#{Faker::Internet.url}?param=value" }
     throttle { 0 }
+    kind { 0 }
 
     pagination_type { 'item' }
     page_parameter { 'page' }
@@ -39,13 +40,16 @@ FactoryBot.define do
     end
 
     association :content_partner
-  end
 
-  trait :harvest do
-    kind { 0 }
-  end
+    trait :harvest do
+      kind { 0 }
+    end
 
-  trait :enrichment do
-    kind { 1 }
+    trait :enrichment do
+      kind { 1 }
+      source_id { 'test' }
+      enrichment_url { '"https://api.figshare.com/v1/articles/#{record[\'dc_identifier\'].first}"' }
+      throttle { 1000 }
+    end
   end
 end

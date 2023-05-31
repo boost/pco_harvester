@@ -1,0 +1,8004 @@
+---
+headers:
+  content-type: application/json
+status: 200
+body: |-
+  {
+    "records": [
+      {
+        "id": "646acfc15e96825f7910389b",
+        "internal_identifier": "figshare_id:23029880",
+        "status": "active",
+        "record_type": 0,
+        "created_at": "2023-05-22T14:13:21.118+12:00",
+        "updated_at": "2023-05-22T14:13:21.124+12:00",
+        "record_id": 83439,
+        "concept_ids": [
+        
+        ],
+        "concept_ids_str": [
+        
+        ],
+        "title": "Self-enucleation of one eye",
+        "alternate_title": [
+        
+        ],
+        "description": null,
+        "additional_description": [
+        
+        ],
+        "content_partner": [
+        
+        ],
+        "display_content_partner": null,
+        "collection_title": [
+        
+        ],
+        "collection": [
+        
+        ],
+        "attachment_name": "",
+        "lat_lng": [
+        
+        ],
+        "has_lat_lng": false,
+        "placename": [
+        
+        ],
+        "display_collection": null,
+        "primary_collection": [
+        
+        ],
+        "contributing_partner": [
+        
+        ],
+        "auto_tag": [
+        
+        ],
+        "category": [
+        
+        ],
+        "creator": [
+        
+        ],
+        "contributor": [
+        
+        ],
+        "copyright": [
+        
+        ],
+        "citation": [
+        
+        ],
+        "credit_creator": null,
+        "language": [
+        
+        ],
+        "provenance": null,
+        "publisher": [
+        
+        ],
+        "rights": null,
+        "usage": [
+        
+        ],
+        "source": [
+        
+        ],
+        "tag": [
+        
+        ],
+        "thesis_level": null,
+        "holding": [
+        
+        ],
+        "library_collection": [
+        
+        ],
+        "shelf_location": null,
+        "eprints_type": [
+        
+        ],
+        "fulltext": null,
+        "text": null,
+        "copy": "Self-enucleation of one eye 23029880",
+        "has_version": [
+        
+        ],
+        "license": null,
+        "relation": [
+        
+        ],
+        "is_part_of": [
+        
+        ],
+        "is_replaced_by": "Unknown",
+        "replaces": "Unknown",
+        "is_required_by": null,
+        "is_version_of": null,
+        "table_of_contents": null,
+        "availability_id": null,
+        "availability_id_str": null,
+        "access_rights": null,
+        "dc_type": [
+        
+        ],
+        "dnz_type": "Unknown",
+        "display_date": null,
+        "format": [
+        
+        ],
+        "dc_identifier": [
+          23029880
+        ],
+        "is_natlib_record": null,
+        "is_catalog_record": "Unknown",
+        "is_commercial_use": null,
+        "date": [
+        
+        ],
+        "date_str": [
+        
+        ],
+        "sort_date": null,
+        "sort_date_str": null,
+        "syndication_date": null,
+        "syndication_date_str": null,
+        "published_date": [
+        
+        ],
+        "published_date_str": [
+        
+        ],
+        "year": [
+        
+        ],
+        "decade": [
+        
+        ],
+        "century": [
+        
+        ],
+        "landing_url": null,
+        "rights_url": [
+        
+        ],
+        "origin_url": null,
+        "metadata_url": null,
+        "object_url": null,
+        "atl_free_download": null,
+        "atl_physical_viewability": null,
+        "atl_purchasable": null,
+        "atl_purchasable_download": null,
+        "atl_location_code": null,
+        "atl_usage_code": null,
+        "anzsrc_code": null,
+        "marsden_code": [
+        
+        ],
+        "subject": [
+        
+        ],
+        "coverage": [
+        
+        ],
+        "autotag_events": [
+        
+        ],
+        "autotag_organisations": [
+        
+        ],
+        "autotag_people": [
+        
+        ],
+        "autotag_places": [
+        
+        ],
+        "online_child_count": null,
+        "online_child_count_str": null,
+        "child_count": null,
+        "child_count_str": null,
+        "tapuhi_root_id": null,
+        "physical_restrictions": null,
+        "thumbnail_url": null,
+        "large_thumbnail_url": null,
+        "source_provider_name": null,
+        "source_contributor_name": [
+        
+        ],
+        "source_website_name": null,
+        "source_url": "/records/83439/source",
+        "job_id": null,
+        "available_thumbnail": false,
+        "available_large_thumbnail": false,
+        "has_large_thumbnail_url": null,
+        "collection_any_id": [
+        
+        ],
+        "collection_any_id_str": [
+        
+        ],
+        "broad_related_authority_text": [
+        
+        ],
+        "broad_related_authority_id": [
+        
+        ],
+        "broad_related_authority_id_str": [
+        
+        ],
+        "iwihapu_authority_text": [
+        
+        ],
+        "iwihapu_authority_id": [
+        
+        ],
+        "iwihapu_authority_id_str": [
+        
+        ],
+        "name_authority_text": [
+        
+        ],
+        "name_authority_id": [
+        
+        ],
+        "name_authority_id_str": [
+        
+        ],
+        "place_authority_text": [
+        
+        ],
+        "place_authority_id": [
+        
+        ],
+        "place_authority_id_str": [
+        
+        ],
+        "recordtype_authority_text": [
+        
+        ],
+        "recordtype_authority_id": [
+        
+        ],
+        "recordtype_authority_id_str": [
+        
+        ],
+        "subject_authority_text": [
+        
+        ],
+        "subject_authority_id": [
+        
+        ],
+        "subject_authority_id_str": [
+        
+        ],
+        "imagetype_authority_text": [
+        
+        ],
+        "imagetype_authority_id": [
+        
+        ],
+        "imagetype_authority_id_str": [
+        
+        ],
+        "broader_term_text": [
+        
+        ],
+        "broader_term_id": [
+        
+        ],
+        "broader_term_id_str": [
+        
+        ],
+        "narrower_term_text": [
+        
+        ],
+        "narrower_term_id": [
+        
+        ],
+        "narrower_term_id_str": [
+        
+        ],
+        "preferred_term_text": [
+        
+        ],
+        "preferred_term_id": [
+        
+        ],
+        "preferred_term_id_str": [
+        
+        ],
+        "related_term_text": [
+        
+        ],
+        "related_term_id": [
+        
+        ],
+        "related_term_id_str": [
+        
+        ],
+        "unpreferred_term_text": [
+        
+        ],
+        "unpreferred_term_id": [
+        
+        ],
+        "unpreferred_term_id_str": [
+        
+        ],
+        "series_parent_text": [
+        
+        ],
+        "series_parent_id": [
+        
+        ],
+        "series_parent_id_str": [
+        
+        ],
+        "child_series_text": [
+        
+        ],
+        "child_series_id": [
+        
+        ],
+        "child_series_id_str": [
+        
+        ],
+        "collection_parent_text": [
+        
+        ],
+        "collection_parent_id": [
+        
+        ],
+        "collection_parent_id_str": [
+        
+        ],
+        "collection_root_text": [
+        
+        ],
+        "collection_root_id": [
+        
+        ],
+        "collection_root_id_str": [
+        
+        ],
+        "collection_mid_text": [
+        
+        ],
+        "collection_mid_id": [
+        
+        ],
+        "collection_mid_id_str": [
+        
+        ],
+        "ndha_rights": [
+        
+        ],
+        "ndha_rights_str": [
+        
+        ],
+        "fragments": [
+          {
+            "_id": "646acfc15e96825f7910389a",
+            "priority": 0,
+            "_type": "SupplejackApi::ApiRecord::RecordFragment",
+            "title": "Self-enucleation of one eye",
+            "source_id": "test",
+            "updated_at": "2023-05-22T21:56:48.610Z",
+            "created_at": "2023-05-22T02:13:21.118Z",
+            "dc_identifier": [
+              23029880
+            ],
+            "id": "646acfc15e96825f7910389a",
+            "authorities": [
+            
+            ],
+            "attachments": [
+            
+            ],
+            "locations": [
+            
+            ],
+            "thumbnail": null,
+            "large_thumbnail": null
+          }
+        ]
+      },
+      {
+        "id": "646acfc15e96825f7910389d",
+        "internal_identifier": "figshare_id:23029811",
+        "status": "active",
+        "record_type": 0,
+        "created_at": "2023-05-22T14:13:21.143+12:00",
+        "updated_at": "2023-05-22T14:13:21.148+12:00",
+        "record_id": 83442,
+        "concept_ids": [
+        
+        ],
+        "concept_ids_str": [
+        
+        ],
+        "title": "Review of H. Barr and A. M. Hutchison, eds., Text and Controversy from Wyclif to Bale: Essays in Honour of Anne Hudson (Turnhout: Brepols, 2005)",
+        "alternate_title": [
+        
+        ],
+        "description": null,
+        "additional_description": [
+        
+        ],
+        "content_partner": [
+        
+        ],
+        "display_content_partner": null,
+        "collection_title": [
+        
+        ],
+        "collection": [
+        
+        ],
+        "attachment_name": "",
+        "lat_lng": [
+        
+        ],
+        "has_lat_lng": false,
+        "placename": [
+        
+        ],
+        "display_collection": null,
+        "primary_collection": [
+        
+        ],
+        "contributing_partner": [
+        
+        ],
+        "auto_tag": [
+        
+        ],
+        "category": [
+        
+        ],
+        "creator": [
+        
+        ],
+        "contributor": [
+        
+        ],
+        "copyright": [
+        
+        ],
+        "citation": [
+        
+        ],
+        "credit_creator": null,
+        "language": [
+        
+        ],
+        "provenance": null,
+        "publisher": [
+        
+        ],
+        "rights": null,
+        "usage": [
+        
+        ],
+        "source": [
+        
+        ],
+        "tag": [
+        
+        ],
+        "thesis_level": null,
+        "holding": [
+        
+        ],
+        "library_collection": [
+        
+        ],
+        "shelf_location": null,
+        "eprints_type": [
+        
+        ],
+        "fulltext": null,
+        "text": null,
+        "copy": "Review of H. Barr and A. M. Hutchison, eds., Text and Controversy from Wyclif to Bale: Essays in Honour of Anne Hudson (Turnhout: Brepols, 2005) 23029811",
+        "has_version": [
+        
+        ],
+        "license": null,
+        "relation": [
+        
+        ],
+        "is_part_of": [
+        
+        ],
+        "is_replaced_by": "Unknown",
+        "replaces": "Unknown",
+        "is_required_by": null,
+        "is_version_of": null,
+        "table_of_contents": null,
+        "availability_id": null,
+        "availability_id_str": null,
+        "access_rights": null,
+        "dc_type": [
+        
+        ],
+        "dnz_type": "Unknown",
+        "display_date": null,
+        "format": [
+        
+        ],
+        "dc_identifier": [
+          23029811
+        ],
+        "is_natlib_record": null,
+        "is_catalog_record": "Unknown",
+        "is_commercial_use": null,
+        "date": [
+        
+        ],
+        "date_str": [
+        
+        ],
+        "sort_date": null,
+        "sort_date_str": null,
+        "syndication_date": null,
+        "syndication_date_str": null,
+        "published_date": [
+        
+        ],
+        "published_date_str": [
+        
+        ],
+        "year": [
+        
+        ],
+        "decade": [
+        
+        ],
+        "century": [
+        
+        ],
+        "landing_url": null,
+        "rights_url": [
+        
+        ],
+        "origin_url": null,
+        "metadata_url": null,
+        "object_url": null,
+        "atl_free_download": null,
+        "atl_physical_viewability": null,
+        "atl_purchasable": null,
+        "atl_purchasable_download": null,
+        "atl_location_code": null,
+        "atl_usage_code": null,
+        "anzsrc_code": null,
+        "marsden_code": [
+        
+        ],
+        "subject": [
+        
+        ],
+        "coverage": [
+        
+        ],
+        "autotag_events": [
+        
+        ],
+        "autotag_organisations": [
+        
+        ],
+        "autotag_people": [
+        
+        ],
+        "autotag_places": [
+        
+        ],
+        "online_child_count": null,
+        "online_child_count_str": null,
+        "child_count": null,
+        "child_count_str": null,
+        "tapuhi_root_id": null,
+        "physical_restrictions": null,
+        "thumbnail_url": null,
+        "large_thumbnail_url": null,
+        "source_provider_name": null,
+        "source_contributor_name": [
+        
+        ],
+        "source_website_name": null,
+        "source_url": "/records/83442/source",
+        "job_id": null,
+        "available_thumbnail": false,
+        "available_large_thumbnail": false,
+        "has_large_thumbnail_url": null,
+        "collection_any_id": [
+        
+        ],
+        "collection_any_id_str": [
+        
+        ],
+        "broad_related_authority_text": [
+        
+        ],
+        "broad_related_authority_id": [
+        
+        ],
+        "broad_related_authority_id_str": [
+        
+        ],
+        "iwihapu_authority_text": [
+        
+        ],
+        "iwihapu_authority_id": [
+        
+        ],
+        "iwihapu_authority_id_str": [
+        
+        ],
+        "name_authority_text": [
+        
+        ],
+        "name_authority_id": [
+        
+        ],
+        "name_authority_id_str": [
+        
+        ],
+        "place_authority_text": [
+        
+        ],
+        "place_authority_id": [
+        
+        ],
+        "place_authority_id_str": [
+        
+        ],
+        "recordtype_authority_text": [
+        
+        ],
+        "recordtype_authority_id": [
+        
+        ],
+        "recordtype_authority_id_str": [
+        
+        ],
+        "subject_authority_text": [
+        
+        ],
+        "subject_authority_id": [
+        
+        ],
+        "subject_authority_id_str": [
+        
+        ],
+        "imagetype_authority_text": [
+        
+        ],
+        "imagetype_authority_id": [
+        
+        ],
+        "imagetype_authority_id_str": [
+        
+        ],
+        "broader_term_text": [
+        
+        ],
+        "broader_term_id": [
+        
+        ],
+        "broader_term_id_str": [
+        
+        ],
+        "narrower_term_text": [
+        
+        ],
+        "narrower_term_id": [
+        
+        ],
+        "narrower_term_id_str": [
+        
+        ],
+        "preferred_term_text": [
+        
+        ],
+        "preferred_term_id": [
+        
+        ],
+        "preferred_term_id_str": [
+        
+        ],
+        "related_term_text": [
+        
+        ],
+        "related_term_id": [
+        
+        ],
+        "related_term_id_str": [
+        
+        ],
+        "unpreferred_term_text": [
+        
+        ],
+        "unpreferred_term_id": [
+        
+        ],
+        "unpreferred_term_id_str": [
+        
+        ],
+        "series_parent_text": [
+        
+        ],
+        "series_parent_id": [
+        
+        ],
+        "series_parent_id_str": [
+        
+        ],
+        "child_series_text": [
+        
+        ],
+        "child_series_id": [
+        
+        ],
+        "child_series_id_str": [
+        
+        ],
+        "collection_parent_text": [
+        
+        ],
+        "collection_parent_id": [
+        
+        ],
+        "collection_parent_id_str": [
+        
+        ],
+        "collection_root_text": [
+        
+        ],
+        "collection_root_id": [
+        
+        ],
+        "collection_root_id_str": [
+        
+        ],
+        "collection_mid_text": [
+        
+        ],
+        "collection_mid_id": [
+        
+        ],
+        "collection_mid_id_str": [
+        
+        ],
+        "ndha_rights": [
+        
+        ],
+        "ndha_rights_str": [
+        
+        ],
+        "fragments": [
+          {
+            "_id": "646acfc15e96825f7910389c",
+            "priority": 0,
+            "_type": "SupplejackApi::ApiRecord::RecordFragment",
+            "title": "Review of H. Barr and A. M. Hutchison, eds., Text and Controversy from Wyclif to Bale: Essays in Honour of Anne Hudson (Turnhout: Brepols, 2005)",
+            "source_id": "test",
+            "updated_at": "2023-05-22T21:56:48.625Z",
+            "created_at": "2023-05-22T02:13:21.142Z",
+            "dc_identifier": [
+              23029811
+            ],
+            "id": "646acfc15e96825f7910389c",
+            "authorities": [
+            
+            ],
+            "attachments": [
+            
+            ],
+            "locations": [
+            
+            ],
+            "thumbnail": null,
+            "large_thumbnail": null
+          }
+        ]
+      },
+      {
+        "id": "646acfc15e96825f7910389f",
+        "internal_identifier": "figshare_id:23029790",
+        "status": "active",
+        "record_type": 0,
+        "created_at": "2023-05-22T14:13:21.163+12:00",
+        "updated_at": "2023-05-22T14:13:21.168+12:00",
+        "record_id": 83445,
+        "concept_ids": [
+        
+        ],
+        "concept_ids_str": [
+        
+        ],
+        "title": "Review of Anneke B. Mulder-Bakker (ed.) and Margot H. King and Hugh Feiss (trans.), Mary of Oignies: Mother of Salvation (Turnhout: Brepols, 2007)",
+        "alternate_title": [
+        
+        ],
+        "description": null,
+        "additional_description": [
+        
+        ],
+        "content_partner": [
+        
+        ],
+        "display_content_partner": null,
+        "collection_title": [
+        
+        ],
+        "collection": [
+        
+        ],
+        "attachment_name": "",
+        "lat_lng": [
+        
+        ],
+        "has_lat_lng": false,
+        "placename": [
+        
+        ],
+        "display_collection": null,
+        "primary_collection": [
+        
+        ],
+        "contributing_partner": [
+        
+        ],
+        "auto_tag": [
+        
+        ],
+        "category": [
+        
+        ],
+        "creator": [
+        
+        ],
+        "contributor": [
+        
+        ],
+        "copyright": [
+        
+        ],
+        "citation": [
+        
+        ],
+        "credit_creator": null,
+        "language": [
+        
+        ],
+        "provenance": null,
+        "publisher": [
+        
+        ],
+        "rights": null,
+        "usage": [
+        
+        ],
+        "source": [
+        
+        ],
+        "tag": [
+        
+        ],
+        "thesis_level": null,
+        "holding": [
+        
+        ],
+        "library_collection": [
+        
+        ],
+        "shelf_location": null,
+        "eprints_type": [
+        
+        ],
+        "fulltext": null,
+        "text": null,
+        "copy": "Review of Anneke B. Mulder-Bakker (ed.) and Margot H. King and Hugh Feiss (trans.), Mary of Oignies: Mother of Salvation (Turnhout: Brepols, 2007) 23029790",
+        "has_version": [
+        
+        ],
+        "license": null,
+        "relation": [
+        
+        ],
+        "is_part_of": [
+        
+        ],
+        "is_replaced_by": "Unknown",
+        "replaces": "Unknown",
+        "is_required_by": null,
+        "is_version_of": null,
+        "table_of_contents": null,
+        "availability_id": null,
+        "availability_id_str": null,
+        "access_rights": null,
+        "dc_type": [
+        
+        ],
+        "dnz_type": "Unknown",
+        "display_date": null,
+        "format": [
+        
+        ],
+        "dc_identifier": [
+          23029790
+        ],
+        "is_natlib_record": null,
+        "is_catalog_record": "Unknown",
+        "is_commercial_use": null,
+        "date": [
+        
+        ],
+        "date_str": [
+        
+        ],
+        "sort_date": null,
+        "sort_date_str": null,
+        "syndication_date": null,
+        "syndication_date_str": null,
+        "published_date": [
+        
+        ],
+        "published_date_str": [
+        
+        ],
+        "year": [
+        
+        ],
+        "decade": [
+        
+        ],
+        "century": [
+        
+        ],
+        "landing_url": null,
+        "rights_url": [
+        
+        ],
+        "origin_url": null,
+        "metadata_url": null,
+        "object_url": null,
+        "atl_free_download": null,
+        "atl_physical_viewability": null,
+        "atl_purchasable": null,
+        "atl_purchasable_download": null,
+        "atl_location_code": null,
+        "atl_usage_code": null,
+        "anzsrc_code": null,
+        "marsden_code": [
+        
+        ],
+        "subject": [
+        
+        ],
+        "coverage": [
+        
+        ],
+        "autotag_events": [
+        
+        ],
+        "autotag_organisations": [
+        
+        ],
+        "autotag_people": [
+        
+        ],
+        "autotag_places": [
+        
+        ],
+        "online_child_count": null,
+        "online_child_count_str": null,
+        "child_count": null,
+        "child_count_str": null,
+        "tapuhi_root_id": null,
+        "physical_restrictions": null,
+        "thumbnail_url": null,
+        "large_thumbnail_url": null,
+        "source_provider_name": null,
+        "source_contributor_name": [
+        
+        ],
+        "source_website_name": null,
+        "source_url": "/records/83445/source",
+        "job_id": null,
+        "available_thumbnail": false,
+        "available_large_thumbnail": false,
+        "has_large_thumbnail_url": null,
+        "collection_any_id": [
+        
+        ],
+        "collection_any_id_str": [
+        
+        ],
+        "broad_related_authority_text": [
+        
+        ],
+        "broad_related_authority_id": [
+        
+        ],
+        "broad_related_authority_id_str": [
+        
+        ],
+        "iwihapu_authority_text": [
+        
+        ],
+        "iwihapu_authority_id": [
+        
+        ],
+        "iwihapu_authority_id_str": [
+        
+        ],
+        "name_authority_text": [
+        
+        ],
+        "name_authority_id": [
+        
+        ],
+        "name_authority_id_str": [
+        
+        ],
+        "place_authority_text": [
+        
+        ],
+        "place_authority_id": [
+        
+        ],
+        "place_authority_id_str": [
+        
+        ],
+        "recordtype_authority_text": [
+        
+        ],
+        "recordtype_authority_id": [
+        
+        ],
+        "recordtype_authority_id_str": [
+        
+        ],
+        "subject_authority_text": [
+        
+        ],
+        "subject_authority_id": [
+        
+        ],
+        "subject_authority_id_str": [
+        
+        ],
+        "imagetype_authority_text": [
+        
+        ],
+        "imagetype_authority_id": [
+        
+        ],
+        "imagetype_authority_id_str": [
+        
+        ],
+        "broader_term_text": [
+        
+        ],
+        "broader_term_id": [
+        
+        ],
+        "broader_term_id_str": [
+        
+        ],
+        "narrower_term_text": [
+        
+        ],
+        "narrower_term_id": [
+        
+        ],
+        "narrower_term_id_str": [
+        
+        ],
+        "preferred_term_text": [
+        
+        ],
+        "preferred_term_id": [
+        
+        ],
+        "preferred_term_id_str": [
+        
+        ],
+        "related_term_text": [
+        
+        ],
+        "related_term_id": [
+        
+        ],
+        "related_term_id_str": [
+        
+        ],
+        "unpreferred_term_text": [
+        
+        ],
+        "unpreferred_term_id": [
+        
+        ],
+        "unpreferred_term_id_str": [
+        
+        ],
+        "series_parent_text": [
+        
+        ],
+        "series_parent_id": [
+        
+        ],
+        "series_parent_id_str": [
+        
+        ],
+        "child_series_text": [
+        
+        ],
+        "child_series_id": [
+        
+        ],
+        "child_series_id_str": [
+        
+        ],
+        "collection_parent_text": [
+        
+        ],
+        "collection_parent_id": [
+        
+        ],
+        "collection_parent_id_str": [
+        
+        ],
+        "collection_root_text": [
+        
+        ],
+        "collection_root_id": [
+        
+        ],
+        "collection_root_id_str": [
+        
+        ],
+        "collection_mid_text": [
+        
+        ],
+        "collection_mid_id": [
+        
+        ],
+        "collection_mid_id_str": [
+        
+        ],
+        "ndha_rights": [
+        
+        ],
+        "ndha_rights_str": [
+        
+        ],
+        "fragments": [
+          {
+            "_id": "646acfc15e96825f7910389e",
+            "priority": 0,
+            "_type": "SupplejackApi::ApiRecord::RecordFragment",
+            "title": "Review of Anneke B. Mulder-Bakker (ed.) and Margot H. King and Hugh Feiss (trans.), Mary of Oignies: Mother of Salvation (Turnhout: Brepols, 2007)",
+            "source_id": "test",
+            "updated_at": "2023-05-22T21:56:48.641Z",
+            "created_at": "2023-05-22T02:13:21.162Z",
+            "dc_identifier": [
+              23029790
+            ],
+            "id": "646acfc15e96825f7910389e",
+            "authorities": [
+            
+            ],
+            "attachments": [
+            
+            ],
+            "locations": [
+            
+            ],
+            "thumbnail": null,
+            "large_thumbnail": null
+          }
+        ]
+      },
+      {
+        "id": "646acfc15e96825f791038a1",
+        "internal_identifier": "figshare_id:23029787",
+        "status": "active",
+        "record_type": 0,
+        "created_at": "2023-05-22T14:13:21.182+12:00",
+        "updated_at": "2023-05-22T14:13:21.187+12:00",
+        "record_id": 83448,
+        "concept_ids": [
+        
+        ],
+        "concept_ids_str": [
+        
+        ],
+        "title": "Review of Liz Herbert McAvoy (ed.), Rhetoric of the Anchorhold: Space, Place and Body within the Discourses of Enclosure (Cardiff: University of Wales Press, 2008)",
+        "alternate_title": [
+        
+        ],
+        "description": null,
+        "additional_description": [
+        
+        ],
+        "content_partner": [
+        
+        ],
+        "display_content_partner": null,
+        "collection_title": [
+        
+        ],
+        "collection": [
+        
+        ],
+        "attachment_name": "",
+        "lat_lng": [
+        
+        ],
+        "has_lat_lng": false,
+        "placename": [
+        
+        ],
+        "display_collection": null,
+        "primary_collection": [
+        
+        ],
+        "contributing_partner": [
+        
+        ],
+        "auto_tag": [
+        
+        ],
+        "category": [
+        
+        ],
+        "creator": [
+        
+        ],
+        "contributor": [
+        
+        ],
+        "copyright": [
+        
+        ],
+        "citation": [
+        
+        ],
+        "credit_creator": null,
+        "language": [
+        
+        ],
+        "provenance": null,
+        "publisher": [
+        
+        ],
+        "rights": null,
+        "usage": [
+        
+        ],
+        "source": [
+        
+        ],
+        "tag": [
+        
+        ],
+        "thesis_level": null,
+        "holding": [
+        
+        ],
+        "library_collection": [
+        
+        ],
+        "shelf_location": null,
+        "eprints_type": [
+        
+        ],
+        "fulltext": null,
+        "text": null,
+        "copy": "Review of Liz Herbert McAvoy (ed.), Rhetoric of the Anchorhold: Space, Place and Body within the Discourses of Enclosure (Cardiff: University of Wales Press, 2008) 23029787",
+        "has_version": [
+        
+        ],
+        "license": null,
+        "relation": [
+        
+        ],
+        "is_part_of": [
+        
+        ],
+        "is_replaced_by": "Unknown",
+        "replaces": "Unknown",
+        "is_required_by": null,
+        "is_version_of": null,
+        "table_of_contents": null,
+        "availability_id": null,
+        "availability_id_str": null,
+        "access_rights": null,
+        "dc_type": [
+        
+        ],
+        "dnz_type": "Unknown",
+        "display_date": null,
+        "format": [
+        
+        ],
+        "dc_identifier": [
+          23029787
+        ],
+        "is_natlib_record": null,
+        "is_catalog_record": "Unknown",
+        "is_commercial_use": null,
+        "date": [
+        
+        ],
+        "date_str": [
+        
+        ],
+        "sort_date": null,
+        "sort_date_str": null,
+        "syndication_date": null,
+        "syndication_date_str": null,
+        "published_date": [
+        
+        ],
+        "published_date_str": [
+        
+        ],
+        "year": [
+        
+        ],
+        "decade": [
+        
+        ],
+        "century": [
+        
+        ],
+        "landing_url": null,
+        "rights_url": [
+        
+        ],
+        "origin_url": null,
+        "metadata_url": null,
+        "object_url": null,
+        "atl_free_download": null,
+        "atl_physical_viewability": null,
+        "atl_purchasable": null,
+        "atl_purchasable_download": null,
+        "atl_location_code": null,
+        "atl_usage_code": null,
+        "anzsrc_code": null,
+        "marsden_code": [
+        
+        ],
+        "subject": [
+        
+        ],
+        "coverage": [
+        
+        ],
+        "autotag_events": [
+        
+        ],
+        "autotag_organisations": [
+        
+        ],
+        "autotag_people": [
+        
+        ],
+        "autotag_places": [
+        
+        ],
+        "online_child_count": null,
+        "online_child_count_str": null,
+        "child_count": null,
+        "child_count_str": null,
+        "tapuhi_root_id": null,
+        "physical_restrictions": null,
+        "thumbnail_url": null,
+        "large_thumbnail_url": null,
+        "source_provider_name": null,
+        "source_contributor_name": [
+        
+        ],
+        "source_website_name": null,
+        "source_url": "/records/83448/source",
+        "job_id": null,
+        "available_thumbnail": false,
+        "available_large_thumbnail": false,
+        "has_large_thumbnail_url": null,
+        "collection_any_id": [
+        
+        ],
+        "collection_any_id_str": [
+        
+        ],
+        "broad_related_authority_text": [
+        
+        ],
+        "broad_related_authority_id": [
+        
+        ],
+        "broad_related_authority_id_str": [
+        
+        ],
+        "iwihapu_authority_text": [
+        
+        ],
+        "iwihapu_authority_id": [
+        
+        ],
+        "iwihapu_authority_id_str": [
+        
+        ],
+        "name_authority_text": [
+        
+        ],
+        "name_authority_id": [
+        
+        ],
+        "name_authority_id_str": [
+        
+        ],
+        "place_authority_text": [
+        
+        ],
+        "place_authority_id": [
+        
+        ],
+        "place_authority_id_str": [
+        
+        ],
+        "recordtype_authority_text": [
+        
+        ],
+        "recordtype_authority_id": [
+        
+        ],
+        "recordtype_authority_id_str": [
+        
+        ],
+        "subject_authority_text": [
+        
+        ],
+        "subject_authority_id": [
+        
+        ],
+        "subject_authority_id_str": [
+        
+        ],
+        "imagetype_authority_text": [
+        
+        ],
+        "imagetype_authority_id": [
+        
+        ],
+        "imagetype_authority_id_str": [
+        
+        ],
+        "broader_term_text": [
+        
+        ],
+        "broader_term_id": [
+        
+        ],
+        "broader_term_id_str": [
+        
+        ],
+        "narrower_term_text": [
+        
+        ],
+        "narrower_term_id": [
+        
+        ],
+        "narrower_term_id_str": [
+        
+        ],
+        "preferred_term_text": [
+        
+        ],
+        "preferred_term_id": [
+        
+        ],
+        "preferred_term_id_str": [
+        
+        ],
+        "related_term_text": [
+        
+        ],
+        "related_term_id": [
+        
+        ],
+        "related_term_id_str": [
+        
+        ],
+        "unpreferred_term_text": [
+        
+        ],
+        "unpreferred_term_id": [
+        
+        ],
+        "unpreferred_term_id_str": [
+        
+        ],
+        "series_parent_text": [
+        
+        ],
+        "series_parent_id": [
+        
+        ],
+        "series_parent_id_str": [
+        
+        ],
+        "child_series_text": [
+        
+        ],
+        "child_series_id": [
+        
+        ],
+        "child_series_id_str": [
+        
+        ],
+        "collection_parent_text": [
+        
+        ],
+        "collection_parent_id": [
+        
+        ],
+        "collection_parent_id_str": [
+        
+        ],
+        "collection_root_text": [
+        
+        ],
+        "collection_root_id": [
+        
+        ],
+        "collection_root_id_str": [
+        
+        ],
+        "collection_mid_text": [
+        
+        ],
+        "collection_mid_id": [
+        
+        ],
+        "collection_mid_id_str": [
+        
+        ],
+        "ndha_rights": [
+        
+        ],
+        "ndha_rights_str": [
+        
+        ],
+        "fragments": [
+          {
+            "_id": "646acfc15e96825f791038a0",
+            "priority": 0,
+            "_type": "SupplejackApi::ApiRecord::RecordFragment",
+            "title": "Review of Liz Herbert McAvoy (ed.), Rhetoric of the Anchorhold: Space, Place and Body within the Discourses of Enclosure (Cardiff: University of Wales Press, 2008)",
+            "source_id": "test",
+            "updated_at": "2023-05-22T21:56:48.660Z",
+            "created_at": "2023-05-22T02:13:21.182Z",
+            "dc_identifier": [
+              23029787
+            ],
+            "id": "646acfc15e96825f791038a0",
+            "authorities": [
+            
+            ],
+            "attachments": [
+            
+            ],
+            "locations": [
+            
+            ],
+            "thumbnail": null,
+            "large_thumbnail": null
+          }
+        ]
+      },
+      {
+        "id": "646acfc15e96825f791038a3",
+        "internal_identifier": "figshare_id:23029784",
+        "status": "active",
+        "record_type": 0,
+        "created_at": "2023-05-22T14:13:21.202+12:00",
+        "updated_at": "2023-05-22T14:13:21.207+12:00",
+        "record_id": 83451,
+        "concept_ids": [
+        
+        ],
+        "concept_ids_str": [
+        
+        ],
+        "title": "Review of Emilia Jamroziak and Janet Burton (Eds), Religious and Laity in Western Europe 1000-1400: Interactions, Negotiation, and Power (Turnhout: Brepols, 2006)",
+        "alternate_title": [
+        
+        ],
+        "description": null,
+        "additional_description": [
+        
+        ],
+        "content_partner": [
+        
+        ],
+        "display_content_partner": null,
+        "collection_title": [
+        
+        ],
+        "collection": [
+        
+        ],
+        "attachment_name": "",
+        "lat_lng": [
+        
+        ],
+        "has_lat_lng": false,
+        "placename": [
+        
+        ],
+        "display_collection": null,
+        "primary_collection": [
+        
+        ],
+        "contributing_partner": [
+        
+        ],
+        "auto_tag": [
+        
+        ],
+        "category": [
+        
+        ],
+        "creator": [
+        
+        ],
+        "contributor": [
+        
+        ],
+        "copyright": [
+        
+        ],
+        "citation": [
+        
+        ],
+        "credit_creator": null,
+        "language": [
+        
+        ],
+        "provenance": null,
+        "publisher": [
+        
+        ],
+        "rights": null,
+        "usage": [
+        
+        ],
+        "source": [
+        
+        ],
+        "tag": [
+        
+        ],
+        "thesis_level": null,
+        "holding": [
+        
+        ],
+        "library_collection": [
+        
+        ],
+        "shelf_location": null,
+        "eprints_type": [
+        
+        ],
+        "fulltext": null,
+        "text": null,
+        "copy": "Review of Emilia Jamroziak and Janet Burton (Eds), Religious and Laity in Western Europe 1000-1400: Interactions, Negotiation, and Power (Turnhout: Brepols, 2006) 23029784",
+        "has_version": [
+        
+        ],
+        "license": null,
+        "relation": [
+        
+        ],
+        "is_part_of": [
+        
+        ],
+        "is_replaced_by": "Unknown",
+        "replaces": "Unknown",
+        "is_required_by": null,
+        "is_version_of": null,
+        "table_of_contents": null,
+        "availability_id": null,
+        "availability_id_str": null,
+        "access_rights": null,
+        "dc_type": [
+        
+        ],
+        "dnz_type": "Unknown",
+        "display_date": null,
+        "format": [
+        
+        ],
+        "dc_identifier": [
+          23029784
+        ],
+        "is_natlib_record": null,
+        "is_catalog_record": "Unknown",
+        "is_commercial_use": null,
+        "date": [
+        
+        ],
+        "date_str": [
+        
+        ],
+        "sort_date": null,
+        "sort_date_str": null,
+        "syndication_date": null,
+        "syndication_date_str": null,
+        "published_date": [
+        
+        ],
+        "published_date_str": [
+        
+        ],
+        "year": [
+        
+        ],
+        "decade": [
+        
+        ],
+        "century": [
+        
+        ],
+        "landing_url": null,
+        "rights_url": [
+        
+        ],
+        "origin_url": null,
+        "metadata_url": null,
+        "object_url": null,
+        "atl_free_download": null,
+        "atl_physical_viewability": null,
+        "atl_purchasable": null,
+        "atl_purchasable_download": null,
+        "atl_location_code": null,
+        "atl_usage_code": null,
+        "anzsrc_code": null,
+        "marsden_code": [
+        
+        ],
+        "subject": [
+        
+        ],
+        "coverage": [
+        
+        ],
+        "autotag_events": [
+        
+        ],
+        "autotag_organisations": [
+        
+        ],
+        "autotag_people": [
+        
+        ],
+        "autotag_places": [
+        
+        ],
+        "online_child_count": null,
+        "online_child_count_str": null,
+        "child_count": null,
+        "child_count_str": null,
+        "tapuhi_root_id": null,
+        "physical_restrictions": null,
+        "thumbnail_url": null,
+        "large_thumbnail_url": null,
+        "source_provider_name": null,
+        "source_contributor_name": [
+        
+        ],
+        "source_website_name": null,
+        "source_url": "/records/83451/source",
+        "job_id": null,
+        "available_thumbnail": false,
+        "available_large_thumbnail": false,
+        "has_large_thumbnail_url": null,
+        "collection_any_id": [
+        
+        ],
+        "collection_any_id_str": [
+        
+        ],
+        "broad_related_authority_text": [
+        
+        ],
+        "broad_related_authority_id": [
+        
+        ],
+        "broad_related_authority_id_str": [
+        
+        ],
+        "iwihapu_authority_text": [
+        
+        ],
+        "iwihapu_authority_id": [
+        
+        ],
+        "iwihapu_authority_id_str": [
+        
+        ],
+        "name_authority_text": [
+        
+        ],
+        "name_authority_id": [
+        
+        ],
+        "name_authority_id_str": [
+        
+        ],
+        "place_authority_text": [
+        
+        ],
+        "place_authority_id": [
+        
+        ],
+        "place_authority_id_str": [
+        
+        ],
+        "recordtype_authority_text": [
+        
+        ],
+        "recordtype_authority_id": [
+        
+        ],
+        "recordtype_authority_id_str": [
+        
+        ],
+        "subject_authority_text": [
+        
+        ],
+        "subject_authority_id": [
+        
+        ],
+        "subject_authority_id_str": [
+        
+        ],
+        "imagetype_authority_text": [
+        
+        ],
+        "imagetype_authority_id": [
+        
+        ],
+        "imagetype_authority_id_str": [
+        
+        ],
+        "broader_term_text": [
+        
+        ],
+        "broader_term_id": [
+        
+        ],
+        "broader_term_id_str": [
+        
+        ],
+        "narrower_term_text": [
+        
+        ],
+        "narrower_term_id": [
+        
+        ],
+        "narrower_term_id_str": [
+        
+        ],
+        "preferred_term_text": [
+        
+        ],
+        "preferred_term_id": [
+        
+        ],
+        "preferred_term_id_str": [
+        
+        ],
+        "related_term_text": [
+        
+        ],
+        "related_term_id": [
+        
+        ],
+        "related_term_id_str": [
+        
+        ],
+        "unpreferred_term_text": [
+        
+        ],
+        "unpreferred_term_id": [
+        
+        ],
+        "unpreferred_term_id_str": [
+        
+        ],
+        "series_parent_text": [
+        
+        ],
+        "series_parent_id": [
+        
+        ],
+        "series_parent_id_str": [
+        
+        ],
+        "child_series_text": [
+        
+        ],
+        "child_series_id": [
+        
+        ],
+        "child_series_id_str": [
+        
+        ],
+        "collection_parent_text": [
+        
+        ],
+        "collection_parent_id": [
+        
+        ],
+        "collection_parent_id_str": [
+        
+        ],
+        "collection_root_text": [
+        
+        ],
+        "collection_root_id": [
+        
+        ],
+        "collection_root_id_str": [
+        
+        ],
+        "collection_mid_text": [
+        
+        ],
+        "collection_mid_id": [
+        
+        ],
+        "collection_mid_id_str": [
+        
+        ],
+        "ndha_rights": [
+        
+        ],
+        "ndha_rights_str": [
+        
+        ],
+        "fragments": [
+          {
+            "_id": "646acfc15e96825f791038a2",
+            "priority": 0,
+            "_type": "SupplejackApi::ApiRecord::RecordFragment",
+            "title": "Review of Emilia Jamroziak and Janet Burton (Eds), Religious and Laity in Western Europe 1000-1400: Interactions, Negotiation, and Power (Turnhout: Brepols, 2006)",
+            "source_id": "test",
+            "updated_at": "2023-05-22T21:56:48.675Z",
+            "created_at": "2023-05-22T02:13:21.201Z",
+            "dc_identifier": [
+              23029784
+            ],
+            "id": "646acfc15e96825f791038a2",
+            "authorities": [
+            
+            ],
+            "attachments": [
+            
+            ],
+            "locations": [
+            
+            ],
+            "thumbnail": null,
+            "large_thumbnail": null
+          }
+        ]
+      },
+      {
+        "id": "646acfc15e96825f791038a5",
+        "internal_identifier": "figshare_id:23029733",
+        "status": "active",
+        "record_type": 0,
+        "created_at": "2023-05-22T14:13:21.221+12:00",
+        "updated_at": "2023-05-22T14:13:21.226+12:00",
+        "record_id": 83454,
+        "concept_ids": [
+        
+        ],
+        "concept_ids_str": [
+        
+        ],
+        "title": "Reciprocal smiling in negative schizophrenia",
+        "alternate_title": [
+        
+        ],
+        "description": null,
+        "additional_description": [
+        
+        ],
+        "content_partner": [
+        
+        ],
+        "display_content_partner": null,
+        "collection_title": [
+        
+        ],
+        "collection": [
+        
+        ],
+        "attachment_name": "",
+        "lat_lng": [
+        
+        ],
+        "has_lat_lng": false,
+        "placename": [
+        
+        ],
+        "display_collection": null,
+        "primary_collection": [
+        
+        ],
+        "contributing_partner": [
+        
+        ],
+        "auto_tag": [
+        
+        ],
+        "category": [
+        
+        ],
+        "creator": [
+        
+        ],
+        "contributor": [
+        
+        ],
+        "copyright": [
+        
+        ],
+        "citation": [
+        
+        ],
+        "credit_creator": null,
+        "language": [
+        
+        ],
+        "provenance": null,
+        "publisher": [
+        
+        ],
+        "rights": null,
+        "usage": [
+        
+        ],
+        "source": [
+        
+        ],
+        "tag": [
+        
+        ],
+        "thesis_level": null,
+        "holding": [
+        
+        ],
+        "library_collection": [
+        
+        ],
+        "shelf_location": null,
+        "eprints_type": [
+        
+        ],
+        "fulltext": null,
+        "text": null,
+        "copy": "Reciprocal smiling in negative schizophrenia 23029733",
+        "has_version": [
+        
+        ],
+        "license": null,
+        "relation": [
+        
+        ],
+        "is_part_of": [
+        
+        ],
+        "is_replaced_by": "Unknown",
+        "replaces": "Unknown",
+        "is_required_by": null,
+        "is_version_of": null,
+        "table_of_contents": null,
+        "availability_id": null,
+        "availability_id_str": null,
+        "access_rights": null,
+        "dc_type": [
+        
+        ],
+        "dnz_type": "Unknown",
+        "display_date": null,
+        "format": [
+        
+        ],
+        "dc_identifier": [
+          23029733
+        ],
+        "is_natlib_record": null,
+        "is_catalog_record": "Unknown",
+        "is_commercial_use": null,
+        "date": [
+        
+        ],
+        "date_str": [
+        
+        ],
+        "sort_date": null,
+        "sort_date_str": null,
+        "syndication_date": null,
+        "syndication_date_str": null,
+        "published_date": [
+        
+        ],
+        "published_date_str": [
+        
+        ],
+        "year": [
+        
+        ],
+        "decade": [
+        
+        ],
+        "century": [
+        
+        ],
+        "landing_url": null,
+        "rights_url": [
+        
+        ],
+        "origin_url": null,
+        "metadata_url": null,
+        "object_url": null,
+        "atl_free_download": null,
+        "atl_physical_viewability": null,
+        "atl_purchasable": null,
+        "atl_purchasable_download": null,
+        "atl_location_code": null,
+        "atl_usage_code": null,
+        "anzsrc_code": null,
+        "marsden_code": [
+        
+        ],
+        "subject": [
+        
+        ],
+        "coverage": [
+        
+        ],
+        "autotag_events": [
+        
+        ],
+        "autotag_organisations": [
+        
+        ],
+        "autotag_people": [
+        
+        ],
+        "autotag_places": [
+        
+        ],
+        "online_child_count": null,
+        "online_child_count_str": null,
+        "child_count": null,
+        "child_count_str": null,
+        "tapuhi_root_id": null,
+        "physical_restrictions": null,
+        "thumbnail_url": null,
+        "large_thumbnail_url": null,
+        "source_provider_name": null,
+        "source_contributor_name": [
+        
+        ],
+        "source_website_name": null,
+        "source_url": "/records/83454/source",
+        "job_id": null,
+        "available_thumbnail": false,
+        "available_large_thumbnail": false,
+        "has_large_thumbnail_url": null,
+        "collection_any_id": [
+        
+        ],
+        "collection_any_id_str": [
+        
+        ],
+        "broad_related_authority_text": [
+        
+        ],
+        "broad_related_authority_id": [
+        
+        ],
+        "broad_related_authority_id_str": [
+        
+        ],
+        "iwihapu_authority_text": [
+        
+        ],
+        "iwihapu_authority_id": [
+        
+        ],
+        "iwihapu_authority_id_str": [
+        
+        ],
+        "name_authority_text": [
+        
+        ],
+        "name_authority_id": [
+        
+        ],
+        "name_authority_id_str": [
+        
+        ],
+        "place_authority_text": [
+        
+        ],
+        "place_authority_id": [
+        
+        ],
+        "place_authority_id_str": [
+        
+        ],
+        "recordtype_authority_text": [
+        
+        ],
+        "recordtype_authority_id": [
+        
+        ],
+        "recordtype_authority_id_str": [
+        
+        ],
+        "subject_authority_text": [
+        
+        ],
+        "subject_authority_id": [
+        
+        ],
+        "subject_authority_id_str": [
+        
+        ],
+        "imagetype_authority_text": [
+        
+        ],
+        "imagetype_authority_id": [
+        
+        ],
+        "imagetype_authority_id_str": [
+        
+        ],
+        "broader_term_text": [
+        
+        ],
+        "broader_term_id": [
+        
+        ],
+        "broader_term_id_str": [
+        
+        ],
+        "narrower_term_text": [
+        
+        ],
+        "narrower_term_id": [
+        
+        ],
+        "narrower_term_id_str": [
+        
+        ],
+        "preferred_term_text": [
+        
+        ],
+        "preferred_term_id": [
+        
+        ],
+        "preferred_term_id_str": [
+        
+        ],
+        "related_term_text": [
+        
+        ],
+        "related_term_id": [
+        
+        ],
+        "related_term_id_str": [
+        
+        ],
+        "unpreferred_term_text": [
+        
+        ],
+        "unpreferred_term_id": [
+        
+        ],
+        "unpreferred_term_id_str": [
+        
+        ],
+        "series_parent_text": [
+        
+        ],
+        "series_parent_id": [
+        
+        ],
+        "series_parent_id_str": [
+        
+        ],
+        "child_series_text": [
+        
+        ],
+        "child_series_id": [
+        
+        ],
+        "child_series_id_str": [
+        
+        ],
+        "collection_parent_text": [
+        
+        ],
+        "collection_parent_id": [
+        
+        ],
+        "collection_parent_id_str": [
+        
+        ],
+        "collection_root_text": [
+        
+        ],
+        "collection_root_id": [
+        
+        ],
+        "collection_root_id_str": [
+        
+        ],
+        "collection_mid_text": [
+        
+        ],
+        "collection_mid_id": [
+        
+        ],
+        "collection_mid_id_str": [
+        
+        ],
+        "ndha_rights": [
+        
+        ],
+        "ndha_rights_str": [
+        
+        ],
+        "fragments": [
+          {
+            "_id": "646acfc15e96825f791038a4",
+            "priority": 0,
+            "_type": "SupplejackApi::ApiRecord::RecordFragment",
+            "title": "Reciprocal smiling in negative schizophrenia",
+            "source_id": "test",
+            "updated_at": "2023-05-22T21:56:48.690Z",
+            "created_at": "2023-05-22T02:13:21.220Z",
+            "dc_identifier": [
+              23029733
+            ],
+            "id": "646acfc15e96825f791038a4",
+            "authorities": [
+            
+            ],
+            "attachments": [
+            
+            ],
+            "locations": [
+            
+            ],
+            "thumbnail": null,
+            "large_thumbnail": null
+          }
+        ]
+      },
+      {
+        "id": "646acfc15e96825f791038a7",
+        "internal_identifier": "figshare_id:23029685",
+        "status": "active",
+        "record_type": 0,
+        "created_at": "2023-05-22T14:13:21.241+12:00",
+        "updated_at": "2023-05-22T14:13:21.248+12:00",
+        "record_id": 83457,
+        "concept_ids": [
+        
+        ],
+        "concept_ids_str": [
+        
+        ],
+        "title": "R.S. Hill, The Iron Hand in the Velvet Glove: Modernisation of Policing in NZ 1886-1917",
+        "alternate_title": [
+        
+        ],
+        "description": null,
+        "additional_description": [
+        
+        ],
+        "content_partner": [
+        
+        ],
+        "display_content_partner": null,
+        "collection_title": [
+        
+        ],
+        "collection": [
+        
+        ],
+        "attachment_name": "",
+        "lat_lng": [
+        
+        ],
+        "has_lat_lng": false,
+        "placename": [
+        
+        ],
+        "display_collection": null,
+        "primary_collection": [
+        
+        ],
+        "contributing_partner": [
+        
+        ],
+        "auto_tag": [
+        
+        ],
+        "category": [
+        
+        ],
+        "creator": [
+        
+        ],
+        "contributor": [
+        
+        ],
+        "copyright": [
+        
+        ],
+        "citation": [
+        
+        ],
+        "credit_creator": null,
+        "language": [
+        
+        ],
+        "provenance": null,
+        "publisher": [
+        
+        ],
+        "rights": null,
+        "usage": [
+        
+        ],
+        "source": [
+        
+        ],
+        "tag": [
+        
+        ],
+        "thesis_level": null,
+        "holding": [
+        
+        ],
+        "library_collection": [
+        
+        ],
+        "shelf_location": null,
+        "eprints_type": [
+        
+        ],
+        "fulltext": null,
+        "text": null,
+        "copy": "R.S. Hill, The Iron Hand in the Velvet Glove: Modernisation of Policing in NZ 1886-1917 23029685",
+        "has_version": [
+        
+        ],
+        "license": null,
+        "relation": [
+        
+        ],
+        "is_part_of": [
+        
+        ],
+        "is_replaced_by": "Unknown",
+        "replaces": "Unknown",
+        "is_required_by": null,
+        "is_version_of": null,
+        "table_of_contents": null,
+        "availability_id": null,
+        "availability_id_str": null,
+        "access_rights": null,
+        "dc_type": [
+        
+        ],
+        "dnz_type": "Unknown",
+        "display_date": null,
+        "format": [
+        
+        ],
+        "dc_identifier": [
+          23029685
+        ],
+        "is_natlib_record": null,
+        "is_catalog_record": "Unknown",
+        "is_commercial_use": null,
+        "date": [
+        
+        ],
+        "date_str": [
+        
+        ],
+        "sort_date": null,
+        "sort_date_str": null,
+        "syndication_date": null,
+        "syndication_date_str": null,
+        "published_date": [
+        
+        ],
+        "published_date_str": [
+        
+        ],
+        "year": [
+        
+        ],
+        "decade": [
+        
+        ],
+        "century": [
+        
+        ],
+        "landing_url": null,
+        "rights_url": [
+        
+        ],
+        "origin_url": null,
+        "metadata_url": null,
+        "object_url": null,
+        "atl_free_download": null,
+        "atl_physical_viewability": null,
+        "atl_purchasable": null,
+        "atl_purchasable_download": null,
+        "atl_location_code": null,
+        "atl_usage_code": null,
+        "anzsrc_code": null,
+        "marsden_code": [
+        
+        ],
+        "subject": [
+        
+        ],
+        "coverage": [
+        
+        ],
+        "autotag_events": [
+        
+        ],
+        "autotag_organisations": [
+        
+        ],
+        "autotag_people": [
+        
+        ],
+        "autotag_places": [
+        
+        ],
+        "online_child_count": null,
+        "online_child_count_str": null,
+        "child_count": null,
+        "child_count_str": null,
+        "tapuhi_root_id": null,
+        "physical_restrictions": null,
+        "thumbnail_url": null,
+        "large_thumbnail_url": null,
+        "source_provider_name": null,
+        "source_contributor_name": [
+        
+        ],
+        "source_website_name": null,
+        "source_url": "/records/83457/source",
+        "job_id": null,
+        "available_thumbnail": false,
+        "available_large_thumbnail": false,
+        "has_large_thumbnail_url": null,
+        "collection_any_id": [
+        
+        ],
+        "collection_any_id_str": [
+        
+        ],
+        "broad_related_authority_text": [
+        
+        ],
+        "broad_related_authority_id": [
+        
+        ],
+        "broad_related_authority_id_str": [
+        
+        ],
+        "iwihapu_authority_text": [
+        
+        ],
+        "iwihapu_authority_id": [
+        
+        ],
+        "iwihapu_authority_id_str": [
+        
+        ],
+        "name_authority_text": [
+        
+        ],
+        "name_authority_id": [
+        
+        ],
+        "name_authority_id_str": [
+        
+        ],
+        "place_authority_text": [
+        
+        ],
+        "place_authority_id": [
+        
+        ],
+        "place_authority_id_str": [
+        
+        ],
+        "recordtype_authority_text": [
+        
+        ],
+        "recordtype_authority_id": [
+        
+        ],
+        "recordtype_authority_id_str": [
+        
+        ],
+        "subject_authority_text": [
+        
+        ],
+        "subject_authority_id": [
+        
+        ],
+        "subject_authority_id_str": [
+        
+        ],
+        "imagetype_authority_text": [
+        
+        ],
+        "imagetype_authority_id": [
+        
+        ],
+        "imagetype_authority_id_str": [
+        
+        ],
+        "broader_term_text": [
+        
+        ],
+        "broader_term_id": [
+        
+        ],
+        "broader_term_id_str": [
+        
+        ],
+        "narrower_term_text": [
+        
+        ],
+        "narrower_term_id": [
+        
+        ],
+        "narrower_term_id_str": [
+        
+        ],
+        "preferred_term_text": [
+        
+        ],
+        "preferred_term_id": [
+        
+        ],
+        "preferred_term_id_str": [
+        
+        ],
+        "related_term_text": [
+        
+        ],
+        "related_term_id": [
+        
+        ],
+        "related_term_id_str": [
+        
+        ],
+        "unpreferred_term_text": [
+        
+        ],
+        "unpreferred_term_id": [
+        
+        ],
+        "unpreferred_term_id_str": [
+        
+        ],
+        "series_parent_text": [
+        
+        ],
+        "series_parent_id": [
+        
+        ],
+        "series_parent_id_str": [
+        
+        ],
+        "child_series_text": [
+        
+        ],
+        "child_series_id": [
+        
+        ],
+        "child_series_id_str": [
+        
+        ],
+        "collection_parent_text": [
+        
+        ],
+        "collection_parent_id": [
+        
+        ],
+        "collection_parent_id_str": [
+        
+        ],
+        "collection_root_text": [
+        
+        ],
+        "collection_root_id": [
+        
+        ],
+        "collection_root_id_str": [
+        
+        ],
+        "collection_mid_text": [
+        
+        ],
+        "collection_mid_id": [
+        
+        ],
+        "collection_mid_id_str": [
+        
+        ],
+        "ndha_rights": [
+        
+        ],
+        "ndha_rights_str": [
+        
+        ],
+        "fragments": [
+          {
+            "_id": "646acfc15e96825f791038a6",
+            "priority": 0,
+            "_type": "SupplejackApi::ApiRecord::RecordFragment",
+            "title": "R.S. Hill, The Iron Hand in the Velvet Glove: Modernisation of Policing in NZ 1886-1917",
+            "source_id": "test",
+            "updated_at": "2023-05-22T21:56:48.704Z",
+            "created_at": "2023-05-22T02:13:21.240Z",
+            "dc_identifier": [
+              23029685
+            ],
+            "id": "646acfc15e96825f791038a6",
+            "authorities": [
+            
+            ],
+            "attachments": [
+            
+            ],
+            "locations": [
+            
+            ],
+            "thumbnail": null,
+            "large_thumbnail": null
+          }
+        ]
+      },
+      {
+        "id": "646acfc15e96825f791038a9",
+        "internal_identifier": "figshare_id:23029673",
+        "status": "active",
+        "record_type": 0,
+        "created_at": "2023-05-22T14:13:21.264+12:00",
+        "updated_at": "2023-05-22T14:13:21.269+12:00",
+        "record_id": 83460,
+        "concept_ids": [
+        
+        ],
+        "concept_ids_str": [
+        
+        ],
+        "title": "W. Coster, Baptism and Spiritual Kinship in Early Modern England",
+        "alternate_title": [
+        
+        ],
+        "description": null,
+        "additional_description": [
+        
+        ],
+        "content_partner": [
+        
+        ],
+        "display_content_partner": null,
+        "collection_title": [
+        
+        ],
+        "collection": [
+        
+        ],
+        "attachment_name": "",
+        "lat_lng": [
+        
+        ],
+        "has_lat_lng": false,
+        "placename": [
+        
+        ],
+        "display_collection": null,
+        "primary_collection": [
+        
+        ],
+        "contributing_partner": [
+        
+        ],
+        "auto_tag": [
+        
+        ],
+        "category": [
+        
+        ],
+        "creator": [
+        
+        ],
+        "contributor": [
+        
+        ],
+        "copyright": [
+        
+        ],
+        "citation": [
+        
+        ],
+        "credit_creator": null,
+        "language": [
+        
+        ],
+        "provenance": null,
+        "publisher": [
+        
+        ],
+        "rights": null,
+        "usage": [
+        
+        ],
+        "source": [
+        
+        ],
+        "tag": [
+        
+        ],
+        "thesis_level": null,
+        "holding": [
+        
+        ],
+        "library_collection": [
+        
+        ],
+        "shelf_location": null,
+        "eprints_type": [
+        
+        ],
+        "fulltext": null,
+        "text": null,
+        "copy": "W. Coster, Baptism and Spiritual Kinship in Early Modern England 23029673",
+        "has_version": [
+        
+        ],
+        "license": null,
+        "relation": [
+        
+        ],
+        "is_part_of": [
+        
+        ],
+        "is_replaced_by": "Unknown",
+        "replaces": "Unknown",
+        "is_required_by": null,
+        "is_version_of": null,
+        "table_of_contents": null,
+        "availability_id": null,
+        "availability_id_str": null,
+        "access_rights": null,
+        "dc_type": [
+        
+        ],
+        "dnz_type": "Unknown",
+        "display_date": null,
+        "format": [
+        
+        ],
+        "dc_identifier": [
+          23029673
+        ],
+        "is_natlib_record": null,
+        "is_catalog_record": "Unknown",
+        "is_commercial_use": null,
+        "date": [
+        
+        ],
+        "date_str": [
+        
+        ],
+        "sort_date": null,
+        "sort_date_str": null,
+        "syndication_date": null,
+        "syndication_date_str": null,
+        "published_date": [
+        
+        ],
+        "published_date_str": [
+        
+        ],
+        "year": [
+        
+        ],
+        "decade": [
+        
+        ],
+        "century": [
+        
+        ],
+        "landing_url": null,
+        "rights_url": [
+        
+        ],
+        "origin_url": null,
+        "metadata_url": null,
+        "object_url": null,
+        "atl_free_download": null,
+        "atl_physical_viewability": null,
+        "atl_purchasable": null,
+        "atl_purchasable_download": null,
+        "atl_location_code": null,
+        "atl_usage_code": null,
+        "anzsrc_code": null,
+        "marsden_code": [
+        
+        ],
+        "subject": [
+        
+        ],
+        "coverage": [
+        
+        ],
+        "autotag_events": [
+        
+        ],
+        "autotag_organisations": [
+        
+        ],
+        "autotag_people": [
+        
+        ],
+        "autotag_places": [
+        
+        ],
+        "online_child_count": null,
+        "online_child_count_str": null,
+        "child_count": null,
+        "child_count_str": null,
+        "tapuhi_root_id": null,
+        "physical_restrictions": null,
+        "thumbnail_url": null,
+        "large_thumbnail_url": null,
+        "source_provider_name": null,
+        "source_contributor_name": [
+        
+        ],
+        "source_website_name": null,
+        "source_url": "/records/83460/source",
+        "job_id": null,
+        "available_thumbnail": false,
+        "available_large_thumbnail": false,
+        "has_large_thumbnail_url": null,
+        "collection_any_id": [
+        
+        ],
+        "collection_any_id_str": [
+        
+        ],
+        "broad_related_authority_text": [
+        
+        ],
+        "broad_related_authority_id": [
+        
+        ],
+        "broad_related_authority_id_str": [
+        
+        ],
+        "iwihapu_authority_text": [
+        
+        ],
+        "iwihapu_authority_id": [
+        
+        ],
+        "iwihapu_authority_id_str": [
+        
+        ],
+        "name_authority_text": [
+        
+        ],
+        "name_authority_id": [
+        
+        ],
+        "name_authority_id_str": [
+        
+        ],
+        "place_authority_text": [
+        
+        ],
+        "place_authority_id": [
+        
+        ],
+        "place_authority_id_str": [
+        
+        ],
+        "recordtype_authority_text": [
+        
+        ],
+        "recordtype_authority_id": [
+        
+        ],
+        "recordtype_authority_id_str": [
+        
+        ],
+        "subject_authority_text": [
+        
+        ],
+        "subject_authority_id": [
+        
+        ],
+        "subject_authority_id_str": [
+        
+        ],
+        "imagetype_authority_text": [
+        
+        ],
+        "imagetype_authority_id": [
+        
+        ],
+        "imagetype_authority_id_str": [
+        
+        ],
+        "broader_term_text": [
+        
+        ],
+        "broader_term_id": [
+        
+        ],
+        "broader_term_id_str": [
+        
+        ],
+        "narrower_term_text": [
+        
+        ],
+        "narrower_term_id": [
+        
+        ],
+        "narrower_term_id_str": [
+        
+        ],
+        "preferred_term_text": [
+        
+        ],
+        "preferred_term_id": [
+        
+        ],
+        "preferred_term_id_str": [
+        
+        ],
+        "related_term_text": [
+        
+        ],
+        "related_term_id": [
+        
+        ],
+        "related_term_id_str": [
+        
+        ],
+        "unpreferred_term_text": [
+        
+        ],
+        "unpreferred_term_id": [
+        
+        ],
+        "unpreferred_term_id_str": [
+        
+        ],
+        "series_parent_text": [
+        
+        ],
+        "series_parent_id": [
+        
+        ],
+        "series_parent_id_str": [
+        
+        ],
+        "child_series_text": [
+        
+        ],
+        "child_series_id": [
+        
+        ],
+        "child_series_id_str": [
+        
+        ],
+        "collection_parent_text": [
+        
+        ],
+        "collection_parent_id": [
+        
+        ],
+        "collection_parent_id_str": [
+        
+        ],
+        "collection_root_text": [
+        
+        ],
+        "collection_root_id": [
+        
+        ],
+        "collection_root_id_str": [
+        
+        ],
+        "collection_mid_text": [
+        
+        ],
+        "collection_mid_id": [
+        
+        ],
+        "collection_mid_id_str": [
+        
+        ],
+        "ndha_rights": [
+        
+        ],
+        "ndha_rights_str": [
+        
+        ],
+        "fragments": [
+          {
+            "_id": "646acfc15e96825f791038a8",
+            "priority": 0,
+            "_type": "SupplejackApi::ApiRecord::RecordFragment",
+            "title": "W. Coster, Baptism and Spiritual Kinship in Early Modern England",
+            "source_id": "test",
+            "updated_at": "2023-05-22T21:56:48.719Z",
+            "created_at": "2023-05-22T02:13:21.263Z",
+            "dc_identifier": [
+              23029673
+            ],
+            "id": "646acfc15e96825f791038a8",
+            "authorities": [
+            
+            ],
+            "attachments": [
+            
+            ],
+            "locations": [
+            
+            ],
+            "thumbnail": null,
+            "large_thumbnail": null
+          }
+        ]
+      },
+      {
+        "id": "646acfc15e96825f791038ab",
+        "internal_identifier": "figshare_id:23029661",
+        "status": "active",
+        "record_type": 0,
+        "created_at": "2023-05-22T14:13:21.283+12:00",
+        "updated_at": "2023-05-22T14:13:21.289+12:00",
+        "record_id": 83463,
+        "concept_ids": [
+        
+        ],
+        "concept_ids_str": [
+        
+        ],
+        "title": "Women and Urban Life in Eighteenth-Century England: 'On the Town' (review)",
+        "alternate_title": [
+        
+        ],
+        "description": null,
+        "additional_description": [
+        
+        ],
+        "content_partner": [
+        
+        ],
+        "display_content_partner": null,
+        "collection_title": [
+        
+        ],
+        "collection": [
+        
+        ],
+        "attachment_name": "",
+        "lat_lng": [
+        
+        ],
+        "has_lat_lng": false,
+        "placename": [
+        
+        ],
+        "display_collection": null,
+        "primary_collection": [
+        
+        ],
+        "contributing_partner": [
+        
+        ],
+        "auto_tag": [
+        
+        ],
+        "category": [
+        
+        ],
+        "creator": [
+        
+        ],
+        "contributor": [
+        
+        ],
+        "copyright": [
+        
+        ],
+        "citation": [
+        
+        ],
+        "credit_creator": null,
+        "language": [
+        
+        ],
+        "provenance": null,
+        "publisher": [
+        
+        ],
+        "rights": null,
+        "usage": [
+        
+        ],
+        "source": [
+        
+        ],
+        "tag": [
+        
+        ],
+        "thesis_level": null,
+        "holding": [
+        
+        ],
+        "library_collection": [
+        
+        ],
+        "shelf_location": null,
+        "eprints_type": [
+        
+        ],
+        "fulltext": null,
+        "text": null,
+        "copy": "Women and Urban Life in Eighteenth-Century England: 'On the Town' (review) 23029661",
+        "has_version": [
+        
+        ],
+        "license": null,
+        "relation": [
+        
+        ],
+        "is_part_of": [
+        
+        ],
+        "is_replaced_by": "Unknown",
+        "replaces": "Unknown",
+        "is_required_by": null,
+        "is_version_of": null,
+        "table_of_contents": null,
+        "availability_id": null,
+        "availability_id_str": null,
+        "access_rights": null,
+        "dc_type": [
+        
+        ],
+        "dnz_type": "Unknown",
+        "display_date": null,
+        "format": [
+        
+        ],
+        "dc_identifier": [
+          23029661
+        ],
+        "is_natlib_record": null,
+        "is_catalog_record": "Unknown",
+        "is_commercial_use": null,
+        "date": [
+        
+        ],
+        "date_str": [
+        
+        ],
+        "sort_date": null,
+        "sort_date_str": null,
+        "syndication_date": null,
+        "syndication_date_str": null,
+        "published_date": [
+        
+        ],
+        "published_date_str": [
+        
+        ],
+        "year": [
+        
+        ],
+        "decade": [
+        
+        ],
+        "century": [
+        
+        ],
+        "landing_url": null,
+        "rights_url": [
+        
+        ],
+        "origin_url": null,
+        "metadata_url": null,
+        "object_url": null,
+        "atl_free_download": null,
+        "atl_physical_viewability": null,
+        "atl_purchasable": null,
+        "atl_purchasable_download": null,
+        "atl_location_code": null,
+        "atl_usage_code": null,
+        "anzsrc_code": null,
+        "marsden_code": [
+        
+        ],
+        "subject": [
+        
+        ],
+        "coverage": [
+        
+        ],
+        "autotag_events": [
+        
+        ],
+        "autotag_organisations": [
+        
+        ],
+        "autotag_people": [
+        
+        ],
+        "autotag_places": [
+        
+        ],
+        "online_child_count": null,
+        "online_child_count_str": null,
+        "child_count": null,
+        "child_count_str": null,
+        "tapuhi_root_id": null,
+        "physical_restrictions": null,
+        "thumbnail_url": null,
+        "large_thumbnail_url": null,
+        "source_provider_name": null,
+        "source_contributor_name": [
+        
+        ],
+        "source_website_name": null,
+        "source_url": "/records/83463/source",
+        "job_id": null,
+        "available_thumbnail": false,
+        "available_large_thumbnail": false,
+        "has_large_thumbnail_url": null,
+        "collection_any_id": [
+        
+        ],
+        "collection_any_id_str": [
+        
+        ],
+        "broad_related_authority_text": [
+        
+        ],
+        "broad_related_authority_id": [
+        
+        ],
+        "broad_related_authority_id_str": [
+        
+        ],
+        "iwihapu_authority_text": [
+        
+        ],
+        "iwihapu_authority_id": [
+        
+        ],
+        "iwihapu_authority_id_str": [
+        
+        ],
+        "name_authority_text": [
+        
+        ],
+        "name_authority_id": [
+        
+        ],
+        "name_authority_id_str": [
+        
+        ],
+        "place_authority_text": [
+        
+        ],
+        "place_authority_id": [
+        
+        ],
+        "place_authority_id_str": [
+        
+        ],
+        "recordtype_authority_text": [
+        
+        ],
+        "recordtype_authority_id": [
+        
+        ],
+        "recordtype_authority_id_str": [
+        
+        ],
+        "subject_authority_text": [
+        
+        ],
+        "subject_authority_id": [
+        
+        ],
+        "subject_authority_id_str": [
+        
+        ],
+        "imagetype_authority_text": [
+        
+        ],
+        "imagetype_authority_id": [
+        
+        ],
+        "imagetype_authority_id_str": [
+        
+        ],
+        "broader_term_text": [
+        
+        ],
+        "broader_term_id": [
+        
+        ],
+        "broader_term_id_str": [
+        
+        ],
+        "narrower_term_text": [
+        
+        ],
+        "narrower_term_id": [
+        
+        ],
+        "narrower_term_id_str": [
+        
+        ],
+        "preferred_term_text": [
+        
+        ],
+        "preferred_term_id": [
+        
+        ],
+        "preferred_term_id_str": [
+        
+        ],
+        "related_term_text": [
+        
+        ],
+        "related_term_id": [
+        
+        ],
+        "related_term_id_str": [
+        
+        ],
+        "unpreferred_term_text": [
+        
+        ],
+        "unpreferred_term_id": [
+        
+        ],
+        "unpreferred_term_id_str": [
+        
+        ],
+        "series_parent_text": [
+        
+        ],
+        "series_parent_id": [
+        
+        ],
+        "series_parent_id_str": [
+        
+        ],
+        "child_series_text": [
+        
+        ],
+        "child_series_id": [
+        
+        ],
+        "child_series_id_str": [
+        
+        ],
+        "collection_parent_text": [
+        
+        ],
+        "collection_parent_id": [
+        
+        ],
+        "collection_parent_id_str": [
+        
+        ],
+        "collection_root_text": [
+        
+        ],
+        "collection_root_id": [
+        
+        ],
+        "collection_root_id_str": [
+        
+        ],
+        "collection_mid_text": [
+        
+        ],
+        "collection_mid_id": [
+        
+        ],
+        "collection_mid_id_str": [
+        
+        ],
+        "ndha_rights": [
+        
+        ],
+        "ndha_rights_str": [
+        
+        ],
+        "fragments": [
+          {
+            "_id": "646acfc15e96825f791038aa",
+            "priority": 0,
+            "_type": "SupplejackApi::ApiRecord::RecordFragment",
+            "title": "Women and Urban Life in Eighteenth-Century England: 'On the Town' (review)",
+            "source_id": "test",
+            "updated_at": "2023-05-22T21:56:48.733Z",
+            "created_at": "2023-05-22T02:13:21.283Z",
+            "dc_identifier": [
+              23029661
+            ],
+            "id": "646acfc15e96825f791038aa",
+            "authorities": [
+            
+            ],
+            "attachments": [
+            
+            ],
+            "locations": [
+            
+            ],
+            "thumbnail": null,
+            "large_thumbnail": null
+          }
+        ]
+      },
+      {
+        "id": "646acfc15e96825f791038ad",
+        "internal_identifier": "figshare_id:23029634",
+        "status": "active",
+        "record_type": 0,
+        "created_at": "2023-05-22T14:13:21.306+12:00",
+        "updated_at": "2023-05-22T14:13:21.311+12:00",
+        "record_id": 83466,
+        "concept_ids": [
+        
+        ],
+        "concept_ids_str": [
+        
+        ],
+        "title": "Review of Peter Coss and Maurice Keen, eds. Heraldry, Pageantry and Social Display in Medieval England (2002)",
+        "alternate_title": [
+        
+        ],
+        "description": null,
+        "additional_description": [
+        
+        ],
+        "content_partner": [
+        
+        ],
+        "display_content_partner": null,
+        "collection_title": [
+        
+        ],
+        "collection": [
+        
+        ],
+        "attachment_name": "",
+        "lat_lng": [
+        
+        ],
+        "has_lat_lng": false,
+        "placename": [
+        
+        ],
+        "display_collection": null,
+        "primary_collection": [
+        
+        ],
+        "contributing_partner": [
+        
+        ],
+        "auto_tag": [
+        
+        ],
+        "category": [
+        
+        ],
+        "creator": [
+        
+        ],
+        "contributor": [
+        
+        ],
+        "copyright": [
+        
+        ],
+        "citation": [
+        
+        ],
+        "credit_creator": null,
+        "language": [
+        
+        ],
+        "provenance": null,
+        "publisher": [
+        
+        ],
+        "rights": null,
+        "usage": [
+        
+        ],
+        "source": [
+        
+        ],
+        "tag": [
+        
+        ],
+        "thesis_level": null,
+        "holding": [
+        
+        ],
+        "library_collection": [
+        
+        ],
+        "shelf_location": null,
+        "eprints_type": [
+        
+        ],
+        "fulltext": null,
+        "text": null,
+        "copy": "Review of Peter Coss and Maurice Keen, eds. Heraldry, Pageantry and Social Display in Medieval England (2002) 23029634",
+        "has_version": [
+        
+        ],
+        "license": null,
+        "relation": [
+        
+        ],
+        "is_part_of": [
+        
+        ],
+        "is_replaced_by": "Unknown",
+        "replaces": "Unknown",
+        "is_required_by": null,
+        "is_version_of": null,
+        "table_of_contents": null,
+        "availability_id": null,
+        "availability_id_str": null,
+        "access_rights": null,
+        "dc_type": [
+        
+        ],
+        "dnz_type": "Unknown",
+        "display_date": null,
+        "format": [
+        
+        ],
+        "dc_identifier": [
+          23029634
+        ],
+        "is_natlib_record": null,
+        "is_catalog_record": "Unknown",
+        "is_commercial_use": null,
+        "date": [
+        
+        ],
+        "date_str": [
+        
+        ],
+        "sort_date": null,
+        "sort_date_str": null,
+        "syndication_date": null,
+        "syndication_date_str": null,
+        "published_date": [
+        
+        ],
+        "published_date_str": [
+        
+        ],
+        "year": [
+        
+        ],
+        "decade": [
+        
+        ],
+        "century": [
+        
+        ],
+        "landing_url": null,
+        "rights_url": [
+        
+        ],
+        "origin_url": null,
+        "metadata_url": null,
+        "object_url": null,
+        "atl_free_download": null,
+        "atl_physical_viewability": null,
+        "atl_purchasable": null,
+        "atl_purchasable_download": null,
+        "atl_location_code": null,
+        "atl_usage_code": null,
+        "anzsrc_code": null,
+        "marsden_code": [
+        
+        ],
+        "subject": [
+        
+        ],
+        "coverage": [
+        
+        ],
+        "autotag_events": [
+        
+        ],
+        "autotag_organisations": [
+        
+        ],
+        "autotag_people": [
+        
+        ],
+        "autotag_places": [
+        
+        ],
+        "online_child_count": null,
+        "online_child_count_str": null,
+        "child_count": null,
+        "child_count_str": null,
+        "tapuhi_root_id": null,
+        "physical_restrictions": null,
+        "thumbnail_url": null,
+        "large_thumbnail_url": null,
+        "source_provider_name": null,
+        "source_contributor_name": [
+        
+        ],
+        "source_website_name": null,
+        "source_url": "/records/83466/source",
+        "job_id": null,
+        "available_thumbnail": false,
+        "available_large_thumbnail": false,
+        "has_large_thumbnail_url": null,
+        "collection_any_id": [
+        
+        ],
+        "collection_any_id_str": [
+        
+        ],
+        "broad_related_authority_text": [
+        
+        ],
+        "broad_related_authority_id": [
+        
+        ],
+        "broad_related_authority_id_str": [
+        
+        ],
+        "iwihapu_authority_text": [
+        
+        ],
+        "iwihapu_authority_id": [
+        
+        ],
+        "iwihapu_authority_id_str": [
+        
+        ],
+        "name_authority_text": [
+        
+        ],
+        "name_authority_id": [
+        
+        ],
+        "name_authority_id_str": [
+        
+        ],
+        "place_authority_text": [
+        
+        ],
+        "place_authority_id": [
+        
+        ],
+        "place_authority_id_str": [
+        
+        ],
+        "recordtype_authority_text": [
+        
+        ],
+        "recordtype_authority_id": [
+        
+        ],
+        "recordtype_authority_id_str": [
+        
+        ],
+        "subject_authority_text": [
+        
+        ],
+        "subject_authority_id": [
+        
+        ],
+        "subject_authority_id_str": [
+        
+        ],
+        "imagetype_authority_text": [
+        
+        ],
+        "imagetype_authority_id": [
+        
+        ],
+        "imagetype_authority_id_str": [
+        
+        ],
+        "broader_term_text": [
+        
+        ],
+        "broader_term_id": [
+        
+        ],
+        "broader_term_id_str": [
+        
+        ],
+        "narrower_term_text": [
+        
+        ],
+        "narrower_term_id": [
+        
+        ],
+        "narrower_term_id_str": [
+        
+        ],
+        "preferred_term_text": [
+        
+        ],
+        "preferred_term_id": [
+        
+        ],
+        "preferred_term_id_str": [
+        
+        ],
+        "related_term_text": [
+        
+        ],
+        "related_term_id": [
+        
+        ],
+        "related_term_id_str": [
+        
+        ],
+        "unpreferred_term_text": [
+        
+        ],
+        "unpreferred_term_id": [
+        
+        ],
+        "unpreferred_term_id_str": [
+        
+        ],
+        "series_parent_text": [
+        
+        ],
+        "series_parent_id": [
+        
+        ],
+        "series_parent_id_str": [
+        
+        ],
+        "child_series_text": [
+        
+        ],
+        "child_series_id": [
+        
+        ],
+        "child_series_id_str": [
+        
+        ],
+        "collection_parent_text": [
+        
+        ],
+        "collection_parent_id": [
+        
+        ],
+        "collection_parent_id_str": [
+        
+        ],
+        "collection_root_text": [
+        
+        ],
+        "collection_root_id": [
+        
+        ],
+        "collection_root_id_str": [
+        
+        ],
+        "collection_mid_text": [
+        
+        ],
+        "collection_mid_id": [
+        
+        ],
+        "collection_mid_id_str": [
+        
+        ],
+        "ndha_rights": [
+        
+        ],
+        "ndha_rights_str": [
+        
+        ],
+        "fragments": [
+          {
+            "_id": "646acfc15e96825f791038ac",
+            "priority": 0,
+            "_type": "SupplejackApi::ApiRecord::RecordFragment",
+            "title": "Review of Peter Coss and Maurice Keen, eds. Heraldry, Pageantry and Social Display in Medieval England (2002)",
+            "source_id": "test",
+            "updated_at": "2023-05-22T21:56:48.749Z",
+            "created_at": "2023-05-22T02:13:21.305Z",
+            "dc_identifier": [
+              23029634
+            ],
+            "id": "646acfc15e96825f791038ac",
+            "authorities": [
+            
+            ],
+            "attachments": [
+            
+            ],
+            "locations": [
+            
+            ],
+            "thumbnail": null,
+            "large_thumbnail": null
+          }
+        ]
+      },
+      {
+        "id": "646c00405e96825f791038af",
+        "internal_identifier": "figshare_id:23072123",
+        "status": "active",
+        "record_type": 0,
+        "created_at": "2023-05-23T11:52:32.911+12:00",
+        "updated_at": "2023-05-23T11:52:32.918+12:00",
+        "record_id": 83469,
+        "concept_ids": [
+        
+        ],
+        "concept_ids_str": [
+        
+        ],
+        "title": "International Student Employability, Mobility and Industry Benchmarking Peer Review Workshop and Global Think Tank Summit: Final Report – Outcomes and Actions for Future Collaboration",
+        "alternate_title": [
+        
+        ],
+        "description": "This report provides an overview of an international benchmarking project and the resulting outcomes involving ten universities from New Zealand, Australia, Canada and the United Kingdom.",
+        "additional_description": [
+        
+        ],
+        "content_partner": [
+        
+        ],
+        "display_content_partner": null,
+        "collection_title": [
+        
+        ],
+        "collection": [
+        
+        ],
+        "attachment_name": "",
+        "lat_lng": [
+        
+        ],
+        "has_lat_lng": false,
+        "placename": [
+        
+        ],
+        "display_collection": null,
+        "primary_collection": [
+        
+        ],
+        "contributing_partner": [
+        
+        ],
+        "auto_tag": [
+        
+        ],
+        "category": [
+        
+        ],
+        "creator": [
+        
+        ],
+        "contributor": [
+        
+        ],
+        "copyright": [
+        
+        ],
+        "citation": [
+        
+        ],
+        "credit_creator": null,
+        "language": [
+        
+        ],
+        "provenance": null,
+        "publisher": [
+        
+        ],
+        "rights": null,
+        "usage": [
+        
+        ],
+        "source": [
+        
+        ],
+        "tag": [
+        
+        ],
+        "thesis_level": null,
+        "holding": [
+        
+        ],
+        "library_collection": [
+        
+        ],
+        "shelf_location": null,
+        "eprints_type": [
+        
+        ],
+        "fulltext": null,
+        "text": null,
+        "copy": "International Student Employability, Mobility and Industry Benchmarking Peer Review Workshop and Global Think Tank Summit: Final Report – Outcomes and Actions for Future Collaboration This report provides an overview of an international benchmarking project and the resulting outcomes involving ten universities from New Zealand, Australia, Canada and the United Kingdom. 23072123",
+        "has_version": [
+        
+        ],
+        "license": null,
+        "relation": [
+        
+        ],
+        "is_part_of": [
+        
+        ],
+        "is_replaced_by": "Unknown",
+        "replaces": "Unknown",
+        "is_required_by": null,
+        "is_version_of": null,
+        "table_of_contents": null,
+        "availability_id": null,
+        "availability_id_str": null,
+        "access_rights": null,
+        "dc_type": [
+        
+        ],
+        "dnz_type": "Unknown",
+        "display_date": null,
+        "format": [
+        
+        ],
+        "dc_identifier": [
+          23072123
+        ],
+        "is_natlib_record": null,
+        "is_catalog_record": "Unknown",
+        "is_commercial_use": null,
+        "date": [
+        
+        ],
+        "date_str": [
+        
+        ],
+        "sort_date": null,
+        "sort_date_str": null,
+        "syndication_date": null,
+        "syndication_date_str": null,
+        "published_date": [
+        
+        ],
+        "published_date_str": [
+        
+        ],
+        "year": [
+        
+        ],
+        "decade": [
+        
+        ],
+        "century": [
+        
+        ],
+        "landing_url": null,
+        "rights_url": [
+        
+        ],
+        "origin_url": null,
+        "metadata_url": null,
+        "object_url": null,
+        "atl_free_download": null,
+        "atl_physical_viewability": null,
+        "atl_purchasable": null,
+        "atl_purchasable_download": null,
+        "atl_location_code": null,
+        "atl_usage_code": null,
+        "anzsrc_code": null,
+        "marsden_code": [
+        
+        ],
+        "subject": [
+        
+        ],
+        "coverage": [
+        
+        ],
+        "autotag_events": [
+        
+        ],
+        "autotag_organisations": [
+        
+        ],
+        "autotag_people": [
+        
+        ],
+        "autotag_places": [
+        
+        ],
+        "online_child_count": null,
+        "online_child_count_str": null,
+        "child_count": null,
+        "child_count_str": null,
+        "tapuhi_root_id": null,
+        "physical_restrictions": null,
+        "thumbnail_url": null,
+        "large_thumbnail_url": null,
+        "source_provider_name": null,
+        "source_contributor_name": [
+        
+        ],
+        "source_website_name": null,
+        "source_url": "/records/83469/source",
+        "job_id": null,
+        "available_thumbnail": false,
+        "available_large_thumbnail": false,
+        "has_large_thumbnail_url": null,
+        "collection_any_id": [
+        
+        ],
+        "collection_any_id_str": [
+        
+        ],
+        "broad_related_authority_text": [
+        
+        ],
+        "broad_related_authority_id": [
+        
+        ],
+        "broad_related_authority_id_str": [
+        
+        ],
+        "iwihapu_authority_text": [
+        
+        ],
+        "iwihapu_authority_id": [
+        
+        ],
+        "iwihapu_authority_id_str": [
+        
+        ],
+        "name_authority_text": [
+        
+        ],
+        "name_authority_id": [
+        
+        ],
+        "name_authority_id_str": [
+        
+        ],
+        "place_authority_text": [
+        
+        ],
+        "place_authority_id": [
+        
+        ],
+        "place_authority_id_str": [
+        
+        ],
+        "recordtype_authority_text": [
+        
+        ],
+        "recordtype_authority_id": [
+        
+        ],
+        "recordtype_authority_id_str": [
+        
+        ],
+        "subject_authority_text": [
+        
+        ],
+        "subject_authority_id": [
+        
+        ],
+        "subject_authority_id_str": [
+        
+        ],
+        "imagetype_authority_text": [
+        
+        ],
+        "imagetype_authority_id": [
+        
+        ],
+        "imagetype_authority_id_str": [
+        
+        ],
+        "broader_term_text": [
+        
+        ],
+        "broader_term_id": [
+        
+        ],
+        "broader_term_id_str": [
+        
+        ],
+        "narrower_term_text": [
+        
+        ],
+        "narrower_term_id": [
+        
+        ],
+        "narrower_term_id_str": [
+        
+        ],
+        "preferred_term_text": [
+        
+        ],
+        "preferred_term_id": [
+        
+        ],
+        "preferred_term_id_str": [
+        
+        ],
+        "related_term_text": [
+        
+        ],
+        "related_term_id": [
+        
+        ],
+        "related_term_id_str": [
+        
+        ],
+        "unpreferred_term_text": [
+        
+        ],
+        "unpreferred_term_id": [
+        
+        ],
+        "unpreferred_term_id_str": [
+        
+        ],
+        "series_parent_text": [
+        
+        ],
+        "series_parent_id": [
+        
+        ],
+        "series_parent_id_str": [
+        
+        ],
+        "child_series_text": [
+        
+        ],
+        "child_series_id": [
+        
+        ],
+        "child_series_id_str": [
+        
+        ],
+        "collection_parent_text": [
+        
+        ],
+        "collection_parent_id": [
+        
+        ],
+        "collection_parent_id_str": [
+        
+        ],
+        "collection_root_text": [
+        
+        ],
+        "collection_root_id": [
+        
+        ],
+        "collection_root_id_str": [
+        
+        ],
+        "collection_mid_text": [
+        
+        ],
+        "collection_mid_id": [
+        
+        ],
+        "collection_mid_id_str": [
+        
+        ],
+        "ndha_rights": [
+        
+        ],
+        "ndha_rights_str": [
+        
+        ],
+        "fragments": [
+          {
+            "_id": "646c00405e96825f791038ae",
+            "priority": 0,
+            "_type": "SupplejackApi::ApiRecord::RecordFragment",
+            "title": "International Student Employability, Mobility and Industry Benchmarking Peer Review Workshop and Global Think Tank Summit: Final Report – Outcomes and Actions for Future Collaboration",
+            "dc_identifier": [
+              23072123
+            ],
+            "source_id": "test",
+            "updated_at": "2023-05-24T03:16:23.251Z",
+            "created_at": "2023-05-22T23:52:32.910Z",
+            "description": "This report provides an overview of an international benchmarking project and the resulting outcomes involving ten universities from New Zealand, Australia, Canada and the United Kingdom.",
+            "id": "646c00405e96825f791038ae",
+            "authorities": [
+            
+            ],
+            "attachments": [
+            
+            ],
+            "locations": [
+            
+            ],
+            "thumbnail": null,
+            "large_thumbnail": null
+          }
+        ]
+      },
+      {
+        "id": "646c00405e96825f791038b1",
+        "internal_identifier": "figshare_id:23072120",
+        "status": "active",
+        "record_type": 0,
+        "created_at": "2023-05-23T11:52:32.935+12:00",
+        "updated_at": "2023-05-23T11:52:32.941+12:00",
+        "record_id": 83472,
+        "concept_ids": [
+        
+        ],
+        "concept_ids_str": [
+        
+        ],
+        "title": "International Peer Review Benchmarking for Quality Higher Education",
+        "alternate_title": [
+        
+        ],
+        "description": "No abstract available.",
+        "additional_description": [
+        
+        ],
+        "content_partner": [
+        
+        ],
+        "display_content_partner": null,
+        "collection_title": [
+        
+        ],
+        "collection": [
+        
+        ],
+        "attachment_name": "",
+        "lat_lng": [
+        
+        ],
+        "has_lat_lng": false,
+        "placename": [
+        
+        ],
+        "display_collection": null,
+        "primary_collection": [
+        
+        ],
+        "contributing_partner": [
+        
+        ],
+        "auto_tag": [
+        
+        ],
+        "category": [
+        
+        ],
+        "creator": [
+        
+        ],
+        "contributor": [
+        
+        ],
+        "copyright": [
+        
+        ],
+        "citation": [
+        
+        ],
+        "credit_creator": null,
+        "language": [
+        
+        ],
+        "provenance": null,
+        "publisher": [
+        
+        ],
+        "rights": null,
+        "usage": [
+        
+        ],
+        "source": [
+        
+        ],
+        "tag": [
+        
+        ],
+        "thesis_level": null,
+        "holding": [
+        
+        ],
+        "library_collection": [
+        
+        ],
+        "shelf_location": null,
+        "eprints_type": [
+        
+        ],
+        "fulltext": null,
+        "text": null,
+        "copy": "International Peer Review Benchmarking for Quality Higher Education No abstract available. 23072120",
+        "has_version": [
+        
+        ],
+        "license": null,
+        "relation": [
+        
+        ],
+        "is_part_of": [
+        
+        ],
+        "is_replaced_by": "Unknown",
+        "replaces": "Unknown",
+        "is_required_by": null,
+        "is_version_of": null,
+        "table_of_contents": null,
+        "availability_id": null,
+        "availability_id_str": null,
+        "access_rights": null,
+        "dc_type": [
+        
+        ],
+        "dnz_type": "Unknown",
+        "display_date": null,
+        "format": [
+        
+        ],
+        "dc_identifier": [
+          23072120
+        ],
+        "is_natlib_record": null,
+        "is_catalog_record": "Unknown",
+        "is_commercial_use": null,
+        "date": [
+        
+        ],
+        "date_str": [
+        
+        ],
+        "sort_date": null,
+        "sort_date_str": null,
+        "syndication_date": null,
+        "syndication_date_str": null,
+        "published_date": [
+        
+        ],
+        "published_date_str": [
+        
+        ],
+        "year": [
+        
+        ],
+        "decade": [
+        
+        ],
+        "century": [
+        
+        ],
+        "landing_url": null,
+        "rights_url": [
+        
+        ],
+        "origin_url": null,
+        "metadata_url": null,
+        "object_url": null,
+        "atl_free_download": null,
+        "atl_physical_viewability": null,
+        "atl_purchasable": null,
+        "atl_purchasable_download": null,
+        "atl_location_code": null,
+        "atl_usage_code": null,
+        "anzsrc_code": null,
+        "marsden_code": [
+        
+        ],
+        "subject": [
+        
+        ],
+        "coverage": [
+        
+        ],
+        "autotag_events": [
+        
+        ],
+        "autotag_organisations": [
+        
+        ],
+        "autotag_people": [
+        
+        ],
+        "autotag_places": [
+        
+        ],
+        "online_child_count": null,
+        "online_child_count_str": null,
+        "child_count": null,
+        "child_count_str": null,
+        "tapuhi_root_id": null,
+        "physical_restrictions": null,
+        "thumbnail_url": null,
+        "large_thumbnail_url": null,
+        "source_provider_name": null,
+        "source_contributor_name": [
+        
+        ],
+        "source_website_name": null,
+        "source_url": "/records/83472/source",
+        "job_id": null,
+        "available_thumbnail": false,
+        "available_large_thumbnail": false,
+        "has_large_thumbnail_url": null,
+        "collection_any_id": [
+        
+        ],
+        "collection_any_id_str": [
+        
+        ],
+        "broad_related_authority_text": [
+        
+        ],
+        "broad_related_authority_id": [
+        
+        ],
+        "broad_related_authority_id_str": [
+        
+        ],
+        "iwihapu_authority_text": [
+        
+        ],
+        "iwihapu_authority_id": [
+        
+        ],
+        "iwihapu_authority_id_str": [
+        
+        ],
+        "name_authority_text": [
+        
+        ],
+        "name_authority_id": [
+        
+        ],
+        "name_authority_id_str": [
+        
+        ],
+        "place_authority_text": [
+        
+        ],
+        "place_authority_id": [
+        
+        ],
+        "place_authority_id_str": [
+        
+        ],
+        "recordtype_authority_text": [
+        
+        ],
+        "recordtype_authority_id": [
+        
+        ],
+        "recordtype_authority_id_str": [
+        
+        ],
+        "subject_authority_text": [
+        
+        ],
+        "subject_authority_id": [
+        
+        ],
+        "subject_authority_id_str": [
+        
+        ],
+        "imagetype_authority_text": [
+        
+        ],
+        "imagetype_authority_id": [
+        
+        ],
+        "imagetype_authority_id_str": [
+        
+        ],
+        "broader_term_text": [
+        
+        ],
+        "broader_term_id": [
+        
+        ],
+        "broader_term_id_str": [
+        
+        ],
+        "narrower_term_text": [
+        
+        ],
+        "narrower_term_id": [
+        
+        ],
+        "narrower_term_id_str": [
+        
+        ],
+        "preferred_term_text": [
+        
+        ],
+        "preferred_term_id": [
+        
+        ],
+        "preferred_term_id_str": [
+        
+        ],
+        "related_term_text": [
+        
+        ],
+        "related_term_id": [
+        
+        ],
+        "related_term_id_str": [
+        
+        ],
+        "unpreferred_term_text": [
+        
+        ],
+        "unpreferred_term_id": [
+        
+        ],
+        "unpreferred_term_id_str": [
+        
+        ],
+        "series_parent_text": [
+        
+        ],
+        "series_parent_id": [
+        
+        ],
+        "series_parent_id_str": [
+        
+        ],
+        "child_series_text": [
+        
+        ],
+        "child_series_id": [
+        
+        ],
+        "child_series_id_str": [
+        
+        ],
+        "collection_parent_text": [
+        
+        ],
+        "collection_parent_id": [
+        
+        ],
+        "collection_parent_id_str": [
+        
+        ],
+        "collection_root_text": [
+        
+        ],
+        "collection_root_id": [
+        
+        ],
+        "collection_root_id_str": [
+        
+        ],
+        "collection_mid_text": [
+        
+        ],
+        "collection_mid_id": [
+        
+        ],
+        "collection_mid_id_str": [
+        
+        ],
+        "ndha_rights": [
+        
+        ],
+        "ndha_rights_str": [
+        
+        ],
+        "fragments": [
+          {
+            "_id": "646c00405e96825f791038b0",
+            "priority": 0,
+            "_type": "SupplejackApi::ApiRecord::RecordFragment",
+            "title": "International Peer Review Benchmarking for Quality Higher Education",
+            "dc_identifier": [
+              23072120
+            ],
+            "source_id": "test",
+            "updated_at": "2023-05-24T03:16:23.267Z",
+            "created_at": "2023-05-22T23:52:32.935Z",
+            "description": "No abstract available.",
+            "id": "646c00405e96825f791038b0",
+            "authorities": [
+            
+            ],
+            "attachments": [
+            
+            ],
+            "locations": [
+            
+            ],
+            "thumbnail": null,
+            "large_thumbnail": null
+          }
+        ]
+      },
+      {
+        "id": "646c00405e96825f791038b3",
+        "internal_identifier": "figshare_id:23072033",
+        "status": "active",
+        "record_type": 0,
+        "created_at": "2023-05-23T11:52:32.956+12:00",
+        "updated_at": "2023-05-23T11:52:32.962+12:00",
+        "record_id": 83475,
+        "concept_ids": [
+        
+        ],
+        "concept_ids_str": [
+        
+        ],
+        "title": "History, current status and future of marine macroalgal research in New Zealand: taxonomy, ecology, physiology and human uses",
+        "alternate_title": [
+        
+        ],
+        "description": "New Zealand has a rich and diverse macroalgal flora  that has been studied since James Cook’s first voyage  to New Zealand in 1769. The New Zealand region  ranges from cool temperate seas at southerly latitudes  to subtropical waters in the north. Here we review the  history of phycological research in New Zealand since  1900, and the current status of research in taxonomy,  ecology, physiology and seaweed uses including aquaculture  and seaweed extracts. Some 770 species of  seaweed are known to New Zealand, of which 22 are  alien. Few taxa have received monographic treatment  and many remain to be described. Polysaccharides  have been identified from over 80 New Zealand seaweeds  and many of these compounds have commercial  potential. In addition to urgent taxonomic work, future  research should include a national program of longterm  (> 5 years) monitoring of macroalgal communities,  rates of growth and primary production, and the  contribution of seaweed-based production to coastal  food webs.",
+        "additional_description": [
+        
+        ],
+        "content_partner": [
+        
+        ],
+        "display_content_partner": null,
+        "collection_title": [
+        
+        ],
+        "collection": [
+        
+        ],
+        "attachment_name": "",
+        "lat_lng": [
+        
+        ],
+        "has_lat_lng": false,
+        "placename": [
+        
+        ],
+        "display_collection": null,
+        "primary_collection": [
+        
+        ],
+        "contributing_partner": [
+        
+        ],
+        "auto_tag": [
+        
+        ],
+        "category": [
+        
+        ],
+        "creator": [
+        
+        ],
+        "contributor": [
+        
+        ],
+        "copyright": [
+        
+        ],
+        "citation": [
+        
+        ],
+        "credit_creator": null,
+        "language": [
+        
+        ],
+        "provenance": null,
+        "publisher": [
+        
+        ],
+        "rights": null,
+        "usage": [
+        
+        ],
+        "source": [
+        
+        ],
+        "tag": [
+        
+        ],
+        "thesis_level": null,
+        "holding": [
+        
+        ],
+        "library_collection": [
+        
+        ],
+        "shelf_location": null,
+        "eprints_type": [
+        
+        ],
+        "fulltext": null,
+        "text": null,
+        "copy": "History, current status and future of marine macroalgal research in New Zealand: taxonomy, ecology, physiology and human uses New Zealand has a rich and diverse macroalgal flora  that has been studied since James Cook’s first voyage  to New Zealand in 1769. The New Zealand region  ranges from cool temperate seas at southerly latitudes  to subtropical waters in the north. Here we review the  history of phycological research in New Zealand since  1900, and the current status of research in taxonomy,  ecology, physiology and seaweed uses including aquaculture  and seaweed extracts. Some 770 species of  seaweed are known to New Zealand, of which 22 are  alien. Few taxa have received monographic treatment  and many remain to be described. Polysaccharides  have been identified from over 80 New Zealand seaweeds  and many of these compounds have commercial  potential. In addition to urgent taxonomic work, future  research should include a national program of longterm  (> 5 years) monitoring of macroalgal communities,  rates of growth and primary production, and the  contribution of seaweed-based production to coastal  food webs. 23072033",
+        "has_version": [
+        
+        ],
+        "license": null,
+        "relation": [
+        
+        ],
+        "is_part_of": [
+        
+        ],
+        "is_replaced_by": "Unknown",
+        "replaces": "Unknown",
+        "is_required_by": null,
+        "is_version_of": null,
+        "table_of_contents": null,
+        "availability_id": null,
+        "availability_id_str": null,
+        "access_rights": null,
+        "dc_type": [
+        
+        ],
+        "dnz_type": "Unknown",
+        "display_date": null,
+        "format": [
+        
+        ],
+        "dc_identifier": [
+          23072033
+        ],
+        "is_natlib_record": null,
+        "is_catalog_record": "Unknown",
+        "is_commercial_use": null,
+        "date": [
+        
+        ],
+        "date_str": [
+        
+        ],
+        "sort_date": null,
+        "sort_date_str": null,
+        "syndication_date": null,
+        "syndication_date_str": null,
+        "published_date": [
+        
+        ],
+        "published_date_str": [
+        
+        ],
+        "year": [
+        
+        ],
+        "decade": [
+        
+        ],
+        "century": [
+        
+        ],
+        "landing_url": null,
+        "rights_url": [
+        
+        ],
+        "origin_url": null,
+        "metadata_url": null,
+        "object_url": null,
+        "atl_free_download": null,
+        "atl_physical_viewability": null,
+        "atl_purchasable": null,
+        "atl_purchasable_download": null,
+        "atl_location_code": null,
+        "atl_usage_code": null,
+        "anzsrc_code": null,
+        "marsden_code": [
+        
+        ],
+        "subject": [
+        
+        ],
+        "coverage": [
+        
+        ],
+        "autotag_events": [
+        
+        ],
+        "autotag_organisations": [
+        
+        ],
+        "autotag_people": [
+        
+        ],
+        "autotag_places": [
+        
+        ],
+        "online_child_count": null,
+        "online_child_count_str": null,
+        "child_count": null,
+        "child_count_str": null,
+        "tapuhi_root_id": null,
+        "physical_restrictions": null,
+        "thumbnail_url": null,
+        "large_thumbnail_url": null,
+        "source_provider_name": null,
+        "source_contributor_name": [
+        
+        ],
+        "source_website_name": null,
+        "source_url": "/records/83475/source",
+        "job_id": null,
+        "available_thumbnail": false,
+        "available_large_thumbnail": false,
+        "has_large_thumbnail_url": null,
+        "collection_any_id": [
+        
+        ],
+        "collection_any_id_str": [
+        
+        ],
+        "broad_related_authority_text": [
+        
+        ],
+        "broad_related_authority_id": [
+        
+        ],
+        "broad_related_authority_id_str": [
+        
+        ],
+        "iwihapu_authority_text": [
+        
+        ],
+        "iwihapu_authority_id": [
+        
+        ],
+        "iwihapu_authority_id_str": [
+        
+        ],
+        "name_authority_text": [
+        
+        ],
+        "name_authority_id": [
+        
+        ],
+        "name_authority_id_str": [
+        
+        ],
+        "place_authority_text": [
+        
+        ],
+        "place_authority_id": [
+        
+        ],
+        "place_authority_id_str": [
+        
+        ],
+        "recordtype_authority_text": [
+        
+        ],
+        "recordtype_authority_id": [
+        
+        ],
+        "recordtype_authority_id_str": [
+        
+        ],
+        "subject_authority_text": [
+        
+        ],
+        "subject_authority_id": [
+        
+        ],
+        "subject_authority_id_str": [
+        
+        ],
+        "imagetype_authority_text": [
+        
+        ],
+        "imagetype_authority_id": [
+        
+        ],
+        "imagetype_authority_id_str": [
+        
+        ],
+        "broader_term_text": [
+        
+        ],
+        "broader_term_id": [
+        
+        ],
+        "broader_term_id_str": [
+        
+        ],
+        "narrower_term_text": [
+        
+        ],
+        "narrower_term_id": [
+        
+        ],
+        "narrower_term_id_str": [
+        
+        ],
+        "preferred_term_text": [
+        
+        ],
+        "preferred_term_id": [
+        
+        ],
+        "preferred_term_id_str": [
+        
+        ],
+        "related_term_text": [
+        
+        ],
+        "related_term_id": [
+        
+        ],
+        "related_term_id_str": [
+        
+        ],
+        "unpreferred_term_text": [
+        
+        ],
+        "unpreferred_term_id": [
+        
+        ],
+        "unpreferred_term_id_str": [
+        
+        ],
+        "series_parent_text": [
+        
+        ],
+        "series_parent_id": [
+        
+        ],
+        "series_parent_id_str": [
+        
+        ],
+        "child_series_text": [
+        
+        ],
+        "child_series_id": [
+        
+        ],
+        "child_series_id_str": [
+        
+        ],
+        "collection_parent_text": [
+        
+        ],
+        "collection_parent_id": [
+        
+        ],
+        "collection_parent_id_str": [
+        
+        ],
+        "collection_root_text": [
+        
+        ],
+        "collection_root_id": [
+        
+        ],
+        "collection_root_id_str": [
+        
+        ],
+        "collection_mid_text": [
+        
+        ],
+        "collection_mid_id": [
+        
+        ],
+        "collection_mid_id_str": [
+        
+        ],
+        "ndha_rights": [
+        
+        ],
+        "ndha_rights_str": [
+        
+        ],
+        "fragments": [
+          {
+            "_id": "646c00405e96825f791038b2",
+            "priority": 0,
+            "_type": "SupplejackApi::ApiRecord::RecordFragment",
+            "title": "History, current status and future of marine macroalgal research in New Zealand: taxonomy, ecology, physiology and human uses",
+            "dc_identifier": [
+              23072033
+            ],
+            "source_id": "test",
+            "updated_at": "2023-05-24T03:16:23.283Z",
+            "created_at": "2023-05-22T23:52:32.956Z",
+            "description": "New Zealand has a rich and diverse macroalgal flora  that has been studied since James Cook’s first voyage  to New Zealand in 1769. The New Zealand region  ranges from cool temperate seas at southerly latitudes  to subtropical waters in the north. Here we review the  history of phycological research in New Zealand since  1900, and the current status of research in taxonomy,  ecology, physiology and seaweed uses including aquaculture  and seaweed extracts. Some 770 species of  seaweed are known to New Zealand, of which 22 are  alien. Few taxa have received monographic treatment  and many remain to be described. Polysaccharides  have been identified from over 80 New Zealand seaweeds  and many of these compounds have commercial  potential. In addition to urgent taxonomic work, future  research should include a national program of longterm  (> 5 years) monitoring of macroalgal communities,  rates of growth and primary production, and the  contribution of seaweed-based production to coastal  food webs.",
+            "id": "646c00405e96825f791038b2",
+            "authorities": [
+            
+            ],
+            "attachments": [
+            
+            ],
+            "locations": [
+            
+            ],
+            "thumbnail": null,
+            "large_thumbnail": null
+          }
+        ]
+      },
+      {
+        "id": "646c00405e96825f791038b5",
+        "internal_identifier": "figshare_id:23071937",
+        "status": "active",
+        "record_type": 0,
+        "created_at": "2023-05-23T11:52:32.978+12:00",
+        "updated_at": "2023-05-23T11:52:32.984+12:00",
+        "record_id": 83478,
+        "concept_ids": [
+        
+        ],
+        "concept_ids_str": [
+        
+        ],
+        "title": "Ten years of experience with biphasic insulin aspart 30: from drug development to the latest clinical findings",
+        "alternate_title": [
+        
+        ],
+        "description": "Biphasic insulin aspart 30 (BIAsp 30) includes 30% soluble rapid-acting insulin aspart (IAsp) along with an intermediate-acting 70% protaminated IAsp that provides coverage of prandial and basal insulin in a single injection. As BIAsp 30 has been available internationally for 10 years, this review provides a comprehensive overview of the discovery of BIAsp 30, its pharmacokinetic and pharmacodynamic profile, safety and efficacy outcomes from the clinical trial programme, 'real-life' clinical insights provided by observational study data, and cost effectiveness and quality-of-life information. These studies have demonstrated that BIAsp 30 once or twice daily is an appropriate option for insulin initiation. BIAsp 30 also provides a switch option in patients on biphasic human insulin (BHI). Switching from BHI to BIAsp 30 is associated with improved postprandial glucose (PPG) and reduced nocturnal and major hypoglycaemia, although daytime hypoglycaemia is higher with BIAsp 30. Intensification of BIAsp 30 can be achieved by increasing the number of daily doses up to three times daily with meals. Therefore, BIAsp 30 provides an intensification option for individuals who are not achieving control with basal insulin and would prefer the simplicity of a single biphasic insulin instead of progressing to a basal-bolus approach. BIAsp 30 has a simple dose-titration algorithm, which enables patients to effectively self-titrate their insulin dose. Cost-effectiveness analyses have demonstrated that BIAsp 30 is cost effective or dominant compared with BHI 30 or insulin glargine in a number of healthcare settings. In conclusion, BIAsp 30 offers a simple and flexible option for insulin initiation and intensification that provides coverage of both fasting and prandial glucose.",
+        "additional_description": [
+        
+        ],
+        "content_partner": [
+        
+        ],
+        "display_content_partner": null,
+        "collection_title": [
+        
+        ],
+        "collection": [
+        
+        ],
+        "attachment_name": "",
+        "lat_lng": [
+        
+        ],
+        "has_lat_lng": false,
+        "placename": [
+        
+        ],
+        "display_collection": null,
+        "primary_collection": [
+        
+        ],
+        "contributing_partner": [
+        
+        ],
+        "auto_tag": [
+        
+        ],
+        "category": [
+        
+        ],
+        "creator": [
+        
+        ],
+        "contributor": [
+        
+        ],
+        "copyright": [
+        
+        ],
+        "citation": [
+        
+        ],
+        "credit_creator": null,
+        "language": [
+        
+        ],
+        "provenance": null,
+        "publisher": [
+        
+        ],
+        "rights": null,
+        "usage": [
+        
+        ],
+        "source": [
+        
+        ],
+        "tag": [
+        
+        ],
+        "thesis_level": null,
+        "holding": [
+        
+        ],
+        "library_collection": [
+        
+        ],
+        "shelf_location": null,
+        "eprints_type": [
+        
+        ],
+        "fulltext": null,
+        "text": null,
+        "copy": "Ten years of experience with biphasic insulin aspart 30: from drug development to the latest clinical findings Biphasic insulin aspart 30 (BIAsp 30) includes 30% soluble rapid-acting insulin aspart (IAsp) along with an intermediate-acting 70% protaminated IAsp that provides coverage of prandial and basal insulin in a single injection. As BIAsp 30 has been available internationally for 10 years, this review provides a comprehensive overview of the discovery of BIAsp 30, its pharmacokinetic and pharmacodynamic profile, safety and efficacy outcomes from the clinical trial programme, 'real-life' clinical insights provided by observational study data, and cost effectiveness and quality-of-life information. These studies have demonstrated that BIAsp 30 once or twice daily is an appropriate option for insulin initiation. BIAsp 30 also provides a switch option in patients on biphasic human insulin (BHI). Switching from BHI to BIAsp 30 is associated with improved postprandial glucose (PPG) and reduced nocturnal and major hypoglycaemia, although daytime hypoglycaemia is higher with BIAsp 30. Intensification of BIAsp 30 can be achieved by increasing the number of daily doses up to three times daily with meals. Therefore, BIAsp 30 provides an intensification option for individuals who are not achieving control with basal insulin and would prefer the simplicity of a single biphasic insulin instead of progressing to a basal-bolus approach. BIAsp 30 has a simple dose-titration algorithm, which enables patients to effectively self-titrate their insulin dose. Cost-effectiveness analyses have demonstrated that BIAsp 30 is cost effective or dominant compared with BHI 30 or insulin glargine in a number of healthcare settings. In conclusion, BIAsp 30 offers a simple and flexible option for insulin initiation and intensification that provides coverage of both fasting and prandial glucose. 23071937",
+        "has_version": [
+        
+        ],
+        "license": null,
+        "relation": [
+        
+        ],
+        "is_part_of": [
+        
+        ],
+        "is_replaced_by": "Unknown",
+        "replaces": "Unknown",
+        "is_required_by": null,
+        "is_version_of": null,
+        "table_of_contents": null,
+        "availability_id": null,
+        "availability_id_str": null,
+        "access_rights": null,
+        "dc_type": [
+        
+        ],
+        "dnz_type": "Unknown",
+        "display_date": null,
+        "format": [
+        
+        ],
+        "dc_identifier": [
+          23071937
+        ],
+        "is_natlib_record": null,
+        "is_catalog_record": "Unknown",
+        "is_commercial_use": null,
+        "date": [
+        
+        ],
+        "date_str": [
+        
+        ],
+        "sort_date": null,
+        "sort_date_str": null,
+        "syndication_date": null,
+        "syndication_date_str": null,
+        "published_date": [
+        
+        ],
+        "published_date_str": [
+        
+        ],
+        "year": [
+        
+        ],
+        "decade": [
+        
+        ],
+        "century": [
+        
+        ],
+        "landing_url": null,
+        "rights_url": [
+        
+        ],
+        "origin_url": null,
+        "metadata_url": null,
+        "object_url": null,
+        "atl_free_download": null,
+        "atl_physical_viewability": null,
+        "atl_purchasable": null,
+        "atl_purchasable_download": null,
+        "atl_location_code": null,
+        "atl_usage_code": null,
+        "anzsrc_code": null,
+        "marsden_code": [
+        
+        ],
+        "subject": [
+        
+        ],
+        "coverage": [
+        
+        ],
+        "autotag_events": [
+        
+        ],
+        "autotag_organisations": [
+        
+        ],
+        "autotag_people": [
+        
+        ],
+        "autotag_places": [
+        
+        ],
+        "online_child_count": null,
+        "online_child_count_str": null,
+        "child_count": null,
+        "child_count_str": null,
+        "tapuhi_root_id": null,
+        "physical_restrictions": null,
+        "thumbnail_url": null,
+        "large_thumbnail_url": null,
+        "source_provider_name": null,
+        "source_contributor_name": [
+        
+        ],
+        "source_website_name": null,
+        "source_url": "/records/83478/source",
+        "job_id": null,
+        "available_thumbnail": false,
+        "available_large_thumbnail": false,
+        "has_large_thumbnail_url": null,
+        "collection_any_id": [
+        
+        ],
+        "collection_any_id_str": [
+        
+        ],
+        "broad_related_authority_text": [
+        
+        ],
+        "broad_related_authority_id": [
+        
+        ],
+        "broad_related_authority_id_str": [
+        
+        ],
+        "iwihapu_authority_text": [
+        
+        ],
+        "iwihapu_authority_id": [
+        
+        ],
+        "iwihapu_authority_id_str": [
+        
+        ],
+        "name_authority_text": [
+        
+        ],
+        "name_authority_id": [
+        
+        ],
+        "name_authority_id_str": [
+        
+        ],
+        "place_authority_text": [
+        
+        ],
+        "place_authority_id": [
+        
+        ],
+        "place_authority_id_str": [
+        
+        ],
+        "recordtype_authority_text": [
+        
+        ],
+        "recordtype_authority_id": [
+        
+        ],
+        "recordtype_authority_id_str": [
+        
+        ],
+        "subject_authority_text": [
+        
+        ],
+        "subject_authority_id": [
+        
+        ],
+        "subject_authority_id_str": [
+        
+        ],
+        "imagetype_authority_text": [
+        
+        ],
+        "imagetype_authority_id": [
+        
+        ],
+        "imagetype_authority_id_str": [
+        
+        ],
+        "broader_term_text": [
+        
+        ],
+        "broader_term_id": [
+        
+        ],
+        "broader_term_id_str": [
+        
+        ],
+        "narrower_term_text": [
+        
+        ],
+        "narrower_term_id": [
+        
+        ],
+        "narrower_term_id_str": [
+        
+        ],
+        "preferred_term_text": [
+        
+        ],
+        "preferred_term_id": [
+        
+        ],
+        "preferred_term_id_str": [
+        
+        ],
+        "related_term_text": [
+        
+        ],
+        "related_term_id": [
+        
+        ],
+        "related_term_id_str": [
+        
+        ],
+        "unpreferred_term_text": [
+        
+        ],
+        "unpreferred_term_id": [
+        
+        ],
+        "unpreferred_term_id_str": [
+        
+        ],
+        "series_parent_text": [
+        
+        ],
+        "series_parent_id": [
+        
+        ],
+        "series_parent_id_str": [
+        
+        ],
+        "child_series_text": [
+        
+        ],
+        "child_series_id": [
+        
+        ],
+        "child_series_id_str": [
+        
+        ],
+        "collection_parent_text": [
+        
+        ],
+        "collection_parent_id": [
+        
+        ],
+        "collection_parent_id_str": [
+        
+        ],
+        "collection_root_text": [
+        
+        ],
+        "collection_root_id": [
+        
+        ],
+        "collection_root_id_str": [
+        
+        ],
+        "collection_mid_text": [
+        
+        ],
+        "collection_mid_id": [
+        
+        ],
+        "collection_mid_id_str": [
+        
+        ],
+        "ndha_rights": [
+        
+        ],
+        "ndha_rights_str": [
+        
+        ],
+        "fragments": [
+          {
+            "_id": "646c00405e96825f791038b4",
+            "priority": 0,
+            "_type": "SupplejackApi::ApiRecord::RecordFragment",
+            "title": "Ten years of experience with biphasic insulin aspart 30: from drug development to the latest clinical findings",
+            "dc_identifier": [
+              23071937
+            ],
+            "source_id": "test",
+            "updated_at": "2023-05-24T03:16:25.556Z",
+            "created_at": "2023-05-22T23:52:32.977Z",
+            "description": "Biphasic insulin aspart 30 (BIAsp 30) includes 30% soluble rapid-acting insulin aspart (IAsp) along with an intermediate-acting 70% protaminated IAsp that provides coverage of prandial and basal insulin in a single injection. As BIAsp 30 has been available internationally for 10 years, this review provides a comprehensive overview of the discovery of BIAsp 30, its pharmacokinetic and pharmacodynamic profile, safety and efficacy outcomes from the clinical trial programme, 'real-life' clinical insights provided by observational study data, and cost effectiveness and quality-of-life information. These studies have demonstrated that BIAsp 30 once or twice daily is an appropriate option for insulin initiation. BIAsp 30 also provides a switch option in patients on biphasic human insulin (BHI). Switching from BHI to BIAsp 30 is associated with improved postprandial glucose (PPG) and reduced nocturnal and major hypoglycaemia, although daytime hypoglycaemia is higher with BIAsp 30. Intensification of BIAsp 30 can be achieved by increasing the number of daily doses up to three times daily with meals. Therefore, BIAsp 30 provides an intensification option for individuals who are not achieving control with basal insulin and would prefer the simplicity of a single biphasic insulin instead of progressing to a basal-bolus approach. BIAsp 30 has a simple dose-titration algorithm, which enables patients to effectively self-titrate their insulin dose. Cost-effectiveness analyses have demonstrated that BIAsp 30 is cost effective or dominant compared with BHI 30 or insulin glargine in a number of healthcare settings. In conclusion, BIAsp 30 offers a simple and flexible option for insulin initiation and intensification that provides coverage of both fasting and prandial glucose.",
+            "id": "646c00405e96825f791038b4",
+            "authorities": [
+            
+            ],
+            "attachments": [
+            
+            ],
+            "locations": [
+            
+            ],
+            "thumbnail": null,
+            "large_thumbnail": null
+          }
+        ]
+      },
+      {
+        "id": "646c00415e96825f791038b7",
+        "internal_identifier": "figshare_id:23071886",
+        "status": "active",
+        "record_type": 0,
+        "created_at": "2023-05-23T11:52:32.999+12:00",
+        "updated_at": "2023-05-23T11:52:33.004+12:00",
+        "record_id": 83481,
+        "concept_ids": [
+        
+        ],
+        "concept_ids_str": [
+        
+        ],
+        "title": "Review: Post-Traumatic Urbanism: Architectural Design",
+        "alternate_title": [
+        
+        ],
+        "description": "No description available",
+        "additional_description": [
+        
+        ],
+        "content_partner": [
+        
+        ],
+        "display_content_partner": null,
+        "collection_title": [
+        
+        ],
+        "collection": [
+        
+        ],
+        "attachment_name": "",
+        "lat_lng": [
+        
+        ],
+        "has_lat_lng": false,
+        "placename": [
+        
+        ],
+        "display_collection": null,
+        "primary_collection": [
+        
+        ],
+        "contributing_partner": [
+        
+        ],
+        "auto_tag": [
+        
+        ],
+        "category": [
+        
+        ],
+        "creator": [
+        
+        ],
+        "contributor": [
+        
+        ],
+        "copyright": [
+        
+        ],
+        "citation": [
+        
+        ],
+        "credit_creator": null,
+        "language": [
+        
+        ],
+        "provenance": null,
+        "publisher": [
+        
+        ],
+        "rights": null,
+        "usage": [
+        
+        ],
+        "source": [
+        
+        ],
+        "tag": [
+        
+        ],
+        "thesis_level": null,
+        "holding": [
+        
+        ],
+        "library_collection": [
+        
+        ],
+        "shelf_location": null,
+        "eprints_type": [
+        
+        ],
+        "fulltext": null,
+        "text": null,
+        "copy": "Review: Post-Traumatic Urbanism: Architectural Design No description available 23071886",
+        "has_version": [
+        
+        ],
+        "license": null,
+        "relation": [
+        
+        ],
+        "is_part_of": [
+        
+        ],
+        "is_replaced_by": "Unknown",
+        "replaces": "Unknown",
+        "is_required_by": null,
+        "is_version_of": null,
+        "table_of_contents": null,
+        "availability_id": null,
+        "availability_id_str": null,
+        "access_rights": null,
+        "dc_type": [
+        
+        ],
+        "dnz_type": "Unknown",
+        "display_date": null,
+        "format": [
+        
+        ],
+        "dc_identifier": [
+          23071886
+        ],
+        "is_natlib_record": null,
+        "is_catalog_record": "Unknown",
+        "is_commercial_use": null,
+        "date": [
+        
+        ],
+        "date_str": [
+        
+        ],
+        "sort_date": null,
+        "sort_date_str": null,
+        "syndication_date": null,
+        "syndication_date_str": null,
+        "published_date": [
+        
+        ],
+        "published_date_str": [
+        
+        ],
+        "year": [
+        
+        ],
+        "decade": [
+        
+        ],
+        "century": [
+        
+        ],
+        "landing_url": null,
+        "rights_url": [
+        
+        ],
+        "origin_url": null,
+        "metadata_url": null,
+        "object_url": null,
+        "atl_free_download": null,
+        "atl_physical_viewability": null,
+        "atl_purchasable": null,
+        "atl_purchasable_download": null,
+        "atl_location_code": null,
+        "atl_usage_code": null,
+        "anzsrc_code": null,
+        "marsden_code": [
+        
+        ],
+        "subject": [
+        
+        ],
+        "coverage": [
+        
+        ],
+        "autotag_events": [
+        
+        ],
+        "autotag_organisations": [
+        
+        ],
+        "autotag_people": [
+        
+        ],
+        "autotag_places": [
+        
+        ],
+        "online_child_count": null,
+        "online_child_count_str": null,
+        "child_count": null,
+        "child_count_str": null,
+        "tapuhi_root_id": null,
+        "physical_restrictions": null,
+        "thumbnail_url": null,
+        "large_thumbnail_url": null,
+        "source_provider_name": null,
+        "source_contributor_name": [
+        
+        ],
+        "source_website_name": null,
+        "source_url": "/records/83481/source",
+        "job_id": null,
+        "available_thumbnail": false,
+        "available_large_thumbnail": false,
+        "has_large_thumbnail_url": null,
+        "collection_any_id": [
+        
+        ],
+        "collection_any_id_str": [
+        
+        ],
+        "broad_related_authority_text": [
+        
+        ],
+        "broad_related_authority_id": [
+        
+        ],
+        "broad_related_authority_id_str": [
+        
+        ],
+        "iwihapu_authority_text": [
+        
+        ],
+        "iwihapu_authority_id": [
+        
+        ],
+        "iwihapu_authority_id_str": [
+        
+        ],
+        "name_authority_text": [
+        
+        ],
+        "name_authority_id": [
+        
+        ],
+        "name_authority_id_str": [
+        
+        ],
+        "place_authority_text": [
+        
+        ],
+        "place_authority_id": [
+        
+        ],
+        "place_authority_id_str": [
+        
+        ],
+        "recordtype_authority_text": [
+        
+        ],
+        "recordtype_authority_id": [
+        
+        ],
+        "recordtype_authority_id_str": [
+        
+        ],
+        "subject_authority_text": [
+        
+        ],
+        "subject_authority_id": [
+        
+        ],
+        "subject_authority_id_str": [
+        
+        ],
+        "imagetype_authority_text": [
+        
+        ],
+        "imagetype_authority_id": [
+        
+        ],
+        "imagetype_authority_id_str": [
+        
+        ],
+        "broader_term_text": [
+        
+        ],
+        "broader_term_id": [
+        
+        ],
+        "broader_term_id_str": [
+        
+        ],
+        "narrower_term_text": [
+        
+        ],
+        "narrower_term_id": [
+        
+        ],
+        "narrower_term_id_str": [
+        
+        ],
+        "preferred_term_text": [
+        
+        ],
+        "preferred_term_id": [
+        
+        ],
+        "preferred_term_id_str": [
+        
+        ],
+        "related_term_text": [
+        
+        ],
+        "related_term_id": [
+        
+        ],
+        "related_term_id_str": [
+        
+        ],
+        "unpreferred_term_text": [
+        
+        ],
+        "unpreferred_term_id": [
+        
+        ],
+        "unpreferred_term_id_str": [
+        
+        ],
+        "series_parent_text": [
+        
+        ],
+        "series_parent_id": [
+        
+        ],
+        "series_parent_id_str": [
+        
+        ],
+        "child_series_text": [
+        
+        ],
+        "child_series_id": [
+        
+        ],
+        "child_series_id_str": [
+        
+        ],
+        "collection_parent_text": [
+        
+        ],
+        "collection_parent_id": [
+        
+        ],
+        "collection_parent_id_str": [
+        
+        ],
+        "collection_root_text": [
+        
+        ],
+        "collection_root_id": [
+        
+        ],
+        "collection_root_id_str": [
+        
+        ],
+        "collection_mid_text": [
+        
+        ],
+        "collection_mid_id": [
+        
+        ],
+        "collection_mid_id_str": [
+        
+        ],
+        "ndha_rights": [
+        
+        ],
+        "ndha_rights_str": [
+        
+        ],
+        "fragments": [
+          {
+            "_id": "646c00405e96825f791038b6",
+            "priority": 0,
+            "_type": "SupplejackApi::ApiRecord::RecordFragment",
+            "title": "Review: Post-Traumatic Urbanism: Architectural Design",
+            "dc_identifier": [
+              23071886
+            ],
+            "source_id": "test",
+            "updated_at": "2023-05-24T03:16:25.578Z",
+            "created_at": "2023-05-22T23:52:32.999Z",
+            "description": "No description available",
+            "id": "646c00405e96825f791038b6",
+            "authorities": [
+            
+            ],
+            "attachments": [
+            
+            ],
+            "locations": [
+            
+            ],
+            "thumbnail": null,
+            "large_thumbnail": null
+          }
+        ]
+      },
+      {
+        "id": "646c00415e96825f791038b9",
+        "internal_identifier": "figshare_id:23071577",
+        "status": "active",
+        "record_type": 0,
+        "created_at": "2023-05-23T11:52:33.019+12:00",
+        "updated_at": "2023-05-23T11:52:33.024+12:00",
+        "record_id": 83484,
+        "concept_ids": [
+        
+        ],
+        "concept_ids_str": [
+        
+        ],
+        "title": "A vaccine against Alzheimer's disease",
+        "alternate_title": [
+        
+        ],
+        "description": "No description available",
+        "additional_description": [
+        
+        ],
+        "content_partner": [
+        
+        ],
+        "display_content_partner": null,
+        "collection_title": [
+        
+        ],
+        "collection": [
+        
+        ],
+        "attachment_name": "",
+        "lat_lng": [
+        
+        ],
+        "has_lat_lng": false,
+        "placename": [
+        
+        ],
+        "display_collection": null,
+        "primary_collection": [
+        
+        ],
+        "contributing_partner": [
+        
+        ],
+        "auto_tag": [
+        
+        ],
+        "category": [
+        
+        ],
+        "creator": [
+        
+        ],
+        "contributor": [
+        
+        ],
+        "copyright": [
+        
+        ],
+        "citation": [
+        
+        ],
+        "credit_creator": null,
+        "language": [
+        
+        ],
+        "provenance": null,
+        "publisher": [
+        
+        ],
+        "rights": null,
+        "usage": [
+        
+        ],
+        "source": [
+        
+        ],
+        "tag": [
+        
+        ],
+        "thesis_level": null,
+        "holding": [
+        
+        ],
+        "library_collection": [
+        
+        ],
+        "shelf_location": null,
+        "eprints_type": [
+        
+        ],
+        "fulltext": null,
+        "text": null,
+        "copy": "A vaccine against Alzheimer's disease No description available 23071577",
+        "has_version": [
+        
+        ],
+        "license": null,
+        "relation": [
+        
+        ],
+        "is_part_of": [
+        
+        ],
+        "is_replaced_by": "Unknown",
+        "replaces": "Unknown",
+        "is_required_by": null,
+        "is_version_of": null,
+        "table_of_contents": null,
+        "availability_id": null,
+        "availability_id_str": null,
+        "access_rights": null,
+        "dc_type": [
+        
+        ],
+        "dnz_type": "Unknown",
+        "display_date": null,
+        "format": [
+        
+        ],
+        "dc_identifier": [
+          23071577
+        ],
+        "is_natlib_record": null,
+        "is_catalog_record": "Unknown",
+        "is_commercial_use": null,
+        "date": [
+        
+        ],
+        "date_str": [
+        
+        ],
+        "sort_date": null,
+        "sort_date_str": null,
+        "syndication_date": null,
+        "syndication_date_str": null,
+        "published_date": [
+        
+        ],
+        "published_date_str": [
+        
+        ],
+        "year": [
+        
+        ],
+        "decade": [
+        
+        ],
+        "century": [
+        
+        ],
+        "landing_url": null,
+        "rights_url": [
+        
+        ],
+        "origin_url": null,
+        "metadata_url": null,
+        "object_url": null,
+        "atl_free_download": null,
+        "atl_physical_viewability": null,
+        "atl_purchasable": null,
+        "atl_purchasable_download": null,
+        "atl_location_code": null,
+        "atl_usage_code": null,
+        "anzsrc_code": null,
+        "marsden_code": [
+        
+        ],
+        "subject": [
+        
+        ],
+        "coverage": [
+        
+        ],
+        "autotag_events": [
+        
+        ],
+        "autotag_organisations": [
+        
+        ],
+        "autotag_people": [
+        
+        ],
+        "autotag_places": [
+        
+        ],
+        "online_child_count": null,
+        "online_child_count_str": null,
+        "child_count": null,
+        "child_count_str": null,
+        "tapuhi_root_id": null,
+        "physical_restrictions": null,
+        "thumbnail_url": null,
+        "large_thumbnail_url": null,
+        "source_provider_name": null,
+        "source_contributor_name": [
+        
+        ],
+        "source_website_name": null,
+        "source_url": "/records/83484/source",
+        "job_id": null,
+        "available_thumbnail": false,
+        "available_large_thumbnail": false,
+        "has_large_thumbnail_url": null,
+        "collection_any_id": [
+        
+        ],
+        "collection_any_id_str": [
+        
+        ],
+        "broad_related_authority_text": [
+        
+        ],
+        "broad_related_authority_id": [
+        
+        ],
+        "broad_related_authority_id_str": [
+        
+        ],
+        "iwihapu_authority_text": [
+        
+        ],
+        "iwihapu_authority_id": [
+        
+        ],
+        "iwihapu_authority_id_str": [
+        
+        ],
+        "name_authority_text": [
+        
+        ],
+        "name_authority_id": [
+        
+        ],
+        "name_authority_id_str": [
+        
+        ],
+        "place_authority_text": [
+        
+        ],
+        "place_authority_id": [
+        
+        ],
+        "place_authority_id_str": [
+        
+        ],
+        "recordtype_authority_text": [
+        
+        ],
+        "recordtype_authority_id": [
+        
+        ],
+        "recordtype_authority_id_str": [
+        
+        ],
+        "subject_authority_text": [
+        
+        ],
+        "subject_authority_id": [
+        
+        ],
+        "subject_authority_id_str": [
+        
+        ],
+        "imagetype_authority_text": [
+        
+        ],
+        "imagetype_authority_id": [
+        
+        ],
+        "imagetype_authority_id_str": [
+        
+        ],
+        "broader_term_text": [
+        
+        ],
+        "broader_term_id": [
+        
+        ],
+        "broader_term_id_str": [
+        
+        ],
+        "narrower_term_text": [
+        
+        ],
+        "narrower_term_id": [
+        
+        ],
+        "narrower_term_id_str": [
+        
+        ],
+        "preferred_term_text": [
+        
+        ],
+        "preferred_term_id": [
+        
+        ],
+        "preferred_term_id_str": [
+        
+        ],
+        "related_term_text": [
+        
+        ],
+        "related_term_id": [
+        
+        ],
+        "related_term_id_str": [
+        
+        ],
+        "unpreferred_term_text": [
+        
+        ],
+        "unpreferred_term_id": [
+        
+        ],
+        "unpreferred_term_id_str": [
+        
+        ],
+        "series_parent_text": [
+        
+        ],
+        "series_parent_id": [
+        
+        ],
+        "series_parent_id_str": [
+        
+        ],
+        "child_series_text": [
+        
+        ],
+        "child_series_id": [
+        
+        ],
+        "child_series_id_str": [
+        
+        ],
+        "collection_parent_text": [
+        
+        ],
+        "collection_parent_id": [
+        
+        ],
+        "collection_parent_id_str": [
+        
+        ],
+        "collection_root_text": [
+        
+        ],
+        "collection_root_id": [
+        
+        ],
+        "collection_root_id_str": [
+        
+        ],
+        "collection_mid_text": [
+        
+        ],
+        "collection_mid_id": [
+        
+        ],
+        "collection_mid_id_str": [
+        
+        ],
+        "ndha_rights": [
+        
+        ],
+        "ndha_rights_str": [
+        
+        ],
+        "fragments": [
+          {
+            "_id": "646c00415e96825f791038b8",
+            "priority": 0,
+            "_type": "SupplejackApi::ApiRecord::RecordFragment",
+            "title": "A vaccine against Alzheimer's disease",
+            "dc_identifier": [
+              23071577
+            ],
+            "source_id": "test",
+            "updated_at": "2023-05-24T03:16:25.595Z",
+            "created_at": "2023-05-22T23:52:33.018Z",
+            "description": "No description available",
+            "id": "646c00415e96825f791038b8",
+            "authorities": [
+            
+            ],
+            "attachments": [
+            
+            ],
+            "locations": [
+            
+            ],
+            "thumbnail": null,
+            "large_thumbnail": null
+          }
+        ]
+      },
+      {
+        "id": "646c00415e96825f791038bb",
+        "internal_identifier": "figshare_id:23071553",
+        "status": "active",
+        "record_type": 0,
+        "created_at": "2023-05-23T11:52:33.041+12:00",
+        "updated_at": "2023-05-23T11:52:33.046+12:00",
+        "record_id": 83487,
+        "concept_ids": [
+        
+        ],
+        "concept_ids_str": [
+        
+        ],
+        "title": "Review of the Law of Negligence Report - August 2002",
+        "alternate_title": [
+        
+        ],
+        "description": "No description available",
+        "additional_description": [
+        
+        ],
+        "content_partner": [
+        
+        ],
+        "display_content_partner": null,
+        "collection_title": [
+        
+        ],
+        "collection": [
+        
+        ],
+        "attachment_name": "",
+        "lat_lng": [
+        
+        ],
+        "has_lat_lng": false,
+        "placename": [
+        
+        ],
+        "display_collection": null,
+        "primary_collection": [
+        
+        ],
+        "contributing_partner": [
+        
+        ],
+        "auto_tag": [
+        
+        ],
+        "category": [
+        
+        ],
+        "creator": [
+        
+        ],
+        "contributor": [
+        
+        ],
+        "copyright": [
+        
+        ],
+        "citation": [
+        
+        ],
+        "credit_creator": null,
+        "language": [
+        
+        ],
+        "provenance": null,
+        "publisher": [
+        
+        ],
+        "rights": null,
+        "usage": [
+        
+        ],
+        "source": [
+        
+        ],
+        "tag": [
+        
+        ],
+        "thesis_level": null,
+        "holding": [
+        
+        ],
+        "library_collection": [
+        
+        ],
+        "shelf_location": null,
+        "eprints_type": [
+        
+        ],
+        "fulltext": null,
+        "text": null,
+        "copy": "Review of the Law of Negligence Report - August 2002 No description available 23071553",
+        "has_version": [
+        
+        ],
+        "license": null,
+        "relation": [
+        
+        ],
+        "is_part_of": [
+        
+        ],
+        "is_replaced_by": "Unknown",
+        "replaces": "Unknown",
+        "is_required_by": null,
+        "is_version_of": null,
+        "table_of_contents": null,
+        "availability_id": null,
+        "availability_id_str": null,
+        "access_rights": null,
+        "dc_type": [
+        
+        ],
+        "dnz_type": "Unknown",
+        "display_date": null,
+        "format": [
+        
+        ],
+        "dc_identifier": [
+          23071553
+        ],
+        "is_natlib_record": null,
+        "is_catalog_record": "Unknown",
+        "is_commercial_use": null,
+        "date": [
+        
+        ],
+        "date_str": [
+        
+        ],
+        "sort_date": null,
+        "sort_date_str": null,
+        "syndication_date": null,
+        "syndication_date_str": null,
+        "published_date": [
+        
+        ],
+        "published_date_str": [
+        
+        ],
+        "year": [
+        
+        ],
+        "decade": [
+        
+        ],
+        "century": [
+        
+        ],
+        "landing_url": null,
+        "rights_url": [
+        
+        ],
+        "origin_url": null,
+        "metadata_url": null,
+        "object_url": null,
+        "atl_free_download": null,
+        "atl_physical_viewability": null,
+        "atl_purchasable": null,
+        "atl_purchasable_download": null,
+        "atl_location_code": null,
+        "atl_usage_code": null,
+        "anzsrc_code": null,
+        "marsden_code": [
+        
+        ],
+        "subject": [
+        
+        ],
+        "coverage": [
+        
+        ],
+        "autotag_events": [
+        
+        ],
+        "autotag_organisations": [
+        
+        ],
+        "autotag_people": [
+        
+        ],
+        "autotag_places": [
+        
+        ],
+        "online_child_count": null,
+        "online_child_count_str": null,
+        "child_count": null,
+        "child_count_str": null,
+        "tapuhi_root_id": null,
+        "physical_restrictions": null,
+        "thumbnail_url": null,
+        "large_thumbnail_url": null,
+        "source_provider_name": null,
+        "source_contributor_name": [
+        
+        ],
+        "source_website_name": null,
+        "source_url": "/records/83487/source",
+        "job_id": null,
+        "available_thumbnail": false,
+        "available_large_thumbnail": false,
+        "has_large_thumbnail_url": null,
+        "collection_any_id": [
+        
+        ],
+        "collection_any_id_str": [
+        
+        ],
+        "broad_related_authority_text": [
+        
+        ],
+        "broad_related_authority_id": [
+        
+        ],
+        "broad_related_authority_id_str": [
+        
+        ],
+        "iwihapu_authority_text": [
+        
+        ],
+        "iwihapu_authority_id": [
+        
+        ],
+        "iwihapu_authority_id_str": [
+        
+        ],
+        "name_authority_text": [
+        
+        ],
+        "name_authority_id": [
+        
+        ],
+        "name_authority_id_str": [
+        
+        ],
+        "place_authority_text": [
+        
+        ],
+        "place_authority_id": [
+        
+        ],
+        "place_authority_id_str": [
+        
+        ],
+        "recordtype_authority_text": [
+        
+        ],
+        "recordtype_authority_id": [
+        
+        ],
+        "recordtype_authority_id_str": [
+        
+        ],
+        "subject_authority_text": [
+        
+        ],
+        "subject_authority_id": [
+        
+        ],
+        "subject_authority_id_str": [
+        
+        ],
+        "imagetype_authority_text": [
+        
+        ],
+        "imagetype_authority_id": [
+        
+        ],
+        "imagetype_authority_id_str": [
+        
+        ],
+        "broader_term_text": [
+        
+        ],
+        "broader_term_id": [
+        
+        ],
+        "broader_term_id_str": [
+        
+        ],
+        "narrower_term_text": [
+        
+        ],
+        "narrower_term_id": [
+        
+        ],
+        "narrower_term_id_str": [
+        
+        ],
+        "preferred_term_text": [
+        
+        ],
+        "preferred_term_id": [
+        
+        ],
+        "preferred_term_id_str": [
+        
+        ],
+        "related_term_text": [
+        
+        ],
+        "related_term_id": [
+        
+        ],
+        "related_term_id_str": [
+        
+        ],
+        "unpreferred_term_text": [
+        
+        ],
+        "unpreferred_term_id": [
+        
+        ],
+        "unpreferred_term_id_str": [
+        
+        ],
+        "series_parent_text": [
+        
+        ],
+        "series_parent_id": [
+        
+        ],
+        "series_parent_id_str": [
+        
+        ],
+        "child_series_text": [
+        
+        ],
+        "child_series_id": [
+        
+        ],
+        "child_series_id_str": [
+        
+        ],
+        "collection_parent_text": [
+        
+        ],
+        "collection_parent_id": [
+        
+        ],
+        "collection_parent_id_str": [
+        
+        ],
+        "collection_root_text": [
+        
+        ],
+        "collection_root_id": [
+        
+        ],
+        "collection_root_id_str": [
+        
+        ],
+        "collection_mid_text": [
+        
+        ],
+        "collection_mid_id": [
+        
+        ],
+        "collection_mid_id_str": [
+        
+        ],
+        "ndha_rights": [
+        
+        ],
+        "ndha_rights_str": [
+        
+        ],
+        "fragments": [
+          {
+            "_id": "646c00415e96825f791038ba",
+            "priority": 0,
+            "_type": "SupplejackApi::ApiRecord::RecordFragment",
+            "title": "Review of the Law of Negligence Report - August 2002",
+            "dc_identifier": [
+              23071553
+            ],
+            "source_id": "test",
+            "updated_at": "2023-05-24T03:16:25.613Z",
+            "created_at": "2023-05-22T23:52:33.040Z",
+            "description": "No description available",
+            "id": "646c00415e96825f791038ba",
+            "authorities": [
+            
+            ],
+            "attachments": [
+            
+            ],
+            "locations": [
+            
+            ],
+            "thumbnail": null,
+            "large_thumbnail": null
+          }
+        ]
+      },
+      {
+        "id": "646c00415e96825f791038bd",
+        "internal_identifier": "figshare_id:23071328",
+        "status": "active",
+        "record_type": 0,
+        "created_at": "2023-05-23T11:52:33.061+12:00",
+        "updated_at": "2023-05-23T11:52:33.066+12:00",
+        "record_id": 83490,
+        "concept_ids": [
+        
+        ],
+        "concept_ids_str": [
+        
+        ],
+        "title": "Symptoms of a crisis? Trust, risk and medicine: review essay",
+        "alternate_title": [
+        
+        ],
+        "description": "No description available",
+        "additional_description": [
+        
+        ],
+        "content_partner": [
+        
+        ],
+        "display_content_partner": null,
+        "collection_title": [
+        
+        ],
+        "collection": [
+        
+        ],
+        "attachment_name": "",
+        "lat_lng": [
+        
+        ],
+        "has_lat_lng": false,
+        "placename": [
+        
+        ],
+        "display_collection": null,
+        "primary_collection": [
+        
+        ],
+        "contributing_partner": [
+        
+        ],
+        "auto_tag": [
+        
+        ],
+        "category": [
+        
+        ],
+        "creator": [
+        
+        ],
+        "contributor": [
+        
+        ],
+        "copyright": [
+        
+        ],
+        "citation": [
+        
+        ],
+        "credit_creator": null,
+        "language": [
+        
+        ],
+        "provenance": null,
+        "publisher": [
+        
+        ],
+        "rights": null,
+        "usage": [
+        
+        ],
+        "source": [
+        
+        ],
+        "tag": [
+        
+        ],
+        "thesis_level": null,
+        "holding": [
+        
+        ],
+        "library_collection": [
+        
+        ],
+        "shelf_location": null,
+        "eprints_type": [
+        
+        ],
+        "fulltext": null,
+        "text": null,
+        "copy": "Symptoms of a crisis? Trust, risk and medicine: review essay No description available 23071328",
+        "has_version": [
+        
+        ],
+        "license": null,
+        "relation": [
+        
+        ],
+        "is_part_of": [
+        
+        ],
+        "is_replaced_by": "Unknown",
+        "replaces": "Unknown",
+        "is_required_by": null,
+        "is_version_of": null,
+        "table_of_contents": null,
+        "availability_id": null,
+        "availability_id_str": null,
+        "access_rights": null,
+        "dc_type": [
+        
+        ],
+        "dnz_type": "Unknown",
+        "display_date": null,
+        "format": [
+        
+        ],
+        "dc_identifier": [
+          23071328
+        ],
+        "is_natlib_record": null,
+        "is_catalog_record": "Unknown",
+        "is_commercial_use": null,
+        "date": [
+        
+        ],
+        "date_str": [
+        
+        ],
+        "sort_date": null,
+        "sort_date_str": null,
+        "syndication_date": null,
+        "syndication_date_str": null,
+        "published_date": [
+        
+        ],
+        "published_date_str": [
+        
+        ],
+        "year": [
+        
+        ],
+        "decade": [
+        
+        ],
+        "century": [
+        
+        ],
+        "landing_url": null,
+        "rights_url": [
+        
+        ],
+        "origin_url": null,
+        "metadata_url": null,
+        "object_url": null,
+        "atl_free_download": null,
+        "atl_physical_viewability": null,
+        "atl_purchasable": null,
+        "atl_purchasable_download": null,
+        "atl_location_code": null,
+        "atl_usage_code": null,
+        "anzsrc_code": null,
+        "marsden_code": [
+        
+        ],
+        "subject": [
+        
+        ],
+        "coverage": [
+        
+        ],
+        "autotag_events": [
+        
+        ],
+        "autotag_organisations": [
+        
+        ],
+        "autotag_people": [
+        
+        ],
+        "autotag_places": [
+        
+        ],
+        "online_child_count": null,
+        "online_child_count_str": null,
+        "child_count": null,
+        "child_count_str": null,
+        "tapuhi_root_id": null,
+        "physical_restrictions": null,
+        "thumbnail_url": null,
+        "large_thumbnail_url": null,
+        "source_provider_name": null,
+        "source_contributor_name": [
+        
+        ],
+        "source_website_name": null,
+        "source_url": "/records/83490/source",
+        "job_id": null,
+        "available_thumbnail": false,
+        "available_large_thumbnail": false,
+        "has_large_thumbnail_url": null,
+        "collection_any_id": [
+        
+        ],
+        "collection_any_id_str": [
+        
+        ],
+        "broad_related_authority_text": [
+        
+        ],
+        "broad_related_authority_id": [
+        
+        ],
+        "broad_related_authority_id_str": [
+        
+        ],
+        "iwihapu_authority_text": [
+        
+        ],
+        "iwihapu_authority_id": [
+        
+        ],
+        "iwihapu_authority_id_str": [
+        
+        ],
+        "name_authority_text": [
+        
+        ],
+        "name_authority_id": [
+        
+        ],
+        "name_authority_id_str": [
+        
+        ],
+        "place_authority_text": [
+        
+        ],
+        "place_authority_id": [
+        
+        ],
+        "place_authority_id_str": [
+        
+        ],
+        "recordtype_authority_text": [
+        
+        ],
+        "recordtype_authority_id": [
+        
+        ],
+        "recordtype_authority_id_str": [
+        
+        ],
+        "subject_authority_text": [
+        
+        ],
+        "subject_authority_id": [
+        
+        ],
+        "subject_authority_id_str": [
+        
+        ],
+        "imagetype_authority_text": [
+        
+        ],
+        "imagetype_authority_id": [
+        
+        ],
+        "imagetype_authority_id_str": [
+        
+        ],
+        "broader_term_text": [
+        
+        ],
+        "broader_term_id": [
+        
+        ],
+        "broader_term_id_str": [
+        
+        ],
+        "narrower_term_text": [
+        
+        ],
+        "narrower_term_id": [
+        
+        ],
+        "narrower_term_id_str": [
+        
+        ],
+        "preferred_term_text": [
+        
+        ],
+        "preferred_term_id": [
+        
+        ],
+        "preferred_term_id_str": [
+        
+        ],
+        "related_term_text": [
+        
+        ],
+        "related_term_id": [
+        
+        ],
+        "related_term_id_str": [
+        
+        ],
+        "unpreferred_term_text": [
+        
+        ],
+        "unpreferred_term_id": [
+        
+        ],
+        "unpreferred_term_id_str": [
+        
+        ],
+        "series_parent_text": [
+        
+        ],
+        "series_parent_id": [
+        
+        ],
+        "series_parent_id_str": [
+        
+        ],
+        "child_series_text": [
+        
+        ],
+        "child_series_id": [
+        
+        ],
+        "child_series_id_str": [
+        
+        ],
+        "collection_parent_text": [
+        
+        ],
+        "collection_parent_id": [
+        
+        ],
+        "collection_parent_id_str": [
+        
+        ],
+        "collection_root_text": [
+        
+        ],
+        "collection_root_id": [
+        
+        ],
+        "collection_root_id_str": [
+        
+        ],
+        "collection_mid_text": [
+        
+        ],
+        "collection_mid_id": [
+        
+        ],
+        "collection_mid_id_str": [
+        
+        ],
+        "ndha_rights": [
+        
+        ],
+        "ndha_rights_str": [
+        
+        ],
+        "fragments": [
+          {
+            "_id": "646c00415e96825f791038bc",
+            "priority": 0,
+            "_type": "SupplejackApi::ApiRecord::RecordFragment",
+            "title": "Symptoms of a crisis? Trust, risk and medicine: review essay",
+            "dc_identifier": [
+              23071328
+            ],
+            "source_id": "test",
+            "updated_at": "2023-05-24T03:16:25.628Z",
+            "created_at": "2023-05-22T23:52:33.061Z",
+            "description": "No description available",
+            "id": "646c00415e96825f791038bc",
+            "authorities": [
+            
+            ],
+            "attachments": [
+            
+            ],
+            "locations": [
+            
+            ],
+            "thumbnail": null,
+            "large_thumbnail": null
+          }
+        ]
+      },
+      {
+        "id": "646c00415e96825f791038bf",
+        "internal_identifier": "figshare_id:23071295",
+        "status": "active",
+        "record_type": 0,
+        "created_at": "2023-05-23T11:52:33.081+12:00",
+        "updated_at": "2023-05-23T11:52:33.086+12:00",
+        "record_id": 83493,
+        "concept_ids": [
+        
+        ],
+        "concept_ids_str": [
+        
+        ],
+        "title": "Zoological Gardens of Australia and New Zealand",
+        "alternate_title": [
+        
+        ],
+        "description": "No abstract available.",
+        "additional_description": [
+        
+        ],
+        "content_partner": [
+        
+        ],
+        "display_content_partner": null,
+        "collection_title": [
+        
+        ],
+        "collection": [
+        
+        ],
+        "attachment_name": "",
+        "lat_lng": [
+        
+        ],
+        "has_lat_lng": false,
+        "placename": [
+        
+        ],
+        "display_collection": null,
+        "primary_collection": [
+        
+        ],
+        "contributing_partner": [
+        
+        ],
+        "auto_tag": [
+        
+        ],
+        "category": [
+        
+        ],
+        "creator": [
+        
+        ],
+        "contributor": [
+        
+        ],
+        "copyright": [
+        
+        ],
+        "citation": [
+        
+        ],
+        "credit_creator": null,
+        "language": [
+        
+        ],
+        "provenance": null,
+        "publisher": [
+        
+        ],
+        "rights": null,
+        "usage": [
+        
+        ],
+        "source": [
+        
+        ],
+        "tag": [
+        
+        ],
+        "thesis_level": null,
+        "holding": [
+        
+        ],
+        "library_collection": [
+        
+        ],
+        "shelf_location": null,
+        "eprints_type": [
+        
+        ],
+        "fulltext": null,
+        "text": null,
+        "copy": "Zoological Gardens of Australia and New Zealand No abstract available. 23071295",
+        "has_version": [
+        
+        ],
+        "license": null,
+        "relation": [
+        
+        ],
+        "is_part_of": [
+        
+        ],
+        "is_replaced_by": "Unknown",
+        "replaces": "Unknown",
+        "is_required_by": null,
+        "is_version_of": null,
+        "table_of_contents": null,
+        "availability_id": null,
+        "availability_id_str": null,
+        "access_rights": null,
+        "dc_type": [
+        
+        ],
+        "dnz_type": "Unknown",
+        "display_date": null,
+        "format": [
+        
+        ],
+        "dc_identifier": [
+          23071295
+        ],
+        "is_natlib_record": null,
+        "is_catalog_record": "Unknown",
+        "is_commercial_use": null,
+        "date": [
+        
+        ],
+        "date_str": [
+        
+        ],
+        "sort_date": null,
+        "sort_date_str": null,
+        "syndication_date": null,
+        "syndication_date_str": null,
+        "published_date": [
+        
+        ],
+        "published_date_str": [
+        
+        ],
+        "year": [
+        
+        ],
+        "decade": [
+        
+        ],
+        "century": [
+        
+        ],
+        "landing_url": null,
+        "rights_url": [
+        
+        ],
+        "origin_url": null,
+        "metadata_url": null,
+        "object_url": null,
+        "atl_free_download": null,
+        "atl_physical_viewability": null,
+        "atl_purchasable": null,
+        "atl_purchasable_download": null,
+        "atl_location_code": null,
+        "atl_usage_code": null,
+        "anzsrc_code": null,
+        "marsden_code": [
+        
+        ],
+        "subject": [
+        
+        ],
+        "coverage": [
+        
+        ],
+        "autotag_events": [
+        
+        ],
+        "autotag_organisations": [
+        
+        ],
+        "autotag_people": [
+        
+        ],
+        "autotag_places": [
+        
+        ],
+        "online_child_count": null,
+        "online_child_count_str": null,
+        "child_count": null,
+        "child_count_str": null,
+        "tapuhi_root_id": null,
+        "physical_restrictions": null,
+        "thumbnail_url": null,
+        "large_thumbnail_url": null,
+        "source_provider_name": null,
+        "source_contributor_name": [
+        
+        ],
+        "source_website_name": null,
+        "source_url": "/records/83493/source",
+        "job_id": null,
+        "available_thumbnail": false,
+        "available_large_thumbnail": false,
+        "has_large_thumbnail_url": null,
+        "collection_any_id": [
+        
+        ],
+        "collection_any_id_str": [
+        
+        ],
+        "broad_related_authority_text": [
+        
+        ],
+        "broad_related_authority_id": [
+        
+        ],
+        "broad_related_authority_id_str": [
+        
+        ],
+        "iwihapu_authority_text": [
+        
+        ],
+        "iwihapu_authority_id": [
+        
+        ],
+        "iwihapu_authority_id_str": [
+        
+        ],
+        "name_authority_text": [
+        
+        ],
+        "name_authority_id": [
+        
+        ],
+        "name_authority_id_str": [
+        
+        ],
+        "place_authority_text": [
+        
+        ],
+        "place_authority_id": [
+        
+        ],
+        "place_authority_id_str": [
+        
+        ],
+        "recordtype_authority_text": [
+        
+        ],
+        "recordtype_authority_id": [
+        
+        ],
+        "recordtype_authority_id_str": [
+        
+        ],
+        "subject_authority_text": [
+        
+        ],
+        "subject_authority_id": [
+        
+        ],
+        "subject_authority_id_str": [
+        
+        ],
+        "imagetype_authority_text": [
+        
+        ],
+        "imagetype_authority_id": [
+        
+        ],
+        "imagetype_authority_id_str": [
+        
+        ],
+        "broader_term_text": [
+        
+        ],
+        "broader_term_id": [
+        
+        ],
+        "broader_term_id_str": [
+        
+        ],
+        "narrower_term_text": [
+        
+        ],
+        "narrower_term_id": [
+        
+        ],
+        "narrower_term_id_str": [
+        
+        ],
+        "preferred_term_text": [
+        
+        ],
+        "preferred_term_id": [
+        
+        ],
+        "preferred_term_id_str": [
+        
+        ],
+        "related_term_text": [
+        
+        ],
+        "related_term_id": [
+        
+        ],
+        "related_term_id_str": [
+        
+        ],
+        "unpreferred_term_text": [
+        
+        ],
+        "unpreferred_term_id": [
+        
+        ],
+        "unpreferred_term_id_str": [
+        
+        ],
+        "series_parent_text": [
+        
+        ],
+        "series_parent_id": [
+        
+        ],
+        "series_parent_id_str": [
+        
+        ],
+        "child_series_text": [
+        
+        ],
+        "child_series_id": [
+        
+        ],
+        "child_series_id_str": [
+        
+        ],
+        "collection_parent_text": [
+        
+        ],
+        "collection_parent_id": [
+        
+        ],
+        "collection_parent_id_str": [
+        
+        ],
+        "collection_root_text": [
+        
+        ],
+        "collection_root_id": [
+        
+        ],
+        "collection_root_id_str": [
+        
+        ],
+        "collection_mid_text": [
+        
+        ],
+        "collection_mid_id": [
+        
+        ],
+        "collection_mid_id_str": [
+        
+        ],
+        "ndha_rights": [
+        
+        ],
+        "ndha_rights_str": [
+        
+        ],
+        "fragments": [
+          {
+            "_id": "646c00415e96825f791038be",
+            "priority": 0,
+            "_type": "SupplejackApi::ApiRecord::RecordFragment",
+            "title": "Zoological Gardens of Australia and New Zealand",
+            "dc_identifier": [
+              23071295
+            ],
+            "source_id": "test",
+            "updated_at": "2023-05-24T03:16:25.644Z",
+            "created_at": "2023-05-22T23:52:33.080Z",
+            "description": "No abstract available.",
+            "id": "646c00415e96825f791038be",
+            "authorities": [
+            
+            ],
+            "attachments": [
+            
+            ],
+            "locations": [
+            
+            ],
+            "thumbnail": null,
+            "large_thumbnail": null
+          }
+        ]
+      },
+      {
+        "id": "646c00415e96825f791038c1",
+        "internal_identifier": "figshare_id:23071220",
+        "status": "active",
+        "record_type": 0,
+        "created_at": "2023-05-23T11:52:33.100+12:00",
+        "updated_at": "2023-05-23T11:52:33.105+12:00",
+        "record_id": 83496,
+        "concept_ids": [
+        
+        ],
+        "concept_ids_str": [
+        
+        ],
+        "title": "Communication and the community",
+        "alternate_title": [
+        
+        ],
+        "description": "No description available",
+        "additional_description": [
+        
+        ],
+        "content_partner": [
+        
+        ],
+        "display_content_partner": null,
+        "collection_title": [
+        
+        ],
+        "collection": [
+        
+        ],
+        "attachment_name": "",
+        "lat_lng": [
+        
+        ],
+        "has_lat_lng": false,
+        "placename": [
+        
+        ],
+        "display_collection": null,
+        "primary_collection": [
+        
+        ],
+        "contributing_partner": [
+        
+        ],
+        "auto_tag": [
+        
+        ],
+        "category": [
+        
+        ],
+        "creator": [
+        
+        ],
+        "contributor": [
+        
+        ],
+        "copyright": [
+        
+        ],
+        "citation": [
+        
+        ],
+        "credit_creator": null,
+        "language": [
+        
+        ],
+        "provenance": null,
+        "publisher": [
+        
+        ],
+        "rights": null,
+        "usage": [
+        
+        ],
+        "source": [
+        
+        ],
+        "tag": [
+        
+        ],
+        "thesis_level": null,
+        "holding": [
+        
+        ],
+        "library_collection": [
+        
+        ],
+        "shelf_location": null,
+        "eprints_type": [
+        
+        ],
+        "fulltext": null,
+        "text": null,
+        "copy": "Communication and the community No description available 23071220",
+        "has_version": [
+        
+        ],
+        "license": null,
+        "relation": [
+        
+        ],
+        "is_part_of": [
+        
+        ],
+        "is_replaced_by": "Unknown",
+        "replaces": "Unknown",
+        "is_required_by": null,
+        "is_version_of": null,
+        "table_of_contents": null,
+        "availability_id": null,
+        "availability_id_str": null,
+        "access_rights": null,
+        "dc_type": [
+        
+        ],
+        "dnz_type": "Unknown",
+        "display_date": null,
+        "format": [
+        
+        ],
+        "dc_identifier": [
+          23071220
+        ],
+        "is_natlib_record": null,
+        "is_catalog_record": "Unknown",
+        "is_commercial_use": null,
+        "date": [
+        
+        ],
+        "date_str": [
+        
+        ],
+        "sort_date": null,
+        "sort_date_str": null,
+        "syndication_date": null,
+        "syndication_date_str": null,
+        "published_date": [
+        
+        ],
+        "published_date_str": [
+        
+        ],
+        "year": [
+        
+        ],
+        "decade": [
+        
+        ],
+        "century": [
+        
+        ],
+        "landing_url": null,
+        "rights_url": [
+        
+        ],
+        "origin_url": null,
+        "metadata_url": null,
+        "object_url": null,
+        "atl_free_download": null,
+        "atl_physical_viewability": null,
+        "atl_purchasable": null,
+        "atl_purchasable_download": null,
+        "atl_location_code": null,
+        "atl_usage_code": null,
+        "anzsrc_code": null,
+        "marsden_code": [
+        
+        ],
+        "subject": [
+        
+        ],
+        "coverage": [
+        
+        ],
+        "autotag_events": [
+        
+        ],
+        "autotag_organisations": [
+        
+        ],
+        "autotag_people": [
+        
+        ],
+        "autotag_places": [
+        
+        ],
+        "online_child_count": null,
+        "online_child_count_str": null,
+        "child_count": null,
+        "child_count_str": null,
+        "tapuhi_root_id": null,
+        "physical_restrictions": null,
+        "thumbnail_url": null,
+        "large_thumbnail_url": null,
+        "source_provider_name": null,
+        "source_contributor_name": [
+        
+        ],
+        "source_website_name": null,
+        "source_url": "/records/83496/source",
+        "job_id": null,
+        "available_thumbnail": false,
+        "available_large_thumbnail": false,
+        "has_large_thumbnail_url": null,
+        "collection_any_id": [
+        
+        ],
+        "collection_any_id_str": [
+        
+        ],
+        "broad_related_authority_text": [
+        
+        ],
+        "broad_related_authority_id": [
+        
+        ],
+        "broad_related_authority_id_str": [
+        
+        ],
+        "iwihapu_authority_text": [
+        
+        ],
+        "iwihapu_authority_id": [
+        
+        ],
+        "iwihapu_authority_id_str": [
+        
+        ],
+        "name_authority_text": [
+        
+        ],
+        "name_authority_id": [
+        
+        ],
+        "name_authority_id_str": [
+        
+        ],
+        "place_authority_text": [
+        
+        ],
+        "place_authority_id": [
+        
+        ],
+        "place_authority_id_str": [
+        
+        ],
+        "recordtype_authority_text": [
+        
+        ],
+        "recordtype_authority_id": [
+        
+        ],
+        "recordtype_authority_id_str": [
+        
+        ],
+        "subject_authority_text": [
+        
+        ],
+        "subject_authority_id": [
+        
+        ],
+        "subject_authority_id_str": [
+        
+        ],
+        "imagetype_authority_text": [
+        
+        ],
+        "imagetype_authority_id": [
+        
+        ],
+        "imagetype_authority_id_str": [
+        
+        ],
+        "broader_term_text": [
+        
+        ],
+        "broader_term_id": [
+        
+        ],
+        "broader_term_id_str": [
+        
+        ],
+        "narrower_term_text": [
+        
+        ],
+        "narrower_term_id": [
+        
+        ],
+        "narrower_term_id_str": [
+        
+        ],
+        "preferred_term_text": [
+        
+        ],
+        "preferred_term_id": [
+        
+        ],
+        "preferred_term_id_str": [
+        
+        ],
+        "related_term_text": [
+        
+        ],
+        "related_term_id": [
+        
+        ],
+        "related_term_id_str": [
+        
+        ],
+        "unpreferred_term_text": [
+        
+        ],
+        "unpreferred_term_id": [
+        
+        ],
+        "unpreferred_term_id_str": [
+        
+        ],
+        "series_parent_text": [
+        
+        ],
+        "series_parent_id": [
+        
+        ],
+        "series_parent_id_str": [
+        
+        ],
+        "child_series_text": [
+        
+        ],
+        "child_series_id": [
+        
+        ],
+        "child_series_id_str": [
+        
+        ],
+        "collection_parent_text": [
+        
+        ],
+        "collection_parent_id": [
+        
+        ],
+        "collection_parent_id_str": [
+        
+        ],
+        "collection_root_text": [
+        
+        ],
+        "collection_root_id": [
+        
+        ],
+        "collection_root_id_str": [
+        
+        ],
+        "collection_mid_text": [
+        
+        ],
+        "collection_mid_id": [
+        
+        ],
+        "collection_mid_id_str": [
+        
+        ],
+        "ndha_rights": [
+        
+        ],
+        "ndha_rights_str": [
+        
+        ],
+        "fragments": [
+          {
+            "_id": "646c00415e96825f791038c0",
+            "priority": 0,
+            "_type": "SupplejackApi::ApiRecord::RecordFragment",
+            "title": "Communication and the community",
+            "dc_identifier": [
+              23071220
+            ],
+            "source_id": "test",
+            "updated_at": "2023-05-24T03:16:25.660Z",
+            "created_at": "2023-05-22T23:52:33.100Z",
+            "description": "No description available",
+            "id": "646c00415e96825f791038c0",
+            "authorities": [
+            
+            ],
+            "attachments": [
+            
+            ],
+            "locations": [
+            
+            ],
+            "thumbnail": null,
+            "large_thumbnail": null
+          }
+        ]
+      }
+    ],
+    "meta": {
+      "page": 1,
+      "total_pages": 66
+    }
+  }
+  

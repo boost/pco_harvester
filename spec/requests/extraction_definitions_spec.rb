@@ -5,28 +5,25 @@ require 'rails_helper'
 RSpec.describe 'ExtractionDefinitions', type: :request do
   let(:content_partner)        { create(:content_partner) }
   let!(:extraction_definition) { create(:extraction_definition, content_partner:) }
-  let!(:ed_copy)               { create(:extraction_definition, original_extraction_definition: extraction_definition) }
-  let!(:harvest_definition) { create(:harvest_definition, extraction_definition: ed_copy) }
+  let!(:harvest_definition) { create(:harvest_definition, extraction_definition:) }
 
   describe '#show' do
     it 'renders a specific extraction definition' do
       get content_partner_extraction_definition_path(extraction_definition.content_partner, extraction_definition)
-
       expect(response.status).to eq 200
       expect(response.body).to include extraction_definition.name
     end
 
-    it 'fetches the copies of a specific extraction_definition' do
+    it 'fetches the associated harvest_definitions' do
       get content_partner_extraction_definition_path(extraction_definition.content_partner, extraction_definition)
-
       expect(response.status).to eq 200
-      expect(response.body).to include ed_copy.name
+      expect(response.body).to include harvest_definition.name
     end
   end
 
   describe '#new' do
     it 'renders the new form' do
-      get new_content_partner_extraction_definition_path(content_partner, extraction_definition)
+      get new_content_partner_extraction_definition_path(content_partner, kind: 'harvest')
 
       expect(response.status).to eq 200
     end
@@ -70,7 +67,7 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
         }
 
         expect(response.status).to eq 200
-        expect(response.body).to include 'New extraction definition'
+        expect(response.body).to include 'There was an issue creating your Extraction Definition'
       end
     end
   end
@@ -145,6 +142,55 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
     end
   end
 
+  describe '#test_record_extraction' do
+    let(:destination) { create(:destination) }
+    let(:ed) { create(:extraction_definition, :enrichment, destination:) }
+
+    before do
+      stub_figshare_enrichment_page_1(destination)
+    end
+
+    it 'returns a document extraction of API records' do
+      post test_record_extraction_content_partner_extraction_definitions_path(content_partner), params: {
+        extraction_definition: ed.attributes
+      }
+
+      expect(response.status).to eq 200
+
+      json_response = JSON.parse(response.body)['body']
+      records = JSON.parse(json_response)['records']
+
+      records.each do |record|
+        expect(record).to have_key('dc_identifier')
+        expect(record).to have_key('internal_identifier')
+      end
+    end
+  end
+
+  describe '#test_enrichment_extraction' do
+    let(:destination) { create(:destination) }
+    let(:ed) { create(:extraction_definition, :enrichment, destination:) }
+
+    before do
+      stub_figshare_enrichment_page_1(destination)
+    end
+
+    it 'returns a document extraction of data for an enrichment' do
+      post test_enrichment_extraction_content_partner_extraction_definitions_path(content_partner), params: {
+        extraction_definition: ed.attributes
+      }
+
+      expect(response.status).to eq 200
+
+      json_response = JSON.parse(response.body)['body']
+      records = JSON.parse(json_response)['items']
+
+      records.each do |record|
+        expect(record).to have_key('article_id')
+      end
+    end
+  end
+
   describe '#destroy' do
     it 'destroys the extraction definition' do
       delete content_partner_extraction_definition_path(content_partner, extraction_definition)
@@ -160,6 +206,22 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
       follow_redirect!
 
       expect(response.body).to include('There was an issue deleting your Extraction Definition')
+    end
+  end
+
+  describe 'POST /update_harvest_definitions' do
+    let!(:extraction_definition) { create(:extraction_definition, content_partner:, base_url: 'http://test.co.nz') }
+    let(:harvest_definition)    { create(:harvest_definition, extraction_definition:) }
+
+    it 'updates associated harvest definitions' do
+      expect(harvest_definition.extraction_definition.base_url).to eq 'http://test.co.nz'
+
+      extraction_definition.update(base_url: 'http://testing.co.nz')
+      post update_harvest_definitions_content_partner_extraction_definition_path(content_partner, extraction_definition)
+
+      harvest_definition.reload
+
+      expect(harvest_definition.extraction_definition.base_url).to eq 'http://testing.co.nz'
     end
   end
 end

@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :destination do
     name { Faker::Company.name }
-    url  { 'www.google.co.nz' }
+    url  { 'http://www.localhost:3000' }
     api_key { 'testkey' }
   end
 end

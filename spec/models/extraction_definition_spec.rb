@@ -15,10 +15,31 @@ RSpec.describe ExtractionDefinition, type: :model do
   end
 
   describe '#validations presence of' do
-    it { is_expected.to validate_presence_of(:name).with_message("can't be blank") }
-    it { is_expected.to validate_presence_of(:format).with_message("can't be blank") }
-    it { is_expected.to validate_presence_of(:base_url).with_message("can't be blank") }
-    it { is_expected.to validate_presence_of(:throttle).with_message('is not a number') }
+    context 'when the extraction definition is for a harvest' do
+      it { is_expected.to validate_presence_of(:name).with_message("can't be blank") }
+      it { is_expected.to validate_presence_of(:format).with_message("can't be blank") }
+      it { is_expected.to validate_presence_of(:base_url).with_message("can't be blank") }
+      it { is_expected.to validate_presence_of(:throttle).with_message('is not a number') }
+
+      it { is_expected.not_to validate_presence_of(:destination_id).with_message("can't be blank") }
+      it { is_expected.not_to validate_presence_of(:source_id).with_message("can't be blank") }
+      it { is_expected.not_to validate_presence_of(:enrichment_url).with_message("can't be blank") }
+    end
+
+    context 'when the extraction definition is for an enrichment' do
+      subject! { create(:extraction_definition, :enrichment, content_partner: cp1, name: 'Flickr API', destination:) }
+
+      let(:destination) { create(:destination) }
+
+      it { is_expected.to validate_presence_of(:name).with_message("can't be blank") }
+      it { is_expected.to validate_presence_of(:throttle).with_message('is not a number') }
+      it { is_expected.to validate_presence_of(:destination_id).with_message("can't be blank") }
+      it { is_expected.to validate_presence_of(:source_id).with_message("can't be blank") }
+      it { is_expected.to validate_presence_of(:enrichment_url).with_message("can't be blank") }
+
+      it { is_expected.not_to validate_presence_of(:format).with_message("can't be blank") }
+      it { is_expected.not_to validate_presence_of(:base_url).with_message("can't be blank") }
+    end
   end
 
   describe '#validation numericality' do
@@ -95,9 +116,9 @@ RSpec.describe ExtractionDefinition, type: :model do
   end
   
   describe '#kinds' do
-    KINDS = { harvest: 0, enrichment: 1 }
+    kinds = { harvest: 0, enrichment: 1 }
 
-    KINDS.each do |key, value|
+    kinds.each do |key, value|
       it "can be #{key}" do
         expect(ExtractionDefinition.new(kind: value).kind).to eq(key.to_s)
       end

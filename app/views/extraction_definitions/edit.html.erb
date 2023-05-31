@@ -4,4 +4,5 @@
 
 <h1><%= @extraction_definition.name_in_database %></h1>
 
-<%= render 'form' %>
+<%= render "#{@extraction_definition.kind}_form" %>
+

@@ -2,7 +2,7 @@
 
 <%= render 'shared/breadcrumb_nav' %>
 
-<h1 class='float-start'><%= @extraction_definition.name %></h1>
+<h1 class='float-start'><%= @extraction_definition.kind.capitalize %> | <%= @extraction_definition.name %></h1>
 
 <div class="float-end">
   <%= button_to 'Run full job', content_partner_extraction_definition_extraction_jobs_path(@content_partner, @extraction_definition, kind: 'full'), class: 'btn btn-primary', form_class: 'd-inline me-1' %>
