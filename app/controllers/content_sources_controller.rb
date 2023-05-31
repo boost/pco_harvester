@@ -11,21 +11,11 @@ class ContentSourcesController < ApplicationController
   end
 
   def show
-    @kind = params['kind'] || 'harvest'
+    @kind = params['kind'].in?([nil, 'harvest']) ? 'harvest' : 'enrichment'
 
-    if @kind == 'harvest'
-      @extraction_definitions = @content_source.extraction_definitions.originals.harvests.order(created_at: :desc).page(params[:page])
-      
-      @transformation_definitions = @content_source.transformation_definitions.originals.harvests.order(created_at: :desc).page(params[:page])
-      
-      @harvest_definitions = @content_source.harvest_definitions.harvests.order(created_at: :desc).page(params[:page])
-    elsif @kind == 'enrichment'
-      @extraction_definitions = @content_source.extraction_definitions.originals.enrichments.order(created_at: :desc).page(params[:page])
-      
-      @transformation_definitions = @content_source.transformation_definitions.originals.enrichments.order(created_at: :desc).page(params[:page])
-      
-      @harvest_definitions = @content_source.harvest_definitions.enrichments.order(created_at: :desc).page(params[:page])
-    end
+    @extraction_definitions = @content_source.extraction_definitions.originals.send(@kind).order(created_at: :desc).page(params[:page])
+    @transformation_definitions = @content_source.transformation_definitions.originals.send(@kind).order(created_at: :desc).page(params[:page])
+    @harvest_definitions = @content_source.harvest_definitions.send(@kind).order(created_at: :desc).page(params[:page])
   end
 
   def new
