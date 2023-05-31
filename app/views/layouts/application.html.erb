@@ -23,6 +23,7 @@
     </div>
 
     <div class="<%= content_for?(:root_class) ? yield(:root_class) : 'container' %>">
+      <div class='mt-4'></div>
       <%= render 'shared/flash' %>
       <%= yield %>
     </div>

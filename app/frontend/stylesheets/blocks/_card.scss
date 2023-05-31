@@ -1,0 +1,8 @@
+.card {
+  text-decoration: none;   
+  color:  $antarctic-deep;
+
+  &:hover {
+    border-color: $primary;
+  }
+}
