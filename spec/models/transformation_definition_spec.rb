@@ -3,10 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe TransformationDefinition, type: :model do
-  let(:content_partner) { create(:content_partner, :ngataonga, name: 'National Library of New Zealand') }
-  let(:extraction_definition) { content_partner.extraction_definitions.first }
+  let(:content_source) { create(:content_source, :ngataonga, name: 'National Library of New Zealand') }
+  let(:extraction_definition) { content_source.extraction_definitions.first }
   let(:extraction_job) { create(:extraction_job, extraction_definition:) }
-  let(:subject) { create(:transformation_definition, content_partner:, extraction_job:) }
+  let(:subject) { create(:transformation_definition, content_source:, extraction_job:) }
 
   let!(:field_one) do
     create(:field, name: 'title', block: "JsonPath.new('title').on(record).first", transformation_definition: subject)
@@ -31,8 +31,8 @@ RSpec.describe TransformationDefinition, type: :model do
       expect(subject.record_selector).to eq '$..results'
     end
 
-    it 'belongs to a content partner' do
-      expect(subject.content_partner).to eq content_partner
+    it 'belongs to a content source' do
+      expect(subject.content_source).to eq content_source
     end
 
     it 'has a job' do

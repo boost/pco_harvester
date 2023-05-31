@@ -35,7 +35,7 @@ const TransformationApp = ({}) => {
   const runAllFields = () => {
     dispatch(
       clickedOnRunFields({
-        contentPartnerId: appDetails.contentPartner.id,
+        contentSourceId: appDetails.contentSource.id,
         transformationDefinitionId: appDetails.transformationDefinition.id,
         record: appDetails.rawRecord,
         fields: fieldIds,

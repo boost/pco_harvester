@@ -13,13 +13,13 @@
 <% end %>
 
 <%- if @destinations.any? %>
-  <%- @destinations.each do |content_partner| %>
+  <%- @destinations.each do |content_source| %>
     <div class="border p-3 my-2">
       <span class="float-start">
-        <%= content_partner.name %>
+        <%= content_source.name %>
       </span>
 
-      <%= link_to "Details", content_partner, class: "btn btn-outline-primary float-end" %>
+      <%= link_to "Details", content_source, class: "btn btn-outline-primary float-end" %>
 
       <div class="clearfix"></div>
     </div>

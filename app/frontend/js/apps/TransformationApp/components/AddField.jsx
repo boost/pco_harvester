@@ -15,7 +15,7 @@ const AddField = () => {
       addField({
         name: "",
         block: "",
-        contentPartnerId: appDetails.contentPartner.id,
+        contentSourceId: appDetails.contentSource.id,
         transformationDefinitionId: appDetails.transformationDefinition.id,
       })
     );

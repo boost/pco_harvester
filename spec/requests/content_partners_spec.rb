@@ -2,122 +2,122 @@
 
 require 'rails_helper'
 
-RSpec.describe 'ContentPartners', type: :request do
-  let!(:content_partner) { create(:content_partner, name: 'National Library of New Zealand') }
+RSpec.describe 'ContentSources', type: :request do
+  let!(:content_source) { create(:content_source, name: 'National Library of New Zealand') }
 
   describe '#index' do
-    it 'displays a list of content partners' do
-      get content_partners_path
+    it 'displays a list of content sources' do
+      get content_sources_path
 
       expect(response.status).to eq 200
-      expect(response.body).to include CGI.escapeHTML(content_partner.name)
+      expect(response.body).to include CGI.escapeHTML(content_source.name)
     end
   end
 
   describe '#new' do
-    it 'renders the form to create a new content partner' do
-      get new_content_partner_path
+    it 'renders the form to create a new content source' do
+      get new_content_source_path
 
       expect(response.status).to eq 200
-      expect(response.body).to include 'Add New Content Partner'
+      expect(response.body).to include 'Add New Content Source'
     end
   end
 
   describe '#show' do
-    it 'renders a specific content partner' do
-      get content_partner_path(content_partner)
+    it 'renders a specific content source' do
+      get content_source_path(content_source)
 
       expect(response.status).to eq 200
-      expect(response.body).to include content_partner.name
+      expect(response.body).to include content_source.name
     end
   end
 
   describe '#edit' do
-    it 'renders the form to edit a content partner' do
-      get edit_content_partner_path(content_partner)
+    it 'renders the form to edit a content source' do
+      get edit_content_source_path(content_source)
 
       expect(response.status).to eq 200
-      expect(response.body).to include content_partner.name
+      expect(response.body).to include content_source.name
     end
   end
 
   describe '#create' do
     context 'with valid parameters' do
-      it 'creates a new content partner' do
+      it 'creates a new content source' do
         expect do
-          post content_partners_path, params: {
-            content_partner: attributes_for(:content_partner)
+          post content_sources_path, params: {
+            content_source: attributes_for(:content_source)
           }
-        end.to change(ContentPartner, :count).by(1)
+        end.to change(ContentSource, :count).by(1)
       end
 
-      it 'redirects to the content_partners_path' do
-        post content_partners_path, params: {
-          content_partner: attributes_for(:content_partner)
+      it 'redirects to the content_sources_path' do
+        post content_sources_path, params: {
+          content_source: attributes_for(:content_source)
         }
 
-        expect(response).to redirect_to content_partners_path
+        expect(response).to redirect_to content_sources_path
       end
     end
 
     context 'with invalid parameters' do
-      it 'does not create a new content partner' do
+      it 'does not create a new content source' do
         expect do
-          post content_partners_path, params: {
-            content_partner: { name: nil }
+          post content_sources_path, params: {
+            content_source: { name: nil }
           }
-        end.not_to change(ContentPartner, :count)
+        end.not_to change(ContentSource, :count)
       end
 
       it 'renders the form again' do
-        post content_partners_path, params: {
-          content_partner: { name: nil }
+        post content_sources_path, params: {
+          content_source: { name: nil }
         }
 
         expect(response.status).to eq 200
-        expect(response.body).to include 'Add New Content Partner'
+        expect(response.body).to include 'Add New Content Source'
       end
     end
   end
 
   describe '#update' do
     context 'with valid parameters' do
-      it 'updates the content partner' do
-        patch content_partner_path(content_partner), params: {
-          content_partner: { name: 'National Library of New Zealand' }
+      it 'updates the content source' do
+        patch content_source_path(content_source), params: {
+          content_source: { name: 'National Library of New Zealand' }
         }
 
-        content_partner.reload
+        content_source.reload
 
-        expect(content_partner.name).to eq 'National Library of New Zealand'
+        expect(content_source.name).to eq 'National Library of New Zealand'
       end
 
-      it 'redirects to the content partners page' do
-        patch content_partner_path(content_partner), params: {
-          content_partner: { name: 'National Library of New Zealand' }
+      it 'redirects to the content sources page' do
+        patch content_source_path(content_source), params: {
+          content_source: { name: 'National Library of New Zealand' }
         }
 
-        expect(response).to redirect_to content_partners_path
+        expect(response).to redirect_to content_sources_path
       end
     end
 
     context 'with invalid paramaters' do
-      it 'does not update the content partner' do
-        patch content_partner_path(content_partner), params: {
-          content_partner: { name: nil }
+      it 'does not update the content source' do
+        patch content_source_path(content_source), params: {
+          content_source: { name: nil }
         }
 
-        content_partner.reload
+        content_source.reload
 
-        expect(content_partner.name).not_to eq nil
+        expect(content_source.name).not_to eq nil
       end
 
       it 're renders the form' do
-        patch content_partner_path(content_partner), params: {
-          content_partner: { name: nil }
+        patch content_source_path(content_source), params: {
+          content_source: { name: nil }
         }
 
-        expect(response.body).to include content_partner.name_in_database
+        expect(response.body).to include content_source.name_in_database
       end
     end
   end

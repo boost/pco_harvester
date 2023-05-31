@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class HarvestJobsController < ApplicationController
-  before_action :find_content_partner
+  before_action :find_content_source
   before_action :find_harvest_definition
   before_action :find_harvest_job, only: %i[show cancel]
 
@@ -18,7 +18,7 @@ class HarvestJobsController < ApplicationController
       render :new
     end
 
-    redirect_to content_partner_harvest_definition_harvest_job_path(@content_partner, @harvest_definition, @harvest_job)
+    redirect_to content_source_harvest_definition_harvest_job_path(@content_source, @harvest_definition, @harvest_job)
   end
 
   def cancel
@@ -29,13 +29,13 @@ class HarvestJobsController < ApplicationController
       flash.alert = 'There was an issue cancelling the harvest job'
     end
 
-    redirect_to content_partner_harvest_definition_path(@content_partner, @harvest_definition)
+    redirect_to content_source_harvest_definition_path(@content_source, @harvest_definition)
   end
 
   private
 
-  def find_content_partner
-    @content_partner = ContentPartner.find(params[:content_partner_id])
+  def find_content_source
+    @content_source = ContentSource.find(params[:content_source_id])
   end
 
   def find_harvest_definition

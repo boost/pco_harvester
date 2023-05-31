@@ -1,10 +1,10 @@
-display_content_partner:
-  name: display_content_partner
+display_content_source:
+  name: display_content_source
   transformation_definition: figshare
   block: "\"FigShare\""
 
-content_partner:
-  name: content_partner
+content_source:
+  name: content_source
   transformation_definition: figshare
   block: "\"FigShare\""
 

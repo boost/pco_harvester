@@ -1,18 +1,18 @@
-<%= content_for(:title) { @content_partner.name_in_database } %>
+<%= content_for(:title) { @content_source.name_in_database } %>
 
 <%= content_for :header do %>
   <%= render 'shared/breadcrumb_nav' %>
 
-  <h1 class="float-start"><%= @content_partner.name_in_database %></h1>
+  <h1 class="float-start"><%= @content_source.name_in_database %></h1>
 
-  <%= link_to 'Edit content partner', edit_content_partner_path(@content_partner), class: 'btn btn-outline-primary float-end' %>
+  <%= link_to 'Edit content source', edit_content_source_path(@content_source), class: 'btn btn-outline-primary float-end' %>
 
   <div class="clearfix"></div>
 <% end %>
 
 <h2 class="float-start">Extraction Definitions</h2>
 
-<%= link_to new_content_partner_extraction_definition_path(@content_partner, kind: 'harvest'), class: 'btn btn-primary float-end' do %>
+<%= link_to new_content_source_extraction_definition_path(@content_source, kind: 'harvest'), class: 'btn btn-primary float-end' do %>
   <%= bootstrap_icon('plus-circle') %>Add new Extraction Definition
 <% end %>
 
@@ -25,7 +25,7 @@
         <%= extraction_definition.name %>
       </span>
 
-      <%= link_to "Details", content_partner_extraction_definition_path(@content_partner, extraction_definition), class: "btn btn-outline-primary float-end" %>
+      <%= link_to "Details", content_source_extraction_definition_path(@content_source, extraction_definition), class: "btn btn-outline-primary float-end" %>
 
       <div class="clearfix"></div>
     </div>
@@ -33,12 +33,12 @@
 
 <%= render 'shared/pagination_below_table', items: @harvest_extraction_definitions %>
 <% else %>
-  <p>There are currently no extraction definitions for <%= @content_partner.name_in_database %>.</p>
+  <p>There are currently no extraction definitions for <%= @content_source.name_in_database %>.</p>
 <% end %>
 
 <h2 class="float-start">Transformation Definitions</h2>
 
-<%= link_to new_content_partner_transformation_definition_path(@content_partner, kind: 'harvest'), class: 'btn btn-primary float-end' do %>
+<%= link_to new_content_source_transformation_definition_path(@content_source, kind: 'harvest'), class: 'btn btn-primary float-end' do %>
   <%= bootstrap_icon('plus-circle') %>Add new Transformation Definition
 <% end %>
 
@@ -51,7 +51,7 @@
         <%= harvest_transformation_definition.name %>
       </span>
 
-      <%= link_to "Details", content_partner_transformation_definition_path(@content_partner, harvest_transformation_definition), class: "btn btn-outline-primary float-end" %>
+      <%= link_to "Details", content_source_transformation_definition_path(@content_source, harvest_transformation_definition), class: "btn btn-outline-primary float-end" %>
 
       <div class="clearfix"></div>
     </div>
@@ -59,13 +59,13 @@
 
   <%= render 'shared/pagination_below_table', items: @harvest_transformation_definitions %>
 <% else %>
-  <p>There are currently no transformation definitions for <%= @content_partner.name_in_database %>.</p>
+  <p>There are currently no transformation definitions for <%= @content_source.name_in_database %>.</p>
 <% end %>
 
 
 <h2 class="float-start">Harvest Definitions</h2>
 
-<%= link_to new_content_partner_harvest_definition_path(@content_partner, kind: 'harvest'), class: 'btn btn-primary float-end' do %>
+<%= link_to new_content_source_harvest_definition_path(@content_source, kind: 'harvest'), class: 'btn btn-primary float-end' do %>
   <%= bootstrap_icon('plus-circle') %>Add new Harvest Definition
 <% end %>
 
@@ -78,7 +78,7 @@
         <%= harvest_definition.name %>
       </span>
 
-      <%= link_to "Details", content_partner_harvest_definition_path(@content_partner, harvest_definition), class: "btn btn-outline-primary float-end" %>
+      <%= link_to "Details", content_source_harvest_definition_path(@content_source, harvest_definition), class: "btn btn-outline-primary float-end" %>
 
       <div class="clearfix"></div>
     </div>
@@ -86,12 +86,12 @@
 
   <%= render 'shared/pagination_below_table', items: @harvest_definitions %>
 <% else %>
-  <p>There are currently no harvest definitions for <%= @content_partner.name_in_database %>.</p>
+  <p>There are currently no harvest definitions for <%= @content_source.name_in_database %>.</p>
 <% end %>
 
 <h2 class="float-start">Enrichment Extraction Definitions</h2>
 
-<%= link_to new_content_partner_extraction_definition_path(@content_partner, kind: 'enrichment'), class: 'btn btn-primary float-end' do %>
+<%= link_to new_content_source_extraction_definition_path(@content_source, kind: 'enrichment'), class: 'btn btn-primary float-end' do %>
   <%= bootstrap_icon('plus-circle') %>Add new Enrichment Extraction Definition
 <% end %>
 
@@ -105,7 +105,7 @@
         <%= extraction_definition.name %>
       </span>
 
-      <%= link_to "Details", content_partner_extraction_definition_path(@content_partner, extraction_definition), class: "btn btn-outline-primary float-end" %>
+      <%= link_to "Details", content_source_extraction_definition_path(@content_source, extraction_definition), class: "btn btn-outline-primary float-end" %>
 
       <div class="clearfix"></div>
     </div>
@@ -114,13 +114,13 @@
 <%= render 'shared/pagination_below_table', items: @enrichment_extraction_definitions %>
 
 <% else %>
-  <p>There are currently no enrichment extraction definitions for <%= @content_partner.name_in_database %>.</p>
+  <p>There are currently no enrichment extraction definitions for <%= @content_source.name_in_database %>.</p>
 <% end %>
 
 
 <h2 class="float-start">Enrichment Transformation Definitions</h2>
 
-<%= link_to new_content_partner_transformation_definition_path(@content_partner, kind: 'enrichment'), class: 'btn btn-primary float-end' do %>
+<%= link_to new_content_source_transformation_definition_path(@content_source, kind: 'enrichment'), class: 'btn btn-primary float-end' do %>
   <%= bootstrap_icon('plus-circle') %>Add new Enrichment Transformation Definition
 <% end %>
 
@@ -133,7 +133,7 @@
         <%= enrichment_transformation_definition.name %>
       </span>
 
-      <%= link_to "Details", content_partner_transformation_definition_path(@content_partner, enrichment_transformation_definition), class: "btn btn-outline-primary float-end" %>
+      <%= link_to "Details", content_source_transformation_definition_path(@content_source, enrichment_transformation_definition), class: "btn btn-outline-primary float-end" %>
 
       <div class="clearfix"></div>
     </div>
@@ -141,12 +141,12 @@
 
   <%= render 'shared/pagination_below_table', items: @enrichment_transformation_definitions %>
 <% else %>
-  <p>There are currently no transformation definitions for <%= @content_partner.name_in_database %>.</p>
+  <p>There are currently no transformation definitions for <%= @content_source.name_in_database %>.</p>
 <% end %>
 
 <h2 class="float-start">Enrichment Definitions</h2>
 
-<%= link_to new_content_partner_harvest_definition_path(@content_partner, kind: 'enrichment'), class: 'btn btn-primary float-end' do %>
+<%= link_to new_content_source_harvest_definition_path(@content_source, kind: 'enrichment'), class: 'btn btn-primary float-end' do %>
   <%= bootstrap_icon('plus-circle') %>Add new Enrichment Definition
 <% end %>
 
@@ -159,7 +159,7 @@
         <%= enrichment_definition.name %>
       </span>
 
-      <%= link_to "Details", content_partner_harvest_definition_path(@content_partner, enrichment_definition), class: "btn btn-outline-primary float-end" %>
+      <%= link_to "Details", content_source_harvest_definition_path(@content_source, enrichment_definition), class: "btn btn-outline-primary float-end" %>
 
       <div class="clearfix"></div>
     </div>

@@ -38,7 +38,7 @@ FactoryBot.define do
       per_page_parameter { 'itemsPerPage' }
     end
 
-    association :content_partner
+    association :content_source
 
     trait :harvest do
       kind { 0 }

@@ -1,5 +1,5 @@
-<%= vertical_form_with model: [@content_partner, @harvest_definition], class: { row: true } do |form| %>
-  <%= form.hidden_field :content_partner_id, value: @content_partner.id %>
+<%= vertical_form_with model: [@content_source, @harvest_definition], class: { row: true } do |form| %>
+  <%= form.hidden_field :content_source_id, value: @content_source.id %>
   <%= form.hidden_field :kind,               value: @harvest_definition.kind %>
 
   <% if @harvest_definition.name.present? %>
@@ -10,9 +10,9 @@
   <% end %>
 
   <% if @harvest_definition.enrichment? %>
-    <% extraction_definitions = @content_partner.extraction_definitions.enrichment.originals %>
+    <% extraction_definitions = @content_source.extraction_definitions.enrichment.originals %>
   <% else %>
-    <% extraction_definitions = @content_partner.extraction_definitions.harvest.originals %>
+    <% extraction_definitions = @content_source.extraction_definitions.harvest.originals %>
   <% end %>
 
   <div class="mb-3 col-12">
@@ -21,9 +21,9 @@
   </div>
 
   <% if @harvest_definition.enrichment? %>
-    <% transformation_definitions = @content_partner.transformation_definitions.enrichment.originals %>
+    <% transformation_definitions = @content_source.transformation_definitions.enrichment.originals %>
   <% else %>
-    <% transformation_definitions = @content_partner.transformation_definitions.harvest.originals %>
+    <% transformation_definitions = @content_source.transformation_definitions.harvest.originals %>
   <% end %>
 
   <div class="mb-3 col-12">

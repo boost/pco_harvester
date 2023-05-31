@@ -9,7 +9,7 @@ class HarvestJob < ApplicationRecord
   has_many   :transformation_jobs
   has_many   :load_jobs
 
-  delegate :content_partner, to: :harvest_definition
+  delegate :content_source, to: :harvest_definition
   delegate :extraction_definition, to: :harvest_definition
   delegate :transformation_definition, to: :harvest_definition
   delegate :destination, to: :harvest_definition

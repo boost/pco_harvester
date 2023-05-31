@@ -3,8 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe HarvestJob, type: :model do
-  let(:content_partner)    { create(:content_partner, name: 'National Library of New Zealand') }
-  let(:harvest_definition) { create(:harvest_definition, content_partner:) }
+  let(:content_source)    { create(:content_source, name: 'National Library of New Zealand') }
+  let(:harvest_definition) { create(:harvest_definition, content_source:) }
   let(:harvest_job) { create(:harvest_job, :completed, harvest_definition:) }
 
   describe '#duration_seconds' do

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class HarvestDefinition < ApplicationRecord
-  belongs_to :content_partner
+  belongs_to :content_source
   belongs_to :extraction_definition, optional: true, dependent: :destroy
   belongs_to :extraction_job, optional: true
   belongs_to :transformation_definition, dependent: :destroy
@@ -19,7 +19,7 @@ class HarvestDefinition < ApplicationRecord
   enum :kind, { harvest: 0, enrichment: 1 }
 
   after_create do
-    self.name = "#{content_partner.name.parameterize}__#{kind}-#{id}"
+    self.name = "#{content_source.name.parameterize}__#{kind}-#{id}"
     save!
   end
 

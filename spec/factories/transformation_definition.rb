@@ -6,6 +6,6 @@ FactoryBot.define do
     record_selector { '$..results' }
 
     extraction_job
-    content_partner
+    content_source
   end
 end

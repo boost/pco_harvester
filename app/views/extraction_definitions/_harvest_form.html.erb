@@ -1,5 +1,5 @@
-<%= vertical_form_with model: [@content_partner, @extraction_definition], class: { row: true } do |form| %>
-  <%= form.hidden_field :content_partner_id, value: @content_partner.id %>
+<%= vertical_form_with model: [@content_source, @extraction_definition], class: { row: true } do |form| %>
+  <%= form.hidden_field :content_source_id, value: @content_source.id %>
 
   <% if @extraction_definition.name.present? %>
     <div class="mb-3 col-12">

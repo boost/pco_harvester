@@ -1,0 +1,33 @@
+<%= content_for(:title) { 'Content sources' } %>
+
+
+<%= content_for :header do %>
+  <%= render 'shared/breadcrumb_nav' %>
+
+  <h1 class="float-start">Content Sources</h1>
+
+  <%= link_to new_content_source_path, class: 'btn btn-primary float-end' do %>
+    <%= bootstrap_icon('plus') %>Add content source
+  <% end %>
+
+  <div class="clearfix"></div>
+<% end %>
+
+
+<%- if @content_sources.any? %>
+  <%- @content_sources.each do |content_source| %>
+    <div class="border p-3 my-2">
+      <span class="float-start">
+        <%= content_source.name %>
+      </span>
+
+      <%= link_to "Details", content_source, class: "btn btn-outline-primary float-end" %>
+
+      <div class="clearfix"></div>
+    </div>
+  <%- end %>
+
+  <%= render 'shared/pagination_below_table', items: @content_sources %>
+<% else %>
+  <p>There are currently no content sources.</p>
+<% end %>

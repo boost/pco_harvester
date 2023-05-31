@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TransformationDefinitionsController < ApplicationController
-  before_action :find_content_partner
+  before_action :find_content_source
   before_action :find_transformation_definition, only: %w[show edit update destroy update_harvest_definitions]
   before_action :find_extraction_jobs, only: %w[new create edit update]
 
@@ -21,7 +21,7 @@ class TransformationDefinitionsController < ApplicationController
         appDetails: {
           rawRecord: @transformation_definition.records.first,
           transformedRecord: {},
-          contentPartner: @content_partner,
+          contentSource: @content_source,
           transformationDefinition: @transformation_definition
         }
       },
@@ -54,7 +54,7 @@ class TransformationDefinitionsController < ApplicationController
     @transformation_definition = TransformationDefinition.new(transformation_definition_params)
 
     if @transformation_definition.save
-      redirect_to content_partner_path(@content_partner), notice: 'Transformation Definition created successfully'
+      redirect_to content_source_path(@content_source), notice: 'Transformation Definition created successfully'
     else
       flash.alert = 'There was an issue creating your Transformation Definition'
 
@@ -65,7 +65,7 @@ class TransformationDefinitionsController < ApplicationController
   def update
     if @transformation_definition.update(transformation_definition_params)
       flash.notice = 'Transformation Definition updated successfully'
-      redirect_to content_partner_transformation_definition_path(@content_partner, @transformation_definition)
+      redirect_to content_source_transformation_definition_path(@content_source, @transformation_definition)
     else
       flash.alert = 'There was an issue updating your Transformation Definition'
       render 'edit'
@@ -74,10 +74,10 @@ class TransformationDefinitionsController < ApplicationController
 
   def destroy
     if @transformation_definition.destroy
-      redirect_to content_partner_path(@content_partner), notice: 'Transformation Definition deleted successfully'
+      redirect_to content_source_path(@content_source), notice: 'Transformation Definition deleted successfully'
     else
       flash.alert = 'There was an issue deleting your Transformation Definition'
-      redirect_to content_partner_transformation_definition_path(@content_partner, @transformation_definition)
+      redirect_to content_source_transformation_definition_path(@content_source, @transformation_definition)
     end
   end
 
@@ -95,13 +95,13 @@ class TransformationDefinitionsController < ApplicationController
     end
 
     flash.notice = 'Harvest definitions updated.'
-    redirect_to content_partner_transformation_definition_path(@content_partner, @transformation_definition)
+    redirect_to content_source_transformation_definition_path(@content_source, @transformation_definition)
   end
 
   private
 
-  def find_content_partner
-    @content_partner = ContentPartner.find(params[:content_partner_id])
+  def find_content_source
+    @content_source = ContentSource.find(params[:content_source_id])
   end
 
   def find_transformation_definition
@@ -110,9 +110,9 @@ class TransformationDefinitionsController < ApplicationController
 
   def find_extraction_jobs
     if params['kind'] == 'enrichment'
-      extraction_definitions = @content_partner.extraction_definitions.enrichment.originals
+      extraction_definitions = @content_source.extraction_definitions.enrichment.originals
     else
-      extraction_definitions = @content_partner.extraction_definitions.harvest.originals
+      extraction_definitions = @content_source.extraction_definitions.harvest.originals
     end
 
     @extraction_jobs = extraction_definitions.map do |ed|
@@ -122,7 +122,7 @@ class TransformationDefinitionsController < ApplicationController
 
   def transformation_definition_params
     params.require(:transformation_definition).permit(
-      :content_partner_id,
+      :content_source_id,
       :name,
       :extraction_job_id,
       :record_selector,

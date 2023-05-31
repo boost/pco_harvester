@@ -42,7 +42,7 @@ const Field = ({ id }) => {
     dispatch(
       deleteField({
         id: id,
-        contentPartnerId: appDetails.contentPartner.id,
+        contentSourceId: appDetails.contentSource.id,
         transformationDefinitionId: appDetails.transformationDefinition.id,
       })
     );
@@ -51,7 +51,7 @@ const Field = ({ id }) => {
   const handleRunClick = () => {
     dispatch(
       clickedOnRunFields({
-        contentPartnerId: appDetails.contentPartner.id,
+        contentSourceId: appDetails.contentSource.id,
         transformationDefinitionId: appDetails.transformationDefinition.id,
         record: appDetails.rawRecord,
         fields: [id],

@@ -15,8 +15,8 @@
       </div>
 
       <div class="col-auto">
-        <% path = send("content_partner_#{type}_definition_#{type}_job_path", definition.content_partner, definition, job) %>
-        <% cancel_path = send("cancel_content_partner_#{type}_definition_#{type}_job_path", definition.content_partner, definition, job) %>
+        <% path = send("content_source_#{type}_definition_#{type}_job_path", definition.content_source, definition, job) %>
+        <% cancel_path = send("cancel_content_source_#{type}_definition_#{type}_job_path", definition.content_source, definition, job) %>
 
         <% if job.queued? || job.running? %>
           <%= button_to "Cancel job", cancel_path, class: "btn btn-outline-danger me-1", form_class: 'd-inline' %>

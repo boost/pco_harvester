@@ -57,7 +57,7 @@ describe("<TransformationApp />", () => {
         title: 'title',
         description: 'description'
       },
-      contentPartner: {
+      contentSource: {
         id: 1
       },
       transformationDefinition: {

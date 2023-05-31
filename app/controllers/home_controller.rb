@@ -2,6 +2,6 @@
 
 class HomeController < ApplicationController
   def index
-    redirect_to content_partners_path
+    redirect_to content_sources_path
   end
 end

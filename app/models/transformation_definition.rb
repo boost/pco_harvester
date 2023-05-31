@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TransformationDefinition < ApplicationRecord
-  belongs_to :content_partner
+  belongs_to :content_source
   belongs_to :extraction_job # used for previewing, needs to be refactored
   has_many :fields
 
@@ -13,7 +13,7 @@ class TransformationDefinition < ApplicationRecord
   validate :cannot_be_a_copy_of_self
 
   after_create do
-    self.name = "#{content_partner.name.parameterize}__#{kind}-transformation-#{id}"
+    self.name = "#{content_source.name.parameterize}__#{kind}-transformation-#{id}"
     save!
   end
 

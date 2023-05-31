@@ -12,8 +12,8 @@
       </div>
 
       <div class="col-auto">
-        <% path = content_partner_extraction_definition_extraction_job_path(job.extraction_definition.content_partner, job.extraction_definition, job) %>
-        <% cancel_path = cancel_content_partner_extraction_definition_extraction_job_path(job.extraction_definition.content_partner, job.extraction_definition, job) %>
+        <% path = content_source_extraction_definition_extraction_job_path(job.extraction_definition.content_source, job.extraction_definition, job) %>
+        <% cancel_path = cancel_content_source_extraction_definition_extraction_job_path(job.extraction_definition.content_source, job.extraction_definition, job) %>
 
         <% if job.queued? || job.running? %>
           <%= button_to "Cancel job", cancel_path, class: "btn btn-outline-danger me-1", form_class: 'd-inline' %>

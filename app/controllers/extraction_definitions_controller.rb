@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ExtractionDefinitionsController < ApplicationController
-  before_action :find_content_partner
+  before_action :find_content_source
   before_action :find_extraction_definition, only: %i[show edit update destroy update_harvest_definitions]
   before_action :find_destinations, only: %i[new create edit update]
 
@@ -22,7 +22,7 @@ class ExtractionDefinitionsController < ApplicationController
   def create
     @extraction_definition = ExtractionDefinition.new(extraction_definition_params)
     if @extraction_definition.save
-      redirect_to content_partner_path(@content_partner), notice: 'Extraction Definition created successfully'
+      redirect_to content_source_path(@content_source), notice: 'Extraction Definition created successfully'
     else
       flash.alert = 'There was an issue creating your Extraction Definition'
       render :new
@@ -32,7 +32,7 @@ class ExtractionDefinitionsController < ApplicationController
   def update
     if @extraction_definition.update(extraction_definition_params)
       flash.notice = 'Extraction Definition updated successfully'
-      redirect_to content_partner_extraction_definition_path(@content_partner, @extraction_definition)
+      redirect_to content_source_extraction_definition_path(@content_source, @extraction_definition)
     else
       flash.alert = 'There was an issue updating your Extraction Definition'
       render 'edit'
@@ -46,7 +46,7 @@ class ExtractionDefinitionsController < ApplicationController
     end
 
     flash.notice = 'Harvest definitions updated.'
-    redirect_to content_partner_extraction_definition_path(@content_partner, @extraction_definition)
+    redirect_to content_source_extraction_definition_path(@content_source, @extraction_definition)
   end
 
   def test
@@ -72,17 +72,17 @@ class ExtractionDefinitionsController < ApplicationController
 
   def destroy
     if @extraction_definition.destroy
-      redirect_to content_partner_path(@content_partner), notice: 'Extraction Definition deleted successfully'
+      redirect_to content_source_path(@content_source), notice: 'Extraction Definition deleted successfully'
     else
       flash.alert = 'There was an issue deleting your Extraction Definition'
-      redirect_to content_partner_extraction_definition_path(@content_partner, @extraction_definition)
+      redirect_to content_source_extraction_definition_path(@content_source, @extraction_definition)
     end
   end
 
   private
 
-  def find_content_partner
-    @content_partner = ContentPartner.find(params[:content_partner_id])
+  def find_content_source
+    @content_source = ContentSource.find(params[:content_source_id])
   end
 
   def find_extraction_definition
@@ -95,7 +95,7 @@ class ExtractionDefinitionsController < ApplicationController
 
   def extraction_definition_params
     params.require(:extraction_definition).permit(
-      :content_partner_id,
+      :content_source_id,
       :name, :format, :base_url, :throttle, :pagination_type,
       :page_parameter, :per_page_parameter, :page, :per_page,
       :total_selector,
