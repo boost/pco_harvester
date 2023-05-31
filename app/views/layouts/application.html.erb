@@ -16,11 +16,11 @@
 
     <%= render 'shared/nav' %>
 
-    <div class='header'>
+    <header class='header'>
       <div class='container'>
         <%= yield :header %>
       </div>
-    </div>
+    </header>
 
     <div class="<%= content_for?(:root_class) ? yield(:root_class) : 'container' %>">
       <div class='mt-4'></div>

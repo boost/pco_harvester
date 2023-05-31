@@ -9,8 +9,8 @@
   }
 
   .nav-tabs {
-    position: absolute;
-    bottom: -1px;
+    margin-bottom: -2rem;
+    border-bottom: none;
 
     .nav-link {
       &:hover {

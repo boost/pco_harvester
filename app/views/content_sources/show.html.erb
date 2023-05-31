@@ -5,19 +5,19 @@
 
   <h1 class="float-start"><%= @content_source.name_in_database %></h1>
 
-  <%= link_to 'Edit content source', edit_content_source_path(@content_source), class: 'btn btn-outline-primary float-end' %>
+  <%= link_to edit_content_source_path(@content_source), class: 'btn btn-outline-primary float-end' do %>
+    Edit content source
+  <% end %>
 
   <div class="clearfix"></div>
 
-  <div class='mt-4'></div>
-
-  <ul class="nav nav-tabs" role="tablist">
+  <ul class="nav nav-tabs mt-4" role="tablist">
     <li class='nav-item'>
-      <%= link_to 'Harvests', content_source_path(@content_source, kind: 'harvest'), class: "nav-link #{@kind == 'harvest' ? 'active' : ''}" %>
+      <%= link_to 'Harvests', content_source_path(@content_source, kind: 'harvest'), class: class_names("nav-link", active: @kind == 'harvest') %>
     </li>
 
     <li class='nav-item'>
-      <%= link_to 'Enrichments', content_source_path(@content_source, kind: 'enrichment'), class: "nav-link #{@kind == 'enrichment' ? 'active' : ''}" %>
+      <%= link_to 'Enrichments', content_source_path(@content_source, kind: 'enrichment'), class: class_names("nav-link", active: @kind == 'enrichment') %>
     </li>
   </ul>
 <% end %>
