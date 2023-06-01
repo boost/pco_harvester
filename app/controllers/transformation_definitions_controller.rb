@@ -35,7 +35,6 @@ class TransformationDefinitionsController < ApplicationController
         appDetails: {
           fieldNavExpanded: true,
           rawRecordExpanded: true,
-          fieldsExpanded: true,
           transformedRecordExpanded: true
         }
       },

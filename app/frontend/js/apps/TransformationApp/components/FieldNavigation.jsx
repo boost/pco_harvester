@@ -22,7 +22,7 @@ const FieldNavigation = ({
   if (!expanded) return expandCollapseButton;
 
   return (
-    <div className="card">
+    <div className="card vh-100 sticky-top">
       <div className="card-body">
         <div className="clearfix">
           <h5 className="float-start">Fields</h5>

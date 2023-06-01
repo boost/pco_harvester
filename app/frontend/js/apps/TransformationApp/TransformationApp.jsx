@@ -38,12 +38,8 @@ const TransformationApp = ({}) => {
     );
   };
 
-  const {
-    fieldNavExpanded,
-    rawRecordExpanded,
-    fieldsExpanded,
-    transformedRecordExpanded,
-  } = uiAppDetails;
+  const { fieldNavExpanded, rawRecordExpanded, transformedRecordExpanded } =
+    uiAppDetails;
 
   const fieldNavClass = classNames({
     "col-2": fieldNavExpanded,
@@ -51,21 +47,15 @@ const TransformationApp = ({}) => {
   });
 
   const rawRecordClasses = classNames({
-    "col-6": rawRecordExpanded && fieldsExpanded && transformedRecordExpanded,
-    "col-5":
-      (rawRecordExpanded && !fieldsExpanded && transformedRecordExpanded) ||
-      (rawRecordExpanded && fieldsExpanded && !transformedRecordExpanded),
-    "col-9": rawRecordExpanded && !fieldsExpanded && !transformedRecordExpanded,
-    "col-1": !rawRecordExpanded,
+    "col-6": rawRecordExpanded && transformedRecordExpanded,
+    "col-10": rawRecordExpanded && !transformedRecordExpanded,
+    "col-2": !rawRecordExpanded,
   });
 
   const transformedRecordClasses = classNames({
-    "col-3": transformedRecordExpanded && fieldsExpanded && rawRecordExpanded,
-    "col-5":
-      (transformedRecordExpanded && !fieldsExpanded && rawRecordExpanded) ||
-      (transformedRecordExpanded && fieldsExpanded && !rawRecordExpanded),
-    "col-9": transformedRecordExpanded && !fieldsExpanded && !rawRecordExpanded,
-    "col-1": !transformedRecordExpanded,
+    "col-6": transformedRecordExpanded && rawRecordExpanded,
+    "col-10": transformedRecordExpanded && !rawRecordExpanded,
+    "col-2": !transformedRecordExpanded,
   });
 
   const expandCollapseText = (section) => {
@@ -97,7 +87,7 @@ const TransformationApp = ({}) => {
 
       <div className="col-10">
         <div className="row gy-4">
-          <div className="col-6">
+          <div className={rawRecordClasses}>
             <div className="card">
               <div className="card-body">
                 <h5 className="float-start">Raw data</h5>
@@ -116,7 +106,7 @@ const TransformationApp = ({}) => {
             </div>
           </div>
 
-          <div className="col-6">
+          <div className={transformedRecordClasses}>
             <div className="card">
               <div className="card-body">
                 <h5 className="float-start">Transformed</h5>
