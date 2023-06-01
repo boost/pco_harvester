@@ -12,7 +12,7 @@
         <i class="bi bi-rocket" aria-hidden="true"></i> Deploy on <%= @transformation_definition.kind %>s
       </button>
     <% end %>
-    <%= link_to edit_content_source_transformation_definition_path(@content_source, @transformation_definition), class: 'me-1 btn btn-outline-primary' do %>
+    <%= link_to edit_content_source_transformation_definition_path(@content_source, @transformation_definition), class: 'btn btn-outline-primary' do %>
       <i class="bi bi-pencil-square" aria-hidden="true"></i> Edit transformation
     <% end %>
     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">

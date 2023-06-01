@@ -20,7 +20,7 @@ const AddField = () => {
   };
 
   return (
-    <div className="d-grid gap-2">
+    <div className="d-grid gap-2 mt-2">
       <button
         disabled={emptyFields}
         className="btn btn-primary"
