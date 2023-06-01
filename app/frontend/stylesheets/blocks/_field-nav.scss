@@ -8,10 +8,19 @@
     font-weight: 600;
     color: var(--bs-body-color);
 
+    &.error {
+      color: $danger;
+    }
+
     &[aria-expanded="true"] {
       border-radius: 0;
       color: var(--bs-nav-pills-link-active-color);
       background-color: var(--bs-nav-pills-link-active-bg);
+      
+      &.error {
+        background-color: $danger;
+        color: $white;
+      }
     }
   }
 }
