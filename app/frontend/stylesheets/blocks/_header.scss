@@ -4,6 +4,10 @@
   border-bottom: 1px solid $bright-star;
   position: relative;
 
+  &.sticky-top {
+    position: sticky;
+  }
+
   @include element('title') {
     float: left;
     margin-bottom: 0;

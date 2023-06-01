@@ -1,5 +1,7 @@
 <%= content_for(:title) { @transformation_definition.name_in_database } %>
 
+<%= content_for(:header_modifier) { 'sticky-top' } %>
+
 <%= content_for(:header) do %>
   <%= render 'shared/breadcrumb_nav' %>
 
