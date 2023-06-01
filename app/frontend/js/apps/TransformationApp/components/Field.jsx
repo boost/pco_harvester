@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import classnames from "classnames";
+import classNames from "classnames";
+import { isEmpty } from 'lodash';
 
 import { updateField, deleteField } from "~/js/features/FieldsSlice";
 import { selectFieldById } from "~/js/features/FieldsSlice";
@@ -32,6 +33,7 @@ const Field = ({ id }) => {
     hasRun,
     expanded,
     successfulRun,
+    displayed
   } = useSelector((state) => selectUiFieldById(state, id));
 
   const dispatch = useDispatch();
@@ -87,7 +89,7 @@ const Field = ({ id }) => {
     return isValid() && hasChanged() && !saving;
   };
 
-  const badgeClasses = classnames({
+  const badgeClasses = classNames({
     badge: true,
     "ms-2": true,
     "bg-primary": saved,
@@ -121,12 +123,20 @@ const Field = ({ id }) => {
     });
 
     const view = new EditorView({ state, parent: editorRef.current });
+    
+    if(isEmpty(nameValue)) {
+      const element = document.getElementById(`field-${id}`);
+      element.scrollIntoView({ behaviour: 'smooth'});
+    }
 
     return () => view.destroy();
+   
   }, []);
 
+  const fieldClasses = classNames('col-12', 'collapse', { 'show': displayed });
+
   return (
-    <div id={`field-${id}`} className="col-12 collapse" data-testid="field">
+    <div id={`field-${id}`} className={fieldClasses} data-testid="field">
       <div className="card">
         <div className="card-body">
           <div className="d-flex d-row justify-content-between align-items-center">
@@ -158,7 +168,7 @@ const Field = ({ id }) => {
                 data-bs-toggle="collapse"
                 href={`#field-${id}-content`}
                 role="button"
-                aria-expanded="true"
+                aria-expanded={ expanded }
                 aria-controls={`field-${id}-content`}
               >
                 <ExpandCollapseIcon expanded={expanded} vertical={true} />

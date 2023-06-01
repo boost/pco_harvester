@@ -5,12 +5,12 @@ import { selectUiFieldById } from "~/js/features/UiFieldsSlice";
 import classNames from "classnames";
 
 const FieldNavigationListItem = ({id}) => {
-  
+ 
   const { name } = useSelector((state) => selectFieldById(state, id));
-  const { error } = useSelector((state) => selectUiFieldById(state, id));
+  const { error, displayed } = useSelector((state) => selectUiFieldById(state, id));
 
   const linkClasses  = classNames('nav-link', {
-    'error': error
+    'error': error,
   });
   
   return(
@@ -20,7 +20,7 @@ const FieldNavigationListItem = ({id}) => {
         data-bs-toggle="collapse"
         href={`#field-${id}`}
         role="button"
-        aria-expanded="false"
+        aria-expanded={displayed}
         aria-controls={`field-${id}`}
       >
         {name || "New field"}

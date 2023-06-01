@@ -26,6 +26,8 @@ const uiFieldsSlice = createSlice({
           saving: false,
           running: false,
           hasRun: false,
+          expanded: true,
+          displayed: true
         });
       })
       .addCase(clickedOnRunFields.pending, (state, action) => {

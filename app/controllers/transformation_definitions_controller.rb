@@ -28,7 +28,7 @@ class TransformationDefinitionsController < ApplicationController
       ui: {
         fields: {
           ids: @transformation_definition.fields.map(&:id),
-          entities: @fields.map do |field|
+          entities: @fields.map.with_index do |field, index|
             {
               id: field[:id],
               saved: true,
@@ -36,7 +36,8 @@ class TransformationDefinitionsController < ApplicationController
               saving: false,
               running: false,
               hasRun: false,
-              expanded: true
+              expanded: true,
+              displayed: index == 0
             }
           end.index_by { |field| field[:id] }
         },
