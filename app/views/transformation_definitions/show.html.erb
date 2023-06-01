@@ -7,9 +7,9 @@
 
   <div class="float-end">
     <% if @related_harvest_definitions.any? %>
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update-harvest-definition-modal">Update <%= @transformation_definition.kind %> definitions</button>
+      <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#update-harvest-definition-modal">Update <%= @transformation_definition.kind %>s</button>
     <% end %>
-    <%= link_to 'Edit transformation', edit_content_source_transformation_definition_path(@content_source, @transformation_definition), class: 'me-1 btn btn-outline-primary' %>
+    <%= link_to 'Edit', edit_content_source_transformation_definition_path(@content_source, @transformation_definition), class: 'me-1 btn btn-outline-primary' %>
     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">Delete</button>
   </div>
 
