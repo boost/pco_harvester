@@ -1,4 +1,4 @@
-<%= vertical_form_with model: [@content_source, @extraction_definition], class: { row: true }, id: 'js-extraction-definition-form' do |form| %>
+<%= vertical_form_with model: [@content_source, @extraction_definition], id: 'js-extraction-definition-form' do |form| %>
   <%= form.hidden_field :content_source_id, value: @content_source.id %>
 
   <div class="row gx-2">
