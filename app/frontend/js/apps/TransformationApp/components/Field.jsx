@@ -120,10 +120,32 @@ const Field = ({ id }) => {
       data-testid="field"
     >
       <div className="card-body">
-        <h5 className="card-title mb-4">
-          {name}
-          {name != "" && <span className={badgeClasses}>{badgeText()}</span>}
-        </h5>
+        <div className="mb-3 d-flex d-row justify-content-between align-items-center">
+          <div className="">
+            <h5 className="m-0 d-inline">{name}</h5>
+            {name != "" && <span className={badgeClasses}>{badgeText()}</span>}
+          </div>
+
+          <div className="hstack gap-2">
+            <button
+              className="btn btn-primary"
+              disabled={!isSaveable()}
+              onClick={handleSaveClick}
+            >
+              {saving ? "Saving..." : "Save"}
+            </button>
+            <button
+              className="btn btn-success"
+              disabled={!saved || hasChanged() || running}
+              onClick={handleRunClick}
+            >
+              {running ? "Running..." : "Run field"}
+            </button>
+            <button className="btn btn-danger" onClick={handleDeleteClick}>
+              {deleting ? "Deleting..." : "Delete"}
+            </button>
+          </div>
+        </div>
 
         <label className="form-label" htmlFor="name">
           Field Name{" "}
@@ -156,27 +178,6 @@ const Field = ({ id }) => {
             <p className="mb-0">{error.description}</p>
           </div>
         )}
-
-        <div className="mt-4 hstack gap-2">
-          <div className="ms-auto"></div>
-          <button className="btn btn-danger" onClick={handleDeleteClick}>
-            {deleting ? "Deleting..." : "Delete"}
-          </button>
-          <button
-            className="btn btn-primary"
-            disabled={!isSaveable()}
-            onClick={handleSaveClick}
-          >
-            {saving ? "Saving..." : "Save"}
-          </button>
-          <button
-            className="btn btn-success"
-            disabled={!saved || hasChanged() || running}
-            onClick={handleRunClick}
-          >
-            {running ? "Running..." : "Run"}
-          </button>
-        </div>
       </div>
     </div>
   );
