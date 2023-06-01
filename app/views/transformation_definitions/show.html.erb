@@ -3,9 +3,9 @@
 <%= content_for(:header) do %>
   <%= render 'shared/breadcrumb_nav' %>
 
-  <h1 class='float-start mb-4'><%= @transformation_definition.name %></h1>
+  <h1 class='header__title'><%= @transformation_definition.name %></h1>
 
-  <div class="float-end">
+  <div class="header__actions">
     <% if @related_harvest_definitions.any? %>
       <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#update-harvest-definition-modal">Update <%= @transformation_definition.kind %>s</button>
     <% end %>
@@ -14,7 +14,6 @@
   </div>
 
   <div class="clearfix"></div>
-
 <% end %>
 
 <div id="js-transformation-app" data-props="<%= @props %>"></div>
