@@ -1,6 +1,6 @@
 import { bindTestForm } from './utils/test-form';
 
-bindTestForm('test', 'js-test-extraction', (response, alertClass) => {
+bindTestForm('test', 'js-test-extraction', 'js-extraction-definition-form', (response, alertClass) => {
    document.getElementById(
       "test-result"
     ).innerHTML = `<div class="${alertClass(
@@ -14,6 +14,7 @@ bindTestForm('test', 'js-test-extraction', (response, alertClass) => {
   document.getElementById(
     "test-result"
   ).innerHTML = `<div class="alert alert-danger my-2" role="alert">
-    Something went wrong. Please confirm your Extraction Definition settings are correct.
+    Something went wrong. Please confirm your Extraction details are correct.
   </div>`;
 });
+

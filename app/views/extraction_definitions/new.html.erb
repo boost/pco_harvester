@@ -3,9 +3,32 @@
 <%= content_for :header do %>
   <%= render 'shared/breadcrumb_nav' %>
 
-  <h1 class="header__title">New <%= @extraction_definition.kind %> extraction</h1>
+  <h1 class="header__title float-start">New <%= @extraction_definition.kind %> extraction</h1>
 
-  <div class="clearfix">
+  <div class="float-end">
+
+    <% if @extraction_definition.harvest? %>
+      <button type="button" class="btn btn-outline-primary me-1" id="js-test-extraction">
+        Test Extraction Definition
+      </button>
+    <% else %>
+      <button type="button" class="btn btn-outline-primary me-1" id="js-test-record-extraction">
+        Test Record Extraction
+      </button>
+    
+      <button type="button" class="btn btn-outline-primary me-1" id="js-test-enrichment-extraction">
+        Test Enrichment Extraction
+      </button>
+    <% end %>
+    
+    <button type="submit" class="btn btn-primary" id="js-extraction-definition-form-submit">
+      Create Extraction Definition
+    </button>
+
+    <%= link_to 'Cancel', content_source_path(@content_source, kind: @extraction_definition.kind), class: 'btn btn-outline-danger' %>
+  </div>
+
+  <div class="clearfix"></div>
 <% end %>
 
 <%= render "#{@extraction_definition.kind}_form" %>

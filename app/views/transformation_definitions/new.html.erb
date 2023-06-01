@@ -4,6 +4,19 @@
   <%= render 'shared/breadcrumb_nav' %>
 
   <h1 class="header__title">New <%= @transformation_definition.kind.capitalize %> Transformation</h1>
+  
+  <div class="float-end">
+
+    <button type="button" class="btn btn-secondary me-1" id="js-test-transformation-record-selector">
+      Test Record Selector
+    </button>
+
+    <button type="submit" id='js-transformation-definition-form-submit' class="btn btn-primary">
+      Create <%= @transformation_definition.kind %> transformation
+    </button>
+
+    <%= link_to 'Cancel', content_source_path(@content_source), class: 'btn btn-outline-danger' %>
+  </div>
 
   <div class="clearfix">
 <% end %>

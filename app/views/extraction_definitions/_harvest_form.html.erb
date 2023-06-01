@@ -1,6 +1,5 @@
-<%= vertical_form_with model: [@content_source, @extraction_definition], class: { row: true } do |form| %>
+<%= vertical_form_with model: [@content_source, @extraction_definition], class: { row: true }, id: 'js-extraction-definition-form' do |form| %>
   <%= form.hidden_field :content_source_id, value: @content_source.id %>
-
 
   <div class="row gx-2">
     <fieldset class="col-6">
@@ -134,16 +133,6 @@
       </div>
     </fieldset>
   </div>
-
-  <div class="col-12">
-    <button type="button" class="btn btn-secondary me-1" id="js-test-extraction">
-      Test
-    </button>
-    <button type="submit" class="btn btn-primary">
-      Save
-    </button>
-
-  </div>
-  <% end %>
+<% end %>
 
 <div id="test-result"></div>

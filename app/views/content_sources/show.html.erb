@@ -56,7 +56,7 @@
 
   <div class='col-3 align-self-center mb-3'>
     <div class="d-grid gap-2">
-      <%= link_to new_content_source_extraction_definition_path(@content_source, kind: 'harvest'), class: 'btn btn-lg btn-outline-primary' do %>
+      <%= link_to new_content_source_extraction_definition_path(@content_source, kind: @kind), class: 'btn btn-lg btn-outline-primary' do %>
         <i class="bi bi-plus" aria-hidden="true"></i> Create extraction
       <% end %>
     </div>
@@ -87,7 +87,7 @@
 
   <div class='col-3 align-self-center mb-3'>
     <div class="d-grid gap-2">
-      <%= link_to new_content_source_transformation_definition_path(@content_source, kind: 'harvest'), class: 'btn btn-lg btn-outline-primary' do %>
+      <%= link_to new_content_source_transformation_definition_path(@content_source, kind: @kind), class: 'btn btn-lg btn-outline-primary' do %>
         <i class="bi bi-plus" aria-hidden="true"></i> Create transformation
       <% end %>
     </div>

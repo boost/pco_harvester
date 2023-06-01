@@ -1,6 +1,6 @@
 import { bindTestForm } from './utils/test-form';
 
-bindTestForm('test', 'js-test-destination', (response, alertClass) => {
+bindTestForm('test', 'js-test-destination', 'js-destination-form', (response, alertClass) => {
   function alertMessage(statusCode) {
     if (statusCode >= 200 && statusCode < 300) {
       return "Successfully connected to destination.";

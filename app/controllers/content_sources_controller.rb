@@ -37,7 +37,7 @@ class ContentSourcesController < ApplicationController
 
   def update
     if @content_source.update(content_source_params)
-      redirect_to content_sources_path, notice: 'Content Source updated successfully'
+      redirect_to content_source_path(@content_source), notice: 'Content Source updated successfully'
     else
       flash.alert = 'There was an issue updating your Content Source'
       render :edit

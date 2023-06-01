@@ -3,7 +3,17 @@
 <%= content_for(:header) do %>
   <%= render 'shared/breadcrumb_nav' %>
 
-  <h1>Add New <%= @harvest_definition.kind.capitalize %></h1>
+  <h1 class='float-start'>Add New <%= @harvest_definition.kind.capitalize %></h1>
+  
+  <div class="float-end">
+    <button type="submit" class="btn btn-primary" id="js-harvest-definition-form-submit">
+      Create <%= @harvest_definition.kind %> 
+    </button>
+
+    <%= link_to 'Cancel', content_source_path(@content_source), class: 'btn btn-outline-danger' %>
+  </div>
+
+  <div class='clearfix'></div>
 <% end %>
 
 <%= render 'form' %>

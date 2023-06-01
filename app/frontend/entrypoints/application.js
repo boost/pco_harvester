@@ -46,5 +46,6 @@ const tooltipTriggerList = document.querySelectorAll(
 );
 
 import "/js/editor";
+import "/js/form-header-submission";
 
 import "/js/react";

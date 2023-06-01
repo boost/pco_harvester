@@ -3,7 +3,13 @@
 <%= content_for :header do %>
   <%= render 'shared/breadcrumb_nav' %>
 
-  <h1 class="header__title"><%= @content_source.name_in_database %></h1>
+  <h1 class="header__title float-start"><%= @content_source.name_in_database %></h1>
+
+  <div class="float-end">
+    <button type="submit" class="btn btn-primary" id="js-content-source-form-submit">
+      Update
+    </button>
+  </div>
 
   <div class="clearfix"></div>
 <% end %>
