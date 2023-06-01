@@ -6,10 +6,7 @@ const NavigationPanel = () => {
   const fields = useSelector(selectAllFields);
 
   return (
-    <ul
-      id="field-list"
-      className="nav flex-column flex-grow-1 overflow-auto flex-nowrap"
-    >
+    <ul id="field-list" className="nav flex-column overflow-auto flex-nowrap">
       {fields.map((field) => {
         return (
           <li className="nav-item" key={field.id}>

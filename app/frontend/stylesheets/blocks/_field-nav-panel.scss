@@ -1,0 +1,9 @@
+.field-nav-panel {
+  position: sticky;
+  height: calc(100vh - 2rem);
+  top: 1rem;
+
+  .card-body {
+    max-height: 100%;
+  }
+}

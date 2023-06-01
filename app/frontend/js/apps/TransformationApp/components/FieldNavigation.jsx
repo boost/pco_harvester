@@ -22,15 +22,17 @@ const FieldNavigation = ({
   if (!expanded) return expandCollapseButton;
 
   return (
-    <div className="card vh-100 sticky-top">
-      <div className="card-body">
-        <div className="clearfix">
-          <h5 className="float-start">Fields</h5>
+    <div className="card field-nav-panel">
+      <div className="card-body d-flex flex-column">
+        <div className="d-flex flex-row justify-content-between align-items-center">
+          <h5>Fields</h5>
           {expandCollapseButton}
         </div>
-        <button className="btn btn-success mb-4" onClick={() => runAllFields()}>
+
+        {/* <button className="btn btn-success mb-4" onClick={() => runAllFields()}>
           Run All
-        </button>
+        </button> */}
+
         <NavigationPanel />
         <AddField />
       </div>

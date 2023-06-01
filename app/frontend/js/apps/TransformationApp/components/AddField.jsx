@@ -1,9 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addField, hasEmptyFields } from "~/js/features/FieldsSlice";
-import {
-  selectAppDetails,
-} from "~/js/features/AppDetailsSlice";
+import { selectAppDetails } from "~/js/features/AppDetailsSlice";
 
 const AddField = () => {
   const dispatch = useDispatch();
@@ -22,7 +20,7 @@ const AddField = () => {
   };
 
   return (
-    <div className="d-grid gap-2 mt-4">
+    <div className="d-grid gap-2">
       <button
         disabled={emptyFields}
         className="btn btn-primary"
