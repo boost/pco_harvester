@@ -90,17 +90,15 @@ const TransformationApp = ({}) => {
         <div className="col-2">
           <div className='card'>
             <div className='card-body'>
-              <div className="sticky-top pb-2 d-flex flex-column">
-                <h5>Jump To</h5>
-                <button
-                  className="btn btn-success mb-4"
-                  onClick={() => runAllFields()}
-                >
-                  Run All
-                </button>
-                <NavigationPanel />
-                <AddField />
-              </div>
+              <h5>Fields</h5>
+              <button
+                className="btn btn-success mb-4"
+                onClick={() => runAllFields()}
+              >
+                Run All
+              </button>
+              <NavigationPanel />
+              <AddField />
             </div>
           </div>
         </div>
@@ -142,6 +140,7 @@ const TransformationApp = ({}) => {
               <RecordViewer record={appDetails.transformedRecord} />
             </div>
           </div>
+
         </div>
 
         <div className="col-10 offset-2">
