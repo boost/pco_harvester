@@ -6,9 +6,10 @@
 
   .active {
     position: relative;
+
     &:after {
       content: '';
-      width: 88%;
+      width: calc(100% - var(--bs-navbar-nav-link-padding-x) * 2);
       height: 5px;
       bottom: -8px;
       display: block;
