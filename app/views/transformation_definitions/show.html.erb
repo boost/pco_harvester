@@ -6,6 +6,7 @@
   <h1 class='header__title'><%= @transformation_definition.name %></h1>
 
   <div class="header__actions">
+    <span id="react-header-actions"></span>
     <% if @related_harvest_definitions.any? %>
       <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#update-harvest-definition-modal">
         <i class="bi bi-rocket" aria-hidden="true"></i> Deploy on <%= @transformation_definition.kind %>s

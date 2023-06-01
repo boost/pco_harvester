@@ -10,16 +10,14 @@ import { selectUiAppDetails } from "~/js/features/UiAppDetailsSlice";
 import { toggleSection } from "~/js/features/UiAppDetailsSlice";
 
 // Fields from state
-import {
-  selectAppDetails,
-  clickedOnRunFields,
-} from "~/js/features/AppDetailsSlice";
+import { selectAppDetails } from "~/js/features/AppDetailsSlice";
 
 // Components
 import RecordViewer from "~/js/apps/TransformationApp/components/RecordViewer";
 import Field from "~/js/apps/TransformationApp/components/Field";
 import FieldNavigationPanel from "./components/FieldNavigationPanel";
 import ExpandCollapseIcon from "./components/ExpandCollapseIcon";
+import HeaderActions from "./components/HeaderActions";
 
 const TransformationApp = ({}) => {
   const dispatch = useDispatch();
@@ -27,17 +25,6 @@ const TransformationApp = ({}) => {
   const fieldIds = useSelector(selectFieldIds);
   const appDetails = useSelector(selectAppDetails);
   const uiAppDetails = useSelector(selectUiAppDetails);
-
-  const runAllFields = () => {
-    dispatch(
-      clickedOnRunFields({
-        contentSourceId: appDetails.contentSource.id,
-        transformationDefinitionId: appDetails.transformationDefinition.id,
-        record: appDetails.rawRecord,
-        fields: fieldIds,
-      })
-    );
-  };
 
   const { fieldNavExpanded, rawRecordExpanded, transformedRecordExpanded } =
     uiAppDetails;
@@ -64,6 +51,8 @@ const TransformationApp = ({}) => {
 
   return (
     <div className="row">
+      <HeaderActions />
+
       <div
         className={classNames({
           "col-2": fieldNavExpanded,
@@ -72,7 +61,6 @@ const TransformationApp = ({}) => {
       >
         <FieldNavigationPanel
           expanded={fieldNavExpanded}
-          runAllFields={runAllFields}
           clickToggleSection={clickToggleSection}
         />
       </div>

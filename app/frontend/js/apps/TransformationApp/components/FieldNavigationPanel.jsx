@@ -4,11 +4,7 @@ import FieldNavigationList from "/js/apps/TransformationApp/components/FieldNavi
 import AddField from "~/js/apps/TransformationApp/components/AddField";
 import ExpandCollapseIcon from "./ExpandCollapseIcon";
 
-const FieldNavigationPanel = ({
-  expanded,
-  runAllFields,
-  clickToggleSection,
-}) => {
+const FieldNavigationPanel = ({ expanded, clickToggleSection }) => {
   const expandCollapseButton = (
     <button
       onClick={() => clickToggleSection("fieldNavExpanded")}
@@ -30,10 +26,6 @@ const FieldNavigationPanel = ({
           <h5>Fields</h5>
           {expandCollapseButton}
         </div>
-
-        <button className="btn btn-success mt-2" onClick={() => runAllFields()}>
-          Run All
-        </button>
 
         <FieldNavigationList />
         <AddField />
