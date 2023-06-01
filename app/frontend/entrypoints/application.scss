@@ -12,6 +12,8 @@
 @import "../stylesheets/bootstrap/breadcrumb";
 @import "../stylesheets/bootstrap/form";
 @import "../stylesheets/bootstrap/navbar";
+@import "../stylesheets/bootstrap/root";
+@import "../stylesheets/bootstrap/typography";
 
 // Mixins
 
@@ -23,14 +25,3 @@
 @import "../stylesheets/blocks/form-in-dropdown";
 @import "../stylesheets/blocks/header";
 @import "../stylesheets/blocks/record-view";
-
-
-h1, h2, h3, h4 {
-  font-weight: 700;
-}
-
-body {
-  background-color: $bleached-silk;
-  color: $antarctic-deep;
-  font-family: 'Lato', sans-serif;
-}
