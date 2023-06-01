@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { selectAllFields } from "~/js/features/FieldsSlice";
 
-const NavigationPanel = () => {
+const FieldNavigationList = () => {
   const fields = useSelector(selectAllFields);
 
   return (
@@ -27,4 +27,4 @@ const NavigationPanel = () => {
   );
 };
 
-export default NavigationPanel;
+export default FieldNavigationList;

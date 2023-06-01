@@ -1,6 +1,6 @@
 import React from "react";
 
-import NavigationPanel from "~/js/apps/TransformationApp/components/NavigationPanel";
+import FieldNavigationList from "/js/apps/TransformationApp/components/FieldNavigationList";
 import AddField from "~/js/apps/TransformationApp/components/AddField";
 import ExpandCollapseIcon from "./ExpandCollapseIcon";
 
@@ -35,7 +35,7 @@ const FieldNavigationPanel = ({
           Run All
         </button>
 
-        <NavigationPanel />
+        <FieldNavigationList />
         <AddField />
       </div>
     </div>
