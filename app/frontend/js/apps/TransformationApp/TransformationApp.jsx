@@ -42,11 +42,6 @@ const TransformationApp = ({}) => {
   const { fieldNavExpanded, rawRecordExpanded, transformedRecordExpanded } =
     uiAppDetails;
 
-  const fieldNavClass = classNames({
-    "col-2": fieldNavExpanded,
-    "col-auto": !fieldNavExpanded,
-  });
-
   const rawRecordClasses = classNames({
     "col-6": rawRecordExpanded && transformedRecordExpanded,
     "col-10": rawRecordExpanded && !transformedRecordExpanded,
@@ -69,7 +64,12 @@ const TransformationApp = ({}) => {
 
   return (
     <div className="row">
-      <div className={fieldNavClass}>
+      <div
+        className={classNames({
+          "col-2": fieldNavExpanded,
+          "col-auto": !fieldNavExpanded,
+        })}
+      >
         <FieldNavigationPanel
           expanded={fieldNavExpanded}
           runAllFields={runAllFields}
@@ -77,7 +77,12 @@ const TransformationApp = ({}) => {
         />
       </div>
 
-      <div className="col-10">
+      <div
+        className={classNames({
+          "col-10": fieldNavExpanded,
+          "col-11": !fieldNavExpanded,
+        })}
+      >
         <div className="row gy-4">
           <div className={rawRecordClasses}>
             <div className="card">
