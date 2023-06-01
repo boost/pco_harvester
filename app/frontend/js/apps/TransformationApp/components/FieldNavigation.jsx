@@ -2,20 +2,16 @@ import React from "react";
 
 import NavigationPanel from "~/js/apps/TransformationApp/components/NavigationPanel";
 import AddField from "~/js/apps/TransformationApp/components/AddField";
+import ExpandCollapseIcon from "./ExpandCollapseIcon";
 
-const FieldNavigation = ({
-  expanded,
-  expandCollapseText,
-  runAllFields,
-  clickToggleSection,
-}) => {
+const FieldNavigation = ({ expanded, runAllFields, clickToggleSection }) => {
   const expandCollapseButton = (
     <button
       onClick={() => clickToggleSection("fieldNavExpanded")}
       type="button"
       className="btn btn-primary float-end"
     >
-      {expandCollapseText("fieldNavExpanded")}
+      <ExpandCollapseIcon expanded={expanded} />
     </button>
   );
 

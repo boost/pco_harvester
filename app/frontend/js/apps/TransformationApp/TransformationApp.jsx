@@ -19,6 +19,7 @@ import {
 import RecordViewer from "~/js/apps/TransformationApp/components/RecordViewer";
 import Field from "~/js/apps/TransformationApp/components/Field";
 import FieldNavigation from "./components/FieldNavigation";
+import ExpandCollapseIcon from "./components/ExpandCollapseIcon";
 
 const TransformationApp = ({}) => {
   const dispatch = useDispatch();
@@ -58,14 +59,6 @@ const TransformationApp = ({}) => {
     "col-2": !transformedRecordExpanded,
   });
 
-  const expandCollapseText = (section) => {
-    if (uiAppDetails[section]) {
-      return <i className="bi bi-arrow-bar-left" aria-label="collapse"></i>;
-    } else {
-      return <i className="bi bi-arrow-bar-right" aria-label="expand"></i>;
-    }
-  };
-
   const clickToggleSection = (section) => {
     dispatch(
       toggleSection({
@@ -75,11 +68,10 @@ const TransformationApp = ({}) => {
   };
 
   return (
-    <div class="row">
+    <div className="row">
       <div className={fieldNavClass}>
         <FieldNavigation
           expanded={fieldNavExpanded}
-          expandCollapseText={expandCollapseText}
           runAllFields={runAllFields}
           clickToggleSection={clickToggleSection}
         />
@@ -96,7 +88,9 @@ const TransformationApp = ({}) => {
                   type="button"
                   className="btn btn-primary float-end"
                 >
-                  {expandCollapseText("rawRecordExpanded")}
+                  <ExpandCollapseIcon
+                    expanded={uiAppDetails["rawRecordExpanded"]}
+                  />
                 </button>
                 <div className="clearfix"></div>
 
@@ -118,7 +112,9 @@ const TransformationApp = ({}) => {
                   type="button"
                   className="btn btn-primary float-end"
                 >
-                  {expandCollapseText("transformedRecordExpanded")}
+                  <ExpandCollapseIcon
+                    expanded={uiAppDetails["transformedRecordExpanded"]}
+                  />
                 </button>
                 <div className="clearfix"></div>
 
@@ -131,7 +127,7 @@ const TransformationApp = ({}) => {
           <div className="col-12">
             <div className="row gy-4">
               {map(fieldIds, (fieldId) => (
-                <div className="col-12">
+                <div className="col-12" key={fieldId}>
                   <Field id={fieldId} key={fieldId} />
                 </div>
               ))}

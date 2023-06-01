@@ -13,14 +13,26 @@ import { EditorState } from "@codemirror/state";
 import { EditorView, basicSetup } from "codemirror";
 import { StreamLanguage } from "@codemirror/language";
 import { ruby } from "@codemirror/legacy-modes/mode/ruby";
-import { selectUiFieldById } from "~/js/features/UiFieldsSlice";
+import {
+  selectUiFieldById,
+  toggleCollapseField,
+} from "~/js/features/UiFieldsSlice";
 import Tooltip from "~/js/components/Tooltip";
+import ExpandCollapseIcon from "./ExpandCollapseIcon";
 
 const Field = ({ id }) => {
   const appDetails = useSelector(selectAppDetails);
   const { name, block } = useSelector((state) => selectFieldById(state, id));
-  const { saved, deleting, saving, running, error, hasRun, successfulRun } =
-    useSelector((state) => selectUiFieldById(state, id));
+  const {
+    saved,
+    deleting,
+    saving,
+    running,
+    error,
+    hasRun,
+    expanded,
+    successfulRun,
+  } = useSelector((state) => selectUiFieldById(state, id));
 
   const dispatch = useDispatch();
   const editorRef = useRef();
@@ -46,6 +58,10 @@ const Field = ({ id }) => {
         transformationDefinitionId: appDetails.transformationDefinition.id,
       })
     );
+  };
+
+  const handleCollapseExpandClick = () => {
+    dispatch(toggleCollapseField({ id, expanded: !expanded }));
   };
 
   const handleRunClick = () => {
@@ -120,7 +136,7 @@ const Field = ({ id }) => {
       data-testid="field"
     >
       <div className="card-body">
-        <div className="mb-3 d-flex d-row justify-content-between align-items-center">
+        <div className="d-flex d-row justify-content-between align-items-center">
           <div className="">
             <h5 className="m-0 d-inline">{name}</h5>
             {name != "" && <span className={badgeClasses}>{badgeText()}</span>}
@@ -141,43 +157,55 @@ const Field = ({ id }) => {
             >
               {running ? "Running..." : "Run field"}
             </button>
+            <a
+              className="btn btn-success"
+              onClick={handleCollapseExpandClick}
+              data-bs-toggle="collapse"
+              aria-expanded="true"
+              href={`#field-${id}-content`}
+              aria-controls={`field-${id}-content`}
+            >
+              <ExpandCollapseIcon expanded={expanded} vertical={true} />
+            </a>
             <button className="btn btn-danger" onClick={handleDeleteClick}>
               {deleting ? "Deleting..." : "Delete"}
             </button>
           </div>
         </div>
 
-        <label className="form-label" htmlFor="name">
-          Field Name{" "}
-          <Tooltip data-bs-title="This is the field name that the result of this transformation will appear under on the transformed record.">
-            <i className="bi bi-question-circle" aria-label="help text"></i>
-          </Tooltip>
-        </label>
-        <input
-          id="name"
-          type="text"
-          className="form-control"
-          required="required"
-          placeholder="New field"
-          defaultValue={name}
-          onChange={(e) => setNameValue(e.target.value)}
-        />
+        <div className="mt-3 collapse show" id={`field-${id}-content`}>
+          <label className="form-label" htmlFor="name">
+            Field Name{" "}
+            <Tooltip data-bs-title="This is the field name that the result of this transformation will appear under on the transformed record.">
+              <i className="bi bi-question-circle" aria-label="help text"></i>
+            </Tooltip>
+          </label>
+          <input
+            id="name"
+            type="text"
+            className="form-control"
+            required="required"
+            placeholder="New field"
+            defaultValue={name}
+            onChange={(e) => setNameValue(e.target.value)}
+          />
 
-        <label className="form-label mt-4" htmlFor="block">
-          Field Block{" "}
-          <Tooltip data-bs-title="This is the code that is applied to create this field on the transformed record.">
-            <i className="bi bi-question-circle" aria-label="help text"></i>
-          </Tooltip>
-        </label>
-        <div id="block" ref={editorRef}></div>
+          <label className="form-label mt-4" htmlFor="block">
+            Field Block{" "}
+            <Tooltip data-bs-title="This is the code that is applied to create this field on the transformed record.">
+              <i className="bi bi-question-circle" aria-label="help text"></i>
+            </Tooltip>
+          </label>
+          <div id="block" ref={editorRef}></div>
 
-        {error && (
-          <div className="alert alert-danger mt-4" role="alert">
-            <h4 className="alert-heading">{error.title}</h4>
-            <hr />
-            <p className="mb-0">{error.description}</p>
-          </div>
-        )}
+          {error && (
+            <div className="alert alert-danger mt-4" role="alert">
+              <h4 className="alert-heading">{error.title}</h4>
+              <hr />
+              <p className="mb-0">{error.description}</p>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

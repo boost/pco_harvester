@@ -8,7 +8,14 @@ const uiFieldsAdapter = createEntityAdapter();
 const uiFieldsSlice = createSlice({
   name: "fieldsSlice",
   initialState: {},
-  reducers: {},
+  reducers: {
+    toggleCollapseField(state, action) {
+      uiFieldsAdapter.updateOne(state, {
+        id: action.payload.id,
+        changes: { expanded: action.payload.expanded },
+      });
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(addField.fulfilled, (state, action) => {
@@ -92,6 +99,6 @@ export const {
   selectAll: selectAllUiFields,
 } = uiFieldsAdapter.getSelectors((state) => state.ui.fields);
 
-export const {} = actions;
+export const { toggleCollapseField } = actions;
 
 export default reducer;
