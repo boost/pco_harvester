@@ -36,7 +36,6 @@ class TransformationDefinitionsController < ApplicationController
               saving: false,
               running: false,
               hasRun: false,
-              displayed: false,
               expanded: true
             }
           end.index_by { |field| field[:id] }

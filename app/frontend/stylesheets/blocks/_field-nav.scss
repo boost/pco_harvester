@@ -1,0 +1,17 @@
+.field-nav {
+  margin-top: .5rem;
+  margin-left: calc(-1 * var(--bs-card-spacer-x));
+  margin-right: calc(-1 * var(--bs-card-spacer-x));
+
+  .nav-link {
+    padding: .2rem var(--bs-card-spacer-x) ;
+    font-weight: 600;
+    color: var(--bs-body-color);
+
+    &[aria-expanded="true"] {
+      border-radius: 0;
+      color: var(--bs-nav-pills-link-active-color);
+      background-color: var(--bs-nav-pills-link-active-bg);
+    }
+  }
+}

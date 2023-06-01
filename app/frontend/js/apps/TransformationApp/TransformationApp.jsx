@@ -18,7 +18,7 @@ import {
 // Components
 import RecordViewer from "~/js/apps/TransformationApp/components/RecordViewer";
 import Field from "~/js/apps/TransformationApp/components/Field";
-import FieldNavigation from "./components/FieldNavigation";
+import FieldNavigationPanel from "./components/FieldNavigationPanel";
 import ExpandCollapseIcon from "./components/ExpandCollapseIcon";
 
 const TransformationApp = ({}) => {
@@ -70,7 +70,7 @@ const TransformationApp = ({}) => {
   return (
     <div className="row">
       <div className={fieldNavClass}>
-        <FieldNavigation
+        <FieldNavigationPanel
           expanded={fieldNavExpanded}
           runAllFields={runAllFields}
           clickToggleSection={clickToggleSection}
@@ -124,12 +124,10 @@ const TransformationApp = ({}) => {
             </div>
           </div>
 
-          <div className="col-12">
+          <div className="col-12 mb-4">
             <div className="row gy-4">
               {map(fieldIds, (fieldId) => (
-                <div className="col-12" key={fieldId}>
-                  <Field id={fieldId} key={fieldId} />
-                </div>
+                <Field id={fieldId} key={fieldId} />
               ))}
             </div>
           </div>
