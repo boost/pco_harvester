@@ -31,9 +31,9 @@ const FieldNavigationPanel = ({
           {expandCollapseButton}
         </div>
 
-        {/* <button className="btn btn-success mb-4" onClick={() => runAllFields()}>
+        <button className="btn btn-success mt-2" onClick={() => runAllFields()}>
           Run All
-        </button> */}
+        </button>
 
         <NavigationPanel />
         <AddField />
