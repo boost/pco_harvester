@@ -33,6 +33,7 @@ class TransformationDefinitionsController < ApplicationController
           end.index_by { |field| field[:id] }
         },
         appDetails: {
+          fieldNavExpanded: true,
           rawRecordExpanded: true,
           fieldsExpanded: true,
           transformedRecordExpanded: true

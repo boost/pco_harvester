@@ -16,10 +16,9 @@ import {
 } from "~/js/features/AppDetailsSlice";
 
 // Components
-import NavigationPanel from "~/js/apps/TransformationApp/components/NavigationPanel";
 import RecordViewer from "~/js/apps/TransformationApp/components/RecordViewer";
 import Field from "~/js/apps/TransformationApp/components/Field";
-import AddField from "~/js/apps/TransformationApp/components/AddField";
+import FieldNavigation from "./components/FieldNavigation";
 
 const TransformationApp = ({}) => {
   const dispatch = useDispatch();
@@ -39,12 +38,17 @@ const TransformationApp = ({}) => {
     );
   };
 
-  const jumpToClasses = classNames({
-    "col-1": true,
-  });
+  const {
+    fieldNavExpanded,
+    rawRecordExpanded,
+    fieldsExpanded,
+    transformedRecordExpanded,
+  } = uiAppDetails;
 
-  const { rawRecordExpanded, fieldsExpanded, transformedRecordExpanded } =
-    uiAppDetails;
+  const fieldNavClass = classNames({
+    "col-2": fieldNavExpanded,
+    "col-auto": !fieldNavExpanded,
+  });
 
   const rawRecordClasses = classNames({
     "col-6": rawRecordExpanded && fieldsExpanded && transformedRecordExpanded,
@@ -82,20 +86,13 @@ const TransformationApp = ({}) => {
 
   return (
     <div class="row">
-      <div className="col-2">
-        <div className="card">
-          <div className="card-body">
-            <h5>Fields</h5>
-            <button
-              className="btn btn-success mb-4"
-              onClick={() => runAllFields()}
-            >
-              Run All
-            </button>
-            <NavigationPanel />
-            <AddField />
-          </div>
-        </div>
+      <div className={fieldNavClass}>
+        <FieldNavigation
+          expanded={fieldNavExpanded}
+          expandCollapseText={expandCollapseText}
+          runAllFields={runAllFields}
+          clickToggleSection={clickToggleSection}
+        />
       </div>
 
       <div className="col-10">

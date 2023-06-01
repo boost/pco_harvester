@@ -1,4 +1,4 @@
-import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const uiAppDetailsSlice = createSlice({
   name: "appDetailsSlice",
