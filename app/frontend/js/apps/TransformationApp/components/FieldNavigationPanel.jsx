@@ -19,7 +19,9 @@ const FieldNavigationPanel = ({
     </button>
   );
 
-  if (!expanded) return expandCollapseButton;
+  if (!expanded) {
+    return <div className="field-nav-panel">{expandCollapseButton}</div>;
+  }
 
   return (
     <div className="card field-nav-panel">
