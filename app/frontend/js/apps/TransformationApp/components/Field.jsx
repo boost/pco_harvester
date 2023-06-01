@@ -111,7 +111,7 @@ const Field = ({ id }) => {
 
   return (
     <div
-      className="card mb-4"
+      className="card"
       data-bs-spy="scroll"
       data-bs-target="#field-list"
       data-bs-offset="0"

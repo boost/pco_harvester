@@ -28,10 +28,6 @@ const TransformationApp = ({}) => {
   const appDetails = useSelector(selectAppDetails);
   const uiAppDetails = useSelector(selectUiAppDetails);
 
-  const fieldComponents = map(fieldIds, (fieldId) => (
-    <Field id={fieldId} key={fieldId} />
-  ));
-
   const runAllFields = () => {
     dispatch(
       clickedOnRunFields({
@@ -85,70 +81,78 @@ const TransformationApp = ({}) => {
   };
 
   return (
-    <>
-      <div class='row'>
-        <div className="col-2">
-          <div className='card'>
-            <div className='card-body'>
-              <h5>Fields</h5>
-              <button
-                className="btn btn-success mb-4"
-                onClick={() => runAllFields()}
-              >
-                Run All
-              </button>
-              <NavigationPanel />
-              <AddField />
-            </div>
+    <div class="row">
+      <div className="col-2">
+        <div className="card">
+          <div className="card-body">
+            <h5>Fields</h5>
+            <button
+              className="btn btn-success mb-4"
+              onClick={() => runAllFields()}
+            >
+              Run All
+            </button>
+            <NavigationPanel />
+            <AddField />
           </div>
-        </div>
-
-        <div className="col-5">
-          <div className='card'>
-            <div className='card-body'>
-              <h5 className="float-start">Raw data</h5>
-              <button
-                onClick={() => clickToggleSection("rawRecordExpanded")}
-                type="button"
-                className="btn btn-primary float-end"
-              >
-                {expandCollapseText("rawRecordExpanded")}
-              </button>
-              <div className="clearfix"></div>
-
-              <div className="mb-4"></div>
-              <RecordViewer record={appDetails.rawRecord} />
-            </div>
-          </div>
-        </div>
-
-        <div className="col-5">
-          <div className='card'>
-            <div className='card-body'>
-              <h5 className="float-start">Transformed</h5>
-
-              <button
-                onClick={() => clickToggleSection("transformedRecordExpanded")}
-                type="button"
-                className="btn btn-primary float-end"
-              >
-                {expandCollapseText("transformedRecordExpanded")}
-              </button>
-              <div className="clearfix"></div>
-
-              <div className="mb-4"></div>
-              <RecordViewer record={appDetails.transformedRecord} />
-            </div>
-          </div>
-
-        </div>
-
-        <div className="col-10 offset-2">
-          {fieldComponents}
         </div>
       </div>
-    
-    </>
+
+      <div className="col-10">
+        <div className="row gy-4">
+          <div className="col-6">
+            <div className="card">
+              <div className="card-body">
+                <h5 className="float-start">Raw data</h5>
+                <button
+                  onClick={() => clickToggleSection("rawRecordExpanded")}
+                  type="button"
+                  className="btn btn-primary float-end"
+                >
+                  {expandCollapseText("rawRecordExpanded")}
+                </button>
+                <div className="clearfix"></div>
+
+                <div className="mb-4"></div>
+                <RecordViewer record={appDetails.rawRecord} />
+              </div>
+            </div>
+          </div>
+
+          <div className="col-6">
+            <div className="card">
+              <div className="card-body">
+                <h5 className="float-start">Transformed</h5>
+
+                <button
+                  onClick={() =>
+                    clickToggleSection("transformedRecordExpanded")
+                  }
+                  type="button"
+                  className="btn btn-primary float-end"
+                >
+                  {expandCollapseText("transformedRecordExpanded")}
+                </button>
+                <div className="clearfix"></div>
+
+                <div className="mb-4"></div>
+                <RecordViewer record={appDetails.transformedRecord} />
+              </div>
+            </div>
+          </div>
+
+          <div className="col-12">
+            <div className="row gy-4">
+              {map(fieldIds, (fieldId) => (
+                <div className="col-12">
+                  <Field id={fieldId} key={fieldId} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
