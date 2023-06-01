@@ -51,21 +51,12 @@ const TransformationApp = ({}) => {
     uiAppDetails;
 
   const rawRecordClasses = classNames({
-    "col-3": rawRecordExpanded && fieldsExpanded && transformedRecordExpanded,
+    "col-6": rawRecordExpanded && fieldsExpanded && transformedRecordExpanded,
     "col-5":
       (rawRecordExpanded && !fieldsExpanded && transformedRecordExpanded) ||
       (rawRecordExpanded && fieldsExpanded && !transformedRecordExpanded),
     "col-9": rawRecordExpanded && !fieldsExpanded && !transformedRecordExpanded,
     "col-1": !rawRecordExpanded,
-  });
-
-  const fieldsClasses = classNames({
-    "col-5":
-      (fieldsExpanded && rawRecordExpanded && transformedRecordExpanded) ||
-      (fieldsExpanded && !rawRecordExpanded && transformedRecordExpanded) ||
-      (fieldsExpanded && rawRecordExpanded && !transformedRecordExpanded),
-    "col-9": fieldsExpanded && !rawRecordExpanded && !transformedRecordExpanded,
-    "col-1": !fieldsExpanded,
   });
 
   const transformedRecordClasses = classNames({
@@ -94,80 +85,71 @@ const TransformationApp = ({}) => {
   };
 
   return (
-    <div className="text-bg-light p-2 row gy-4 mt-1">
-      <div className={jumpToClasses}>
-        <div className="sticky-top pb-2 d-flex flex-column">
-          <h5>Jump To</h5>
-          <button
-            className="btn btn-success mb-4"
-            onClick={() => runAllFields()}
-          >
-            Run All
-          </button>
-          <NavigationPanel />
-          <AddField />
+    <>
+      <div class='row'>
+        <div className="col-2">
+          <div className='card'>
+            <div className='card-body'>
+              <div className="sticky-top pb-2 d-flex flex-column">
+                <h5>Jump To</h5>
+                <button
+                  className="btn btn-success mb-4"
+                  onClick={() => runAllFields()}
+                >
+                  Run All
+                </button>
+                <NavigationPanel />
+                <AddField />
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div className={rawRecordClasses}>
-        <div className="sticky-top vh-100">
-          <h5 className="float-start">Raw</h5>
-          <button
-            onClick={() => clickToggleSection("rawRecordExpanded")}
-            type="button"
-            className="btn btn-primary float-end"
-          >
-            {expandCollapseText("rawRecordExpanded")}
-          </button>
-          <div className="clearfix"></div>
+        <div className="col-5">
+          <div className='card'>
+            <div className='card-body'>
+              <h5 className="float-start">Raw data</h5>
+              <button
+                onClick={() => clickToggleSection("rawRecordExpanded")}
+                type="button"
+                className="btn btn-primary float-end"
+              >
+                {expandCollapseText("rawRecordExpanded")}
+              </button>
+              <div className="clearfix"></div>
 
-          <div className="mb-4"></div>
-          <RecordViewer record={appDetails.rawRecord} />
+              <div className="mb-4"></div>
+              <RecordViewer record={appDetails.rawRecord} />
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div className={fieldsClasses}>
-        <h5 className="float-start">Fields</h5>
-        <button
-          onClick={() => clickToggleSection("fieldsExpanded")}
-          type="button"
-          className="btn btn-primary float-end"
-        >
-          {expandCollapseText("fieldsExpanded")}
-        </button>
-        <div className="clearfix"></div>
+        <div className="col-5">
+          <div className='card'>
+            <div className='card-body'>
+              <h5 className="float-start">Transformed</h5>
 
-        <div className="mb-4"></div>
-        <div
-          data-bs-spy="scroll"
-          data-bs-target="#field-list"
-          data-bs-offset="0"
-          data-bs-smooth-scroll="true"
-        >
+              <button
+                onClick={() => clickToggleSection("transformedRecordExpanded")}
+                type="button"
+                className="btn btn-primary float-end"
+              >
+                {expandCollapseText("transformedRecordExpanded")}
+              </button>
+              <div className="clearfix"></div>
+
+              <div className="mb-4"></div>
+              <RecordViewer record={appDetails.transformedRecord} />
+            </div>
+          </div>
+        </div>
+
+        <div className="col-10 offset-2">
           {fieldComponents}
-
-          <div className="clearfix"></div>
         </div>
       </div>
-
-      <div className={transformedRecordClasses}>
-        <div className="sticky-top vh-100">
-          <h5 className="float-start">Transformed</h5>
-
-          <button
-            onClick={() => clickToggleSection("transformedRecordExpanded")}
-            type="button"
-            className="btn btn-primary float-end"
-          >
-            {expandCollapseText("transformedRecordExpanded")}
-          </button>
-          <div className="clearfix"></div>
-
-          <div className="mb-4"></div>
-          <RecordViewer record={appDetails.transformedRecord} />
-        </div>
-      </div>
-    </div>
+    
+    </>
   );
 };
 
