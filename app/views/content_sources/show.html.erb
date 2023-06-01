@@ -35,25 +35,17 @@
 
             <h5 class='card-title'><%= extraction_definition.name %></h5>
 
-            <span class="badge rounded-pill bg-light text-dark">
-              <%= pluralize(extraction_definition.extraction_jobs.queued.count, 'job') %> queued
-            </span>
+            <% if extraction_definition.extraction_jobs.running.any? %>
+              <span class="badge rounded-pill bg-success">
+                <%= pluralize(extraction_definition.extraction_jobs.running.count, 'job') %> running
+              </span>
+            <% end %>
 
-            <span class="badge rounded-pill bg-success">
-              <%= pluralize(extraction_definition.extraction_jobs.running.count, 'job') %> running
-            </span>
-
-            <span class="badge rounded-pill bg-light text-dark">
-              <%= pluralize(extraction_definition.extraction_jobs.completed.count, 'job') %> completed
-            </span>
-
-            <span class="badge rounded-pill bg-light text-dark">
-              <%= pluralize(extraction_definition.extraction_jobs.cancelled.count, 'job') %> cancelled
-            </span>
-
-            <span class="badge rounded-pill bg-danger">
-              <%= pluralize(extraction_definition.extraction_jobs.errored.count, 'job') %> errored
-            </span>
+            <% if extraction_definition.extraction_jobs.errored.any? %>
+              <span class="badge rounded-pill bg-danger">
+                <%= pluralize(extraction_definition.extraction_jobs.errored.count, 'job') %> errored
+              </span>
+            <% end %>
 
           </div>
 
@@ -113,25 +105,17 @@
 
             <h5 class='card-title'><%= harvest_definition.name %></h5>
 
-            <span class="badge rounded-pill bg-light text-dark">
-              <%= pluralize(harvest_definition.harvest_jobs.queued.count, 'job') %> queued
-            </span>
+            <% if harvest_definition.harvest_jobs.running.any? %>
+              <span class="badge rounded-pill bg-success">
+                <%= pluralize(harvest_definition.harvest_jobs.running.count, 'job') %> running
+              </span>
+            <% end %>
 
-            <span class="badge rounded-pill bg-success">
-              <%= pluralize(harvest_definition.harvest_jobs.running.count, 'job') %> running
-            </span>
-
-            <span class="badge rounded-pill bg-light text-dark">
-              <%= pluralize(harvest_definition.harvest_jobs.completed.count, 'job') %> triggered successfully
-            </span>
-
-            <span class="badge rounded-pill bg-light text-dark">
-              <%= pluralize(harvest_definition.harvest_jobs.cancelled.count, 'job') %> cancelled
-            </span>
-
-            <span class="badge rounded-pill bg-danger">
-              <%= pluralize(harvest_definition.harvest_jobs.errored.count, 'job') %> errored
-            </span>
+            <% if harvest_definition.harvest_jobs.errored.any? %>
+              <span class="badge rounded-pill bg-danger">
+                <%= pluralize(harvest_definition.harvest_jobs.errored.count, 'job') %> errored
+              </span>
+            <% end %>
           </div>
 
         <% end %>
