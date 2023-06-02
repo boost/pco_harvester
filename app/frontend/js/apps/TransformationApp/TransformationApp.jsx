@@ -53,24 +53,11 @@ const TransformationApp = ({}) => {
     <div className="row">
       <HeaderActions />
 
-      <div
-        className={classNames({
-          "col-2": fieldNavExpanded,
-          "col-auto": !fieldNavExpanded,
-        })}
-      >
-        <FieldNavigationPanel
-          expanded={fieldNavExpanded}
-          clickToggleSection={clickToggleSection}
-        />
+      <div className="col-2">
+        <FieldNavigationPanel />
       </div>
 
-      <div
-        className={classNames({
-          "col-10": fieldNavExpanded,
-          "col-11": !fieldNavExpanded,
-        })}
-      >
+      <div className="col-10">
         <div className="row gy-4">
           <div className={rawRecordClasses}>
             <div className="card">
