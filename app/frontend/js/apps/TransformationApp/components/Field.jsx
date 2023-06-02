@@ -9,6 +9,7 @@ import {
   selectAppDetails,
   clickedOnRunFields,
 } from "~/js/features/AppDetailsSlice";
+import { selectUiAppDetails } from "~/js/features/UiAppDetailsSlice";
 
 import { EditorState } from "@codemirror/state";
 import { EditorView, basicSetup } from "codemirror";
@@ -41,6 +42,9 @@ const Field = ({ id }) => {
 
   const [nameValue, setNameValue] = useState(name);
   const [blockValue, setBlockValue] = useState(block);
+  
+  const uiAppDetails = useSelector(selectUiAppDetails);
+  const { readOnly } = uiAppDetails;
 
   const handleSaveClick = () => {
     dispatch(
@@ -115,6 +119,7 @@ const Field = ({ id }) => {
       doc: block,
       extensions: [
         basicSetup,
+        EditorState.readOnly.of(readOnly),
         StreamLanguage.define(ruby),
         EditorView.updateListener.of(function (e) {
           setBlockValue(e.state.doc.toString());
@@ -142,11 +147,15 @@ const Field = ({ id }) => {
           <div className="d-flex d-row justify-content-between align-items-center">
             <div>
               <h5 className="m-0 d-inline">{name}</h5>
-              {name != "" && (
-                <span className={badgeClasses}>{badgeText()}</span>
-              )}
+              { !readOnly && (
+                  name != "" && (
+                    <span className={badgeClasses}>{badgeText()}</span>
+                  )
+                )
+              }
             </div>
 
+            { !readOnly &&
             <div className="hstack gap-2">
               <button
                 className="btn btn-primary"
@@ -177,6 +186,7 @@ const Field = ({ id }) => {
                 {deleting ? "Deleting..." : "Delete"}
               </button>
             </div>
+          }
           </div>
 
           <div className="mt-3 collapse show" id={`field-${id}-content`}>

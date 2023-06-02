@@ -44,7 +44,8 @@ class TransformationDefinitionsController < ApplicationController
         appDetails: {
           fieldNavExpanded: true,
           rawRecordExpanded: true,
-          transformedRecordExpanded: true
+          transformedRecordExpanded: true,
+          readOnly: @transformation_definition.copy?
         }
       },
       config: {

@@ -26,7 +26,7 @@ const TransformationApp = ({}) => {
   const appDetails = useSelector(selectAppDetails);
   const uiAppDetails = useSelector(selectUiAppDetails);
 
-  const { fieldNavExpanded, rawRecordExpanded, transformedRecordExpanded } =
+  const { rawRecordExpanded, transformedRecordExpanded } =
     uiAppDetails;
 
   const rawRecordClasses = classNames({
