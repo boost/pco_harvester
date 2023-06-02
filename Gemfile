@@ -58,6 +58,7 @@ group :development do
 end
 
 gem 'codeclimate_diff', github: 'boost/codeclimate_diff', tag: 'v0.1.9'
+gem 'devise'
 
 group :test do
   # used in tests

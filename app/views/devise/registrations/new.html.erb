@@ -1,0 +1,52 @@
+<%= content_for :header do %>
+  <h1 class="header__title">Create account</h1>
+
+  <div class="float-end">
+    <button type="submit" class="btn btn-primary mx-2" id="js-content-source-form-submit">
+      Create
+    </button>
+
+    <%= link_to 'Cancel', root_path, class: 'btn btn-outline-danger' %>
+  </div>
+
+  <div class="clearfix">
+<% end %>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <div class='card'>
+    <div class='card-body'>
+      <div class='row gy-3 align-items-center'>
+        <%= render "devise/shared/error_messages", resource: resource %>
+
+        <div class="col-3">
+          <%= f.label :email %><br />
+        </div>
+
+        <div class='col-9'>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: {"form-control": true, "is-invalid": resource.errors[:email].any? }  %>
+        </div>
+
+        <div class="col-3">
+          <%= f.label :password %>
+          <br />
+
+          <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %>
+        </div>
+
+        <div class='col-9'>
+          <%= f.password_field :password, autocomplete: "new-password", class: {"form-control": true, "is-invalid": resource.errors[:password].any? }  %>
+        </div>
+
+        <div class="col-3">
+          <%= f.label :password_confirmation %>
+        </div>
+
+        <div class='col-9'>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: {"form-control": true, "is-invalid": resource.errors[:password].any? }  %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

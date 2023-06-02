@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_02_014018) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_02_034610) do
   create_table "content_sources", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -152,6 +152,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_02_014018) do
     t.index ["extraction_job_id"], name: "index_transformation_jobs_on_extraction_job_id"
     t.index ["harvest_job_id"], name: "index_transformation_jobs_on_harvest_job_id"
     t.index ["transformation_definition_id"], name: "index_transformation_jobs_on_transformation_definition_id"
+  end
+
+  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
 end

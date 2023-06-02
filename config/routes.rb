@@ -3,7 +3,7 @@ require 'sidekiq/web'
 Sidekiq::Web.app_url = '/'
 
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  devise_for :users
   root 'home#index'
 
   resources :content_sources, only: %i[index show create update new edit] do
