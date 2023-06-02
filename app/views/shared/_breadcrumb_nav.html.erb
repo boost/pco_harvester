@@ -55,6 +55,12 @@
       path: (content_source_harvest_definition_path(source_id, harvest_definition_id) rescue nil),
       active: current_page(:harvest_definitions, %w[show]),
       display: request.path.match?(/\/harvest_definitions\/\d+/)) %>
+      
+    <%= breadcrumb_item(
+      text: @harvest_job&.name_in_database,
+      path: '',
+      active: current_page(:harvest_jobs, %w[show]),
+      display: request.path.match?(/\/harvest_jobs\/\d+/)) %>
 
     <%= breadcrumb_item(
       text: @extraction_job&.id,
