@@ -33,13 +33,24 @@
           <%= link_to 'Jobs', extraction_jobs_path, class: extraction_jobs_classes %>
         </li>
       </ul>
-      <% if !user_signed_in? %>
-        <ul class="navbar-nav">
+      <ul class="navbar-nav">
+        <% if user_signed_in? %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-person-circle" aria-hidden="true"></i> <%= current_user.username %>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+              </li>
+            </ul>
+          </li>
+        <% else %>
           <li class="nav-item">
             <%= link_to 'Sign in', new_user_session_path, class: { "nav-link": true, active: current_page?(new_user_session_path) } %>
           </li>
-        </ul>
-      <% end %>
+        <% end %>
+      </ul>
     </div>
   </div>
 </nav>
