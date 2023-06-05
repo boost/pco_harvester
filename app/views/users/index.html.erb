@@ -6,9 +6,14 @@
   <h1 class="header__title">Users</h1>
 
   <div class="header__actions">
-    <%= link_to new_user_path, class: 'btn btn-primary' do %>
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#invite-user"
+    >
       <i class="bi bi-plus" aria-hidden="true"></i> Invite user
-    <% end %>
+    </button>
   </div>
 
   <div class="clearfix"></div>
@@ -21,6 +26,10 @@
         <%= link_to user, class: 'card mb-3' do %>
           <div class="card-body">
             <h5 class="card-title"><%= user.username %></h5>
+            <p><%= user.email %></p>
+            <span class="<%= class_names('badge', 'rounded-pill', 'bg-light text-dark': !user.invitation_accepted_at?, 'bg-primary': user.invitation_accepted_at?) %>">
+              <%= user.invitation_accepted_at? ? 'Active' : 'Invited' %>
+            </span>
           </div>
         <% end %>
       </div>
@@ -31,3 +40,38 @@
 <% else %>
   <p>There are currently no users. Click 'Invite user' to help someone to join your work.</p>
 <% end %>
+
+<%# Modals %>
+
+<div
+  class="modal fade"
+  id="invite-user"
+  tabindex="-1"
+  aria-labelledby="Invite user"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <%= vertical_form_with model: User.new, url: invitation_path(User), class: 'modal-content' do |form| %>
+      <div class="modal-header">
+        <h5 class="modal-title">Invite user</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <%= form.label :username, class: "form-label" %>
+          <%= form.text_field :username, required: true, class: "form-control" %>
+        </div>
+        <div class="mb-3">
+          <%= form.label :email, class: "form-label" %>
+          <%= form.email_field :email, required: true, class: "form-control" %>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">
+          Invite
+        </button>
+      </div>
+    <% end %>
+  </div>
+</div>

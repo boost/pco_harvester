@@ -72,4 +72,23 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # CUSTOM SETTINGS are coming here
+  DEFAULT_URL_OPTIONS = {
+    host: ENV.fetch('APPLICATION_HOST_DOMAIN'),
+    protocol: 'https'
+  }.freeze
+
+  config.action_controller.default_url_options = DEFAULT_URL_OPTIONS
+  config.action_mailer.default_url_options = DEFAULT_URL_OPTIONS
+  config.action_mailer.asset_host = "#{DEFAULT_URL_OPTIONS[:protocol]}://#{DEFAULT_URL_OPTIONS[:host]}"
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: ENV['SMTP_ADDRESS'],
+    port: ENV['SMTP_PORT'],
+    domain: APPLICATION_HOST_DOMAIN,
+    user_name: ENV['SMTP_USER'],
+    password: ENV['SMTP_PASSWORD']
+  }
 end

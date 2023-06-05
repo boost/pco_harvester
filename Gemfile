@@ -59,6 +59,7 @@ end
 
 group :development do
   gem 'codeclimate_diff', github: 'boost/codeclimate_diff', tag: 'v0.1.9'
+  gem 'letter_opener'
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem 'spring'
