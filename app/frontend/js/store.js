@@ -1,4 +1,8 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import {
+  displayedFieldsListener,
+  loadDisplayedFields,
+} from "./displayedFieldsListener";
 
 // entities
 import fields from "/js/features/FieldsSlice";
@@ -8,10 +12,12 @@ import appDetails from "/js/features/AppDetailsSlice";
 import uiFields from "/js/features/UiFieldsSlice";
 import uiAppDetails from "/js/features/UiAppDetailsSlice";
 
-// ui
+// config
 import config from "/js/features/ConfigSlice";
 
 export default function configureAppStore(preloadedState) {
+  loadDisplayedFields(preloadedState);
+
   const store = configureStore({
     reducer: combineReducers({
       entities: combineReducers({
@@ -24,7 +30,8 @@ export default function configureAppStore(preloadedState) {
       }),
       config,
     }),
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().concat(displayedFieldsListener.middleware),
     preloadedState,
   });
 
