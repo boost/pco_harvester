@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   devise_for :users
   root 'home#index'
 
+  resources :users, only: %i[index new create edit update]
+
   resources :content_sources, only: %i[index show create update new edit] do
     resources :extraction_definitions, only: %i[show new create edit update destroy] do
       collection do

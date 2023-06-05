@@ -1,0 +1,33 @@
+<%= content_for(:title) { 'Users' } %>
+
+<%= content_for :header do %>
+  <%= render 'shared/breadcrumb_nav' %>
+
+  <h1 class="header__title">Users</h1>
+
+  <div class="header__actions">
+    <%= link_to new_user_path, class: 'btn btn-primary' do %>
+      <i class="bi bi-plus" aria-hidden="true"></i> Invite user
+    <% end %>
+  </div>
+
+  <div class="clearfix"></div>
+<% end %>
+
+<% if @users.any? %>
+  <div class="row">
+    <% @users.each do |user| %>
+      <div class='col-3'>
+        <%= link_to user, class: 'card mb-3' do %>
+          <div class="card-body">
+            <h5 class="card-title"><%= user.username %></h5>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <%= render 'shared/pagination_below_table', items: @users %>
+<% else %>
+  <p>There are currently no users. Click 'Invite user' to help someone to join your work.</p>
+<% end %>
