@@ -1,36 +1,43 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectFieldById } from "~/js/features/FieldsSlice";
-import { selectUiFieldById } from "~/js/features/UiFieldsSlice";
+import {
+  selectUiFieldById,
+  toggleDisplayField,
+} from "~/js/features/UiFieldsSlice";
 import classNames from "classnames";
 
-const FieldNavigationListItem = ({id}) => {
- 
+const FieldNavigationListItem = ({ id }) => {
+  const dispatch = useDispatch();
   const { name } = useSelector((state) => selectFieldById(state, id));
-  const { error, displayed } = useSelector((state) => selectUiFieldById(state, id));
+  const { error, displayed } = useSelector((state) =>
+    selectUiFieldById(state, id)
+  );
 
-  const linkClasses  = classNames('nav-link', {
-    'error': error,
+  const linkClasses = classNames("nav-link", {
+    error: error,
   });
-  
-  return(
+
+  return (
     <li className="nav-item">
       <a
-        className={ linkClasses }
+        className={linkClasses}
         data-bs-toggle="collapse"
+        onClick={() =>
+          dispatch(toggleDisplayField({ id: id, displayed: !displayed }))
+        }
         href={`#field-${id}`}
         role="button"
         aria-expanded={displayed}
         aria-controls={`field-${id}`}
       >
-        {name || "New field"}
-        { " " }
-        { error && <i className="bi bi-exclamation-circle-fill" aria-label="error"></i> }
+        {name || "New field"}{" "}
+        {error && (
+          <i className="bi bi-exclamation-circle-fill" aria-label="error"></i>
+        )}
       </a>
     </li>
   );
-}
+};
 
 export default FieldNavigationListItem;
-
-

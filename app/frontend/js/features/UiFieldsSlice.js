@@ -15,6 +15,12 @@ const uiFieldsSlice = createSlice({
         changes: { expanded: action.payload.expanded },
       });
     },
+    toggleDisplayField(state, action) {
+      uiFieldsAdapter.updateOne(state, {
+        id: action.payload.id,
+        changes: { displayed: action.payload.displayed },
+      });
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -27,7 +33,7 @@ const uiFieldsSlice = createSlice({
           running: false,
           hasRun: false,
           expanded: true,
-          displayed: true
+          displayed: true,
         });
       })
       .addCase(clickedOnRunFields.pending, (state, action) => {
@@ -101,6 +107,12 @@ export const {
   selectAll: selectAllUiFields,
 } = uiFieldsAdapter.getSelectors((state) => state.ui.fields);
 
-export const { toggleCollapseField } = actions;
+export const selectDisplayedFieldIds = (state) => {
+  return selectAllUiFields(state)
+    .filter((field) => field.displayed)
+    .map((field) => field.id);
+};
+
+export const { toggleCollapseField, toggleDisplayField } = actions;
 
 export default reducer;
