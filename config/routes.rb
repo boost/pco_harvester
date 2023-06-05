@@ -3,10 +3,15 @@ require 'sidekiq/web'
 Sidekiq::Web.app_url = '/'
 
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, :skip => [:registrations]
+  as :user do
+    get 'users/edit' => 'devise/registrations#edit', as: :edit_user_registration
+    put 'users/:id' => 'devise/registrations#update', as: :registration
+  end
+
   root 'home#index'
 
-  resources :users, only: %i[index new create edit update]
+  resources :users, only: %i[index show]
 
   resources :content_sources, only: %i[index show create update new edit] do
     resources :extraction_definitions, only: %i[show new create edit update destroy] do

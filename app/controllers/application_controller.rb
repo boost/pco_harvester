@@ -19,5 +19,6 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:invite, keys: %i[username email])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[username])
   end
 end
