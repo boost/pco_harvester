@@ -33,8 +33,13 @@ gem 'faraday-follow_redirects'
 gem 'jsonpath'
 gem 'sidekiq'
 
+# user management
+gem 'devise'
+gem 'devise_invitable', '~> 2.0.0'
+
 # transformation related
 gem 'webmock'
+
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
@@ -53,12 +58,11 @@ group :development, :test do
 end
 
 group :development do
+  gem 'codeclimate_diff', github: 'boost/codeclimate_diff', tag: 'v0.1.9'
+
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem 'spring'
 end
-
-gem 'codeclimate_diff', github: 'boost/codeclimate_diff', tag: 'v0.1.9'
-gem 'devise'
 
 group :test do
   # used in tests
