@@ -65,6 +65,17 @@
           <%= form.label :email, class: "form-label" %>
           <%= form.email_field :email, required: true, class: "form-control" %>
         </div>
+        <div class="mb-3 form-check">
+          <% role_names = User.roles.keys %>
+          <%= form.check_box :role, { class: "form-check-input" }, role_names.last, role_names.first %>
+          <%= form.label :role, class: "form-check-label" do %>
+            Admin
+            <span
+              data-bs-toggle="tooltip"
+              data-bs-title="Admins can manage and invite users"
+            ><i class="bi bi-question-circle" aria-label="helper text"></i>
+          <% end %>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
