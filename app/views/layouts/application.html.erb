@@ -10,23 +10,20 @@
     <%= vite_javascript_tag 'application' %>
     <%= vite_stylesheet_tag 'application.scss' %>
 
-    <!--
-      If using a TypeScript entrypoint file:
-        vite_typescript_tag 'application'
-
-      If using a .jsx or .tsx entrypoint, add the extension:
-        vite_javascript_tag 'application.jsx'
-
-      Visit the guide for more information: https://vite-ruby.netlify.app/guide/rails
-    -->
-
   </head>
 
   <body>
 
     <%= render 'shared/nav' %>
 
-    <div class="<%= content_for?(:root_class) ? yield(:root_class) : 'container' %>">
+    <header class='header'>
+      <div class='container'>
+        <%= yield :header %>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class='mt-4'></div>
       <%= render 'shared/flash' %>
       <%= yield %>
     </div>

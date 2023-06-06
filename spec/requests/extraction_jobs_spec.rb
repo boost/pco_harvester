@@ -5,8 +5,8 @@ require 'rails_helper'
 RSpec.describe 'ExtractionJobs', type: :request do
   subject! { create(:extraction_job, extraction_definition:) }
 
-  let(:content_partner) { create(:content_partner, :ngataonga) }
-  let(:extraction_definition) { content_partner.extraction_definitions.first }
+  let(:content_source) { create(:content_source, :ngataonga) }
+  let(:extraction_definition) { content_source.extraction_definitions.first }
 
   describe '#index' do
     it 'returns a successful response' do
@@ -57,12 +57,12 @@ RSpec.describe 'ExtractionJobs', type: :request do
     end
 
     it 'returns a successful response' do
-      get content_partner_extraction_definition_extraction_job_path(content_partner, extraction_definition, subject)
+      get content_source_extraction_definition_extraction_job_path(content_source, extraction_definition, subject)
       expect(response).to be_successful
     end
 
     it 'displays the updated_at of the jobs' do
-      get content_partner_extraction_definition_extraction_job_path(content_partner, extraction_definition, subject)
+      get content_source_extraction_definition_extraction_job_path(content_source, extraction_definition, subject)
       subject.reload
       expect(response.body).to include subject.updated_at.to_fs(:verbose)
     end
@@ -71,14 +71,14 @@ RSpec.describe 'ExtractionJobs', type: :request do
   describe '#create' do
     describe 'is successful' do
       it 'redirects to the ED path' do
-        post content_partner_extraction_definition_extraction_jobs_path(content_partner, extraction_definition,
+        post content_source_extraction_definition_extraction_jobs_path(content_source, extraction_definition,
                                                                         kind: 'full')
-        expect(response).to redirect_to content_partner_extraction_definition_path(content_partner,
+        expect(response).to redirect_to content_source_extraction_definition_path(content_source,
                                                                                    extraction_definition)
       end
 
       it 'sets a succesful message' do
-        post content_partner_extraction_definition_extraction_jobs_path(content_partner, extraction_definition,
+        post content_source_extraction_definition_extraction_jobs_path(content_source, extraction_definition,
                                                                         kind: 'full')
         follow_redirect!
         expect(response.body).to include 'Job queued successfuly'
@@ -86,7 +86,7 @@ RSpec.describe 'ExtractionJobs', type: :request do
 
       it 'queues a job' do
         expect(ExtractionWorker).to receive(:perform_async)
-        post content_partner_extraction_definition_extraction_jobs_path(content_partner, extraction_definition,
+        post content_source_extraction_definition_extraction_jobs_path(content_source, extraction_definition,
                                                                         kind: 'full')
       end
     end
@@ -97,20 +97,20 @@ RSpec.describe 'ExtractionJobs', type: :request do
       end
 
       it 'redirects to the ED path' do
-        post content_partner_extraction_definition_extraction_jobs_path(content_partner, extraction_definition)
-        expect(response).to redirect_to content_partner_extraction_definition_path(content_partner,
+        post content_source_extraction_definition_extraction_jobs_path(content_source, extraction_definition)
+        expect(response).to redirect_to content_source_extraction_definition_path(content_source,
                                                                                    extraction_definition)
       end
 
       it 'sets a failure message' do
-        post content_partner_extraction_definition_extraction_jobs_path(content_partner, extraction_definition)
+        post content_source_extraction_definition_extraction_jobs_path(content_source, extraction_definition)
         follow_redirect!
         expect(response.body).to include 'There was an issue launching the job'
       end
 
       it 'does not queue a job' do
         expect(ExtractionWorker).not_to receive(:perform_async)
-        post content_partner_extraction_definition_extraction_jobs_path(content_partner, extraction_definition)
+        post content_source_extraction_definition_extraction_jobs_path(content_source, extraction_definition)
       end
     end
   end
@@ -119,21 +119,21 @@ RSpec.describe 'ExtractionJobs', type: :request do
     context 'when the destroy is successful' do
       it 'deletes the job' do
         expect do
-          delete content_partner_extraction_definition_extraction_job_path(content_partner, extraction_definition,
+          delete content_source_extraction_definition_extraction_job_path(content_source, extraction_definition,
                                                                            subject)
         end.to change(ExtractionJob, :count).by(-1)
       end
 
       it 'redirects to the correct path' do
-        delete content_partner_extraction_definition_extraction_job_path(content_partner, extraction_definition,
+        delete content_source_extraction_definition_extraction_job_path(content_source, extraction_definition,
                                                                          subject)
 
-        expect(response).to redirect_to content_partner_extraction_definition_path(content_partner,
+        expect(response).to redirect_to content_source_extraction_definition_path(content_source,
                                                                                    extraction_definition)
       end
 
       it 'displays an appropriate flash message' do
-        delete content_partner_extraction_definition_extraction_job_path(content_partner, extraction_definition,
+        delete content_source_extraction_definition_extraction_job_path(content_source, extraction_definition,
                                                                          subject)
 
         follow_redirect!
@@ -149,21 +149,21 @@ RSpec.describe 'ExtractionJobs', type: :request do
 
       it 'does not delete the job' do
         expect do
-          delete content_partner_extraction_definition_extraction_job_path(content_partner, extraction_definition,
+          delete content_source_extraction_definition_extraction_job_path(content_source, extraction_definition,
                                                                            subject)
         end.not_to change(ExtractionJob, :count)
       end
 
       it 'redirects to the correct path' do
-        delete content_partner_extraction_definition_extraction_job_path(content_partner, extraction_definition,
+        delete content_source_extraction_definition_extraction_job_path(content_source, extraction_definition,
                                                                          subject)
 
-        expect(response).to redirect_to content_partner_extraction_definition_extraction_job_path(content_partner,
+        expect(response).to redirect_to content_source_extraction_definition_extraction_job_path(content_source,
                                                                                                   extraction_definition, subject)
       end
 
       it 'displays an appropriate flash message' do
-        delete content_partner_extraction_definition_extraction_job_path(content_partner, extraction_definition,
+        delete content_source_extraction_definition_extraction_job_path(content_source, extraction_definition,
                                                                          subject)
 
         follow_redirect!
@@ -176,7 +176,7 @@ RSpec.describe 'ExtractionJobs', type: :request do
   describe '#cancel' do
     context 'when the cancellation is successful' do
       it 'sets the job status to be cancelled' do
-        post cancel_content_partner_extraction_definition_extraction_job_path(content_partner, extraction_definition,
+        post cancel_content_source_extraction_definition_extraction_job_path(content_source, extraction_definition,
                                                                               subject)
 
         subject.reload
@@ -184,15 +184,15 @@ RSpec.describe 'ExtractionJobs', type: :request do
       end
 
       it 'redirects to the correct path' do
-        post cancel_content_partner_extraction_definition_extraction_job_path(content_partner, extraction_definition,
+        post cancel_content_source_extraction_definition_extraction_job_path(content_source, extraction_definition,
                                                                               subject)
 
-        expect(response).to redirect_to content_partner_extraction_definition_path(content_partner,
+        expect(response).to redirect_to content_source_extraction_definition_path(content_source,
                                                                                    extraction_definition)
       end
 
       it 'displays an appropriate flash message' do
-        post cancel_content_partner_extraction_definition_extraction_job_path(content_partner, extraction_definition,
+        post cancel_content_source_extraction_definition_extraction_job_path(content_source, extraction_definition,
                                                                               subject)
 
         follow_redirect!
@@ -207,7 +207,7 @@ RSpec.describe 'ExtractionJobs', type: :request do
       end
 
       it 'does not set the job status to be cancelled' do
-        post cancel_content_partner_extraction_definition_extraction_job_path(content_partner, extraction_definition,
+        post cancel_content_source_extraction_definition_extraction_job_path(content_source, extraction_definition,
                                                                               subject)
 
         subject.reload
@@ -215,15 +215,15 @@ RSpec.describe 'ExtractionJobs', type: :request do
       end
 
       it 'redirects to the correct path' do
-        post cancel_content_partner_extraction_definition_extraction_job_path(content_partner, extraction_definition,
+        post cancel_content_source_extraction_definition_extraction_job_path(content_source, extraction_definition,
                                                                               subject)
 
-        expect(response).to redirect_to content_partner_extraction_definition_path(content_partner,
+        expect(response).to redirect_to content_source_extraction_definition_path(content_source,
                                                                                    extraction_definition)
       end
 
       it 'displays an appropriate flash message' do
-        post cancel_content_partner_extraction_definition_extraction_job_path(content_partner, extraction_definition,
+        post cancel_content_source_extraction_definition_extraction_job_path(content_source, extraction_definition,
                                                                               subject)
 
         follow_redirect!

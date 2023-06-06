@@ -1,0 +1,20 @@
+<%= vertical_form_with model: @content_source, class: { row: true }, id: 'js-content-source-form' do |form| %>
+
+  <div class="row gx-2">
+    <fieldset>
+      <div class="card">
+        <div class="card-body">
+          <div class='row gy-3 align-items-center'>
+            <div class="col-3">
+              <%= form.label :name, 'Name', class: "form-label" %>
+            </div>
+            <div class='col-9'>
+              <%= form.text_field :name, class: {"form-control": true, "is-invalid": @content_source.errors[:name].any? } %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+
+<% end %>

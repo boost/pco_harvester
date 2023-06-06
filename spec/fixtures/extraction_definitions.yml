@@ -9,4 +9,4 @@ figshare:
   per_page_parameter: 'itemsPerPage'
   per_page: 10
   total_selector: '$.items_found'
-  content_partner: antarctica_nz
+  content_source: antarctica_nz

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ContentPartner < ApplicationRecord
+class ContentSource < ApplicationRecord
   has_many :extraction_definitions
   has_many :transformation_definitions
   has_many :harvest_definitions

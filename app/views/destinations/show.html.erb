@@ -1,21 +1,17 @@
 <%= content_for(:title) { @destination.name_in_database } %>
 
-<%= render 'shared/breadcrumb_nav' %>
+<%= content_for :header do %>
+  <%= render 'shared/breadcrumb_nav' %>
 
-<h1 class="float-start mb-4"><%= @destination.name_in_database %></h1>
+  <h1 class="header__title"><%= @destination.name_in_database %></h1>
 
-<div class='float-end'>
-  <%= link_to 'Edit destination', edit_destination_path(@destination), class: 'btn btn-outline-primary' %>
-  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">Delete</button>
-</div>
+  <div class='header__actions'>
+    <%= link_to 'Edit destination', edit_destination_path(@destination), class: 'btn btn-outline-primary' %>
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">Delete</button>
+  </div>
 
-<div class="clearfix"></div>
-
-<div class='mt-4'></div>
-
-<h5>Name</h5>
-
-<p><%= @destination.name %></p>
+  <div class="clearfix"></div>
+<% end %>
 
 <h5>URL</h5>
 

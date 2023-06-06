@@ -1,9 +1,21 @@
 <%= content_for(:title) { "Editing #{@destination.name_in_database}" } %>
 
-<%= render 'shared/breadcrumb_nav' %>
+<%= content_for :header do %>
+  <%= render 'shared/breadcrumb_nav' %>
 
-<h1><%= @destination.name_in_database %></h1>
+  <h1 class="header__title"><%= @destination.name_in_database %></h1>
 
-<div class="mt-4"></div>
+  <div class="float-end">
+    <button type="button" class="btn btn-outline-primary me-1" id="js-test-destination-button">
+      Test
+    </button>
+
+    <button type="submit" class="btn btn-primary" data-form="js-destination-form">
+      Update
+    </button>
+  </div>
+
+  <div class="clearfix">
+<% end %>
 
 <%= render 'form' %>

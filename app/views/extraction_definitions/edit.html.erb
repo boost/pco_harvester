@@ -1,8 +1,35 @@
 <%= content_for(:title) { "Editing #{@extraction_definition.name_in_database}" } %>
 
-<%= render 'shared/breadcrumb_nav' %>
+<%= content_for(:header) do %>
+  <%= render 'shared/breadcrumb_nav' %>
 
-<h1><%= @extraction_definition.name_in_database %></h1>
+  <h1 class='float-start'><%= @extraction_definition.name_in_database %></h1>
+
+  <div class="float-end">
+  
+    <% if @extraction_definition.harvest? %>
+      <button type="button" class="btn btn-outline-primary me-1" id="js-test-extraction-button">
+        Test Extraction Definition
+      </button>
+    <% else %>
+      <button type="button" class="btn btn-outline-primary me-1" id="js-test-record-extraction-button">
+        Test Record Extraction
+      </button>
+    
+      <button type="button" class="btn btn-outline-primary me-1" id="js-test-enrichment-extraction-button">
+        Test Enrichment Extraction
+      </button>
+    <% end %>
+
+    <button type="submit" class="btn btn-primary" data-form="js-extraction-definition-form">
+      Update
+    </button>
+
+    <%= link_to 'Cancel', content_source_extraction_definition_path(@content_source, @extraction_definition), class: 'btn btn-outline-danger' %>
+  </div>
+
+  <div class='clearfix'></div>
+<% end %>
 
 <%= render "#{@extraction_definition.kind}_form" %>
 

@@ -1,0 +1,38 @@
+.header {
+  background-color: $doctor;
+  padding: 2rem;
+  border-bottom: 1px solid $bright-star;
+  position: relative;
+
+  @include element('title') {
+    float: left;
+    margin-bottom: 0;
+  }
+
+  @include element('actions') {
+    float: right;
+    padding-top: .5rem;
+  }
+
+  .nav-tabs {
+    margin-bottom: -2rem;
+    border-bottom: none;
+
+    .nav-link {
+      &:hover {
+        border-color: $doctor;
+        border-bottom-color: $bleached-silk;
+      }
+    }
+
+    .nav-link.active {
+      background-color: $bleached-silk;
+      border-bottom: 1px solid $bleached-silk;
+
+      &:hover {
+        border-color: $bright-star;
+        border-bottom-color: $bleached-silk;
+      }
+    }
+  }
+}

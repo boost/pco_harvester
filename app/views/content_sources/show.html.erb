@@ -1,0 +1,133 @@
+<%= content_for(:title) { @content_source.name_in_database } %>
+
+<%= content_for :header do %>
+  <%= render 'shared/breadcrumb_nav' %>
+
+  <h1 class="header__title"><%= @content_source.name_in_database %></h1>
+
+  <div class="header__actions">
+    <%= link_to edit_content_source_path(@content_source), class: 'btn btn-primary' do %>
+      <i class="bi bi-pencil-square" aria-hidden="true"></i> Edit content source
+    <% end %>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <ul class="nav nav-tabs mt-4" role="tablist">
+    <li class='nav-item'>
+      <%= link_to 'Harvests', content_source_path(@content_source, kind: 'harvest'), class: class_names("nav-link", active: @kind == 'harvest') %>
+    </li>
+
+    <li class='nav-item'>
+      <%= link_to 'Enrichments', content_source_path(@content_source, kind: 'enrichment'), class: class_names("nav-link", active: @kind == 'enrichment') %>
+    </li>
+  </ul>
+<% end %>
+
+<h4 class='mb-3'>Extractions</h4>
+
+<div class='row'>
+  <%- if @extraction_definitions.any? %>
+    <%- @extraction_definitions.each do |extraction_definition| %>
+      <div class='col-3'>
+        <%= link_to content_source_extraction_definition_path(@content_source, extraction_definition), class: 'card mb-3' do %>
+          <div class='card-body'>
+
+            <h5 class='card-title'><%= extraction_definition.name %></h5>
+
+            <% if extraction_definition.extraction_jobs.running.any? %>
+              <span class="badge rounded-pill bg-success">
+                <%= pluralize(extraction_definition.extraction_jobs.running.count, 'job') %> running
+              </span>
+            <% end %>
+
+            <% if extraction_definition.extraction_jobs.errored.any? %>
+              <span class="badge rounded-pill bg-danger">
+                <%= pluralize(extraction_definition.extraction_jobs.errored.count, 'job') %> errored
+              </span>
+            <% end %>
+
+          </div>
+
+        <% end %>
+      </div>
+    <%- end %>
+  <% end %>
+
+  <div class='col-3 align-self-center mb-3'>
+    <div class="d-grid gap-2">
+      <%= link_to new_content_source_extraction_definition_path(@content_source, kind: @kind), class: 'btn btn-lg btn-outline-primary' do %>
+        <i class="bi bi-plus" aria-hidden="true"></i> Create extraction
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<h4 class='mb-3'>Transformations</h4>
+
+<div class='row'>
+  <%- if @transformation_definitions.any? %>
+    <%- @transformation_definitions.each do |transformation_definition| %>
+      <div class='col-3'>
+        <%= link_to content_source_transformation_definition_path(@content_source, transformation_definition), class: 'card mb-3' do %>
+          <div class='card-body'>
+
+            <h5 class='card-title'><%= transformation_definition.name %></h5>
+
+            <span class="badge rounded-pill bg-light text-dark">
+              <%= pluralize(transformation_definition.fields.count, 'field') %>
+            </span>
+
+          </div>
+
+        <% end %>
+      </div>
+    <%- end %>
+  <% end %>
+
+  <div class='col-3 align-self-center mb-3'>
+    <div class="d-grid gap-2">
+      <%= link_to new_content_source_transformation_definition_path(@content_source, kind: @kind), class: 'btn btn-lg btn-outline-primary' do %>
+        <i class="bi bi-plus" aria-hidden="true"></i> Create transformation
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<h4 class='mb-3'><%= @kind.pluralize.capitalize %></h4>
+
+<div class='row'>
+  <%- if @harvest_definitions.any? %>
+    <%- @harvest_definitions.each do |harvest_definition| %>
+      <div class='col-3'>
+        <%= link_to content_source_harvest_definition_path(@content_source, harvest_definition), class: 'card mb-3' do %>
+          <div class='card-body'>
+
+            <h5 class='card-title'><%= harvest_definition.name %></h5>
+
+            <% if harvest_definition.harvest_jobs.running.any? %>
+              <span class="badge rounded-pill bg-success">
+                <%= pluralize(harvest_definition.harvest_jobs.running.count, 'job') %> running
+              </span>
+            <% end %>
+
+            <% if harvest_definition.harvest_jobs.errored.any? %>
+              <span class="badge rounded-pill bg-danger">
+                <%= pluralize(harvest_definition.harvest_jobs.errored.count, 'job') %> errored
+              </span>
+            <% end %>
+          </div>
+
+        <% end %>
+      </div>
+    <%- end %>
+  <% end %>
+
+  <div class='col-3 align-self-center mb-3'>
+    <div class="d-grid gap-2">
+      <%= link_to new_content_source_harvest_definition_path(@content_source, kind: @kind), class: 'btn btn-lg btn-outline-primary' do %>
+        <i class="bi bi-plus" aria-hidden="true"></i> Create <%= @kind %>
+      <% end %>
+    </div>
+  </div>
+</div>

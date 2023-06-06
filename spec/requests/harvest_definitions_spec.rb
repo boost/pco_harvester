@@ -3,16 +3,16 @@
 require 'rails_helper'
 
 RSpec.describe 'HarvestDefinitions', type: :request do
-  let(:content_partner)           { create(:content_partner, :ngataonga) }
-  let(:extraction_definition)     { content_partner.extraction_definitions.first }
+  let(:content_source)           { create(:content_source, :ngataonga) }
+  let(:extraction_definition)     { content_source.extraction_definitions.first }
   let(:extraction_job) { create(:extraction_job, extraction_definition:) }
-  let(:transformation_definition) { create(:transformation_definition, content_partner:, extraction_job:) }
+  let(:transformation_definition) { create(:transformation_definition, content_source:, extraction_job:) }
   let(:destination)               { create(:destination) }
   let(:harvest_definition)        { create(:harvest_definition) }
 
   describe 'GET /new' do
     it 'has a successful response' do
-      get new_content_partner_harvest_definition_path(content_partner, kind: 'harvest')
+      get new_content_source_harvest_definition_path(content_source, kind: 'harvest')
 
       expect(response.status).to eq 200
     end
@@ -20,7 +20,7 @@ RSpec.describe 'HarvestDefinitions', type: :request do
 
   describe 'GET /show' do
     it 'has a successful response' do
-      get content_partner_harvest_definition_path(content_partner, harvest_definition)
+      get content_source_harvest_definition_path(content_source, harvest_definition)
 
       expect(response.status).to eq 200
     end
@@ -30,10 +30,10 @@ RSpec.describe 'HarvestDefinitions', type: :request do
     context 'with valid attributes' do
       it 'creates a new harvest definition' do
         expect do
-          post content_partner_harvest_definitions_path(content_partner), params: {
+          post content_source_harvest_definitions_path(content_source), params: {
             harvest_definition: {
               name: 'Staging',
-              content_partner_id: content_partner.id,
+              content_source_id: content_source.id,
               extraction_definition_id: extraction_definition.id,
               transformation_definition_id: transformation_definition.id,
               destination_id: destination.id,
@@ -43,11 +43,11 @@ RSpec.describe 'HarvestDefinitions', type: :request do
         end.to change(HarvestDefinition, :count).by(1)
       end
 
-      it 'redirects to the content_partner path' do
-        post content_partner_harvest_definitions_path(content_partner), params: {
+      it 'redirects to the content_source path' do
+        post content_source_harvest_definitions_path(content_source), params: {
           harvest_definition: {
             name: 'Staging',
-            content_partner_id: content_partner.id,
+            content_source_id: content_source.id,
             extraction_definition_id: extraction_definition.id,
             transformation_definition_id: transformation_definition.id,
             destination_id: destination.id,
@@ -55,14 +55,14 @@ RSpec.describe 'HarvestDefinitions', type: :request do
           }
         }
 
-        expect(response).to redirect_to content_partner_path(content_partner)
+        expect(response).to redirect_to content_source_path(content_source)
       end
     end
 
     context 'with invalid attributes' do
       it 'does not create a new harvest definition' do
         expect do
-          post content_partner_harvest_definitions_path(content_partner), params: {
+          post content_source_harvest_definitions_path(content_source), params: {
             harvest_definition: { name: nil }
           }
         end.not_to change(HarvestDefinition, :count)
@@ -72,12 +72,12 @@ RSpec.describe 'HarvestDefinitions', type: :request do
 
   describe 'GET /edit' do
     let(:harvest_definition) do
-      create(:harvest_definition, name: 'Staging', content_partner:, extraction_definition:, transformation_definition:,
+      create(:harvest_definition, name: 'Staging', content_source:, extraction_definition:, transformation_definition:,
                                   destination:)
     end
 
     it 'returns a successful response' do
-      get edit_content_partner_harvest_definition_path(content_partner, harvest_definition)
+      get edit_content_source_harvest_definition_path(content_source, harvest_definition)
 
       expect(response.status).to eq 200
     end
@@ -85,17 +85,17 @@ RSpec.describe 'HarvestDefinitions', type: :request do
 
   describe 'PATCH /update' do
     let(:harvest_definition) do
-      create(:harvest_definition, name: 'Staging', content_partner:, extraction_definition:, transformation_definition:,
+      create(:harvest_definition, name: 'Staging', content_source:, extraction_definition:, transformation_definition:,
                                   destination:)
     end
 
     context 'with valid params' do
       let!(:updated_extraction_definition)     { create(:extraction_definition, base_url: 'http://test.com') }
       let(:updated_field)                      { build(:field, block: 'hello!') }
-      let!(:updated_transformation_definition) { create(:transformation_definition, content_partner:, extraction_job:, fields: [updated_field]) }
+      let!(:updated_transformation_definition) { create(:transformation_definition, content_source:, extraction_job:, fields: [updated_field]) }
 
       it 'updates the harvest definition' do
-        patch content_partner_harvest_definition_path(content_partner, harvest_definition), params: {
+        patch content_source_harvest_definition_path(content_source, harvest_definition), params: {
           harvest_definition: {
             source_id: 'testing'
           }
@@ -107,19 +107,19 @@ RSpec.describe 'HarvestDefinitions', type: :request do
       end
 
       it 'redirects to the harvest definition path' do
-        patch content_partner_harvest_definition_path(content_partner, harvest_definition), params: {
+        patch content_source_harvest_definition_path(content_source, harvest_definition), params: {
           harvest_definition: {
             name: 'Production'
           }
         }
 
-        expect(response).to redirect_to content_partner_harvest_definition_path(content_partner, harvest_definition)
+        expect(response).to redirect_to content_source_harvest_definition_path(content_source, harvest_definition)
       end
 
       it 'updates the extraction_definition clone' do
         expect(harvest_definition.extraction_definition.original_extraction_definition).to eq extraction_definition
 
-        patch content_partner_harvest_definition_path(content_partner, harvest_definition), params: {
+        patch content_source_harvest_definition_path(content_source, harvest_definition), params: {
           harvest_definition: {
             extraction_definition_id: updated_extraction_definition.id
           }
@@ -135,7 +135,7 @@ RSpec.describe 'HarvestDefinitions', type: :request do
       it 'updates the transformation_definition clone' do
         expect(harvest_definition.transformation_definition.original_transformation_definition).to eq transformation_definition
 
-        patch content_partner_harvest_definition_path(content_partner, harvest_definition), params: {
+        patch content_source_harvest_definition_path(content_source, harvest_definition), params: {
           harvest_definition: {
             transformation_definition_id: updated_transformation_definition.id
           }
@@ -149,7 +149,7 @@ RSpec.describe 'HarvestDefinitions', type: :request do
 
     context 'with invalid params' do
       it 'does not update the harvest definition' do
-        patch content_partner_harvest_definition_path(content_partner, harvest_definition), params: {
+        patch content_source_harvest_definition_path(content_source, harvest_definition), params: {
           harvest_definition: {
             source_id: nil
           }
@@ -164,28 +164,28 @@ RSpec.describe 'HarvestDefinitions', type: :request do
 
   describe 'DELETE /destroy' do
     let!(:harvest_definition) do
-      create(:harvest_definition, name: 'Staging', content_partner:, extraction_definition:, transformation_definition:,
+      create(:harvest_definition, name: 'Staging', content_source:, extraction_definition:, transformation_definition:,
                                   destination:)
     end
 
     it 'deletes a harvest definition' do
       expect do
-        delete content_partner_harvest_definition_path(content_partner, harvest_definition)
+        delete content_source_harvest_definition_path(content_source, harvest_definition)
       end.to change(HarvestDefinition, :count).by(-1)
     end
 
-    it 'redirects to the content partner path' do
-      delete content_partner_harvest_definition_path(content_partner, harvest_definition)
+    it 'redirects to the content source path' do
+      delete content_source_harvest_definition_path(content_source, harvest_definition)
 
-      expect(response).to redirect_to content_partner_path(content_partner)
+      expect(response).to redirect_to content_source_path(content_source)
     end
 
     it 'does not delete the harvest definition if something has gone wrong' do
       allow_any_instance_of(HarvestDefinition).to receive(:destroy).and_return(false)
 
-      delete content_partner_harvest_definition_path(content_partner, harvest_definition)
+      delete content_source_harvest_definition_path(content_source, harvest_definition)
 
-      expect(response).to redirect_to content_partner_harvest_definition_path(content_partner, harvest_definition)
+      expect(response).to redirect_to content_source_harvest_definition_path(content_source, harvest_definition)
     end
   end
 end

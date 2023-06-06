@@ -1,32 +1,31 @@
 <%- if jobs.any? %>
-  <%- jobs.each do |job| %>
-    <% definition = job.send("#{type}_definition") %>
-  
-    <div class="border p-3 my-2 row justify-content-between">
-      <div class="col">
+  <div class='row'>
+    <%- jobs.each do |job| %>
+      <div class='col-3'>
+        <% definition = job.send("#{type}_definition") %>
+        <% next if definition.nil? %>
+        <% path = send("content_source_#{type}_definition_#{type}_job_path", definition.content_source, definition, job) %>
 
-        <h2 class="h4"><%= job.name %></h2>
+        <%= link_to path, class: 'card mb-3' do %>      
+          <div class='card-body'>
+            <h5 class='card-title'><%= job.name %></h5>
 
-        <p class="text-secondary mb-0">
-          <%= job.updated_at.to_fs(:light) %> |
-          <%= job_status_text(job) %>
-        </p>
+              <%= job.updated_at.to_fs(:light) %>
 
-      </div>
-
-      <div class="col-auto">
-        <% path = send("content_partner_#{type}_definition_#{type}_job_path", definition.content_partner, definition, job) %>
-        <% cancel_path = send("cancel_content_partner_#{type}_definition_#{type}_job_path", definition.content_partner, definition, job) %>
-
-        <% if job.queued? || job.running? %>
-          <%= button_to "Cancel job", cancel_path, class: "btn btn-outline-danger me-1", form_class: 'd-inline' %>
+              <span class="badge bg-light text-dark">
+                <%= job_status_text(job) %>
+              </span>
+          </div>
         <% end %>
-          <%= link_to "See results", path, class: "btn btn-outline-primary" %>
+  
       </div>
-    </div>
-  <%- end %>
+    <%- end %>
 
-  <%= render 'shared/pagination_below_table', items: jobs %>
+    <%= render 'shared/pagination_below_table', items: jobs %>
+  </div>
+
 <% else %>
+
   <p>There are currently no jobs.</p>
+
 <% end %>

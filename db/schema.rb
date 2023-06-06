@@ -10,8 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_29_015101) do
-  create_table "content_partners", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+ActiveRecord::Schema[7.0].define(version: 2023_05_30_232605) do
+  create_table "content_sources", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -38,13 +38,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_29_015101) do
     t.string "total_selector"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "content_partner_id", null: false
+    t.bigint "content_source_id", null: false
     t.bigint "original_extraction_definition_id"
     t.integer "kind", default: 0
     t.string "source_id"
     t.string "enrichment_url"
     t.bigint "destination_id"
-    t.index ["content_partner_id"], name: "index_extraction_definitions_on_content_partner_id"
+    t.index ["content_source_id"], name: "index_extraction_definitions_on_content_source_id"
     t.index ["destination_id"], name: "index_extraction_definitions_on_destination_id"
     t.index ["original_extraction_definition_id"], name: "index_eds_on_original_ed_id"
   end
@@ -75,7 +75,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_29_015101) do
     t.text "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "content_partner_id"
+    t.bigint "content_source_id"
     t.bigint "extraction_definition_id"
     t.bigint "transformation_definition_id"
     t.bigint "destination_id"
@@ -83,7 +83,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_29_015101) do
     t.integer "kind", default: 0
     t.integer "priority", default: 0
     t.boolean "required_for_active_record", default: false
-    t.index ["content_partner_id"], name: "index_harvest_definitions_on_content_partner_id"
+    t.index ["content_source_id"], name: "index_harvest_definitions_on_content_source_id"
     t.index ["destination_id"], name: "index_harvest_definitions_on_destination_id"
     t.index ["extraction_definition_id"], name: "index_harvest_definitions_on_extraction_definition_id"
     t.index ["transformation_definition_id"], name: "index_harvest_definitions_on_transformation_definition_id"
@@ -124,11 +124,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_29_015101) do
     t.string "record_selector", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "content_partner_id", null: false
+    t.bigint "content_source_id", null: false
     t.bigint "extraction_job_id", null: false
     t.bigint "original_transformation_definition_id"
     t.integer "kind", default: 0
-    t.index ["content_partner_id"], name: "index_transformation_definitions_on_content_partner_id"
+    t.index ["content_source_id"], name: "index_transformation_definitions_on_content_source_id"
     t.index ["extraction_job_id"], name: "index_transformation_definitions_on_extraction_job_id"
     t.index ["original_transformation_definition_id"], name: "index_tds_on_original_td_id"
   end

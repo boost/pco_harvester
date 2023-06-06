@@ -1,9 +1,21 @@
 <%= content_for(:title) { 'New Destination' } %>
 
-<%= render 'shared/breadcrumb_nav' %>
+<%= content_for :header do %>
+  <%= render 'shared/breadcrumb_nav' %>
 
-<h1>Add New Destination</h1>
+  <h1 class="header__title float-start">Add New Destination</h1>
+ 
+  <div class="float-end">
+    <button type="button" class="btn btn-outline-primary me-1" id="js-test-destination-button">
+      Test
+    </button>
 
-<div class="mt-4"></div>
+    <button type="submit" class="btn btn-primary" data-form="js-destination-form">
+      Save
+    </button>
+  </div>
+
+  <div class="clearfix">
+<% end %>
 
 <%= render 'form' %>

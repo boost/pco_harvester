@@ -6,7 +6,7 @@ RSpec.describe HarvestDefinition, type: :model do
   subject do
     create(
       :harvest_definition,
-      content_partner:,
+      content_source:,
       extraction_definition:,
       transformation_definition:,
       destination:,
@@ -14,15 +14,15 @@ RSpec.describe HarvestDefinition, type: :model do
     )
   end
 
-  let(:content_partner) { create(:content_partner, :ngataonga, name: 'National Library of New Zealand') }
-  let(:extraction_definition) { content_partner.extraction_definitions.first }
+  let(:content_source) { create(:content_source, :ngataonga, name: 'National Library of New Zealand') }
+  let(:extraction_definition) { content_source.extraction_definitions.first }
   let(:extraction_job) { create(:extraction_job, extraction_definition:) }
-  let(:transformation_definition) { create(:transformation_definition, content_partner:, extraction_job:) }
+  let(:transformation_definition) { create(:transformation_definition, content_source:, extraction_job:) }
   let(:destination) { create(:destination) }
 
   describe '#attributes' do
-    it 'belongs to a content partner' do
-      expect(subject.content_partner).to eq content_partner
+    it 'belongs to a content source' do
+      expect(subject.content_source).to eq content_source
     end
 
     it 'has a copy of the provided extraction definition' do
@@ -65,12 +65,12 @@ RSpec.describe HarvestDefinition, type: :model do
   describe '#update_transformation_definition_clone' do
     let(:field) { build(:field) }
     let(:transformation_definition) do
-      create(:transformation_definition, content_partner:, extraction_job:, fields: [field])
+      create(:transformation_definition, content_source:, extraction_job:, fields: [field])
     end
 
     let(:updated_field) { build(:field, name: 'test') }
     let(:updated_transformation_definition) do
-      create(:transformation_definition, content_partner:, extraction_job:, name: 'updated',
+      create(:transformation_definition, content_source:, extraction_job:, name: 'updated',
                                          record_selector: 'updated record selector', fields: [updated_field])
     end
     let(:harvest_job) { create(:harvest_job, harvest_definition: subject) }
@@ -151,13 +151,13 @@ RSpec.describe HarvestDefinition, type: :model do
   end
 
   describe 'safe_copy' do
-    let(:content_partner)           { create(:content_partner, :ngataonga) }
-    let(:extraction_definition)     { content_partner.extraction_definitions.first }
-    let(:transformation_definition) { create(:transformation_definition, content_partner:, extraction_job:) }
+    let(:content_source)           { create(:content_source, :ngataonga) }
+    let(:extraction_definition)     { content_source.extraction_definitions.first }
+    let(:transformation_definition) { create(:transformation_definition, content_source:, extraction_job:) }
     let(:destination)               { create(:destination) }
 
     it 'creates a safe copy of the extraction_definition' do
-      hd = described_class.new(content_partner:, extraction_definition:, transformation_definition:, destination:,
+      hd = described_class.new(content_source:, extraction_definition:, transformation_definition:, destination:,
                                source_id: 'test')
       hd.save!
 
@@ -167,7 +167,7 @@ RSpec.describe HarvestDefinition, type: :model do
     end
 
     it 'creates a safe copy of the transformation_definition' do
-      hd = described_class.new(content_partner:, extraction_definition:, transformation_definition:, destination:,
+      hd = described_class.new(content_source:, extraction_definition:, transformation_definition:, destination:,
                                source_id: 'test')
       hd.save!
 

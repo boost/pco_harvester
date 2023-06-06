@@ -10,15 +10,15 @@ import { request } from "~/js/utils/request";
 export const addField = createAsyncThunk(
   "fields/addFieldStatus",
   async (payload) => {
-    const { name, block, contentPartnerId, transformationDefinitionId } =
+    const { name, block, contentSourceId, transformationDefinitionId } =
       payload;
 
     const response = request
       .post(
-        `/content_partners/${contentPartnerId}/transformation_definitions/${transformationDefinitionId}/fields`,
+        `/content_sources/${contentSourceId}/transformation_definitions/${transformationDefinitionId}/fields`,
         {
           field: {
-            content_partner_id: contentPartnerId,
+            content_source_id: contentSourceId,
             transformation_definition_id: transformationDefinitionId,
             name: name,
             block: block,
@@ -36,11 +36,11 @@ export const addField = createAsyncThunk(
 export const deleteField = createAsyncThunk(
   "fields/deleteFieldStatus",
   async (payload) => {
-    const { id, contentPartnerId, transformationDefinitionId } = payload;
+    const { id, contentSourceId, transformationDefinitionId } = payload;
 
     const response = request
       .delete(
-        `/content_partners/${contentPartnerId}/transformation_definitions/${transformationDefinitionId}/fields/${id}`
+        `/content_sources/${contentSourceId}/transformation_definitions/${transformationDefinitionId}/fields/${id}`
       )
       .then((response) => {
         return id;
@@ -53,12 +53,12 @@ export const deleteField = createAsyncThunk(
 export const updateField = createAsyncThunk(
   "fields/updateFieldStatus",
   async (payload) => {
-    const { id, contentPartnerId, transformationDefinitionId, name, block } =
+    const { id, contentSourceId, transformationDefinitionId, name, block } =
       payload;
 
     const response = request
       .patch(
-        `/content_partners/${contentPartnerId}/transformation_definitions/${transformationDefinitionId}/fields/${id}`,
+        `/content_sources/${contentSourceId}/transformation_definitions/${transformationDefinitionId}/fields/${id}`,
         {
           field: {
             name: name,

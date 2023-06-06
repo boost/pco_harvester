@@ -31,7 +31,7 @@ RSpec.describe Extraction::EnrichmentExtraction do
     end
 
     context 'when there is no extraction_folder' do
-      it 'returns an extracted document from a content partner' do
+      it 'returns an extracted document from a content source' do
         doc = described_class.new(ed, records.first, 1)
         expect { doc.save }.to raise_error(ArgumentError, 'extraction_folder was not provided in #new')
       end

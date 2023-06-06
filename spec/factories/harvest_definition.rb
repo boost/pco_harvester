@@ -5,7 +5,7 @@ FactoryBot.define do
     name { Faker::Company.name }
     source_id { 'test' }
 
-    association :content_partner
+    association :content_source
     association :extraction_definition
     association :transformation_definition
     association :destination

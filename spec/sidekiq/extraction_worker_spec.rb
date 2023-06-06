@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe ExtractionWorker, type: :job do
-  let(:cp) { create(:content_partner, :ngataonga) }
+  let(:cp) { create(:content_source, :ngataonga) }
   let(:ed) { cp.extraction_definitions.first }
   let(:extraction_job) { create(:extraction_job, extraction_definition: ed, status: 'queued') }
   let(:subject) { ExtractionWorker.new }

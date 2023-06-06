@@ -20,7 +20,7 @@ RSpec.describe Extraction::Execution do
     context 'when running a full job' do
       let(:subject) { described_class.new(full_job, ed) }
 
-      it 'saves the full response from the content partner to the filesystem' do
+      it 'saves the full response from the content source to the filesystem' do
         subject.call
 
         expect(File.exist?(full_job.extraction_folder)).to eq true
@@ -33,7 +33,7 @@ RSpec.describe Extraction::Execution do
     context 'when running a sample job' do
       let(:subject) { described_class.new(sample_job, ed) }
 
-      it 'saves the first page from the content partner to the filesystem' do
+      it 'saves the first page from the content source to the filesystem' do
         subject.call
 
         expect(File.exist?(sample_job.extraction_folder)).to eq true

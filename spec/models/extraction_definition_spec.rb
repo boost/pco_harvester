@@ -3,10 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe ExtractionDefinition, type: :model do
-  subject! { create(:extraction_definition, content_partner: cp1) }
+  subject! { create(:extraction_definition, content_source: cp1) }
 
-  let!(:cp1) { create(:content_partner, name: 'National Library of New Zealand') }
-  let!(:cp2) { create(:content_partner) }
+  let!(:cp1) { create(:content_source, name: 'National Library of New Zealand') }
+  let!(:cp2) { create(:content_source) }
 
   describe '#name' do
     it 'autogenerates a sensible name' do
@@ -26,7 +26,7 @@ RSpec.describe ExtractionDefinition, type: :model do
     end
 
     context 'when the extraction definition is for an enrichment' do
-      subject! { create(:extraction_definition, :enrichment, content_partner: cp1, name: 'Flickr API', destination:) }
+      subject! { create(:extraction_definition, :enrichment, content_source: cp1, name: 'Flickr API', destination:) }
 
       let(:destination) { create(:destination) }
 
@@ -58,11 +58,11 @@ RSpec.describe ExtractionDefinition, type: :model do
                                                                     OAI]).with_message('is not included in the list')
     }
 
-    it 'requires a content partner' do
-      extraction_definition = build(:extraction_definition, content_partner: nil)
+    it 'requires a content source' do
+      extraction_definition = build(:extraction_definition, content_source: nil)
       expect(extraction_definition).not_to be_valid
 
-      expect(extraction_definition.errors[:content_partner]).to include 'must exist'
+      expect(extraction_definition.errors[:content_source]).to include 'must exist'
     end
 
     it 'cannot be a copy of itself' do
@@ -104,8 +104,8 @@ RSpec.describe ExtractionDefinition, type: :model do
       expect(ed.extraction_jobs).to include extraction_job
     end
 
-    it 'belongs to a content partner' do
-      expect(subject.content_partner).to be_a ContentPartner
+    it 'belongs to a content source' do
+      expect(subject.content_source).to be_a ContentSource
     end
   end
 
@@ -121,8 +121,8 @@ RSpec.describe ExtractionDefinition, type: :model do
 
   describe "#copy?" do
     let(:destination) { create(:destination) }
-    let(:original) { create(:extraction_definition, :enrichment, content_partner: cp1, name: 'Flickr API', destination:) }
-    let(:copy) { create(:extraction_definition, :enrichment, content_partner: cp1, name: 'Flickr API', destination:, original_extraction_definition: original) }
+    let(:original) { create(:extraction_definition, :enrichment, content_source: cp1, name: 'Flickr API', destination:) }
+    let(:copy) { create(:extraction_definition, :enrichment, content_source: cp1, name: 'Flickr API', destination:, original_extraction_definition: original) }
 
     it 'returns true if the extraction definition is a copy' do
       expect(copy.copy?).to eq true

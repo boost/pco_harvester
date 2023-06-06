@@ -1,7 +1,24 @@
 <%= content_for(:title) { 'New Transformation' } %>
 
-<%= render 'shared/breadcrumb_nav' %>
+<%= content_for :header do %>
+  <%= render 'shared/breadcrumb_nav' %>
 
-<h1>New <%= @transformation_definition.kind.capitalize %> Transformation Definition</h1>
+  <h1 class="header__title">New <%= @transformation_definition.kind.capitalize %> Transformation</h1>
+  
+  <div class="float-end">
+
+    <button type="button" class="btn btn-secondary me-1" id="js-test-transformation-record-selector-button">
+      Test Record Selector
+    </button>
+
+    <button type="submit" data-form='js-transformation-definition-form' class="btn btn-primary">
+      Create <%= @transformation_definition.kind %> transformation
+    </button>
+
+    <%= link_to 'Cancel', content_source_path(@content_source), class: 'btn btn-outline-danger' %>
+  </div>
+
+  <div class="clearfix">
+<% end %>
 
 <%= render 'form' %>

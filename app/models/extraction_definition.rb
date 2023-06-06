@@ -5,14 +5,14 @@
 class ExtractionDefinition < ApplicationRecord
   scope :originals, -> { where(original_extraction_definition: nil) }
 
-  belongs_to :content_partner
+  belongs_to :content_source
   has_many :extraction_jobs
   belongs_to :destination, optional: true
 
   enum :kind, { harvest: 0, enrichment: 1 }
 
   after_create do
-    self.name = "#{content_partner.name.parameterize}__#{kind}-extraction-#{id}"
+    self.name = "#{content_source.name.parameterize}__#{kind}-extraction-#{id}"
     save!
   end
 

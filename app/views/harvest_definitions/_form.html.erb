@@ -1,65 +1,85 @@
-<%= vertical_form_with model: [@content_partner, @harvest_definition], class: { row: true } do |form| %>
-  <%= form.hidden_field :content_partner_id, value: @content_partner.id %>
+<%= vertical_form_with model: [@content_source, @harvest_definition], class: { row: true }, id: 'js-harvest-definition-form' do |form| %>
+  <%= form.hidden_field :content_source_id, value: @content_source.id %>
   <%= form.hidden_field :kind,               value: @harvest_definition.kind %>
 
-  <% if @harvest_definition.name.present? %>
-    <div class="mb-3 col-12">
-      <%= form.label :name, 'Name', class: "form-label" %>
-      <%= form.text_field :name, class: "form-control" %>
-    </div>
-  <% end %>
+  <fieldset>
+    <div class='card'>
+      <div class='card-body'>
+        <div class='row gy-3 align-items-center'>
 
-  <% if @harvest_definition.enrichment? %>
-    <% extraction_definitions = @content_partner.extraction_definitions.enrichment.originals %>
-  <% else %>
-    <% extraction_definitions = @content_partner.extraction_definitions.harvest.originals %>
-  <% end %>
+          <% if @harvest_definition.name.present? %>
+            <div class="col-3">
+              <%= form.label :name, 'Name', class: "form-label" %>
+            </div>
 
-  <div class="mb-3 col-12">
-    <%= form.label :extraction_definition_id, 'Extraction Definition', class: "form-label" %>
-    <%= form.select :extraction_definition_id, options_from_collection_for_select(extraction_definitions, 'id', 'name'), {},  class: "form-select" %>
-  </div>
+            <div class='col-9'>            
+              <%= form.text_field :name, class: "form-control" %>
+            </div>
+          <% end %>
 
-  <% if @harvest_definition.enrichment? %>
-    <% transformation_definitions = @content_partner.transformation_definitions.enrichment.originals %>
-  <% else %>
-    <% transformation_definitions = @content_partner.transformation_definitions.harvest.originals %>
-  <% end %>
+          <% if @harvest_definition.enrichment? %>
+            <% extraction_definitions = @content_source.extraction_definitions.enrichment.originals %>
+          <% else %>
+            <% extraction_definitions = @content_source.extraction_definitions.harvest.originals %>
+          <% end %>
 
-  <div class="mb-3 col-12">
-    <%= form.label :transformation_definition_id, 'Transformation Definition', class: "form-label" %>
-    <%= form.select :transformation_definition_id, options_from_collection_for_select(transformation_definitions, 'id', 'name'), {},  class: "form-select" %>
-  </div>
+          <div class="col-3">
+            <%= form.label :extraction_definition_id, 'Extraction Definition', class: "form-label" %>
+          </div>
 
-  <div class="mb-3 col-12">
-    <%= form.label :destination_id, 'Destination', class: "form-label" %>
-    <%= form.select :destination_id, options_from_collection_for_select(@destinations, 'id', 'name'), {},  class: "form-select" %>
-  </div>
+          <div class='col-9'>
+            <%= form.select :extraction_definition_id, options_from_collection_for_select(extraction_definitions, 'id', 'name'), {},  class: "form-select" %>
+          </div>
 
-  <div class="mb-3 col-12">
-    <%= form.label :source_id, 'Source ID', class: "form-label" %>
-    <%= form.text_field :source_id, class: "form-control" %>
-  </div>
+          <% if @harvest_definition.enrichment? %>
+            <% transformation_definitions = @content_source.transformation_definitions.enrichment.originals %>
+          <% else %>
+            <% transformation_definitions = @content_source.transformation_definitions.harvest.originals %>
+          <% end %>
 
-  <% if @harvest_definition.harvest? %>
-    <%= form.hidden_field :priority, value: 0 %>
-  <% else %>
-    <div class="mb-3 col-12">
-      <%= form.label :priority, 'Priority', class: "form-label" %>
-      <%= form.number_field :priority, class: "form-control" %>
-    </div>
+          <div class="col-3">
+            <%= form.label :transformation_definition_id, 'Transformation Definition', class: "form-label" %>
+          </div>
 
-    <div class="mb-3 col-12">
-      <div class="form-check">
-        <%= form.label :required_for_active_record, 'Required for active record', class: "form-check-label" %>
-        <%= form.check_box :required_for_active_record, class: "form-check-input" %>
+          <div class='col-9'>
+            <%= form.select :transformation_definition_id, options_from_collection_for_select(transformation_definitions, 'id', 'name'), {},  class: "form-select" %>
+          </div>
+
+          <div class="col-3">
+            <%= form.label :destination_id, 'Destination', class: "form-label" %>
+          </div>
+
+          <div class='col-9'>
+            <%= form.select :destination_id, options_from_collection_for_select(@destinations, 'id', 'name'), {},  class: "form-select" %>
+          </div>
+
+          <div class="col-3">
+            <%= form.label :source_id, 'Source ID', class: "form-label" %>
+          </div>
+
+          <div class='col-9'>
+            <%= form.text_field :source_id, class: "form-control" %>
+          </div>
+
+          <% if @harvest_definition.harvest? %>
+            <%= form.hidden_field :priority, value: 0 %>
+          <% else %>
+            <div class="col-3">
+              <%= form.label :priority, 'Priority', class: "form-label" %>
+            </div>
+            <div class='col-9'>
+              <%= form.number_field :priority, class: "form-control" %>
+            </div>
+
+            <div class="col-3">
+              <%= form.label :required_for_active_record, 'Required for active record', class: "form-check-label" %>
+            </div>
+            <div class='col-9'>
+              <%= form.check_box :required_for_active_record, class: "form-check-input" %>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
-  <% end %>
-
-  <div class="col-12">
-    <button type="submit" class="btn btn-primary">
-      Save
-    </button>
-  </div>
+  </fieldset>
 <% end %>

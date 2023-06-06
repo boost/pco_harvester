@@ -3,9 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe 'Fields', type: :request do
-  let(:content_partner) { create(:content_partner) }
+  let(:content_source) { create(:content_source) }
   let(:extraction_job) { create(:extraction_job) }
-  let!(:transformation_definition) { create(:transformation_definition, content_partner:, extraction_job:) }
+  let!(:transformation_definition) { create(:transformation_definition, content_source:, extraction_job:) }
 
   describe '#create' do
     let(:field) { build(:field, transformation_definition:) }
@@ -13,14 +13,14 @@ RSpec.describe 'Fields', type: :request do
     context 'with valid parameters' do
       it 'creates a new field' do
         expect do
-          post content_partner_transformation_definition_fields_path(content_partner, transformation_definition), params: {
+          post content_source_transformation_definition_fields_path(content_source, transformation_definition), params: {
             field: field.attributes
           }
         end.to change(Field, :count).by(1)
       end
 
       it 'returns a JSON object representing the new field' do
-        post content_partner_transformation_definition_fields_path(content_partner, transformation_definition), params: {
+        post content_source_transformation_definition_fields_path(content_source, transformation_definition), params: {
           field: field.attributes
         }
 
@@ -37,7 +37,7 @@ RSpec.describe 'Fields', type: :request do
 
     context 'with valid parameters' do
       it 'updates the field' do
-        patch content_partner_transformation_definition_field_path(content_partner, transformation_definition, field), params: {
+        patch content_source_transformation_definition_field_path(content_source, transformation_definition, field), params: {
           field: { name: 'Description' }
         }
 
@@ -47,7 +47,7 @@ RSpec.describe 'Fields', type: :request do
       end
 
       it 'returns a JSON hash of the updated field' do
-        patch content_partner_transformation_definition_field_path(content_partner, transformation_definition, field), params: {
+        patch content_source_transformation_definition_field_path(content_source, transformation_definition, field), params: {
           field: { name: 'Description' }
         }
 
@@ -61,13 +61,13 @@ RSpec.describe 'Fields', type: :request do
 
     it 'deletes the field' do
       expect do
-        delete content_partner_transformation_definition_field_path(content_partner, transformation_definition,
+        delete content_source_transformation_definition_field_path(content_source, transformation_definition,
                                                                     field)
       end.to change(Field, :count).by(-1)
     end
 
     it 'returns a successful response' do
-      delete content_partner_transformation_definition_field_path(content_partner, transformation_definition, field)
+      delete content_source_transformation_definition_field_path(content_source, transformation_definition, field)
 
       expect(response.status).to eq(200)
     end
@@ -88,7 +88,7 @@ RSpec.describe 'Fields', type: :request do
       let!(:field_four) { create(:field, name: 'landing_url', block: '"http://www.ngataonga.org.nz/collections/catalogue/catalogue-item?record_id=#{record[\'record_id\']}"', transformation_definition:) }
 
       it 'returns a new record made up of the given transformation fields' do
-        post run_content_partner_transformation_definition_fields_path(content_partner, transformation_definition), params: {
+        post run_content_source_transformation_definition_fields_path(content_source, transformation_definition), params: {
           record: {
             title: 'title',
             source: 'source',

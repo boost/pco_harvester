@@ -1,6 +1,6 @@
 import { request } from './request';
 
-export function bindTestForm(testRoute, buttonId, successCallback, failureCallback) {
+export function bindTestForm(testRoute, buttonId, formId, successCallback, failureCallback) {
   document.addEventListener(
     "DOMContentLoaded",
     function () {
@@ -31,7 +31,7 @@ export function bindTestForm(testRoute, buttonId, successCallback, failureCallba
       const button = this.getElementById(buttonId);
 
       if (button) {
-        const form = button.closest("form");
+        const form = this.getElementById(formId);
         button.addEventListener("click", (event) => {
           sendData(form);
         });

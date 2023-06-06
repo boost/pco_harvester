@@ -1,0 +1,78 @@
+<%= content_for(:title) { 'Content sources' } %>
+
+<%= content_for :header do %>
+  <%= render 'shared/breadcrumb_nav' %>
+
+  <h1 class="header__title">Content Sources</h1>
+
+  <div class="header__actions">
+    <%= link_to new_content_source_path, class: 'btn btn-primary' do %>
+      <i class="bi bi-plus" aria-hidden="true"></i> Add content source
+    <% end %>
+  </div>
+
+  <div class="clearfix"></div>
+<% end %>
+
+<%- if @content_sources.any? %>
+
+  <div class="float-end">
+    <ul class='list-inline'>
+
+      <li class='list-inline-item'>
+        <strong>
+          Sort by:
+        </strong>
+      </li>
+
+      <li class='list-inline-item'>
+        <%= form_with url: '/content_sources', method: :get do |form| %>
+          <%= select_tag(:sort_by, options_for_select([['Alphabetical', 'name'], ['Last Edited', 'updated_at']], @sort_by.first), class: ' form-select', id: 'js-content-source-filter') %>
+        <% end %>
+      </li>
+
+    </ul>
+  </div>
+
+  <div class='clearfix'></div>
+
+  <div class='mb-4'></div>
+
+  <div class='row'>
+    <%- @content_sources.each do |content_source| %>
+      <div class='col-3'>
+        <%= link_to content_source, class: 'card mb-3' do %>
+          <div class="card-body">
+            <h5 class="card-title"><%= content_source.name %></h5>
+
+            <% if content_source.extraction_definitions.originals.any? %>
+              <span class="badge rounded-pill bg-light text-dark"><%= pluralize(content_source.extraction_definitions.originals.count, 'extraction') %></span>
+            <% end %>
+
+            <% if content_source.transformation_definitions.originals.any? %>
+              <span class="badge rounded-pill bg-light text-dark"><%= pluralize(content_source.transformation_definitions.originals.count, 'transformation') %></span>
+            <% end %>
+
+            <% if content_source.harvest_definitions.harvest.any? %>
+              <span class="badge rounded-pill bg-light text-dark"><%= pluralize(content_source.harvest_definitions.harvest.count, 'harvest') %></span>
+            <% end %>
+
+            <% if content_source.harvest_definitions.enrichment.any? %>
+              <span class="badge rounded-pill bg-light text-dark"><%= pluralize(content_source.harvest_definitions.enrichment.count, 'enrichment') %></span>
+            <% end %>
+
+            <% if content_source.extraction_definitions.originals.empty? && content_source.transformation_definitions.originals.empty? && content_source.harvest_definitions.empty? %>
+              <span class="badge rounded-pill bg-light text-dark">No definitions set</span>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <%- end %>
+  </div>
+
+  <%= render 'shared/pagination_below_table', items: @content_sources %>
+<% else %>
+
+  <p>There are currently no content sources. Click 'Add Content Source' to create your first one.</p>
+
+<% end %>

@@ -15,7 +15,7 @@ RSpec.describe Extraction::DocumentExtraction do
   end
 
   describe '#extract' do
-    it 'returns an extracted document from a content partner' do
+    it 'returns an extracted document from a content source' do
       expect(subject.extract).to be_a(Extraction::Document)
     end
   end
@@ -31,7 +31,7 @@ RSpec.describe Extraction::DocumentExtraction do
     end
 
     context 'when there is no extraction_folder' do
-      it 'returns an extracted document from a content partner' do
+      it 'returns an extracted document from a content source' do
         doc = described_class.new(ed)
         expect { doc.save }.to raise_error(ArgumentError, 'extraction_folder was not provided in #new')
       end
