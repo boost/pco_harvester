@@ -1,6 +1,6 @@
 import { bindTestForm } from './utils/test-form';
 
-bindTestForm('test', 'js-test-extraction', 'js-extraction-definition-form', (response, alertClass) => {
+bindTestForm('test', 'js-test-extraction-button', 'js-extraction-definition-form', (response, alertClass) => {
    document.getElementById(
       "test-result"
     ).innerHTML = `<div class="${alertClass(

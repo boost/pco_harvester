@@ -8,20 +8,20 @@
   <div class="float-end">
   
     <% if @extraction_definition.harvest? %>
-      <button type="button" class="btn btn-outline-primary me-1" id="js-test-extraction">
+      <button type="button" class="btn btn-outline-primary me-1" id="js-test-extraction-button">
         Test Extraction Definition
       </button>
     <% else %>
-      <button type="button" class="btn btn-outline-primary me-1" id="js-test-record-extraction">
+      <button type="button" class="btn btn-outline-primary me-1" id="js-test-record-extraction-button">
         Test Record Extraction
       </button>
     
-      <button type="button" class="btn btn-outline-primary me-1" id="js-test-enrichment-extraction">
+      <button type="button" class="btn btn-outline-primary me-1" id="js-test-enrichment-extraction-button">
         Test Enrichment Extraction
       </button>
     <% end %>
 
-    <button type="submit" class="btn btn-primary" id="js-extraction-definition-form-submit">
+    <button type="submit" class="btn btn-primary" data-form="js-extraction-definition-form">
       Update
     </button>
 

@@ -3,7 +3,7 @@ import { EditorState } from "@codemirror/state";
 import { EditorView, basicSetup } from "codemirror";
 import { json } from "@codemirror/lang-json";
 
-bindTestForm('test_record_extraction', 'js-test-record-extraction', 'js-extraction-definition-form', (response, _alertClass) => {
+bindTestForm('test_record_extraction', 'js-test-record-extraction-button', 'js-extraction-definition-form', (response, _alertClass) => {
   let editor = new EditorView({
     state: EditorState.create({
       extensions: [basicSetup, json(), EditorState.readOnly.of(true)],
