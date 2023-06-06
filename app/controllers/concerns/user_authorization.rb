@@ -10,12 +10,17 @@ module UserAuthorization
   protected
 
   def authenticate_inviter!
-    raise ActionController::RoutingError.new('Not authorized') unless current_user.admin?
+    authenticate_admin!
   end
 
+  # Having multiple redirect raises an Exception
+  # devise_invitable uses authenticate_inviter! to get the inviter user
+  # It makes several call to it
+  # That's why we return if performed?
   def authenticate_admin!
-    return if current_user.admin?
+    return current_user if current_user.admin? || performed?
 
-    redirect_back(fallback_location: root_path, alert: 'You are not authorized to access this page')
+    flash.alert = 'You are not authorized to access this page'
+    redirect_back fallback_location: root_path
   end
 end
