@@ -3,6 +3,11 @@
 <%= content_for :header do %>
   <h1 class="header__title"><%= @user.username%></h1>
 
+  <div class="header__actions">
+    <%= link_to edit_user_path(@user), class: 'btn btn-primary' do %>
+      <i class="bi bi-pencil-square" aria-hidden="true"></i> Edit user
+    <% end %>
+  </div>
   <div class="clearfix"></div>
 <% end %>
 
