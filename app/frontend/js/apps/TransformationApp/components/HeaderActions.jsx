@@ -13,9 +13,7 @@ const HeaderActions = () => {
   const dispatch = useDispatch();
   const fieldIds = useSelector(selectFieldIds);
   const appDetails = useSelector(selectAppDetails);
- 
-  const uiAppDetails = useSelector(selectUiAppDetails);
-  const { readOnly } = uiAppDetails;
+  const { readOnly } = useSelector(selectUiAppDetails);
 
   const runAllFields = () => {
     dispatch(
@@ -30,9 +28,9 @@ const HeaderActions = () => {
 
   return createPortal(
     <>
-      { !readOnly && <AddField /> }
-      <button className="btn btn-success" onClick={() => runAllFields()}>
-        <i className="bi bi-play" aria-hidden="true"></i> Run
+      {!readOnly && <AddField />}
+      <button className="btn btn-success" onClick={runAllFields}>
+        <i className="bi bi-play" aria-hidden="true"></i> Run all
       </button>
     </>,
     document.getElementById("react-header-actions")
