@@ -61,19 +61,19 @@ const TransformationApp = ({}) => {
           <div className={rawRecordClasses}>
             <div className="card">
               <div className="card-body">
-                <h5 className="float-start">Raw data</h5>
-                <button
-                  onClick={() => clickToggleSection("rawRecordExpanded")}
-                  type="button"
-                  className="btn btn-primary float-end"
-                >
-                  <ExpandCollapseIcon
-                    expanded={uiAppDetails["rawRecordExpanded"]}
-                  />
-                </button>
-                <div className="clearfix"></div>
+                <div className="d-flex flex-row flex-nowrap justify-content-between mb-4">
+                  <h5 className="text-truncate">Raw data</h5>
+                  <button
+                    onClick={() => clickToggleSection("rawRecordExpanded")}
+                    type="button"
+                    className="btn btn-primary"
+                  >
+                    <ExpandCollapseIcon
+                      expanded={uiAppDetails["rawRecordExpanded"]}
+                    />
+                  </button>
+                </div>
 
-                <div className="mb-4"></div>
                 <RecordViewer record={appDetails.rawRecord} />
               </div>
             </div>
@@ -82,22 +82,22 @@ const TransformationApp = ({}) => {
           <div className={transformedRecordClasses}>
             <div className="card">
               <div className="card-body">
-                <h5 className="float-start">Transformed</h5>
+                <div className="d-flex flex-row flex-nowrap justify-content-between mb-4">
+                  <h5 className="text-truncate">Transformed</h5>
 
-                <button
-                  onClick={() =>
-                    clickToggleSection("transformedRecordExpanded")
-                  }
-                  type="button"
-                  className="btn btn-primary float-end"
-                >
-                  <ExpandCollapseIcon
-                    expanded={uiAppDetails["transformedRecordExpanded"]}
-                  />
-                </button>
-                <div className="clearfix"></div>
+                  <button
+                    onClick={() =>
+                      clickToggleSection("transformedRecordExpanded")
+                    }
+                    type="button"
+                    className="btn btn-primary"
+                  >
+                    <ExpandCollapseIcon
+                      expanded={uiAppDetails["transformedRecordExpanded"]}
+                    />
+                  </button>
+                </div>
 
-                <div className="mb-4"></div>
                 <RecordViewer record={appDetails.transformedRecord} />
               </div>
             </div>
