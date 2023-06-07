@@ -7,6 +7,9 @@
     <%= link_to edit_user_path(@user), class: 'btn btn-primary' do %>
       <i class="bi bi-pencil-square" aria-hidden="true"></i> Edit user
     <% end %>
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-user-modal">
+      <i class="bi bi-trash" aria-hidden="true"></i> Delete user
+    </button>
   </div>
   <div class="clearfix"></div>
 <% end %>
@@ -47,3 +50,28 @@
     <%= @user.updated_at.to_fs(:light) %>
   </li>
 </ul>
+
+<%# Modal %>
+<div
+  class="modal fade"
+  id="delete-user-modal"
+  tabindex="-1"
+  aria-labelledby="Delete user"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete "<%= @user.username %>"</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to remove this user?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <%= button_to "Delete user", user_path(@user), method: :delete, class: "btn btn-danger" %>
+      </div>
+    </div>
+  </div>
+</div>
