@@ -24,8 +24,11 @@ gem 'kaminari'
 
 gem 'foreman'
 
-# For code commenting
-gem 'yard'
+# user management
+gem 'devise'
+gem 'devise_invitable', '~> 2.0.0'
+gem 'devise-two-factor'
+gem 'rqrcode'
 
 # extraction related
 gem 'faraday', '~> 2.7'
@@ -33,15 +36,8 @@ gem 'faraday-follow_redirects'
 gem 'jsonpath'
 gem 'sidekiq'
 
-# user management
-gem 'devise'
-gem 'devise_invitable', '~> 2.0.0'
-
 # transformation related
 gem 'webmock'
-
-gem 'devise-two-factor'
-gem 'rqrcode'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
@@ -63,8 +59,8 @@ group :development do
   gem 'codeclimate_diff', github: 'boost/codeclimate_diff', tag: 'v0.1.9'
   gem 'letter_opener'
 
-  # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
-  # gem 'spring'
+  # For code commenting
+  gem 'yard'
 end
 
 group :test do
