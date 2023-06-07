@@ -36,9 +36,16 @@ import "/js/TestRecordExtraction";
 import "/js/TestEnrichmentExtraction";
 import "/js/TestTransformationRecordSelector";
 import "/js/TestDestination";
-import "/js/ContentSourceFilter.js";
 import "/js/Tooltips";
 import "/js/CollapseScroll";
+import "/js/ContentSourceFilter";
+
+const tooltipTriggerList = document.querySelectorAll(
+  '[data-bs-toggle="tooltip"]'
+);
+[...tooltipTriggerList].map(
+  (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
+);
 
 import "/js/editor";
 import "/js/form-header-submission";
