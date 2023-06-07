@@ -40,6 +40,8 @@ gem 'devise_invitable', '~> 2.0.0'
 # transformation related
 gem 'webmock'
 
+gem 'devise-two-factor'
+gem 'rqrcode'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

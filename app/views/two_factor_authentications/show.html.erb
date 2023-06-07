@@ -1,0 +1,46 @@
+<%= content_for(:title) { 'Two Factor Authentication' } %>
+
+<%= content_for :header do %>
+  <h1 class="header__title">Two Factor Authentication</h1>
+  <div class="clearfix"></div>
+<% end %>
+
+<div class='row'>
+  <div class='col-sm-12'>
+    <div class='card'>
+      <div class='card-body'>
+
+          <p>You need to set up two factor authentication. Scan this QR code into an authenticator app on your phone.</p>
+
+
+          <%= vertical_form_with(model: current_user, url: user_two_factor_authentication_path(current_user), method: :post) do |form| %>
+            <div class='row gy-3 align-items-center'>
+
+              <div class='col-3'>
+                
+              </div>
+
+              <div class='col-9'>
+                <%= RQRCode::QRCode.new(current_user.otp_provisioning_uri(current_user.email, issuer: "Supplejack Harvester")).as_svg(offset: 0, color: '000', shape_rendering: 'crispEdges', module_size: 3).html_safe %>
+              </div>
+
+              <div class='col-3'>
+                <%= form.label :otp_attempt, 'Two-factor authentication code', class: 'form-label' %>
+              </div>
+
+              <div class='col-9'>
+                <%= form.text_field :otp_attempt, class: 'form-control' %>
+              </div>
+
+              <div class='col-3'>
+                <%= form.submit 'Login', class: 'btn btn-primary' %>
+              </div>
+            </div>
+          <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

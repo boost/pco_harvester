@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_05_235157) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_07_033756) do
   create_table "content_sources", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -172,6 +172,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_05_235157) do
     t.bigint "invited_by_id"
     t.integer "invitations_count", default: 0
     t.integer "role", default: 0, null: false
+    t.string "otp_secret"
+    t.integer "consumed_timestep"
+    t.boolean "otp_required_for_login"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invited_by_id"], name: "index_users_on_invited_by_id"

@@ -18,4 +18,8 @@ class UsersController < ApplicationController
   def update; end
 
   def destroy; end
+
+  def two_factor_authentication
+
+  end
 end
