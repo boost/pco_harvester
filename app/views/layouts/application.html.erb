@@ -16,7 +16,7 @@
 
     <%= render 'shared/nav' %>
 
-    <header class='header<%= content_for?(:header_modifier) ? " #{yield(:header_modifier)}" : '' %>'>
+    <header class='header'>
       <div class='container'>
         <%= yield :header %>
       </div>

@@ -1,18 +1,21 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { selectFieldIds } from "~/js/features/FieldsSlice";
+import FieldNavigationListItem from "./FieldNavigationListItem";
 
-import FieldNavigationList from "/js/apps/TransformationApp/components/FieldNavigationList";
-import AddField from "~/js/apps/TransformationApp/components/AddField";
-import ExpandCollapseIcon from "./ExpandCollapseIcon";
+const FieldNavigationPanel = () => {
+  const fieldIds = useSelector(selectFieldIds);
 
-const FieldNavigationPanel = ({ expanded, clickToggleSection }) => {
   return (
     <div className="card field-nav-panel">
-      <div className="card-body d-flex flex-column">
-        <div className="d-flex flex-row justify-content-between align-items-center">
-          <h5>Fields</h5>
-        </div>
+      <div className="card-body d-flex flex-column overflow-auto">
+        <h5>Fields</h5>
 
-        <FieldNavigationList />
+        <ul className="field-nav nav nav-pills flex-column overflow-auto flex-nowrap">
+          {fieldIds.map((id) => {
+            return <FieldNavigationListItem id={id} key={id} />;
+          })}
+        </ul>
       </div>
     </div>
   );

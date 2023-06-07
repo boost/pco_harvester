@@ -2,11 +2,6 @@
   background-color: $doctor;
   padding: 2rem;
   border-bottom: 1px solid $bright-star;
-  position: relative;
-
-  &.sticky-top {
-    position: sticky;
-  }
 
   @include element('title') {
     float: left;
