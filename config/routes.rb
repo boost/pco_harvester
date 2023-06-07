@@ -5,9 +5,9 @@ Sidekiq::Web.app_url = '/'
 Rails.application.routes.draw do
   devise_for :users, :skip => [:registrations]
   as :user do
-    get 'users/edit' => 'devise/registrations#edit', as: :edit_user_registration
-    put 'users/:id' => 'devise/registrations#update', as: :user_registration
-    delete 'users' => 'devise/registrations#destroy', as: :registration
+    get 'edit_profile' => 'devise/registrations#edit', as: :edit_profile
+    put 'update_profile' => 'devise/registrations#update', as: :update_profile
+    delete 'cancel_account' => 'devise/registrations#destroy', as: :cancel_account
   end
 
   root 'home#index'
