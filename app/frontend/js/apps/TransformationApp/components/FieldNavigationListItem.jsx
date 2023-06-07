@@ -14,7 +14,7 @@ const FieldNavigationListItem = ({ id }) => {
     selectUiFieldById(state, id)
   );
 
-  const linkClasses = classNames("nav-link", {
+  const linkClasses = classNames("nav-link", "text-truncate", {
     error: error,
   });
 
