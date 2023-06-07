@@ -3,14 +3,8 @@ import React from "react";
 import FieldNavigationList from "/js/apps/TransformationApp/components/FieldNavigationList";
 import AddField from "~/js/apps/TransformationApp/components/AddField";
 import ExpandCollapseIcon from "./ExpandCollapseIcon";
-import { selectUiAppDetails } from "~/js/features/UiAppDetailsSlice";
-import { useSelector } from "react-redux";
 
 const FieldNavigationPanel = ({ expanded, clickToggleSection }) => {
-  
-  const uiAppDetails = useSelector(selectUiAppDetails);
-  const { readOnly } = uiAppDetails;
-
   return (
     <div className="card field-nav-panel">
       <div className="card-body d-flex flex-column">
@@ -19,7 +13,6 @@ const FieldNavigationPanel = ({ expanded, clickToggleSection }) => {
         </div>
 
         <FieldNavigationList />
-        { !readOnly && <AddField /> }
       </div>
     </div>
   );

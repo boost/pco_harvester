@@ -173,7 +173,7 @@ const Field = ({ id }) => {
               </button>
               <a
                 onClick={handleCollapseExpandClick}
-                className="btn btn-success"
+                className="btn btn-outline-success"
                 data-bs-toggle="collapse"
                 href={`#field-${id}-content`}
                 role="button"
@@ -182,7 +182,7 @@ const Field = ({ id }) => {
               >
                 <ExpandCollapseIcon expanded={expanded} vertical={true} />
               </a>
-              <button className="btn btn-danger" onClick={handleDeleteClick}>
+              <button className="btn btn-outline-danger" onClick={handleDeleteClick}>
                 {deleting ? "Deleting..." : "Delete"}
               </button>
             </div>
