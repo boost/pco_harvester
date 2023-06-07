@@ -30,6 +30,9 @@
             <span class="<%= class_names('badge', 'rounded-pill', 'bg-light text-dark': !user.invitation_accepted_at?, 'bg-primary': user.invitation_accepted_at?) %>">
               <%= user.invitation_accepted_at? ? 'Active' : 'Invited' %>
             </span>
+            <span class="<%= class_names('badge', 'rounded-pill', 'bg-primary': !user.admin?, 'bg-danger': user.admin?) %>">
+              <%= user.role.capitalize %>
+            </span>
           </div>
         <% end %>
       </div>

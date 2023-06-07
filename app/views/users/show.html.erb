@@ -20,6 +20,10 @@
     <div class="fw-bold">Email</div>
     <%= @user.email %>
   </li>
+  <li class="list-group-item">
+    <div class="fw-bold">Role</div>
+    <%= @user.role %>
+  </li>
   <% unless @user.invitation_accepted_at? %>
     <li class="list-group-item">
       <div class="fw-bold">Invitation sent at</div>
