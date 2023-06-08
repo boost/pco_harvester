@@ -3,9 +3,14 @@
 require 'rails_helper'
 
 RSpec.describe 'ExtractionDefinitions', type: :request do
+  let(:user)                  { create(:user) }
   let(:content_source)        { create(:content_source) }
   let!(:extraction_definition) { create(:extraction_definition, content_source:) }
   let!(:harvest_definition) { create(:harvest_definition, extraction_definition:) }
+  
+  before do
+    sign_in user
+  end
 
   describe '#show' do
     it 'renders a specific extraction definition' do

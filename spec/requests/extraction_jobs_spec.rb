@@ -3,10 +3,15 @@
 require 'rails_helper'
 
 RSpec.describe 'ExtractionJobs', type: :request do
+  let(:user)           { create(:user) }
   subject! { create(:extraction_job, extraction_definition:) }
 
   let(:content_source) { create(:content_source, :ngataonga) }
   let(:extraction_definition) { content_source.extraction_definitions.first }
+
+  before do
+    sign_in user
+  end
 
   describe '#index' do
     it 'returns a successful response' do

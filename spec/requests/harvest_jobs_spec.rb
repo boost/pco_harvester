@@ -5,10 +5,15 @@ require 'rails_helper'
 RSpec.describe 'HarvestJobs', type: :request do
   subject!                    { create(:harvest_job, harvest_definition:) }
 
+  let(:user)                  { create(:user) }
   let(:extraction_job)        { create(:extraction_job, extraction_definition:, harvest_job: subject) }
   let(:content_source)       { create(:content_source, :figshare) }
   let(:harvest_definition)    { content_source.harvest_definitions.first }
   let(:extraction_definition) { content_source.extraction_definitions.first }
+  
+  before do
+    sign_in user
+  end
 
   describe 'POST /cancel' do
     context 'when the cancellation is successful' do
