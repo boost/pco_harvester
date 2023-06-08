@@ -8,7 +8,20 @@ const uiFieldsAdapter = createEntityAdapter();
 const uiFieldsSlice = createSlice({
   name: "fieldsSlice",
   initialState: {},
-  reducers: {},
+  reducers: {
+    toggleCollapseField(state, action) {
+      uiFieldsAdapter.updateOne(state, {
+        id: action.payload.id,
+        changes: { expanded: action.payload.expanded },
+      });
+    },
+    toggleDisplayField(state, action) {
+      uiFieldsAdapter.updateOne(state, {
+        id: action.payload.id,
+        changes: { displayed: action.payload.displayed },
+      });
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(addField.fulfilled, (state, action) => {
@@ -19,6 +32,8 @@ const uiFieldsSlice = createSlice({
           saving: false,
           running: false,
           hasRun: false,
+          expanded: true,
+          displayed: true,
         });
       })
       .addCase(clickedOnRunFields.pending, (state, action) => {
@@ -92,6 +107,12 @@ export const {
   selectAll: selectAllUiFields,
 } = uiFieldsAdapter.getSelectors((state) => state.ui.fields);
 
-export const {} = actions;
+export const selectDisplayedFieldIds = (state) => {
+  return selectAllUiFields(state)
+    .filter((field) => field.displayed)
+    .map((field) => field.id);
+};
+
+export const { toggleCollapseField, toggleDisplayField } = actions;
 
 export default reducer;

@@ -10,16 +10,14 @@ import { selectUiAppDetails } from "~/js/features/UiAppDetailsSlice";
 import { toggleSection } from "~/js/features/UiAppDetailsSlice";
 
 // Fields from state
-import {
-  selectAppDetails,
-  clickedOnRunFields,
-} from "~/js/features/AppDetailsSlice";
+import { selectAppDetails } from "~/js/features/AppDetailsSlice";
 
 // Components
-import NavigationPanel from "~/js/apps/TransformationApp/components/NavigationPanel";
 import RecordViewer from "~/js/apps/TransformationApp/components/RecordViewer";
 import Field from "~/js/apps/TransformationApp/components/Field";
-import AddField from "~/js/apps/TransformationApp/components/AddField";
+import FieldNavigationPanel from "./components/FieldNavigationPanel";
+import ExpandCollapseIcon from "./components/ExpandCollapseIcon";
+import HeaderActions from "./components/HeaderActions";
 
 const TransformationApp = ({}) => {
   const dispatch = useDispatch();
@@ -28,62 +26,19 @@ const TransformationApp = ({}) => {
   const appDetails = useSelector(selectAppDetails);
   const uiAppDetails = useSelector(selectUiAppDetails);
 
-  const fieldComponents = map(fieldIds, (fieldId) => (
-    <Field id={fieldId} key={fieldId} />
-  ));
-
-  const runAllFields = () => {
-    dispatch(
-      clickedOnRunFields({
-        contentSourceId: appDetails.contentSource.id,
-        transformationDefinitionId: appDetails.transformationDefinition.id,
-        record: appDetails.rawRecord,
-        fields: fieldIds,
-      })
-    );
-  };
-
-  const jumpToClasses = classNames({
-    "col-1": true,
-  });
-
-  const { rawRecordExpanded, fieldsExpanded, transformedRecordExpanded } =
-    uiAppDetails;
+  const { rawRecordExpanded, transformedRecordExpanded } = uiAppDetails;
 
   const rawRecordClasses = classNames({
-    "col-3": rawRecordExpanded && fieldsExpanded && transformedRecordExpanded,
-    "col-5":
-      (rawRecordExpanded && !fieldsExpanded && transformedRecordExpanded) ||
-      (rawRecordExpanded && fieldsExpanded && !transformedRecordExpanded),
-    "col-9": rawRecordExpanded && !fieldsExpanded && !transformedRecordExpanded,
-    "col-1": !rawRecordExpanded,
-  });
-
-  const fieldsClasses = classNames({
-    "col-5":
-      (fieldsExpanded && rawRecordExpanded && transformedRecordExpanded) ||
-      (fieldsExpanded && !rawRecordExpanded && transformedRecordExpanded) ||
-      (fieldsExpanded && rawRecordExpanded && !transformedRecordExpanded),
-    "col-9": fieldsExpanded && !rawRecordExpanded && !transformedRecordExpanded,
-    "col-1": !fieldsExpanded,
+    "col-6": rawRecordExpanded && transformedRecordExpanded,
+    "col-10": rawRecordExpanded && !transformedRecordExpanded,
+    "col-2": !rawRecordExpanded,
   });
 
   const transformedRecordClasses = classNames({
-    "col-3": transformedRecordExpanded && fieldsExpanded && rawRecordExpanded,
-    "col-5":
-      (transformedRecordExpanded && !fieldsExpanded && rawRecordExpanded) ||
-      (transformedRecordExpanded && fieldsExpanded && !rawRecordExpanded),
-    "col-9": transformedRecordExpanded && !fieldsExpanded && !rawRecordExpanded,
-    "col-1": !transformedRecordExpanded,
+    "col-6": transformedRecordExpanded && rawRecordExpanded,
+    "col-10": transformedRecordExpanded && !rawRecordExpanded,
+    "col-2": !transformedRecordExpanded,
   });
-
-  const expandCollapseText = (section) => {
-    if (uiAppDetails[section]) {
-      return <i className="bi bi-arrow-bar-left" aria-label="collapse"></i>;
-    } else {
-      return <i className="bi bi-arrow-bar-right" aria-label="expand"></i>;
-    }
-  };
 
   const clickToggleSection = (section) => {
     dispatch(
@@ -94,77 +49,67 @@ const TransformationApp = ({}) => {
   };
 
   return (
-    <div className="text-bg-light p-2 row gy-4 mt-1">
-      <div className={jumpToClasses}>
-        <div className="sticky-top pb-2 d-flex flex-column">
-          <h5>Jump To</h5>
-          <button
-            className="btn btn-success mb-4"
-            onClick={() => runAllFields()}
-          >
-            Run All
-          </button>
-          <NavigationPanel />
-          <AddField />
-        </div>
+    <div className="row">
+      <HeaderActions />
+
+      <div className="col-2">
+        <FieldNavigationPanel />
       </div>
 
-      <div className={rawRecordClasses}>
-        <div className="sticky-top vh-100">
-          <h5 className="float-start">Raw</h5>
-          <button
-            onClick={() => clickToggleSection("rawRecordExpanded")}
-            type="button"
-            className="btn btn-primary float-end"
-          >
-            {expandCollapseText("rawRecordExpanded")}
-          </button>
-          <div className="clearfix"></div>
+      <div className="col-10">
+        <div className="row gy-4">
+          <div className={rawRecordClasses}>
+            <div className="card">
+              <div className="card-body">
+                <div className="d-flex flex-row flex-nowrap justify-content-between mb-4">
+                  <h5 className="text-truncate">Raw data</h5>
+                  <button
+                    onClick={() => clickToggleSection("rawRecordExpanded")}
+                    type="button"
+                    className="btn btn-primary"
+                  >
+                    <ExpandCollapseIcon
+                      expanded={uiAppDetails["rawRecordExpanded"]}
+                    />
+                  </button>
+                </div>
 
-          <div className="mb-4"></div>
-          <RecordViewer record={appDetails.rawRecord} />
-        </div>
-      </div>
+                <RecordViewer record={appDetails.rawRecord} />
+              </div>
+            </div>
+          </div>
 
-      <div className={fieldsClasses}>
-        <h5 className="float-start">Fields</h5>
-        <button
-          onClick={() => clickToggleSection("fieldsExpanded")}
-          type="button"
-          className="btn btn-primary float-end"
-        >
-          {expandCollapseText("fieldsExpanded")}
-        </button>
-        <div className="clearfix"></div>
+          <div className={transformedRecordClasses}>
+            <div className="card">
+              <div className="card-body">
+                <div className="d-flex flex-row flex-nowrap justify-content-between mb-4">
+                  <h5 className="text-truncate">Transformed</h5>
 
-        <div className="mb-4"></div>
-        <div
-          data-bs-spy="scroll"
-          data-bs-target="#field-list"
-          data-bs-offset="0"
-          data-bs-smooth-scroll="true"
-        >
-          {fieldComponents}
+                  <button
+                    onClick={() =>
+                      clickToggleSection("transformedRecordExpanded")
+                    }
+                    type="button"
+                    className="btn btn-primary"
+                  >
+                    <ExpandCollapseIcon
+                      expanded={uiAppDetails["transformedRecordExpanded"]}
+                    />
+                  </button>
+                </div>
 
-          <div className="clearfix"></div>
-        </div>
-      </div>
+                <RecordViewer record={appDetails.transformedRecord} />
+              </div>
+            </div>
+          </div>
 
-      <div className={transformedRecordClasses}>
-        <div className="sticky-top vh-100">
-          <h5 className="float-start">Transformed</h5>
-
-          <button
-            onClick={() => clickToggleSection("transformedRecordExpanded")}
-            type="button"
-            className="btn btn-primary float-end"
-          >
-            {expandCollapseText("transformedRecordExpanded")}
-          </button>
-          <div className="clearfix"></div>
-
-          <div className="mb-4"></div>
-          <RecordViewer record={appDetails.transformedRecord} />
+          <div className="col-12 mb-4">
+            <div className="row gy-4">
+              {map(fieldIds, (fieldId) => (
+                <Field id={fieldId} key={fieldId} />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>

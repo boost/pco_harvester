@@ -99,7 +99,7 @@ class ExtractionDefinitionsController < ApplicationController
       :name, :format, :base_url, :throttle, :pagination_type,
       :page_parameter, :per_page_parameter, :page, :per_page,
       :total_selector,
-      :kind, :destination_id, :source_id, :enrichment_url
+      :kind, :destination_id, :source_id, :enrichment_url, :job_id
     )
   end
 end

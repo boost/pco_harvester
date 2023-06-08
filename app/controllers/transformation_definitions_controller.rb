@@ -28,14 +28,24 @@ class TransformationDefinitionsController < ApplicationController
       ui: {
         fields: {
           ids: @transformation_definition.fields.map(&:id),
-          entities: @fields.map do |field|
-            { id: field[:id], saved: true, deleting: false, saving: false, running: false, hasRun: false }
+          entities: @fields.map.with_index do |field, index|
+            {
+              id: field[:id],
+              saved: true,
+              deleting: false,
+              saving: false,
+              running: false,
+              hasRun: false,
+              expanded: true,
+              displayed: false
+            }
           end.index_by { |field| field[:id] }
         },
         appDetails: {
+          fieldNavExpanded: true,
           rawRecordExpanded: true,
-          fieldsExpanded: true,
-          transformedRecordExpanded: true
+          transformedRecordExpanded: true,
+          readOnly: @transformation_definition.copy?
         }
       },
       config: {
@@ -109,7 +119,7 @@ class TransformationDefinitionsController < ApplicationController
   end
 
   def find_extraction_jobs
-    if params['kind'] == 'enrichment'
+    if params['kind'] == 'enrichment' || @transformation_definition&.kind == 'enrichment'
       extraction_definitions = @content_source.extraction_definitions.enrichment.originals
     else
       extraction_definitions = @content_source.extraction_definitions.harvest.originals

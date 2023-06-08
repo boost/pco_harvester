@@ -15,8 +15,16 @@ module Extraction
     def params
       {
         search: {
-          'fragments.source_id' => @extraction_definition.source_id
-        },
+          'fragments.source_id' => @extraction_definition.source_id,
+        }.merge(
+          if @extraction_definition.job_id.present?
+            {
+              'fragments.job_id' => @extraction_definition.job_id
+            }
+          else
+            {}
+          end
+        ),
         search_options: {
           page: @page
         },

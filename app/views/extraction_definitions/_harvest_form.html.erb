@@ -1,4 +1,4 @@
-<%= vertical_form_with model: [@content_source, @extraction_definition], class: { row: true }, id: 'js-extraction-definition-form' do |form| %>
+<%= vertical_form_with model: [@content_source, @extraction_definition], id: 'js-extraction-definition-form' do |form| %>
   <%= form.hidden_field :content_source_id, value: @content_source.id %>
 
   <div class="row gx-2">
@@ -65,58 +65,6 @@
             </div>
 
             <div class="col-4">
-              <%= form.label :page_parameter, class: "form-label" do %>
-                Page parameter
-                <span
-                  data-bs-toggle="tooltip"
-                  data-bs-title="This parameter will be appended to the base_url for selecting the page. It will be incremented until the extraction reaches the limit."
-                ><i class="bi bi-question-circle" aria-label="helper text"></i>
-              <% end %>
-            </div>
-            <div class="col-8">
-              <%= form.text_field :page_parameter, class: "form-control" %>
-            </div>
-
-            <div class="col-4">
-              <%= form.label :page, class: "form-label" do %>
-                Starting page
-                <span
-                  data-bs-toggle="tooltip"
-                  data-bs-title="First page being requested"
-                ><i class="bi bi-question-circle" aria-label="helper text"></i>
-              <% end %>
-            </div>
-            <div class="col-8">
-              <%= form.number_field :page, class: "form-control" %>
-            </div>
-
-            <div class="col-4">
-              <%= form.label :per_page_parameter, class: "form-label" do %>
-                Per page parameter
-                <span
-                  data-bs-toggle="tooltip"
-                  data-bs-title="This parameter will be appended to the base_url"
-                ><i class="bi bi-question-circle" aria-label="helper text"></i>
-              <% end %>
-            </div>
-            <div class="col-8">
-              <%= form.text_field :per_page_parameter, class: "form-control" %>
-            </div>
-
-            <div class="col-4">
-              <%= form.label :per_page, class: "form-label" do %>
-                Per page
-                <span
-                  data-bs-toggle="tooltip"
-                  data-bs-title="Number indicating the number of items per page"
-                ><i class="bi bi-question-circle" aria-label="helper text"></i>
-              <% end %>
-            </div>
-            <div class="col-8">
-              <%= form.number_field :per_page, class: "form-control" %>
-            </div>
-
-            <div class="col-4">
               <%= form.label :total_selector, class: "form-label" do %>
                 Total selector
                 <span
@@ -128,6 +76,51 @@
             <div class="col-8">
               <%= form.text_field :total_selector, class: "form-control" %>
             </div>
+
+            <div class="col-6">
+              <%= form.label :page_parameter, class: "form-label" do %>
+                Page parameter name
+                <span
+                  data-bs-toggle="tooltip"
+                  data-bs-title="This parameter will be appended to the base_url for selecting the page. It will be incremented until the extraction reaches the limit."
+                ><i class="bi bi-question-circle" aria-label="helper text"></i>
+              <% end %>
+              <%= form.text_field :page_parameter, class: "form-control" %>
+            </div>
+
+            <div class="col-6">
+              <%= form.label :page, class: "form-label" do %>
+                Starting page value
+                <span
+                  data-bs-toggle="tooltip"
+                  data-bs-title="First page being requested"
+                ><i class="bi bi-question-circle" aria-label="helper text"></i>
+              <% end %>
+              <%= form.number_field :page, class: "form-control" %>
+            </div>
+
+            <div class="col-6">
+              <%= form.label :per_page_parameter, class: "form-label" do %>
+                Per page parameter name
+                <span
+                  data-bs-toggle="tooltip"
+                  data-bs-title="This parameter will be appended to the base_url"
+                ><i class="bi bi-question-circle" aria-label="helper text"></i>
+              <% end %>
+              <%= form.text_field :per_page_parameter, class: "form-control" %>
+            </div>
+
+            <div class="col-6">
+              <%= form.label :per_page, class: "form-label" do %>
+                Per page value
+                <span
+                  data-bs-toggle="tooltip"
+                  data-bs-title="Number indicating the number of items per page"
+                ><i class="bi bi-question-circle" aria-label="helper text"></i>
+              <% end %>
+              <%= form.number_field :per_page, class: "form-control" %>
+            </div>
+
           </div>
         </div>
       </div>

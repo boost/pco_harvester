@@ -14,7 +14,7 @@ module Load
 
       record['source_id'] = @harvest_definition.source_id
       record['priority']  = @harvest_definition.priority
-      record['job_id']    = "harvester_#{@harvest_definition.id}"
+      record['job_id']    = @load_job.harvest_job.name
 
       if @harvest_definition.harvest?
         connection(@destination.url, {}, { 'Authentication-Token' => @destination.api_key })

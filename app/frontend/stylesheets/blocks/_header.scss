@@ -2,7 +2,6 @@
   background-color: $doctor;
   padding: 2rem;
   border-bottom: 1px solid $bright-star;
-  position: relative;
 
   @include element('title') {
     float: left;

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_30_232605) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_02_014018) do
   create_table "content_sources", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -44,6 +44,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_30_232605) do
     t.string "source_id"
     t.string "enrichment_url"
     t.bigint "destination_id"
+    t.string "job_id"
     t.index ["content_source_id"], name: "index_extraction_definitions_on_content_source_id"
     t.index ["destination_id"], name: "index_extraction_definitions_on_destination_id"
     t.index ["original_extraction_definition_id"], name: "index_eds_on_original_ed_id"
