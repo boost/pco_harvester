@@ -13,7 +13,9 @@ Rails.application.routes.draw do
   root 'home#index'
 
   resources :users, only: %i[index show edit update destroy] do
-    resource :two_factor_authentication
+    collection do
+      resource :two_factor_authentication
+    end
   end
 
   resources :content_sources, only: %i[index show create update new edit] do
