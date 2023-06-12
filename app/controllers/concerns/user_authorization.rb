@@ -12,13 +12,13 @@ module UserAuthorization
 
   def setup_two_factor_authentication
     excluded_paths = ['/users/sign_in', '/users/password/new', '/users/invitation', '/users/invitation/accept']
-    
+
     return if excluded_paths.include?(request.path)
     return if current_user.two_factor_setup?
 
     current_user.update(otp_secret: User.generate_otp_secret) if current_user.otp_secret.nil?
 
-    redirect_to two_factor_authentication_path
+    redirect_to two_factor_setups_path
   end
 
   def authenticate_inviter!

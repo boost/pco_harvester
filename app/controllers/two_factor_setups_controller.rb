@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class TwoFactorAuthenticationsController < ApplicationController
+class TwoFactorSetupsController < ApplicationController
   skip_before_action :setup_two_factor_authentication
 
   def show; end

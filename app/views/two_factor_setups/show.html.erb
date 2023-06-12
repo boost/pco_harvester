@@ -18,7 +18,7 @@
             manually: <code><%= current_user.otp_secret%></code>
           </p>
 
-          <%= vertical_form_with(model: current_user, url: two_factor_authentication_path, method: :post) do |form| %>
+          <%= vertical_form_with(model: current_user, url: two_factor_setups_path, method: :post) do |form| %>
             <div class='row gy-3 align-items-center'>
 
               <p class='text-center'>
