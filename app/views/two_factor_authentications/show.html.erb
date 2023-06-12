@@ -6,33 +6,40 @@
 <% end %>
 
 <div class='row'>
-  <div class='col-sm-12'>
+  <div class='col-sm-12 col-md-8'>
     <div class='card'>
       <div class='card-body'>
-
-          <p>You need to set up two factor authentication. Scan this QR code into an authenticator app on your phone.</p>
+          <p>
+            You need to set up two factor authentication. Scan this QR code into an authenticator
+            app on your phone.
+          </p>
+          <p>
+            If you cannot scan, please enter the following code
+            manually: <code><%= current_user.otp_secret%></code>
+          </p>
 
           <%= vertical_form_with(model: current_user, url: two_factor_authentication_path, method: :post) do |form| %>
             <div class='row gy-3 align-items-center'>
 
-              <div class='col-3'>
-                
-              </div>
+              <p class='text-center'>
+                <%= qr_code_as_svg(current_user.otp_provisioning_uri(current_user.email, issuer: "Supplejack Harvester")) %>
+              </p>
 
-              <div class='col-9'>
-                <%= RQRCode::QRCode.new(current_user.otp_provisioning_uri(current_user.email, issuer: "Supplejack Harvester")).as_svg(offset: 0, color: '000', shape_rendering: 'crispEdges', module_size: 3).html_safe %>
-              </div>
+              <p>
+                Please confirm that your authentication application is working
+                by entering a generated code below.
+              </p>
 
               <div class='col-3'>
-                <%= form.label :otp_attempt, 'Two-factor authentication code', class: 'form-label' %>
+                <%= form.label :otp_attempt, '2FA code', class: 'form-label' %>
               </div>
 
               <div class='col-9'>
                 <%= form.text_field :otp_attempt, class: 'form-control' %>
               </div>
 
-              <div class='col-3'>
-                <%= form.submit 'Login', class: 'btn btn-primary' %>
+              <div class='col'>
+                <%= form.submit 'Confirm', class: 'btn btn-primary' %>
               </div>
             </div>
           <% end %>
@@ -40,6 +47,3 @@
     </div>
   </div>
 </div>
-
-
-
