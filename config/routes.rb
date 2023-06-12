@@ -3,7 +3,7 @@ require 'sidekiq/web'
 Sidekiq::Web.app_url = '/'
 
 Rails.application.routes.draw do
-  devise_for :users, :skip => [:registrations]
+  devise_for :users, controllers: { sessions: 'sessions' }, skip: [:registrations]
   as :user do
     get 'edit_profile' => 'devise/registrations#edit', as: :edit_profile
     put 'update_profile' => 'devise/registrations#update', as: :update_profile

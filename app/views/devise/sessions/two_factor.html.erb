@@ -1,0 +1,27 @@
+<%= content_for(:title) { 'Two Factor Authentication' } %>
+
+<%= content_for :header do %>
+  <h1 class="header__title">Two Factor Authentication</h1>
+
+  <div class="clearfix"></div>
+<% end %>
+
+<div class="row">
+  <div class="col-sm-12 col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <p>Enter your 2FA code to complete sign-in.</p>
+
+        <%= vertical_form_with(model: resource, as: resource_name, url: session_path(resource_name), method: :post) do |f| %>
+
+          <%= f.label :otp_attempt, '2FA Code', class: 'form-label' %>
+          <%= f.text_field :otp_attempt, autofocus: true, required: true, class: 'form-control' %>
+
+          <div class="actions">
+            <%= f.submit 'Login', class: 'btn btn-primary mt-2' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

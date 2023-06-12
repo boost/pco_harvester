@@ -2,9 +2,8 @@
 
 class TwoFactorAuthenticationsController < ApplicationController
   skip_before_action :setup_two_factor_authentication
-  
-  def show
-  end
+
+  def show; end
 
   def create
     if current_user.validate_and_consume_otp!(user_params[:otp_attempt])
