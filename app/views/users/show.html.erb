@@ -35,6 +35,14 @@
       <i class="bi bi-x-lg fw-bold text-danger" aria-label="No"></i>
     <% end %>
   </li>
+  <li class="list-group-item">
+    <div class="fw-bold">2FA setup</div>
+    <% if @user.two_factor_setup? %>
+      <i class="bi bi-check-circle fw-bold text-primary" aria-label="Yes"></i>
+    <% else %>
+      <i class="bi bi-x-lg fw-bold text-danger" aria-label="No"></i>
+    <% end %>
+  </li>
   <% unless @user.invitation_accepted_at? %>
     <li class="list-group-item">
       <div class="fw-bold">Invitation sent at</div>
