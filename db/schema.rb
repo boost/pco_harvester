@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_07_232848) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_12_212703) do
   create_table "content_sources", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -176,6 +176,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_07_232848) do
     t.integer "consumed_timestep"
     t.boolean "otp_required_for_login"
     t.boolean "two_factor_setup", default: false, null: false
+    t.boolean "force_two_factor", default: false, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invited_by_id"], name: "index_users_on_invited_by_id"

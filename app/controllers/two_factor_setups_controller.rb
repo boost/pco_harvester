@@ -3,7 +3,9 @@
 class TwoFactorSetupsController < ApplicationController
   skip_before_action :setup_two_factor_authentication
 
-  def show; end
+  def show
+    current_user.update(otp_secret: User.generate_otp_secret) if current_user.otp_secret.nil?
+  end
 
   def create
     if current_user.validate_and_consume_otp!(user_params[:otp_attempt])

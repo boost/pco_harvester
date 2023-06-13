@@ -52,7 +52,22 @@
     <% end %>
   </div>
 
-  <div class="col-sm-12 col-md-6 mb-4">
+  <div class="col-sm-12 col-md-6">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h3>Two Factor Authentication</h3>
+
+        <% if resource.two_factor_setup? %>
+          <p>
+            Congratulations, your have enabled two factor authentication!
+          </p>
+        <% else %>
+          <p>Want more security?</p>
+          <%= link_to 'Set up 2FA', two_factor_setups_path, class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+
     <div class="card">
       <div class="card-body">
         <h3>Cancel my account</h3>
@@ -62,8 +77,6 @@
             Cancel my account
           </button>
         </div>
-
-        <%= link_to "Back", :back %>
       </div>
     </div>
   </div>

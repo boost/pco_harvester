@@ -27,6 +27,14 @@
     <div class="fw-bold">Role</div>
     <%= @user.role %>
   </li>
+  <li class="list-group-item">
+    <div class="fw-bold">Force 2FA</div>
+    <% if @user.force_two_factor? %>
+      <i class="bi bi-check-circle fw-bold text-primary" aria-label="Yes"></i>
+    <% else %>
+      <i class="bi bi-x-lg fw-bold text-danger" aria-label="No"></i>
+    <% end %>
+  </li>
   <% unless @user.invitation_accepted_at? %>
     <li class="list-group-item">
       <div class="fw-bold">Invitation sent at</div>

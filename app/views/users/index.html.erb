@@ -27,11 +27,14 @@
           <div class="card-body">
             <h5 class="card-title"><%= user.username %></h5>
             <p><%= user.email %></p>
-            <span class="<%= class_names('badge', 'rounded-pill', 'bg-light text-dark': !user.invitation_accepted_at?, 'bg-primary': user.invitation_accepted_at?) %>">
+            <span class="<%= class_names('badge', 'rounded-pill', 'bg-secondary': !user.invitation_accepted_at?, 'bg-primary': user.invitation_accepted_at?) %>">
               <%= user.invitation_accepted_at? ? 'Active' : 'Invited' %>
             </span>
-            <span class="<%= class_names('badge', 'rounded-pill', 'bg-primary': !user.admin?, 'bg-danger': user.admin?) %>">
+            <span class="<%= class_names('badge', 'rounded-pill', 'bg-secondary': user.harvester?, 'bg-primary': user.admin?) %>">
               <%= user.role.capitalize %>
+            </span>
+            <span class="<%= class_names('badge', 'rounded-pill', 'bg-primary': user.force_two_factor?, 'bg-danger': !user.force_two_factor?) %>">
+              <%= user.force_two_factor? ? 'Forced 2FA' : '2FA not forced' %>
             </span>
           </div>
         <% end %>
@@ -68,16 +71,30 @@
           <%= form.label :email, class: "form-label" %>
           <%= form.email_field :email, required: true, class: "form-control" %>
         </div>
-        <div class="mb-3 form-check">
-          <% role_names = User.roles.keys %>
-          <%= form.check_box :role, { class: "form-check-input" }, role_names.last, role_names.first %>
-          <%= form.label :role, class: "form-check-label" do %>
-            Admin
-            <span
-              data-bs-toggle="tooltip"
-              data-bs-title="Admins can manage and invite users"
-            ><i class="bi bi-question-circle" aria-label="helper text"></i>
-          <% end %>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-6 mb-3 form-check">
+              <% role_names = User.roles.keys %>
+              <%= form.check_box :role, { class: "form-check-input" }, role_names.last, role_names.first %>
+              <%= form.label :role, class: "form-check-label" do %>
+                Admin
+                <span
+                  data-bs-toggle="tooltip"
+                  data-bs-title="Admins can manage and invite users"
+                ><i class="bi bi-question-circle" aria-label="helper text"></i>
+              <% end %>
+            </div>
+            <div class="col-sm-6 mb-3 form-check">
+              <%= form.check_box :force_two_factor, { class: "form-check-input" } %>
+              <%= form.label :force_two_factor, class: "form-check-label" do %>
+                Force 2FA
+                <span
+                  data-bs-toggle="tooltip"
+                  data-bs-title="The user will be forced to setup and use 2FA to sign in."
+                ><i class="bi bi-question-circle" aria-label="helper text"></i>
+              <% end %>
+            </div>
+          </div>
         </div>
       </div>
       <div class="modal-footer">
