@@ -15,9 +15,22 @@ class TwoFactorSetupsController < ApplicationController
       redirect_to root_path
     else
       flash.alert = 'Two Factor Authentication failed. Please try and input your code again.'
-
       render :show
     end
+  end
+
+  def destroy
+    if current_user.force_two_factor?
+      return redirect_back fallback_location: root_path, alert: 'You were forced to use 2FA by admins.'
+    end
+
+    if current_user.update(otp_required_for_login: false, otp_secret: nil, two_factor_setup: false)
+      flash.notice = 'Two Factor Authentication successfully disabled.'
+    else
+      flash.alert = 'There was a problem disabling 2FA.'
+    end
+
+    redirect_to edit_profile_path
   end
 
   private

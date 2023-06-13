@@ -86,7 +86,9 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <%= button_to "Delete user", user_path(@user), method: :delete, class: "btn btn-danger" %>
+        <%= button_to user_path(@user), method: :delete, class: "btn btn-danger" do %>
+          <i class="bi bi-trash" aria-hidden="true"></i> Delete user
+        <% end %>
       </div>
     </div>
   </div>

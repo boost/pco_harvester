@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   resources :users, only: %i[index show edit update destroy] do
     collection do
-      resource :two_factor_setups, only: %i[show create]
+      resource :two_factor_setups, only: %i[show create destroy]
     end
   end
 

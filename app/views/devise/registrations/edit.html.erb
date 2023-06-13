@@ -58,9 +58,18 @@
         <h3>Two Factor Authentication</h3>
 
         <% if resource.two_factor_setup? %>
-          <p>
-            Congratulations, your have enabled two factor authentication!
+          <p class="alert alert-success">
+            Congratulations, you have enabled two factor authentication!
           </p>
+          <% unless resource.force_two_factor? %>
+            <p class="alert alert-danger">
+              If you disable 2FA, you won't be asked for a 2FA code on next login. Your security
+              will be decreased.
+            </p>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#disable-2fa-modal">
+              Disable 2FA
+            </button>
+          <% end %>
         <% else %>
           <p>Want more security?</p>
           <%= link_to 'Set up 2FA', two_factor_setups_path, class: "btn btn-primary" %>
@@ -103,6 +112,30 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <%= button_to "Cancel my account", cancel_account_path, method: :delete, class: "btn btn-danger" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="disable-2fa-modal"
+  tabindex="-1"
+  aria-labelledby="Disable 2FA"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Disable 2FA</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to disable 2FA?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <%= button_to('Disable 2FA', two_factor_setups_path(resource), method: :delete, class: "btn btn-danger") %>
       </div>
     </div>
   </div>
