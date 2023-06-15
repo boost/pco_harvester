@@ -89,7 +89,7 @@
               <% end %>
             </div>
             <div class="col-sm-6 mb-3 form-check">
-              <%= form.check_box :enforce_two_factor, { class: "form-check-input" } %>
+              <%= form.check_box :enforce_two_factor, { checked: true, class: "form-check-input" } %>
               <%= form.label :enforce_two_factor, class: "form-check-label" do %>
                 Enforce 2FA
                 <span
