@@ -28,8 +28,8 @@
     <%= @user.role %>
   </li>
   <li class="list-group-item">
-    <div class="fw-bold">Force 2FA</div>
-    <% if @user.force_two_factor? %>
+    <div class="fw-bold">Enforce 2FA</div>
+    <% if @user.enforce_two_factor? %>
       <i class="bi bi-check-circle fw-bold text-primary" aria-label="Yes"></i>
     <% else %>
       <i class="bi bi-x-lg fw-bold text-danger" aria-label="No"></i>

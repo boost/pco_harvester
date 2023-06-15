@@ -20,7 +20,7 @@ class TwoFactorSetupsController < ApplicationController
   end
 
   def destroy
-    if current_user.force_two_factor?
+    if current_user.enforce_two_factor?
       return redirect_back fallback_location: root_path, alert: 'You were forced to use 2FA by admins.'
     end
 

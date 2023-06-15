@@ -14,7 +14,7 @@ module UserAuthorization
     excluded_paths = ['/users/sign_in', '/users/sign_out', '/users/password/new', '/users/invitation', '/users/invitation/accept']
 
     return if excluded_paths.include?(request.path)
-    return unless current_user.force_two_factor?
+    return unless current_user.enforce_two_factor?
     return if current_user.two_factor_setup?
 
     redirect_to two_factor_setups_path

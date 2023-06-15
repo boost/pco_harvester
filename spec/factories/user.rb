@@ -7,7 +7,7 @@ FactoryBot.define do
     password { Faker::Internet.password }
     two_factor_setup { false }
     otp_required_for_login { false }
-    force_two_factor { false }
+    enforce_two_factor { false }
 
     trait :two_factor_setup do
       two_factor_setup { true }
@@ -18,8 +18,8 @@ FactoryBot.define do
       end
     end
 
-    trait :force_two_factor do
-      force_two_factor { true }
+    trait :enforce_two_factor do
+      enforce_two_factor { true }
     end
   end
 end

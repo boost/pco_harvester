@@ -63,7 +63,7 @@ RSpec.describe 'Login' do
   context 'when enforce_two_factor is true' do
     context 'when two factor is not setup' do
       it 'user must set up 2FA before accessing pages and cannot access other pages' do
-        user = create(:user, :force_two_factor)
+        user = create(:user, :enforce_two_factor)
         visit root_path
 
         fill_in 'Email', with: user.email
@@ -79,7 +79,7 @@ RSpec.describe 'Login' do
 
     context 'when two factor is already setup' do
       it 'cannot go to another page after email and password login' do
-        user = create(:user, :force_two_factor, :two_factor_setup)
+        user = create(:user, :enforce_two_factor, :two_factor_setup)
         visit root_path
 
         fill_in 'Email', with: user.email
@@ -94,7 +94,7 @@ RSpec.describe 'Login' do
       end
 
       it 'can log in with a valid OTP' do
-        user = create(:user, :force_two_factor, :two_factor_setup)
+        user = create(:user, :enforce_two_factor, :two_factor_setup)
         visit root_path
 
         fill_in 'Email', with: user.email

@@ -18,7 +18,7 @@ module DeviseOverrides
   end
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:invite, keys: %i[username email role force_two_factor])
+    devise_parameter_sanitizer.permit(:invite, keys: %i[username email role enforce_two_factor])
     devise_parameter_sanitizer.permit(:account_update, keys: %i[username])
     devise_parameter_sanitizer.permit(:sign_in, keys: [:otp_attempt])
   end

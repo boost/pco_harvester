@@ -35,9 +35,9 @@
             <span class="<%= class_names('badge', 'rounded-pill', 'bg-secondary': user.harvester?, 'bg-primary': user.admin?) %>">
               <%= user.role.capitalize %>
             </span>
-            <% if user.force_two_factor? %>
+            <% if user.enforce_two_factor? %>
               <span class="badge rounded-pill bg-primary">
-                Forcing 2FA
+                Enforcing 2FA
               </span>
             <% end %>
           </div>
@@ -89,9 +89,9 @@
               <% end %>
             </div>
             <div class="col-sm-6 mb-3 form-check">
-              <%= form.check_box :force_two_factor, { class: "form-check-input" } %>
-              <%= form.label :force_two_factor, class: "form-check-label" do %>
-                Force 2FA
+              <%= form.check_box :enforce_two_factor, { class: "form-check-input" } %>
+              <%= form.label :enforce_two_factor, class: "form-check-label" do %>
+                Enforce 2FA
                 <span
                   data-bs-toggle="tooltip"
                   data-bs-title="The user will be forced to setup and use 2FA to sign in."
