@@ -1,7 +1,7 @@
 <% matches = { notice: 'success', alert: 'danger'} %>
 
 <% flash.each do |type, msg| %>
-  <div class="alert  alert-dismissible fade show my-3 <%= "alert-#{matches[type.to_sym]}" %>" role="alert">
+  <div class="alert alert-dismissible fade show my-3 <%= "alert-#{matches[type.to_sym]}" %>" role="alert">
     <%= msg %>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>

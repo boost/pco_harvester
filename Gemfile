@@ -65,9 +65,12 @@ end
 
 group :test do
   # used in tests
+  gem 'capybara'
+  gem 'capybara-screenshot'
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'shoulda-matchers'
+  gem 'webdrivers', require: false
 
   # generates code coverage reports
   gem 'simplecov'

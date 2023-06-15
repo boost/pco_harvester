@@ -2,6 +2,10 @@
 
 require 'webmock/rspec'
 
+WebMock.disable_net_connect!(
+  allow_localhost: true
+)
+
 RSpec.configure do |config|
   config.before(:suite) do
     FileUtils.rm Dir.glob("#{ExtractionJob::EXTRACTIONS_FOLDER}/*/*")
