@@ -28,11 +28,9 @@ class UsersController < ApplicationController
       redirect_to users_path, notice: 'User removed successfully'
     else
       flash.alert = 'There was an issue deleting the user'
-      redirect_to edit_user_path(@user)
+      redirect_to users_path
     end
   end
-
-  def two_factor_authentication; end
 
   private
 

@@ -8,4 +8,6 @@ class User < ApplicationRecord
          otp_secret_encryption_key: ENV.fetch('OTP_ENCRYPTION_KEY', nil)
 
   enum :role, { harvester: 0, admin: 1 }
+
+  validates :username, length: { minimum: 2 }
 end

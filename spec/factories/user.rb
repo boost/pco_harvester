@@ -5,6 +5,8 @@ FactoryBot.define do
     username { Faker::Internet.username }
     email    { Faker::Internet.email }
     password { Faker::Internet.password }
+    role { 'harvester' }
+    invitation_sent_at { DateTime.now }
     two_factor_setup { false }
     otp_required_for_login { false }
     enforce_two_factor { false }

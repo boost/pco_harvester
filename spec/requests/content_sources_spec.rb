@@ -8,7 +8,7 @@ RSpec.describe 'ContentSources', type: :request do
 
   before do
     sign_in user
-  end  
+  end
 
   describe '#index' do
     it 'displays a list of content sources' do
