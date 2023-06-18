@@ -74,8 +74,9 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # CUSTOM SETTINGS are coming here
+  APPLICATION_HOST_DOMAIN = ENV.fetch('APPLICATION_HOST_DOMAIN', nil)
   DEFAULT_URL_OPTIONS = {
-    host: ENV.fetch('APPLICATION_HOST_DOMAIN'),
+    host: APPLICATION_HOST_DOMAIN,
     protocol: 'https'
   }.freeze
 

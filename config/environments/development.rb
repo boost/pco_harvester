@@ -61,8 +61,9 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   # CUSTOM SETTINGS are coming here
+  APPLICATION_HOST_DOMAIN = ENV.fetch('APPLICATION_HOST_DOMAIN', nil)
   DEFAULT_URL_OPTIONS = {
-    host: ENV.fetch('APPLICATION_HOST_DOMAIN'),
+    host: APPLICATION_HOST_DOMAIN,
     port: (Rails::Server::Options.new.parse!(ARGV)[:Port] rescue 3000),
     protocol: 'http'
   }.freeze
