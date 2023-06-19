@@ -21,7 +21,7 @@ class TwoFactorSetupsController < ApplicationController
 
   def destroy
     if current_user.enforce_two_factor?
-      return redirect_back fallback_location: root_path, alert: 'You were forced to use 2FA by admins.'
+      return redirect_back fallback_location: root_path, alert: '2FA was made mandatory for you by admins'
     end
 
     if current_user.update(otp_required_for_login: false, otp_secret: nil, two_factor_setup: false)

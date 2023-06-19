@@ -47,4 +47,8 @@ Rails.application.configure do
 
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
+
+  # CUSTOM SETTINGS are coming here
+  config.action_mailer.delivery_method = :test
+  config.action_mailer.default_url_options = { only_path: true }
 end
