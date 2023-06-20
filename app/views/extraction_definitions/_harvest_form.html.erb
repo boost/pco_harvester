@@ -61,10 +61,10 @@
             </div>
             <div class="col-8">
               <% options = find_options_from_validations(ExtractionDefinition, :pagination_type) %>
-              <%= form.select :pagination_type, options, {}, class: "form-select" %>
+              <%= form.select :pagination_type, options, {}, class: "form-select", id: 'js-extraction-definition-pagination-type' %>
             </div>
 
-            <div class="col-4">
+            <div class="col-4 js-extraction-definition-page-form">
               <%= form.label :total_selector, class: "form-label" do %>
                 Total selector
                 <span
@@ -73,8 +73,30 @@
                 ><i class="bi bi-question-circle" aria-label="helper text"></i>
               <% end %>
             </div>
-            <div class="col-8">
+            <div class="col-8 js-extraction-definition-page-form">
               <%= form.text_field :total_selector, class: "form-control" %>
+            </div>
+
+            <!-- TODO rename me when I understand what this value is actually for -->
+            <div class="col-4 js-extraction-definition-tokenised-form">
+              <%= form.label :initial_param, class: "form-label" do %>
+                Initial Param
+              <% end %>
+            </div>
+
+            <div class="col-8 js-extraction-definition-tokenised-form">
+              <%= form.text_field :initial_param, class: "form-control" %>
+            </div>
+            <!-- TODO rename me when I understand what this value is actually for -->
+            
+            <div class="col-4 js-extraction-definition-tokenised-form">
+              <%= form.label :next_page_token_location, class: "form-label" do %>
+                Next Page Token Location
+              <% end %>
+            </div>
+
+            <div class="col-8 js-extraction-definition-tokenised-form">
+              <%= form.text_field :next_page_token_location, class: "form-control" %>
             </div>
 
             <div class="col-6">

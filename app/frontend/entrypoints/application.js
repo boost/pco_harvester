@@ -39,6 +39,7 @@ import "/js/TestDestination";
 import "/js/Tooltips";
 import "/js/CollapseScroll";
 import "/js/ContentSourceFilter";
+import "/js/ExtractionDefinitionFormLogic";
 
 import "/js/editor";
 import "/js/form-header-submission";

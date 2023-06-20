@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Used to store the inforamation for running an extraction
+# Used to store the information for running an extraction
 #
 class ExtractionDefinition < ApplicationRecord
   scope :originals, -> { where(original_extraction_definition: nil) }
@@ -45,14 +45,23 @@ class ExtractionDefinition < ApplicationRecord
   with_options if: :harvest? do
     validates :format, presence: true, inclusion: { in: %w[JSON HTML XML OAI] }
     validates :base_url, presence: true, format: { with: URI::DEFAULT_PARSER.make_regexp }
-    validate :total_selector_format
+
+    with_options if: ->{ pagination_type == 'page' } do
+      validate :total_selector_format
+      validates :total_selector, presence: true
+    end
+    
+    with_options presence: true, if: ->{ pagination_type == 'tokenised' } do
+      validates :next_page_token_location
+      # TODO rename this field when I understand what it's actually for
+      validates :initial_param
+    end
   end
 
   # pagination fields
-  validates :pagination_type, presence: true, inclusion: { in: %w[item page] },           if: -> { harvest? }
+  validates :pagination_type, presence: true, inclusion: { in: %w[page tokenised] }, if: -> { harvest? }
   validates :page, numericality: { only_integer: true }
   validates :per_page, numericality: { only_integer: true }
-  validates :total_selector, presence: true
 
   with_options presence: true, if: :enrichment? do
     validates :destination_id
