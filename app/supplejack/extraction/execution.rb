@@ -7,24 +7,25 @@ module Extraction
       @extraction_job = job
       @extraction_definition = extraction_definition
       @harvest_job = @extraction_job.harvest_job
+      @de = DocumentExtraction.new(@extraction_definition, @extraction_job.extraction_folder)
     end
 
     def call
-      de = DocumentExtraction.new(@extraction_definition, @extraction_job.extraction_folder)
-      de.extract_and_save
+      @de.extract_and_save
 
-      enqueue_record_transformation(de.document)
+      enqueue_record_transformation
 
       return if @extraction_job.is_sample?
 
-      total_results   = JsonPath.new(@extraction_definition.total_selector).on(de.document.body).first.to_i
       max_pages       = (total_results / @extraction_definition.per_page) + 1
 
       (@extraction_definition.page...max_pages).each do
         @extraction_definition.page += 1
-        de.extract_and_save
+        @extraction_definition.token_value = next_token
 
-        enqueue_record_transformation(de.document)
+        @de.extract_and_save
+
+        enqueue_record_transformation
 
         sleep @extraction_definition.throttle / 1000.0
         @extraction_job.reload
@@ -38,8 +39,22 @@ module Extraction
 
     private
 
-    def enqueue_record_transformation(document)
-      return unless @harvest_job.present? && document.successful?
+    def total_results
+      return Nokogiri::XML(@de.document.body).xpath(@extraction_definition.total_selector).first.value.to_i if @extraction_definition.format == 'XML'
+
+      JsonPath.new(@extraction_definition.total_selector).on(@de.document.body).first.to_i
+    end
+
+    def next_token
+      return unless @extraction_definition.pagination_type == 'tokenised'
+
+      return Nokogiri::XML(@de.document.body).xpath(@extraction_definition.next_token_path).first.value if @extraction_definition.format == 'XML'
+
+      JsonPath.new(@extraction_definition.next_token_path).on(@de.document.body).first
+    end
+
+    def enqueue_record_transformation
+      return unless @harvest_job.present? && @de.document.successful?
 
       transformation_job = TransformationJob.create(
         extraction_job: @extraction_job,

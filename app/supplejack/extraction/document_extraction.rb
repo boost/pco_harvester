@@ -23,8 +23,8 @@ module Extraction
       {
         @extraction_definition.page_parameter => @extraction_definition.page,
         @extraction_definition.per_page_parameter => @extraction_definition.per_page,
-        @extraction_definition.token_parameter => @extraction_definition.initial_token_value
-      }.reject { |key, value| key.blank? }
+        @extraction_definition.token_parameter => @extraction_definition.token_value
+      }.reject { |key, value| key.blank? || value.blank? }
     end
   end
 end
