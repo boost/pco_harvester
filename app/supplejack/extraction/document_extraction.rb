@@ -22,8 +22,9 @@ module Extraction
     def params
       {
         @extraction_definition.page_parameter => @extraction_definition.page,
-        @extraction_definition.per_page_parameter => @extraction_definition.per_page
-      }
+        @extraction_definition.per_page_parameter => @extraction_definition.per_page,
+        @extraction_definition.token_parameter => @extraction_definition.initial_token_value
+      }.reject { |key, value| key.blank? }
     end
   end
 end

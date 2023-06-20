@@ -51,9 +51,9 @@ class ExtractionDefinition < ApplicationRecord
     end
     
     with_options presence: true, if: ->{ pagination_type == 'tokenised' } do
-      validates :next_page_token_location
-      # TODO rename this field when I understand what it's actually for
-      validates :initial_param
+      validates :next_page_token_path
+      validates :token_parameter
+      validates :initial_token_value
     end
   end
 

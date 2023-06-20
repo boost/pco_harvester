@@ -82,7 +82,7 @@
           <p>This file is too large to display in the browser.</p>
         <% else %>
           <div class="record-view record-view--extraction-result">
-            <div id="extraction-result-viewer" data-results="<%= @document.body %>"></div>
+            <div id="extraction-result-viewer" data-results="<%= @document.body %>" data-format="<%= @extraction_job.extraction_definition.format %>"></div>
           </div>
         <% end %>
       </div>
