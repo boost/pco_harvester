@@ -2,6 +2,7 @@ import { EditorState } from "@codemirror/state";
 import { EditorView, basicSetup } from "codemirror";
 import { json } from "@codemirror/lang-json";
 import { xml } from "@codemirror/lang-xml";
+import xmlFormat from 'xml-formatter';
 
 import { StreamLanguage } from "@codemirror/language";
 import { ruby } from "@codemirror/legacy-modes/mode/ruby";
@@ -32,10 +33,15 @@ if (extraction_result_viewer) {
       .append(extraction_result_viewer_editor.dom);
 
   } else if(extraction_result_viewer.dataset.format == 'XML') {
+    // TODO why doesnt the syntax highlight work?
+    // const parser = new DOMParser();
+    // const parsedXML = parser.parseFromString(extraction_result_viewer.dataset.results, 'text/xml');
+    // new XMLSerializer().serializeToString(parsedXML);
+    
     let extraction_result_viewer_editor = new EditorView({
       state: EditorState.create({
         extensions: [basicSetup, xml(), EditorState.readOnly.of(true)],
-        doc: extraction_result_viewer.dataset.results
+        doc: xmlFormat(extraction_result_viewer.dataset.results)
       }),
       parent: document.body,
     });
@@ -51,7 +57,6 @@ if (extraction_result_viewer) {
 const enrichment_field = document.querySelector(
   "#js-enrichment-url"
 );
-
 
 function updateEnrichmentUrl(value) {
   enrichment_field.value = value;
