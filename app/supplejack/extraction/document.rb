@@ -6,7 +6,7 @@ module Extraction
   class Document
     attr_reader :status, :request_headers, :response_headers, :body, :url, :method, :params, :file_path
 
-    def initialize(file_path, **kwargs)
+    def initialize(file_path = nil, **kwargs)
       @file_path = file_path
       @url = kwargs[:url]
       @method = kwargs[:method]
@@ -26,6 +26,8 @@ module Extraction
     end
 
     def size_in_bytes
+      return if file_path.nil?
+      
       File.size(file_path)
     end
 

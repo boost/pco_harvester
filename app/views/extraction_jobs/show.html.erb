@@ -29,11 +29,12 @@
 
 <ul class="list-group list-group-horizontal my-4">
   <li class="list-group-item">Status: <%= job_status_text(@extraction_job) %></li>
-
-  <%- if @extraction_job.duration_seconds.present? %>
-    <li class="list-group-item">Duration: <%= ActiveSupport::Duration.build(@extraction_job.duration_seconds).inspect %></li>
-  <% end %>
-    <li class="list-group-item">File size: <%= number_to_human_size(@document.size_in_bytes) %></li>
+    <%- if @extraction_job.duration_seconds.present? %>
+      <li class="list-group-item">Duration: <%= ActiveSupport::Duration.build(@extraction_job.duration_seconds).inspect %></li>
+    <% end %>
+    <% if @document.present? %>
+      <li class="list-group-item">File size: <%= number_to_human_size(@document.size_in_bytes) %></li>
+    <% end %>
     <li class="list-group-item">Folder size: <%= number_to_human_size(@extraction_job.extraction_folder_size_in_bytes) %></li>
     <% if @extraction_definition.harvest? %>
       <li class="list-group-item">Records Per Page: <%= @extraction_definition.per_page %></li>
@@ -79,7 +80,7 @@
 <div class="tab-content">
   <div class="tab-pane fade show active" id="result-tab" role="tal" aria-labelledby="result-tab" tabindex="0">
       <div class="col-12 mt-3">
-        <% if @document.size_in_bytes > 10.megabytes %>
+        <% if @document.present? && @document.size_in_bytes > 10.megabytes %>
           <p>This file is too large to display in the browser.</p>
         <% else %>
           <div class="record-view record-view--extraction-result">

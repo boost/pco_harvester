@@ -7,7 +7,7 @@ FactoryBot.define do
     throttle { 0 }
     kind { 0 }
 
-    pagination_type { 'item' }
+    pagination_type { 'page' }
     page_parameter { 'page' }
     page { 1 }
     per_page_parameter { 'per_page' }

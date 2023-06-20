@@ -54,7 +54,7 @@ RSpec.describe ExtractionDefinition, type: :model do
 
   describe '#validation' do
     it {
-      expect(subject).to validate_inclusion_of(:format).in_array(%w[JSON HTML XML
+      expect(subject).to validate_inclusion_of(:format).in_array(%w[JSON XML
                                                                     OAI]).with_message('is not included in the list')
     }
 
@@ -135,45 +135,26 @@ RSpec.describe ExtractionDefinition, type: :model do
 
   describe '#pagination_type' do
     [
-      'item',
       'page',
       'tokenised'
     ].each do |pagination_type|
       it { is_expected.to allow_value(pagination_type).for(:pagination_type) }
     end
 
-    # type tokenised
-
-    # next_page_token_location
-    # initial_param
-
     context 'when the type is tokenised' do
       subject! { build(:extraction_definition, name: 'Flickr API', pagination_type: 'tokenised') }
-
-      it { is_expected.to validate_presence_of(:next_page_token_location).with_message("can't be blank") }
-      it { is_expected.to validate_presence_of(:initial_param).with_message("can't be blank") }
-
-      it { is_expected.not_to validate_presence_of(:total_selector).with_message("can't be blank") }
+      it { is_expected.to validate_presence_of(:next_token_path).with_message("can't be blank") }
+      it { is_expected.to validate_presence_of(:token_parameter).with_message("can't be blank") }
+      it { is_expected.to validate_presence_of(:token_value).with_message("can't be blank") }
+      it { is_expected.to validate_presence_of(:total_selector).with_message("can't be blank") }
     end
 
     context 'when the type is page' do
       subject! { build(:extraction_definition, name: 'Flickr API', pagination_type: 'page') }
-
       it { is_expected.to validate_presence_of(:total_selector).with_message("can't be blank") }
-
-      it { is_expected.not_to validate_presence_of(:next_page_token_location).with_message("can't be blank") }
-      it { is_expected.not_to validate_presence_of(:initial_param).with_message("can't be blank") }
+      it { is_expected.not_to validate_presence_of(:next_token_path).with_message("can't be blank") }
+      it { is_expected.not_to validate_presence_of(:token_parameter).with_message("can't be blank") }
+      it { is_expected.not_to validate_presence_of(:token_value).with_message("can't be blank") }
     end
-
-    # type 'page' needs
-
-    # total_selector
-
-    # shared
-    
-    # page_parameter
-    # page
-    # per_page_parameter
-    # per_page
   end
 end
