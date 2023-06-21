@@ -64,7 +64,7 @@
               <%= form.select :pagination_type, options, {}, class: "form-select", id: 'js-extraction-definition-pagination-type' %>
             </div>
 
-            <div class="col-4 js-extraction-definition-page-form">
+            <div class="col-4">
               <%= form.label :total_selector, class: "form-label" do %>
                 Total selector
                 <span
@@ -73,7 +73,7 @@
                 ><i class="bi bi-question-circle" aria-label="helper text"></i>
               <% end %>
             </div>
-            <div class="col-8 js-extraction-definition-page-form">
+            <div class="col-8">
               <%= form.text_field :total_selector, class: "form-control" %>
             </div>
 
