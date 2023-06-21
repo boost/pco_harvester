@@ -84,7 +84,6 @@ RSpec.describe Extraction::Execution do
 
       before do
         stub_figshare_harvest_requests(ed)
-        allow(JsonPath).to receive_message_chain(:new, :on).and_return([40])
       end
 
       context 'when it is a full harvest' do
@@ -120,7 +119,6 @@ RSpec.describe Extraction::Execution do
       context 'when the document has failed to be extracted' do
         before do
           stub_failed_figshare_harvest_requests(ed)
-          allow(JsonPath).to receive_message_chain(:new, :on).and_return([40])
         end
         
         let(:subject) { described_class.new(ej, ed) }
