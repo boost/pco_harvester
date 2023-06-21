@@ -40,7 +40,7 @@ module Extraction
     private
 
     def total_results
-      return Nokogiri::XML(@de.document.body).xpath(@extraction_definition.total_selector).first.value.to_i if @extraction_definition.format == 'XML'
+      return Nokogiri::XML(@de.document.body).xpath(@extraction_definition.total_selector).first.content.to_i if @extraction_definition.format == 'XML'
 
       JsonPath.new(@extraction_definition.total_selector).on(@de.document.body).first.to_i
     end
