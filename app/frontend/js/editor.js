@@ -9,18 +9,17 @@ import { ruby } from "@codemirror/legacy-modes/mode/ruby";
 
 // Job Extraction Result Viewer
 
-const extraction_result_viewer = document.querySelector(
+const extractionResultViewer = document.querySelector(
   "#extraction-result-viewer"
 );
 
-if (extraction_result_viewer) {
-
-  if(extraction_result_viewer.dataset.format == 'JSON') {
-    let extraction_result_viewer_editor = new EditorView({
+if (extractionResultViewer) {
+  if(extractionResultViewer.dataset.format == 'JSON') {
+    let extractionResultViewerEditor = new EditorView({
       state: EditorState.create({
         extensions: [basicSetup, json(), EditorState.readOnly.of(true)],
         doc: JSON.stringify(
-          JSON.parse(extraction_result_viewer.dataset.results),
+          JSON.parse(extractionResultViewer.dataset.results),
           null,
           2
         ),
@@ -30,40 +29,43 @@ if (extraction_result_viewer) {
 
     document
       .querySelector("#extraction-result-viewer")
-      .append(extraction_result_viewer_editor.dom);
+      .append(extractionResultViewerEditor.dom);
 
-  } else if(extraction_result_viewer.dataset.format == 'XML') {
+  } else if(extractionResultViewer.dataset.format == 'XML') {
     // TODO why doesnt the syntax highlight work?
     // const parser = new DOMParser();
-    // const parsedXML = parser.parseFromString(extraction_result_viewer.dataset.results, 'text/xml');
-    // new XMLSerializer().serializeToString(parsedXML);
+    // const parsedXML = parser.parseFromString(extractionResultViewer.dataset.results, 'text/xml');
+    // console.log(new XMLSerializer().serializeToString(parsedXML));
     
-    let extraction_result_viewer_editor = new EditorView({
+    let extractionResultViewerEditor = new EditorView({
       state: EditorState.create({
-        extensions: [basicSetup, xml(), EditorState.readOnly.of(true)],
-        doc: xmlFormat(extraction_result_viewer.dataset.results)
+        extensions: [
+          basicSetup,
+          xml(),
+          EditorState.readOnly.of(true)
+        ],
+        doc: xmlFormat(extractionResultViewer.dataset.results, { indentation: '  ', lineSeparator: '\n' })
       }),
       parent: document.body,
     });
 
     document
       .querySelector("#extraction-result-viewer")
-      .append(extraction_result_viewer_editor.dom);
+      .append(extractionResultViewerEditor.dom);
   }
-
 }
 
 // Enrichment URL Editor
-const enrichment_field = document.querySelector(
+const enrichmentField = document.querySelector(
   "#js-enrichment-url"
 );
 
 function updateEnrichmentUrl(value) {
-  enrichment_field.value = value;
+  enrichmentField.value = value;
 }
 
-if (enrichment_field) {
-  let enrichment_field_editor = new EditorView({
+if (enrichmentField) {
+  let enrichmentFieldEditor = new EditorView({
     state: EditorState.create({
       extensions: [
         basicSetup, 
@@ -72,13 +74,13 @@ if (enrichment_field) {
           updateEnrichmentUrl(e.state.doc.toString());
         })
       ],
-      doc: enrichment_field.value,
+      doc: enrichmentField.value,
     }),
     parent: document.body,
   });
 
   document
     .querySelector("#js-enrichment-editor")
-    .append(enrichment_field_editor.dom);
+    .append(enrichmentFieldEditor.dom);
 }
 
