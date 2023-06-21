@@ -133,6 +133,85 @@ RSpec.describe Extraction::Execution do
           subject.call
         end
       end
+
+      context 'when the extraction_definition format is JSON' do
+        let(:subject) { described_class.new(ej, ed) }
+
+        context 'when the extraction_definition pagination_type is token' do
+          let(:ed) { create(:extraction_definition, format: 'JSON', pagination_type: 'tokenised', total_selector: '$.total_results', page: 1, per_page_parameter: 'per_page', per_page: 30, token_parameter: 'id_above', token_value: '0', next_token_path: '$.results[(@.length-1)].id') }
+
+          before do
+            stub_inaturalist_harvest_requests(ed, 
+              {
+                1 => '0', 
+                2 => '2098031',
+                3 => '4218778',
+                4 => '7179629'
+              }
+            )
+          end
+          
+          it 'creates TransformationJobs for each page' do
+            expect { subject.call }.to change(TransformationJob, :count).by(4)
+            expect(TransformationJob.last(4).map(&:page)).to eq [1, 2, 3, 4]
+          end
+          
+          it 'enqueues 4 TransformationWorkers in sidekiq' do
+            expect(TransformationWorker).to receive(:perform_async).exactly(4).times.and_call_original
+
+            subject.call
+          end
+        end
+      end
+
+      context 'when the extraction_definition format is XML' do
+        let(:subject) { described_class.new(ej, ed) }
+
+        context 'when the extraction_definition pagination_type is page' do
+          let(:ed) { create(:extraction_definition, format: 'XML', pagination_type: 'page', total_selector: '//count/text()', page_parameter: 'page', page: 1, per_page_parameter: 'page_size', per_page: 50) }
+
+          before do
+            stub_freesound_harvest_requests(ed)
+          end
+
+          it 'creates TransformationJobs for each page' do
+            expect { subject.call }.to change(TransformationJob, :count).by(4)
+            expect(TransformationJob.last(4).map(&:page)).to eq [1, 2, 3, 4]
+          end
+          
+          it 'enqueues 4 TransformationWorkers in sidekiq' do
+            expect(TransformationWorker).to receive(:perform_async).exactly(4).times.and_call_original
+
+            subject.call
+          end
+        end
+
+        context 'when the extraction_definition pagination_type is tokenised' do
+          let(:ed) { create(:extraction_definition, format: 'XML', pagination_type: 'tokenised', total_selector: '//records/@total', page: 1, per_page_parameter: 'n', per_page: 100, token_parameter: 's', token_value: '*', next_token_path: '//records/@nextStart') }
+          
+          before do
+            stub_trove_harvest_requests(ed, 
+              {
+                1 => '*', 
+                2 => 'AoErc3UyMzQwNjY5OTI=',
+                3 => 'AoErc3UyMzQwNjcwOTI=',
+                4 => 'AoErc3UyMzQwNjcxOTQ='
+              }
+            )
+          end
+          
+          it 'creates TransformationJobs for each page' do
+            expect { subject.call }.to change(TransformationJob, :count).by(4)
+            expect(TransformationJob.last(4).map(&:page)).to eq [1, 2, 3, 4]
+          end
+          
+          it 'enqueues 4 TransformationWorkers in sidekiq' do
+            expect(TransformationWorker).to receive(:perform_async).exactly(4).times.and_call_original
+
+            subject.call
+          end
+        end
+      end
     end
   end
 end

@@ -1,0 +1,25 @@
+---
+status: 200
+headers:
+  date: Wed, 21 Jun 2023 01:27:37 GMT
+  content-type: application/xml; charset=utf-8
+  content-length: 77854
+  connection: keep-alive
+  vary: Accept, Origin, Cookie
+  allow: GET, HEAD, OPTIONS
+  x-frame-options: DENY
+  x-content-type-options: nosniff
+  referrer-policy: same-origin, no-referrer-when-downgrade
+  x-mapped-host: freesound.org
+  strict-transport-security: max-age=31536000; preload
+body: |-
+    <?xml version="1.0" encoding="UTF-8"?>
+    <response>
+        <query>issn:0030-8722</query>
+        <zone name="article">
+            <records s="*" n="100" total="300" next="/result?bulkHarvest=true&amp;encoding=xml&amp;include=tags%2Cworkversions&amp;l-australian=y&amp;l-availability=y&amp;n=100&amp;q=issn%3A0030-8722&amp;reclevel=full&amp;zone=article&amp;s=AoErc3UyMzQwNjY5OTI%3D" nextStart="AoErc3UyMzQwNjY5OTI=">
+            </records>
+        </zone>
+    </response>
+
+  

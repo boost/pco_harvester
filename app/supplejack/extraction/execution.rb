@@ -47,8 +47,7 @@ module Extraction
 
     def next_token
       return unless @extraction_definition.pagination_type == 'tokenised'
-
-      return Nokogiri::XML(@de.document.body).xpath(@extraction_definition.next_token_path).first.value if @extraction_definition.format == 'XML'
+      return Nokogiri::XML(@de.document.body).xpath(@extraction_definition.next_token_path).first.content if @extraction_definition.format == 'XML'
 
       JsonPath.new(@extraction_definition.next_token_path).on(@de.document.body).first
     end

@@ -1,0 +1,1516 @@
+---
+status: 200
+headers:
+  date: Wed, 21 Jun 2023 01:27:37 GMT
+  content-type: application/xml; charset=utf-8
+  content-length: 77854
+  connection: keep-alive
+  vary: Accept, Origin, Cookie
+  allow: GET, HEAD, OPTIONS
+  x-frame-options: DENY
+  x-content-type-options: nosniff
+  referrer-policy: same-origin, no-referrer-when-downgrade
+  x-mapped-host: freesound.org
+  strict-transport-security: max-age=31536000; preload
+body: |-
+  <?xml version=\"1.0\" encoding=\"utf-8\"?>
+  <root>
+    <count>198</count>
+    <previous/>
+    <next>https://freesound.org/apiv2/search/text/?&query='Zealand'&weights=&page=2&page_size=50&fields=name,created,geotag,type,images,id,tags,license,username,url,description</next>
+    <results>
+      <list-item>
+        <id>372597</id>
+        <url>https://freesound.org/people/simongray/sounds/372597/</url>
+        <name>Aromoana Spit.aiff</name>
+        <tags>
+          <list-item>aromoana-spit</list-item>
+          <list-item>otago</list-item>
+          <list-item>field-recording</list-item>
+          <list-item>pilots-cottage</list-item>
+          <list-item>dunedin</list-item>
+          <list-item>new-zealand</list-item>
+        </tags>
+        <description>General sounds on the sand spit at Aromoana near Dunedin, New Zealand, the cottage was the old pilots house and sits between a salt marsh and the sea.</description>
+        <geotag>-45.78309525981473 170.7157051563263</geotag>
+        <created>2017-01-03 23:19:31</created>
+        <license>http://creativecommons.org/publicdomain/zero/1.0/</license>
+        <type>aiff</type>
+        <username>simongray</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/372/372597_93361_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/372/372597_93361_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/372/372597_93361_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/372/372597_93361_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/372/372597_93361_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/372/372597_93361_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/372/372597_93361_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/372/372597_93361_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>326547</id>
+        <url>https://freesound.org/people/Phistomefel/sounds/326547/</url>
+        <name>Tui_birds_singing_close_distant_bush_NewZealand.flac</name>
+        <tags>
+          <list-item>field-recording</list-item>
+          <list-item>nature</list-item>
+          <list-item>new-zealand</list-item>
+          <list-item>bush</list-item>
+          <list-item>forest</list-item>
+          <list-item>bird</list-item>
+          <list-item>birdsong</list-item>
+          <list-item>native</list-item>
+        </tags>
+        <description>New Zealand Tui birds singing in the bush. One Tui is singing close by. It jumps to different branches several times, characteristically flapping its wings. Other birds, mainly Tuis, continuously singing in the distance. Slight wind in the background.\r\n\r\nRecorded at Goldies Bush, New Zealand, in October on a sunny day.\r\nRecorded with a Zoom H2 recorder and its internal microphone-pair.</description>
+        <geotag>-36.8457 174.4651</geotag>
+        <created>2015-10-29 04:17:39</created>
+        <license>http://creativecommons.org/licenses/by/3.0/</license>
+        <type>flac</type>
+        <username>Phistomefel</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/326/326547_4859500_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/326/326547_4859500_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/326/326547_4859500_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/326/326547_4859500_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/326/326547_4859500_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/326/326547_4859500_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/326/326547_4859500_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/326/326547_4859500_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>326546</id>
+        <url>https://freesound.org/people/Phistomefel/sounds/326546/</url>
+        <name>Various_birds_bush_NewZealand_4channel_front.flac</name>
+        <tags>
+          <list-item>field-recording</list-item>
+          <list-item>nature</list-item>
+          <list-item>new-zealand</list-item>
+          <list-item>bush</list-item>
+          <list-item>forest</list-item>
+          <list-item>bird</list-item>
+          <list-item>birdsong</list-item>
+          <list-item>native</list-item>
+        </tags>
+        <description>Multiple native New Zealand birds singing in the bush. Mainly Tuis, in different distances and widely spread over the stereo image. Towards the very end a little wind.\r\n\r\nRecorded at Goldies Bush, New Zealand, in October on a sunny day.\r\nRecorded with a Zoom H2 recorder and its two internal microphone-pairs.\r\nThis is the \"front\" channel-pair of a four-channel recording. \r\n\r\n</description>
+        <geotag>-36.8457 174.4651</geotag>
+        <created>2015-10-29 04:17:38</created>
+        <license>http://creativecommons.org/licenses/by/3.0/</license>
+        <type>flac</type>
+        <username>Phistomefel</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/326/326546_4859500_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/326/326546_4859500_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/326/326546_4859500_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/326/326546_4859500_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/326/326546_4859500_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/326/326546_4859500_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/326/326546_4859500_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/326/326546_4859500_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>326545</id>
+        <url>https://freesound.org/people/Phistomefel/sounds/326545/</url>
+        <name>Various_birds_bush_NewZealand_4channel_rear.flac</name>
+        <tags>
+          <list-item>field-recording</list-item>
+          <list-item>nature</list-item>
+          <list-item>new-zealand</list-item>
+          <list-item>bush</list-item>
+          <list-item>forest</list-item>
+          <list-item>bird</list-item>
+          <list-item>birdsong</list-item>
+          <list-item>native</list-item>
+        </tags>
+        <description>Multiple native New Zealand birds singing in the bush. Mainly Tuis, in different distances and widely spread over the stereo image. Towards the very end a little wind.\r\n\r\nRecorded at Goldies Bush, New Zealand, in October on a sunny day.\r\nRecorded with a Zoom H2 recorder and its two internal microphone-pairs.\r\nThis is the \"rear\" channel-pair of a four-channel recording. \r\n\r\n</description>
+        <geotag>-36.8457 174.4651</geotag>
+        <created>2015-10-29 04:17:37</created>
+        <license>http://creativecommons.org/licenses/by/3.0/</license>
+        <type>flac</type>
+        <username>Phistomefel</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/326/326545_4859500_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/326/326545_4859500_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/326/326545_4859500_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/326/326545_4859500_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/326/326545_4859500_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/326/326545_4859500_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/326/326545_4859500_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/326/326545_4859500_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>323660</id>
+        <url>https://freesound.org/people/Phistomefel/sounds/323660/</url>
+        <name>Traffic busy urban street, distant birds - Auckland, New Zealand.flac</name>
+        <tags>
+          <list-item>town</list-item>
+          <list-item>city</list-item>
+          <list-item>noise</list-item>
+          <list-item>field-recording</list-item>
+          <list-item>cars</list-item>
+          <list-item>street</list-item>
+          <list-item>traffic</list-item>
+          <list-item>ambience</list-item>
+        </tags>
+        <description>Traffic on a busy urban street: cars, loud trucks, soft local birds. One-lane through street, traffic is constantly passing by, no cars stopping, honking, no voices.\r\nRecorded in Auckland, New Zealand in October on a dry day.   \r\nRecorded with a Zoom H2 recorder and its internal microphone-pair.</description>
+        <geotag>-36.86653 151.171875</geotag>
+        <created>2015-10-02 07:47:38</created>
+        <license>http://creativecommons.org/licenses/by/3.0/</license>
+        <type>flac</type>
+        <username>Phistomefel</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/323/323660_4859500_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/323/323660_4859500_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/323/323660_4859500_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/323/323660_4859500_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/323/323660_4859500_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/323/323660_4859500_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/323/323660_4859500_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/323/323660_4859500_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>323661</id>
+        <url>https://freesound.org/people/Phistomefel/sounds/323661/</url>
+        <name>Traffic busy urban street, birds - Auckland, New Zealand.flac</name>
+        <tags>
+          <list-item>town</list-item>
+          <list-item>city</list-item>
+          <list-item>noise</list-item>
+          <list-item>field-recording</list-item>
+          <list-item>cars</list-item>
+          <list-item>street</list-item>
+          <list-item>traffic</list-item>
+          <list-item>ambience</list-item>
+        </tags>
+        <description>Traffic on a busy urban street: cars, loud trucks, clearly audible local birds. One-lane through street, traffic is constantly passing by, no cars stopping, honking, no voices.\r\nRecorded in Auckland, New Zealand in October on a dry day.   \r\nRecorded with a Zoom H2 recorder and its internal microphone-pair.</description>
+        <geotag>-36.86653 151.171875</geotag>
+        <created>2015-10-02 07:47:39</created>
+        <license>http://creativecommons.org/licenses/by/3.0/</license>
+        <type>flac</type>
+        <username>Phistomefel</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/323/323661_4859500_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/323/323661_4859500_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/323/323661_4859500_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/323/323661_4859500_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/323/323661_4859500_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/323/323661_4859500_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/323/323661_4859500_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/323/323661_4859500_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>212937</id>
+        <url>https://freesound.org/people/simongray/sounds/212937/</url>
+        <name>city gallery cafe.aiff</name>
+        <tags>
+          <list-item>zealand</list-item>
+          <list-item>field-recording</list-item>
+          <list-item>cafes</list-item>
+          <list-item>wellington</list-item>
+          <list-item>ambience</list-item>
+          <list-item>new</list-item>
+        </tags>
+        <description>Recordings from cafes around Wellington New Zealand</description>
+        <geotag>-41.28851316272053 174.77766662836075</geotag>
+        <created>2014-01-04 03:17:50</created>
+        <license>http://creativecommons.org/publicdomain/zero/1.0/</license>
+        <type>aiff</type>
+        <username>simongray</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/212/212937_93361_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/212/212937_93361_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/212/212937_93361_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/212/212937_93361_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/212/212937_93361_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/212/212937_93361_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/212/212937_93361_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/212/212937_93361_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>323663</id>
+        <url>https://freesound.org/people/Phistomefel/sounds/323663/</url>
+        <name>Saddleback / Tieke near, distant.flac</name>
+        <tags>
+          <list-item>bird</list-item>
+          <list-item>nature</list-item>
+          <list-item>field-recording</list-item>
+          <list-item>birdsong</list-item>
+          <list-item>New-Zealand</list-item>
+        </tags>
+        <description>A New Zealand Saddleback (or Tieke) singing. First one bird near-by, then two distant saddlebacks communicating in flight. \r\nRecorded on Rotoroa Island, New Zealand, in September on a sunny day.\r\nRecorded with a Zoom H2 recorder and its internal microphone-pair.</description>
+        <geotag>-36.8148 175.02589999999998</geotag>
+        <created>2015-10-02 07:47:41</created>
+        <license>http://creativecommons.org/licenses/by/3.0/</license>
+        <type>flac</type>
+        <username>Phistomefel</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/323/323663_4859500_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/323/323663_4859500_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/323/323663_4859500_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/323/323663_4859500_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/323/323663_4859500_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/323/323663_4859500_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/323/323663_4859500_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/323/323663_4859500_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>323666</id>
+        <url>https://freesound.org/people/Phistomefel/sounds/323666/</url>
+        <name>Tui bird, slight wind, background waves.flac</name>
+        <tags>
+          <list-item>bird</list-item>
+          <list-item>nature</list-item>
+          <list-item>field-recording</list-item>
+          <list-item>birdsong</list-item>
+          <list-item>New-Zealand</list-item>
+        </tags>
+        <description>A New Zealand Tui bird singing. The bird sits in a bush close-by and produces various colourful noises with short breaks. Some wind, in the background the waves of the ocean.\r\nRecorded on Rotoroa Island, New Zealand, in September on a sunny day.\r\nRecorded with a Zoom H2 recorder and its internal microphone-pair.\r\nPost-processing: a soft low-shelf to weaken the noise of the wind.</description>
+        <geotag>-36.8148 175.02589999999998</geotag>
+        <created>2015-10-02 07:47:43</created>
+        <license>http://creativecommons.org/licenses/by/3.0/</license>
+        <type>flac</type>
+        <username>Phistomefel</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/323/323666_4859500_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/323/323666_4859500_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/323/323666_4859500_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/323/323666_4859500_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/323/323666_4859500_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/323/323666_4859500_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/323/323666_4859500_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/323/323666_4859500_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>323667</id>
+        <url>https://freesound.org/people/Phistomefel/sounds/323667/</url>
+        <name>Tui bird, distant Tui birds, background waves.flac</name>
+        <tags>
+          <list-item>bird</list-item>
+          <list-item>nature</list-item>
+          <list-item>field-recording</list-item>
+          <list-item>birdsong</list-item>
+          <list-item>New-Zealand</list-item>
+        </tags>
+        <description>A New Zealand Tui bird singing. The bird sits in a bush close-by and produces various colourful noises with short breaks. Other, more distant Tuis answering. In the background the waves of the ocean, slight wind. The Tui hops from branch to branch. Towards the end a soft cricket.\r\nRecorded on Rotoroa Island, New Zealand, in September on a sunny day.\r\nRecorded with a Zoom H2 recorder and its internal microphone-pair.\r\nPost-processing: a soft low-shelf to weaken the noise of the wind.</description>
+        <geotag>-36.8148 175.02589999999998</geotag>
+        <created>2015-10-02 07:47:44</created>
+        <license>http://creativecommons.org/licenses/by/3.0/</license>
+        <type>flac</type>
+        <username>Phistomefel</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/323/323667_4859500_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/323/323667_4859500_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/323/323667_4859500_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/323/323667_4859500_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/323/323667_4859500_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/323/323667_4859500_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/323/323667_4859500_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/323/323667_4859500_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>323665</id>
+        <url>https://freesound.org/people/Phistomefel/sounds/323665/</url>
+        <name>Tui bird, wind, background waves.flac</name>
+        <tags>
+          <list-item>bird</list-item>
+          <list-item>nature</list-item>
+          <list-item>field-recording</list-item>
+          <list-item>birdsong</list-item>
+          <list-item>New-Zealand</list-item>
+        </tags>
+        <description>A New Zealand Tui bird singing. The bird sits in a bush close-by and produces various colourful noises. It's windy, in the background the waves of the ocean.\r\nRecorded on Rotoroa Island, New Zealand, in September on a sunny day.\r\nRecorded with a Zoom H2 recorder and its internal microphone-pair.\r\nPost-processing: a soft low-shelf to weaken the noise of the wind.</description>
+        <geotag>-36.8148 175.02589999999998</geotag>
+        <created>2015-10-02 07:47:43</created>
+        <license>http://creativecommons.org/licenses/by/3.0/</license>
+        <type>flac</type>
+        <username>Phistomefel</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/323/323665_4859500_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/323/323665_4859500_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/323/323665_4859500_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/323/323665_4859500_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/323/323665_4859500_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/323/323665_4859500_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/323/323665_4859500_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/323/323665_4859500_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>326548</id>
+        <url>https://freesound.org/people/Phistomefel/sounds/326548/</url>
+        <name>Muddy_steps_bush_birds_singing.flac</name>
+        <tags>
+          <list-item>walking</list-item>
+          <list-item>mud</list-item>
+          <list-item>feet</list-item>
+          <list-item>trail</list-item>
+          <list-item>wet</list-item>
+          <list-item>footsteps</list-item>
+        </tags>
+        <description>Footsteps on a muddy walking path in the bush. Audible, continuous rustling of clothes resulting from the movement. In the background native New Zealand birds singing, mainly Tui birds. The person walks steadily without stopping. Towards the end one step on something harder, probably a root.\r\n\r\nRecorded at Goldies Bush, New Zealand, in October.\r\nRecorded with a Zoom H2 recorder and its internal microphone-pair.</description>
+        <geotag>-36.8457 174.4651</geotag>
+        <created>2015-10-29 04:17:39</created>
+        <license>http://creativecommons.org/licenses/by/3.0/</license>
+        <type>flac</type>
+        <username>Phistomefel</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/326/326548_4859500_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/326/326548_4859500_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/326/326548_4859500_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/326/326548_4859500_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/326/326548_4859500_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/326/326548_4859500_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/326/326548_4859500_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/326/326548_4859500_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>212930</id>
+        <url>https://freesound.org/people/simongray/sounds/212930/</url>
+        <name>bordeaux newtown.aiff</name>
+        <tags>
+          <list-item>zealand</list-item>
+          <list-item>field-recording</list-item>
+          <list-item>cafes</list-item>
+          <list-item>wellington</list-item>
+          <list-item>ambience</list-item>
+          <list-item>new</list-item>
+        </tags>
+        <description>Sounds from various cafes around wellington New Zealand. Recorded on an ipod touch, so quality is not great and mono. Mostly the sounds are the general ambience of the cafe, people talking, music playing and coffee being made, a few are outside so there are the sounds from the street and traffic.</description>
+        <geotag>-41.31212537250603 174.77919280529022</geotag>
+        <created>2014-01-04 03:08:37</created>
+        <license>http://creativecommons.org/publicdomain/zero/1.0/</license>
+        <type>aiff</type>
+        <username>simongray</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/212/212930_93361_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/212/212930_93361_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/212/212930_93361_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/212/212930_93361_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/212/212930_93361_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/212/212930_93361_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/212/212930_93361_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/212/212930_93361_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>212935</id>
+        <url>https://freesound.org/people/simongray/sounds/212935/</url>
+        <name>cafe nr Vic Uni.aiff</name>
+        <tags>
+          <list-item>zealand</list-item>
+          <list-item>field-recording</list-item>
+          <list-item>cafes</list-item>
+          <list-item>wellington</list-item>
+          <list-item>ambience</list-item>
+          <list-item>new</list-item>
+        </tags>
+        <description>Sounds from various cafes around wellington New Zealand. Recorded on an ipod touch, so quality is not great and mono. Mostly the sounds are the general ambience of the cafe, people talking, music playing and coffee being made, a few are outside so there are the sounds from the street and traffic.</description>
+        <geotag>-41.28017289501351 174.77861881256104</geotag>
+        <created>2014-01-04 03:08:40</created>
+        <license>http://creativecommons.org/publicdomain/zero/1.0/</license>
+        <type>aiff</type>
+        <username>simongray</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/212/212935_93361_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/212/212935_93361_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/212/212935_93361_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/212/212935_93361_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/212/212935_93361_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/212/212935_93361_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/212/212935_93361_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/212/212935_93361_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>212926</id>
+        <url>https://freesound.org/people/simongray/sounds/212926/</url>
+        <name>Mojo Cafe nr Wagamama.aiff</name>
+        <tags>
+          <list-item>zealand</list-item>
+          <list-item>field-recording</list-item>
+          <list-item>cafes</list-item>
+          <list-item>wellington</list-item>
+          <list-item>ambience</list-item>
+          <list-item>new</list-item>
+        </tags>
+        <description>Sounds from various cafes around wellington New Zealand. Recorded on an ipod touch, so quality is not great and mono. Mostly the sounds are the general ambience of the cafe, people talking, music playing and coffee being made, a few are outside so there are the sounds from the street and traffic.</description>
+        <geotag>-41.283055225029564 174.77867245674133</geotag>
+        <created>2014-01-04 03:08:35</created>
+        <license>http://creativecommons.org/publicdomain/zero/1.0/</license>
+        <type>aiff</type>
+        <username>simongray</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/212/212926_93361_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/212/212926_93361_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/212/212926_93361_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/212/212926_93361_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/212/212926_93361_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/212/212926_93361_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/212/212926_93361_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/212/212926_93361_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>212927</id>
+        <url>https://freesound.org/people/simongray/sounds/212927/</url>
+        <name>Kaffe Eis Waterfront .aiff</name>
+        <tags>
+          <list-item>zealand</list-item>
+          <list-item>field-recording</list-item>
+          <list-item>cafes</list-item>
+          <list-item>wellington</list-item>
+          <list-item>ambience</list-item>
+          <list-item>new</list-item>
+        </tags>
+        <description>Sounds from various cafes around wellington New Zealand. Recorded on an ipod touch, so quality is not great and mono. Mostly the sounds are the general ambience of the cafe, people talking, music playing and coffee being made, a few are outside so there are the sounds from the street and traffic.</description>
+        <geotag>-41.287962955573065 174.77912843227386</geotag>
+        <created>2014-01-04 03:08:36</created>
+        <license>http://creativecommons.org/publicdomain/zero/1.0/</license>
+        <type>aiff</type>
+        <username>simongray</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/212/212927_93361_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/212/212927_93361_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/212/212927_93361_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/212/212927_93361_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/212/212927_93361_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/212/212927_93361_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/212/212927_93361_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/212/212927_93361_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>212929</id>
+        <url>https://freesound.org/people/simongray/sounds/212929/</url>
+        <name>Clarks Cafe.aiff</name>
+        <tags>
+          <list-item>field-recording</list-item>
+          <list-item>cafes</list-item>
+          <list-item>wellington</list-item>
+          <list-item>ambience</list-item>
+          <list-item>new</list-item>
+          <list-item>zealand</list-item>
+        </tags>
+        <description>Sounds from various cafes around wellington New Zealand. Recorded on an ipod touch, so quality is not great and mono. Mostly the sounds are the general ambience of the cafe, people talking, music playing and coffee being made, a few are outside so there are the sounds from the street and traffic.</description>
+        <geotag>-41.288609901959155 174.7766876220703</geotag>
+        <created>2014-01-04 03:08:37</created>
+        <license>http://creativecommons.org/publicdomain/zero/1.0/</license>
+        <type>aiff</type>
+        <username>simongray</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/212/212929_93361_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/212/212929_93361_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/212/212929_93361_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/212/212929_93361_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/212/212929_93361_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/212/212929_93361_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/212/212929_93361_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/212/212929_93361_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>212933</id>
+        <url>https://freesound.org/people/simongray/sounds/212933/</url>
+        <name>Parsons Bookshop Cafe.aiff</name>
+        <tags>
+          <list-item>zealand</list-item>
+          <list-item>field-recording</list-item>
+          <list-item>cafes</list-item>
+          <list-item>wellington</list-item>
+          <list-item>ambience</list-item>
+          <list-item>new</list-item>
+        </tags>
+        <description>Sounds from various cafes around wellington New Zealand. Recorded on an ipod touch, so quality is not great and mono. Mostly the sounds are the general ambience of the cafe, people talking, music playing and coffee being made, a few are outside so there are the sounds from the street and traffic.</description>
+        <geotag>-41.280483305900994 174.7757501900196</geotag>
+        <created>2014-01-04 03:08:39</created>
+        <license>http://creativecommons.org/publicdomain/zero/1.0/</license>
+        <type>aiff</type>
+        <username>simongray</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/212/212933_93361_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/212/212933_93361_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/212/212933_93361_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/212/212933_93361_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/212/212933_93361_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/212/212933_93361_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/212/212933_93361_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/212/212933_93361_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>212932</id>
+        <url>https://freesound.org/people/simongray/sounds/212932/</url>
+        <name>Terrace Cafe.aiff</name>
+        <tags>
+          <list-item>zealand</list-item>
+          <list-item>field-recording</list-item>
+          <list-item>cafes</list-item>
+          <list-item>wellington</list-item>
+          <list-item>ambience</list-item>
+          <list-item>new</list-item>
+        </tags>
+        <description>Sounds from various cafes around wellington New Zealand. Recorded on an ipod touch, so quality is not great and mono. Mostly the sounds are the general ambience of the cafe, people talking, music playing and coffee being made, a few are outside so there are the sounds from the street and traffic.</description>
+        <geotag>-41.28323964950489 174.77463975548744</geotag>
+        <created>2014-01-04 03:08:38</created>
+        <license>http://creativecommons.org/publicdomain/zero/1.0/</license>
+        <type>aiff</type>
+        <username>simongray</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/212/212932_93361_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/212/212932_93361_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/212/212932_93361_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/212/212932_93361_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/212/212932_93361_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/212/212932_93361_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/212/212932_93361_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/212/212932_93361_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>323664</id>
+        <url>https://freesound.org/people/Phistomefel/sounds/323664/</url>
+        <name>Waves in small rocky cavern.flac</name>
+        <tags>
+          <list-item>rocks</list-item>
+          <list-item>seaside</list-item>
+          <list-item>cave</list-item>
+          <list-item>coast</list-item>
+          <list-item>water</list-item>
+          <list-item>bathtub</list-item>
+          <list-item>shore</list-item>
+          <list-item>cavern</list-item>
+          <list-item>sea</list-item>
+          <list-item>waves</list-item>
+          <list-item>ocean</list-item>
+          <list-item>beach</list-item>
+        </tags>
+        <description>Waves in a small rocky cavern. Water repeatedly hits the walls of the hole and retreats again. Sounds of the impact, gurgling, bubbling. Room impression very small, similar to water in a bathtub. \r\nRecorded at the beach of Rotoroa Island, New Zealand, in September on a sunny day.\r\nRecorded with a Zoom H2 recorder and its internal microphone-pair.</description>
+        <geotag>-36.8148 175.02589999999998</geotag>
+        <created>2015-10-02 07:47:42</created>
+        <license>http://creativecommons.org/licenses/by/3.0/</license>
+        <type>flac</type>
+        <username>Phistomefel</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/323/323664_4859500_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/323/323664_4859500_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/323/323664_4859500_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/323/323664_4859500_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/323/323664_4859500_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/323/323664_4859500_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/323/323664_4859500_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/323/323664_4859500_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>323662</id>
+        <url>https://freesound.org/people/Phistomefel/sounds/323662/</url>
+        <name>Sizzling Seabed.flac</name>
+        <tags>
+          <list-item>water</list-item>
+          <list-item>sea-shell</list-item>
+          <list-item>sand</list-item>
+          <list-item>seabed</list-item>
+          <list-item>sea</list-item>
+          <list-item>waves</list-item>
+          <list-item>beach</list-item>
+        </tags>
+        <description>Sizzling of the seabed at low tide. Continuous sizzling. In the background, occasionally: soft waves, distant seagulls. The sizzling is very soft, therefore the noisefloor of the converter is audible.\r\nRecorded at the beach of Rotoroa Island, New Zealand, in September on a sunny day.\r\nThe sound was first of all recorded for reasons of fascination about the activity of the seabed.\r\nRecorded with a Zoom H2 recorder and its internal microphone-pair.\r\nPostprocessing: bell filter to soften the dominant high frequency areas of the noise floor.</description>
+        <geotag>-36.8148 175.02589999999998</geotag>
+        <created>2015-10-02 07:47:40</created>
+        <license>http://creativecommons.org/licenses/by/3.0/</license>
+        <type>flac</type>
+        <username>Phistomefel</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/323/323662_4859500_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/323/323662_4859500_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/323/323662_4859500_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/323/323662_4859500_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/323/323662_4859500_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/323/323662_4859500_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/323/323662_4859500_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/323/323662_4859500_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>581731</id>
+        <url>https://freesound.org/people/Studio1212/sounds/581731/</url>
+        <name>Forest stream New Zealand 04.wav</name>
+        <tags>
+          <list-item>water</list-item>
+          <list-item>field-recording</list-item>
+          <list-item>stream</list-item>
+        </tags>
+        <description>Forest stream New Zealand</description>
+        <geotag/>
+        <created>2021-08-01 12:53:12</created>
+        <license>http://creativecommons.org/publicdomain/zero/1.0/</license>
+        <type>wav</type>
+        <username>Studio1212</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/581/581731_5083552_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/581/581731_5083552_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/581/581731_5083552_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/581/581731_5083552_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/581/581731_5083552_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/581/581731_5083552_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/581/581731_5083552_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/581/581731_5083552_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>581732</id>
+        <url>https://freesound.org/people/Studio1212/sounds/581732/</url>
+        <name>Forest stream New Zealand 03.wav</name>
+        <tags>
+          <list-item>water</list-item>
+          <list-item>field-recording</list-item>
+          <list-item>stream</list-item>
+        </tags>
+        <description>Forest stream New Zealand</description>
+        <geotag/>
+        <created>2021-08-01 12:53:12</created>
+        <license>http://creativecommons.org/publicdomain/zero/1.0/</license>
+        <type>wav</type>
+        <username>Studio1212</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/581/581732_5083552_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/581/581732_5083552_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/581/581732_5083552_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/581/581732_5083552_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/581/581732_5083552_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/581/581732_5083552_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/581/581732_5083552_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/581/581732_5083552_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>581734</id>
+        <url>https://freesound.org/people/Studio1212/sounds/581734/</url>
+        <name>Forest stream New Zealand 01.wav</name>
+        <tags>
+          <list-item>water</list-item>
+          <list-item>field-recording</list-item>
+          <list-item>stream</list-item>
+        </tags>
+        <description>Forest stream New Zealand</description>
+        <geotag/>
+        <created>2021-08-01 12:53:14</created>
+        <license>http://creativecommons.org/publicdomain/zero/1.0/</license>
+        <type>wav</type>
+        <username>Studio1212</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/581/581734_5083552_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/581/581734_5083552_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/581/581734_5083552_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/581/581734_5083552_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/581/581734_5083552_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/581/581734_5083552_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/581/581734_5083552_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/581/581734_5083552_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>581733</id>
+        <url>https://freesound.org/people/Studio1212/sounds/581733/</url>
+        <name>Forest stream New Zealand 02.wav</name>
+        <tags>
+          <list-item>water</list-item>
+          <list-item>field-recording</list-item>
+          <list-item>stream</list-item>
+        </tags>
+        <description>Forest stream New Zealand</description>
+        <geotag/>
+        <created>2021-08-01 12:53:13</created>
+        <license>http://creativecommons.org/publicdomain/zero/1.0/</license>
+        <type>wav</type>
+        <username>Studio1212</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/581/581733_5083552_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/581/581733_5083552_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/581/581733_5083552_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/581/581733_5083552_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/581/581733_5083552_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/581/581733_5083552_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/581/581733_5083552_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/581/581733_5083552_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>456805</id>
+        <url>https://freesound.org/people/Breviceps/sounds/456805/</url>
+        <name>Cicadas in New Zealand</name>
+        <tags>
+          <list-item>Zealand</list-item>
+          <list-item>summer</list-item>
+          <list-item>nature</list-item>
+          <list-item>insects</list-item>
+          <list-item>cicadas</list-item>
+          <list-item>cicada</list-item>
+          <list-item>forest</list-item>
+          <list-item>New</list-item>
+        </tags>
+        <description>Cicada sounds in a rainforest in New Zealand</description>
+        <geotag/>
+        <created>2019-01-17 10:13:05</created>
+        <license>http://creativecommons.org/publicdomain/zero/1.0/</license>
+        <type>wav</type>
+        <username>Breviceps</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/456/456805_9159316_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/456/456805_9159316_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/456/456805_9159316_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/456/456805_9159316_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/456/456805_9159316_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/456/456805_9159316_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/456/456805_9159316_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/456/456805_9159316_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>160382</id>
+        <url>https://freesound.org/people/Mings/sounds/160382/</url>
+        <name>Kea (New Zealand parrot)</name>
+        <tags>
+          <list-item>zealand</list-item>
+          <list-item>parrot</list-item>
+          <list-item>kea</list-item>
+          <list-item>birdcall</list-item>
+          <list-item>new</list-item>
+          <list-item>bird</list-item>
+          <list-item>birdsong</list-item>
+          <list-item>native</list-item>
+        </tags>
+        <description>Another mournful cry from a New Zealand bird.</description>
+        <geotag/>
+        <created>2012-07-02 08:34:23</created>
+        <license>http://creativecommons.org/licenses/by/3.0/</license>
+        <type>wav</type>
+        <username>Mings</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/160/160382_2725266_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/160/160382_2725266_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/160/160382_2725266_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/160/160382_2725266_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/160/160382_2725266_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/160/160382_2725266_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/160/160382_2725266_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/160/160382_2725266_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>160381</id>
+        <url>https://freesound.org/people/Mings/sounds/160381/</url>
+        <name>Kaka (New Zealand parrot)</name>
+        <tags>
+          <list-item>zealand</list-item>
+          <list-item>parrot</list-item>
+          <list-item>bird</list-item>
+          <list-item>birdcall</list-item>
+          <list-item>call</list-item>
+          <list-item>new</list-item>
+          <list-item>scream</list-item>
+          <list-item>birdsong</list-item>
+          <list-item>native</list-item>
+        </tags>
+        <description>A kaka - native parrot to New Zealand - letting loose.</description>
+        <geotag/>
+        <created>2012-07-02 08:09:33</created>
+        <license>http://creativecommons.org/licenses/by/3.0/</license>
+        <type>wav</type>
+        <username>Mings</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/160/160381_2725266_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/160/160381_2725266_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/160/160381_2725266_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/160/160381_2725266_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/160/160381_2725266_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/160/160381_2725266_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/160/160381_2725266_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/160/160381_2725266_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>349470</id>
+        <url>https://freesound.org/people/Capitalmind/sounds/349470/</url>
+        <name>Tui Birdsong New Zealand</name>
+        <tags>
+          <list-item>Tui</list-item>
+          <list-item>nature</list-item>
+          <list-item>birds</list-item>
+          <list-item>birdsong</list-item>
+          <list-item>spring</list-item>
+        </tags>
+        <description>Tui birds singing in Otari Wilton's Bush, Wellington New Zealand.</description>
+        <geotag/>
+        <created>2016-07-10 03:28:28</created>
+        <license>http://creativecommons.org/publicdomain/zero/1.0/</license>
+        <type>wav</type>
+        <username>Capitalmind</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/349/349470_1553542_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/349/349470_1553542_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/349/349470_1553542_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/349/349470_1553542_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/349/349470_1553542_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/349/349470_1553542_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/349/349470_1553542_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/349/349470_1553542_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>155767</id>
+        <url>https://freesound.org/people/tdes/sounds/155767/</url>
+        <name>Tui  - New Zealand bird</name>
+        <tags>
+          <list-item>Tui</list-item>
+          <list-item>NZ</list-item>
+          <list-item>Bird</list-item>
+          <list-item>Zealand</list-item>
+          <list-item>Auckland</list-item>
+          <list-item>tweet</list-item>
+          <list-item>New</list-item>
+        </tags>
+        <description>This is a recording of a tui, a New Zealand bird. \r\n<a href=\"http://en.wikipedia.org/wiki/Tui_(bird)\" rel=\"nofollow\">http://en.wikipedia.org/wiki/Tui_(bird)</a>\r\n\r\nIt was recorded on the deck of a house in Remuera - a suburb in Auckland, New Zealand.\r\n<a href=\"http://en.wikipedia.org/wiki/Remuera\" rel=\"nofollow\">http://en.wikipedia.org/wiki/Remuera</a>\r\n\r\nThe house is near a road, so cars can be heard in the background.\r\n\r\nThe tui was in a bottlebrush tree next to the deck.\r\n<a href=\"http://en.wikipedia.org/wiki/Callistemon\" rel=\"nofollow\">http://en.wikipedia.org/wiki/Callistemon</a>\r\n\r\nRecorded on 16 May 2012.\r\n\r\nRecorded with Zoom Handy Recorder h4n.\r\n<a href=\"http://www.zoom.co.jp/products/h4n\" rel=\"nofollow\">http://www.zoom.co.jp/products/h4n</a>\r\n\r\nPlease credit to: \r\nstudio tdes \r\n<a href=\"http://www.thedailyenglishshow.com/\" rel=\"nofollow\">http://www.thedailyenglishshow.com/</a> \r\n\r\nAny questions? Please email Sarah:\r\nthedailyenglishshow@gmail.com</description>
+        <geotag/>
+        <created>2012-05-16 10:48:45</created>
+        <license>http://creativecommons.org/licenses/by/3.0/</license>
+        <type>mp3</type>
+        <username>tdes</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/155/155767_1176609_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/155/155767_1176609_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/155/155767_1176609_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/155/155767_1176609_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/155/155767_1176609_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/155/155767_1176609_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/155/155767_1176609_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/155/155767_1176609_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>181574</id>
+        <url>https://freesound.org/people/Mings/sounds/181574/</url>
+        <name>Tui (New Zealand bird)</name>
+        <tags>
+          <list-item>Zealand</list-item>
+          <list-item>tui</list-item>
+          <list-item>bird-call</list-item>
+          <list-item>birdcall</list-item>
+          <list-item>forest</list-item>
+          <list-item>New</list-item>
+          <list-item>bird</list-item>
+          <list-item>birdsong</list-item>
+          <list-item>native</list-item>
+        </tags>
+        <description>I have a large number of tui recordings but this is the first one I've posted! Mainly due to the amount of noise heard when listening back to them. They seem to have endless variations of calls, and this is but one of them - I have done a bit of EQ altering just to try and minimise the ubiquitous wind and tree movement noise - and will try and post some more tuis soon!</description>
+        <geotag/>
+        <created>2013-03-22 02:56:23</created>
+        <license>http://creativecommons.org/licenses/by-nc/3.0/</license>
+        <type>wav</type>
+        <username>Mings</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/181/181574_2725266_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/181/181574_2725266_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/181/181574_2725266_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/181/181574_2725266_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/181/181574_2725266_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/181/181574_2725266_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/181/181574_2725266_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/181/181574_2725266_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>456806</id>
+        <url>https://freesound.org/people/Breviceps/sounds/456806/</url>
+        <name>Hot Bubbling Mud</name>
+        <tags>
+          <list-item>Zealand</list-item>
+          <list-item>thermal</list-item>
+          <list-item>bubbling</list-item>
+          <list-item>geothermal</list-item>
+          <list-item>lava</list-item>
+          <list-item>mud</list-item>
+          <list-item>hot</list-item>
+          <list-item>New</list-item>
+          <list-item>bubble</list-item>
+          <list-item>pool</list-item>
+        </tags>
+        <description>A hot bubbling mud pool in New Zealand (Thermal Wonderland, New Zealand).</description>
+        <geotag/>
+        <created>2019-01-17 10:15:52</created>
+        <license>http://creativecommons.org/publicdomain/zero/1.0/</license>
+        <type>wav</type>
+        <username>Breviceps</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/456/456806_9159316_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/456/456806_9159316_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/456/456806_9159316_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/456/456806_9159316_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/456/456806_9159316_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/456/456806_9159316_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/456/456806_9159316_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/456/456806_9159316_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>406065</id>
+        <url>https://freesound.org/people/laughatlantic/sounds/406065/</url>
+        <name>Waterfall (Whangarei Falls, New Zealand).mp3</name>
+        <tags>
+          <list-item>river</list-item>
+          <list-item>Waterfall</list-item>
+          <list-item>Field-Recording</list-item>
+        </tags>
+        <description>Sound of the Whangarei Falls New Zealand</description>
+        <geotag/>
+        <created>2017-10-27 16:12:58</created>
+        <license>http://creativecommons.org/publicdomain/zero/1.0/</license>
+        <type>mp3</type>
+        <username>laughatlantic</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/406/406065_3713344_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/406/406065_3713344_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/406/406065_3713344_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/406/406065_3713344_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/406/406065_3713344_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/406/406065_3713344_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/406/406065_3713344_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/406/406065_3713344_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>414539</id>
+        <url>https://freesound.org/people/emilyws/sounds/414539/</url>
+        <name>Sheep Grazing 1</name>
+        <tags>
+          <list-item>Sheep</list-item>
+          <list-item>Atmosphere</list-item>
+          <list-item>Farm</list-item>
+          <list-item>Baa</list-item>
+          <list-item>Park</list-item>
+          <list-item>Field</list-item>
+          <list-item>Outside</list-item>
+          <list-item>Animal</list-item>
+          <list-item>Outdoors</list-item>
+          <list-item>Ambience</list-item>
+          <list-item>Day</list-item>
+          <list-item>Wind</list-item>
+        </tags>
+        <description>Sheep grazing in a field. (New Zealand)</description>
+        <geotag/>
+        <created>2018-01-01 23:49:49</created>
+        <license>http://creativecommons.org/publicdomain/zero/1.0/</license>
+        <type>wav</type>
+        <username>emilyws</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/414/414539_6694545_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/414/414539_6694545_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/414/414539_6694545_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/414/414539_6694545_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/414/414539_6694545_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/414/414539_6694545_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/414/414539_6694545_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/414/414539_6694545_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>414540</id>
+        <url>https://freesound.org/people/emilyws/sounds/414540/</url>
+        <name>Sheep Grazing 2</name>
+        <tags>
+          <list-item>Sheep</list-item>
+          <list-item>Atmosphere</list-item>
+          <list-item>Farm</list-item>
+          <list-item>Baa</list-item>
+          <list-item>Park</list-item>
+          <list-item>Field</list-item>
+          <list-item>Outside</list-item>
+          <list-item>Animal</list-item>
+          <list-item>Outdoors</list-item>
+          <list-item>Ambience</list-item>
+          <list-item>Day</list-item>
+          <list-item>Wind</list-item>
+        </tags>
+        <description>Sheep grazing in a field. (New Zealand)</description>
+        <geotag/>
+        <created>2018-01-01 23:49:50</created>
+        <license>http://creativecommons.org/publicdomain/zero/1.0/</license>
+        <type>wav</type>
+        <username>emilyws</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/414/414540_6694545_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/414/414540_6694545_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/414/414540_6694545_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/414/414540_6694545_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/414/414540_6694545_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/414/414540_6694545_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/414/414540_6694545_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/414/414540_6694545_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>413263</id>
+        <url>https://freesound.org/people/emilyws/sounds/413263/</url>
+        <name>Cultery - Spoons</name>
+        <tags>
+          <list-item>Household</list-item>
+          <list-item>Cooking</list-item>
+          <list-item>Cutlery</list-item>
+          <list-item>Dining</list-item>
+          <list-item>Eat</list-item>
+          <list-item>Kitchen</list-item>
+        </tags>
+        <description>Spoons clattering together. (New Zealand)</description>
+        <geotag/>
+        <created>2017-12-11 09:21:47</created>
+        <license>https://creativecommons.org/licenses/by/4.0/</license>
+        <type>wav</type>
+        <username>emilyws</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/413/413263_6694545_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/413/413263_6694545_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/413/413263_6694545_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/413/413263_6694545_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/413/413263_6694545_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/413/413263_6694545_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/413/413263_6694545_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/413/413263_6694545_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>414542</id>
+        <url>https://freesound.org/people/emilyws/sounds/414542/</url>
+        <name>Water Dripping</name>
+        <tags>
+          <list-item>Drain</list-item>
+          <list-item>Drips</list-item>
+          <list-item>Water</list-item>
+          <list-item>Splash</list-item>
+          <list-item>Drops</list-item>
+          <list-item>Movement</list-item>
+        </tags>
+        <description>Water dripping into a drain. (New Zealand)</description>
+        <geotag/>
+        <created>2018-01-01 23:49:52</created>
+        <license>http://creativecommons.org/publicdomain/zero/1.0/</license>
+        <type>wav</type>
+        <username>emilyws</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/414/414542_6694545_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/414/414542_6694545_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/414/414542_6694545_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/414/414542_6694545_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/414/414542_6694545_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/414/414542_6694545_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/414/414542_6694545_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/414/414542_6694545_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>413262</id>
+        <url>https://freesound.org/people/emilyws/sounds/413262/</url>
+        <name>Cutlery - Plates</name>
+        <tags>
+          <list-item>Plates</list-item>
+          <list-item>Household</list-item>
+          <list-item>Cooking</list-item>
+          <list-item>Cutlery</list-item>
+          <list-item>Kitchen</list-item>
+        </tags>
+        <description>Plates banging together. (New Zealand)</description>
+        <geotag/>
+        <created>2017-12-11 09:21:46</created>
+        <license>https://creativecommons.org/licenses/by/4.0/</license>
+        <type>wav</type>
+        <username>emilyws</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/413/413262_6694545_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/413/413262_6694545_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/413/413262_6694545_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/413/413262_6694545_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/413/413262_6694545_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/413/413262_6694545_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/413/413262_6694545_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/413/413262_6694545_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>414534</id>
+        <url>https://freesound.org/people/emilyws/sounds/414534/</url>
+        <name>Machine-Drone1</name>
+        <tags>
+          <list-item>Noise</list-item>
+          <list-item>Hum</list-item>
+          <list-item>Buzz</list-item>
+          <list-item>Appliance</list-item>
+          <list-item>Factory</list-item>
+          <list-item>Machine</list-item>
+          <list-item>Drone</list-item>
+          <list-item>Machinery</list-item>
+          <list-item>Mechanical</list-item>
+          <list-item>Ambience</list-item>
+          <list-item>Industrial</list-item>
+        </tags>
+        <description>Drone of a household appliance. (New Zealand)</description>
+        <geotag/>
+        <created>2018-01-01 23:36:16</created>
+        <license>http://creativecommons.org/publicdomain/zero/1.0/</license>
+        <type>wav</type>
+        <username>emilyws</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/414/414534_6694545_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/414/414534_6694545_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/414/414534_6694545_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/414/414534_6694545_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/414/414534_6694545_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/414/414534_6694545_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/414/414534_6694545_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/414/414534_6694545_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>414533</id>
+        <url>https://freesound.org/people/emilyws/sounds/414533/</url>
+        <name>Machine-Drone2</name>
+        <tags>
+          <list-item>Noise</list-item>
+          <list-item>Hum</list-item>
+          <list-item>Buzz</list-item>
+          <list-item>Appliance</list-item>
+          <list-item>Factory</list-item>
+          <list-item>Machine</list-item>
+          <list-item>Drone</list-item>
+          <list-item>Machinery</list-item>
+          <list-item>Mechanical</list-item>
+          <list-item>Ambience</list-item>
+          <list-item>Industrial</list-item>
+        </tags>
+        <description>Drone of a household appliance. (New Zealand)</description>
+        <geotag/>
+        <created>2018-01-01 23:36:14</created>
+        <license>http://creativecommons.org/publicdomain/zero/1.0/</license>
+        <type>wav</type>
+        <username>emilyws</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/414/414533_6694545_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/414/414533_6694545_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/414/414533_6694545_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/414/414533_6694545_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/414/414533_6694545_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/414/414533_6694545_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/414/414533_6694545_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/414/414533_6694545_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>333824</id>
+        <url>https://freesound.org/people/Travesia_Sonora/sounds/333824/</url>
+        <name>Le Soleal Horns, New Zealand</name>
+        <tags>
+          <list-item>CruiseShip</list-item>
+          <list-item>Soundmark</list-item>
+          <list-item>Auckland</list-item>
+          <list-item>NewZealand</list-item>
+          <list-item>Horns</list-item>
+        </tags>
+        <description>Recorded by a XY stereo mic capsule and ZoomH5 recorder.\r\nRecorded on January 22nd, 2015 at Auckland Harbour, New Zealand.\r\nRecorded at 18.10PM</description>
+        <geotag>-36.84245160774263 174.7683620452881</geotag>
+        <created>2016-01-23 04:58:07</created>
+        <license>http://creativecommons.org/publicdomain/zero/1.0/</license>
+        <type>wav</type>
+        <username>Travesia_Sonora</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/333/333824_5838800_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/333/333824_5838800_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/333/333824_5838800_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/333/333824_5838800_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/333/333824_5838800_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/333/333824_5838800_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/333/333824_5838800_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/333/333824_5838800_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>470753</id>
+        <url>https://freesound.org/people/jaskfla/sounds/470753/</url>
+        <name>New Zealand Pedestrian Traffic Signal</name>
+        <tags>
+          <list-item>accessible</list-item>
+          <list-item>blind</list-item>
+          <list-item>Auckland</list-item>
+          <list-item>streets</list-item>
+          <list-item>accessibility</list-item>
+          <list-item>pedestrian</list-item>
+          <list-item>street</list-item>
+          <list-item>roads</list-item>
+          <list-item>traffic-signals</list-item>
+          <list-item>pedestrian-signals</list-item>
+          <list-item>pedestrian-crossing</list-item>
+          <list-item>traffic-lights</list-item>
+          <list-item>signals</list-item>
+          <list-item>lights</list-item>
+          <list-item>junction</list-item>
+          <list-item>city</list-item>
+          <list-item>cars</list-item>
+          <list-item>pedestrian-signal</list-item>
+          <list-item>traffic</list-item>
+          <list-item>New-Zealand</list-item>
+          <list-item>traffic-signal</list-item>
+          <list-item>light</list-item>
+          <list-item>signal</list-item>
+          <list-item>crossing</list-item>
+          <list-item>traffic-light</list-item>
+          <list-item>road</list-item>
+        </tags>
+        <description>This is a recording of the New Zealand pedestrian crossing signal. For a digitally generated recreation, go to <a href=\"https://freesound.org/s/474366/\" rel=\"nofollow\">https://freesound.org/s/474366/</a>.\n\n***\n\nNew Zealand uses ‘Audible Tactile Traffic Signals’ at almost all of their light-controlled pedestrian crossings to aid visual- and hearing-impaired pedestrians, letting them know when the pedestrian light is green and it’s safe to cross.\n\nThere are two parts to the audible component: the locating signal and the crossing signal.\n\nThe locating signal assists vision-impaired people in finding the pedestrian push-button. This “consists of a short pip (25 ms of 1000 Hz square wave) repeating every 1.8 seconds.” (NZTA Road Traffic Standards)\n\nThe crossing signal indicates that the pedestrian crossing signal is green and that the pedestrians may cross. This consists of a square wave which “descends exponentially in pitch from 3,500 Hz to 700 Hz over 115 ms. This is immediately followed by a rapidly pulsing sinusoidal 500 Hz signal that decays over 35 ms, before ceasing momentarily and being repeated at 8.5 times a second for the duration of the cross signal.” (NZTA Road Traffic Standards)\n\nThe volume of the audible signal responds to ambient sound levels. i.e. When nearby traffic is louder, the signal is louder, but when the environment is quiet, signal noise is lowered accordingly.\n\nRecorded with a Zoom H4n Pro in Auckland, New Zealand.</description>
+        <geotag>-36.8483 174.7647</geotag>
+        <created>2019-05-18 04:47:36</created>
+        <license>https://creativecommons.org/licenses/by-nc/4.0/</license>
+        <type>wav</type>
+        <username>jaskfla</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/470/470753_9788571_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/470/470753_9788571_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/470/470753_9788571_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/470/470753_9788571_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/470/470753_9788571_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/470/470753_9788571_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/470/470753_9788571_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/470/470753_9788571_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>73141</id>
+        <url>https://freesound.org/people/boziav/sounds/73141/</url>
+        <name>bird_tui_new_zealand.wav</name>
+        <tags>
+          <list-item>bird</list-item>
+          <list-item>new</list-item>
+          <list-item>tui</list-item>
+          <list-item>zealand</list-item>
+        </tags>
+        <description>Tui singing (male I think) recorded in Wellington (highbury). Light trafic in BG, a few boom noise.\nrecorded with tascam HDP2 and MKH416\n</description>
+        <geotag/>
+        <created>2009-05-25 09:58:34</created>
+        <license>https://creativecommons.org/licenses/by-nc/4.0/</license>
+        <type>wav</type>
+        <username>boziav</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/73/73141_1062601_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/73/73141_1062601_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/73/73141_1062601_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/73/73141_1062601_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/73/73141_1062601_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/73/73141_1062601_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/73/73141_1062601_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/73/73141_1062601_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>414538</id>
+        <url>https://freesound.org/people/emilyws/sounds/414538/</url>
+        <name>Crunch Sound 1</name>
+        <tags>
+          <list-item>Foley</list-item>
+          <list-item>Crunch</list-item>
+          <list-item>Rustle</list-item>
+          <list-item>Spooky</list-item>
+          <list-item>Movement</list-item>
+        </tags>
+        <description>Foley sound for whatever you need. (New Zealand)</description>
+        <geotag/>
+        <created>2018-01-01 23:44:58</created>
+        <license>http://creativecommons.org/publicdomain/zero/1.0/</license>
+        <type>wav</type>
+        <username>emilyws</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/414/414538_6694545_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/414/414538_6694545_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/414/414538_6694545_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/414/414538_6694545_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/414/414538_6694545_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/414/414538_6694545_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/414/414538_6694545_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/414/414538_6694545_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>414537</id>
+        <url>https://freesound.org/people/emilyws/sounds/414537/</url>
+        <name>Crunch Sound 2</name>
+        <tags>
+          <list-item>Foley</list-item>
+          <list-item>Crunch</list-item>
+          <list-item>Rustle</list-item>
+          <list-item>Spooky</list-item>
+          <list-item>Movement</list-item>
+        </tags>
+        <description>Foley sound for whatever you need. (New Zealand)</description>
+        <geotag/>
+        <created>2018-01-01 23:44:57</created>
+        <license>http://creativecommons.org/publicdomain/zero/1.0/</license>
+        <type>wav</type>
+        <username>emilyws</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/414/414537_6694545_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/414/414537_6694545_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/414/414537_6694545_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/414/414537_6694545_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/414/414537_6694545_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/414/414537_6694545_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/414/414537_6694545_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/414/414537_6694545_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>414532</id>
+        <url>https://freesound.org/people/emilyws/sounds/414532/</url>
+        <name>Machine-Drone3</name>
+        <tags>
+          <list-item>Noise</list-item>
+          <list-item>Hum</list-item>
+          <list-item>Buzz</list-item>
+          <list-item>Appliance</list-item>
+          <list-item>Factory</list-item>
+          <list-item>Machine</list-item>
+          <list-item>Drone</list-item>
+          <list-item>Machinery</list-item>
+          <list-item>Mechanical</list-item>
+          <list-item>Ambience</list-item>
+          <list-item>Industrial</list-item>
+        </tags>
+        <description>Machine drone of a household appliance. (New Zealand)</description>
+        <geotag/>
+        <created>2018-01-01 23:36:11</created>
+        <license>http://creativecommons.org/publicdomain/zero/1.0/</license>
+        <type>wav</type>
+        <username>emilyws</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/414/414532_6694545_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/414/414532_6694545_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/414/414532_6694545_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/414/414532_6694545_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/414/414532_6694545_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/414/414532_6694545_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/414/414532_6694545_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/414/414532_6694545_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>474804</id>
+        <url>https://freesound.org/people/kragdigital/sounds/474804/</url>
+        <name>BirdChirps and Magpie.wav</name>
+        <tags>
+          <list-item>magpie</list-item>
+          <list-item>soundfx</list-item>
+          <list-item>birds</list-item>
+          <list-item>nature</list-item>
+        </tags>
+        <description>bird sounds from rural Taranaki new zealand</description>
+        <geotag/>
+        <created>2019-06-17 00:35:58</created>
+        <license>http://creativecommons.org/publicdomain/zero/1.0/</license>
+        <type>wav</type>
+        <username>kragdigital</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/474/474804_10005243_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/474/474804_10005243_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/474/474804_10005243_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/474/474804_10005243_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/474/474804_10005243_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/474/474804_10005243_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/474/474804_10005243_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/474/474804_10005243_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>328966</id>
+        <url>https://freesound.org/people/Pierre%20Grandjean/sounds/328966/</url>
+        <name>criquet 2.mp3</name>
+        <tags>
+          <list-item>insect</list-item>
+          <list-item>locust</list-item>
+          <list-item>field-recording</list-item>
+          <list-item>New-Zealand</list-item>
+        </tags>
+        <description>locusts making noise in Waimangu (New Zealand)</description>
+        <geotag>-38.2867702687367 176.38940334320068</geotag>
+        <created>2015-11-18 16:31:28</created>
+        <license>http://creativecommons.org/publicdomain/zero/1.0/</license>
+        <type>mp3</type>
+        <username>Pierre Grandjean</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/328/328966_850678_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/328/328966_850678_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/328/328966_850678_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/328/328966_850678_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/328/328966_850678_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/328/328966_850678_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/328/328966_850678_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/328/328966_850678_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>90207</id>
+        <url>https://freesound.org/people/xeroks/sounds/90207/</url>
+        <name>SV400080.WAV</name>
+        <tags>
+          <list-item>birdsong</list-item>
+          <list-item>new</list-item>
+          <list-item>zealand</list-item>
+        </tags>
+        <description>birdsong  in new zealand dated 05/12/2005</description>
+        <geotag/>
+        <created>2010-02-13 21:43:53</created>
+        <license>http://creativecommons.org/licenses/by/3.0/</license>
+        <type>wav</type>
+        <username>xeroks</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/90/90207_1469441_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/90/90207_1469441_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/90/90207_1469441_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/90/90207_1469441_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/90/90207_1469441_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/90/90207_1469441_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/90/90207_1469441_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/90/90207_1469441_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+      <list-item>
+        <id>90209</id>
+        <url>https://freesound.org/people/xeroks/sounds/90209/</url>
+        <name>SV400095.WAV</name>
+        <tags>
+          <list-item>birdsong</list-item>
+          <list-item>new</list-item>
+          <list-item>zealand</list-item>
+        </tags>
+        <description>birdsong  in new zealand dated 05/12/2005</description>
+        <geotag/>
+        <created>2010-02-13 21:44:58</created>
+        <license>http://creativecommons.org/licenses/by/3.0/</license>
+        <type>wav</type>
+        <username>xeroks</username>
+        <images>
+          <waveform_m>https://cdn.freesound.org/displays/90/90209_1469441_wave_M.png</waveform_m>
+          <waveform_l>https://cdn.freesound.org/displays/90/90209_1469441_wave_L.png</waveform_l>
+          <spectral_m>https://cdn.freesound.org/displays/90/90209_1469441_spec_M.jpg</spectral_m>
+          <spectral_l>https://cdn.freesound.org/displays/90/90209_1469441_spec_L.jpg</spectral_l>
+          <waveform_bw_m>https://cdn.freesound.org/displays/90/90209_1469441_wave_bw_M.png</waveform_bw_m>
+          <waveform_bw_l>https://cdn.freesound.org/displays/90/90209_1469441_wave_bw_L.png</waveform_bw_l>
+          <spectral_bw_m>https://cdn.freesound.org/displays/90/90209_1469441_spec_bw_M.jpg</spectral_bw_m>
+          <spectral_bw_l>https://cdn.freesound.org/displays/90/90209_1469441_spec_bw_L.jpg</spectral_bw_l>
+        </images>
+      </list-item>
+    </results>
+  </root>
