@@ -25,7 +25,7 @@ function extractionResultViewerDocument(format, results) {
   if(format == 'JSON') {
     return JSON.stringify(JSON.parse(results), null, 2 )
   } else if(format == 'XML') {
-    return xmlFormat(extractionResultViewer.dataset.results, { indentation: '  ', lineSeparator: '\n' })
+    return xmlFormat(results, { indentation: '  ', lineSeparator: '\n' })
   }
 }
 
