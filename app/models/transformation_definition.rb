@@ -41,6 +41,7 @@ class TransformationDefinition < ApplicationRecord
     if extraction_job.extraction_definition.format == 'XML'
       Nokogiri::XML(extraction_job.documents[page].body)
         .xpath(record_selector)
+        .map(&:to_xml)
     elsif extraction_job.extraction_definition.format == 'JSON'
       JsonPath.new(record_selector)
               .on(extraction_job.documents[page].body)
