@@ -7,44 +7,47 @@ import { StreamLanguage } from "@codemirror/language";
 import { ruby } from "@codemirror/legacy-modes/mode/ruby";
 import { xml } from "@codemirror/legacy-modes/mode/xml";
 
+function extensions(format, readOnly) {
+  if(format == 'JSON') {
+    return [ basicSetup, json(), EditorState.readOnly.of(readOnly) ];
+  } else if(format == 'XML') {
+    return [ basicSetup, StreamLanguage.define(xml), EditorState.readOnly.of(readOnly) ]
+  }
+}
+
+export default function editor(editorID, format, readOnly, results) {
+  const editorHTMLElement = document.querySelector(editorID);
+  let editor = new EditorView({
+    state: EditorState.create({
+      extensions: extensions(format, readOnly),
+      doc: results
+    }),
+    parent: document.body,
+  });
+
+  document.querySelector(editorID).innerHTML = "";
+  document
+    .querySelector(editorID)
+    .append(editor.dom);
+}
+
 // Job Extraction Result Viewer
 
 const extractionResultViewer = document.querySelector(
   "#extraction-result-viewer"
 );
 
-function extractionResultViewerExtensions(format) {
-  if(format == 'JSON') {
-    return [ basicSetup, json(), EditorState.readOnly.of(true) ];
-  } else if(format == 'XML') {
-    return [ basicSetup, StreamLanguage.define(xml), EditorState.readOnly.of(true) ]
-  }
-}
-
-function extractionResultViewerDocument(format, results) {
-  if(format == 'JSON') {
-    return JSON.stringify(JSON.parse(results), null, 2 )
-  } else if(format == 'XML') {
-    return xmlFormat(results, { indentation: '  ', lineSeparator: '\n' })
-  }
-}
-
-
 if (extractionResultViewer) {
   const format = extractionResultViewer.dataset.format;
-  const results = extractionResultViewer.dataset.results;
+  let results = extractionResultViewer.dataset.results;
   
-  let extractionResultViewerEditor = new EditorView({
-    state: EditorState.create({
-      extensions: extractionResultViewerExtensions(format),
-      doc: extractionResultViewerDocument(format, results)
-    }),
-    parent: document.body,
-  });
+  if(format == 'JSON') {
+    results = JSON.stringify(JSON.parse(results), null, 2 )
+  } else if(format == 'XML') {
+    results = xmlFormat(results, { indentation: '  ', lineSeparator: '\n' })
+  }
 
-  document
-    .querySelector("#extraction-result-viewer")
-    .append(extractionResultViewerEditor.dom);
+  editor('#extraction-result-viewer', format, true, results);
 }
 
 // Enrichment URL Editor
