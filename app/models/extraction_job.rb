@@ -22,6 +22,8 @@ class ExtractionJob < ApplicationRecord
     save!
   end
 
+  delegate :format, to: :extraction_definition
+
   # Returns the fullpath to the extraction folder for this job
   #
   # @example job.extraction_folder #=> /app/extractions/development/2023-04-28_08-51-16_-_19

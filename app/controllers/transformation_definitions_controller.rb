@@ -19,6 +19,7 @@ class TransformationDefinitionsController < ApplicationController
           entities: @fields.index_by { |field| field[:id] }
         },
         appDetails: {
+          format: @transformation_definition.extraction_job.format,
           rawRecord: @transformation_definition.records.first,
           transformedRecord: {},
           contentSource: @content_source,

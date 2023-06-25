@@ -7,11 +7,13 @@ import { StreamLanguage } from "@codemirror/language";
 import { ruby } from "@codemirror/legacy-modes/mode/ruby";
 import { xml } from "@codemirror/legacy-modes/mode/xml";
 
-function extensions(format, readOnly) {
+export function editorExtensions(format, readOnly) {
   if(format == 'JSON') {
     return [ basicSetup, json(), EditorState.readOnly.of(readOnly) ];
   } else if(format == 'XML') {
     return [ basicSetup, StreamLanguage.define(xml), EditorState.readOnly.of(readOnly) ]
+  } else if(format == 'Enrichment') {
+    return [ basicSetup, StreamLanguage.define(ruby), EditorView.updateListener.of(function (e) { updateEnrichmentUrl(e.state.doc.toString()) }) ]
   }
 }
 
@@ -19,7 +21,7 @@ export default function editor(editorID, format, readOnly, results) {
   const editorHTMLElement = document.querySelector(editorID);
   let editor = new EditorView({
     state: EditorState.create({
-      extensions: extensions(format, readOnly),
+      extensions: editorExtensions(format, readOnly),
       doc: results
     }),
     parent: document.body,
@@ -55,27 +57,12 @@ const enrichmentField = document.querySelector(
   "#js-enrichment-url"
 );
 
-function updateEnrichmentUrl(value) {
-  enrichmentField.value = value;
-}
 
 if (enrichmentField) {
-  let enrichmentFieldEditor = new EditorView({
-    state: EditorState.create({
-      extensions: [
-        basicSetup, 
-        StreamLanguage.define(ruby),
-        EditorView.updateListener.of(function (e) {
-          updateEnrichmentUrl(e.state.doc.toString());
-        })
-      ],
-      doc: enrichmentField.value,
-    }),
-    parent: document.body,
-  });
+  function updateEnrichmentUrl(value) {
+    enrichmentField.value = value;
+  }
 
-  document
-    .querySelector("#js-enrichment-editor")
-    .append(enrichmentFieldEditor.dom);
+  editor('#js-enrichment-editor', 'Enrichment', true, enrichmentField.value)
 }
 
