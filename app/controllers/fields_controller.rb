@@ -27,7 +27,6 @@ class FieldsController < ApplicationController
     format = params['format']
 
     record = if format == 'XML' 
-              # Hash.from_xml(params['record'])
               params['record']
             elsif format == 'JSON'
               params['record'].to_unsafe_h
