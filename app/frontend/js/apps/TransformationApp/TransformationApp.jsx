@@ -98,7 +98,7 @@ const TransformationApp = ({}) => {
                   </button>
                 </div>
 
-                <RecordViewer record={appDetails.transformedRecord} />
+                <RecordViewer record={appDetails.transformedRecord} format="JSON" />
               </div>
             </div>
           </div>

@@ -24,7 +24,15 @@ class FieldsController < ApplicationController
   end
 
   def run
-    record = params['record'].to_unsafe_h
+    format = params['format']
+
+    record = if format == 'XML' 
+              # Hash.from_xml(params['record'])
+              params['record']
+            elsif format == 'JSON'
+              params['record'].to_unsafe_h
+            end
+
     fields = params['fields'].map { |id| Field.find(id) }
 
     transformation = Transformation::Execution.new([record], fields).call.first

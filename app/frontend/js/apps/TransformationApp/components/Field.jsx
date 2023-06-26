@@ -75,6 +75,7 @@ const Field = ({ id }) => {
       clickedOnRunFields({
         contentSourceId: appDetails.contentSource.id,
         transformationDefinitionId: appDetails.transformationDefinition.id,
+        format: appDetails.format,
         record: appDetails.rawRecord,
         fields: [id],
       })
