@@ -76,6 +76,21 @@
             <div class="col-8">
               <%= form.text_field :total_selector, class: "form-control" %>
             </div>
+            
+            <div class="col-4 js-extraction-definition-tokenised-form">
+              <%= form.label :initial_params, class: "form-label" do %>
+                Initial Params
+                <span
+                  data-bs-toggle="tooltip"
+                  data-bs-title="Add additional parameters that are only used on the first API request"
+                ><i class="bi bi-question-circle" aria-label="helper text"></i>
+              <% end %>
+            </div>
+
+            <div class="col-8 js-extraction-definition-tokenised-form">
+              <%= form.hidden_field :initial_params, class: "form-control", id: 'js-initial-params' %>
+              <div id="js-initial-params-editor"></div>
+            </div>
 
             <div class="col-6 js-extraction-definition-tokenised-form">
               <%= form.label :token_parameter, class: "form-label" do %>

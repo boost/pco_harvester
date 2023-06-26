@@ -23,8 +23,22 @@ module Extraction
       {
         @extraction_definition.page_parameter => @extraction_definition.page,
         @extraction_definition.per_page_parameter => @extraction_definition.per_page,
-        @extraction_definition.token_parameter => @extraction_definition.token_value
-      }.reject { |key, value| key.blank? || value.blank? }
+        @extraction_definition.token_parameter => @extraction_definition.token_value,
+      }
+        .reject { |key, value| key.blank? || value.blank? }
+        .merge(
+          if @extraction_definition.page == 1          
+            initial_params
+          else
+            {}
+          end
+        )
+    end
+
+    def initial_params
+      return {} if @extraction_definition.initial_params.blank?
+
+      CGI.parse(eval(@extraction_definition.initial_params)).transform_values(&:first)
     end
   end
 end

@@ -7,21 +7,23 @@ import { StreamLanguage } from "@codemirror/language";
 import { ruby } from "@codemirror/legacy-modes/mode/ruby";
 import { xml } from "@codemirror/legacy-modes/mode/xml";
 
-export function editorExtensions(format, readOnly) {
+export function editorExtensions(format, readOnly, formField) {
   if(format == 'JSON') {
     return [ basicSetup, json(), EditorState.readOnly.of(readOnly) ];
   } else if(format == 'XML') {
     return [ basicSetup, StreamLanguage.define(xml), EditorState.readOnly.of(readOnly) ]
-  } else if(format == 'Enrichment') {
-    return [ basicSetup, StreamLanguage.define(ruby), EditorView.updateListener.of(function (e) { updateEnrichmentUrl(e.state.doc.toString()) }) ]
+  } else if(format == 'FormField') {
+    return [ basicSetup, StreamLanguage.define(ruby), EditorView.updateListener.of(function (e) { 
+      formField.value = e.state.doc.toString();
+    }) ]
   }
 }
 
-export default function editor(editorID, format, readOnly, results) {
+export default function editor(editorID, format, readOnly, results, formField) {
   const editorHTMLElement = document.querySelector(editorID);
   let editor = new EditorView({
     state: EditorState.create({
-      extensions: editorExtensions(format, readOnly),
+      extensions: editorExtensions(format, readOnly, formField),
       doc: results
     }),
     parent: document.body,
@@ -52,17 +54,23 @@ if (extractionResultViewer) {
   editor('#extraction-result-viewer', format, true, results);
 }
 
+// Extraction Initial Params Editor
+
+const initialParamsField = document.querySelector(
+  "#js-initial-params"
+);
+
+if (initialParamsField) {
+  editor('#js-initial-params-editor', 'FormField', true, initialParamsField.value, initialParamsField)
+}
+
+
 // Enrichment URL Editor
 const enrichmentField = document.querySelector(
   "#js-enrichment-url"
 );
 
-
 if (enrichmentField) {
-  function updateEnrichmentUrl(value) {
-    enrichmentField.value = value;
-  }
-
-  editor('#js-enrichment-editor', 'Enrichment', true, enrichmentField.value)
+  editor('#js-enrichment-editor', 'FormField', true, enrichmentField.value, enrichmentField)
 }
 
