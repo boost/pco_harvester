@@ -3,9 +3,14 @@
 require 'rails_helper'
 
 RSpec.describe 'Transformation Definitions', type: :request do
+  let(:user)           { create(:user) }
   let(:content_source) { create(:content_source) }
   let(:extraction_job) { create(:extraction_job) }
   let(:transformation_definition) { create(:transformation_definition, content_source:, extraction_job:) }
+
+  before do
+    sign_in user
+  end
 
   describe '#new' do
     it 'renders the new form' do

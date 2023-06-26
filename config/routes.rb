@@ -3,8 +3,20 @@ require 'sidekiq/web'
 Sidekiq::Web.app_url = '/'
 
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  devise_for :users, controllers: { sessions: 'sessions' }, skip: [:registrations]
+  as :user do
+    get 'edit_profile' => 'devise/registrations#edit', as: :edit_profile
+    put 'update_profile' => 'devise/registrations#update', as: :update_profile
+    delete 'cancel_account' => 'devise/registrations#destroy', as: :cancel_account
+  end
+
   root 'home#index'
+
+  resources :users, only: %i[index show edit update destroy] do
+    collection do
+      resource :two_factor_setups, only: %i[show create destroy]
+    end
+  end
 
   resources :content_sources, only: %i[index show create update new edit] do
     resources :extraction_definitions, only: %i[show new create edit update destroy] do

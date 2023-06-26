@@ -3,7 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe 'ContentSources', type: :request do
+  let(:user) { create(:user) }
   let!(:content_source) { create(:content_source, name: 'National Library of New Zealand') }
+
+  before do
+    sign_in user
+  end
 
   describe '#index' do
     it 'displays a list of content sources' do
@@ -97,7 +102,7 @@ RSpec.describe 'ContentSources', type: :request do
           content_source: { name: 'National Library of New Zealand' }
         }
 
-        expect(response).to redirect_to content_sources_path
+        expect(response).to redirect_to content_source_path(content_source)
       end
     end
 

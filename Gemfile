@@ -24,8 +24,11 @@ gem 'kaminari'
 
 gem 'foreman'
 
-# For code commenting
-gem 'yard'
+# user management
+gem 'devise'
+gem 'devise_invitable', '~> 2.0.0'
+gem 'devise-two-factor'
+gem 'rqrcode'
 
 # extraction related
 gem 'faraday', '~> 2.7'
@@ -53,17 +56,21 @@ group :development, :test do
 end
 
 group :development do
-  # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
-  # gem 'spring'
-end
+  gem 'codeclimate_diff', github: 'boost/codeclimate_diff', tag: 'v0.1.9'
+  gem 'letter_opener'
 
-gem 'codeclimate_diff', github: 'boost/codeclimate_diff', tag: 'v0.1.9'
+  # For code commenting
+  gem 'yard'
+end
 
 group :test do
   # used in tests
+  gem 'capybara'
+  gem 'capybara-screenshot'
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'shoulda-matchers'
+  gem 'webdrivers', require: false
 
   # generates code coverage reports
   gem 'simplecov'

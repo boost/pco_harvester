@@ -1,0 +1,142 @@
+<%= content_for(:title) { 'Edit profile' } %>
+
+<%= content_for :header do %>
+  <h1 class="header__title">Edit profile</h1>
+
+  <div class="clearfix"></div>
+<% end %>
+
+<div class="row">
+  <div class="col-sm-6 col-md-6 mb-4">
+    <%= vertical_form_with(model: resource, url: update_profile_path, method: :put) do |f| %>
+      <div class="card">
+        <div class="card-body">
+
+          <div class="mb-3">
+            <%= f.label :username, class: "form-label" %>
+            <%= f.text_field :username, class: 'form-control', autofocus: true, autocomplete: "username" %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :email, class: "form-label" %>
+            <%= f.email_field :email, class: 'form-control', autofocus: true, autocomplete: "email" %>
+          </div>
+
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+          <% end %>
+
+          <div class="mb-3">
+            <%= f.label :password, class: "form-label" %> <i>(leave blank if you don't want to change it)</i>
+            <%= f.password_field :password, class: 'form-control', autocomplete: "new-password" %>
+            <% if @minimum_password_length %>
+              <div class="form-text"><%= @minimum_password_length %> characters minimum</div>
+            <% end %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :password_confirmation, class: "form-label" %>
+            <%= f.password_field :password_confirmation, class: 'form-control', autocomplete: "new-password" %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :current_password, class: "form-label" %> <i>(we need your current password to confirm your changes)</i>
+            <%= f.password_field :current_password, class: 'form-control', autocomplete: "current-password" %>
+          </div>
+
+          <div class="actions">
+            <%= f.submit "Update", class: 'btn btn-primary' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="col-sm-12 col-md-6">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h3>Two Factor Authentication</h3>
+
+        <% if resource.two_factor_setup? %>
+          <p class="alert alert-success">
+            Congratulations, you have enabled two factor authentication!
+          </p>
+          <% unless resource.enforce_two_factor? %>
+            <p class="alert alert-danger">
+              If you disable 2FA, you won't be asked for a 2FA code on next login. Your security
+              will be decreased.
+            </p>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#disable-2fa-modal">
+              Disable 2FA
+            </button>
+          <% end %>
+        <% else %>
+          <p>Want more security?</p>
+          <%= link_to 'Set up 2FA', two_factor_setups_path, class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <h3>Cancel my account</h3>
+
+        <div class="mb-2">
+          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancel-account-modal">
+            Cancel my account
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%# Modal %>
+<div
+  class="modal fade"
+  id="cancel-account-modal"
+  tabindex="-1"
+  aria-labelledby="Cancel account"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cancel my account</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to remove your account?</p>
+        <p>You'll be logged out and lose access to all pages.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <%= button_to "Cancel my account", cancel_account_path, method: :delete, class: "btn btn-danger" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="disable-2fa-modal"
+  tabindex="-1"
+  aria-labelledby="Disable 2FA"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Disable 2FA</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to disable 2FA?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <%= button_to('Disable', two_factor_setups_path(resource), method: :delete, class: "btn btn-danger") %>
+      </div>
+    </div>
+  </div>
+</div>

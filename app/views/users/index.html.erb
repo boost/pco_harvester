@@ -1,0 +1,112 @@
+<%= content_for(:title) { 'Users' } %>
+
+<%= content_for :header do %>
+  <%= render 'shared/breadcrumb_nav' %>
+
+  <h1 class="header__title">Users</h1>
+
+  <div class="header__actions">
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#invite-user"
+    >
+      <i class="bi bi-plus" aria-hidden="true"></i> Invite user
+    </button>
+  </div>
+
+  <div class="clearfix"></div>
+<% end %>
+
+<% if @users.any? %>
+  <div class="row">
+    <% @users.each do |user| %>
+      <div class='col-3'>
+        <%= link_to user, class: 'card mb-3' do %>
+          <div class="card-body">
+            <h5 class="card-title"><%= user.username %></h5>
+            <p><%= user.email %></p>
+            <% unless user.invitation_accepted_at? %>
+              <span class="badge rounded-pill bg-primary">
+                Invited
+              </span>
+            <% end %>
+            <span class="<%= class_names('badge', 'rounded-pill', 'bg-secondary': user.harvester?, 'bg-primary': user.admin?) %>">
+              <%= user.role.capitalize %>
+            </span>
+            <% if user.enforce_two_factor? %>
+              <span class="badge rounded-pill bg-primary">
+                Enforcing 2FA
+              </span>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <%= render 'shared/pagination_below_table', items: @users %>
+<% else %>
+  <p>There are currently no users. Click 'Invite user' to help someone to join your work.</p>
+<% end %>
+
+<%# Modals %>
+
+<div
+  class="modal fade"
+  id="invite-user"
+  tabindex="-1"
+  aria-labelledby="Invite user"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <%= vertical_form_with model: User.new, url: invitation_path(User), class: 'modal-content' do |form| %>
+      <div class="modal-header">
+        <h5 class="modal-title">Invite user</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <%= form.label :username, class: "form-label" %>
+          <%= form.text_field :username, required: true, class: "form-control" %>
+        </div>
+        <div class="mb-3">
+          <%= form.label :email, class: "form-label" %>
+          <%= form.email_field :email, required: true, class: "form-control" %>
+        </div>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-6 mb-3 form-check">
+              <% role_names = User.roles.keys %>
+              <%= form.check_box :role, { class: "form-check-input" }, role_names.last, role_names.first %>
+              <%= form.label :role, class: "form-check-label" do %>
+                Admin
+                <span
+                  data-bs-toggle="tooltip"
+                  data-bs-title="Admins can manage and invite users"
+                ><i class="bi bi-question-circle" aria-label="helper text"></i>
+              <% end %>
+            </div>
+            <div class="col-sm-6 mb-3 form-check">
+              <%= form.check_box :enforce_two_factor, { checked: true, class: "form-check-input" } %>
+              <%= form.label :enforce_two_factor, class: "form-check-label" do %>
+                Enforce 2FA
+                <span
+                  data-bs-toggle="tooltip"
+                  data-bs-title="The user will be forced to setup and use 2FA to sign in."
+                ><i class="bi bi-question-circle" aria-label="helper text"></i>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">
+          Invite
+        </button>
+      </div>
+    <% end %>
+  </div>
+</div>

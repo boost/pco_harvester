@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  include UserAuthorization
+  include DeviseOverrides
+
   def paginate_and_filter_jobs(jobs)
     @status = params[:status]
     jobs = jobs.order(updated_at: :desc).page(params[:page])

@@ -1,0 +1,95 @@
+<%= content_for(:title) { @user.username } %>
+
+<%= content_for :header do %>
+  <h1 class="header__title"><%= @user.username%></h1>
+
+  <div class="header__actions">
+    <%= link_to edit_user_path(@user), class: 'btn btn-primary' do %>
+      <i class="bi bi-pencil-square" aria-hidden="true"></i> Edit user
+    <% end %>
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-user-modal">
+      <i class="bi bi-trash" aria-hidden="true"></i> Delete user
+    </button>
+  </div>
+  <div class="clearfix"></div>
+<% end %>
+
+<ul class="list-group">
+  <li class="list-group-item">
+    <div class="fw-bold">Username</div>
+    <%= @user.username %>
+  </li>
+  <li class="list-group-item">
+    <div class="fw-bold">Email</div>
+    <%= @user.email %>
+  </li>
+  <li class="list-group-item">
+    <div class="fw-bold">Role</div>
+    <%= @user.role %>
+  </li>
+  <li class="list-group-item">
+    <div class="fw-bold">Enforce 2FA</div>
+    <% if @user.enforce_two_factor? %>
+      <i class="bi bi-check-circle fw-bold text-primary" aria-label="Yes"></i>
+    <% else %>
+      <i class="bi bi-x-lg fw-bold text-danger" aria-label="No"></i>
+    <% end %>
+  </li>
+  <li class="list-group-item">
+    <div class="fw-bold">2FA setup</div>
+    <% if @user.two_factor_setup? %>
+      <i class="bi bi-check-circle fw-bold text-primary" aria-label="Yes"></i>
+    <% else %>
+      <i class="bi bi-x-lg fw-bold text-danger" aria-label="No"></i>
+    <% end %>
+  </li>
+  <% unless @user.invitation_accepted_at? %>
+    <li class="list-group-item">
+      <div class="fw-bold">Invitation sent at</div>
+      <%= @user.invitation_sent_at.to_fs(:light) %>
+    </li>
+  <% end %>
+  <li class="list-group-item">
+    <div class="fw-bold">Invitation accepted at</div>
+    <% if @user.invitation_accepted_at? %>
+      <%= @user.invitation_accepted_at.to_fs(:light) %>
+    <% else %>
+      Not accepted yet.
+    <% end %>
+  </li>
+  <li class="list-group-item">
+    <div class="fw-bold">Created at</div>
+    <%= @user.created_at.to_fs(:light) %>
+  </li>
+  <li class="list-group-item">
+    <div class="fw-bold">Updated at</div>
+    <%= @user.updated_at.to_fs(:light) %>
+  </li>
+</ul>
+
+<%# Modal %>
+<div
+  class="modal fade"
+  id="delete-user-modal"
+  tabindex="-1"
+  aria-labelledby="Delete user"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete "<%= @user.username %>"</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to remove this user?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <%= button_to user_path(@user), method: :delete, class: "btn btn-danger" do %>
+          <i class="bi bi-trash" aria-hidden="true"></i> Delete user
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
