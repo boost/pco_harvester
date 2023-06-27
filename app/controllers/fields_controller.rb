@@ -26,7 +26,7 @@ class FieldsController < ApplicationController
   def run
     format = params['format']
 
-    record = if format == 'XML' 
+    record = if format == 'XML' || format == 'HTML'
               params['record']
             elsif format == 'JSON'
               params['record'].to_unsafe_h

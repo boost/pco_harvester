@@ -38,7 +38,11 @@ class TransformationDefinition < ApplicationRecord
   def records(page = 1)
     return [] if record_selector.blank? || extraction_job.documents[page].nil?
 
-    if extraction_job.extraction_definition.format == 'XML'
+    if extraction_job.extraction_definition.format == 'HTML'
+      Nokogiri::HTML(extraction_job.documents[page].body)
+        .xpath(record_selector)
+        .map(&:to_xml)
+    elsif extraction_job.extraction_definition.format == 'XML'
       Nokogiri::XML(extraction_job.documents[page].body)
         .xpath(record_selector)
         .map(&:to_xml)

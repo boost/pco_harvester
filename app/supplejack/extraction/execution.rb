@@ -40,6 +40,7 @@ module Extraction
     private
 
     def total_results
+      return Nokogiri::HTML(@de.document.body).xpath(@extraction_definition.total_selector).first.content.to_i if @extraction_definition.format == 'HTML'
       return Nokogiri::XML(@de.document.body).xpath(@extraction_definition.total_selector).first.content.to_i if @extraction_definition.format == 'XML'
 
       JsonPath.new(@extraction_definition.total_selector).on(@de.document.body).first.to_i
@@ -47,6 +48,7 @@ module Extraction
 
     def next_token
       return unless @extraction_definition.pagination_type == 'tokenised'
+      return Nokogiri::HTML(@de.document.body).xpath(@extraction_definition.next_token_path).first.content if @extraction_definition.format == 'HTML'
       return Nokogiri::XML(@de.document.body).xpath(@extraction_definition.next_token_path).first.content if @extraction_definition.format == 'XML'
 
       JsonPath.new(@extraction_definition.next_token_path).on(@de.document.body).first

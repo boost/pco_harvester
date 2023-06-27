@@ -1,23 +1,20 @@
 
 import { bindTestForm } from "./utils/test-form";
-import { EditorState } from "@codemirror/state";
-import { EditorView, basicSetup } from "codemirror";
-import { json } from "@codemirror/lang-json";
+import editor from './editor';
+import xmlFormat from 'xml-formatter';
 
 bindTestForm('test_enrichment_extraction', 'js-test-enrichment-extraction-button', 'js-extraction-definition-form', (response, _alertClass) => {
-  let editor = new EditorView({
-    state: EditorState.create({
-      extensions: [basicSetup, json(), EditorState.readOnly.of(true)],
-      doc: JSON.stringify(JSON.parse(response.data.body), null, 2),
-    }),
-    parent: document.body,
-  });
+  let results = response.data.body;
+  let format = document.querySelector('#extraction_definition_format').value;
 
-  document.querySelector("#js-enrichment-extraction-result").innerHTML = "";
-  document
-    .querySelector("#js-enrichment-extraction-result")
-    .append(editor.dom);
-}, () => {
+  if(format == 'JSON') {
+    results = JSON.stringify(response.data.body, null, 2)
+  } else if(format == 'XML') {
+    results = xmlFormat(response.data.body, { indentation: '  ', lineSeparator: '\n' });
+  }
+ 
+  editor('#js-enrichment-extraction-result', format, true, results)
+}, (error) => {
   document.querySelector("#js-enrichment-extraction-result").innerHTML = "";
   document.getElementById(
     "js-enrichment-extraction-result"

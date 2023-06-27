@@ -34,6 +34,7 @@ class ExtractionDefinition < ApplicationRecord
   FORMAT_SELECTOR_REGEX_MAP = {
     JSON: /^\$\./,
     XML: %r{^/},
+    HTML: %r{^/},
     OAI: %r{^/}
   }.freeze
 
@@ -42,7 +43,7 @@ class ExtractionDefinition < ApplicationRecord
 
   # Harvest related validation
   with_options if: :harvest? do
-    validates :format, presence: true, inclusion: { in: %w[JSON XML OAI] }
+    validates :format, presence: true, inclusion: { in: %w[JSON XML HTML] }
     validates :base_url, presence: true, format: { with: URI::DEFAULT_PARSER.make_regexp }
     validate :total_selector_format
     validates :total_selector, presence: true

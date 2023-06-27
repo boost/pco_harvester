@@ -13,6 +13,8 @@ const RecordViewer = ({ record, format }) => {
       return JSON.stringify(record, null, 2);
     } else if(format == 'XML') {
       return xmlFormat(record, { indentation: '  ', lineSeparator: '\n' })
+    } else {
+      return record;
     }
   }
 

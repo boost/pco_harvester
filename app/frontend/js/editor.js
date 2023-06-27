@@ -10,7 +10,7 @@ import { xml } from "@codemirror/legacy-modes/mode/xml";
 export function editorExtensions(format, readOnly, formField) {
   if(format == 'JSON') {
     return [ basicSetup, json(), EditorState.readOnly.of(readOnly) ];
-  } else if(format == 'XML') {
+  } else if(format == 'XML' || format == 'HTML') {
     return [ basicSetup, StreamLanguage.define(xml), EditorState.readOnly.of(readOnly) ]
   } else if(format == 'FormField') {
     return [ basicSetup, StreamLanguage.define(ruby), EditorView.updateListener.of(function (e) { 
@@ -21,6 +21,7 @@ export function editorExtensions(format, readOnly, formField) {
 
 export default function editor(editorID, format, readOnly, results, formField) {
   const editorHTMLElement = document.querySelector(editorID);
+
   let editor = new EditorView({
     state: EditorState.create({
       extensions: editorExtensions(format, readOnly, formField),
