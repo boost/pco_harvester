@@ -54,8 +54,7 @@ RSpec.describe ExtractionDefinition, type: :model do
 
   describe '#validation' do
     it {
-      expect(subject).to validate_inclusion_of(:format).in_array(%w[JSON XML
-                                                                    OAI]).with_message('is not included in the list')
+      expect(subject).to validate_inclusion_of(:format).in_array(%w[JSON XML]).with_message('is not included in the list')
     }
 
     it 'requires a content source' do
