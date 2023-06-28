@@ -101,7 +101,7 @@ class ExtractionDefinitionsController < ApplicationController
       :page_parameter, :per_page_parameter, :page, :per_page,
       :total_selector,
       :kind, :destination_id, :source_id, :enrichment_url, :job_id,
-      :token_parameter, :token_value, :next_token_path
+      :token_parameter, :token_value, :next_token_path, :initial_params
     )
   end
 end
