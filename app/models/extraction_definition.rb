@@ -3,6 +3,8 @@
 # Used to store the information for running an extraction
 #
 class ExtractionDefinition < ApplicationRecord
+  serialize :headers, Array
+
   scope :originals, -> { where(original_extraction_definition: nil) }
 
   belongs_to :content_source

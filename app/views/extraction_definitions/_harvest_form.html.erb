@@ -50,6 +50,7 @@
       </div>
     </fieldset>
 
+
     <fieldset class="col-6">
       <div class="card">
         <div class="card-body">
@@ -160,6 +161,30 @@
               <%= form.number_field :per_page, class: "form-control" %>
             </div>
 
+          </div>
+        </div>
+      </div>
+    </fieldset>
+    
+    <fieldset class="col-12 my-4">
+      <div class="card">
+        <div class="card-body">
+          <legend>Headers</legend>
+
+          <div class="row gy-3 align-items-center">
+            <div class="col-3">
+              <%= form.label :header_name, 'Name', class: "form-label" %>
+            </div>
+            <div class="col-9">
+              <%= form.text_field :header_name, class: "form-control" %>
+            </div>
+
+            <div class="col-3">
+              <%= form.label :header_value, 'Value', class: "form-label" %>
+            </div>
+            <div class="col-9">
+              <%= form.text_field :header_value, class: "form-control" %>
+            </div>
           </div>
         </div>
       </div>
