@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_29_015749) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_26_010755) do
   create_table "content_sources", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -49,7 +49,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_29_015749) do
     t.string "token_parameter"
     t.string "token_value"
     t.string "initial_params"
-    t.text "headers"
     t.index ["content_source_id"], name: "index_extraction_definitions_on_content_source_id"
     t.index ["destination_id"], name: "index_extraction_definitions_on_destination_id"
     t.index ["original_extraction_definition_id"], name: "index_eds_on_original_ed_id"
