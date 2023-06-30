@@ -35,6 +35,13 @@ module Extraction
         )
     end
 
+    def headers
+      super
+        .merge(
+          @extraction_definition.headers.map(&:to_h).reduce(&:merge)
+        )
+    end
+
     # There are scenarios where a harvester adds a string of additional params
     # that are only used on the very first API call to the Content Source.
     # These params can actually break subsequent calls if they are added where they are not expected to be.

@@ -5,4 +5,10 @@ class Header < ApplicationRecord
   
   validates :name, presence: true
   validates :value, presence: true
+
+  def to_h
+    {
+      name => value
+    }
+  end
 end
