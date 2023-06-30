@@ -40,18 +40,6 @@ RSpec.describe ExtractionDefinition, type: :model do
     end
   end
 
-  describe '#headers' do
-    subject! { create(:extraction_definition, headers: [{ 'X-Forwarded-For' => 'ab.cd.ef.gh' }, { 'Authorization' => 'BLAH' }, { 'x-api-key' => 'key' }])}
-
-    it 'can have many headers associated with it' do
-      expect(subject.headers.count).to eq 3
-
-      expect(subject.headers[0]['X-Forwarded-For']).to eq 'ab.cd.ef.gh'
-      expect(subject.headers[1]['Authorization']).to eq 'BLAH'
-      expect(subject.headers[2]['x-api-key']).to eq 'key'
-    end
-  end
-
   describe '#validation numericality' do
     it do
       expect(subject).to validate_numericality_of(:throttle)
@@ -109,14 +97,19 @@ RSpec.describe ExtractionDefinition, type: :model do
 
   describe '#associations' do
     let(:extraction_job) { create(:extraction_job) }
-    let(:ed) { create(:extraction_definition, extraction_jobs: [extraction_job]) }
+    let(:header)         { create(:header) }
+    subject { create(:extraction_definition, extraction_jobs: [extraction_job], headers: [header]) }
 
     it 'has many jobs' do
-      expect(ed.extraction_jobs).to include extraction_job
+      expect(subject.extraction_jobs).to include(extraction_job)
     end
 
     it 'belongs to a content source' do
       expect(subject.content_source).to be_a ContentSource
+    end
+
+    it 'has many headers' do
+      expect(subject.headers).to include(header)
     end
   end
 

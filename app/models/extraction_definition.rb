@@ -3,13 +3,13 @@
 # Used to store the information for running an extraction
 #
 class ExtractionDefinition < ApplicationRecord
-  serialize :headers, Array
-
   scope :originals, -> { where(original_extraction_definition: nil) }
 
   belongs_to :content_source
-  has_many :extraction_jobs
   belongs_to :destination, optional: true
+  
+  has_many :extraction_jobs
+  has_many :headers
 
   enum :kind, { harvest: 0, enrichment: 1 }
 
