@@ -13,6 +13,8 @@ class ExtractionDefinition < ApplicationRecord
 
   enum :kind, { harvest: 0, enrichment: 1 }
 
+  accepts_nested_attributes_for :headers
+
   after_create do
     self.name = "#{content_source.name.parameterize}__#{kind}-extraction-#{id}"
     save!
