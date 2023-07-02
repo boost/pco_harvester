@@ -15,10 +15,6 @@ class ExtractionDefinitionsController < ApplicationController
 
   def new
     @extraction_definition = ExtractionDefinition.new(kind: params[:kind])
-
-    3.times do
-      @extraction_definition.headers.new
-    end
   end
 
   def edit; end

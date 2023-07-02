@@ -8,7 +8,6 @@
           <legend>Common settings</legend>
 
           <div class="row gy-3 align-items-center">
-
             <% if @extraction_definition.name.present? %>
               <div class="col-3">
                 <%= form.label :name, 'Name', class: "form-label" %>
@@ -49,7 +48,6 @@
         </div>
       </div>
     </fieldset>
-
 
     <fieldset class="col-6">
       <div class="card">
@@ -166,36 +164,40 @@
       </div>
     </fieldset>
     
-    <fieldset class="col-12 my-4">
+    <fieldset class="col-12 my-4" >
       <div class="card">
-        <div class="card-body">
+        <div class="card-body"> 
           <legend>Headers</legend>
 
-          <%= form.fields_for :headers do |header_form| %>
-
-            <div class="row gy-3 mb-5 align-items-center">
-              <div class="col-4">
-                <%= header_form.label :name, class: "form-label" do %>
-                  Header Name
-                <% end %>
-              </div>
+          <span id='js-extraction-definition-headers'>
+            <%= form.fields_for :headers do |header_form| %>
+              <div class="row gy-3 mb-5 align-items-center">
+                <div class="col-4">
+                  <%= header_form.label :name, class: "form-label" do %>
+                    Header Name
+                  <% end %>
+                </div>
             
-              <div class="col-8">
-                <%= header_form.text_field :name, class: "form-control" %>
-              </div>
+                <div class="col-8">
+                  <%= header_form.text_field :name, class: "form-control" %>
+                </div>
               
-              <div class="col-4">
-                <%= header_form.label :value, class: "form-label" do %>
-                  Header Value
-                <% end %>
-              </div>
+                <div class="col-4">
+                  <%= header_form.label :value, class: "form-label" do %>
+                    Header Value
+                  <% end %>
+                </div>
             
-              <div class="col-8">
-                <%= header_form.text_field :value, class: "form-control" %>
+                <div class="col-8">
+                  <%= header_form.text_field :value, class: "form-control" %>
+                </div>
               </div>
-            </div>
-           
-          <% end %>
+            <% end %>
+          </span>
+
+          <button class="btn btn-primary float-end" id="js-extraction-definition-add-header" type="button" aria-selected="true">
+            Add header
+          </button>
         </div>
       </div>
     </fieldset>

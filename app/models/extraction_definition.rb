@@ -7,13 +7,13 @@ class ExtractionDefinition < ApplicationRecord
 
   belongs_to :content_source
   belongs_to :destination, optional: true
-  
+
   has_many :extraction_jobs
   has_many :headers
 
   enum :kind, { harvest: 0, enrichment: 1 }
 
-  accepts_nested_attributes_for :headers
+  accepts_nested_attributes_for :headers, allow_destroy: true, reject_if: proc { |attribute| attribute[:name].blank? && attribute[:value].blank? }
 
   after_create do
     self.name = "#{content_source.name.parameterize}__#{kind}-extraction-#{id}"
@@ -51,8 +51,8 @@ class ExtractionDefinition < ApplicationRecord
     validates :base_url, presence: true, format: { with: URI::DEFAULT_PARSER.make_regexp }
     validate :total_selector_format
     validates :total_selector, presence: true
-    
-    with_options presence: true, if: ->{ pagination_type == 'tokenised' } do
+
+    with_options presence: true, if: -> { pagination_type == 'tokenised' } do
       validates :next_token_path
       validates :token_parameter
       validates :token_value
@@ -81,8 +81,8 @@ class ExtractionDefinition < ApplicationRecord
   end
 
   def cannot_be_a_copy_of_self
-    if original_extraction_definition == self
-      errors.add(:copy, 'Extraction Definition cannot be a copy of itself')
-    end
+    return unless original_extraction_definition == self
+
+    errors.add(:copy, 'Extraction Definition cannot be a copy of itself')
   end
 end
