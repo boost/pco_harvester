@@ -12,8 +12,6 @@ RSpec.describe Header, type: :model do
   end
 
   describe 'associations' do
-    it 'belongs to an extraction_definition' do
-      expect(subject.extraction_definition).to eq extraction_definition
-    end
+    it { is_expected.to belong_to(:extraction_definition) }
   end
 end
