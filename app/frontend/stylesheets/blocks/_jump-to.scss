@@ -1,0 +1,9 @@
+.jump-to {
+  @include element('body') {
+    min-width: 17rem;
+  }
+
+  @include element('input') {
+    appearance: textfield;
+  }
+}
