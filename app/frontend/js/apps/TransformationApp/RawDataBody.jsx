@@ -1,13 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { selectAppDetails } from "/js/features/AppDetailsSlice";
 import { selectUiAppDetails } from "/js/features/UiAppDetailsSlice";
 import ExpandCollapseIcon from "./components/ExpandCollapseIcon";
 import RecordViewer from "~/js/apps/TransformationApp/components/RecordViewer";
 import JumpTo from "./JumpTo";
+import { selectRawRecord } from "/js/features/RawRecordSlice";
 
 const RawDataBody = ({ clickToggleSection }) => {
-  const { rawRecord, format } = useSelector(selectAppDetails);
+  const { body, format } = useSelector(selectRawRecord);
   const { rawRecordExpanded } = useSelector(selectUiAppDetails);
 
   return (
@@ -27,7 +27,7 @@ const RawDataBody = ({ clickToggleSection }) => {
         </div>
       </div>
 
-      <RecordViewer record={rawRecord} format={format} />
+      <RecordViewer record={body} format={format} />
     </>
   );
 };

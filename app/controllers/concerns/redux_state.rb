@@ -6,7 +6,7 @@ module ReduxState
   def transformation_app_state
     {
       entities: {
-        fields: fields_slice, appDetails: app_details_slice
+        fields: fields_slice, rawRecord: raw_record_slice, appDetails: app_details_slice
       },
       ui: {
         fields: ui_fields_slice, appDetails: ui_app_details_slice
@@ -24,10 +24,21 @@ module ReduxState
     }
   end
 
+  def raw_record_slice
+    records = @transformation_definition.records
+    record_number = (params[:record] || 1).to_i
+    {
+      page: (params[:page] || 1).to_i,
+      record: record_number,
+      total_pages: @transformation_definition.extraction_job.documents.total_pages,
+      total_records: records.length,
+      format: @transformation_definition.extraction_job.format,
+      body: records[record_number]
+    }
+  end
+
   def app_details_slice
     {
-      format: @transformation_definition.extraction_job.format,
-      rawRecord: @transformation_definition.records.first,
       transformedRecord: {},
       contentSource: @content_source,
       transformationDefinition: @transformation_definition
