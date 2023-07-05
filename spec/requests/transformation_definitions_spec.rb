@@ -161,7 +161,7 @@ RSpec.describe 'Transformation Definitions', type: :request do
 
       expect(response.status).to eq 200
 
-      json_data = JSON.parse(response.body)
+      json_data = JSON.parse(response.body)['result']
 
       expected_keys = %w[record_id created_at updated_at reference_number thumbnail_url genre authors]
 

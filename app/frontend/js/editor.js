@@ -1,61 +1,77 @@
 import { EditorState } from "@codemirror/state";
 import { EditorView, basicSetup } from "codemirror";
 import { json } from "@codemirror/lang-json";
+import xmlFormat from 'xml-formatter';
 
 import { StreamLanguage } from "@codemirror/language";
 import { ruby } from "@codemirror/legacy-modes/mode/ruby";
+import { xml } from "@codemirror/legacy-modes/mode/xml";
+
+export function editorExtensions(format, readOnly, formField) {
+  if(format == 'JSON') {
+    return [ basicSetup, json(), EditorState.readOnly.of(readOnly) ];
+  } else if(format == 'XML' || format == 'HTML') {
+    return [ basicSetup, StreamLanguage.define(xml), EditorState.readOnly.of(readOnly) ]
+  } else if(format == 'FormField') {
+    return [ basicSetup, StreamLanguage.define(ruby), EditorView.updateListener.of(function (e) { 
+      formField.value = e.state.doc.toString();
+    }) ]
+  }
+}
+
+export default function editor(editorID, format, readOnly, results, formField) {
+  const editorHTMLElement = document.querySelector(editorID);
+
+  let editor = new EditorView({
+    state: EditorState.create({
+      extensions: editorExtensions(format, readOnly, formField),
+      doc: results
+    }),
+    parent: document.body,
+  });
+
+  document.querySelector(editorID).innerHTML = "";
+  document
+    .querySelector(editorID)
+    .append(editor.dom);
+}
 
 // Job Extraction Result Viewer
 
-const extraction_result_viewer = document.querySelector(
+const extractionResultViewer = document.querySelector(
   "#extraction-result-viewer"
 );
 
-if (extraction_result_viewer) {
-  let extraction_result_viewer_editor = new EditorView({
-    state: EditorState.create({
-      extensions: [basicSetup, json(), EditorState.readOnly.of(true)],
-      doc: JSON.stringify(
-        JSON.parse(extraction_result_viewer.dataset.results),
-        null,
-        2
-      ),
-    }),
-    parent: document.body,
-  });
+if (extractionResultViewer) {
+  const format = extractionResultViewer.dataset.format;
+  let results = extractionResultViewer.dataset.results;
+  
+  if(format == 'JSON') {
+    results = JSON.stringify(JSON.parse(results), null, 2 )
+  } else if(format == 'XML') {
+    results = xmlFormat(results, { indentation: '  ', lineSeparator: '\n' })
+  }
 
-  document
-    .querySelector("#extraction-result-viewer")
-    .append(extraction_result_viewer_editor.dom);
+  editor('#extraction-result-viewer', format, true, results);
 }
 
+// Extraction Initial Params Editor
+
+const initialParamsField = document.querySelector(
+  "#js-initial-params"
+);
+
+if (initialParamsField) {
+  editor('#js-initial-params-editor', 'FormField', true, initialParamsField.value, initialParamsField)
+}
+
+
 // Enrichment URL Editor
-const enrichment_field = document.querySelector(
+const enrichmentField = document.querySelector(
   "#js-enrichment-url"
 );
 
-
-function updateEnrichmentUrl(value) {
-  enrichment_field.value = value;
-}
-
-if (enrichment_field) {
-  let enrichment_field_editor = new EditorView({
-    state: EditorState.create({
-      extensions: [
-        basicSetup, 
-        StreamLanguage.define(ruby),
-        EditorView.updateListener.of(function (e) {
-          updateEnrichmentUrl(e.state.doc.toString());
-        })
-      ],
-      doc: enrichment_field.value,
-    }),
-    parent: document.body,
-  });
-
-  document
-    .querySelector("#js-enrichment-editor")
-    .append(enrichment_field_editor.dom);
+if (enrichmentField) {
+  editor('#js-enrichment-editor', 'FormField', true, enrichmentField.value, enrichmentField)
 }
 

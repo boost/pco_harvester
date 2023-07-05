@@ -19,6 +19,7 @@ class TransformationDefinitionsController < ApplicationController
           entities: @fields.index_by { |field| field[:id] }
         },
         appDetails: {
+          format: @transformation_definition.extraction_job.format,
           rawRecord: @transformation_definition.records.first,
           transformedRecord: {},
           contentSource: @content_source,
@@ -93,7 +94,10 @@ class TransformationDefinitionsController < ApplicationController
 
   def test
     @transformation_definition = TransformationDefinition.new(transformation_definition_params)
-    render json: @transformation_definition.records.first || []
+    render json: {
+      result: (@transformation_definition.records.first || []),
+      format: @transformation_definition.extraction_job.extraction_definition.format
+    }
   end
 
   def update_harvest_definitions

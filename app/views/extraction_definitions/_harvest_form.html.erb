@@ -61,7 +61,7 @@
             </div>
             <div class="col-8">
               <% options = find_options_from_validations(ExtractionDefinition, :pagination_type) %>
-              <%= form.select :pagination_type, options, {}, class: "form-select" %>
+              <%= form.select :pagination_type, options, {}, class: "form-select", id: 'js-extraction-definition-pagination-type' %>
             </div>
 
             <div class="col-4">
@@ -76,8 +76,47 @@
             <div class="col-8">
               <%= form.text_field :total_selector, class: "form-control" %>
             </div>
+            
+            <div class="col-4 js-extraction-definition-tokenised-form">
+              <%= form.label :initial_params, class: "form-label" do %>
+                Initial Params
+                <span
+                  data-bs-toggle="tooltip"
+                  data-bs-title="Add additional parameters that are only used on the first API request"
+                ><i class="bi bi-question-circle" aria-label="helper text"></i>
+              <% end %>
+            </div>
 
-            <div class="col-6">
+            <div class="col-8 js-extraction-definition-tokenised-form">
+              <%= form.hidden_field :initial_params, class: "form-control", id: 'js-initial-params' %>
+              <div id="js-initial-params-editor"></div>
+            </div>
+
+            <div class="col-6 js-extraction-definition-tokenised-form">
+              <%= form.label :token_parameter, class: "form-label" do %>
+                Token Parameter
+              <% end %>
+              <%= form.text_field :token_parameter, class: "form-control" %>
+            </div>
+            
+            <div class="col-4 js-extraction-definition-tokenised-form">
+              <%= form.label :token_value, class: "form-label" do %>
+                Token Value
+              <% end %>
+              <%= form.text_field :token_value, class: "form-control" %>
+            </div>
+            
+            <div class="col-4 js-extraction-definition-tokenised-form">
+              <%= form.label :next_token_path, class: "form-label" do %>
+                Next Token Path
+              <% end %>
+            </div>
+
+            <div class="col-8 js-extraction-definition-tokenised-form">
+              <%= form.text_field :next_token_path, class: "form-control" %>
+            </div>
+
+            <div class="col-6 js-extraction-definition-page-form">
               <%= form.label :page_parameter, class: "form-label" do %>
                 Page parameter name
                 <span
@@ -88,7 +127,7 @@
               <%= form.text_field :page_parameter, class: "form-control" %>
             </div>
 
-            <div class="col-6">
+            <div class="col-6 js-extraction-definition-page-form">
               <%= form.label :page, class: "form-label" do %>
                 Starting page value
                 <span
@@ -96,7 +135,7 @@
                   data-bs-title="First page being requested"
                 ><i class="bi bi-question-circle" aria-label="helper text"></i>
               <% end %>
-              <%= form.number_field :page, class: "form-control" %>
+              <%= form.number_field :page, class: "form-control", value: 1 %>
             </div>
 
             <div class="col-6">

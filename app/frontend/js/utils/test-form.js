@@ -24,7 +24,7 @@ export function bindTestForm(testRoute, buttonId, formId, successCallback, failu
             successCallback(response, alertClass);
           })
           .catch(function (error) {
-            failureCallback();
+            failureCallback(error);
           });
       }
 

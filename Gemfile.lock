@@ -402,6 +402,7 @@ DEPENDENCIES
   kaminari
   letter_opener
   mysql2 (~> 0.5)
+  nokogiri
   pry-byebug
   puma (~> 5.0)
   rails (~> 7.0.4)

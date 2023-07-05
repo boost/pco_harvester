@@ -14,7 +14,7 @@ headers:
   content-encoding: gzip
 body: |-
   {
-    "items_found": 24906,
+    "items_found": 40,
     "page_nr": 4,
     "items": [
       {

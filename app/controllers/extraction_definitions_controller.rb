@@ -21,6 +21,7 @@ class ExtractionDefinitionsController < ApplicationController
 
   def create
     @extraction_definition = ExtractionDefinition.new(extraction_definition_params)
+
     if @extraction_definition.save
       redirect_to content_source_path(@content_source), notice: 'Extraction Definition created successfully'
     else
@@ -99,7 +100,8 @@ class ExtractionDefinitionsController < ApplicationController
       :name, :format, :base_url, :throttle, :pagination_type,
       :page_parameter, :per_page_parameter, :page, :per_page,
       :total_selector,
-      :kind, :destination_id, :source_id, :enrichment_url, :job_id
+      :kind, :destination_id, :source_id, :enrichment_url, :job_id,
+      :token_parameter, :token_value, :next_token_path, :initial_params
     )
   end
 end

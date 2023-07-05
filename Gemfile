@@ -34,6 +34,7 @@ gem 'rqrcode'
 gem 'faraday', '~> 2.7'
 gem 'faraday-follow_redirects'
 gem 'jsonpath'
+gem 'nokogiri'
 gem 'sidekiq'
 
 # transformation related

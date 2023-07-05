@@ -100,7 +100,8 @@ RSpec.describe 'Fields', type: :request do
             reference_number: '111',
             record_id: '128'
           },
-          fields: [field_one.id, field_two.id, field_three.id, field_four.id]
+          fields: [field_one.id, field_two.id, field_three.id, field_four.id],
+          format: 'JSON'
         }
 
         transformed_record = JSON.parse(response.body)['transformed_record']

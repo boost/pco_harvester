@@ -15,7 +15,7 @@ class HarvestJobsController < ApplicationController
       flash.notice = 'Harvest job queued successfuly'
     else
       flash.alert = 'There was an issue launching the harvest job'
-      render :new
+      return redirect_to content_source_harvest_definition_path(@content_source, @harvest_definition)
     end
 
     redirect_to content_source_harvest_definition_harvest_job_path(@content_source, @harvest_definition, @harvest_job)

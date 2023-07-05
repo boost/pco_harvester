@@ -74,7 +74,7 @@ const TransformationApp = ({}) => {
                   </button>
                 </div>
 
-                <RecordViewer record={appDetails.rawRecord} />
+                <RecordViewer record={appDetails.rawRecord} format={appDetails.format} />
               </div>
             </div>
           </div>
@@ -98,7 +98,7 @@ const TransformationApp = ({}) => {
                   </button>
                 </div>
 
-                <RecordViewer record={appDetails.transformedRecord} />
+                <RecordViewer record={appDetails.transformedRecord} format="JSON" />
               </div>
             </div>
           </div>

@@ -1,15 +1,27 @@
 import React, { useRef, useEffect } from "react";
 import { EditorState } from "@codemirror/state";
 import { EditorView, basicSetup } from "codemirror";
-import { json } from "@codemirror/lang-json";
+import { editorExtensions } from '~/js/editor';
 
-const RecordViewer = ({ record }) => {
+import xmlFormat from 'xml-formatter';
+
+const RecordViewer = ({ record, format }) => {
   const editor = useRef();
+
+  function doc() {
+    if(format == 'JSON') {
+      return JSON.stringify(record, null, 2);
+    } else if(format == 'XML') {
+      return xmlFormat(record, { indentation: '  ', lineSeparator: '\n' })
+    } else {
+      return record;
+    }
+  }
 
   useEffect(() => {
     const state = EditorState.create({
-      doc: JSON.stringify(record, null, 2),
-      extensions: [basicSetup, json(), EditorState.readOnly.of(true)],
+      doc: doc(),
+      extensions: editorExtensions(format, true),
     });
 
     const view = new EditorView({ state, parent: editor.current });

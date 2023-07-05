@@ -1,19 +1,14 @@
 import { bindTestForm } from './utils/test-form';
-import { EditorState } from "@codemirror/state";
-import { EditorView, basicSetup } from "codemirror";
-import { json } from "@codemirror/lang-json";
+import editor from './editor';
+import xmlFormat from 'xml-formatter';
 
-bindTestForm('test', 'js-test-transformation-record-selector-button', 'js-transformation-definition-form', (response, _alertClass) => {
-    let editor = new EditorView({
-      state: EditorState.create({
-        extensions: [basicSetup, json(), EditorState.readOnly.of(true)],
-        doc: JSON.stringify(response.data, null, 2),
-      }),
-      parent: document.body,
-    });
+bindTestForm('test', 'js-test-transformation-record-selector-button', 'js-transformation-definition-form', (response, _alertClass) => { let results = response.data.result;
 
-    document.querySelector("#js-record-selector-result").innerHTML = "";
-    document
-      .querySelector("#js-record-selector-result")
-      .append(editor.dom);
+  if(response.data.format == 'JSON') {
+    results = JSON.stringify(response.data.result, null, 2)
+  } else if(response.data.format == 'XML') {
+    results = xmlFormat(response.data.result, { indentation: '  ', lineSeparator: '\n' });
+  }
+  
+  editor('#js-record-selector-result', response.data.format, true, results)
 });

@@ -4,9 +4,10 @@ module Extraction
   # Manages the filesystem part of the request object
   # Saves it to filesystem and loads it in memory
   class Document
-    attr_reader :status, :request_headers, :response_headers, :body, :url, :method, :params
+    attr_reader :status, :request_headers, :response_headers, :body, :url, :method, :params, :file_path
 
-    def initialize(**kwargs)
+    def initialize(file_path = nil, **kwargs)
+      @file_path = file_path
       @url = kwargs[:url]
       @method = kwargs[:method]
       @params = kwargs[:params]
@@ -24,9 +25,15 @@ module Extraction
       File.write(file_path, to_json)
     end
 
+    def size_in_bytes
+      return if file_path.nil?
+      
+      File.size(file_path)
+    end
+
     def self.load_from_file(file_path)
       json = JSON.parse(File.read(file_path)).symbolize_keys
-      Document.new(**json)
+      Document.new(file_path, **json)
     end
 
     def to_hash
