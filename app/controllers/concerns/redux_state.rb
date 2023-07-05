@@ -30,8 +30,8 @@ module ReduxState
     {
       page: (params[:page] || 1).to_i,
       record: record_number,
-      total_pages: @transformation_definition.extraction_job.documents.total_pages,
-      total_records: records.length,
+      totalPages: @transformation_definition.extraction_job.documents.total_pages,
+      totalRecords: records.length,
       format: @transformation_definition.extraction_job.format,
       body: records[record_number]
     }

@@ -15,7 +15,7 @@ const RawDataBody = ({ clickToggleSection }) => {
       <div className="d-flex flex-row flex-nowrap justify-content-between mb-4">
         <h5 className="text-truncate">Raw data</h5>
 
-        <div class="hstack gap-2">
+        <div className="hstack gap-2">
           <JumpTo />
           <button
             onClick={() => clickToggleSection("rawRecordExpanded")}
