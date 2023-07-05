@@ -18,6 +18,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :pipelines, only: %i[index show create update new edit]
+
   resources :content_sources, only: %i[index show create update new edit] do
     resources :extraction_definitions, only: %i[show new create edit update destroy] do
       collection do

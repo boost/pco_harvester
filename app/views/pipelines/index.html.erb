@@ -1,0 +1,35 @@
+<%= content_for(:title) { 'Pipelines' } %>
+
+<%= content_for :header do %>
+  <%= render 'shared/breadcrumb_nav' %>
+
+  <h1 class="header__title">Pipelines</h1>
+
+  <div class="header__actions">
+    <%= link_to new_pipeline_path, class: 'btn btn-primary' do %>
+      <i class="bi bi-plus" aria-hidden="true"></i> Add Pipeline
+    <% end %>
+  </div>
+
+  <div class="clearfix"></div>
+<% end %>
+
+<%- if @pipelines.any? %>
+  <div class="float-end">
+    <ul class='list-inline'>
+
+      <li class='list-inline-item'>
+        <strong>
+          Sort by:
+        </strong>
+      </li>
+      
+    <li class='list-inline-item'>
+      <%= form_with url: '/content_sources', method: :get do |form| %>
+        <%= select_tag(:sort_by, options_for_select([['Alphabetical', 'name'], ['Last Edited', 'updated_at']], @sort_by.first), class: ' form-select', id: 'js-content-source-filter') %>
+      <% end %>
+    </li>
+
+    </ul>
+  </div>
+<% end %>

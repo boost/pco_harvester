@@ -13,6 +13,12 @@
       path: content_sources_path,
       active: current_page?(content_sources_path),
       display: request.path.include?(content_sources_path)) %>
+      
+    <%= breadcrumb_item(
+      text: 'Pipelines',
+      path: pipelines_path,
+      active: current_page?(pipelines_path),
+      display: request.path.include?(pipelines_path)) %>
 
     <%= breadcrumb_item(
       text: @content_source&.name_in_database,
