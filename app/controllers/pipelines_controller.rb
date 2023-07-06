@@ -3,6 +3,7 @@
 class PipelinesController < ApplicationController
   before_action :assign_sort_by, only: %w[index create]
   before_action :assign_pipelines, only: %w[index]
+  before_action :assign_pipeline, only: %w[show destroy edit update]
 
   def index
     @pipeline = Pipeline.new
@@ -20,11 +21,33 @@ class PipelinesController < ApplicationController
     end
   end
 
-  def show
-    @pipeline = Pipeline.find(params[:id])
+  def show; end
+
+  def edit; end
+  
+  def update
+    if @pipeline.update(pipeline_params)
+      redirect_to pipeline_path(@pipeline), notice: 'Pipeline updated successfully'
+    else
+      flash.alert = 'There was an issue updating your Pipeline'
+      render :edit
+    end
+  end
+
+  def destroy
+    if @pipeline.destroy
+      redirect_to pipelines_path, notice: 'Pipeline deleted successfully'
+    else
+      flash.alert = 'There was an issue deleting your Pipeline'
+      redirect_to pipeline_path(@pipeline)
+    end
   end
 
   private
+
+  def assign_pipeline
+    @pipeline = Pipeline.find(params[:id])
+  end
 
   def assign_sort_by
     @sort_by = { name: :asc }
