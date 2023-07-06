@@ -1,7 +1,9 @@
-PATH
-  remote: ../../boost/codeclimate_diff
+GIT
+  remote: https://github.com/boost/codeclimate_diff.git
+  revision: 3af7ab88e4ceb8c03a98a9910eb3ad4bbd1b84e9
+  tag: v0.1.10
   specs:
-    codeclimate_diff (0.1.9)
+    codeclimate_diff (0.1.10)
       colorize
       json
       optparse

@@ -57,8 +57,7 @@ group :development, :test do
 end
 
 group :development do
-  # gem 'codeclimate_diff', github: 'boost/codeclimate_diff', tag: 'v0.1.9'
-  gem 'codeclimate_diff', path: '~/webspace/boost/codeclimate_diff'
+  gem 'codeclimate_diff', github: 'boost/codeclimate_diff', tag: 'v0.1.10'
   gem 'letter_opener'
 
   # For code commenting
