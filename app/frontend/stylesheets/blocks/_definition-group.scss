@@ -1,0 +1,36 @@
+.definition-group {
+  border: 1px dashed $pompeii-ash;
+  border-radius: 5px;
+  padding: 12px 16px 12px 16px;
+  position: relative;
+
+  @include element('bridge') {
+    position: absolute;
+    width: 0px;
+    height: 111px;
+    border-left: 1px dashed $pompeii-ash;
+    left: 0;
+    right: 0;
+    margin: auto;
+    bottom: -111px;
+    padding: 0;
+  }
+
+  .card {
+    @include modifier('right-arrow') {
+      position: relative;
+      &:after {
+        position: absolute;
+        content: '\F138';
+        right: -1.3rem;
+        top: 0;
+        bottom: 0;
+        width: 1.25rem;
+        height: 1.25rem;
+        margin: auto;
+        font-family: "bootstrap-icons";
+        color: $primary;
+      }
+    }
+  }
+}

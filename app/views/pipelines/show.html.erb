@@ -17,7 +17,61 @@
   </div>
 
   <div class='clearfix'></div>
+  
+  <div class='mt-4'></div>
+  <ul class="nav nav-tabs">
+
+    <li class='nav-item'>
+      <%= link_to 'Pipeline', pipeline_path(@pipeline), class: "nav-link active" %>
+    </li>
+  </ul>
 <% end %>
+
+<h4 class='mb-3'>Harvest</h4>
+<p>Add an extraction and a transformation</p>
+
+<div class='row definition-group'>
+  <div class='col-6'>
+    <button type="button" class="card card--create-cta card--right-arrow" data-bs-toggle="modal" data-bs-target="#create-modal">
+      <div class="card-body">
+        <p class='card-text'>+ Add harvest extraction</p>
+      </div>
+    </button>
+  </div>
+
+  <div class='col-6'>
+    <button type="button" class="card mb-3 card--create-cta" data-bs-toggle="modal" data-bs-target="#create-modal">
+      <div class="card-body">
+        <p class="card-text">+ Add harvest transformation</p>
+      </div>
+    </button>
+  </div>
+
+  <span class='definition-group__bridge'></span>
+</div>
+
+<div class='mt-4'></div>
+
+<h4 class='mb-3'>Enrichment 1</h4>
+<p>Add an extraction and a transformation</p>
+
+<div class='row definition-group'>
+  <div class='col-6'>
+    <button type="button" class="card card--create-cta card--right-arrow" data-bs-toggle="modal" data-bs-target="#create-modal">
+      <div class="card-body">
+        <p class='card-text'>+ Add enrichment extraction</p>
+      </div>
+    </button>
+  </div>
+
+  <div class='col-6'>
+    <button type="button" class="card mb-3 card--create-cta" data-bs-toggle="modal" data-bs-target="#create-modal">
+      <div class="card-body">
+        <p class="card-text">+ Add enrichment transformation</p>
+      </div>
+    </button>
+  </div>
+</div>
 
 <%# Modals %>
 <%= render layout: 'shared/delete-modal', locals: { path: pipeline_path(@pipeline) } do %>
