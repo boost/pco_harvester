@@ -40,6 +40,7 @@ import "/js/Tooltips";
 import "/js/CollapseScroll";
 import "/js/ContentSourceFilter";
 import "/js/ExtractionDefinitionFormLogic";
+import "/js/CreateModal";
 
 import "/js/editor";
 import "/js/form-header-submission";

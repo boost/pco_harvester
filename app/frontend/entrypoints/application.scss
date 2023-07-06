@@ -8,20 +8,21 @@
 @import "~bootstrap/scss/bootstrap";
 @import "~bootstrap-icons/font/bootstrap-icons.min";
 
+// Mixins
+
+@import "../stylesheets/mixins/bem";
+
 // Bootstrap overrides
 @import "../stylesheets/bootstrap/breadcrumb";
 @import "../stylesheets/bootstrap/form";
 @import "../stylesheets/bootstrap/navbar";
 @import "../stylesheets/bootstrap/root";
 @import "../stylesheets/bootstrap/typography";
+@import "../stylesheets/bootstrap/card";
 
-// Mixins
-
-@import "../stylesheets/mixins/bem";
 
 // Blocks
 
-@import "../stylesheets/blocks/card";
 @import "../stylesheets/blocks/field-nav";
 @import "../stylesheets/blocks/field-nav-panel";
 @import "../stylesheets/blocks/form-in-dropdown";
