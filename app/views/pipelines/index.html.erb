@@ -74,10 +74,10 @@
             </div>
             
             <div class="col-4">
-              <%= form.label :pipeline_description, 'Pipeline Description', class: "form-label" %>
+              <%= form.label :description, 'Pipeline Description', class: "form-label" %>
             </div>
             <div class='col-8'>
-              <%= form.text_area :pipeline_description, class: {"form-control": true, "is-invalid": @pipeline.errors[:description].any? } %>
+              <%= form.text_area :description, class: {"form-control": true, "is-invalid": @pipeline.errors[:description].any? } %>
             </div>
           </div>
           

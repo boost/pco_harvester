@@ -1,3 +1,4 @@
+<% pipeline_id = @pipeline&.id %>
 <% source_id = @content_source&.id %>
 <% extraction_id = @extraction_definition&.id %>
 <% transformation_id = @transformation_definition&.id %>
@@ -13,18 +14,24 @@
       path: content_sources_path,
       active: current_page?(content_sources_path),
       display: request.path.include?(content_sources_path)) %>
-      
-    <%= breadcrumb_item(
-      text: 'Pipelines',
-      path: pipelines_path,
-      active: current_page?(pipelines_path),
-      display: request.path.include?(pipelines_path)) %>
 
     <%= breadcrumb_item(
       text: @content_source&.name_in_database,
       path: (content_source_path(source_id) rescue nil),
       active: (current_page?(content_source_path(source_id)) rescue false),
       display: request.path.match?(/^\/content_sources\/\d+/)) %>
+      
+    <%= breadcrumb_item(
+      text: 'Pipelines',
+      path: pipelines_path,
+      active: current_page?(pipelines_path),
+      display: request.path.include?(pipelines_path)) %>
+      
+    <%= breadcrumb_item(
+      text: @pipeline&.name_in_database,
+      path: (pipeline_path(pipeline_id) rescue nil),
+      active: (current_page?(pipeline_path(pipeline_id)) rescue false),
+      display: request.path.match?(/^\/pipelines\/\d+/)) %>
 
     <%= breadcrumb_item(
       text: 'Destinations',
