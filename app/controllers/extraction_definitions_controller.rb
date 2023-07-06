@@ -51,7 +51,11 @@ class ExtractionDefinitionsController < ApplicationController
   end
 
   def test
-    @extraction_definition = ExtractionDefinition.new(extraction_definition_params)
+    @extraction_definition = ExtractionDefinition.new(extraction_definition_params.except('headers_attributes'))
+
+    extraction_definition_params['headers_attributes'].each do |key, header_attributes|
+      @extraction_definition.headers << Header.new(header_attributes)
+    end
 
     render json: Extraction::DocumentExtraction.new(@extraction_definition).extract
   end
@@ -101,7 +105,8 @@ class ExtractionDefinitionsController < ApplicationController
       :page_parameter, :per_page_parameter, :page, :per_page,
       :total_selector,
       :kind, :destination_id, :source_id, :enrichment_url, :job_id,
-      :token_parameter, :token_value, :next_token_path, :initial_params
+      :token_parameter, :token_value, :next_token_path, :initial_params,
+      headers_attributes: [:id, :name, :value]
     )
   end
 end

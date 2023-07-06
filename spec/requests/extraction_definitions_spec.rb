@@ -53,6 +53,23 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
 
         expect(response).to redirect_to content_source_path(content_source)
       end
+
+      it 'creates a new extraction definition with associated headers' do
+        extraction_definition2 = build(:extraction_definition, content_source:)
+        headers = build_list(:header, 2)
+
+        post content_source_extraction_definitions_path(content_source), params: {
+          extraction_definition: extraction_definition2.attributes.merge('headers_attributes' => headers.map(&:attributes))
+        }
+
+        ed = ExtractionDefinition.last
+
+        expect(ed.headers.first.name).to eq headers.first.name
+        expect(ed.headers.first.value).to eq headers.first.value
+
+        expect(ed.headers.last.name).to eq headers.last.name
+        expect(ed.headers.last.value).to eq headers.last.value
+      end
     end
 
     context 'with invalid parameters' do

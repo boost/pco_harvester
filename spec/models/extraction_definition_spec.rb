@@ -97,14 +97,19 @@ RSpec.describe ExtractionDefinition, type: :model do
 
   describe '#associations' do
     let(:extraction_job) { create(:extraction_job) }
-    let(:ed) { create(:extraction_definition, extraction_jobs: [extraction_job]) }
+    let(:header)         { create(:header) }
+    subject { create(:extraction_definition, extraction_jobs: [extraction_job], headers: [header]) }
 
     it 'has many jobs' do
-      expect(ed.extraction_jobs).to include extraction_job
+      expect(subject.extraction_jobs).to include(extraction_job)
     end
 
     it 'belongs to a content source' do
       expect(subject.content_source).to be_a ContentSource
+    end
+
+    it 'has many headers' do
+      expect(subject.headers).to include(header)
     end
   end
 

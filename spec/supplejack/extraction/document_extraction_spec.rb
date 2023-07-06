@@ -20,7 +20,6 @@ RSpec.describe Extraction::DocumentExtraction do
     end
 
     context 'intial_params' do
-
       before do
        stub_request(:get, "http://google.com/?from=#{(Date.today - 2.days).strftime("%Y-%m-%d")}&metadataPrefix=marc21&page=1&per_page=50&set=INNZ&url_param=url_value").
          with(
@@ -65,7 +64,6 @@ RSpec.describe Extraction::DocumentExtraction do
       end
 
       it 'does not append the initial params to subsequent requests' do
-
         expect(Extraction::Request).to receive(:new).with(
           url: ed.base_url,
           headers: { 
@@ -79,6 +77,30 @@ RSpec.describe Extraction::DocumentExtraction do
         ).and_call_original
 
         ed.update(page: 2)
+
+        subject.extract
+      end
+    end
+
+    context 'headers' do
+      let(:header1) { create(:header, name: 'X-Forwarded-For', value: 'ab.cd.ef.gh') }
+      let(:header2) { create(:header, name: 'Authorization', value: 'Token') }
+      let(:ed) { create(:extraction_definition, page: 1, base_url: 'http://google.com/?url_param=url_value', extraction_jobs: [extraction_job], headers: [header1, header2]) }
+
+      it 'appends headers from the ExtractionDefinition into the request' do
+        expect(Extraction::Request).to receive(:new).with(
+          url: ed.base_url,
+          headers: { 
+            "Content-Type"    => "application/json",
+            "User-Agent"      => "Supplejack Harvester v2.0",
+            "X-Forwarded-For" => 'ab.cd.ef.gh',
+            "Authorization"   => 'Token'
+          },
+          params: {
+            "page" => 1,
+            "per_page" => 50,
+          }
+        ).and_call_original
 
         subject.extract
       end
