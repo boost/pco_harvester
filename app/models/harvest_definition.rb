@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class HarvestDefinition < ApplicationRecord
-  belongs_to :pipeline, optional: true
+  belongs_to :pipeline
   belongs_to :content_source, optional: true
 
   belongs_to :extraction_definition, optional: true, dependent: :destroy
@@ -14,16 +14,16 @@ class HarvestDefinition < ApplicationRecord
   # before_create :clone_transformation_definition
   # before_create :clone_extraction_definition
 
-  # validates :source_id, presence: true
+  validates :source_id, presence: true
   # validate :extraction_definition_is_a_copy, on: :update
   # validate :transformation_definition_is_a_copy, on: :update
 
   enum :kind, { harvest: 0, enrichment: 1 }
 
-  # after_create do
-  #   self.name = "#{content_source.name.parameterize}__#{kind}-#{id}"
-  #   save!
-  # end
+  after_create do
+    self.name = "#{pipeline.name.parameterize}__#{kind}-#{id}"
+    save!
+  end
 
   # Creates a safe copy of the provided transformation definition
   # So that edits made to the visible transformation definition

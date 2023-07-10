@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class HarvestDefinitionsController < ApplicationController
-  before_action :find_content_source
+  before_action :find_pipeline
   before_action :find_harvest_definition, only: %i[show edit update destroy]
   before_action :find_destinations
 
@@ -20,31 +20,18 @@ class HarvestDefinitionsController < ApplicationController
     @harvest_definition = HarvestDefinition.new(harvest_definition_params)
 
     if @harvest_definition.save
-      redirect_to content_source_path(@content_source), notice: 'Harvest Definition created successfully'
+      redirect_to pipeline_path(@pipeline), notice: 'Harvest created successfully'
     else
-      flash.alert = 'There was an issue creating your Harvest Definition'
-      render :new
+      flash.alert = 'There was an issue creating your Harvest'
+      render 'pipelines/show'
     end
   end
 
   def update
-    if @harvest_definition.update(harvest_definition_params.except('extraction_definition_id', 'transformation_definition_id'))
-
-      if harvest_definition_params.include?('extraction_definition_id')
-        extraction_definition = ExtractionDefinition.find(harvest_definition_params['extraction_definition_id'])
-        @harvest_definition.update_extraction_definition_clone(extraction_definition)
-      end
-
-      if harvest_definition_params.include?('transformation_definition_id')
-        transformation_definition = TransformationDefinition.find(harvest_definition_params['transformation_definition_id'])
-        @harvest_definition.update_transformation_definition_clone(transformation_definition)
-      end
-      
-      flash.notice = 'Harvest Definition updated successfully'
-      redirect_to content_source_harvest_definition_path(@content_source, @harvest_definition)
+    if @harvest_definition.update(harvest_definition_params)
+      render status: 200, json: 'Harvest Definition update successfully'
     else
-      flash.alert = 'There was an issue updating your Harvest Definition'
-      render 'edit'
+      render status: 500, json: 'There was an issue updating your Harvest Definition'
     end
   end
 
@@ -59,8 +46,8 @@ class HarvestDefinitionsController < ApplicationController
 
   private
 
-  def find_content_source
-    @content_source = ContentSource.find(params[:content_source_id])
+  def find_pipeline
+    @pipeline = Pipeline.find(params[:pipeline_id])
   end
 
   def find_destinations
@@ -73,7 +60,7 @@ class HarvestDefinitionsController < ApplicationController
 
   def harvest_definition_params
     params.require(:harvest_definition).permit(
-      :content_source_id,
+      :pipeline_id,
       :extraction_definition_id,
       :job_id,
       :transformation_definition_id,
