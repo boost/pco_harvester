@@ -8,6 +8,6 @@ FactoryBot.define do
     association :content_source
     association :extraction_definition
     association :transformation_definition
-    association :destination
+    # association :destination
   end
 end

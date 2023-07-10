@@ -21,7 +21,9 @@ class PipelinesController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @extraction_definitions = ExtractionDefinition.all.sort_by(&:name).map(&:to_h)
+  end
 
   def edit; end
   

@@ -85,4 +85,11 @@ class ExtractionDefinition < ApplicationRecord
 
     errors.add(:copy, 'Extraction Definition cannot be a copy of itself')
   end
+
+  def to_h
+    { 
+      id: id,
+      name: name
+    }
+  end
 end

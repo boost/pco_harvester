@@ -88,9 +88,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_05_043234) do
     t.integer "kind", default: 0
     t.integer "priority", default: 0
     t.boolean "required_for_active_record", default: false
+    t.bigint "pipeline_id"
     t.index ["content_source_id"], name: "index_harvest_definitions_on_content_source_id"
     t.index ["destination_id"], name: "index_harvest_definitions_on_destination_id"
     t.index ["extraction_definition_id"], name: "index_harvest_definitions_on_extraction_definition_id"
+    t.index ["pipeline_id"], name: "index_harvest_definitions_on_pipeline_id"
     t.index ["transformation_definition_id"], name: "index_harvest_definitions_on_transformation_definition_id"
   end
 

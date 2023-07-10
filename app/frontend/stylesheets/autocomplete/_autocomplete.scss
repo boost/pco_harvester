@@ -1,0 +1,67 @@
+// Overrides for the autocomplete js plugin.
+
+.autoComplete_wrapper > input {
+  border-radius: 4px;
+  border: 1px solid $pompeii-ash;
+  color: $dark;
+  background-image: none;
+  transition: none;
+
+  &:after {
+    position: absolute;
+    content: '\F138';
+    right: -1.3rem;
+    top: 0;
+    bottom: 0;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin: auto;
+    font-family: "bootstrap-icons";
+    color: $primary;
+  }
+}
+
+.autoComplete_wrapper > ul {
+  overflow-y: auto;
+  margin: 0;
+  border-radius: 0;
+} 
+
+.autoComplete_wrapper > ul > li {
+  color: $dark;
+  transition: none;
+  margin: 0;
+  border-radius: 0;
+  border: 1px solid $pompeii-ash;
+}
+
+.autoComplete_wrapper > input:focus {
+  border: 1px solid $pompeii-ash;
+  color: $dark;
+}
+
+.autoComplete_wrapper > ul > li mark {
+  color: $dark;
+  padding: 0;
+  font-weight: normal;
+}
+
+.autoComplete_wrapper > input:hover {
+  color: $dark;
+}
+
+.autoComplete_wrapper > ul > li:hover, .autoComplete_wrapper > ul > li[aria-selected=true] {
+  background-color: $primary;
+  color: $white;
+
+  mark {
+    color: $white;
+  }
+}
+
+::placeholder { 
+  color: $pompeii-ash !important;
+  opacity: 1 !important; /* Firefox */
+}
+
+

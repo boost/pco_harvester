@@ -27,6 +27,8 @@
   </ul>
 <% end %>
 
+<input id="js-auto-complete-extraction-definition" class='js-auto-complete' data-src="<%= @extraction_definitions.to_json %>" data-placeholder='Start typing to use an existing definition..' data-key='name'>
+
 <h4 class='mb-3'>Harvest</h4>
 <p>Add an extraction and a transformation</p>
 
@@ -73,6 +75,14 @@
 </div>
 
 <%# Modals %>
+
 <%= render layout: 'shared/delete-modal', locals: { path: pipeline_path(@pipeline) } do %>
   Are you sure you want to delete "<%= @pipeline.name %>"?
 <% end %>
+
+<%= render layout: 'shared/create-modal', locals: { modal_heading: 'Add harvest extraction', button_text: 'Add new extraction definition'  } do %>
+  <div class='d-grid mt-4'>
+    <div id="js-autocomplete-app"></div>
+  </div>
+<% end %>
+
