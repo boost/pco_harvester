@@ -1,26 +1,30 @@
 // Overrides for the autocomplete js plugin.
 
+.autoComplete_wrapper {
+  position: absolite;
+  &:before {
+    position: absolute;
+    content: '\F52A';
+    left: .75rem;
+    top: 0;
+    bottom: 0;
+    width: 1rem;
+    height: 1.3rem;
+    margin: auto;
+    font-family: "bootstrap-icons";
+    color: $pompeii-ash;
+  }
+}
+
 .autoComplete_wrapper > input {
   border-radius: 4px;
-  border: 1px solid $pompeii-ash;
+  border: 1px solid $satin-white;
   color: $dark;
   background-image: none;
   transition: none;
   width: 100%;
   height: 2.5rem;
-
-  &:after {
-    position: absolute;
-    content: '\F138';
-    right: -1.3rem;
-    top: 0;
-    bottom: 0;
-    width: 1.25rem;
-    height: 1.25rem;
-    margin: auto;
-    font-family: "bootstrap-icons";
-    color: $primary;
-  }
+  padding: 7px 13px 7px 2.5rem;
 }
 
 .autoComplete_wrapper > ul {
@@ -34,12 +38,13 @@
   transition: none;
   margin: 0;
   border-radius: 0;
-  border: 1px solid $pompeii-ash;
+  border: 1px solid $satin-white;
 }
 
 .autoComplete_wrapper > input:focus {
-  border: 1px solid $pompeii-ash;
+  border: 1px solid $satin-white;
   color: $dark;
+  transition: none;
 }
 
 .autoComplete_wrapper > ul > li mark {
@@ -50,6 +55,8 @@
 
 .autoComplete_wrapper > input:hover {
   color: $dark;
+  transition: none;
+  -webkit-transition: none;
 }
 
 .autoComplete_wrapper > ul > li:hover, .autoComplete_wrapper > ul > li[aria-selected=true] {
@@ -61,9 +68,15 @@
   }
 }
 
-::placeholder { 
+.autoComplete_wrapper > input::selection {
+  color: $white;
+  background-color: $primary!important;
+}
+
+.autoComplete_wrapper > input::placeholder { 
   color: $pompeii-ash !important;
-  opacity: 1 !important; /* Firefox */
+  padding: 0 !important;
+  opacity: 1;
 }
 
 
