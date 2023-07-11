@@ -20,7 +20,7 @@ const RawDataBody = ({ clickToggleSection }) => {
           <button
             onClick={() => clickToggleSection("rawRecordExpanded")}
             type="button"
-            className="btn btn-primary"
+            className="btn btn-outline-primary"
           >
             <ExpandCollapseIcon expanded={rawRecordExpanded} />
           </button>
