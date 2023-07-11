@@ -62,4 +62,11 @@ class TransformationDefinition < ApplicationRecord
       errors.add(:copy, 'Transformation Definition cannot be a copy of itself')
     end
   end
+
+  def to_h
+    {
+      id: id,
+      name: name
+    }
+  end
 end

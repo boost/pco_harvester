@@ -73,11 +73,30 @@
         </div>
 
         <div class='col-6'>
-          <button type="button" class="card mb-3 card--create-cta d-flex" data-bs-toggle="modal" data-bs-target="#create-modal">
-            <div class="card-body align-items-center d-flex justify-content-center">
-              <p class="card-text">+ Add harvest transformation</p>
+          <% if @harvest_definition.transformation_definition.present? %>
+            <div class='card'>
+              <div class='card-body'>
+                <h5 class="card-title"><%= @harvest_definition.transformation_definition.name %></h5>
+
+                <div class="btn-group card__control">
+                  <i class="bi bi-three-dots-vertical" data-bs-toggle='dropdown'></i>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-layers me-2"></i>Create from reference</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-link-45deg me-2"></i>Go to reference source</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-trash me-2"></i>Remove definition</a></li>
+                  </ul>
+                </div>
+              </div>
             </div>
-          </button>
+          <% else %>
+            <button type="button" class="card mb-3 card--create-cta d-flex" data-bs-toggle="modal" data-bs-target="#add-harvest-transformation">
+              <div class="card-body align-items-center d-flex justify-content-center">
+                <p class="card-text">+ Add harvest transformation</p>
+              </div>
+            </button>
+          <% end %>
         </div>
       </div>
     </div>
@@ -114,13 +133,41 @@
 <% if @harvest_definition.persisted? %>
   <%= render layout: 'shared/create-modal', locals: { modal_heading: 'Add harvest extraction', id: 'add-harvest-extraction' } do %>
     <div class='d-grid mt-4'>
-      <input id="js-auto-complete-extraction-definition" class='js-auto-complete' data-src="<%= @extraction_definitions.to_json %>" data-placeholder='Start typing to use an existing definition..' data-key='name'>
+      <input 
+        id="js-auto-complete-extraction-definition" 
+        class='js-auto-complete' 
+        data-src="<%= @extraction_definitions.to_json %>" 
+        data-path="<%= "/pipelines/#{@pipeline.id}/harvest_definitions/#{@harvest_definition.id}" %>"
+        data-field="extraction_definition_id" 
+        data-placeholder='Start typing to use an existing definition..' 
+        data-key='name'
+      >
 
       <div class='text-center mt-4 mb-4'>
         or 
       </div>
 
       <%= link_to '+ Add new extraction definition', new_pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition, kind: 'harvest'), class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+
+  <%= render layout: 'shared/create-modal', locals: { modal_heading: 'Add harvest transformation', id: 'add-harvest-transformation' } do %>
+    <div class='d-grid mt-4'>
+      <input 
+        id="js-auto-complete-transformation-definition" 
+        class='js-auto-complete' 
+        data-src="<%= @transformation_definitions.to_json %>" 
+        data-placeholder='Start typing to use an existing definition..' 
+        data-path="<%= "/pipelines/#{@pipeline.id}/harvest_definitions/#{@harvest_definition.id}" %>"
+        data-field="transformation_definition_id" 
+        data-key='name'
+      >
+
+      <div class='text-center mt-4 mb-4'>
+        or 
+      </div>
+
+      <%= link_to '+ Add new transformation definition', new_pipeline_harvest_definition_transformation_definition_path(@pipeline, @harvest_definition), class: 'btn btn-primary' %>
     </div>
   <% end %>
 <% end %>

@@ -9,6 +9,8 @@ each(autoCompleteForms, (form) => {
   const placeholder = form.dataset.placeholder;
   const key = form.dataset.key;
   const selector = `#${form.id}`;
+  const path = form.dataset.path;
+  const field = form.dataset.field;
   
   const config = {
       selector: selector,
@@ -24,15 +26,11 @@ each(autoCompleteForms, (form) => {
   }
 
   new autoComplete(config);
-  
-  const pipelineID = document.querySelector('#js-pipeline-id').value;
-  const harvestDefinitionID = document.querySelector('#js-harvest-definition-id').value;
-  
 
-  form.addEventListener('selection', (event) => {
+    form.addEventListener('selection', (event) => {
     request
-      .patch(`/pipelines/${pipelineID}/harvest_definitions/${harvestDefinitionID}`, {
-        extraction_definition_id: event.detail.selection.value.id
+      .patch(path, {
+        [field]: event.detail.selection.value.id
       })
       .then(function (response) {
         location.reload();

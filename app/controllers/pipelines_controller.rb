@@ -23,6 +23,7 @@ class PipelinesController < ApplicationController
 
   def show
     @extraction_definitions = ExtractionDefinition.all.sort_by(&:name).map(&:to_h)
+    @transformation_definitions = TransformationDefinition.all.harvest.sort_by(&:name).map(&:to_h)
 
     @harvest_definition = @pipeline.harvest || HarvestDefinition.new(pipeline: @pipeline)
   end
