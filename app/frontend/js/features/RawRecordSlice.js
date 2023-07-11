@@ -33,6 +33,12 @@ const rawRecordSlice = createSlice({
         state.page = action.payload.page;
         state.record = action.payload.record;
         state.body = action.payload.body;
+
+        window.history.replaceState(
+          null,
+          null,
+          `${window.location.pathname}?page=${state.page}&record=${state.record}`
+        );
       });
   },
 });

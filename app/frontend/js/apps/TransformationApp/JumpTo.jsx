@@ -15,7 +15,6 @@ const JumpTo = () => {
   const [inputRecord, setInputRecord] = useState(record);
 
   useEffect(() => {
-    console.log("ehllo");
     setInputPage(page);
     setInputRecord(record);
   }, [page, record]);
