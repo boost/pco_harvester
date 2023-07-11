@@ -5,7 +5,6 @@
 class ExtractionDefinition < ApplicationRecord
   scope :originals, -> { where(original_extraction_definition: nil) }
 
-  belongs_to :content_source
   belongs_to :destination, optional: true
 
   has_many :extraction_jobs
@@ -16,7 +15,7 @@ class ExtractionDefinition < ApplicationRecord
   accepts_nested_attributes_for :headers, allow_destroy: true, reject_if: proc { |attribute| attribute[:name].blank? && attribute[:value].blank? }
 
   after_create do
-    self.name = "#{content_source.name.parameterize}__#{kind}-extraction-#{id}"
+    self.name = "#{kind}-extraction-#{id}"
     save!
   end
 

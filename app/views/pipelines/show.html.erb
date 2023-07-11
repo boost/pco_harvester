@@ -26,7 +26,6 @@
   </ul>
 <% end %>
 
-
   <% if @pipeline.harvest.blank? %>
     <div class='row definition-group'>
       <div class='col-12'>
@@ -74,7 +73,6 @@
   <% end %>
 
 
-
 <%# Modals %>
 
 <%= render layout: 'shared/delete-modal', locals: { path: pipeline_path(@pipeline) } do %>
@@ -111,7 +109,7 @@
         or 
       </div>
 
-      <%= link_to '+ Add new extraction definition', new_pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition), class: 'btn btn-primary' %>
+      <%= link_to '+ Add new extraction definition', new_pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition, kind: 'harvest'), class: 'btn btn-primary' %>
     </div>
   <% end %>
 <% end %>

@@ -20,7 +20,13 @@ Rails.application.routes.draw do
 
   resources :pipelines, only: %i[index show create update edit destroy] do
     resources :harvest_definitions do
-      resources :extraction_definitions
+      resources :extraction_definitions do
+        collection do
+          post :test
+          post :test_record_extraction
+          post :test_enrichment_extraction
+        end
+      end
     end
   end
 
