@@ -3,6 +3,7 @@
   color: $antarctic-deep;
   width: 100%;
   height: 100%;
+  position: relative;
 
   @include modifier('create-cta') {
     background-color: transparent;
@@ -11,6 +12,36 @@
 
     .card-body {
       width: 100%;
+    }
+  }
+
+  @include element('control') {
+    position: absolute;
+    right: .5rem;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    height: 1rem;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    ul {
+      padding: 0;
+    }
+
+    li a {
+      padding: 10px 16px 9px 16px;
+    }
+
+    .dropdown-item:hover, .dropdown-item:focus {
+      color: $white;
+      background-color: $primary;
+    }
+
+    .dropdown-divider {
+      margin: 0;
     }
   }
   

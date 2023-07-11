@@ -50,6 +50,17 @@
             <div class='card card--right-arrow'>
               <div class='card-body'>
                 <h5 class="card-title"><%= @harvest_definition.extraction_definition.name %></h5>
+
+                <div class="btn-group card__control">
+                  <i class="bi bi-three-dots-vertical" data-bs-toggle='dropdown'></i>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-layers me-2"></i>Create from reference</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-link-45deg me-2"></i>Go to reference source</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-trash me-2"></i>Remove definition</a></li>
+                  </ul>
+                </div>
               </div>
             </div>
           <% else %>
