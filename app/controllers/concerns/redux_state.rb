@@ -25,16 +25,7 @@ module ReduxState
   end
 
   def raw_record_slice
-    records = @transformation_definition.records
-    record_number = (params[:record] || 1).to_i
-    {
-      page: (params[:page] || 1).to_i,
-      record: record_number,
-      totalPages: @transformation_definition.extraction_job.documents.total_pages,
-      totalRecords: records.length,
-      format: @transformation_definition.extraction_job.format,
-      body: records[record_number]
-    }
+    RawRecordSlice.new(@transformation_definition, params[:page], params[:record]).call
   end
 
   def app_details_slice
