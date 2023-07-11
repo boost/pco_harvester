@@ -167,7 +167,7 @@
         or 
       </div>
 
-      <%= link_to '+ Add new transformation definition', new_pipeline_harvest_definition_transformation_definition_path(@pipeline, @harvest_definition), class: 'btn btn-primary' %>
+      <%= link_to '+ Add new transformation definition', new_pipeline_harvest_definition_transformation_definition_path(@pipeline, @harvest_definition, kind: 'harvest'), class: 'btn btn-primary' %>
     </div>
   <% end %>
 <% end %>

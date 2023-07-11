@@ -1,4 +1,5 @@
 <%= vertical_form_with model: [@pipeline, @harvest_definition, @extraction_definition], id: 'js-extraction-definition-form' do |form| %>
+  <%= form.hidden_field :pipeline_id, value: @pipeline.id %>
   <%= hidden_field :harvest_definition_id, value: @harvest_definition.id %>
 
   <div class="row gx-2">

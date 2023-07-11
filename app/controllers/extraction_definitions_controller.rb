@@ -24,7 +24,6 @@ class ExtractionDefinitionsController < ApplicationController
     @extraction_definition = ExtractionDefinition.new(extraction_definition_params)
 
     if @extraction_definition.save
-
       if params[:harvest_definition_id].present?
         HarvestDefinition.find(params[:harvest_definition_id]).update(
           extraction_definition_id: @extraction_definition.id
@@ -114,6 +113,7 @@ class ExtractionDefinitionsController < ApplicationController
 
   def extraction_definition_params
     params.require(:extraction_definition).permit(
+      :pipeline_id,
       :name, :format, :base_url, :throttle, :pagination_type,
       :page_parameter, :per_page_parameter, :page, :per_page,
       :total_selector,
