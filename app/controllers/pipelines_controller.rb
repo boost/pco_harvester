@@ -26,6 +26,8 @@ class PipelinesController < ApplicationController
     @transformation_definitions = TransformationDefinition.all.harvest.sort_by(&:name).map(&:to_h)
 
     @harvest_definition = @pipeline.harvest || HarvestDefinition.new(pipeline: @pipeline)
+
+    @enrichment_definition = HarvestDefinition.new(pipeline: @pipeline)
   end
 
   def edit; end

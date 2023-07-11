@@ -4,11 +4,15 @@
   padding: 12px 16px 12px 16px;
   position: relative;
 
+  @include modifier('spacer') {
+    margin-top: 7rem;
+  }
+
   @include element('bridge') {
     position: absolute;
     width: 0px;
-    height: 111px;
-    top: -111px;
+    height: 112px;
+    top: -112px;
     border-left: 1px dashed $pompeii-ash;
     left: 0;
     right: 0;

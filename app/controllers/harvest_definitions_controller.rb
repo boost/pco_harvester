@@ -20,9 +20,9 @@ class HarvestDefinitionsController < ApplicationController
     @harvest_definition = HarvestDefinition.new(harvest_definition_params)
 
     if @harvest_definition.save
-      redirect_to pipeline_path(@pipeline), notice: 'Harvest created successfully'
+      redirect_to pipeline_path(@pipeline), notice: "#{@harvest_definition.kind.capitalize} created successfully"
     else
-      flash.alert = 'There was an issue creating your Harvest'
+      flash.alert = "There was an issue creating your #{@harvest_definition.kind.capitalize}"
       render 'pipelines/show'
     end
   end
