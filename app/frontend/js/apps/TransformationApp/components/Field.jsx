@@ -14,6 +14,8 @@ import {
 } from "~/js/features/AppDetailsSlice";
 import { selectUiAppDetails } from "~/js/features/UiAppDetailsSlice";
 
+import { selectRawRecord } from "/js/features/RawRecordSlice";
+
 import {
   selectUiFieldById,
   toggleCollapseField,
@@ -25,6 +27,9 @@ import CodeEditor from "~/js/components/CodeEditor";
 const Field = ({ id }) => {
   const appDetails = useSelector(selectAppDetails);
   const { name, block } = useSelector((state) => selectFieldById(state, id));
+
+  const rawRecord = useSelector(selectRawRecord);
+  
   const {
     saved,
     deleting,
@@ -77,8 +82,8 @@ const Field = ({ id }) => {
         harvestDefinitionId: appDetails.harvestDefinition.id,
         pipelineId: appDetails.pipeline.id,
         transformationDefinitionId: appDetails.transformationDefinition.id,
-        format: appDetails.format,
-        record: appDetails.rawRecord,
+        format: rawRecord.format,
+        record: rawRecord.body,
         fields: [id],
       })
     );
