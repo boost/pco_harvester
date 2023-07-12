@@ -85,7 +85,7 @@ class TransformationDefinitionsController < ApplicationController
   def update
     if @transformation_definition.update(transformation_definition_params)
       flash.notice = 'Transformation Definition updated successfully'
-      redirect_to content_source_transformation_definition_path(@content_source, @transformation_definition)
+      redirect_to pipeline_harvest_definition_transformation_definition_path(@pipeline, @harvest_definition, @transformation_definition)
     else
       flash.alert = 'There was an issue updating your Transformation Definition'
       render 'edit'
