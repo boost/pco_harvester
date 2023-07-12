@@ -18,7 +18,8 @@ const HeaderActions = () => {
   const runAllFields = () => {
     dispatch(
       clickedOnRunFields({
-        contentSourceId: appDetails.contentSource.id,
+        harvestDefinitionId: appDetails.harvestDefinition.id,
+        pipelineId: appDetails.pipeline.id,
         format: appDetails.format,
         transformationDefinitionId: appDetails.transformationDefinition.id,
         record: appDetails.rawRecord,

@@ -68,7 +68,7 @@
       <div class='col-6'>
         <% if @harvest_definition.extraction_definition.present? %>
 
-          <%= render partial: 'pipelines/card', locals: { pipeline: @pipeline, position: 'first', definition: @harvest_definition.extraction_definition, edit_path: edit_pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition, @harvest_definition.extraction_definition) } %>
+          <%= render partial: 'pipelines/card', locals: { pipeline: @pipeline, position: 'first', definition: @harvest_definition.extraction_definition, edit_path: edit_pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition, @harvest_definition.extraction_definition), edit_text: 'Edit Extraction' } %>
           
         <% else %>
           <button type="button" class="card card--create-cta d-flex card--right-arrow" data-bs-toggle="modal" data-bs-target="#add-harvest-extraction">
@@ -82,7 +82,7 @@
       <div class='col-6'>
         <% if @harvest_definition.transformation_definition.present? %>
 
-          <%= render partial: 'pipelines/card', locals: { pipeline: @pipeline, definition: @harvest_definition.transformation_definition, position: 'last', harvest_definition: @harvest_definition } %>
+          <%= render partial: 'pipelines/card', locals: { pipeline: @pipeline, definition: @harvest_definition.transformation_definition, position: 'last', edit_path: pipeline_harvest_definition_transformation_definition_path(@pipeline, @harvest_definition, @harvest_definition.transformation_definition), edit_text: 'Edit Transformation'  } %>
 
         <% else %>
           <button type="button" class="card mb-3 card--create-cta d-flex" data-bs-toggle="modal" data-bs-target="#add-harvest-transformation">

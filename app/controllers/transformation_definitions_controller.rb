@@ -23,7 +23,8 @@ class TransformationDefinitionsController < ApplicationController
           format: @transformation_definition.extraction_job.format,
           rawRecord: @transformation_definition.records.first,
           transformedRecord: {},
-          contentSource: @content_source,
+          harvestDefinition: @harvest_definition,
+          pipeline: @pipeline,
           transformationDefinition: @transformation_definition
         }
       },

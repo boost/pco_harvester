@@ -59,7 +59,8 @@ const Field = ({ id }) => {
     dispatch(
       deleteField({
         id: id,
-        contentSourceId: appDetails.contentSource.id,
+        harvestDefinitionId: appDetails.harvestDefinition.id,
+        pipelineId: appDetails.pipeline.id,
         transformationDefinitionId: appDetails.transformationDefinition.id,
       })
     );
@@ -73,7 +74,8 @@ const Field = ({ id }) => {
   const handleRunClick = () => {
     dispatch(
       clickedOnRunFields({
-        contentSourceId: appDetails.contentSource.id,
+        harvestDefinitionId: appDetails.harvestDefinition.id,
+        pipelineId: appDetails.pipeline.id,
         transformationDefinitionId: appDetails.transformationDefinition.id,
         format: appDetails.format,
         record: appDetails.rawRecord,
