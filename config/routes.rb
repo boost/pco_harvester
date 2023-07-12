@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   end
 
   resources :pipelines, only: %i[index show create update edit destroy] do
+    resources :jobs
+
     resources :harvest_definitions do
       resources :extraction_definitions do
         collection do

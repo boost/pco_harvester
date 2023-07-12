@@ -32,6 +32,12 @@
       path: (pipeline_path(pipeline_id) rescue nil),
       active: (current_page?(pipeline_path(pipeline_id)) rescue false),
       display: request.path.match?(/^\/pipelines\/\d+/)) %>
+      
+    <%= breadcrumb_item(
+      text: 'Jobs',
+      path: (pipeline_jobs_path(pipeline_id) rescue nil),
+      active: (current_page?(pipeline_jobs_path(pipeline_id)) rescue false),
+      display: request.path.match?(/^\/pipelines\/\d+\/jobs/)) %>
 
     <%= breadcrumb_item(
       text: 'Destinations',
@@ -45,11 +51,6 @@
       active: (current_page?(destination_path(destination_id)) rescue false),
       display: request.path.match?(/^\/destinations\/\d+/)) %>
 
-    <%= breadcrumb_item(
-      text: 'Extraction Jobs',
-      path: extraction_jobs_path,
-      active: current_page?(extraction_jobs_path),
-      display: request.path.include?(extraction_jobs_path)) %>
 
     <%= breadcrumb_item(
       text: @extraction_definition&.name_in_database,

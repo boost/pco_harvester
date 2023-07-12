@@ -21,7 +21,7 @@
   <div class="clearfix"></div>
 <% end %>
 
-<% path = content_source_extraction_definition_extraction_job_path(@content_source, @extraction_definition, @extraction_job)%>
+<% path = pipeline_harvest_definition_extraction_definition_extraction_job_path(@pipeline, @harvest_definition, @extraction_definition, @extraction_job)%>
 <%= render layout: 'shared/delete-modal', locals: { path: } do %>
   <p>Are you sure you want to delete this job?</p>
   <p>It will delete all the data related to it.</p>
