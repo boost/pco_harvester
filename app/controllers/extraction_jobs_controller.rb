@@ -31,10 +31,10 @@ class ExtractionJobsController < ApplicationController
   def destroy
     if @extraction_job.destroy
       flash.notice = 'Results deleted successfully'
-      redirect_to content_source_extraction_definition_path(@content_source, @extraction_definition)
+      redirect_to pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition, @extraction_definition)
     else
       flash.alert = 'There was an issue deleting the results'
-      redirect_to content_source_extraction_definition_extraction_job_path(@content_source, @extraction_definition,
+      redirect_to pipeline_harvest_definition_extraction_definition_extraction_job_path(@pipeline, @harvest_definition, @extraction_definition,
                                                                             @extraction_job)
     end
   end
@@ -46,7 +46,7 @@ class ExtractionJobsController < ApplicationController
       flash.alert = 'There was an issue cancelling the job'
     end
 
-    redirect_to content_source_extraction_definition_path(@content_source, @extraction_definition)
+    redirect_to pipeline_jobs_path(@pipeline)
   end
 
   private
