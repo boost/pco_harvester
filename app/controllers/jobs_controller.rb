@@ -5,6 +5,8 @@ class JobsController < ApplicationController
 
   def index
     @harvest_extraction_jobs = paginate_and_filter_jobs(@pipeline.harvest.extraction_definition.extraction_jobs)
+
+    @enrichment_extraction_jobs = paginate_and_filter_jobs(@pipeline.enrichments.first.extraction_definition.extraction_jobs)
   end
 
   private
