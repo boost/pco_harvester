@@ -47,17 +47,13 @@
       <div>
         <div class="dropdown d-inline me-1">
           <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-play" aria-hidden="true"></i> Run
+            <i class="bi bi-play" aria-hidden="true"></i> Run Extraction
           </button>
           <ul class="dropdown-menu">
-            <li><%= button_to 'Run full extraction job', pipeline_harvest_definition_extraction_definition_extraction_jobs_path(@pipeline, @harvest_definition,  @harvest_definition.extraction_definition, kind: :full), class: 'dropdown-item', form_class: 'dropdown-item' %></li>
-            <li><%= button_to 'Run sample extraction job', pipeline_harvest_definition_extraction_definition_extraction_jobs_path(@pipeline, @harvest_definition, @harvest_definition.extraction_definition, kind: :sample), class: 'dropdown-item', form_class: 'dropdown-item' %></li>
+            <li><%= button_to 'Run full job', pipeline_harvest_definition_extraction_definition_extraction_jobs_path(@pipeline, @harvest_definition,  @harvest_definition.extraction_definition, kind: :full), class: 'dropdown-item', form_class: 'dropdown-item' %></li>
+            <li><%= button_to 'Run sample job', pipeline_harvest_definition_extraction_definition_extraction_jobs_path(@pipeline, @harvest_definition, @harvest_definition.extraction_definition, kind: :sample), class: 'dropdown-item', form_class: 'dropdown-item' %></li>
           </ul>
         </div>
-
-        <%= link_to edit_pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition, @harvest_definition.extraction_definition), class: 'me-1 btn btn-outline-primary' do %>
-          <i class="bi bi-pencil-square" aria-hidden="true"></i> Edit definition
-        <% end %>
       </div>
     </div>
     
@@ -101,15 +97,34 @@
 
     <div class='card p-4 definition-group--spacer'>
     <span class='definition-group__bridge'></span>
+    
+      <div class='d-flex'>
+        <div class='me-auto'>
+          <h4><%= enrichment_definition.name %></h4>
+          <p><%= enrichment_definition.source_id %> | priority: <%= enrichment_definition.priority %></p>
+        </div>
+    
+        <div>
+          <div class="dropdown d-inline me-1">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-play" aria-hidden="true"></i> Run Extraction
+            </button>
+            <ul class="dropdown-menu">
+              <li><%= button_to 'Run full job', pipeline_harvest_definition_extraction_definition_extraction_jobs_path(@pipeline, enrichment_definition,  enrichment_definition.extraction_definition, kind: :full), class: 'dropdown-item', form_class: 'dropdown-item' %></li>
+              <li><%= button_to 'Run sample job', pipeline_harvest_definition_extraction_definition_extraction_jobs_path(@pipeline, enrichment_definition, enrichment_definition.extraction_definition, kind: :sample), class: 'dropdown-item', form_class: 'dropdown-item' %></li>
+            </ul>
+          </div>
+        </div>
+      </div>
 
-      <h4><%= enrichment_definition.name %></h4>
-      <p><%= enrichment_definition.source_id %> | priority: <%= enrichment_definition.priority %></p>
 
       <div class='row'>
         <div class='col-6'>
           <% if enrichment_definition.extraction_definition.present? %>
+
           
-            <%= render partial: 'pipelines/card', locals: { definition: enrichment_definition.extraction_definition, position: 'first', pipeline: @pipeline, harvest_definition: @harvest_definition } %>
+          
+            <%= render partial: 'pipelines/card', locals: { definition: enrichment_definition.extraction_definition, position: 'first', pipeline: @pipeline, edit_path: edit_pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition, enrichment_definition.extraction_definition), edit_text: 'Edit Extraction'  , edit_text: 'Edit Extraction' } %>
 
           <% else %>
 
