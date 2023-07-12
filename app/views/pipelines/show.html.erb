@@ -1,5 +1,4 @@
 <%= content_for(:title) { @pipeline.name_in_database } %>
-
 <%= content_for(:header) do %>
   <%= render 'shared/breadcrumb_nav' %>
 
@@ -38,8 +37,28 @@
   </div>
 <% else %>
   <div class='card p-4'>
-    <h4><%= @harvest_definition.name %></h4>
-    <p><%= @harvest_definition.source_id %></p>
+    <div class='d-flex'>
+      <div class='me-auto'>
+        <h4><%= @harvest_definition.name %></h4>
+        <p><%= @harvest_definition.source_id %></p>
+      </div>
+    
+      <div>
+        <div class="dropdown d-inline me-1">
+          <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-play" aria-hidden="true"></i> Run
+          </button>
+          <ul class="dropdown-menu">
+            <li><%= button_to 'Run full extraction job', pipeline_harvest_definition_extraction_definition_extraction_jobs_path(@pipeline, @harvest_definition,  @harvest_definition.extraction_definition, kind: :full), class: 'dropdown-item', form_class: 'dropdown-item' %></li>
+            <li><%= button_to 'Run sample extraction job', pipeline_harvest_definition_extraction_definition_extraction_jobs_path(@pipeline, @harvest_definition, @harvest_definition.extraction_definition, kind: :sample), class: 'dropdown-item', form_class: 'dropdown-item' %></li>
+          </ul>
+        </div>
+
+        <%= link_to edit_pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition, @harvest_definition.extraction_definition), class: 'me-1 btn btn-outline-primary' do %>
+          <i class="bi bi-pencil-square" aria-hidden="true"></i> Edit definition
+        <% end %>
+      </div>
+    </div>
     
     <input type='hidden' value="<%= @pipeline.id %>" name='pipeline_id' id='js-pipeline-id' />
     <input type='hidden' value="<%= @pipeline.harvest.id %>" name='harvest_id' id='js-harvest-definition-id' />
@@ -48,7 +67,7 @@
       <div class='col-6'>
         <% if @harvest_definition.extraction_definition.present? %>
 
-          <%= render partial: 'pipelines/card', locals: { name: @harvest_definition.extraction_definition.name, position: 'first', referenced: @pipeline != @harvest_definition.extraction_definition.pipeline } %>
+          <%= render partial: 'pipelines/card', locals: { pipeline: @pipeline, position: 'first', definition: @harvest_definition.extraction_definition, edit_path: edit_pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition, @harvest_definition.extraction_definition) } %>
           
         <% else %>
           <button type="button" class="card card--create-cta d-flex card--right-arrow" data-bs-toggle="modal" data-bs-target="#add-harvest-extraction">
@@ -62,7 +81,7 @@
       <div class='col-6'>
         <% if @harvest_definition.transformation_definition.present? %>
 
-          <%= render partial: 'pipelines/card', locals: { name: @harvest_definition.transformation_definition.name, position: 'last', referenced: @pipeline != @harvest_definition.transformation_definition.pipeline } %>
+          <%= render partial: 'pipelines/card', locals: { pipeline: @pipeline, definition: @harvest_definition.transformation_definition, position: 'last', harvest_definition: @harvest_definition } %>
 
         <% else %>
           <button type="button" class="card mb-3 card--create-cta d-flex" data-bs-toggle="modal" data-bs-target="#add-harvest-transformation">
@@ -89,7 +108,7 @@
         <div class='col-6'>
           <% if enrichment_definition.extraction_definition.present? %>
           
-            <%= render partial: 'pipelines/card', locals: { name: enrichment_definition.extraction_definition.name, position: 'first', referenced: @pipeline != enrichment_definition.extraction_definition.pipeline } %>
+            <%= render partial: 'pipelines/card', locals: { definition: enrichment_definition.extraction_definition, position: 'first', pipeline: @pipeline, harvest_definition: @harvest_definition } %>
 
           <% else %>
 
@@ -125,7 +144,7 @@
         <div class='col-6'>
           <% if enrichment_definition.transformation_definition.present? %>
           
-            <%= render partial: 'pipelines/card', locals: { name: enrichment_definition.transformation_definition.name, position: 'last', referenced: @pipeline != enrichment_definition.transformation_definition.pipeline } %>
+            <%= render partial: 'pipelines/card', locals: { definition: enrichment_definition.transformation_definition, position: 'last', pipeline: @pipeline, harvest_definition: @harvest_definition } %>
 
           <% else %>
             <button type="button" class="card mb-3 card--create-cta d-flex" data-bs-toggle="modal" data-bs-target="#add-enrichment-transformation-<%= enrichment_definition.id %>">
@@ -135,7 +154,7 @@
             </button>
             
             <%= render layout: 'shared/create-modal', locals: { modal_heading: 'Add enrichment transformation', id: "add-enrichment-transformation-#{enrichment_definition.id}" } do %>
-              <div class='d-grid mt-4'>
+             <div class='d-grid mt-4'>
                 <input 
                   id="js-auto-complete-enrichment-transformation-definition-<%= enrichment_definition.id %>" 
                   class='js-auto-complete' 

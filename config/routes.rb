@@ -26,6 +26,10 @@ Rails.application.routes.draw do
           post :test_record_extraction
           post :test_enrichment_extraction
         end
+
+        resources :extraction_jobs, only: %i[show create destroy] do
+          post :cancel, on: :member
+        end
       end
       
       resources :transformation_definitions, only: %i[new create show edit update destroy] do

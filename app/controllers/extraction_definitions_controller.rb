@@ -40,7 +40,7 @@ class ExtractionDefinitionsController < ApplicationController
   def update
     if @extraction_definition.update(extraction_definition_params)
       flash.notice = 'Extraction Definition updated successfully'
-      redirect_to pipeline_extraction_definition_path(@pipeline, @extraction_definition)
+      redirect_to pipeline_path(@pipeline)
     else
       flash.alert = 'There was an issue updating your Extraction Definition'
       render 'edit'
