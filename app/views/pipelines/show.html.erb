@@ -47,22 +47,9 @@
     <div class='row'>
       <div class='col-6'>
         <% if @harvest_definition.extraction_definition.present? %>
-          <div class='card card--right-arrow'>
-            <div class='card-body'>
-              <h5 class="card-title"><%= @harvest_definition.extraction_definition.name %></h5>
 
-              <div class="btn-group card__control">
-                <i class="bi bi-three-dots-vertical" data-bs-toggle='dropdown'></i>
-                <ul class="dropdown-menu dropdown-menu-end">
-                  <li><a class="dropdown-item" href="#"><i class="bi bi-layers me-2"></i>Create from reference</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#"><i class="bi bi-link-45deg me-2"></i>Go to reference source</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#"><i class="bi bi-trash me-2"></i>Remove definition</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
+          <%= render partial: 'pipelines/card', locals: { name: @harvest_definition.extraction_definition.name, position: 'first', referenced: @pipeline != @harvest_definition.extraction_definition.pipeline } %>
+          
         <% else %>
           <button type="button" class="card card--create-cta d-flex card--right-arrow" data-bs-toggle="modal" data-bs-target="#add-harvest-extraction">
             <div class="card-body align-items-center d-flex justify-content-center">
@@ -74,22 +61,9 @@
 
       <div class='col-6'>
         <% if @harvest_definition.transformation_definition.present? %>
-          <div class='card'>
-            <div class='card-body'>
-              <h5 class="card-title"><%= @harvest_definition.transformation_definition.name %></h5>
 
-              <div class="btn-group card__control">
-                <i class="bi bi-three-dots-vertical" data-bs-toggle='dropdown'></i>
-                <ul class="dropdown-menu dropdown-menu-end">
-                  <li><a class="dropdown-item" href="#"><i class="bi bi-layers me-2"></i>Create from reference</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#"><i class="bi bi-link-45deg me-2"></i>Go to reference source</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#"><i class="bi bi-trash me-2"></i>Remove definition</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
+          <%= render partial: 'pipelines/card', locals: { name: @harvest_definition.transformation_definition.name, position: 'last', referenced: @pipeline != @harvest_definition.transformation_definition.pipeline } %>
+
         <% else %>
           <button type="button" class="card mb-3 card--create-cta d-flex" data-bs-toggle="modal" data-bs-target="#add-harvest-transformation">
             <div class="card-body align-items-center d-flex justify-content-center">
@@ -114,23 +88,8 @@
       <div class='row'>
         <div class='col-6'>
           <% if enrichment_definition.extraction_definition.present? %>
-
-            <div class='card card--right-arrow'>
-              <div class='card-body'>
-                <h5 class="card-title"><%= enrichment_definition.extraction_definition.name %></h5>
-
-                <div class="btn-group card__control">
-                  <i class="bi bi-three-dots-vertical" data-bs-toggle='dropdown'></i>
-                  <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-layers me-2"></i>Create from reference</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-link-45deg me-2"></i>Go to reference source</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-trash me-2"></i>Remove definition</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+          
+            <%= render partial: 'pipelines/card', locals: { name: enrichment_definition.extraction_definition.name, position: 'first', referenced: @pipeline != enrichment_definition.extraction_definition.pipeline } %>
 
           <% else %>
 
@@ -166,22 +125,7 @@
         <div class='col-6'>
           <% if enrichment_definition.transformation_definition.present? %>
           
-            <div class='card'>
-              <div class='card-body'>
-                <h5 class="card-title"><%= enrichment_definition.transformation_definition.name %></h5>
-
-                <div class="btn-group card__control">
-                  <i class="bi bi-three-dots-vertical" data-bs-toggle='dropdown'></i>
-                  <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-layers me-2"></i>Create from reference</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-link-45deg me-2"></i>Go to reference source</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-trash me-2"></i>Remove definition</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+            <%= render partial: 'pipelines/card', locals: { name: enrichment_definition.transformation_definition.name, position: 'last', referenced: @pipeline != enrichment_definition.transformation_definition.pipeline } %>
 
           <% else %>
             <button type="button" class="card mb-3 card--create-cta d-flex" data-bs-toggle="modal" data-bs-target="#add-enrichment-transformation-<%= enrichment_definition.id %>">
