@@ -10,6 +10,8 @@
   <div class="float-end">
 
     <div class="dropdown d-inline me-1">
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#run-from-extraction-job">Run from extraction job</button>
+
       <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
         <i class="bi bi-play" aria-hidden="true"></i> Run
       </button>
@@ -316,4 +318,40 @@
     </div>
   <% end %>
 <% end %>
+
+
+<div
+  class="modal fade"
+  id="run-from-extraction-job"
+  tabindex="-1"
+  aria-labelledby="Delete"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <%= vertical_form_with model: [@pipeline, @harvest_definition, @harvest_job], class: 'modal-content' do |form| %>
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Run from extraction job</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= form.hidden_field :harvest_definition_id, value: @harvest_definition.id %>
+        <div class="mb-3">
+          <%= form.label :extraction_job, 'Choose the extraction job:', class: "form-label" %>
+          <%= form.collection_select(:extraction_job_id, @pipeline.harvest.extraction_definition.extraction_jobs, :id, :name, {}, class: 'form-select') %>
+        </div>
+        
+        <div class="mb-3">
+          <%= form.label :extraction_job, 'Destination:', class: "form-label" %>
+          <%= form.collection_select(:destination_id, @destinations, :id, :name, {}, class: 'form-select') %>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">
+          Run
+        </button>
+      </div>
+    <% end %>
+  </div>
+</div>
 
