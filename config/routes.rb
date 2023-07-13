@@ -22,6 +22,10 @@ Rails.application.routes.draw do
     resources :jobs
 
     resources :harvest_definitions do
+      resources :harvest_jobs, only: %i[show create destroy] do
+        post :cancel, on: :member
+      end
+
       resources :extraction_definitions do
         collection do
           post :test

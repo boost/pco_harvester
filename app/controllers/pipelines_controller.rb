@@ -31,6 +31,8 @@ class PipelinesController < ApplicationController
     @harvest_definition = @pipeline.harvest || HarvestDefinition.new(pipeline: @pipeline)
 
     @enrichment_definition = HarvestDefinition.new(pipeline: @pipeline)
+
+    @destinations = Destination.all
   end
 
   def edit; end
