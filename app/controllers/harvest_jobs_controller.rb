@@ -15,10 +15,10 @@ class HarvestJobsController < ApplicationController
       flash.notice = 'Harvest job queued successfuly'
     else
       flash.alert = 'There was an issue launching the harvest job'
-      return redirect_to pipeline_path(@pipeline)
+      return redirect_to pipeline_jobs_path(@pipeline)
     end
 
-    redirect_to pipeline_path(@pipeline)
+    redirect_to pipeline_jobs_path(@pipeline)
   end
 
   def cancel
@@ -29,7 +29,7 @@ class HarvestJobsController < ApplicationController
       flash.alert = 'There was an issue cancelling the harvest job'
     end
 
-    redirect_to pipeline_path(@pipeline)
+    redirect_to pipeline_jobs_path(@pipeline)
   end
 
   private

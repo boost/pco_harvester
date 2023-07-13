@@ -25,7 +25,7 @@ class ExtractionJobsController < ApplicationController
       flash.alert = 'There was an issue launching the job'
     end
 
-    redirect_to pipeline_path(@pipeline)
+    redirect_to pipeline_jobs_path(@pipeline)
   end
 
   def destroy

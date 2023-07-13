@@ -6,7 +6,7 @@
         <% next if definition.nil? %>
 
         <% if type == 'harvest' %>
-          <% path = send("pipeline_harvest_definition_#{type}_job_path", pipeline, pipeline.harvest, pipeline.harvest.extraction_definition, job) %>
+          <% path = send("pipeline_harvest_definition_#{type}_job_path", pipeline, pipeline.harvest, job) %>
         <% else %>
           <% path = send("pipeline_harvest_definition_#{type}_definition_#{type}_job_path", pipeline, pipeline.harvest, pipeline.harvest.extraction_definition, job) %>
         <% end %>
