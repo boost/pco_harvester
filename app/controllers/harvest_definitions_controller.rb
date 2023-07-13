@@ -29,9 +29,22 @@ class HarvestDefinitionsController < ApplicationController
 
   def update
     if @harvest_definition.update(harvest_definition_params)
-      render status: 200, json: 'Harvest Definition update successfully'
+      respond_to do |format|
+        format.html do
+          redirect_to pipeline_path(@pipeline), notice: 'Harvest Definition updated successfully'
+        end
+
+        format.js { render status: 200, json: 'Harvest Definition update successfully' }
+      end
     else
-      render status: 500, json: 'There was an issue updating your Harvest Definition'
+      respond_to do |format|
+        format.html do 
+          flash.alert = "There was an issue updating your Harvest Definition"
+          redirect_to pipeline_path(@pipeline)
+        end
+
+        format.js { render status: 500, json: 'There was an issue updating your Harvest Definition' }
+      end
     end
   end
 

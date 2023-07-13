@@ -61,14 +61,18 @@
       </div>
 
       <% if @harvest_definition.extraction_definition.present? %>
-        <div class="dropdown d-inline me-1">
-          <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-play" aria-hidden="true"></i> Run Extraction
-          </button>
-          <ul class="dropdown-menu">
-            <li><%= button_to 'Run full job', pipeline_harvest_definition_extraction_definition_extraction_jobs_path(@pipeline, @harvest_definition,  @harvest_definition.extraction_definition, kind: :full), class: 'dropdown-item', form_class: 'dropdown-item' %></li>
-            <li><%= button_to 'Run sample job', pipeline_harvest_definition_extraction_definition_extraction_jobs_path(@pipeline, @harvest_definition, @harvest_definition.extraction_definition, kind: :sample), class: 'dropdown-item', form_class: 'dropdown-item' %></li>
-          </ul>
+        <div>
+          <div class="dropdown d-inline me-1">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-play" aria-hidden="true"></i> Run Extraction
+            </button>
+            <ul class="dropdown-menu">
+              <li><%= button_to 'Run full job', pipeline_harvest_definition_extraction_definition_extraction_jobs_path(@pipeline, @harvest_definition,  @harvest_definition.extraction_definition, kind: :full), class: 'dropdown-item', form_class: 'dropdown-item' %></li>
+              <li><%= button_to 'Run sample job', pipeline_harvest_definition_extraction_definition_extraction_jobs_path(@pipeline, @harvest_definition, @harvest_definition.extraction_definition, kind: :sample), class: 'dropdown-item', form_class: 'dropdown-item' %></li>
+            </ul>
+          </div>
+        
+          <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#add-harvest">Edit</button>
         </div>
       <% end %>
     </div>
@@ -242,7 +246,11 @@
     </div>
     
     <div class='d-grid mt-4'>
-      <button type="submit" class="btn btn-primary">Add to pipeline</button>
+      <% if @harvest_definition.persisted? %>
+        <button type="submit" class="btn btn-primary">Update harvest</button>
+      <% else %>
+        <button type="submit" class="btn btn-primary">Add to pipeline</button>
+      <% end %>
     </div>
   <% end %>
   </div>
