@@ -2,6 +2,6 @@
 
 class HomeController < ApplicationController
   def index
-    redirect_to content_sources_path
+    redirect_to pipelines_path
   end
 end
