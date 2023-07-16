@@ -85,7 +85,7 @@ class TransformationDefinitionsController < ApplicationController
   def find_pipeline
     @pipeline = Pipeline.find(params[:pipeline_id])
   end
-  
+
   def find_harvest_definition
     @harvest_definition = HarvestDefinition.find(params[:harvest_definition_id])
   end

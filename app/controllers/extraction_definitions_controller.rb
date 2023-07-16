@@ -2,6 +2,7 @@
 
 class ExtractionDefinitionsController < ApplicationController
   before_action :find_pipeline
+  before_action :find_referrer
   before_action :find_harvest_definition
   before_action :find_extraction_definition, only: %i[show edit update destroy update_harvest_definitions]
   before_action :find_destinations, only: %i[new create edit update]
@@ -40,7 +41,12 @@ class ExtractionDefinitionsController < ApplicationController
   def update
     if @extraction_definition.update(extraction_definition_params)
       flash.notice = 'Extraction Definition updated successfully'
-      redirect_to pipeline_path(@pipeline)
+
+      if params[:referrer_id].present?
+        redirect_to pipeline_path(params[:referrer_id])
+      else
+        redirect_to pipeline_path(@pipeline)
+      end
     else
       flash.alert = 'There was an issue updating your Extraction Definition'
       render 'edit'
@@ -97,6 +103,12 @@ class ExtractionDefinitionsController < ApplicationController
 
   def find_pipeline
     @pipeline = Pipeline.find(params[:pipeline_id])
+  end
+
+  def find_referrer
+    return if params[:referrer_id].blank?
+
+    @referrer = Pipeline.find(params[:referrer_id])
   end
 
   def find_harvest_definition
