@@ -50,10 +50,10 @@ class HarvestDefinitionsController < ApplicationController
 
   def destroy
     if @harvest_definition.destroy
-      redirect_to content_source_path(@content_source), notice: 'Harvest Definition deleted successfully'
+      redirect_to pipeline_path(@pipeline), notice: 'Harvest Definition deleted successfully'
     else
       flash.alert = 'There was an issue deleting your Harvest Definition'
-      redirect_to content_source_harvest_definition_path(@content_source, @harvest_definition)
+      redirect_to pipeline_path(@pipeline)
     end
   end
 

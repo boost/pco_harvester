@@ -10,13 +10,15 @@
   <div class="float-end">
 
     <div class="dropdown d-inline me-1">
-      <% if @pipeline.harvest.extraction_definition.present? && @pipeline.harvest.extraction_definition.extraction_jobs.any? %>
+      <% if @pipeline&.harvest&.extraction_definition.present? && @pipeline&.harvest&.extraction_definition.extraction_jobs.any? %>
+      <%#
         <button
           type="button"
           class="btn btn-primary"
           data-bs-toggle="modal"
           data-bs-target="#run-from-extraction-job"
         >Run from extraction job</button>
+      %>
         
         <div
           class="modal fade"
@@ -38,6 +40,8 @@
               </div>
               <div class="modal-body">
                 <%= form.hidden_field :harvest_definition_id, value: @harvest_definition.id %>
+                <%= form.hidden_field :key, value: SecureRandom.hex %>
+
                 <div class="mb-3">
                   <%= form.label :extraction_job, "Choose the extraction job:", class: "form-label" %>
                   <%= form.collection_select(
@@ -73,31 +77,34 @@
         </div>
       <% end %>
 
-      <button
-        class="btn btn-primary dropdown-toggle"
-        type="button"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-      >
-        <i class="bi bi-play" aria-hidden="true"></i>
-        Run
-      </button>
+      <% if @pipeline&.harvest&.extraction_definition.present? %>
 
-      <ul class="dropdown-menu">
-        <% @destinations.each do |destination| %>
-          <li><%= button_to destination.name,
-            pipeline_harvest_definition_harvest_jobs_path(@pipeline, @harvest_definition),
-            params: {
-              harvest_job: {
-                harvest_definition_id: @harvest_definition.id,
-                destination_id: destination.id,
-                key: SecureRandom.hex
-              }
-            },
-            class: "dropdown-item",
-            form_class: "dropdown-item" %></li>
-        <% end %>
-      </ul>
+        <button
+          class="btn btn-primary dropdown-toggle"
+          type="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <i class="bi bi-play" aria-hidden="true"></i>
+          Run
+        </button>
+
+        <ul class="dropdown-menu">
+          <% @destinations.each do |destination| %>
+            <li><%= button_to destination.name,
+              pipeline_harvest_definition_harvest_jobs_path(@pipeline, @harvest_definition),
+              params: {
+                harvest_job: {
+                  harvest_definition_id: @harvest_definition.id,
+                  destination_id: destination.id,
+                  key: SecureRandom.hex
+                }
+              },
+              class: "dropdown-item",
+              form_class: "dropdown-item" %></li>
+          <% end %>
+        </ul>
+      <% end %>
     </div>
 
     <%= link_to "Edit",
