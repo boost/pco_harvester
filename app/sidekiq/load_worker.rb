@@ -30,7 +30,22 @@ class LoadWorker < ApplicationWorker
     Sidekiq.logger.info "Harvest Job Load Status: #{harvest_job.load_jobs.map(&:status).uniq}"
 
     if harvest_job.extraction_job.completed? && harvest_job.transformation_jobs.all?(&:completed?) && harvest_job.load_jobs.all?(&:completed?)
-      Sidekiq.logger.info '!! ENQUEUE THE ENRICHMENTS !!'
+      harvest_job.pipeline.enrichments.each do |enrichment|
+        harvest_key = harvest_job.key
+        if harvest_job.key.include?('__')
+          harvest_key = harvest_key.match(/(?<key>.+)__/)[:key]
+        end
+
+        next if HarvestJob.find_by(key: "#{harvest_key}__enrichment-#{enrichment.id}").present?
+
+        enrichment_job = HarvestJob.create(
+          harvest_definition_id: enrichment.id,
+          destination_id: harvest_job.destination.id,
+          key: "#{harvest_key}__enrichment-#{enrichment.id}"
+        )
+
+        HarvestWorker.perform_async(enrichment_job.id)
+      end
     end
   end
 end
