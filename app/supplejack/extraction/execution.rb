@@ -26,9 +26,13 @@ module Extraction
 
         @de.extract_and_save
 
+        # The throttle needs to be before the transformation jobs are enqueued
+        # otherwise the child processes finish before the extraction process
+        # and the enrichments are never enqueued.
+        sleep @extraction_definition.throttle / 1000.0
+
         enqueue_record_transformation
 
-        sleep @extraction_definition.throttle / 1000.0
         @extraction_job.reload
 
         if @extraction_job.cancelled?
