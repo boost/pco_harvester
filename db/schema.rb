@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_13_015208) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_18_042706) do
   create_table "content_sources", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -108,9 +108,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_13_015208) do
     t.bigint "extraction_job_id"
     t.text "name"
     t.bigint "destination_id"
+    t.string "key"
     t.index ["destination_id"], name: "index_harvest_jobs_on_destination_id"
     t.index ["extraction_job_id"], name: "index_harvest_jobs_on_extraction_job_id"
     t.index ["harvest_definition_id"], name: "index_harvest_jobs_on_harvest_definition_id"
+    t.index ["key"], name: "index_harvest_jobs_on_key", unique: true
   end
 
   create_table "headers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

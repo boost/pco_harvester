@@ -69,4 +69,13 @@ RSpec.describe HarvestJob, type: :model do
   describe 'associations' do
     it { is_expected.to belong_to(:destination) }
   end
+
+  describe '#validations' do
+    let(:pipeline)           { create(:pipeline, name: 'NLNZCat') }
+    let(:destination)        { create(:destination) }
+    let(:harvest_definition) { create(:harvest_definition, pipeline:) }
+    subject                  { create(:harvest_job, harvest_definition:, destination:) }
+
+    it { is_expected.to validate_uniqueness_of(:key).case_insensitive.with_message('has already been taken') }
+  end
 end

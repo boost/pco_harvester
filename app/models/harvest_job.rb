@@ -14,6 +14,10 @@ class HarvestJob < ApplicationRecord
   delegate :extraction_definition, to: :harvest_definition
   delegate :transformation_definition, to: :harvest_definition
 
+  # This is to ensure that there is only ever one version of a HarvestJob running. 
+  # It is used when enqueing enrichments at the end of a harvest. 
+  validates_uniqueness_of :key
+
   after_create do
     self.name = "#{harvest_definition.name}__job-#{id}"
     save!

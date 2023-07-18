@@ -90,7 +90,8 @@
             params: {
               harvest_job: {
                 harvest_definition_id: @harvest_definition.id,
-                destination_id: destination.id
+                destination_id: destination.id,
+                key: SecureRandom.hex
               }
             },
             class: "dropdown-item",

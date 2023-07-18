@@ -42,8 +42,6 @@ module Load
 
     private
 
-    # TODO
-    # How can we reuse our existing request object?
     def connection(url, params, headers)
       Faraday.new(url:, params:, headers:) do |f|
         f.response :follow_redirects, limit: 5
