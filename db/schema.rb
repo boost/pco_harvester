@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_19_233904) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_19_234935) do
   create_table "destinations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "url", null: false
@@ -140,11 +140,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_19_233904) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "extraction_job_id", null: false
-    t.bigint "original_transformation_definition_id"
     t.integer "kind", default: 0
     t.bigint "pipeline_id"
     t.index ["extraction_job_id"], name: "index_transformation_definitions_on_extraction_job_id"
-    t.index ["original_transformation_definition_id"], name: "index_tds_on_original_td_id"
     t.index ["pipeline_id"], name: "index_transformation_definitions_on_pipeline_id"
   end
 

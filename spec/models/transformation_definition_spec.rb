@@ -3,10 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe TransformationDefinition, type: :model do
-  let(:content_source) { create(:content_source, :ngataonga, name: 'National Library of New Zealand') }
-  let(:extraction_definition) { content_source.extraction_definitions.first }
-  let(:extraction_job) { create(:extraction_job, extraction_definition:) }
-  let(:subject) { create(:transformation_definition, content_source:, extraction_job:) }
+  let(:pipeline)              { create(:pipeline, :ngataonga, name: 'National Library of New Zealand') }
+  let(:extraction_definition) { pipeline.harvest.extraction_definition }
+  let(:extraction_job)        { create(:extraction_job, extraction_definition:) }
+  let(:subject)               { create(:transformation_definition, pipeline:, extraction_job:) }
 
   let!(:field_one) do
     create(:field, name: 'title', block: "JsonPath.new('title').on(record).first", transformation_definition: subject)
@@ -31,8 +31,8 @@ RSpec.describe TransformationDefinition, type: :model do
       expect(subject.record_selector).to eq '$..results'
     end
 
-    it 'belongs to a content source' do
-      expect(subject.content_source).to eq content_source
+    it 'belongs to a pipeline' do
+      expect(subject.pipeline).to eq pipeline
     end
 
     it 'has a job' do
@@ -50,19 +50,6 @@ RSpec.describe TransformationDefinition, type: :model do
     it 'cannot be a copy of itself' do
       subject.original_transformation_definition = subject
       expect(subject).not_to be_valid
-    end
-  end
-
-  describe "#copy?" do
-    let(:original) { create(:transformation_definition) }
-    let(:copy)     { create(:transformation_definition, original_transformation_definition: original) }
-
-    it 'returns true if the transformation definition is a copy' do
-      expect(copy.copy?).to be true
-    end
-
-    it 'returns false if the transformation definition is an original' do
-      expect(original.copy?).to be false
     end
   end
 
