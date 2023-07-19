@@ -1,6 +1,6 @@
 <% id ||= 'create-modal' %>
 <% modal_heading ||= 'Create' %>
-<%= modal_subheading ||= '' %>
+<% modal_subheading ||= '' %>
 
 <%= tag.div(
   class: "modal fade",
@@ -12,9 +12,12 @@
 %>
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header modal-header--with-subheader">
         <h5 class="modal-title" id="create-modal-label"><%= modal_heading %></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class='modal-subheader'>
+        <p><%= modal_subheading %></p>
       </div>
       <div class="modal-body">
         <%= yield %>

@@ -33,7 +33,7 @@ class TransformationDefinitionsController < ApplicationController
         )
       end
 
-      redirect_to pipeline_path(@pipeline), notice: 'Transformation Definition created successfully'
+      redirect_to pipeline_harvest_definition_transformation_definition_path(@pipeline, @harvest_definition, @transformation_definition), notice: 'Transformation Definition created successfully'
     else
       flash.alert = 'There was an issue creating your Transformation Definition'
 

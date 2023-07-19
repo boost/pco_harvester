@@ -28,7 +28,7 @@ module Extraction
 
         # The throttle needs to be before the transformation jobs are enqueued
         # otherwise the child processes finish before the extraction process
-        # and the enrichments are never enqueued.
+        # and the enrichments are never queued.
         sleep @extraction_definition.throttle / 1000.0
 
         enqueue_record_transformation

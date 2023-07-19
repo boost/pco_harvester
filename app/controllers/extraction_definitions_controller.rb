@@ -31,6 +31,9 @@ class ExtractionDefinitionsController < ApplicationController
         )
       end
 
+      @extraction_job = ExtractionJob.create(extraction_definition: @extraction_definition, kind: 'sample')
+      ExtractionWorker.perform_async(@extraction_job.id)
+      
       redirect_to pipeline_path(@pipeline), notice: 'Extraction Definition created successfully'
     else
       flash.alert = 'There was an issue creating your Extraction Definition'
@@ -41,6 +44,9 @@ class ExtractionDefinitionsController < ApplicationController
   def update
     if @extraction_definition.update(extraction_definition_params)
       flash.notice = 'Extraction Definition updated successfully'
+
+      @extraction_job = ExtractionJob.create(extraction_definition: @extraction_definition, kind: 'sample')
+      ExtractionWorker.perform_async(@extraction_job.id)
 
       if params[:referrer_id].present?
         redirect_to pipeline_path(params[:referrer_id])
