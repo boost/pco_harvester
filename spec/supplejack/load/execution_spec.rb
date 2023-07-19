@@ -11,9 +11,9 @@ RSpec.describe Load::Execution do
       }
     }
   end
-  let(:content_source)    { create(:content_source, name: 'test') }
-  let(:destination)        { create(:destination) }
 
+  let(:pipeline)    { create(:pipeline, name: 'test') }
+  let(:destination) { create(:destination) }
 
   describe '#call' do
     context 'when the harvest definition is for a harvest' do
@@ -32,8 +32,8 @@ RSpec.describe Load::Execution do
          to_return(status: 200, body: "", headers: {})
       end
 
-      let(:harvest_definition) { create(:harvest_definition, destination:, content_source:, kind: 'harvest', source_id: 'test') }
-      let(:harvest_job)        { create(:harvest_job, harvest_definition:) }
+      let(:harvest_definition) { create(:harvest_definition, pipeline:, kind: 'harvest', source_id: 'test') }
+      let(:harvest_job)        { create(:harvest_job, harvest_definition:, destination:) }
       let(:load_job)           { create(:load_job, harvest_job:) }
 
       it 'sends the record to the API correctly' do
@@ -42,8 +42,8 @@ RSpec.describe Load::Execution do
     end
 
     context 'when the harvest definition is for an enrichment' do
-      let(:harvest_definition) { create(:harvest_definition, destination:, content_source:, kind: 'enrichment', source_id: 'test') }
-      let(:harvest_job)        { create(:harvest_job, harvest_definition:) }
+      let(:harvest_definition) { create(:harvest_definition, pipeline:, kind: 'enrichment', source_id: 'test') }
+      let(:harvest_job)        { create(:harvest_job, harvest_definition:, destination:) }
       let(:load_job)           { create(:load_job, harvest_job:, api_record_id: 'record_id') }
 
       before do
