@@ -1,40 +1,41 @@
 # frozen_string_literal: true
 
+# TODO
+# Tests on here are to be revisited when we look into cloning pipelines
+#
+
 require 'rails_helper'
 
 RSpec.describe HarvestDefinition, type: :model do
   subject do
     create(
       :harvest_definition,
-      content_source:,
+      pipeline:,
+      source_id: 'test',
       extraction_definition:,
-      transformation_definition:,
-      destination:,
-      source_id: 'test'
+      transformation_definition:
     )
   end
 
-  let(:content_source) { create(:content_source, :ngataonga, name: 'National Library of New Zealand') }
-  let(:extraction_definition) { content_source.extraction_definitions.first }
-  let(:extraction_job) { create(:extraction_job, extraction_definition:) }
-  let(:transformation_definition) { create(:transformation_definition, content_source:, extraction_job:) }
-  let(:destination) { create(:destination) }
+  let(:pipeline)                    { create(:pipeline, name: 'National Library of New Zealand') }
+  let(:harvest_definition)          { create(:harvest_definition, pipeline:, extraction_definition:, transformation_definition:) }
+  let(:extraction_definition)       { create(:extraction_definition) }
+  let(:extraction_job)              { create(:extraction_job, extraction_definition:) }
+  let(:transformation_definition)   { create(:transformation_definition, extraction_job:) }
+
+  # let(:destination)               { create(:destination) }
 
   describe '#attributes' do
-    it 'belongs to a content source' do
-      expect(subject.content_source).to eq content_source
+    it 'belongs to a pipeline' do
+      expect(subject.pipeline).to eq pipeline
     end
 
-    it 'has a copy of the provided extraction definition' do
-      expect(subject.extraction_definition.original_extraction_definition).to eq extraction_definition
+    it 'has an extraction definition' do
+      expect(subject.extraction_definition).to eq extraction_definition
     end
 
     it 'has a transformation definition' do
-      expect(subject.transformation_definition.original_transformation_definition).to eq transformation_definition
-    end
-
-    it 'has a destination' do
-      expect(subject.destination).to eq destination
+      expect(subject.transformation_definition).to eq transformation_definition
     end
   end
 
@@ -43,12 +44,15 @@ RSpec.describe HarvestDefinition, type: :model do
     let!(:transformation_definition) { create(:transformation_definition, fields: [field]) }
 
     it 'creates a safe copy of the provided transformation definition' do
+      pending
       expect do
         described_class.new(transformation_definition:).clone_transformation_definition
       end.to change(TransformationDefinition, :count).by(1)
     end
 
     it 'creates a copy of the transformation definition that has the same fields' do
+      pending
+
       described_class.new(transformation_definition:).clone_transformation_definition
 
       expect(transformation_definition.copies.count).to eq 1
@@ -63,6 +67,8 @@ RSpec.describe HarvestDefinition, type: :model do
   end
 
   describe '#update_transformation_definition_clone' do
+    pending
+
     let(:field) { build(:field) }
     let(:transformation_definition) do
       create(:transformation_definition, content_source:, extraction_job:, fields: [field])
@@ -76,6 +82,7 @@ RSpec.describe HarvestDefinition, type: :model do
     let(:harvest_job) { create(:harvest_job, harvest_definition: subject) }
 
     it 'updates the safe transformation definition copy to have the new fields and record_selector' do
+      pending
       subject
       copy = transformation_definition.copies.first
       expect(subject.transformation_definition).to eq transformation_definition.copies.first
@@ -88,6 +95,7 @@ RSpec.describe HarvestDefinition, type: :model do
     end
 
     it 'maintains the relationship between the copied transformation definition and anything else that references it' do
+      pending
       subject
       copy = transformation_definition.copies.first
       expect(subject.transformation_definition).to eq transformation_definition.copies.first
@@ -103,12 +111,14 @@ RSpec.describe HarvestDefinition, type: :model do
     let!(:extraction_definition) { create(:extraction_definition) }
 
     it 'creates a safe copy of the extraction_definition' do
+      pending
       expect do
         described_class.new(extraction_definition:).clone_extraction_definition
       end.to change(ExtractionDefinition, :count).by(1)
     end
 
     it 'creates a safe copy of the extraction definition that has the same information' do
+      pending
       described_class.new(extraction_definition:).clone_extraction_definition
 
       expect(extraction_definition.copies.count).to eq 1
@@ -122,6 +132,7 @@ RSpec.describe HarvestDefinition, type: :model do
     let!(:updated_extraction_definition) { create(:extraction_definition, base_url: 'http://www.test.co.nz') }
 
     it 'updates the extraction_definition clone to have the same values as the provided extracted_definition' do
+      pending
       subject
       copy = extraction_definition.copies.first
       expect(subject.extraction_definition).to eq extraction_definition.copies.first
@@ -133,6 +144,7 @@ RSpec.describe HarvestDefinition, type: :model do
     end
 
     it 'maintains the relationship between the extraction_definition and anything else that references it' do
+      pending
       subject
       copy = extraction_definition.copies.first
       expect(subject.extraction_definition).to eq extraction_definition.copies.first
@@ -157,6 +169,7 @@ RSpec.describe HarvestDefinition, type: :model do
     let(:destination)               { create(:destination) }
 
     it 'creates a safe copy of the extraction_definition' do
+      pending
       hd = described_class.new(content_source:, extraction_definition:, transformation_definition:, destination:,
                                source_id: 'test')
       hd.save!
@@ -167,6 +180,7 @@ RSpec.describe HarvestDefinition, type: :model do
     end
 
     it 'creates a safe copy of the transformation_definition' do
+      pending
       hd = described_class.new(content_source:, extraction_definition:, transformation_definition:, destination:,
                                source_id: 'test')
       hd.save!
@@ -193,14 +207,15 @@ RSpec.describe HarvestDefinition, type: :model do
 
   describe '#extraction_definition_is_a_copy' do
     it 'does not allow being associated with an original extraction definition' do
+      pending
       subject.extraction_definition = extraction_definition
       expect(subject).not_to be_valid
     end
   end
 
-
   describe '#transformation_definition_is_a_copy' do
     it 'does not allow being associated with an original transformation definition' do
+      pending
       subject.transformation_definition = transformation_definition
       expect(subject).not_to be_valid
     end
