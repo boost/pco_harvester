@@ -15,6 +15,7 @@ class HarvestDefinition < ApplicationRecord
   # before_create :clone_extraction_definition
 
   validates :source_id, presence: true
+
   # validate :extraction_definition_is_a_copy, on: :update
   # validate :transformation_definition_is_a_copy, on: :update
 
