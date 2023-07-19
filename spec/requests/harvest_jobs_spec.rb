@@ -3,25 +3,26 @@
 require 'rails_helper'
 
 RSpec.describe 'HarvestJobs', type: :request do
-  subject!                    { create(:harvest_job, harvest_definition:) }
+  let(:destination)           { create(:destination) }
+  subject!                    { create(:harvest_job, harvest_definition:, destination:) }
 
   let(:user)                  { create(:user) }
   let(:extraction_job)        { create(:extraction_job, extraction_definition:, harvest_job: subject) }
-  let(:content_source)       { create(:content_source, :figshare) }
-  let(:harvest_definition)    { content_source.harvest_definitions.first }
-  let(:extraction_definition) { content_source.extraction_definitions.first }
+  let(:pipeline)              { create(:pipeline, :figshare) }
+  let(:harvest_definition)    { pipeline.harvest }
+  let(:extraction_definition) { pipeline.harvest.extraction_definition }
   
   before do
     sign_in user
   end
 
   describe 'POST /create' do
-    let(:harvest_job) { build(:harvest_job, harvest_definition:) }
+    let(:harvest_job) { build(:harvest_job, harvest_definition:, destination:, key: SecureRandom.hex) }
 
     context 'with valid parameters' do
       it 'creates a new HarvestJob' do
         expect do
-          post content_source_harvest_definition_harvest_jobs_path(content_source, harvest_definition), params: {
+          post pipeline_harvest_definition_harvest_jobs_path(pipeline, harvest_definition), params: {
             harvest_job: harvest_job.attributes
           }
         end.to change(HarvestJob, :count).by(1)
@@ -30,21 +31,21 @@ RSpec.describe 'HarvestJobs', type: :request do
       it 'schedules a HarvestWorker' do
         expect(HarvestWorker).to receive(:perform_async).exactly(1).times.and_call_original
         
-        post content_source_harvest_definition_harvest_jobs_path(content_source, harvest_definition), params: {
+        post pipeline_harvest_definition_harvest_jobs_path(pipeline, harvest_definition), params: {
           harvest_job: harvest_job.attributes
         }
       end
 
-      it 'redirects to the harvest job path' do
-        post content_source_harvest_definition_harvest_jobs_path(content_source, harvest_definition), params: {
+      it 'redirects to the pipeline job path' do
+        post pipeline_harvest_definition_harvest_jobs_path(pipeline, harvest_definition), params: {
           harvest_job: harvest_job.attributes
         }
 
-        expect(response).to redirect_to(content_source_harvest_definition_harvest_job_path(content_source, harvest_definition, HarvestJob.last))
+        expect(response).to redirect_to(pipeline_jobs_path(pipeline))
       end
 
       it 'displays an appropriate flash message' do
-        post content_source_harvest_definition_harvest_jobs_path(content_source, harvest_definition), params: {
+        post pipeline_harvest_definition_harvest_jobs_path(pipeline, harvest_definition), params: {
           harvest_job: harvest_job.attributes
         }
 
@@ -57,7 +58,7 @@ RSpec.describe 'HarvestJobs', type: :request do
     context 'with invalid parameters' do
       it 'does not create a new HarvestJob' do
         expect do
-          post content_source_harvest_definition_harvest_jobs_path(content_source, harvest_definition), params: {
+          post pipeline_harvest_definition_harvest_jobs_path(pipeline, harvest_definition), params: {
             harvest_job: { title: 'hello' }
           }
         end.to change(HarvestJob, :count).by(0)
@@ -66,21 +67,21 @@ RSpec.describe 'HarvestJobs', type: :request do
       it 'does not enqueue a HarvestWorker' do
         expect(HarvestWorker).to receive(:perform_async).exactly(0).times.and_call_original
         
-        post content_source_harvest_definition_harvest_jobs_path(content_source, harvest_definition), params: {
+        post pipeline_harvest_definition_harvest_jobs_path(pipeline, harvest_definition), params: {
           harvest_job: { title: 'hello' }
         }
       end
 
-      it 'redirects to the harvest definition path' do
-        post content_source_harvest_definition_harvest_jobs_path(content_source, harvest_definition), params: {
+      it 'redirects to the pipeline jobs path' do
+        post pipeline_harvest_definition_harvest_jobs_path(pipeline, harvest_definition), params: {
           harvest_job: { title: 'hello' }
         }
 
-        expect(response).to redirect_to(content_source_harvest_definition_path(content_source, harvest_definition))
+        expect(response).to redirect_to(pipeline_jobs_path(pipeline))
       end
       
       it 'displays an appropriate flash message' do
-        post content_source_harvest_definition_harvest_jobs_path(content_source, harvest_definition), params: {
+        post pipeline_harvest_definition_harvest_jobs_path(pipeline, harvest_definition), params: {
           harvest_job: { title: 'hello' }
         }
 
@@ -94,7 +95,7 @@ RSpec.describe 'HarvestJobs', type: :request do
   describe 'POST /cancel' do
     context 'when the cancellation is successful' do
       it 'sets the job status to be cancelled' do
-        post cancel_content_source_harvest_definition_harvest_job_path(content_source, harvest_definition, subject)
+        post cancel_pipeline_harvest_definition_harvest_job_path(pipeline, harvest_definition, subject)
 
         subject.reload
 
@@ -103,9 +104,9 @@ RSpec.describe 'HarvestJobs', type: :request do
       end
 
       it 'redirects to the correct path' do
-        post cancel_content_source_harvest_definition_harvest_job_path(content_source, harvest_definition, subject)
+        post cancel_pipeline_harvest_definition_harvest_job_path(pipeline, harvest_definition, subject)
 
-        expect(response).to redirect_to content_source_harvest_definition_path(content_source, harvest_definition)
+        expect(response).to redirect_to pipeline_jobs_path(pipeline)
       end
     end
 
@@ -115,7 +116,7 @@ RSpec.describe 'HarvestJobs', type: :request do
       end
 
       it 'does not set the job status to be cancelled' do
-        post cancel_content_source_harvest_definition_harvest_job_path(content_source, harvest_definition, subject)
+        post cancel_pipeline_harvest_definition_harvest_job_path(pipeline, harvest_definition, subject)
 
         subject.reload
 
@@ -124,7 +125,7 @@ RSpec.describe 'HarvestJobs', type: :request do
       end
 
       it 'displays an appropriate flash message' do
-        post cancel_content_source_harvest_definition_harvest_job_path(content_source, harvest_definition, subject)
+        post cancel_pipeline_harvest_definition_harvest_job_path(pipeline, harvest_definition, subject)
 
         follow_redirect!
 

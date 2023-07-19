@@ -15,7 +15,6 @@ class HarvestJobsController < ApplicationController
       flash.notice = 'Harvest job queued successfuly'
     else
       flash.alert = 'There was an issue launching the harvest job'
-      return redirect_to pipeline_jobs_path(@pipeline)
     end
 
     redirect_to pipeline_jobs_path(@pipeline)
