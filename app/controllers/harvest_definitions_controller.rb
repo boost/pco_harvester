@@ -2,19 +2,8 @@
 
 class HarvestDefinitionsController < ApplicationController
   before_action :find_pipeline
-  before_action :find_harvest_definition, only: %i[show edit update destroy]
+  before_action :find_harvest_definition, only: %i[update]
   before_action :find_destinations
-
-  def show
-    @harvest_jobs = paginate_and_filter_jobs(@harvest_definition.harvest_jobs)
-    @harvest_job = HarvestJob.new(harvest_definition: @harvest_definition)
-  end
-
-  def new
-    @harvest_definition = HarvestDefinition.new(kind: params[:kind])
-  end
-
-  def edit; end
 
   def create
     @harvest_definition = HarvestDefinition.new(harvest_definition_params)
@@ -23,6 +12,9 @@ class HarvestDefinitionsController < ApplicationController
       redirect_to pipeline_path(@pipeline), notice: "#{@harvest_definition.kind.capitalize} created successfully"
     else
       flash.alert = "There was an issue creating your #{@harvest_definition.kind.capitalize}"
+
+      @enrichment_definition = HarvestDefinition.new(pipeline: @pipeline)
+      
       render 'pipelines/show'
     end
   end

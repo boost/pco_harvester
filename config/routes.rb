@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   resources :pipelines, only: %i[index show create update edit destroy] do
     resources :jobs
 
-    resources :harvest_definitions do
+    resources :harvest_definitions, only: %i[create update] do
       resources :harvest_jobs, only: %i[show create destroy] do
         post :cancel, on: :member
       end
