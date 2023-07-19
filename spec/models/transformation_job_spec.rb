@@ -3,11 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe TransformationJob, type: :model do
-  subject(:transformation_job) { create(:transformation_job, extraction_job:, transformation_definition:) }
+  subject(:transformation_job)    { create(:transformation_job, extraction_job:, transformation_definition:) }
 
-  let(:content_source) { create(:content_source, name: 'National Library of New Zealand') }
-  let(:extraction_job) { create(:extraction_job) }
-  let(:transformation_definition) { create(:transformation_definition, content_source:) }
+  let(:pipeline)                  { create(:pipeline, name: 'National Library of New Zealand') }
+  let(:harvest_definition)        { create(:harvest_definition, transformation_definition:, pipeline:)}
+  let(:extraction_job)            { create(:extraction_job) }
+  let(:transformation_definition) { create(:transformation_definition) }
 
   describe '#name' do
     it 'automatically generates a sensible name' do
@@ -24,7 +25,7 @@ RSpec.describe TransformationJob, type: :model do
     context 'when the extracted document is XML' do
       let(:extraction_definition)     { create(:extraction_definition, format: 'XML', pagination_type: 'tokenised', total_selector: '//records/@total', page: 1, per_page_parameter: 'n', per_page: 100, token_parameter: 's', token_value: '*', next_token_path: '//records/@nextStart') }
       let(:extraction_job)            { create(:extraction_job, extraction_definition:) }
-      let(:transformation_definition) { create(:transformation_definition, content_source:, record_selector: '//work', extraction_job:) }
+      let(:transformation_definition) { create(:transformation_definition, record_selector: '//work', extraction_job:) }
       
       before do
         stub_trove_harvest_requests(extraction_definition, 
@@ -47,7 +48,7 @@ RSpec.describe TransformationJob, type: :model do
     context 'when the extracted document is JSON' do
       let(:extraction_definition) { create(:extraction_definition, format: 'JSON', pagination_type: 'tokenised', total_selector: '$.total_results', page: 1, per_page_parameter: 'per_page', per_page: 30, token_parameter: 'id_above', token_value: '0', next_token_path: '$.results[(@.length-1)].id') }
       let(:extraction_job)            { create(:extraction_job, extraction_definition:) }
-      let(:transformation_definition) { create(:transformation_definition, content_source:, record_selector: '$.results', extraction_job:) }
+      let(:transformation_definition) { create(:transformation_definition, record_selector: '$.results', extraction_job:) }
 
       before do
         stub_inaturalist_harvest_requests(extraction_definition, 
