@@ -5,6 +5,8 @@
 class ExtractionDefinition < ApplicationRecord
   scope :originals, -> { where(original_extraction_definition: nil) }
 
+  # The destination is used for Enrichment Extractions
+  # To know where to pull the records that are to be enriched from
   belongs_to :destination, optional: true
   belongs_to :pipeline
 
@@ -20,20 +22,6 @@ class ExtractionDefinition < ApplicationRecord
     save!
   end
 
-  # feature allows editing an extraction definition  without impacting a running harvest
-  belongs_to(
-    :original_extraction_definition,
-    class_name: 'ExtractionDefinition',
-    optional: true
-  )
-
-  has_many(
-    :copies,
-    class_name: 'ExtractionDefinition',
-    foreign_key: 'original_extraction_definition_id',
-    inverse_of: 'original_extraction_definition'
-  )
-
   # find good regex or another implementation
   FORMAT_SELECTOR_REGEX_MAP = {
     JSON: /^\$\./,
@@ -43,7 +31,6 @@ class ExtractionDefinition < ApplicationRecord
   }.freeze
 
   validates :throttle, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 60_000 }
-  validate :cannot_be_a_copy_of_self
 
   # Harvest related validation
   with_options if: :harvest? do
@@ -74,16 +61,6 @@ class ExtractionDefinition < ApplicationRecord
     return if FORMAT_SELECTOR_REGEX_MAP[format&.to_sym]&.match?(total_selector)
 
     errors.add(:total_selector, "invalid selector for the #{format} format")
-  end
-
-  def copy?
-    original_extraction_definition.present?
-  end
-
-  def cannot_be_a_copy_of_self
-    return unless original_extraction_definition == self
-
-    errors.add(:copy, 'Extraction Definition cannot be a copy of itself')
   end
 
   def to_h

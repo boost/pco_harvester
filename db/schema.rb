@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_19_232602) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_19_233904) do
   create_table "destinations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "url", null: false
@@ -32,7 +32,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_19_232602) do
     t.string "total_selector"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "original_extraction_definition_id"
     t.integer "kind", default: 0
     t.string "source_id"
     t.string "enrichment_url"
@@ -44,7 +43,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_19_232602) do
     t.string "initial_params"
     t.bigint "pipeline_id"
     t.index ["destination_id"], name: "index_extraction_definitions_on_destination_id"
-    t.index ["original_extraction_definition_id"], name: "index_eds_on_original_ed_id"
     t.index ["pipeline_id"], name: "index_extraction_definitions_on_pipeline_id"
   end
 

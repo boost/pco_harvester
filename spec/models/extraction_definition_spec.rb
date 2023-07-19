@@ -3,10 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe ExtractionDefinition, type: :model do
-  subject! { create(:extraction_definition, content_source: cp1) }
+  subject! { create(:extraction_definition, pipeline: pipeline1) }
 
-  let!(:cp1) { create(:content_source, name: 'National Library of New Zealand') }
-  let!(:cp2) { create(:content_source) }
+  let!(:pipeline1) { create(:pipeline, name: 'National Library of New Zealand') }
+  let!(:pipeline2) { create(:pipeline) }
 
   describe '#name' do
     it 'autogenerates a sensible name' do
@@ -26,7 +26,7 @@ RSpec.describe ExtractionDefinition, type: :model do
     end
 
     context 'when the extraction definition is for an enrichment' do
-      subject! { create(:extraction_definition, :enrichment, content_source: cp1, name: 'Flickr API', destination:) }
+      subject! { create(:extraction_definition, :enrichment, pipeline: pipeline1, name: 'Flickr API', destination:) }
 
       let(:destination) { create(:destination) }
 
@@ -57,16 +57,11 @@ RSpec.describe ExtractionDefinition, type: :model do
       expect(subject).to validate_inclusion_of(:format).in_array(%w[JSON XML]).with_message('is not included in the list')
     }
 
-    it 'requires a content source' do
-      extraction_definition = build(:extraction_definition, content_source: nil)
+    it 'requires a pipeline' do
+      extraction_definition = build(:extraction_definition, pipeline: nil)
       expect(extraction_definition).not_to be_valid
 
-      expect(extraction_definition.errors[:content_source]).to include 'must exist'
-    end
-
-    it 'cannot be a copy of itself' do
-      subject.original_extraction_definition = subject
-      expect(subject).not_to be_valid
+      expect(extraction_definition.errors[:pipeline]).to include 'must exist'
     end
   end
 
@@ -104,8 +99,8 @@ RSpec.describe ExtractionDefinition, type: :model do
       expect(subject.extraction_jobs).to include(extraction_job)
     end
 
-    it 'belongs to a content source' do
-      expect(subject.content_source).to be_a ContentSource
+    it 'belongs to a pipeline' do
+      expect(subject.pipeline).to be_a Pipeline
     end
 
     it 'has many headers' do
@@ -120,20 +115,6 @@ RSpec.describe ExtractionDefinition, type: :model do
       it "can be #{key}" do
         expect(ExtractionDefinition.new(kind: value).kind).to eq(key.to_s)
       end
-    end
-  end
-
-  describe "#copy?" do
-    let(:destination) { create(:destination) }
-    let(:original) { create(:extraction_definition, :enrichment, content_source: cp1, name: 'Flickr API', destination:) }
-    let(:copy) { create(:extraction_definition, :enrichment, content_source: cp1, name: 'Flickr API', destination:, original_extraction_definition: original) }
-
-    it 'returns true if the extraction definition is a copy' do
-      expect(copy.copy?).to eq true
-    end
-
-    it 'returns false if the extraction definition is an original' do
-      expect(original.copy?).to eq false
     end
   end
 
