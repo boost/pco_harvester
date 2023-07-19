@@ -5,8 +5,8 @@ require 'rails_helper'
 RSpec.describe ExtractionJob, type: :model do
   subject { create(:extraction_job, extraction_definition:) }
 
-  let(:content_source) { create(:content_source, name: 'National Library of New Zealand') }
-  let(:extraction_definition) { create(:extraction_definition, content_source:) }
+  let(:pipeline) { create(:pipeline, name: 'National Library of New Zealand') }
+  let(:extraction_definition) { create(:extraction_definition, pipeline:) }
 
   describe '#name' do
     it 'autogenerates a sensible name' do
