@@ -4,7 +4,7 @@ class ExtractionDefinitionsController < ApplicationController
   before_action :find_pipeline
   before_action :find_referrer
   before_action :find_harvest_definition
-  before_action :find_extraction_definition, only: %i[show edit update destroy update_harvest_definitions]
+  before_action :find_extraction_definition, only: %i[show edit update]
   before_action :find_destinations, only: %i[new create edit update]
 
   def show
@@ -57,16 +57,6 @@ class ExtractionDefinitionsController < ApplicationController
       flash.alert = 'There was an issue updating your Extraction Definition'
       render 'edit'
     end
-  end
-
-  def update_harvest_definitions
-    @extraction_definition.copies.each do |copy|
-      harvest_definition = HarvestDefinition.find_by(extraction_definition: copy)
-      harvest_definition.update_extraction_definition_clone(@extraction_definition)
-    end
-
-    flash.notice = 'Harvest definitions updated.'
-    redirect_to pipeline_extraction_definition_path(@pipeline, @extraction_definition)
   end
 
   def test

@@ -17,7 +17,8 @@ module Extraction
 
       return if @extraction_job.is_sample?
 
-      max_pages       = (total_results / @extraction_definition.per_page) + 1
+      # max_pages       = (total_results / @extraction_definition.per_page) + 1
+      max_pages = 5
 
       (@extraction_definition.page...max_pages).each do
         @extraction_definition.page += 1
