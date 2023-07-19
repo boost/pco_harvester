@@ -10,36 +10,32 @@
   <div class="float-end">
     <div class="dropdown d-inline me-1">
 
-      <% if @pipeline.harvest.present? %>
-        <% if @pipeline.harvest.extraction_definition.present? %>
-          <% if @pipeline.harvest.transformation_definition.present? && @pipeline.harvest.transformation_definition.fields.any? %>
-            <button
-              class="btn btn-primary dropdown-toggle"
-              type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              <i class="bi bi-play" aria-hidden="true"></i>
-              Run
-            </button>
+      <% if ready_to_run?(@pipeline) %>
+        <button
+          class="btn btn-primary dropdown-toggle"
+          type="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <i class="bi bi-play" aria-hidden="true"></i>
+          Run
+        </button>
 
-            <ul class="dropdown-menu">
-              <% @destinations.each do |destination| %>
-                <li><%= button_to destination.name,
-                  pipeline_harvest_definition_harvest_jobs_path(@pipeline, @harvest_definition),
-                  params: {
-                    harvest_job: {
-                      harvest_definition_id: @harvest_definition.id,
-                      destination_id: destination.id,
-                      key: SecureRandom.hex
-                    }
-                  },
-                  class: "dropdown-item",
-                  form_class: "dropdown-item" %></li>
-              <% end %>
-            </ul>
+        <ul class="dropdown-menu">
+          <% @destinations.each do |destination| %>
+            <li><%= button_to destination.name,
+              pipeline_harvest_definition_harvest_jobs_path(@pipeline, @harvest_definition),
+              params: {
+                harvest_job: {
+                  harvest_definition_id: @harvest_definition.id,
+                  destination_id: destination.id,
+                  key: SecureRandom.hex
+                }
+              },
+              class: "dropdown-item",
+              form_class: "dropdown-item" %></li>
           <% end %>
-        <% end %>
+        </ul>
       <% end %>
 
     </div>
