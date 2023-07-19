@@ -3,10 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe Field, type: :model do
-  let(:content_source) { create(:content_source, :ngataonga) }
-  let(:extraction_definition) { content_source.extraction_definitions.first }
+  let(:pipeline) { create(:pipeline, :ngataonga) }
+  let(:extraction_definition) { pipeline.harvest.extraction_definition }
   let(:extraction_job) { create(:extraction_job, extraction_definition:) }
-  let(:transformation_definition) { create(:transformation_definition, content_source:, extraction_job:) }
+  let(:transformation_definition) { create(:transformation_definition, pipeline:, extraction_job:) }
   let(:subject) { create(:field, transformation_definition:) }
 
   describe '#attributes' do
