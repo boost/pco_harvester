@@ -5,8 +5,8 @@ require 'rails_helper'
 RSpec.describe Extraction::Documents do
   subject { extraction_job.documents }
 
-  let(:content_source) { create(:content_source, :ngataonga) }
-  let(:extraction_definition) { content_source.extraction_definitions.first }
+  let(:pipeline) { create(:pipeline, :ngataonga) }
+  let(:extraction_definition) { pipeline.harvest.extraction_definition }
   let(:extraction_job) { create(:extraction_job, extraction_definition:) }
 
   before do
