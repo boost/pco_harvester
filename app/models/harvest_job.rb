@@ -51,4 +51,12 @@ class HarvestJob < ApplicationRecord
 
     end_time - start_time
   end
+
+  def reload_child_jobs!
+    extraction_job.reload && transformation_jobs.each(&:reload) && load_jobs.each(&:reload)
+  end
+
+  def completed?
+    extraction_job.completed? && transformation_jobs.all?(&:completed?) && load_jobs.all?(&:completed?)
+  end
 end

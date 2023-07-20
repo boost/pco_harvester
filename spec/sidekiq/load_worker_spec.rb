@@ -10,6 +10,7 @@ RSpec.describe LoadWorker, type: :job do
 
   describe '#perform' do
     let(:harvest_job)            { create(:harvest_job, :completed, harvest_definition:, destination:, key: 'test') }
+    let!(:field)                  { create(:field, name: 'title', block: "JsonPath.new('title').on(record).first", transformation_definition: enrichment_definition.transformation_definition) }
     let!(:load_job)              { create(:load_job, harvest_job:) }
 
     context 'when the harvest has completed' do
