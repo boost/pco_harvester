@@ -4,16 +4,8 @@ class ExtractionDefinitionsController < ApplicationController
   before_action :find_pipeline
   before_action :find_referrer
   before_action :find_harvest_definition
-  before_action :find_extraction_definition, only: %i[show edit update]
+  before_action :find_extraction_definition, only: %i[edit update]
   before_action :find_destinations, only: %i[new create edit update]
-
-  def show
-    @extraction_jobs = paginate_and_filter_jobs(@extraction_definition.extraction_jobs)
-
-    @related_harvest_definitions = @extraction_definition.copies.map do |copy|
-      HarvestDefinition.find_by(extraction_definition_id: copy.id)
-    end.compact
-  end
 
   def new
     @extraction_definition = ExtractionDefinition.new(kind: params[:kind])
