@@ -3,10 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe ExtractionWorker, type: :job do
-  let(:cp) { create(:content_source, :ngataonga) }
-  let(:ed) { cp.extraction_definitions.first }
-  let(:extraction_job) { create(:extraction_job, extraction_definition: ed, status: 'queued') }
-  let(:subject) { ExtractionWorker.new }
+  let(:pipeline)              { create(:pipeline, :ngataonga) }
+  let(:extraction_definition) { pipeline.harvest.extraction_definition }
+  let(:extraction_job)        { create(:extraction_job, extraction_definition:, status: 'queued') }
+  let(:subject)               { ExtractionWorker.new }
 
   describe 'options' do
     it 'sets the retry to 0' do
@@ -23,7 +23,7 @@ RSpec.describe ExtractionWorker, type: :job do
   end
 
   describe '#perform' do
-    before { stub_ngataonga_harvest_requests(ed) }
+    before { stub_ngataonga_harvest_requests(extraction_definition) }
 
     it 'marks the job as completed' do
       subject.perform(extraction_job.id)
