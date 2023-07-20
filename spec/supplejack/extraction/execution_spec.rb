@@ -3,9 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe Extraction::Execution do
-  let(:full_job) { create(:extraction_job) }
+  let(:full_job)   { create(:extraction_job) }
   let(:sample_job) { create(:extraction_job, kind: 'sample') }
-  let(:ed) { create(:extraction_definition, base_url: 'http://google.com/?url_param=url_value', extraction_jobs: [full_job, sample_job]) }
+  let(:ed)         { create(:extraction_definition, base_url: 'http://google.com/?url_param=url_value', extraction_jobs: [full_job, sample_job]) }
 
   before do
     (1...6).each do |page|
@@ -79,8 +79,11 @@ RSpec.describe Extraction::Execution do
       let(:ej) { create(:extraction_job) }
       let(:sample_ej) { create(:extraction_job, :sample) }
       let(:ed)  { create(:extraction_definition, :figshare) }
-      let!(:hj) { create(:harvest_job, extraction_job: ej) }
-      let!(:sample_hj) { create(:harvest_job, extraction_job: sample_ej) }
+      let(:pipeline) { create(:pipeline) }
+      let(:harvest_definition) { create(:harvest_definition, pipeline:) }
+      let(:destination) { create(:destination) }
+      let!(:hj) { create(:harvest_job, extraction_job: ej, harvest_definition:, destination:) }
+      let!(:sample_hj) { create(:harvest_job, extraction_job: sample_ej, harvest_definition:, destination:) }
 
       before do
         stub_figshare_harvest_requests(ed)

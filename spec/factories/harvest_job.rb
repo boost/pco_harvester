@@ -4,6 +4,7 @@ FactoryBot.define do
   factory :harvest_job do
     harvest_definition
     extraction_job
+    key { SecureRandom.hex }
 
     trait(:completed) do
       status { 'completed' }
