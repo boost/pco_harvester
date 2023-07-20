@@ -46,13 +46,6 @@ RSpec.describe TransformationDefinition, type: :model do
     end
   end
 
-  describe "#validation" do
-    it 'cannot be a copy of itself' do
-      subject.original_transformation_definition = subject
-      expect(subject).not_to be_valid
-    end
-  end
-
   describe 'kinds' do
     let(:harvest_transformation_definition) { create(:transformation_definition, kind: :harvest) }
     let(:enrichment_transformation_definition) { create(:transformation_definition, kind: :enrichment) }

@@ -61,8 +61,7 @@ module ReduxState
     {
       fieldNavExpanded: true,
       rawRecordExpanded: true,
-      transformedRecordExpanded: true,
-      readOnly: @transformation_definition.copy?
+      transformedRecordExpanded: true
     }
   end
 
