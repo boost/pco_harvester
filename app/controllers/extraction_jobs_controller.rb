@@ -6,10 +6,6 @@ class ExtractionJobsController < ApplicationController
   before_action :find_extraction_definition, only: %i[show create destroy cancel]
   before_action :find_extraction_job, only: %i[show destroy cancel]
 
-  def index
-    @extraction_jobs = paginate_and_filter_jobs(ExtractionJob)
-  end
-
   def show
     @documents = @extraction_job.documents
     @document = @documents[params[:page]]
@@ -31,7 +27,7 @@ class ExtractionJobsController < ApplicationController
   def destroy
     if @extraction_job.destroy
       flash.notice = 'Results deleted successfully'
-      redirect_to pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition, @extraction_definition)
+      redirect_to pipeline_jobs_path(@pipeline)
     else
       flash.alert = 'There was an issue deleting the results'
       redirect_to pipeline_harvest_definition_extraction_definition_extraction_job_path(@pipeline, @harvest_definition, @extraction_definition,
