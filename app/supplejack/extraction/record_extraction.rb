@@ -15,15 +15,15 @@ module Extraction
 
     def params
       {
-        search: {
-          'fragments.source_id' => @extraction_definition.source_id,
-        }.merge(
+        search: {}.merge(
           if @harvest_job&.target_job_id.present?
             {
               'fragments.job_id' => @harvest_job.target_job_id
             }
           else
-            {}
+            {
+              'fragments.source_id' => @extraction_definition.source_id,
+            }
           end
         ),
         search_options: {
