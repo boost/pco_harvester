@@ -39,7 +39,8 @@ class LoadWorker < ApplicationWorker
       enrichment_job = HarvestJob.create(
         harvest_definition: enrichment,
         destination_id: harvest_job.destination.id,
-        key: "#{harvest_key}__enrichment-#{enrichment.id}"
+        key: "#{harvest_key}__enrichment-#{enrichment.id}",
+        target_job_id: harvest_job.name
       )
 
       HarvestWorker.perform_async(enrichment_job.id)

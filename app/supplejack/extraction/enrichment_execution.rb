@@ -7,7 +7,7 @@ module Extraction
     end
 
     def call
-      re = RecordExtraction.new(@extraction_definition, @extraction_definition.page).extract
+      re = RecordExtraction.new(@extraction_definition, @extraction_definition.page, @harvest_job).extract
       max_pages = JsonPath.new(@extraction_definition.total_selector).on(re.body).first.to_i
 
       records = JSON.parse(re.body)['records']

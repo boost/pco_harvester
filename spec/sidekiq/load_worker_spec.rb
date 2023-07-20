@@ -14,12 +14,14 @@ RSpec.describe LoadWorker, type: :job do
     let!(:load_job)              { create(:load_job, harvest_job:) }
 
     context 'when the harvest has completed' do
-      it 'queues enrichments that are ready to be run' do
+      it 'queues scoped enrichments that are ready to be run' do
         expect(HarvestWorker).to receive(:perform_async)
 
         expect do
           LoadWorker.new.perform(load_job.id, '[]')
         end.to change(HarvestJob, :count).by(1)
+
+        expect(HarvestJob.last.target_job_id).to eq harvest_job.name
       end
 
       it 'does not queue enrichments if there is allready an existing enrichment with the same key' do

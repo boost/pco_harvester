@@ -12,7 +12,6 @@ class HarvestWorker < ApplicationWorker
   end
 
   def create_extraction_job
-    
     extraction_job = ExtractionJob.create(
       extraction_definition: @harvest_job.extraction_definition,
       harvest_job: @harvest_job,

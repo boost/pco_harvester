@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_19_234935) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_20_213947) do
   create_table "destinations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "url", null: false
@@ -36,7 +36,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_19_234935) do
     t.string "source_id"
     t.string "enrichment_url"
     t.bigint "destination_id"
-    t.string "job_id"
     t.string "next_token_path"
     t.string "token_parameter"
     t.string "token_value"
@@ -97,6 +96,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_19_234935) do
     t.text "name"
     t.bigint "destination_id"
     t.string "key"
+    t.string "target_job_id"
     t.index ["destination_id"], name: "index_harvest_jobs_on_destination_id"
     t.index ["extraction_job_id"], name: "index_harvest_jobs_on_extraction_job_id"
     t.index ["harvest_definition_id"], name: "index_harvest_jobs_on_harvest_definition_id"
