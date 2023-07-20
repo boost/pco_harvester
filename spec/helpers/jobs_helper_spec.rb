@@ -10,7 +10,11 @@ RSpec.describe JobsHelper do
     let(:errored_job)        { create(:extraction_job, status: 'errored') }
     let(:cancelled_job)      { create(:extraction_job, status: 'cancelled') }
     let(:completed_job)      { create(:extraction_job, status: 'completed') }
-    let(:harvest_job)        { create(:harvest_job,    status: 'completed') }
+    
+    let(:destination)        { create(:destination) }
+    let(:pipeline)           { create(:pipeline, name: 'NLNZCat') }
+    let(:harvest_definition) { create(:harvest_definition, pipeline:) }
+    let(:harvest_job)        { create(:harvest_job,    status: 'completed', destination:, harvest_definition:) }
 
     it 'returns Waiting in queue... for queued jobs' do
       expect(job_status_text(queued_job)).to eq 'Waiting in queue...'
