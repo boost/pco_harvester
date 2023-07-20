@@ -52,4 +52,35 @@ RSpec.describe HarvestDefinition, type: :model do
       expect(subject.enrichment?).to be true
     end
   end
+
+  describe '#ready_to_run?' do
+    it 'returns false if it has no extraction definition' do
+      pipeline = create(:pipeline)
+      harvest_definition = create(:harvest_definition, pipeline:, extraction_definition: nil)
+
+      expect(harvest_definition.ready_to_run?).to eq false
+    end
+
+    it 'returns false if it has an extraction_definition but no transformation definition' do
+      pipeline = create(:pipeline)
+      harvest_definition = create(:harvest_definition, pipeline:, transformation_definition: nil)
+
+      expect(harvest_definition.ready_to_run?).to eq false
+    end
+
+    it 'returns false if it has an extraction definition, transformation definition but no fields' do
+      pipeline = create(:pipeline)
+      harvest_definition = create(:harvest_definition, pipeline:)
+
+      expect(harvest_definition.ready_to_run?).to eq false
+    end
+
+    it 'returns true if it has an extraction_definition and a transformation_definition with fields' do
+      pipeline = create(:pipeline)
+      harvest_definition = create(:harvest_definition, pipeline:)
+      field = create(:field, name: 'title', block: "JsonPath.new('title').on(record).first", transformation_definition: pipeline.harvest.transformation_definition)
+
+      expect(harvest_definition.ready_to_run?).to eq true
+    end
+  end
 end

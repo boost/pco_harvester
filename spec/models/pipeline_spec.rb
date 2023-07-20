@@ -59,9 +59,9 @@ RSpec.describe Pipeline, type: :model do
     it 'returns true if the pipeline is ready to run' do
       pipeline = create(:pipeline)
       harvest_definition = create(:harvest_definition, pipeline:)
-      field = create(:field, name: 'title', block: "JsonPath.new('title').on(record).first", transformation_definition: pipeline.harvest.transformation_definition)
+      field = create(:field, name: 'title', block: "JsonPath.new('title').on(record).first", transformation_definition: harvest_definition.transformation_definition)
 
-      expect(pipeline.ready_to_run?).to eq true
+      expect(pipeline.ready_to_run?).to eq(true)
     end
   end
 end

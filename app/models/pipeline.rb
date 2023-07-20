@@ -14,11 +14,8 @@ class Pipeline < ApplicationRecord
   end
 
   def ready_to_run?
-    return false if harvest.blank?
-    return false if harvest.extraction_definition.blank?
-    return false if harvest.transformation_definition.blank?
-    return false if harvest.transformation_definition.fields.empty?
+    return false if harvest_definitions.empty?
 
-    true
+    harvest_definitions.all? { |definition| definition.ready_to_run? }
   end
 end
