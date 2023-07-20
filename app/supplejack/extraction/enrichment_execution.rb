@@ -8,8 +8,8 @@ module Extraction
 
     def call
       re = RecordExtraction.new(@extraction_definition, @extraction_definition.page, @harvest_job).extract
-      max_pages = JsonPath.new(@extraction_definition.total_selector).on(re.body).first.to_i
 
+      max_pages = JsonPath.new(@extraction_definition.total_selector).on(re.body).first.to_i
       records = JSON.parse(re.body)['records']
 
       extract_and_save_enrichment_documents(records)
@@ -19,7 +19,7 @@ module Extraction
       (@extraction_definition.page...max_pages).each do
         @extraction_definition.page += 1
 
-        re = RecordExtraction.new(@extraction_definition, @extraction_definition.page).extract
+        re = RecordExtraction.new(@extraction_definition, @extraction_definition.page, @harvest_job).extract
         records = JSON.parse(re.body)['records']
 
         extract_and_save_enrichment_documents(records)

@@ -57,8 +57,6 @@ class HarvestJob < ApplicationRecord
   end
 
   def completed?
-    return true if extraction_job.completed? && transformation_jobs.all?(&:completed?) && load_jobs.all?(&:completed?)
-
-    super
+    extraction_job.completed? && transformation_jobs.all?(&:completed?) && load_jobs.all?(&:completed?)
   end
 end
