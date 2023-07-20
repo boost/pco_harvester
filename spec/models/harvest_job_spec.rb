@@ -3,9 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe HarvestJob, type: :model do
+  let(:destination)        { create(:destination) }
   let(:pipeline)           { create(:pipeline, name: 'NLNZCat') }
   let(:harvest_definition) { create(:harvest_definition, pipeline:) }
-  let(:harvest_job)        { create(:harvest_job, :completed, harvest_definition:) }
+  let(:harvest_job)        { create(:harvest_job, :completed, harvest_definition:, destination:) }
 
   describe '#duration_seconds' do
     it 'returns nil if extraction_job is nil' do
