@@ -52,7 +52,7 @@ class ExtractionDefinitionsController < ApplicationController
   def test
     @extraction_definition = ExtractionDefinition.new(extraction_definition_params.except('headers_attributes'))
 
-    unless extraction_definition_params['headers_attributes'].nil?
+    if extraction_definition_params.include?('headers_attributes')
       extraction_definition_params['headers_attributes'].each do |key, header_attributes|
         @extraction_definition.headers << Header.new(header_attributes)
       end
