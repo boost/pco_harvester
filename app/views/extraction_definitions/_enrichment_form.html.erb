@@ -1,8 +1,6 @@
 <%= vertical_form_with model: [@pipeline, @harvest_definition, @extraction_definition], id: 'js-extraction-definition-form' do |form| %>
   <%= form.hidden_field :pipeline_id, value: @pipeline.id %>
   <%= form.hidden_field :kind, value: 'enrichment' %>
-
-  <%= hidden_field_tag :harvest_definition_id, @harvest_definition.id %>
   <%= hidden_field_tag :referrer_id, @referrer&.id  %>
  
   <div class='card'>

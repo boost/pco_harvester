@@ -17,11 +17,9 @@ class ExtractionDefinitionsController < ApplicationController
     @extraction_definition = ExtractionDefinition.new(extraction_definition_params)
 
     if @extraction_definition.save
-      if params[:harvest_definition_id].present?
-        HarvestDefinition.find(params[:harvest_definition_id]).update(
-          extraction_definition_id: @extraction_definition.id
-        )
-      end
+      @harvest_definition.update(
+        extraction_definition_id: @extraction_definition.id
+      )
 
       @extraction_job = ExtractionJob.create(extraction_definition: @extraction_definition, kind: 'sample')
       ExtractionWorker.perform_async(@extraction_job.id)
