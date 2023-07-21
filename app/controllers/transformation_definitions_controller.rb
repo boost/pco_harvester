@@ -21,11 +21,7 @@ class TransformationDefinitionsController < ApplicationController
     @transformation_definition = TransformationDefinition.new(transformation_definition_params)
 
     if @transformation_definition.save
-      if params[:harvest_definition_id].present?
-        HarvestDefinition.find(params[:harvest_definition_id]).update(
-          transformation_definition_id: @transformation_definition.id
-        )
-      end
+      @harvest_definition.update(transformation_definition_id: @transformation_definition.id)
 
       redirect_to pipeline_harvest_definition_transformation_definition_path(@pipeline, @harvest_definition, @transformation_definition), notice: 'Transformation Definition created successfully'
     else
