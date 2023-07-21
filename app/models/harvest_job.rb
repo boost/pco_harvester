@@ -52,9 +52,6 @@ class HarvestJob < ApplicationRecord
     end_time - start_time
   end
 
-  def reload_child_jobs
-    extraction_job.reload && transformation_jobs.each(&:reload) && load_jobs.each(&:reload)
-  end
 
   def errored?
     extraction_job.errored? || transformation_jobs.any?(&:errored?) && load_jobs.any?(&:errored?)
@@ -70,5 +67,35 @@ class HarvestJob < ApplicationRecord
 
   def completed?
     extraction_job.completed? && transformation_jobs.all?(&:completed?) && load_jobs.all?(&:completed?)
+  end
+  
+  def reload_child_jobs
+    extraction_job.reload && transformation_jobs.each(&:reload) && load_jobs.each(&:reload)
+  end
+
+  def enqueue_enrichment_jobs
+    reload_child_jobs
+    
+    return unless completed?
+
+    pipeline.enrichments.each do |enrichment|
+      next unless enrichment.ready_to_run?
+      
+      harvest_key = key
+      if harvest_key.include?('__')
+        harvest_key = harvest_key.match(/(?<key>.+)__/)[:key]
+      end
+      
+      next if HarvestJob.find_by(key: "#{harvest_key}__enrichment-#{enrichment.id}").present?
+
+      enrichment_job = HarvestJob.create(
+        harvest_definition: enrichment,
+        destination_id: destination.id,
+        key: "#{harvest_key}__enrichment-#{enrichment.id}",
+        target_job_id: name
+      )
+
+      HarvestWorker.perform_async(enrichment_job.id)
+    end
   end
 end
