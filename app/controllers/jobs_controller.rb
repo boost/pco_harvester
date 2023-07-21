@@ -4,14 +4,9 @@ class JobsController < ApplicationController
   before_action :find_pipeline
 
   def index
-    if @pipeline.harvest.present?
-      @harvest_jobs = paginate_and_filter_jobs(@pipeline.harvest&.harvest_jobs)
-      @harvest_extraction_jobs = paginate_and_filter_jobs(@pipeline.harvest&.extraction_definition&.extraction_jobs)
-    end
-
-    if @pipeline.enrichments.any?
-      @enrichment_extraction_jobs = paginate_and_filter_jobs(@pipeline.enrichments&.first&.extraction_definition&.extraction_jobs)
-    end
+    @harvest_jobs = paginate_and_filter_jobs(@pipeline.harvest_jobs.joins(:harvest_definition).where(harvest_definition: { kind: 'harvest' }))
+    
+    @enrichment_jobs = paginate_and_filter_jobs(@pipeline.harvest_jobs.joins(:harvest_definition).where(harvest_definition: { kind: 'enrichment' }))
   end
 
   private

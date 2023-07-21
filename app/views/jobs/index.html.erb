@@ -34,21 +34,9 @@
   <%= render partial: 'jobs/jobs', locals: { jobs: @harvest_jobs, type: 'harvest', pipeline: @pipeline } %>
 <% end %>
 
-<% unless @harvest_extraction_jobs.nil? %>
-
-  <h4 class='my-4'>Harvest Extraction Jobs</h4>
-
-  <%= render partial: 'jobs/jobs', locals: { jobs: @harvest_extraction_jobs, type: 'extraction', pipeline: @pipeline } %>
-<% end %>
-
 <% unless @enrichment_jobs.nil? %>
   <h4 class='my-4'>Enrichment Jobs</h4>
-<% end %>
 
-<% unless @enrichment_extraction_jobs.nil? %>
-
-  <h4 class='my-4'>Enrichment Extraction Jobs</h4>
-
-  <%= render partial: 'jobs/jobs', locals: { jobs: @enrichment_extraction_jobs, type: 'extraction', pipeline: @pipeline } %>
+  <%= render partial: 'jobs/jobs', locals: { jobs: @enrichment_jobs, type: 'harvest', pipeline: @pipeline } %>
 <% end %>
 

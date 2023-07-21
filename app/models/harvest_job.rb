@@ -56,6 +56,18 @@ class HarvestJob < ApplicationRecord
     extraction_job.reload && transformation_jobs.each(&:reload) && load_jobs.each(&:reload)
   end
 
+  def errored?
+    extraction_job.errored? || transformation_jobs.any?(&:errored?) && load_jobs.any?(&:errored?)
+  end
+
+  def cancelled?
+    extraction_job.cancelled? || transformation_jobs.any?(&:cancelled?) && load_jobs.any?(&:cancelled?)
+  end
+
+  def running?
+    extraction_job.running? || transformation_jobs.any?(&:running?) && load_jobs.any?(&:running?)
+  end
+
   def completed?
     extraction_job.completed? && transformation_jobs.all?(&:completed?) && load_jobs.all?(&:completed?)
   end
