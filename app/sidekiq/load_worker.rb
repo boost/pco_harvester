@@ -22,7 +22,7 @@ class LoadWorker < ApplicationWorker
     super
 
     harvest_job = @job.harvest_job
-    harvest_job.reload_child_jobs!
+    harvest_job.reload_child_jobs
 
     return unless harvest_job.completed?
 
