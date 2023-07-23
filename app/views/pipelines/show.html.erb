@@ -310,7 +310,7 @@
                 <input
                   id="js-auto-complete-enrichment-extraction-definition-<%= enrichment_definition.id %>"
                   class='js-auto-complete'
-                  data-src="<%= @enrichment_extraction_definitions.to_json %>"
+                  data-src="<%= autocomplete_enrichment_extraction_definitions %>"
                   data-path="<%= "/pipelines/#{@pipeline.id}/harvest_definitions/#{enrichment_definition.id}.json" %>"
                   data-field="extraction_definition_id"
                   data-placeholder='Start typing to use an existing definition..'
@@ -370,7 +370,7 @@
                 <input
                   id="js-auto-complete-enrichment-transformation-definition-<%= enrichment_definition.id %>"
                   class='js-auto-complete'
-                  data-src="<%= @enrichment_transformation_definitions.to_json %>"
+                  data-src="<%= autocomplete_enrichment_transformation_definitions %>"
                   data-placeholder='Start typing to use an existing definition..'
                   data-path="<%= "/pipelines/#{@pipeline.id}/harvest_definitions/#{enrichment_definition.id}.json" %>"
                   data-field="transformation_definition_id"
@@ -490,7 +490,7 @@
       <input
         id="js-auto-complete-extraction-definition"
         class='js-auto-complete'
-        data-src="<%= @harvest_extraction_definitions.to_json %>"
+        data-src="<%= autocomplete_harvest_extraction_definitions %>"
         data-path="<%= "/pipelines/#{@pipeline.id}/harvest_definitions/#{@harvest_definition.id}.json" %>"
         data-field="extraction_definition_id"
         data-placeholder='Start typing to use an existing definition..'
@@ -516,7 +516,7 @@
       <input
         id="js-auto-complete-transformation-definition"
         class='js-auto-complete'
-        data-src="<%= @harvest_transformation_definitions.to_json %>"
+        data-src="<%= autocomplete_harvest_transformation_definitions %>"
         data-placeholder='Start typing to use an existing definition..'
         data-path="<%= "/pipelines/#{@pipeline.id}/harvest_definitions/#{@harvest_definition.id}.json" %>"
         data-field="transformation_definition_id"

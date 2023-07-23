@@ -8,10 +8,12 @@ class HarvestDefinitionsController < ApplicationController
   def create
     @harvest_definition = HarvestDefinition.new(harvest_definition_params)
 
+    harvest_kind = @harvest_definition.kind.capitalize
+
     if @harvest_definition.save
-      redirect_to pipeline_path(@pipeline), notice: "#{@harvest_definition.kind.capitalize} created successfully"
+      redirect_to pipeline_path(@pipeline), notice: "#{harvest_kind} created successfully"
     else
-      flash.alert = "There was an issue creating your #{@harvest_definition.kind.capitalize}"
+      flash.alert = "There was an issue creating your #{harvest_kind}"
 
       @enrichment_definition = HarvestDefinition.new(pipeline: @pipeline)
       
@@ -20,33 +22,34 @@ class HarvestDefinitionsController < ApplicationController
   end
 
   def update
-    if @harvest_definition.update(harvest_definition_params)
-      respond_to do |format|
-        format.html do
-          redirect_to pipeline_path(@pipeline), notice: 'Harvest Definition updated successfully'
-        end
-
-        format.json { render status: 200, json: 'Harvest Definition update successfully' }
-      end
-    else
-      respond_to do |format|
-        format.html do 
+    respond_to do |format|
+      format.html do
+        if @harvest_definition.update(harvest_definition_params)
+          flash.notice = 'Harvest definition update successfully'
+        else
           flash.alert = "There was an issue updating your Harvest Definition"
-          redirect_to pipeline_path(@pipeline)
         end
 
-        format.json { render status: 500, json: 'There was an issue updating your Harvest Definition' }
+        redirect_to pipeline_path(@pipeline)
+      end
+      format.json do
+        if @harvest_definition.update(harvest_definition_params)
+          render status: 200, json: 'Harvest Definition update successfully'
+        else
+          render status: 500, json: 'There was an issue updating your Harvest Definition'
+        end
       end
     end
   end
 
   def destroy
     if @harvest_definition.destroy
-      redirect_to pipeline_path(@pipeline), notice: 'Harvest Definition deleted successfully'
+      flash.notice = "Harvest Definition deleted successfully"
     else
       flash.alert = 'There was an issue deleting your Harvest Definition'
-      redirect_to pipeline_path(@pipeline)
     end
+
+    redirect_to pipeline_path(@pipeline)
   end
 
   private

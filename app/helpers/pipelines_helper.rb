@@ -23,4 +23,19 @@ module PipelinesHelper
     end
   end
 
+  def autocomplete_harvest_extraction_definitions
+    ExtractionDefinition.all.harvest.sort_by(&:name).map(&:to_h).to_json
+  end
+
+  def autocomplete_harvest_transformation_definitions
+    TransformationDefinition.all.harvest.sort_by(&:name).map(&:to_h).to_json
+  end
+
+  def autocomplete_enrichment_extraction_definitions
+    ExtractionDefinition.all.enrichment.sort_by(&:name).map(&:to_h).to_json
+  end
+
+  def autocomplete_enrichment_transformation_definitions
+    TransformationDefinition.all.enrichment.sort_by(&:name).map(&:to_h).to_json
+  end
 end

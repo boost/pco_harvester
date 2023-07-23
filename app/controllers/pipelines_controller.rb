@@ -22,12 +22,6 @@ class PipelinesController < ApplicationController
   end
 
   def show
-    @harvest_extraction_definitions = ExtractionDefinition.all.harvest.sort_by(&:name).map(&:to_h)
-    @harvest_transformation_definitions = TransformationDefinition.all.harvest.sort_by(&:name).map(&:to_h)
-
-    @enrichment_extraction_definitions = ExtractionDefinition.all.enrichment.sort_by(&:name).map(&:to_h)
-    @enrichment_transformation_definitions = TransformationDefinition.all.enrichment.sort_by(&:name).map(&:to_h)
-
     @harvest_definition = @pipeline.harvest || HarvestDefinition.new(pipeline: @pipeline)
     @harvest_job = HarvestJob.new
 
