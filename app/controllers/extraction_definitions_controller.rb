@@ -36,8 +36,8 @@ class ExtractionDefinitionsController < ApplicationController
       @extraction_job = ExtractionJob.create(extraction_definition: @extraction_definition, kind: 'sample')
       ExtractionWorker.perform_async(@extraction_job.id)
 
-      if params[:referrer_id].present?
-        redirect_to pipeline_path(params[:referrer_id])
+      if @referrer.present?
+        redirect_to pipeline_path(@referrer)
       else
         redirect_to pipeline_path(@pipeline)
       end

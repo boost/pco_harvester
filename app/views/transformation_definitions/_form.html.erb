@@ -1,6 +1,7 @@
 <%= vertical_form_with model: [@pipeline, @harvest_definition, @transformation_definition], id: 'js-transformation-definition-form' do |form| %>
   <%= form.hidden_field :pipeline_id,        value: @pipeline.id %>
   <%= form.hidden_field :kind,               value: @transformation_definition.kind %>
+  <%= hidden_field_tag :referrer_id, @referrer&.id  %>
 
   <div class='card'>
     <div class='card-body'>

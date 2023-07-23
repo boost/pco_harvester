@@ -101,6 +101,16 @@ RSpec.describe 'Transformation Definitions', type: :request do
 
         expect(response).to redirect_to(pipeline_harvest_definition_transformation_definition_path(pipeline, harvest_definition, transformation_definition))
       end
+
+      it 'redirects to the referer if it is provided' do
+        pipeline2 = create(:pipeline)
+
+        patch pipeline_harvest_definition_transformation_definition_path(pipeline, harvest_definition, transformation_definition), params: {
+          transformation_definition: { name: 'Flickr' }, referrer_id: pipeline2.id
+        }
+
+        expect(response).to redirect_to pipeline_path(pipeline2)
+      end
     end
 
     context 'with invalid paramaters' do

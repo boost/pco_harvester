@@ -186,7 +186,8 @@
               pipeline_harvest_definition_transformation_definition_path(
                 @harvest_definition.extraction_definition.pipeline,
                 @harvest_definition,
-                @harvest_definition.transformation_definition
+                @harvest_definition.transformation_definition,
+                referrer_id: @pipeline.id
               ),
             edit_text: "Edit Transformation"
           } %>
@@ -346,7 +347,8 @@
                 pipeline_harvest_definition_transformation_definition_path(
                   @harvest_definition.extraction_definition.pipeline,
                   @harvest_definition,
-                  enrichment_definition.transformation_definition
+                  enrichment_definition.transformation_definition,
+                  referrer_id: @pipeline.id
                 ),
               edit_text: "Edit Transformation"
             } %>
