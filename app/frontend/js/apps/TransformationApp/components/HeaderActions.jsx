@@ -6,7 +6,6 @@ import {
   selectAppDetails,
 } from "/js/features/AppDetailsSlice";
 import { selectFieldIds } from "/js/features/FieldsSlice";
-import AddField from "~/js/apps/TransformationApp/components/AddField";
 import { selectUiAppDetails } from "~/js/features/UiAppDetailsSlice";
 import { selectRawRecord } from "/js/features/RawRecordSlice";
 
@@ -32,9 +31,8 @@ const HeaderActions = () => {
 
   return createPortal(
     <>
-      {!readOnly && <AddField />}
       <button className="btn btn-success" onClick={runAllFields}>
-        <i className="bi bi-play" aria-hidden="true"></i> Run all
+        <i className="bi bi-heart-pulse" aria-hidden="true"></i> Test
       </button>
     </>,
     document.getElementById("react-header-actions")
