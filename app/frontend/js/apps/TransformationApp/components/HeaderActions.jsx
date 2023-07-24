@@ -14,7 +14,6 @@ const HeaderActions = () => {
   const fieldIds = useSelector(selectFieldIds);
   const appDetails = useSelector(selectAppDetails);
   const rawRecord = useSelector(selectRawRecord);
-  const { readOnly } = useSelector(selectUiAppDetails);
 
   const runAllFields = () => {
     dispatch(

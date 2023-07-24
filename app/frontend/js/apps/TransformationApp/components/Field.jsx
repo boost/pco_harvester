@@ -51,7 +51,6 @@ const Field = ({ id }) => {
   const [showModal, setShowModal] = useState(false);
 
   const uiAppDetails = useSelector(selectUiAppDetails);
-  const { readOnly } = uiAppDetails;
 
   const handleSaveClick = () => {
     dispatch(
@@ -146,46 +145,44 @@ const Field = ({ id }) => {
             <div className="d-flex d-row justify-content-between align-items-center">
               <div>
                 <h5 className="m-0 d-inline">{name}</h5>
-                {!readOnly && name != "" && (
+                {name != "" && (
                   <span className={badgeClasses}>{badgeText()}</span>
                 )}
               </div>
 
-              {!readOnly && (
-                <div className="hstack gap-2">
-                  <button
-                    className="btn btn-outline-primary"
-                    disabled={!isSaveable()}
-                    onClick={handleSaveClick}
-                  >
-                    <i className="bi bi-save" aria-hidden="true"></i>
-                    {saving ? " Saving..." : " Save"}
-                  </button>
-                  <button
-                    className="btn btn-outline-primary"
-                    disabled={!saved || hasChanged() || running}
-                    onClick={handleRunClick}
-                  >
-                    <i className="bi bi-play" aria-hidden="true"></i>
-                    {running ? " Running..." : " Run"}
-                  </button>
+              <div className="hstack gap-2">
+                <button
+                  className="btn btn-outline-primary"
+                  disabled={!isSaveable()}
+                  onClick={handleSaveClick}
+                >
+                  <i className="bi bi-save" aria-hidden="true"></i>
+                  {saving ? " Saving..." : " Save"}
+                </button>
+                <button
+                  className="btn btn-outline-primary"
+                  disabled={!saved || hasChanged() || running}
+                  onClick={handleRunClick}
+                >
+                  <i className="bi bi-play" aria-hidden="true"></i>
+                  {running ? " Running..." : " Run"}
+                </button>
 
-                  <button
-                    className="btn btn-outline-primary"
-                    onClick={handleHideClick}
-                  >
-                    <i className="bi bi-eye-slash" aria-hidden="true"></i> Hide
-                  </button>
+                <button
+                  className="btn btn-outline-primary"
+                  onClick={handleHideClick}
+                >
+                  <i className="bi bi-eye-slash" aria-hidden="true"></i> Hide
+                </button>
 
-                  <button
-                    className="btn btn-outline-danger"
-                    onClick={handleShow}
-                  >
-                    <i className="bi bi-trash" aria-hidden="true"></i>
-                    {deleting ? " Deleting..." : " Delete"}
-                  </button>
-                </div>
-              )}
+                <button
+                  className="btn btn-outline-danger"
+                  onClick={handleShow}
+                >
+                  <i className="bi bi-trash" aria-hidden="true"></i>
+                  {deleting ? " Deleting..." : " Delete"}
+                </button>
+              </div>
             </div>
 
             <div className="mt-3 collapse show" id={`field-${id}-content`}>
@@ -219,7 +216,6 @@ const Field = ({ id }) => {
               </label>
 
               <CodeEditor
-                readOnly={readOnly}
                 initContent={block}
                 onChange={(e) => setBlockValue(e.target.value)}
               />
