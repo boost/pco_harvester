@@ -2,12 +2,12 @@
 
 class Field < ApplicationRecord
   KINDS = %w[field condition].freeze
-  CONDITION_KINDS = %w[reject_if delete_if].freeze
+  CONDITION = %w[reject_if delete_if].freeze
 
   belongs_to :transformation_definition
 
   enum :kind, KINDS
-  enum :condition_kind, CONDITION_KINDS
+  enum :condition, CONDITION
 
   def to_h
     {
@@ -18,7 +18,7 @@ class Field < ApplicationRecord
     }.merge(
         if condition?
           {
-            conditionKind: condition_kind
+            condition:
           }
         else
           {}

@@ -53,7 +53,7 @@ export const deleteField = createAsyncThunk(
 export const updateField = createAsyncThunk(
   "fields/updateFieldStatus",
   async (payload) => {
-    const { id, pipelineId, harvestDefinitionId, transformationDefinitionId, name, block, conditionKind } =
+    const { id, pipelineId, harvestDefinitionId, transformationDefinitionId, name, block, condition } =
       payload;
 
     const response = request
@@ -63,7 +63,7 @@ export const updateField = createAsyncThunk(
           field: {
             name: name,
             block: block,
-            condition_kind: conditionKind
+            condition: condition
           },
         }
       )

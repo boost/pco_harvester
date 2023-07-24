@@ -27,26 +27,26 @@ RSpec.describe Field, type: :model do
     let(:field)     { create(:field, transformation_definition:) }
     let(:condition) { create(:field, kind: 1, transformation_definition:) }
 
-    it 'can be a standard field' do
-      expect(field.standard?).to eq true
+    it 'can be a field' do
+      expect(field.field?).to eq true
       expect(field.condition?).to eq false
     end
 
-    it 'can be a condition field' do
+    it 'can be a condition' do
       expect(condition.condition?).to eq true
-      expect(condition.standard?).to eq false
+      expect(condition.field?).to eq false
     end
 
     context 'when it is a condition field' do
-      let(:reject) { create(:field, kind: 1, transformation_definition:, condition_kind: 0) }
-      let(:delete) { create(:field, kind: 1, transformation_definition:, condition_kind: 1) }
+      let(:reject) { create(:field, kind: 1, transformation_definition:, condition: 0) }
+      let(:delete) { create(:field, kind: 1, transformation_definition:, condition: 1) }
 
       it 'can be a reject_condition' do
-        expect(reject.reject_record?).to eq true
+        expect(reject.reject_if?).to eq true
       end
 
       it 'can be a delete_condition' do
-        expect(delete.delete_record?).to eq true
+        expect(delete.delete_if?).to eq true
       end
     end
   end

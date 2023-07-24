@@ -26,7 +26,7 @@ import Tooltip from "~/js/components/Tooltip";
 import CodeEditor from "~/js/components/CodeEditor";
  const Field = ({ id }) => {
   const appDetails = useSelector(selectAppDetails);
-  const { name, block, kind, conditionKind } = useSelector((state) => selectFieldById(state, id));
+  const { name, block, kind, condition } = useSelector((state) => selectFieldById(state, id));
 
   const rawRecord = useSelector(selectRawRecord);
   
@@ -43,7 +43,7 @@ import CodeEditor from "~/js/components/CodeEditor";
   const dispatch = useDispatch();
 
   const [nameValue, setNameValue] = useState(name);
-  const [conditionKindValue, setConditionKindValue] = useState(conditionKind);
+  const [conditionValue, setConditionValue] = useState(condition);
   const [blockValue, setBlockValue] = useState(block);
   const [showModal, setShowModal] = useState(false);
 
@@ -55,7 +55,10 @@ import CodeEditor from "~/js/components/CodeEditor";
         id: id,
         name: nameValue,
         block: blockValue,
-        conditionKind: conditionKindValue
+        condition: conditionValue,
+        harvestDefinitionId: appDetails.harvestDefinition.id,
+        pipelineId: appDetails.pipeline.id,
+        transformationDefinitionId: appDetails.transformationDefinition.id,
       })
     );
   };
@@ -94,7 +97,7 @@ import CodeEditor from "~/js/components/CodeEditor";
   };
 
   const hasChanged = () => {
-    return name !== nameValue || block !== blockValue || conditionKind !== conditionKindValue;
+    return name !== nameValue || block !== blockValue || condition !== conditionValue;
   };
 
   const isSaveable = () => {
@@ -227,7 +230,7 @@ import CodeEditor from "~/js/components/CodeEditor";
                       </label>
 
                       <div className='col-sm-8'>
-                        <select className="form-select" aria-label="Condition type" defaultValue={conditionKind} onChange={(e) => setConditionKindValue(e.target.value)}>
+                        <select className="form-select" aria-label="Condition type" defaultValue={condition} onChange={(e) => setConditionValue(e.target.value)}>
                           <option value="reject_if">Reject if</option>
                           <option value="delete_if">Delete if</option>
                         </select>
