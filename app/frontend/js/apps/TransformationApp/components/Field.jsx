@@ -13,6 +13,9 @@ import {
   clickedOnRunFields,
 } from "~/js/features/AppDetailsSlice";
 import { selectUiAppDetails } from "~/js/features/UiAppDetailsSlice";
+import {
+  toggleDisplayField,
+} from "~/js/features/UiFieldsSlice";
 
 import { selectRawRecord } from "/js/features/RawRecordSlice";
 
@@ -60,6 +63,10 @@ const Field = ({ id }) => {
     );
   };
 
+  const handleHideClick = () => {
+    dispatch(toggleDisplayField({ id: id, displayed: false }))
+  }
+
   const handleDeleteClick = () => {
     dispatch(
       deleteField({
@@ -70,10 +77,6 @@ const Field = ({ id }) => {
       })
     );
     handleClose();
-  };
-
-  const handleCollapseExpandClick = () => {
-    dispatch(toggleCollapseField({ id, expanded: !expanded }));
   };
 
   const handleRunClick = () => {
@@ -151,30 +154,29 @@ const Field = ({ id }) => {
               {!readOnly && (
                 <div className="hstack gap-2">
                   <button
-                    className="btn btn-primary"
+                    className="btn btn-outline-primary"
                     disabled={!isSaveable()}
                     onClick={handleSaveClick}
                   >
-                    {saving ? "Saving..." : "Save"}
+                    <i className="bi bi-save" aria-hidden="true"></i>
+                    {saving ? " Saving..." : " Save"}
                   </button>
                   <button
-                    className="btn btn-success"
+                    className="btn btn-outline-primary"
                     disabled={!saved || hasChanged() || running}
                     onClick={handleRunClick}
                   >
-                    {running ? "Running..." : "Run field"}
+                    <i className="bi bi-play" aria-hidden="true"></i>
+                    {running ? " Running..." : " Run"}
                   </button>
-                  <a
-                    onClick={handleCollapseExpandClick}
-                    className="btn btn-outline-success"
-                    data-bs-toggle="collapse"
-                    href={`#field-${id}-content`}
-                    role="button"
-                    aria-expanded={expanded}
-                    aria-controls={`field-${id}-content`}
+
+                  <button
+                    className="btn btn-outline-primary"
+                    onClick={handleHideClick}
                   >
-                    <ExpandCollapseIcon expanded={expanded} vertical={true} />
-                  </a>
+                    <i className="bi bi-eye-slash" aria-hidden="true"></i> Hide
+                  </button>
+
                   <button
                     className="btn btn-outline-danger"
                     onClick={handleShow}
@@ -188,7 +190,7 @@ const Field = ({ id }) => {
 
             <div className="mt-3 collapse show" id={`field-${id}-content`}>
               <label className="form-label" htmlFor="name">
-                Field Name{" "}
+                Name{" "}
                 <Tooltip data-bs-title="This is the field name that the result of this transformation will appear under on the transformed record.">
                   <i
                     className="bi bi-question-circle"
@@ -207,7 +209,7 @@ const Field = ({ id }) => {
               />
 
               <label className="form-label mt-4" htmlFor="block">
-                Field Block{" "}
+                Block{" "}
                 <Tooltip data-bs-title="This is the code that is applied to create this field on the transformed record.">
                   <i
                     className="bi bi-question-circle"

@@ -10,7 +10,7 @@ import { request } from "~/js/utils/request";
 export const addField = createAsyncThunk(
   "fields/addFieldStatus",
   async (payload) => {
-    const { name, block, pipelineId, harvestDefinitionId, transformationDefinitionId } =
+    const { name, block, kind, pipelineId, harvestDefinitionId, transformationDefinitionId } =
       payload;
 
     const response = request
@@ -18,10 +18,9 @@ export const addField = createAsyncThunk(
         `/pipelines/${pipelineId}/harvest_definitions/${harvestDefinitionId}/transformation_definitions/${transformationDefinitionId}/fields`,
         {
           field: {
-            harvestDefinitionId: harvestDefinitionId,
-            piplineId: pipelineId,
             transformation_definition_id: transformationDefinitionId,
             name: name,
+            kind: kind,
             block: block,
           },
         }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_20_213947) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_24_012649) do
   create_table "destinations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "url", null: false
@@ -64,6 +64,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_20_213947) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "transformation_definition_id", null: false
+    t.integer "kind", default: 0
+    t.integer "condition_kind", default: 0
     t.index ["transformation_definition_id"], name: "index_fields_on_transformation_definition_id"
   end
 

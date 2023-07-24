@@ -6,6 +6,10 @@
   @include element('header') {
     padding: .75rem 1rem .75rem 1rem;
     border-bottom: 1px solid $satin-white;
+
+    @include modifier('fields') {
+      border-top: 1px solid $satin-white;
+    }
   }
 
   @include element('content') {
