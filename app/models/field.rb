@@ -2,7 +2,7 @@
 
 class Field < ApplicationRecord
   KINDS = %w[field condition].freeze
-  CONDITION_KINDS = %w[reject_record delete_record].freeze
+  CONDITION_KINDS = %w[reject_if delete_if].freeze
 
   belongs_to :transformation_definition
 
@@ -18,7 +18,7 @@ class Field < ApplicationRecord
     }.merge(
         if condition?
           {
-            condition_kind:
+            conditionKind: condition_kind
           }
         else
           {}

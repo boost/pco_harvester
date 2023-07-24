@@ -52,7 +52,6 @@ module ReduxState
       deleting: false,
       running: false,
       hasRun: false,
-      expanded: true,
       displayed: false
     }
   end

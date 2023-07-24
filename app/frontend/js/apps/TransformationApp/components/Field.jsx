@@ -21,15 +21,12 @@ import { selectRawRecord } from "/js/features/RawRecordSlice";
 
 import {
   selectUiFieldById,
-  toggleCollapseField,
 } from "~/js/features/UiFieldsSlice";
 import Tooltip from "~/js/components/Tooltip";
-import ExpandCollapseIcon from "./ExpandCollapseIcon";
 import CodeEditor from "~/js/components/CodeEditor";
-
-const Field = ({ id }) => {
+ const Field = ({ id }) => {
   const appDetails = useSelector(selectAppDetails);
-  const { name, block } = useSelector((state) => selectFieldById(state, id));
+  const { name, block, kind, conditionKind } = useSelector((state) => selectFieldById(state, id));
 
   const rawRecord = useSelector(selectRawRecord);
   
@@ -40,13 +37,13 @@ const Field = ({ id }) => {
     running,
     error,
     hasRun,
-    expanded,
     displayed,
   } = useSelector((state) => selectUiFieldById(state, id));
 
   const dispatch = useDispatch();
 
   const [nameValue, setNameValue] = useState(name);
+  const [conditionKindValue, setConditionKindValue] = useState(conditionKind);
   const [blockValue, setBlockValue] = useState(block);
   const [showModal, setShowModal] = useState(false);
 
@@ -58,6 +55,7 @@ const Field = ({ id }) => {
         id: id,
         name: nameValue,
         block: blockValue,
+        conditionKind: conditionKindValue
       })
     );
   };
@@ -96,7 +94,7 @@ const Field = ({ id }) => {
   };
 
   const hasChanged = () => {
-    return name !== nameValue || block !== blockValue;
+    return name !== nameValue || block !== blockValue || conditionKind !== conditionKindValue;
   };
 
   const isSaveable = () => {
@@ -136,6 +134,8 @@ const Field = ({ id }) => {
 
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
+
+  const nameColumnClasses = classNames({'col-8': kind == 'condition'}, { 'col-12': kind == 'field'});
 
   return (
     <>
@@ -185,25 +185,57 @@ const Field = ({ id }) => {
               </div>
             </div>
 
-            <div className="mt-3 collapse show" id={`field-${id}-content`}>
-              <label className="form-label" htmlFor="name">
-                Name{" "}
-                <Tooltip data-bs-title="This is the field name that the result of this transformation will appear under on the transformed record.">
-                  <i
-                    className="bi bi-question-circle"
-                    aria-label="help text"
-                  ></i>
-                </Tooltip>
-              </label>
-              <input
-                id="name"
-                type="text"
-                className="form-control"
-                required="required"
-                placeholder="New field"
-                defaultValue={name}
-                onChange={(e) => setNameValue(e.target.value)}
-              />
+            <div className="mt-3 show" id={`field-${id}-content`}>
+
+              <div className="row">
+                <div className={nameColumnClasses}>
+                  <div className='row'>
+                    <label className="col-form-label col-sm-2" htmlFor="name">
+                      <strong>Name{" "}</strong>
+                      <Tooltip data-bs-title="This is the field name that the result of this transformation will appear under on the transformed record.">
+                        <i
+                          className="bi bi-question-circle"
+                          aria-label="help text"
+                        ></i>
+                      </Tooltip>
+                    </label>
+
+                  <div className='col-sm-10'>
+                    <input
+                      id="name"
+                      type="text"
+                      className="form-control"
+                      required="required"
+                      defaultValue={name}
+                      onChange={(e) => setNameValue(e.target.value)}
+                    />
+                  </div>
+                </div>
+              </div>
+
+                { kind == 'condition' && (
+                  <div className="col-4">
+                    <div className='row'>
+                      <label className="col-form-label col-sm-4" htmlFor="name">
+                        <strong>Type{" "}</strong>
+                        <Tooltip data-bs-title="A rejected record will be skipped during a harvest. A deleted record will be removed from the API if it has been harvested in the past.">
+                          <i
+                            className="bi bi-question-circle"
+                            aria-label="help text"
+                          ></i>
+                        </Tooltip>
+                      </label>
+
+                      <div className='col-sm-8'>
+                        <select className="form-select" aria-label="Condition type" defaultValue={conditionKind} onChange={(e) => setConditionKindValue(e.target.value)}>
+                          <option value="reject_if">Reject if</option>
+                          <option value="delete_if">Delete if</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
 
               <label className="form-label mt-4" htmlFor="block">
                 Block{" "}

@@ -9,7 +9,7 @@ import classNames from "classnames";
 
 const FieldNavigationListItem = ({ id }) => {
   const dispatch = useDispatch();
-  const { name } = useSelector((state) => selectFieldById(state, id));
+  const { name, kind } = useSelector((state) => selectFieldById(state, id));
   const { error, displayed } = useSelector((state) =>
     selectUiFieldById(state, id)
   );
@@ -31,7 +31,7 @@ const FieldNavigationListItem = ({ id }) => {
         aria-expanded={displayed}
         aria-controls={`field-${id}`}
       >
-        {name || "New field"}{" "}
+        {name || `New ${kind}`}{" "}
         {error && (
           <i className="bi bi-exclamation-circle-fill" aria-label="error"></i>
         )}
