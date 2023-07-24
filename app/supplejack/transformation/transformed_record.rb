@@ -5,8 +5,9 @@ module Transformation
   # It provides details about the execution of the transformation
   # such as errors and transformation results
   class TransformedRecord
-    def initialize(fields)
+    def initialize(fields, conditions)
       @fields = fields
+      @conditions = conditions
     end
 
     def transformed_record
@@ -21,10 +22,23 @@ module Transformation
       end
     end
 
+    def rejection_reasons
+      binding.pry
+      # @conditions.each_with_object([]) do |condition, reasons|
+      #   binding.pry
+      #   # reasons.push(condition) if 
+      # end
+    end
+
+    def deletion_reasons
+    end
+
     def to_hash
       {
         'transformed_record' => transformed_record,
-        'errors' => errors
+        'errors' => errors,
+        'rejection_reasons' => rejection_reasons,
+        'deletion_reasons' => deletion_reasons
       }
     end
   end
