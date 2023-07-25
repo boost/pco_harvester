@@ -19,7 +19,7 @@ module Transformation
         @error = e
       end
 
-      Transformation::Field.new(@field.id, @field.name, @value, @error, @field.kind, @field.condition)
+      Transformation::Field.new(@field.id, @field.name, @value, @error)
     end
     # rubocop:enable Lint/UnusedBlockArgument
     # rubocop:enable Security/Eval
