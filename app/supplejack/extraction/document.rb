@@ -27,7 +27,7 @@ module Extraction
 
     def size_in_bytes
       return if file_path.nil?
-      
+
       File.size(file_path)
     end
 

@@ -3,15 +3,15 @@ require 'rails_helper'
 RSpec.describe Pipeline, type: :model do
   describe 'validations' do
     subject { build(:pipeline) }
-    
+
     it { is_expected.to validate_presence_of(:name) }
   end
 
   describe 'associations' do
-   let(:pipeline) { create(:pipeline) }
-   let!(:harvest_definition) { create(:harvest_definition, pipeline: pipeline) }
-   let!(:enrichment_definition_one) { create(:harvest_definition, :enrichment, pipeline: pipeline) }
-   let!(:enrichment_definition_two) { create(:harvest_definition, :enrichment, pipeline: pipeline) }
+    let(:pipeline) { create(:pipeline) }
+    let!(:harvest_definition) { create(:harvest_definition, pipeline:) }
+    let!(:enrichment_definition_one) { create(:harvest_definition, :enrichment, pipeline:) }
+    let!(:enrichment_definition_two) { create(:harvest_definition, :enrichment, pipeline:) }
 
     it 'has_one harvest' do
       expect(pipeline.harvest).to eq harvest_definition
@@ -59,7 +59,8 @@ RSpec.describe Pipeline, type: :model do
     it 'returns true if the pipeline is ready to run' do
       pipeline = create(:pipeline)
       harvest_definition = create(:harvest_definition, pipeline:)
-      field = create(:field, name: 'title', block: "JsonPath.new('title').on(record).first", transformation_definition: harvest_definition.transformation_definition)
+      field = create(:field, name: 'title', block: "JsonPath.new('title').on(record).first",
+                             transformation_definition: harvest_definition.transformation_definition)
 
       expect(pipeline.ready_to_run?).to eq(true)
     end

@@ -9,9 +9,12 @@ RSpec.describe LoadWorker, type: :job do
   let(:destination)            { create(:destination) }
 
   describe '#perform' do
-    let(:harvest_job)            { create(:harvest_job, :completed, harvest_definition:, destination:, key: 'test') }
-    let!(:field)                  { create(:field, name: 'title', block: "JsonPath.new('title').on(record).first", transformation_definition: enrichment_definition.transformation_definition) }
-    let!(:load_job)              { create(:load_job, harvest_job:) }
+    let(:harvest_job) { create(:harvest_job, :completed, harvest_definition:, destination:, key: 'test') }
+    let!(:field) do
+      create(:field, name: 'title', block: "JsonPath.new('title').on(record).first",
+                     transformation_definition: enrichment_definition.transformation_definition)
+    end
+    let!(:load_job) { create(:load_job, harvest_job:) }
 
     context 'when the harvest has completed' do
       it 'queues scoped enrichments that are ready to be run' do
@@ -25,18 +28,19 @@ RSpec.describe LoadWorker, type: :job do
       end
 
       it 'does not queue enrichments if there is allready an existing enrichment with the same key' do
-        enrichment_job = create(:harvest_job, :completed, harvest_definition: enrichment_definition, destination:, key: "test__enrichment-#{enrichment_definition.id}")
+        enrichment_job = create(:harvest_job, :completed, harvest_definition: enrichment_definition, destination:,
+                                                          key: "test__enrichment-#{enrichment_definition.id}")
         enrichment_load_job = create(:load_job, harvest_job: enrichment_job)
-        
+
         HarvestJob.create(
           harvest_definition: enrichment_definition,
           destination_id: destination.id,
           key: "#{enrichment_job.key}__enrichment-#{enrichment_definition.id}"
         )
-        
+
         expect do
           LoadWorker.new.perform(enrichment_load_job.id, '[]')
-        end.to change(HarvestJob, :count).by(0)
+        end.not_to change(HarvestJob, :count)
       end
     end
 
@@ -49,7 +53,7 @@ RSpec.describe LoadWorker, type: :job do
 
         expect do
           LoadWorker.new.perform(load_job.id, '[]')
-        end.to change(HarvestJob, :count).by(0)
+        end.not_to change(HarvestJob, :count)
       end
     end
   end

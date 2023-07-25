@@ -26,12 +26,12 @@ class TransformationDefinition < ApplicationRecord
 
     if extraction_job.extraction_definition.format == 'HTML'
       Nokogiri::HTML(extraction_job.documents[page].body)
-        .xpath(record_selector)
-        .map(&:to_xml)
+              .xpath(record_selector)
+              .map(&:to_xml)
     elsif extraction_job.extraction_definition.format == 'XML'
       Nokogiri::XML(extraction_job.documents[page].body)
-        .xpath(record_selector)
-        .map(&:to_xml)
+              .xpath(record_selector)
+              .map(&:to_xml)
     elsif extraction_job.extraction_definition.format == 'JSON'
       JsonPath.new(record_selector)
               .on(extraction_job.documents[page].body)
@@ -41,8 +41,8 @@ class TransformationDefinition < ApplicationRecord
 
   def to_h
     {
-      id: id,
-      name: name
+      id:,
+      name:
     }
   end
 end

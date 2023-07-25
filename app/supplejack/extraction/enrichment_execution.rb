@@ -57,7 +57,7 @@ module Extraction
         extraction_job: @extraction_job,
         transformation_definition: @harvest_job.transformation_definition,
         harvest_job: @harvest_job,
-        page: page,
+        page:,
         api_record_id: record['id']
       )
       TransformationWorker.perform_async(transformation_job.id)

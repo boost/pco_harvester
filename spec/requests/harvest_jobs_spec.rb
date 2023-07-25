@@ -3,15 +3,15 @@
 require 'rails_helper'
 
 RSpec.describe 'HarvestJobs', type: :request do
-  let(:destination)           { create(:destination) }
   subject!                    { create(:harvest_job, harvest_definition:, destination:) }
 
+  let(:destination)           { create(:destination) }
   let(:user)                  { create(:user) }
   let(:extraction_job)        { create(:extraction_job, extraction_definition:, harvest_job: subject) }
   let(:pipeline)              { create(:pipeline, :figshare) }
   let(:harvest_definition)    { pipeline.harvest }
   let(:extraction_definition) { pipeline.harvest.extraction_definition }
-  
+
   before do
     sign_in user
   end
@@ -29,8 +29,8 @@ RSpec.describe 'HarvestJobs', type: :request do
       end
 
       it 'schedules a HarvestWorker' do
-        expect(HarvestWorker).to receive(:perform_async).exactly(1).times.and_call_original
-        
+        expect(HarvestWorker).to receive(:perform_async).once.and_call_original
+
         post pipeline_harvest_definition_harvest_jobs_path(pipeline, harvest_definition), params: {
           harvest_job: harvest_job.attributes
         }
@@ -50,7 +50,7 @@ RSpec.describe 'HarvestJobs', type: :request do
         }
 
         follow_redirect!
-        
+
         expect(response.body).to include 'Harvest job queued successfuly'
       end
     end
@@ -61,12 +61,12 @@ RSpec.describe 'HarvestJobs', type: :request do
           post pipeline_harvest_definition_harvest_jobs_path(pipeline, harvest_definition), params: {
             harvest_job: { title: 'hello' }
           }
-        end.to change(HarvestJob, :count).by(0)
+        end.not_to change(HarvestJob, :count)
       end
 
       it 'does not enqueue a HarvestWorker' do
         expect(HarvestWorker).to receive(:perform_async).exactly(0).times.and_call_original
-        
+
         post pipeline_harvest_definition_harvest_jobs_path(pipeline, harvest_definition), params: {
           harvest_job: { title: 'hello' }
         }
@@ -79,14 +79,14 @@ RSpec.describe 'HarvestJobs', type: :request do
 
         expect(response).to redirect_to(pipeline_jobs_path(pipeline))
       end
-      
+
       it 'displays an appropriate flash message' do
         post pipeline_harvest_definition_harvest_jobs_path(pipeline, harvest_definition), params: {
           harvest_job: { title: 'hello' }
         }
 
         follow_redirect!
-        
+
         expect(response.body).to include 'There was an issue launching the harvest job'
       end
     end

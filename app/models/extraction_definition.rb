@@ -15,7 +15,9 @@ class ExtractionDefinition < ApplicationRecord
 
   enum :kind, { harvest: 0, enrichment: 1 }
 
-  accepts_nested_attributes_for :headers, allow_destroy: true, reject_if: proc { |attribute| attribute[:name].blank? && attribute[:value].blank? }
+  accepts_nested_attributes_for :headers, allow_destroy: true, reject_if: proc { |attribute|
+                                                                            attribute[:name].blank? && attribute[:value].blank?
+                                                                          }
 
   after_create do
     self.name = "#{pipeline.name.parameterize}__#{kind}-extraction-#{id}"
@@ -64,9 +66,9 @@ class ExtractionDefinition < ApplicationRecord
   end
 
   def to_h
-    { 
-      id: id,
-      name: name
+    {
+      id:,
+      name:
     }
   end
 end

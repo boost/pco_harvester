@@ -166,7 +166,7 @@ RSpec.describe ExtractionJob, type: :model do
       end
     end
   end
-  
+
   describe '#finished?' do
     let(:finished_ej) { create(:extraction_job, status: 'completed') }
     let(:unfinished_ej) { create(:extraction_job, status: 'running') }

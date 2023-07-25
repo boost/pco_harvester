@@ -31,7 +31,7 @@ class ExtractionJobsController < ApplicationController
     else
       flash.alert = 'There was an issue deleting the results'
       redirect_to pipeline_harvest_definition_extraction_definition_extraction_job_path(@pipeline, @harvest_definition, @extraction_definition,
-                                                                            @extraction_job)
+                                                                                        @extraction_job)
     end
   end
 
@@ -50,7 +50,7 @@ class ExtractionJobsController < ApplicationController
   def find_pipeline
     @pipeline = Pipeline.find(params[:pipeline_id])
   end
-  
+
   def find_harvest_definition
     @harvest_definition = HarvestDefinition.find(params[:harvest_definition_id])
   end

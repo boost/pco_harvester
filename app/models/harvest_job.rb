@@ -14,9 +14,9 @@ class HarvestJob < ApplicationRecord
   delegate :extraction_definition, to: :harvest_definition
   delegate :transformation_definition, to: :harvest_definition
 
-  # This is to ensure that there is only ever one version of a HarvestJob running. 
-  # It is used when enqueing enrichments at the end of a harvest. 
-  validates_uniqueness_of :key
+  # This is to ensure that there is only ever one version of a HarvestJob running.
+  # It is used when enqueing enrichments at the end of a harvest.
+  validates :key, uniqueness: true
 
   after_create do
     self.name = "#{harvest_definition.name}__job-#{id}"
@@ -25,18 +25,18 @@ class HarvestJob < ApplicationRecord
 
   def duration_seconds
     return if extraction_job.nil? || load_jobs.empty?
-  
+
     extraction_job_start_time = extraction_job.start_time
-    extraction_job_end_time   = extraction_job.end_time 
+    extraction_job_end_time   = extraction_job.end_time
 
     transformation_jobs_start_time = transformation_jobs.minimum(:start_time)
-    load_jobs_end_time   = load_jobs.maximum(:end_time)
+    load_jobs_end_time = load_jobs.maximum(:end_time)
 
     return if transformation_jobs_start_time.nil? || extraction_job_end_time.nil?
 
     idle_offset = transformation_jobs_start_time - extraction_job_end_time
     idle_offset = 0 if idle_offset < 0
-    
+
     return if load_jobs_end_time.nil? || extraction_job_start_time.nil?
 
     (load_jobs_end_time - extraction_job_start_time) - idle_offset
@@ -52,17 +52,16 @@ class HarvestJob < ApplicationRecord
     end_time - start_time
   end
 
-
   def errored?
-    extraction_job.errored? || transformation_jobs.any?(&:errored?) && load_jobs.any?(&:errored?)
+    extraction_job.errored? || (transformation_jobs.any?(&:errored?) && load_jobs.any?(&:errored?))
   end
 
   def cancelled?
-    extraction_job.cancelled? || transformation_jobs.any?(&:cancelled?) && load_jobs.any?(&:cancelled?)
+    extraction_job.cancelled? || (transformation_jobs.any?(&:cancelled?) && load_jobs.any?(&:cancelled?))
   end
 
   def running?
-    extraction_job.running? || transformation_jobs.any?(&:running?) && load_jobs.any?(&:running?)
+    extraction_job.running? || (transformation_jobs.any?(&:running?) && load_jobs.any?(&:running?))
   end
 
   def completed?
@@ -81,7 +80,7 @@ class HarvestJob < ApplicationRecord
 
     pipeline.enrichments.each do |enrichment|
       next unless enrichment.ready_to_run?
-            
+
       next if HarvestJob.find_by(key: "#{harvest_key}__enrichment-#{enrichment.id}").present?
 
       enrichment_job = HarvestJob.create(

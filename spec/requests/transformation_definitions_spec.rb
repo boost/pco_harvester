@@ -3,9 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe 'Transformation Definitions', type: :request do
-  let!(:user)                      { create(:user) }
-  let!(:pipeline)                 { create(:pipeline) }
-  let!(:harvest_definition)        { create(:harvest_definition, pipeline:) }
+  let!(:user) { create(:user) }
+  let!(:pipeline) { create(:pipeline) }
+  let!(:harvest_definition) { create(:harvest_definition, pipeline:) }
   let(:extraction_job)            { create(:extraction_job) }
   let(:transformation_definition) { create(:transformation_definition, extraction_job:) }
 
@@ -23,7 +23,8 @@ RSpec.describe 'Transformation Definitions', type: :request do
 
   describe '#edit' do
     it 'renders the form' do
-      get edit_pipeline_harvest_definition_transformation_definition_path(pipeline, harvest_definition, transformation_definition)
+      get edit_pipeline_harvest_definition_transformation_definition_path(pipeline, harvest_definition,
+                                                                          transformation_definition)
 
       expect(response.status).to eq 200
     end
@@ -46,7 +47,8 @@ RSpec.describe 'Transformation Definitions', type: :request do
           transformation_definition: transformation_definition.attributes
         }
 
-        expect(response).to redirect_to pipeline_harvest_definition_transformation_definition_path(pipeline, harvest_definition, TransformationDefinition.last)
+        expect(response).to redirect_to pipeline_harvest_definition_transformation_definition_path(pipeline,
+                                                                                                   harvest_definition, TransformationDefinition.last)
       end
     end
 
@@ -76,7 +78,8 @@ RSpec.describe 'Transformation Definitions', type: :request do
     let(:transformation_definition) { create(:transformation_definition, pipeline:, extraction_job:) }
 
     it 'shows the details for a transformation_definition' do
-      get pipeline_harvest_definition_transformation_definition_path(pipeline, harvest_definition, transformation_definition)
+      get pipeline_harvest_definition_transformation_definition_path(pipeline, harvest_definition,
+                                                                     transformation_definition)
 
       expect(response.status).to eq 200
     end
@@ -99,7 +102,8 @@ RSpec.describe 'Transformation Definitions', type: :request do
           transformation_definition: { name: 'Flickr' }
         }
 
-        expect(response).to redirect_to(pipeline_harvest_definition_transformation_definition_path(pipeline, harvest_definition, transformation_definition))
+        expect(response).to redirect_to(pipeline_harvest_definition_transformation_definition_path(pipeline,
+                                                                                                   harvest_definition, transformation_definition))
       end
 
       it 'redirects to the referer if it is provided' do
@@ -136,7 +140,8 @@ RSpec.describe 'Transformation Definitions', type: :request do
 
   describe '#destroy' do
     it 'destroys the transformation_definition' do
-      delete pipeline_harvest_definition_transformation_definition_path(pipeline, harvest_definition, transformation_definition)
+      delete pipeline_harvest_definition_transformation_definition_path(pipeline, harvest_definition,
+                                                                        transformation_definition)
 
       expect(response).to redirect_to(pipeline_path(pipeline))
       follow_redirect!
@@ -145,7 +150,8 @@ RSpec.describe 'Transformation Definitions', type: :request do
 
     it 'displays a message when failing' do
       allow_any_instance_of(TransformationDefinition).to receive(:destroy).and_return false
-      delete pipeline_harvest_definition_transformation_definition_path(pipeline, harvest_definition, transformation_definition)
+      delete pipeline_harvest_definition_transformation_definition_path(pipeline, harvest_definition,
+                                                                        transformation_definition)
       follow_redirect!
 
       expect(response.body).to include('There was an issue deleting your Transformation Definition')

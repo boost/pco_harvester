@@ -7,7 +7,7 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
   let(:pipeline)               { create(:pipeline) }
   let!(:extraction_definition) { create(:extraction_definition) }
   let!(:harvest_definition)    { create(:harvest_definition, extraction_definition:, pipeline:) }
-  
+
   before do
     sign_in user
   end
@@ -60,7 +60,7 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
       it 'associates an extraction definition with a provided harvest definition' do
         harvest_definition = create(:harvest_definition, pipeline:, extraction_definition: nil)
         expect(harvest_definition.extraction_definition).to eq nil
-        
+
         extraction_definition2 = build(:extraction_definition, pipeline:)
         post pipeline_harvest_definition_extraction_definitions_path(pipeline, harvest_definition), params: {
           extraction_definition: extraction_definition2.attributes.merge(harvest_definition_id: harvest_definition.id)

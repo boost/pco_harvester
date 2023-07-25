@@ -10,7 +10,7 @@ RSpec.describe 'HarvestDefinitions', type: :request do
   let(:transformation_definition) { create(:transformation_definition, extraction_job:) }
   let(:destination)               { create(:destination) }
   let(:harvest_definition)        { create(:harvest_definition) }
-  
+
   before do
     sign_in user
   end
@@ -58,12 +58,16 @@ RSpec.describe 'HarvestDefinitions', type: :request do
   end
 
   describe 'PATCH /update' do
-    let(:harvest_definition) { create(:harvest_definition, name: 'Staging', pipeline:, extraction_definition:, transformation_definition:) }
+    let(:harvest_definition) do
+      create(:harvest_definition, name: 'Staging', pipeline:, extraction_definition:, transformation_definition:)
+    end
 
     context 'with valid params' do
       let!(:updated_extraction_definition)     { create(:extraction_definition, base_url: 'http://test.com') }
       let(:updated_field)                      { build(:field, block: 'hello!') }
-      let!(:updated_transformation_definition) { create(:transformation_definition, pipeline:, extraction_job:, fields: [updated_field]) }
+      let!(:updated_transformation_definition) do
+        create(:transformation_definition, pipeline:, extraction_job:, fields: [updated_field])
+      end
 
       it 'updates the harvest definition' do
         patch pipeline_harvest_definition_path(pipeline, harvest_definition), params: {

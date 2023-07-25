@@ -22,7 +22,7 @@ module Extraction
             }
           else
             {
-              'fragments.source_id' => @extraction_definition.source_id,
+              'fragments.source_id' => @extraction_definition.source_id
             }
           end
         ),

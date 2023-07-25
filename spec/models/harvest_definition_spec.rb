@@ -14,7 +14,9 @@ RSpec.describe HarvestDefinition, type: :model do
   end
 
   let(:pipeline)                    { create(:pipeline, name: 'National Library of New Zealand') }
-  let(:harvest_definition)          { create(:harvest_definition, pipeline:, extraction_definition:, transformation_definition:) }
+  let(:harvest_definition)          do
+    create(:harvest_definition, pipeline:, extraction_definition:, transformation_definition:)
+  end
   let(:extraction_definition)       { create(:extraction_definition) }
   let(:extraction_job)              { create(:extraction_job, extraction_definition:) }
   let(:transformation_definition)   { create(:transformation_definition, extraction_job:) }
@@ -78,7 +80,8 @@ RSpec.describe HarvestDefinition, type: :model do
     it 'returns true if it has an extraction_definition and a transformation_definition with fields' do
       pipeline = create(:pipeline)
       harvest_definition = create(:harvest_definition, pipeline:)
-      field = create(:field, name: 'title', block: "JsonPath.new('title').on(record).first", transformation_definition: pipeline.harvest.transformation_definition)
+      field = create(:field, name: 'title', block: "JsonPath.new('title').on(record).first",
+                             transformation_definition: pipeline.harvest.transformation_definition)
 
       expect(harvest_definition.ready_to_run?).to eq true
     end

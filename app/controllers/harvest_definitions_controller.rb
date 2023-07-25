@@ -16,7 +16,7 @@ class HarvestDefinitionsController < ApplicationController
       flash.alert = "There was an issue creating your #{harvest_kind}"
 
       @enrichment_definition = HarvestDefinition.new(pipeline: @pipeline)
-      
+
       render 'pipelines/show'
     end
   end
@@ -27,16 +27,16 @@ class HarvestDefinitionsController < ApplicationController
         if @harvest_definition.update(harvest_definition_params)
           flash.notice = 'Harvest definition update successfully'
         else
-          flash.alert = "There was an issue updating your Harvest Definition"
+          flash.alert = 'There was an issue updating your Harvest Definition'
         end
 
         redirect_to pipeline_path(@pipeline)
       end
       format.json do
         if @harvest_definition.update(harvest_definition_params)
-          render status: 200, json: 'Harvest Definition update successfully'
+          render status: :ok, json: 'Harvest Definition update successfully'
         else
-          render status: 500, json: 'There was an issue updating your Harvest Definition'
+          render status: :internal_server_error, json: 'There was an issue updating your Harvest Definition'
         end
       end
     end
@@ -44,7 +44,7 @@ class HarvestDefinitionsController < ApplicationController
 
   def destroy
     if @harvest_definition.destroy
-      flash.notice = "Harvest Definition deleted successfully"
+      flash.notice = 'Harvest Definition deleted successfully'
     else
       flash.alert = 'There was an issue deleting your Harvest Definition'
     end

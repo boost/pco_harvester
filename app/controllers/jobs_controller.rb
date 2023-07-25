@@ -5,7 +5,7 @@ class JobsController < ApplicationController
 
   def index
     @harvest_jobs = paginate_and_filter_jobs(@pipeline.harvest_jobs.joins(:harvest_definition).where(harvest_definition: { kind: 'harvest' }))
-    
+
     @enrichment_jobs = paginate_and_filter_jobs(@pipeline.harvest_jobs.joins(:harvest_definition).where(harvest_definition: { kind: 'enrichment' }))
   end
 

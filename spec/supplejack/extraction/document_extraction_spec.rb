@@ -21,25 +21,27 @@ RSpec.describe Extraction::DocumentExtraction do
 
     context 'intial_params' do
       before do
-       stub_request(:get, "http://google.com/?from=#{(Date.today - 2.days).strftime("%Y-%m-%d")}&metadataPrefix=marc21&page=1&per_page=50&set=INNZ&url_param=url_value").
-         with(
-           headers: {
-       	 'Accept'=>'*/*',
-       	 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-       	 'Content-Type'=>'application/json',
-       	 'User-Agent'=>'Supplejack Harvester v2.0'
-           }).
-         to_return(status: 200, body: "", headers: {})
+        stub_request(:get, "http://google.com/?from=#{(Date.today - 2.days).strftime('%Y-%m-%d')}&metadataPrefix=marc21&page=1&per_page=50&set=INNZ&url_param=url_value")
+          .with(
+            headers: {
+              'Accept' => '*/*',
+              'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+              'Content-Type' => 'application/json',
+              'User-Agent' => 'Supplejack Harvester v2.0'
+            }
+          )
+          .to_return(status: 200, body: '', headers: {})
 
-        stub_request(:get, "http://google.com/?page=2&per_page=50&url_param=url_value").
-           with(
-             headers: {
-         	 'Accept'=>'*/*',
-         	 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-         	 'Content-Type'=>'application/json',
-         	 'User-Agent'=>'Supplejack Harvester v2.0'
-             }).
-           to_return(status: 200, body: "", headers: {})
+        stub_request(:get, 'http://google.com/?page=2&per_page=50&url_param=url_value')
+          .with(
+            headers: {
+              'Accept' => '*/*',
+              'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+              'Content-Type' => 'application/json',
+              'User-Agent' => 'Supplejack Harvester v2.0'
+            }
+          )
+          .to_return(status: 200, body: '', headers: {})
       end
 
       let(:ed) { create(:extraction_definition, page: 1, base_url: 'http://google.com/?url_param=url_value', extraction_jobs: [extraction_job], initial_params: '"metadataPrefix=marc21&set=INNZ&from=#{(Date.today - 2.days).strftime("%Y-%m-%d").to_s}"') }
@@ -47,16 +49,16 @@ RSpec.describe Extraction::DocumentExtraction do
       it 'appends initial_params to the first request' do
         expect(Extraction::Request).to receive(:new).with(
           url: ed.base_url,
-          headers: { 
-            "Content-Type" =>"application/json",
-            "User-Agent"   => "Supplejack Harvester v2.0"
+          headers: {
+            'Content-Type' => 'application/json',
+            'User-Agent' => 'Supplejack Harvester v2.0'
           },
           params: {
-            "metadataPrefix" => "marc21",
-            "page" => 1,
-            "per_page" => 50,
-            "from" => (Date.today - 2.days).strftime("%Y-%m-%d"),
-            "set" => "INNZ"
+            'metadataPrefix' => 'marc21',
+            'page' => 1,
+            'per_page' => 50,
+            'from' => (Date.today - 2.days).strftime('%Y-%m-%d'),
+            'set' => 'INNZ'
           }
         ).and_call_original
 
@@ -66,13 +68,13 @@ RSpec.describe Extraction::DocumentExtraction do
       it 'does not append the initial params to subsequent requests' do
         expect(Extraction::Request).to receive(:new).with(
           url: ed.base_url,
-          headers: { 
-            "Content-Type" =>"application/json",
-            "User-Agent"   => "Supplejack Harvester v2.0"
+          headers: {
+            'Content-Type' => 'application/json',
+            'User-Agent' => 'Supplejack Harvester v2.0'
           },
           params: {
-            "page" => 2,
-            "per_page" => 50,
+            'page' => 2,
+            'per_page' => 50
           }
         ).and_call_original
 
@@ -90,15 +92,15 @@ RSpec.describe Extraction::DocumentExtraction do
       it 'appends headers from the ExtractionDefinition into the request' do
         expect(Extraction::Request).to receive(:new).with(
           url: ed.base_url,
-          headers: { 
-            "Content-Type"    => "application/json",
-            "User-Agent"      => "Supplejack Harvester v2.0",
-            "X-Forwarded-For" => 'ab.cd.ef.gh',
-            "Authorization"   => 'Token'
+          headers: {
+            'Content-Type' => 'application/json',
+            'User-Agent' => 'Supplejack Harvester v2.0',
+            'X-Forwarded-For' => 'ab.cd.ef.gh',
+            'Authorization' => 'Token'
           },
           params: {
-            "page" => 1,
-            "per_page" => 50,
+            'page' => 1,
+            'per_page' => 50
           }
         ).and_call_original
 

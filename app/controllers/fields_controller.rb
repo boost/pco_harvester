@@ -26,15 +26,15 @@ class FieldsController < ApplicationController
   def run
     format = params['format']
 
-    record = if format == 'XML' || format == 'HTML'
-              params['record']
-            elsif format == 'JSON'
-              params['record'].to_unsafe_h
-            end
+    record = if %w[XML HTML].include?(format)
+               params['record']
+             elsif format == 'JSON'
+               params['record'].to_unsafe_h
+             end
 
     providedFields = params['fields'].map { |id| Field.find(id) }
 
-    fields     = providedFields.select(&:field?)
+    fields = providedFields.select(&:field?)
     reject_conditions = providedFields.select(&:condition?).select(&:reject_if?)
     delete_conditions = providedFields.select(&:condition?).select(&:delete_if?)
 

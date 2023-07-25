@@ -4,7 +4,7 @@ FactoryBot.define do
   factory :pipeline do
     name { 'DigitalNZ Production' }
     description { 'Description' }
-    
+
     trait :ngataonga do
       name { 'Ngā Taonga' }
       after :create do |pipeline|

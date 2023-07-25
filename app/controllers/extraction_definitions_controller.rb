@@ -21,7 +21,7 @@ class ExtractionDefinitionsController < ApplicationController
 
       @extraction_job = ExtractionJob.create(extraction_definition: @extraction_definition, kind: 'sample')
       ExtractionWorker.perform_async(@extraction_job.id)
-      
+
       redirect_to pipeline_path(@pipeline), notice: 'Extraction Definition created successfully'
     else
       flash.alert = 'There was an issue creating your Extraction Definition'
@@ -51,7 +51,7 @@ class ExtractionDefinitionsController < ApplicationController
     @extraction_definition = ExtractionDefinition.new(extraction_definition_params.except('headers_attributes'))
 
     if extraction_definition_params.include?('headers_attributes')
-      extraction_definition_params['headers_attributes'].each do |key, header_attributes|
+      extraction_definition_params['headers_attributes'].each do |_key, header_attributes|
         @extraction_definition.headers << Header.new(header_attributes)
       end
     end
@@ -115,7 +115,7 @@ class ExtractionDefinitionsController < ApplicationController
       :total_selector,
       :kind, :destination_id, :source_id, :enrichment_url,
       :token_parameter, :token_value, :next_token_path, :initial_params,
-      headers_attributes: [:id, :name, :value]
+      headers_attributes: %i[id name value]
     )
   end
 end

@@ -74,7 +74,6 @@ def stub_figshare_enrichment_page_2(destination)
   end
 end
 
-
 def stub_failed_figshare_enrichment_page_1(destination)
   stub_request(:get, "#{destination.url}/harvester/records")
     .with(

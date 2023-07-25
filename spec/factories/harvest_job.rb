@@ -19,7 +19,8 @@ FactoryBot.define do
                                     start_time: 30.minutes.ago, end_time: 28.minutes.ago)
         end
 
-        create_list(:load_job, 2, status: 'completed', start_time: 28.minutes.ago, end_time: 24.minutes.ago, harvest_job:)
+        create_list(:load_job, 2, status: 'completed', start_time: 28.minutes.ago, end_time: 24.minutes.ago,
+                                  harvest_job:)
       end
     end
   end

@@ -32,7 +32,6 @@ RSpec.describe HarvestJob, type: :model do
     it 'returns the number of seconds between the extraction start_time ignoring idle time between jobs and the max load_job end_time' do
       expect(harvest_job.duration_seconds).to eq 3_960.0
     end
-
   end
 
   describe '#transformation_and_load_duration_seconds' do
@@ -72,15 +71,16 @@ RSpec.describe HarvestJob, type: :model do
   end
 
   describe '#validations' do
+    subject                  { create(:harvest_job, harvest_definition:, destination:) }
+
     let(:pipeline)           { create(:pipeline, name: 'NLNZCat') }
     let(:destination)        { create(:destination) }
     let(:harvest_definition) { create(:harvest_definition, pipeline:) }
-    subject                  { create(:harvest_job, harvest_definition:, destination:) }
 
     it { is_expected.to validate_uniqueness_of(:key).case_insensitive.with_message('has already been taken') }
   end
 
-  describe "#completed?" do
+  describe '#completed?' do
     it 'returns true when all child jobs have finished' do
       expect(harvest_job.completed?).to eq true
     end

@@ -17,7 +17,7 @@ module Extraction
 
       return if @extraction_job.is_sample?
 
-      max_pages       = (total_results / @extraction_definition.per_page) + 1
+      max_pages = (total_results / @extraction_definition.per_page) + 1
 
       (@extraction_definition.page...max_pages).each do
         @extraction_definition.page += 1
@@ -44,16 +44,24 @@ module Extraction
     private
 
     def total_results
-      return Nokogiri::HTML(@de.document.body).xpath(@extraction_definition.total_selector).first.content.to_i if @extraction_definition.format == 'HTML'
-      return Nokogiri::XML(@de.document.body).xpath(@extraction_definition.total_selector).first.content.to_i if @extraction_definition.format == 'XML'
+      if @extraction_definition.format == 'HTML'
+        return Nokogiri::HTML(@de.document.body).xpath(@extraction_definition.total_selector).first.content.to_i
+      end
+      if @extraction_definition.format == 'XML'
+        return Nokogiri::XML(@de.document.body).xpath(@extraction_definition.total_selector).first.content.to_i
+      end
 
       JsonPath.new(@extraction_definition.total_selector).on(@de.document.body).first.to_i
     end
 
     def next_token
       return unless @extraction_definition.pagination_type == 'tokenised'
-      return Nokogiri::HTML(@de.document.body).xpath(@extraction_definition.next_token_path).first.content if @extraction_definition.format == 'HTML'
-      return Nokogiri::XML(@de.document.body).xpath(@extraction_definition.next_token_path).first.content if @extraction_definition.format == 'XML'
+      if @extraction_definition.format == 'HTML'
+        return Nokogiri::HTML(@de.document.body).xpath(@extraction_definition.next_token_path).first.content
+      end
+      if @extraction_definition.format == 'XML'
+        return Nokogiri::XML(@de.document.body).xpath(@extraction_definition.next_token_path).first.content
+      end
 
       JsonPath.new(@extraction_definition.next_token_path).on(@de.document.body).first
     end

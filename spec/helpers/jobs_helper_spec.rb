@@ -10,7 +10,7 @@ RSpec.describe JobsHelper do
     let(:errored_job)        { create(:extraction_job, status: 'errored') }
     let(:cancelled_job)      { create(:extraction_job, status: 'cancelled') }
     let(:completed_job)      { create(:extraction_job, status: 'completed') }
-    
+
     let(:destination)        { create(:destination) }
     let(:pipeline)           { create(:pipeline, name: 'NLNZCat') }
     let(:harvest_definition) { create(:harvest_definition, pipeline:) }

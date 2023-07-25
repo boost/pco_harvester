@@ -24,7 +24,8 @@ class TransformationDefinitionsController < ApplicationController
     if @transformation_definition.save
       @harvest_definition.update(transformation_definition_id: @transformation_definition.id)
 
-      redirect_to pipeline_harvest_definition_transformation_definition_path(@pipeline, @harvest_definition, @transformation_definition), notice: 'Transformation Definition created successfully'
+      redirect_to pipeline_harvest_definition_transformation_definition_path(@pipeline, @harvest_definition, @transformation_definition),
+                  notice: 'Transformation Definition created successfully'
     else
       flash.alert = 'There was an issue creating your Transformation Definition'
 
@@ -39,7 +40,8 @@ class TransformationDefinitionsController < ApplicationController
       if @referrer.present?
         redirect_to pipeline_path(@referrer)
       else
-        redirect_to pipeline_harvest_definition_transformation_definition_path(@pipeline, @harvest_definition, @transformation_definition)
+        redirect_to pipeline_harvest_definition_transformation_definition_path(@pipeline, @harvest_definition,
+                                                                               @transformation_definition)
       end
     else
       flash.alert = 'There was an issue updating your Transformation Definition'
@@ -52,7 +54,8 @@ class TransformationDefinitionsController < ApplicationController
       redirect_to pipeline_path(@pipeline), notice: 'Transformation Definition deleted successfully'
     else
       flash.alert = 'There was an issue deleting your Transformation Definition'
-      redirect_to pipeline_harvest_definition_transformation_definition_path(@pipeline, @harvest_definition, @transformation_definition)
+      redirect_to pipeline_harvest_definition_transformation_definition_path(@pipeline, @harvest_definition,
+                                                                             @transformation_definition)
     end
   end
 
@@ -85,11 +88,11 @@ class TransformationDefinitionsController < ApplicationController
   end
 
   def find_extraction_jobs
-    if params['kind'] == 'enrichment' || @transformation_definition&.kind == 'enrichment'
-      extraction_definitions = ExtractionDefinition.all.enrichment
-    else
-      extraction_definitions = ExtractionDefinition.all.harvest
-    end
+    extraction_definitions = if params['kind'] == 'enrichment' || @transformation_definition&.kind == 'enrichment'
+                               ExtractionDefinition.all.enrichment
+                             else
+                               ExtractionDefinition.all.harvest
+                             end
 
     @extraction_jobs = extraction_definitions.map do |ed|
       [ed.name, ed.extraction_jobs.map { |job| [job.name, job.id] }]

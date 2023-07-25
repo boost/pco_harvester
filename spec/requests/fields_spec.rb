@@ -68,12 +68,13 @@ RSpec.describe 'Fields', type: :request do
     it 'deletes the field' do
       expect do
         delete pipeline_harvest_definition_transformation_definition_field_path(pipeline, harvest_definition, transformation_definition,
-                                                                    field)
+                                                                                field)
       end.to change(Field, :count).by(-1)
     end
 
     it 'returns a successful response' do
-      delete pipeline_harvest_definition_transformation_definition_field_path(pipeline, harvest_definition, transformation_definition, field)
+      delete pipeline_harvest_definition_transformation_definition_field_path(pipeline, harvest_definition,
+                                                                              transformation_definition, field)
 
       expect(response.status).to eq(200)
     end

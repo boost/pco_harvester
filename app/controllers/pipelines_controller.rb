@@ -9,6 +9,17 @@ class PipelinesController < ApplicationController
     @pipeline = Pipeline.new
   end
 
+  def show
+    @harvest_definition = @pipeline.harvest || HarvestDefinition.new(pipeline: @pipeline)
+    @harvest_job = HarvestJob.new
+
+    @enrichment_definition = HarvestDefinition.new(pipeline: @pipeline)
+
+    @destinations = Destination.all
+  end
+
+  def edit; end
+
   def create
     @pipeline = Pipeline.new(pipeline_params)
 
@@ -21,17 +32,6 @@ class PipelinesController < ApplicationController
     end
   end
 
-  def show
-    @harvest_definition = @pipeline.harvest || HarvestDefinition.new(pipeline: @pipeline)
-    @harvest_job = HarvestJob.new
-
-    @enrichment_definition = HarvestDefinition.new(pipeline: @pipeline)
-
-    @destinations = Destination.all
-  end
-
-  def edit; end
-  
   def update
     if @pipeline.update(pipeline_params)
       redirect_to pipeline_path(@pipeline), notice: 'Pipeline updated successfully'

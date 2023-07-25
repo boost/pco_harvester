@@ -3,9 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe 'ExtractionJobs', type: :request do
-  let(:user)           { create(:user) }
   subject!             { create(:extraction_job, extraction_definition:) }
 
+  let(:user)           { create(:user) }
   let(:pipeline) { create(:pipeline, :ngataonga) }
   let(:harvest_definition) { pipeline.harvest }
   let(:extraction_definition) { harvest_definition.extraction_definition }
@@ -19,7 +19,8 @@ RSpec.describe 'ExtractionJobs', type: :request do
       # that's to test the display of results
       stub_ngataonga_harvest_requests(extraction_definition)
       ExtractionWorker.new.perform(subject.id)
-      get pipeline_harvest_definition_extraction_definition_extraction_job_path(pipeline, harvest_definition, extraction_definition, subject)
+      get pipeline_harvest_definition_extraction_definition_extraction_job_path(pipeline, harvest_definition,
+                                                                                extraction_definition, subject)
     end
 
     it 'returns a successful response' do
@@ -36,13 +37,13 @@ RSpec.describe 'ExtractionJobs', type: :request do
     describe 'is successful' do
       it 'redirects to the pipeline jobs path' do
         post pipeline_harvest_definition_extraction_definition_extraction_jobs_path(pipeline, harvest_definition, extraction_definition,
-                                                                        kind: 'full')
+                                                                                    kind: 'full')
         expect(response).to redirect_to pipeline_jobs_path(pipeline)
       end
 
       it 'sets a succesful message' do
         post pipeline_harvest_definition_extraction_definition_extraction_jobs_path(pipeline, harvest_definition, extraction_definition,
-                                                                        kind: 'full')
+                                                                                    kind: 'full')
         follow_redirect!
         expect(response.body).to include 'Job queued successfuly'
       end
@@ -51,7 +52,7 @@ RSpec.describe 'ExtractionJobs', type: :request do
         expect(ExtractionWorker).to receive(:perform_async)
 
         post pipeline_harvest_definition_extraction_definition_extraction_jobs_path(pipeline, harvest_definition, extraction_definition,
-                                                                        kind: 'full')
+                                                                                    kind: 'full')
       end
     end
 
@@ -61,20 +62,23 @@ RSpec.describe 'ExtractionJobs', type: :request do
       end
 
       it 'redirects to the pipeline jobs path' do
-        post pipeline_harvest_definition_extraction_definition_extraction_jobs_path(pipeline, harvest_definition, extraction_definition)
+        post pipeline_harvest_definition_extraction_definition_extraction_jobs_path(pipeline, harvest_definition,
+                                                                                    extraction_definition)
 
         expect(response).to redirect_to pipeline_jobs_path(pipeline)
       end
 
       it 'sets a failure message' do
-        post pipeline_harvest_definition_extraction_definition_extraction_jobs_path(pipeline, harvest_definition, extraction_definition)
+        post pipeline_harvest_definition_extraction_definition_extraction_jobs_path(pipeline, harvest_definition,
+                                                                                    extraction_definition)
         follow_redirect!
         expect(response.body).to include 'There was an issue launching the job'
       end
 
       it 'does not queue a job' do
         expect(ExtractionWorker).not_to receive(:perform_async)
-        post pipeline_harvest_definition_extraction_definition_extraction_jobs_path(pipeline, harvest_definition, extraction_definition)
+        post pipeline_harvest_definition_extraction_definition_extraction_jobs_path(pipeline, harvest_definition,
+                                                                                    extraction_definition)
       end
     end
   end
@@ -84,19 +88,19 @@ RSpec.describe 'ExtractionJobs', type: :request do
       it 'deletes the job' do
         expect do
           delete pipeline_harvest_definition_extraction_definition_extraction_job_path(pipeline, harvest_definition, extraction_definition,
-                                                                           subject)
+                                                                                       subject)
         end.to change(ExtractionJob, :count).by(-1)
       end
 
       it 'redirects to the correct path' do
         delete pipeline_harvest_definition_extraction_definition_extraction_job_path(pipeline, harvest_definition, extraction_definition,
-                                                                           subject)
+                                                                                     subject)
         expect(response).to redirect_to(pipeline_jobs_path(pipeline))
       end
 
       it 'displays an appropriate flash message' do
         delete pipeline_harvest_definition_extraction_definition_extraction_job_path(pipeline, harvest_definition, extraction_definition,
-                                                                           subject)
+                                                                                     subject)
 
         follow_redirect!
 
@@ -112,19 +116,21 @@ RSpec.describe 'ExtractionJobs', type: :request do
       it 'does not delete the job' do
         expect do
           delete pipeline_harvest_definition_extraction_definition_extraction_job_path(pipeline, harvest_definition, extraction_definition,
-                                                                           subject)
+                                                                                       subject)
         end.not_to change(ExtractionJob, :count)
       end
 
       it 'redirects to the correct path' do
-        delete pipeline_harvest_definition_extraction_definition_extraction_job_path(pipeline, harvest_definition, extraction_definition, subject)
+        delete pipeline_harvest_definition_extraction_definition_extraction_job_path(pipeline, harvest_definition,
+                                                                                     extraction_definition, subject)
 
         expect(response).to redirect_to pipeline_harvest_definition_extraction_definition_extraction_job_path(pipeline, harvest_definition,
-                                                                                                  extraction_definition, subject)
+                                                                                                              extraction_definition, subject)
       end
 
       it 'displays an appropriate flash message' do
-        delete pipeline_harvest_definition_extraction_definition_extraction_job_path(pipeline, harvest_definition, extraction_definition, subject)
+        delete pipeline_harvest_definition_extraction_definition_extraction_job_path(pipeline, harvest_definition,
+                                                                                     extraction_definition, subject)
 
         follow_redirect!
 
@@ -137,7 +143,7 @@ RSpec.describe 'ExtractionJobs', type: :request do
     context 'when the cancellation is successful' do
       before do
         post cancel_pipeline_harvest_definition_extraction_definition_extraction_job_path(pipeline, harvest_definition, extraction_definition,
-                                                                              subject)
+                                                                                          subject)
       end
 
       it 'sets the job status to be cancelled' do
@@ -160,7 +166,7 @@ RSpec.describe 'ExtractionJobs', type: :request do
       before do
         allow_any_instance_of(ExtractionJob).to receive(:cancelled!).and_return(false)
         post cancel_pipeline_harvest_definition_extraction_definition_extraction_job_path(pipeline, harvest_definition, extraction_definition,
-                                                                              subject)
+                                                                                          subject)
       end
 
       it 'does not set the job status to be cancelled' do

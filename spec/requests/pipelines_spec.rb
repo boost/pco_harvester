@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Pipelines", type: :request do
+RSpec.describe 'Pipelines', type: :request do
   let(:user) { create(:user) }
   let!(:pipeline) { create(:pipeline, name: 'DigitalNZ Production') }
 
@@ -8,7 +8,7 @@ RSpec.describe "Pipelines", type: :request do
     sign_in(user)
   end
 
-  describe "GET /index" do
+  describe 'GET /index' do
     it 'displays a list of pipelines' do
       get pipelines_path
 
@@ -17,7 +17,7 @@ RSpec.describe "Pipelines", type: :request do
     end
   end
 
-  describe "POST /create" do
+  describe 'POST /create' do
     context 'with valid attributes' do
       it 'creates a new pipeline' do
         expect do
@@ -45,7 +45,7 @@ RSpec.describe "Pipelines", type: :request do
               description: nil
             }
           }
-        end.to change(Pipeline, :count).by(0)
+        end.not_to change(Pipeline, :count)
       end
 
       it 'renders the :index template' do
@@ -101,7 +101,6 @@ RSpec.describe "Pipelines", type: :request do
       end
     end
 
-    
     context 'with invalid paramaters' do
       it 'does not update the pipeline' do
         patch pipeline_path(pipeline), params: {
@@ -133,7 +132,7 @@ RSpec.describe "Pipelines", type: :request do
 
       it 'redirects to the pipelines path' do
         delete pipeline_path(pipeline)
-  
+
         expect(response).to redirect_to pipelines_path
 
         follow_redirect!
@@ -149,7 +148,7 @@ RSpec.describe "Pipelines", type: :request do
       it 'does not delete a pipeline' do
         expect do
           delete pipeline_path(pipeline)
-        end.to change(Pipeline, :count).by(0)
+        end.not_to change(Pipeline, :count)
       end
 
       it 'redirects to the pipeline path and displays a message' do
