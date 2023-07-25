@@ -1,6 +1,6 @@
 // Library Imports
 import React from "react";
-import { map } from "lodash";
+import { map, isEmpty } from "lodash";
 import { useDispatch, useSelector } from "react-redux";
 import classNames from "classnames";
 
@@ -49,6 +49,18 @@ const TransformationApp = ({}) => {
     );
   };
 
+  const transformedRecord = () => {
+    if(!isEmpty(appDetails.rejectionReasons)) {
+      return `This record would be rejected based on the conditions: ${appDetails.rejectionReasons.join(' ')}`
+    }
+
+    if(!isEmpty(appDetails.deletionReasons)) {
+      return `This record would be deleted based on the conditions: ${appDetails.deletionReasons.join(' ')}`
+    }
+
+    return appDetails.transformedRecord;
+  }
+
   return (
     <div className="row">
       <HeaderActions />
@@ -87,7 +99,7 @@ const TransformationApp = ({}) => {
                 </div>
 
                 <RecordViewer
-                  record={appDetails.transformedRecord}
+                  record={ transformedRecord() }
                   format="JSON"
                 />
               </div>

@@ -35,9 +35,10 @@ class FieldsController < ApplicationController
     providedFields = params['fields'].map { |id| Field.find(id) }
 
     fields     = providedFields.select(&:field?)
-    conditions = providedFields.select(&:condition?)
+    reject_conditions = providedFields.select(&:condition?).select(&:reject_if?)
+    delete_conditions = providedFields.select(&:condition?).select(&:delete_if?)
 
-    transformation = Transformation::Execution.new([record], fields, conditions).call.first
+    transformation = Transformation::Execution.new([record], fields, reject_conditions, delete_conditions).call.first
 
     render json: transformation.to_json
   end

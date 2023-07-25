@@ -33,7 +33,9 @@ module ReduxState
       transformedRecord: {},
       harvestDefinition: @harvest_definition,
       pipeline: @pipeline,
-      transformationDefinition: @transformation_definition
+      transformationDefinition: @transformation_definition,
+      rejectionReasons: [],
+      deletionReasons: []
     }
   end
 

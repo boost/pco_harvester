@@ -5,7 +5,7 @@ module Transformation
   class Field
     attr_reader :id, :name, :value, :error
 
-    def initialize(id, name, value, exception)
+    def initialize(id, name, value, exception, kind, condition)
       @id = id
       @name = name
       @value = value

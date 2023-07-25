@@ -14,15 +14,8 @@ class Field < ApplicationRecord
       id:,
       name:,
       block:,
-      kind:
-    }.merge(
-        if condition?
-          {
-            condition:
-          }
-        else
-          {}
-        end
-      )
+      kind:,
+      condition:
+    }
   end
 end
