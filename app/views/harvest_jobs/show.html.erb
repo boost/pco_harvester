@@ -83,6 +83,16 @@
         <th scope="row">Total Records Transformed</th>
         <td><%= @harvest_job.transformation_jobs.sum(:records_transformed) %></td>
       </tr>
+      
+      <tr>
+        <th scope="row">Total Records Rejected</th>
+        <td><%= @harvest_job.transformation_jobs.sum(:records_rejected) %></td>
+      </tr>
+      
+      <tr>
+        <th scope="row">Total Records Deleted</th>
+        <td><%= @harvest_job.transformation_jobs.sum(:records_deleted) %></td>
+      </tr>
 
       <tr>
         <th scope="row">Total Records Loaded</th>

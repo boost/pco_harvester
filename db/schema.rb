@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_24_012649) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_25_031030) do
   create_table "destinations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "url", null: false
@@ -163,6 +163,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_24_012649) do
     t.bigint "extraction_job_id"
     t.text "name"
     t.string "api_record_id"
+    t.integer "records_rejected", default: 0
+    t.integer "records_deleted", default: 0
     t.index ["extraction_job_id"], name: "index_transformation_jobs_on_extraction_job_id"
     t.index ["harvest_job_id"], name: "index_transformation_jobs_on_harvest_job_id"
     t.index ["transformation_definition_id"], name: "index_transformation_jobs_on_transformation_definition_id"

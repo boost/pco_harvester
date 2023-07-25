@@ -5,26 +5,41 @@ class TransformationWorker < ApplicationWorker
     @transformation_job = transformation_job
     @harvest_job = @transformation_job.harvest_job
 
-    transformed_records = transform_records(transformation_job.page)
-    queue_load_worker(transformed_records)
+    transformed_records = transform_records(transformation_job.page).map(&:to_hash)
 
-    update_transformation_report(transformed_records)
+    valid_records       = transformed_records.select { |record| record['rejection_reasons'].blank? && record['deletion_reasons'].blank? }
+    rejected_records    = transformed_records.select { |record| record['rejection_reasons'].present? }
+    deleted_records     = transformed_records.select { |record| record['deletion_reasons'].present? }
+
+    queue_load_worker(valid_records)
+    queue_delete_worker(deleted_records)
+
+    update_transformation_report(valid_records, rejected_records, deleted_records)
   end
 
   def transform_records(page)
     transformation_definition = @transformation_job.transformation_definition
-    Transformation::Execution.new(@transformation_job.records(page), transformation_definition.fields).call
+
+    fields            = transformation_definition.fields.select(&:field?)
+    reject_conditions = transformation_definition.fields.select(&:condition?).select(&:reject_if?)
+    delete_conditions = transformation_definition.fields.select(&:condition?).select(&:delete_if?)
+
+    Transformation::Execution.new(@transformation_job.records(page), fields, reject_conditions, delete_conditions).call
   end
 
   def queue_load_worker(transformed_records)
     load_job = LoadJob.create(harvest_job: @harvest_job, page: @transformation_job.page,
                               api_record_id: @transformation_job.api_record_id)
-    LoadWorker.perform_async(load_job.id, transformed_records.map(&:to_hash).to_json)
+
+    LoadWorker.perform_async(load_job.id, transformed_records.to_json)
   end
 
-  def update_transformation_report(transformed_records)
+  def update_transformation_report(valid_records, rejected_records, deleted_records)
     @transformation_job.reload
-    records_count = @transformation_job.records_transformed + transformed_records.count
-    @transformation_job.update(records_transformed: records_count)
+    records_count = @transformation_job.records_transformed + valid_records.count
+    rejected_records_count = @transformation_job.records_rejected + rejected_records.count
+    deleted_records_count = @transformation_job.records_deleted + deleted_records.count
+    
+    @transformation_job.update(records_transformed: records_count, records_rejected: rejected_records_count, records_deleted: deleted_records_count)
   end
 end
