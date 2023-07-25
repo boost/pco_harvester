@@ -228,6 +228,66 @@
       <% end %>
     </div>
   </div>
+
+  
+  <h3 class='my-4'>Delete Jobs</h3>
+
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#delete-summary-tab" type="button" role="tab" aria-controls="delete-summary-tab" aria-selected="true">
+        Summary
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" data-bs-toggle="tab" data-bs-target="#delete-details-tab" type="button" role="tab" aria-controls="delete-details-tab" aria-selected="true">
+        Details
+      </button>
+    </li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane fade show active" id="delete-summary-tab" role="tab" aria-labelledby="delete-summary-tab" tabindex="0">
+      <table class="table my-4">
+        <tbody>
+          <% DeleteJob.statuses.keys.each do |status| %>
+            <tr>
+              <th scope="row">Number <%= status %></th>
+              <td><%= @harvest_job.delete_jobs.where(status: status).count %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="tab-pane fade show" id="delete-details-tab" role="tab" aria-labelledby="delete-details-tab" tabindex="0">
+      <% @harvest_job.delete_jobs.each do |delete_job| %>
+        <div class="card my-2">
+          <div class="card-body">
+            <h5 class="card-title mb-4"><%= delete_job.name %></h5>
+
+            <dl class="row">
+
+              <dt class="col-sm-2">Page</dt>
+              <dd class="col-sm-10"><%= delete_job.page %></dd>
+
+              <dt class="col-sm-2">Start Time</dt>
+              <dd class="col-sm-10"><%= job_start_time(delete_job) %></dd>
+
+              <dt class="col-sm-2">End Time</dt>
+              <dd class="col-sm-10"><%= job_end_time(delete_job) %></dd>
+
+              <dt class="col-sm-2">Duration</dt>
+              <dd class="col-sm-10"><%= job_duration(delete_job) %></dd>
+
+              <dt class="col-sm-2">Status</dt>
+              <dd class="col-sm-10"><%= job_status_text(delete_job) %></dd>
+
+              <dt class="col-sm-2">Records deleted</dt>
+              <dd class="col-sm-10"><%= delete_job.records_deleted %></dd>
+            </dl>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
 <% else %>
   <p class="my-4">The job hasn't started yet.</p>
 <% end %>

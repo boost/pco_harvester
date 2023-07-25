@@ -17,19 +17,15 @@ module Transformation
         FieldExecution.new(field).execute(@record)
       end
 
-      return TransformedRecord.new([], reject_fields) if reject_fields.any?(&:condition_met?)
-
       delete_fields = @delete_conditions.map do |field|
         FieldExecution.new(field).execute(@record)
       end
-
-      return TransformedRecord.new([], [], delete_fields) if delete_fields.any?(&:condition_met?)
 
       transformed_fields = @fields.map do |field|
         FieldExecution.new(field).execute(@record)
       end
 
-      TransformedRecord.new(transformed_fields)
+      TransformedRecord.new(transformed_fields, reject_fields, delete_fields)
     end
   end
 end

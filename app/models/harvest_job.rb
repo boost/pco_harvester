@@ -9,6 +9,7 @@ class HarvestJob < ApplicationRecord
   belongs_to :extraction_job, optional: true
   has_many   :transformation_jobs
   has_many   :load_jobs
+  has_many   :delete_jobs
 
   delegate :pipeline, to: :harvest_definition
   delegate :extraction_definition, to: :harvest_definition

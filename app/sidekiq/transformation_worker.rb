@@ -12,7 +12,7 @@ class TransformationWorker < ApplicationWorker
     deleted_records     = transformed_records.select { |record| record['deletion_reasons'].present? }
 
     queue_load_worker(valid_records)
-    queue_delete_worker(deleted_records)
+    queue_delete_worker(deleted_records) unless deleted_records.empty?
 
     update_transformation_report(valid_records, rejected_records, deleted_records)
   end
@@ -27,11 +27,17 @@ class TransformationWorker < ApplicationWorker
     Transformation::Execution.new(@transformation_job.records(page), fields, reject_conditions, delete_conditions).call
   end
 
-  def queue_load_worker(transformed_records)
+  def queue_load_worker(records)
     load_job = LoadJob.create(harvest_job: @harvest_job, page: @transformation_job.page,
                               api_record_id: @transformation_job.api_record_id)
 
-    LoadWorker.perform_async(load_job.id, transformed_records.to_json)
+    LoadWorker.perform_async(load_job.id, records.to_json)
+  end
+
+  def queue_delete_worker(records)
+    delete_job = DeleteJob.create(harvest_job: @harvest_job, page: @transformation_job.page)
+
+    DeleteWorker.perform_async(delete_job.id, records.to_json)
   end
 
   def update_transformation_report(valid_records, rejected_records, deleted_records)
