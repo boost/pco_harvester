@@ -66,7 +66,10 @@ class HarvestJob < ApplicationRecord
   end
 
   def completed?
-    extraction_job.completed? && transformation_jobs.all?(&:completed?) && load_jobs.all?(&:completed?)
+    return false unless extraction_job.completed?
+    return false unless transformation_jobs.where.not(status: 'completed').empty?
+
+    load_jobs.where.not(status: 'completed').empty?
   end
 
   def harvest_complete?
@@ -76,6 +79,7 @@ class HarvestJob < ApplicationRecord
   end
 
   def enqueue_enrichment_jobs
+    return if harvest_definition.enrichment?
     return if pipeline.enrichments.empty?
     return unless harvest_complete?
 

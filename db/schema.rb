@@ -10,7 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_20_213947) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_26_202809) do
+  create_table "delete_jobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "status"
+    t.integer "kind", default: 0, null: false
+    t.timestamp "start_time"
+    t.timestamp "end_time"
+    t.integer "records_deleted", default: 0
+    t.text "name"
+    t.integer "page", default: 1, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "harvest_job_id"
+    t.index ["harvest_job_id"], name: "index_delete_jobs_on_harvest_job_id"
+  end
+
   create_table "destinations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "url", null: false
@@ -56,6 +70,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_20_213947) do
     t.text "error_message"
     t.text "name"
     t.index ["extraction_definition_id"], name: "index_extraction_jobs_on_extraction_definition_id"
+    t.index ["status"], name: "index_extraction_jobs_on_status"
   end
 
   create_table "fields", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -64,6 +79,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_20_213947) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "transformation_definition_id", null: false
+    t.integer "kind", default: 0
+    t.integer "condition", default: 0
     t.index ["transformation_definition_id"], name: "index_fields_on_transformation_definition_id"
   end
 
@@ -101,6 +118,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_20_213947) do
     t.index ["extraction_job_id"], name: "index_harvest_jobs_on_extraction_job_id"
     t.index ["harvest_definition_id"], name: "index_harvest_jobs_on_harvest_definition_id"
     t.index ["key"], name: "index_harvest_jobs_on_key", unique: true
+    t.index ["status"], name: "index_harvest_jobs_on_status"
   end
 
   create_table "headers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -125,6 +143,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_20_213947) do
     t.text "name"
     t.string "api_record_id"
     t.index ["harvest_job_id"], name: "index_load_jobs_on_harvest_job_id"
+    t.index ["status"], name: "index_load_jobs_on_status"
   end
 
   create_table "pipelines", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -161,8 +180,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_20_213947) do
     t.bigint "extraction_job_id"
     t.text "name"
     t.string "api_record_id"
+    t.integer "records_rejected", default: 0
+    t.integer "records_deleted", default: 0
     t.index ["extraction_job_id"], name: "index_transformation_jobs_on_extraction_job_id"
     t.index ["harvest_job_id"], name: "index_transformation_jobs_on_harvest_job_id"
+    t.index ["status"], name: "index_transformation_jobs_on_status"
     t.index ["transformation_definition_id"], name: "index_transformation_jobs_on_transformation_definition_id"
   end
 
