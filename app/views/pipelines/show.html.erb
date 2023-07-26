@@ -162,6 +162,20 @@
                 @harvest_definition.extraction_definition.pipeline,
                 @harvest_definition,
                 @harvest_definition.extraction_definition
+              ),
+            run_sample_extraction_path: 
+              pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
+                @harvest_definition.extraction_definition.pipeline, 
+                @harvest_definition,
+                @harvest_definition.extraction_definition, 
+                kind: :sample
+              ),
+            run_full_extraction_path: 
+              pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
+                @harvest_definition.extraction_definition.pipeline, 
+                @harvest_definition,
+                @harvest_definition.extraction_definition, 
+                kind: :full
               )
           } %>
 
@@ -302,6 +316,20 @@
                   enrichment_definition.extraction_definition.pipeline,
                   enrichment_definition,
                   enrichment_definition.extraction_definition
+                ),
+              run_sample_extraction_path: 
+                pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
+                  enrichment_definition.extraction_definition.pipeline, 
+                  enrichment_definition,
+                  enrichment_definition.extraction_definition, 
+                  kind: :sample
+                ),
+              run_full_extraction_path: 
+                pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
+                  enrichment_definition.extraction_definition.pipeline, 
+                  enrichment_definition,
+                  enrichment_definition.extraction_definition, 
+                  kind: :full
                 )
             } %>
 

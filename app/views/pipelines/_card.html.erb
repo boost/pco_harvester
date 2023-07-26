@@ -1,3 +1,9 @@
+<%
+  jobs_path ||= ''
+  run_sample_extraction_path ||= ''
+  run_full_extraction_path ||= ''
+%>
+
 <div class="card">
   <div class='card-body'>
     <h5 class="card-title"><%= definition.send("#{type}_definition").name %></h5>
@@ -11,35 +17,53 @@
       <ul class="dropdown-menu dropdown-menu-end">
         <% if reference?(pipeline, definition.send("#{type}_definition")) %>
           <li>
-            <%= link_to edit_path, class: 'dropdown-item' do %>
+            <%= link_to edit_path, class: 'dropdown-item card__control-action' do %>
               <i class="bi bi-link-45deg me-2"></i>Go to reference source
             <% end %>
           </li>
           <li><hr class="dropdown-divider"></li>
         <% else %>
           <li>
-            <%= link_to edit_path, class: 'dropdown-item' do %>
+            <%= link_to edit_path, class: 'dropdown-item card__control-action' do %>
               <i class="bi bi-link-45deg me-2"></i><%= edit_text %>
             <% end %>
           </li>
         <% end %>
         
         <% if reference?(pipeline, definition.send("#{type}_definition")) %>
-          <li><a class="dropdown-item" href="#" data-bs-toggle='modal' data-bs-target=<%= "#remove-reference-#{definition.send("#{type}_definition").id}" %>><i class="bi bi-trash me-2"></i>Remove definition</a></li>
+          <li><a class="dropdown-item card__control-action" href="#" data-bs-toggle='modal' data-bs-target=<%= "#remove-reference-#{definition.send("#{type}_definition").id}" %>><i class="bi bi-trash me-2"></i>Remove definition</a></li>
         <% end %>
 
         <% if jobs_path.present? %>
           <li>
-            <%= link_to jobs_path, class: 'dropdown-item' do %>
-              <i class="bi bi-link-45deg me-2"></i> View Extraction Jobs
+            <%= link_to jobs_path, class: 'dropdown-item card__control-action' do %>
+              <i class="bi bi-eye me-2"></i> View Extraction Jobs
+            <% end %>
+          </li>
+        <% end %>
+
+        <% if run_sample_extraction_path.present? %>
+          <li>
+            <%= button_to run_sample_extraction_path, class: 'dropdown-item card__control-action' do %>
+              <i class="bi bi-play me-2"></i> Run Sample Extraction
+            <% end %>
+          </li>
+        <% end %>
+
+        <% if run_full_extraction_path.present? %>
+          <li>
+            <%= button_to run_full_extraction_path, class: 'dropdown-item card__control-action' do %>
+              <i class="bi bi-play me-2"></i> Run Full Extraction
             <% end %>
           </li>
         <% end %>
       </ul>
     </div>
   </div>
-  
-  <i class="bi bi-arrow-right card__right-arrow"></i>
+
+  <% if position == 'first' %>
+    <i class="bi bi-arrow-right card__right-arrow"></i>
+  <% end %>
 </div>
 
 <div

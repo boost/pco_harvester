@@ -22,6 +22,10 @@
       cursor: default
     }
   }
+  
+  @include element('control-action') {
+    padding: 10px 16px 9px 16px;
+  }
 
   @include element('control') {
     position: absolute;
@@ -37,10 +41,6 @@
 
     ul {
       padding: 0;
-    }
-
-    li a {
-      padding: 10px 16px 9px 16px;
     }
 
     .dropdown-item:hover, .dropdown-item:focus {
