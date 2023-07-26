@@ -50,6 +50,23 @@ const JumpTo = () => {
     );
   };
 
+  const canClickPreviousRecord = () => isFetching || (page == 1 && record == 1);
+
+  const canClickNextRecord = () =>
+    isFetching || (page == totalPages && record == totalRecords);
+
+  const canGoToDifferentPage = () =>
+    isFetching ||
+    record !== inputRecord ||
+    page === inputPage ||
+    inputPage > totalPages;
+
+  const canGoToDifferentRecord = () =>
+    isFetching ||
+    page !== inputPage ||
+    record === inputRecord ||
+    inputRecord > totalRecords;
+
   return (
     <div className="dropdown jump-to">
       <button
@@ -83,12 +100,7 @@ const JumpTo = () => {
           <div className="col-auto">
             <button
               className="btn btn-primary"
-              disabled={
-                isFetching ||
-                record !== inputRecord ||
-                page === inputPage ||
-                inputPage > totalPages
-              }
+              disabled={canGoToDifferentPage()}
             >
               Go
             </button>
@@ -117,12 +129,7 @@ const JumpTo = () => {
           <div className="col-auto">
             <button
               className="btn btn-primary"
-              disabled={
-                isFetching ||
-                page !== inputPage ||
-                record === inputRecord ||
-                inputRecord > totalRecords
-              }
+              disabled={canGoToDifferentRecord()}
             >
               Go
             </button>
@@ -135,16 +142,14 @@ const JumpTo = () => {
         >
           <button
             className="btn btn-outline-primary"
-            disabled={isFetching || (page == 1 && record == 1)}
+            disabled={canClickPreviousRecord()}
             onClick={handlePreviousRecordClick}
           >
             Previous record
           </button>
           <button
             className="btn btn-outline-primary"
-            disabled={
-              isFetching || (page == totalPages && record == totalRecords)
-            }
+            disabled={canClickNextRecord()}
             onClick={handleNextRecordClick}
           >
             Next record
