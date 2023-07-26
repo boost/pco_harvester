@@ -1,6 +1,4 @@
-<div
-  class="<%= class_names('card', 'card--right-arrow': position == 'first') %>"
->
+<div class="card">
   <div class='card-body'>
     <h5 class="card-title"><%= definition.send("#{type}_definition").name %></h5>
 
@@ -29,9 +27,19 @@
         <% if reference?(pipeline, definition.send("#{type}_definition")) %>
           <li><a class="dropdown-item" href="#" data-bs-toggle='modal' data-bs-target=<%= "#remove-reference-#{definition.send("#{type}_definition").id}" %>><i class="bi bi-trash me-2"></i>Remove definition</a></li>
         <% end %>
+
+        <% if jobs_path.present? %>
+          <li>
+            <%= link_to jobs_path, class: 'dropdown-item' do %>
+              <i class="bi bi-link-45deg me-2"></i> View Extraction Jobs
+            <% end %>
+          </li>
+        <% end %>
       </ul>
     </div>
   </div>
+  
+  <i class="bi bi-arrow-right card__right-arrow"></i>
 </div>
 
 <div

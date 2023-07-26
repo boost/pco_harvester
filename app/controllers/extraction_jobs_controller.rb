@@ -1,10 +1,14 @@
 # frozen_string_literal: true
 
 class ExtractionJobsController < ApplicationController
-  before_action :find_pipeline, only: %i[show create destroy cancel]
+  before_action :find_pipeline
   before_action :find_harvest_definition
-  before_action :find_extraction_definition, only: %i[show create destroy cancel]
+  before_action :find_extraction_definition
   before_action :find_extraction_job, only: %i[show destroy cancel]
+
+  def index
+    @extraction_jobs = paginate_and_filter_jobs(@extraction_definition.extraction_jobs)
+  end
 
   def show
     @documents = @extraction_job.documents

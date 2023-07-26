@@ -27,14 +27,14 @@ each(autoCompleteForms, (form) => {
 
   new autoComplete(config);
 
-    form.addEventListener('selection', (event) => {
-    request
-      .patch(path, {
-        [field]: event.detail.selection.value.id
-      })
-      .then(function (response) {
-        location.reload();
-      });
+  form.addEventListener('selection', (event) => {
+  request
+    .patch(path, {
+      [field]: event.detail.selection.value.id
+    })
+    .then(function (response) {
+      location.reload();
+    });
   });
 });
 

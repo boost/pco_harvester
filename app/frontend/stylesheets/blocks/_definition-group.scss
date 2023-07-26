@@ -7,14 +7,14 @@
   margin-right: 0;
 
   @include modifier('spacer') {
-    margin-top: 7rem;
+    margin-top: 4rem;
   }
 
   @include element('bridge') {
     position: absolute;
     width: 0px;
-    height: 112px;
-    top: -112px;
+    height: 64px;
+    top: -64px;
     border-left: 1px dashed $pompeii-ash;
     left: 0;
     right: 0;
