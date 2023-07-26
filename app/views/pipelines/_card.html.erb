@@ -1,6 +1,4 @@
-<div
-  class="<%= class_names('card', 'card--right-arrow': position == 'first') %>"
->
+<div class="card">
   <div class='card-body'>
     <h5 class="card-title"><%= definition.send("#{type}_definition").name %></h5>
 
@@ -32,6 +30,8 @@
       </ul>
     </div>
   </div>
+  
+  <i class="bi bi-arrow-right card__right-arrow"></i>
 </div>
 
 <div

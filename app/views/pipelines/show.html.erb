@@ -162,13 +162,14 @@
         <% else %>
           <button
             type="button"
-            class="card card--create-cta d-flex card--right-arrow"
+            class="card card--create-cta d-flex"
             data-bs-toggle="modal"
             data-bs-target="#add-harvest-extraction"
           >
             <div class="card-body align-items-center d-flex justify-content-center">
               <p class='card-text'>+ Add harvest extraction</p>
             </div>
+            <i class="bi bi-arrow-right card__right-arrow"></i>
           </button>
         <% end %>
       </div>
@@ -295,13 +296,14 @@
 
             <button
               type="button"
-              class="card card--create-cta card--right-arrow d-flex"
+              class="card card--create-cta d-flex"
               data-bs-toggle="modal"
               data-bs-target="#add-enrichment-extraction-<%= enrichment_definition.id %>"
             >
               <div class="card-body d-flex align-items-center justify-content-center">
                 <p class='card-text'>+ Add enrichment extraction</p>
               </div>
+              <i class="bi bi-arrow-right card__right-arrow"></i>
             </button>
 
             <%= render layout: 'shared/create-modal', locals: { modal_heading: 'Add enrichment extraction', id: "add-enrichment-extraction-#{enrichment_definition.id}", modal_subheading: 'An enrichment extraction is a set of rules that define how you collect records from a content source' } do %>
