@@ -85,7 +85,7 @@
   <div class='card p-4'>
     <div class='d-flex'>
       <div class='me-auto'>
-        <h4><%= @harvest_definition.name %> (Source ID: <%= @harvest_definition.source_id %>)</h4>
+        <h4><%= @harvest_definition.source_id %> </h4>
 
         <p><%= definition_help_text(@harvest_definition, 'harvest') %></p>
       </div>
@@ -96,7 +96,7 @@
           class="btn btn-outline-primary"
           data-bs-toggle="modal"
           data-bs-target="#edit-harvest"
-        >Edit</button>
+        >Edit Harvest</button>
       </div>
 
       <%= render layout: 'shared/create-modal', locals: { modal_heading: 'Edit harvest', id: 'edit-harvest'  } do %>
@@ -176,7 +176,7 @@
       <div class='col-6'>
         <% if @harvest_definition.transformation_definition.present? %>
 
-          <%= render partial: "pipelines/card",
+          <%# render partial: "pipelines/card",
           locals: {
             pipeline: @pipeline,
             definition: @harvest_definition,
@@ -220,7 +220,7 @@
 
       <div class='d-flex'>
         <div class='me-auto'>
-          <h4><%= enrichment_definition.name %> (Source ID: <%= enrichment_definition.source_id %> | Priority: <%= enrichment_definition.priority %>)</h4>
+          <h4><%= enrichment_definition.source_id %> | <%= enrichment_definition.priority %></h4>
           <p><%= definition_help_text(enrichment_definition, 'enrichment') %></p>
         </div>
 
@@ -230,7 +230,7 @@
             class="btn btn-outline-primary"
             data-bs-toggle="modal"
             data-bs-target=<%= "#edit-enrichment-#{enrichment_definition.id}" %>
-          >Edit</button>
+          >Edit Enrichment</button>
         </div>
 
         <%= render layout: 'shared/create-modal', locals: { modal_heading: 'Edit enrichment', id: "edit-enrichment-#{enrichment_definition.id}"  } do %>
@@ -275,7 +275,7 @@
         <div class='col-6'>
           <% if enrichment_definition.extraction_definition.present? %>
 
-            <%= render partial: "pipelines/card",
+            <%# render partial: "pipelines/card",
             locals: {
               definition: enrichment_definition,
               type: 'extraction',
@@ -337,7 +337,7 @@
         <div class='col-6'>
           <% if enrichment_definition.transformation_definition.present? %>
 
-            <%= render partial: "pipelines/card",
+            <%# render partial: "pipelines/card",
             locals: {
               definition: enrichment_definition,
               type: 'transformation',

@@ -2,10 +2,10 @@
 
 class PipelinesController < ApplicationController
   before_action :assign_sort_by, only: %w[index create]
-  before_action :assign_pipelines, only: %w[index]
-  before_action :assign_pipeline, only: %w[show destroy edit update]
+  before_action :find_pipeline, only: %w[show destroy edit update]
 
   def index
+    @pipelines = Pipeline.order(@sort_by).page(params[:page])
     @pipeline = Pipeline.new
   end
 
@@ -13,10 +13,10 @@ class PipelinesController < ApplicationController
     @pipeline = Pipeline.new(pipeline_params)
 
     if @pipeline.save
-      redirect_to pipeline_path(@pipeline), notice: 'Pipeline created successfully'
+      redirect_to pipeline_path(@pipeline)
     else
       flash.now[:alert] = 'There was an issue creating your Pipeline'
-      assign_pipelines
+      @pipelines = Pipeline.order(@sort_by).page(params[:page])
       render :index
     end
   end
@@ -52,17 +52,13 @@ class PipelinesController < ApplicationController
 
   private
 
-  def assign_pipeline
+  def find_pipeline
     @pipeline = Pipeline.find(params[:id])
   end
 
   def assign_sort_by
     @sort_by = { name: :asc }
     @sort_by = { updated_at: :desc } if params['sort_by'] == 'updated_at'
-  end
-
-  def assign_pipelines
-    @pipelines = Pipeline.order(@sort_by).page(params[:page])
   end
 
   def pipeline_params

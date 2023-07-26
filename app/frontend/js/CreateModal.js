@@ -1,5 +1,7 @@
-import { Modal } from "bootstrap"
+// Open the create Modal on error so the user can see the validation issues
+// and correct them without having to open the modal again.
 
+import { Modal } from "bootstrap"
 
 const createModal = document.getElementById('create-modal');
 

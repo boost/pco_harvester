@@ -7,11 +7,11 @@ class Pipeline < ApplicationRecord
   validates :name, presence: true
 
   def harvest
-    harvest_definitions.find(&:harvest?)
+    harvest_definitions.find_by(kind: 'harvest')
   end
 
   def enrichments
-    harvest_definitions.select(&:enrichment?)
+    harvest_definitions.where(kind: 'enrichment')
   end
 
   def ready_to_run?
