@@ -156,7 +156,13 @@
                 @harvest_definition.extraction_definition,
                 referrer_id: @pipeline.id
               ),
-            edit_text: "Edit Extraction"
+            edit_text: "Edit Extraction",
+            jobs_path: 
+              pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
+                @harvest_definition.extraction_definition.pipeline,
+                @harvest_definition,
+                @harvest_definition.extraction_definition
+              )
           } %>
 
         <% else %>
@@ -190,7 +196,8 @@
                 @harvest_definition.transformation_definition,
                 referrer_id: @pipeline.id
               ),
-            edit_text: "Edit Transformation"
+            edit_text: "Edit Transformation",
+            jobs_path: ''
           } %>
 
         <% else %>
@@ -289,7 +296,13 @@
                   enrichment_definition.extraction_definition,
                   referrer_id: @pipeline.id
                 ),
-              edit_text: "Edit Extraction"
+              edit_text: "Edit Extraction",
+              jobs_path: 
+                pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
+                  enrichment_definition.extraction_definition.pipeline,
+                  enrichment_definition,
+                  enrichment_definition.extraction_definition
+                )
             } %>
 
           <% else %>
@@ -352,7 +365,8 @@
                   enrichment_definition.transformation_definition,
                   referrer_id: @pipeline.id
                 ),
-              edit_text: "Edit Transformation"
+              edit_text: "Edit Transformation",
+              jobs_path: ''
             } %>
 
           <% else %>

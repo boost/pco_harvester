@@ -22,4 +22,4 @@
   </ul>
 <% end %>
 
-<%= render partial: 'jobs/jobs', locals: { jobs: @extraction_jobs, type: 'extraction' } %>
+<%= render partial: 'jobs/jobs', locals: { jobs: @extraction_jobs, type: 'extraction', pipeline: @pipeline } %>

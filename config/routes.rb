@@ -33,7 +33,7 @@ Rails.application.routes.draw do
           post :test_enrichment_extraction
         end
 
-        resources :extraction_jobs, only: %i[show create destroy] do
+        resources :extraction_jobs, only: %i[index show create destroy] do
           post :cancel, on: :member
         end
       end
