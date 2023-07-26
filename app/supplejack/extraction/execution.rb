@@ -25,9 +25,12 @@ module Extraction
 
         @de.extract_and_save
 
-        # The throttle needs to be before the transformation jobs are enqueued
-        # otherwise the child processes finish before the extraction process
-        # and the enrichments are never queued.
+        # The throttle needs to be done before we enqueue the Transformation and Load workers
+        # otherwise the Load Workers for the whole harvest finish before the extraction does.
+        # Then the Load Worker is unable to queue the enrichments as it believes that the harvest is still running.
+        # The Load Worker is responsible for queuing the enrichments as only when the last LoadWorker is done
+        # can we be sure that the harvest is complete.
+
         sleep @extraction_definition.throttle / 1000.0
 
         enqueue_record_transformation
