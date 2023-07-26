@@ -7,7 +7,7 @@ class ExtractionJobsController < ApplicationController
   before_action :find_extraction_job, only: %i[show destroy cancel]
 
   def index
-    @extraction_jobs = paginate_and_filter_jobs(ExtractionJob)
+    @extraction_jobs = paginate_and_filter_jobs(@extraction_definition.extraction_jobs)
   end
 
   def show
