@@ -24,5 +24,9 @@ module Transformation
     # rubocop:enable Lint/UnusedBlockArgument
     # rubocop:enable Security/Eval
     # rubocop:enable Lint/RescueException
+
+    def condition_met?
+      @value.include?(true)
+    end
   end
 end
