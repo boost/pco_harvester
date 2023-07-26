@@ -176,7 +176,7 @@
       <div class='col-6'>
         <% if @harvest_definition.transformation_definition.present? %>
 
-          <%# render partial: "pipelines/card",
+          <%= render partial: "pipelines/card",
           locals: {
             pipeline: @pipeline,
             definition: @harvest_definition,
@@ -184,7 +184,7 @@
             position: "last",
             edit_path:
               pipeline_harvest_definition_transformation_definition_path(
-                @harvest_definition.extraction_definition.pipeline,
+                @harvest_definition.transformation_definition.pipeline,
                 @harvest_definition,
                 @harvest_definition.transformation_definition,
                 referrer_id: @pipeline.id
@@ -275,7 +275,7 @@
         <div class='col-6'>
           <% if enrichment_definition.extraction_definition.present? %>
 
-            <%# render partial: "pipelines/card",
+          <%= render partial: "pipelines/card",
             locals: {
               definition: enrichment_definition,
               type: 'extraction',
@@ -283,8 +283,8 @@
               pipeline: @pipeline,
               edit_path:
                 edit_pipeline_harvest_definition_extraction_definition_path(
-                  @harvest_definition.extraction_definition.pipeline,
-                  @harvest_definition,
+                  enrichment_definition.extraction_definition.pipeline,
+                  enrichment_definition,
                   enrichment_definition.extraction_definition,
                   referrer_id: @pipeline.id
                 ),
@@ -337,7 +337,7 @@
         <div class='col-6'>
           <% if enrichment_definition.transformation_definition.present? %>
 
-            <%# render partial: "pipelines/card",
+          <%= render partial: "pipelines/card",
             locals: {
               definition: enrichment_definition,
               type: 'transformation',
@@ -345,7 +345,7 @@
               pipeline: @pipeline,
               edit_path:
                 pipeline_harvest_definition_transformation_definition_path(
-                  @harvest_definition.extraction_definition.pipeline,
+                  enrichment_definition.transformation_definition.pipeline,
                   @harvest_definition,
                   enrichment_definition.transformation_definition,
                   referrer_id: @pipeline.id
