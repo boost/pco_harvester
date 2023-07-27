@@ -8,7 +8,7 @@ class TransformationDefinitionsController < ApplicationController
   before_action :find_referrer
 
   def show
-    @fields = @transformation_definition.fields.map(&:to_h)
+    @fields = @transformation_definition.fields.order(created_at: :desc).map(&:to_h)
     @props = transformation_app_state
   end
 

@@ -79,7 +79,9 @@ export const hasEmptyFields = (state) => {
   return some(selectAllFields(state), { 'name': '' });
 }
 
-const fieldsAdapter = createEntityAdapter();
+const fieldsAdapter = createEntityAdapter({
+  sortComparer: (fieldOne, fieldTwo) => fieldTwo.created_at.localeCompare(fieldOne.created_at),
+});
 
 const fieldsSlice = createSlice({
   name: "fieldsSlice",

@@ -13,6 +13,8 @@ class Field < ApplicationRecord
       name:,
       block:,
       kind:,
+      created_at:,
+      updated_at:
     }
   end
 end
