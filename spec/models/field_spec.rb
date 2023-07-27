@@ -24,30 +24,20 @@ RSpec.describe Field, type: :model do
   end
 
   describe 'kinds' do
-    let(:field)     { create(:field, transformation_definition:) }
-    let(:condition) { create(:field, kind: 1, transformation_definition:) }
+    let(:field)        { create(:field, transformation_definition:) }
+    let(:reject_field) { create(:field, kind: 1, transformation_definition:) }
+    let(:delete_field) { create(:field, kind: 2, transformation_definition:) }
 
     it 'can be a field' do
       expect(field.field?).to eq true
-      expect(field.condition?).to eq false
     end
 
-    it 'can be a condition' do
-      expect(condition.condition?).to eq true
-      expect(condition.field?).to eq false
+    it 'can be a reject_if field' do
+      expect(reject_field.reject_if?).to eq true
     end
 
-    context 'when it is a condition field' do
-      let(:reject) { create(:field, kind: 1, transformation_definition:, condition: 0) }
-      let(:delete) { create(:field, kind: 1, transformation_definition:, condition: 1) }
-
-      it 'can be a reject_condition' do
-        expect(reject.reject_if?).to eq true
-      end
-
-      it 'can be a delete_condition' do
-        expect(delete.delete_if?).to eq true
-      end
+    it 'can be a delete_if field' do
+      expect(delete_field.delete_if?).to eq true
     end
   end
 end

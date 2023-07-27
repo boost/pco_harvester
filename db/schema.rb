@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_26_202809) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_27_011824) do
   create_table "delete_jobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "status"
     t.integer "kind", default: 0, null: false
@@ -80,7 +80,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_26_202809) do
     t.datetime "updated_at", null: false
     t.bigint "transformation_definition_id", null: false
     t.integer "kind", default: 0
-    t.integer "condition", default: 0
     t.index ["transformation_definition_id"], name: "index_fields_on_transformation_definition_id"
   end
 
@@ -217,4 +216,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_26_202809) do
     t.index ["invited_by_type", "invited_by_id"], name: "index_users_on_invited_by"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
 end

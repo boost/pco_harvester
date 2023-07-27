@@ -18,6 +18,14 @@ const FieldNavigationListItem = ({ id }) => {
     error: error,
   });
 
+  const placeholderListItemText = () => {
+    if(kind == 'field') {
+      return 'field';
+    } 
+
+    return 'condition';
+  }
+
   return (
     <li className="nav-item">
       <a
@@ -31,7 +39,7 @@ const FieldNavigationListItem = ({ id }) => {
         aria-expanded={displayed}
         aria-controls={`field-${id}`}
       >
-        {name || `New ${kind}`}{" "}
+        {name || `New ${placeholderListItemText()}`}{" "}
         {error && (
           <i className="bi bi-exclamation-circle-fill" aria-label="error"></i>
         )}

@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { selectFieldIds, selectAllFields } from "~/js/features/FieldsSlice";
-import { filter } from 'lodash';
+import { filter, concat } from 'lodash';
 import FieldNavigationListItem from "./FieldNavigationListItem";
 import AddField from "~/js/apps/TransformationApp/components/AddField";
 
@@ -9,7 +9,7 @@ const FieldNavigationPanel = () => {
   const allFields = useSelector(selectAllFields);
 
   const fields = filter(allFields, ['kind', 'field']);
-  const conditions = filter(allFields, ['kind', 'condition']);
+  const conditions = filter(allFields, ['kind', 'reject_if']).concat(filter(allFields, ['kind', 'delete_if']));
 
   return (
     <div className="card field-nav-panel">
@@ -19,7 +19,7 @@ const FieldNavigationPanel = () => {
         </div>
 
         <div className='field-nav-panel__content'>
-          <AddField kind='condition' />
+          <AddField kind='reject_if' />
 
           <ul className="field-nav nav nav-pills flex-column overflow-auto flex-nowrap">
             {conditions.map((condition) => {

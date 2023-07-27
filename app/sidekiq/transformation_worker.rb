@@ -18,11 +18,11 @@ class TransformationWorker < ApplicationWorker
   end
 
   def transform_records(page)
-    transformation_definition = @transformation_job.transformation_definition
+    transformation_definition_fields = @transformation_job.transformation_definition.fields
 
-    fields            = transformation_definition.fields.select(&:field?)
-    reject_conditions = transformation_definition.fields.select(&:condition?).select(&:reject_if?)
-    delete_conditions = transformation_definition.fields.select(&:condition?).select(&:delete_if?)
+    fields            = transformation_definition_fields.where(kind: 'field')
+    reject_conditions = transformation_definition_fields.where(kind: 'reject_if')
+    delete_conditions = transformation_definition_fields.where(kind: 'delete_if')
 
     Transformation::Execution.new(@transformation_job.records(page), fields, reject_conditions, delete_conditions).call
   end

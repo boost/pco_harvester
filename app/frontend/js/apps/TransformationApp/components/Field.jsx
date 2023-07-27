@@ -26,7 +26,7 @@ import Tooltip from "~/js/components/Tooltip";
 import CodeEditor from "~/js/components/CodeEditor";
  const Field = ({ id }) => {
   const appDetails = useSelector(selectAppDetails);
-  const { name, block, kind, condition } = useSelector((state) => selectFieldById(state, id));
+  const { name, block, kind } = useSelector((state) => selectFieldById(state, id));
 
   const rawRecord = useSelector(selectRawRecord);
   
@@ -43,7 +43,7 @@ import CodeEditor from "~/js/components/CodeEditor";
   const dispatch = useDispatch();
 
   const [nameValue, setNameValue] = useState(name);
-  const [conditionValue, setConditionValue] = useState(condition);
+  const [kindValue, setKindValue] = useState(kind);
   const [blockValue, setBlockValue] = useState(block);
   const [showModal, setShowModal] = useState(false);
 
@@ -55,7 +55,7 @@ import CodeEditor from "~/js/components/CodeEditor";
         id: id,
         name: nameValue,
         block: blockValue,
-        condition: conditionValue,
+        kind: kindValue,
         harvestDefinitionId: appDetails.harvestDefinition.id,
         pipelineId: appDetails.pipeline.id,
         transformationDefinitionId: appDetails.transformationDefinition.id,
@@ -97,7 +97,7 @@ import CodeEditor from "~/js/components/CodeEditor";
   };
 
   const hasChanged = () => {
-    return name !== nameValue || block !== blockValue || condition !== conditionValue;
+    return name !== nameValue || block !== blockValue || kind !== kindValue;
   };
 
   const isSaveable = () => {
@@ -138,7 +138,7 @@ import CodeEditor from "~/js/components/CodeEditor";
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
 
-  const nameColumnClasses = classNames({'col-8': kind == 'condition'}, { 'col-12': kind == 'field'});
+  const nameColumnClasses = classNames({'col-8': kind != 'field'}, { 'col-12': kind == 'field'});
 
   return (
     <>
@@ -168,7 +168,7 @@ import CodeEditor from "~/js/components/CodeEditor";
                   onClick={handleRunClick}
                 >
                   <i className="bi bi-play" aria-hidden="true"></i>
-                  {running ? " Running..." : " Run"}
+                  {running ? " Previewing..." : " Preview"}
                 </button>
 
                 <button
@@ -216,7 +216,7 @@ import CodeEditor from "~/js/components/CodeEditor";
                 </div>
               </div>
 
-                { kind == 'condition' && (
+                { kind != 'field' && (
                   <div className="col-4">
                     <div className='row'>
                       <label className="col-form-label col-sm-4" htmlFor="name">
@@ -230,7 +230,7 @@ import CodeEditor from "~/js/components/CodeEditor";
                       </label>
 
                       <div className='col-sm-8'>
-                        <select className="form-select" aria-label="Condition type" defaultValue={condition} onChange={(e) => setConditionValue(e.target.value)}>
+                        <select className="form-select" aria-label="Condition type" defaultValue={kind} onChange={(e) => setKindValue(e.target.value)}>
                           <option value="reject_if">Reject if</option>
                           <option value="delete_if">Delete if</option>
                         </select>

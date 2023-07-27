@@ -8,6 +8,14 @@ const AddField = ({ kind }) => {
   const appDetails = useSelector(selectAppDetails);
   const emptyFields = useSelector(hasEmptyFields);
 
+  const buttonText = () => {
+    if(kind == 'field') {
+      return 'field'
+    }
+
+    return 'condition';
+  }
+
   const addNewField = () => {
     dispatch(
       addField({
@@ -28,7 +36,7 @@ const AddField = ({ kind }) => {
         className="btn btn-outline-primary"
         onClick={() => addNewField()}
       >
-        + Add { kind }
+        + Add { buttonText() }
       </button>
     </div>
   );

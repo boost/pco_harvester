@@ -31,7 +31,7 @@ const HeaderActions = () => {
   return createPortal(
     <>
       <button className="btn btn-success" onClick={runAllFields}>
-        <i className="bi bi-heart-pulse" aria-hidden="true"></i> Test
+        <i className="bi bi-play" aria-hidden="true"></i> Preview
       </button>
     </>,
     document.getElementById("react-header-actions")
