@@ -35,10 +35,11 @@ RSpec.describe 'ExtractionJobs', type: :request do
 
   describe '#create' do
     describe 'is successful' do
-      it 'redirects to the pipeline jobs path' do
+      it 'redirects to the extraction definition jobs path' do
         post pipeline_harvest_definition_extraction_definition_extraction_jobs_path(pipeline, harvest_definition, extraction_definition,
                                                                                     kind: 'full')
-        expect(response).to redirect_to pipeline_jobs_path(pipeline)
+
+        expect(response).to redirect_to pipeline_harvest_definition_extraction_definition_extraction_jobs_path(pipeline, harvest_definition, extraction_definition)
       end
 
       it 'sets a succesful message' do
@@ -61,11 +62,11 @@ RSpec.describe 'ExtractionJobs', type: :request do
         expect_any_instance_of(ExtractionJob).to receive(:save).and_return(false)
       end
 
-      it 'redirects to the pipeline jobs path' do
+      it 'redirects to the extraction definition jobs path' do
         post pipeline_harvest_definition_extraction_definition_extraction_jobs_path(pipeline, harvest_definition,
                                                                                     extraction_definition)
 
-        expect(response).to redirect_to pipeline_jobs_path(pipeline)
+        expect(response).to redirect_to pipeline_harvest_definition_extraction_definition_extraction_jobs_path(pipeline, harvest_definition, extraction_definition)
       end
 
       it 'sets a failure message' do
