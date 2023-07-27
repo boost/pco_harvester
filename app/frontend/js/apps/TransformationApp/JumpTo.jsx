@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { askNewRawRecord, selectRawRecord } from "/js/features/RawRecordSlice";
 import { selectAppDetails } from "/js/features/AppDetailsSlice";
+import { selectFieldIds } from "/js/features/FieldsSlice";
 
 const JumpTo = () => {
   const dispatch = useDispatch();
 
   const { transformationDefinition } = useSelector(selectAppDetails);
 
+  const fieldIds = useSelector(selectFieldIds);
   const { isFetching, page, record, totalPages, totalRecords } =
     useSelector(selectRawRecord);
 
@@ -23,6 +25,7 @@ const JumpTo = () => {
     e.preventDefault();
     dispatch(
       askNewRawRecord({
+        fields: fieldIds,
         transformationDefinitionId: transformationDefinition.id,
         page: inputPage,
         record: inputRecord,
@@ -33,6 +36,7 @@ const JumpTo = () => {
   const handleNextRecordClick = (e) => {
     dispatch(
       askNewRawRecord({
+        fields: fieldIds,
         transformationDefinitionId: transformationDefinition.id,
         page: record === totalRecords ? page + 1 : page,
         record: record === totalRecords ? 1 : record + 1,
@@ -43,6 +47,7 @@ const JumpTo = () => {
   const handlePreviousRecordClick = (e) => {
     dispatch(
       askNewRawRecord({
+        fields: fieldIds,
         transformationDefinitionId: transformationDefinition.id,
         page: record === 1 ? page - 1 : page,
         record: record === 1 ? totalRecords : record - 1,

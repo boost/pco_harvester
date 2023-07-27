@@ -36,9 +36,14 @@ const AppDetailsSlice = createSlice({
   initialState: {},
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(clickedOnRunFields.fulfilled, (state, action) => {
-      state.transformedRecord = action.payload.transformed_record;
-    });
+    builder
+      .addCase(clickedOnRunFields.fulfilled, (state, action) => {
+        state.transformedRecord = action.payload.transformed_record;
+      })
+      .addCase(askNewRawRecord.fulfilled, (state, action) => {
+        state.transformedRecord =
+          action.payload.transformedRecord.transformed_record;
+      });
   },
 });
 

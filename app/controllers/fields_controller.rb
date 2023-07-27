@@ -40,7 +40,7 @@ class FieldsController < ApplicationController
   end
 
   def find_fields
-    @fields = params['fields'].map { |id| Field.find(id) }
+    @fields = Field.where(id: params['fields'])
   end
 
   def find_field
