@@ -113,6 +113,44 @@ RSpec.describe 'Fields', type: :request do
         expect(transformed_record['dc_identifier']).to eq ['111']
         expect(transformed_record['landing_url']).to eq ['http://www.ngataonga.org.nz/collections/catalogue/catalogue-item?record_id=128']
       end
+
+      it 'returns a new record with rejection reasons if the record should be rejected' do
+        reject_field = create(:field, kind: 'reject_if', name: 'reject_block', block: "true", transformation_definition:)
+
+        post run_pipeline_harvest_definition_transformation_definition_fields_path(pipeline, harvest_definition, transformation_definition), params: {
+          record: {
+            title: 'title',
+            source: 'source',
+            reference_number: '111',
+            record_id: '128'
+          },
+          fields: [reject_field.id],
+          format: 'JSON'
+        }
+
+        body = JSON.parse(response.body)
+
+        expect(body['rejection_reasons']).to include 'reject_block'
+      end
+      
+      it 'returns a new record with deletion reasons if the record should be deleted' do
+        delete_field = create(:field, kind: 'delete_if', name: 'delete_block', block: "true", transformation_definition:)
+
+        post run_pipeline_harvest_definition_transformation_definition_fields_path(pipeline, harvest_definition, transformation_definition), params: {
+          record: {
+            title: 'title',
+            source: 'source',
+            reference_number: '111',
+            record_id: '128'
+          },
+          fields: [delete_field.id],
+          format: 'JSON'
+        }
+
+        body = JSON.parse(response.body)
+
+        expect(body['deletion_reasons']).to include 'delete_block'
+      end
     end
 
     context 'with invalid transformations' do
