@@ -33,9 +33,6 @@ class ExtractionDefinitionsController < ApplicationController
     if @extraction_definition.update(extraction_definition_params)
       flash.notice = 'Extraction Definition updated successfully'
 
-      @extraction_job = ExtractionJob.create(extraction_definition: @extraction_definition, kind: 'sample')
-      ExtractionWorker.perform_async(@extraction_job.id)
-
       if @referrer.present?
         redirect_to pipeline_path(@referrer)
       else

@@ -13,4 +13,9 @@ class ExtractionWorker < ApplicationWorker
 
     Extraction::Execution.new(extraction_job, extraction_job.extraction_definition).call
   end
+  
+  def job_end
+    super
+    @job.harvest_job.enqueue_enrichment_jobs if @job.harvest_job.present?
+  end
 end
