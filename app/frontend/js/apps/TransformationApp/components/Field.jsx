@@ -29,7 +29,7 @@ const Field = ({ id }) => {
   const { name, block } = useSelector((state) => selectFieldById(state, id));
 
   const rawRecord = useSelector(selectRawRecord);
-  
+
   const {
     saved,
     deleting,
@@ -82,8 +82,8 @@ const Field = ({ id }) => {
         harvestDefinitionId: appDetails.harvestDefinition.id,
         pipelineId: appDetails.pipeline.id,
         transformationDefinitionId: appDetails.transformationDefinition.id,
-        format: rawRecord.format,
-        record: rawRecord.body,
+        page: rawRecord.page,
+        record: rawRecord.record,
         fields: [id],
       })
     );
