@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_25_033147) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_26_202809) do
   create_table "delete_jobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "status"
     t.integer "kind", default: 0, null: false
@@ -70,6 +70,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_25_033147) do
     t.text "error_message"
     t.text "name"
     t.index ["extraction_definition_id"], name: "index_extraction_jobs_on_extraction_definition_id"
+    t.index ["status"], name: "index_extraction_jobs_on_status"
   end
 
   create_table "fields", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -117,6 +118,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_25_033147) do
     t.index ["extraction_job_id"], name: "index_harvest_jobs_on_extraction_job_id"
     t.index ["harvest_definition_id"], name: "index_harvest_jobs_on_harvest_definition_id"
     t.index ["key"], name: "index_harvest_jobs_on_key", unique: true
+    t.index ["status"], name: "index_harvest_jobs_on_status"
   end
 
   create_table "headers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -141,6 +143,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_25_033147) do
     t.text "name"
     t.string "api_record_id"
     t.index ["harvest_job_id"], name: "index_load_jobs_on_harvest_job_id"
+    t.index ["status"], name: "index_load_jobs_on_status"
   end
 
   create_table "pipelines", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -181,6 +184,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_25_033147) do
     t.integer "records_deleted", default: 0
     t.index ["extraction_job_id"], name: "index_transformation_jobs_on_extraction_job_id"
     t.index ["harvest_job_id"], name: "index_transformation_jobs_on_harvest_job_id"
+    t.index ["status"], name: "index_transformation_jobs_on_status"
     t.index ["transformation_definition_id"], name: "index_transformation_jobs_on_transformation_definition_id"
   end
 
@@ -213,5 +217,4 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_25_033147) do
     t.index ["invited_by_type", "invited_by_id"], name: "index_users_on_invited_by"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
-
 end

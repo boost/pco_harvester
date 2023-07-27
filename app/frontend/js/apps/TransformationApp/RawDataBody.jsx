@@ -7,7 +7,7 @@ import JumpTo from "./JumpTo";
 import { selectRawRecord } from "/js/features/RawRecordSlice";
 
 const RawDataBody = ({ clickToggleSection }) => {
-  const { body, format } = useSelector(selectRawRecord);
+  const { body, format, error } = useSelector(selectRawRecord);
   const { rawRecordExpanded } = useSelector(selectUiAppDetails);
 
   return (
@@ -27,7 +27,7 @@ const RawDataBody = ({ clickToggleSection }) => {
         </div>
       </div>
 
-      <RecordViewer record={body} format={format} />
+      <RecordViewer record={error || body} format={format} />
     </>
   );
 };

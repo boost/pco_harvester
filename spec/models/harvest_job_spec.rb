@@ -80,18 +80,39 @@ RSpec.describe HarvestJob, type: :model do
     it { is_expected.to validate_uniqueness_of(:key).case_insensitive.with_message('has already been taken') }
   end
 
-  describe '#completed?' do
-    it 'returns true when all child jobs have finished' do
+  describe "#completed?" do
+    it 'returns true when extraction, transformation, and load jobs have finished' do
       expect(harvest_job.completed?).to eq true
     end
 
-    it 'returns false when any child job is still running' do
-      incomplete_harvest_job = create(:harvest_job, :completed, harvest_definition:, destination:)
+    context 'when a harvest is still running' do
+      it 'returns false when an extraction is still running' do
+        incomplete_harvest_job = create(:harvest_job, :completed, harvest_definition:, destination:)
 
-      incomplete_harvest_job.extraction_job.update(status: 'running')
+        incomplete_harvest_job.extraction_job.update(status: 'running')
 
-      incomplete_harvest_job.reload
-      expect(incomplete_harvest_job.completed?).to eq false
+        incomplete_harvest_job.reload
+        expect(incomplete_harvest_job.completed?).to eq false
+      end
+
+      
+      it 'returns false when a transformation is still running' do
+        incomplete_harvest_job = create(:harvest_job, :completed, harvest_definition:, destination:)
+
+        incomplete_harvest_job.transformation_jobs.first.update(status: 'running')
+
+        incomplete_harvest_job.reload
+        expect(incomplete_harvest_job.completed?).to eq false
+      end
+      
+      it 'returns false when a load is still running' do
+        incomplete_harvest_job = create(:harvest_job, :completed, harvest_definition:, destination:)
+
+        incomplete_harvest_job.load_jobs.first.update(status: 'running')
+
+        incomplete_harvest_job.reload
+        expect(incomplete_harvest_job.completed?).to eq false
+      end
     end
   end
 end

@@ -27,9 +27,11 @@ const rawRecordSlice = createSlice({
     builder
       .addCase(askNewRawRecord.pending, (state) => {
         state.isFetching = true;
+        state.error = null;
       })
       .addCase(askNewRawRecord.fulfilled, (state, action) => {
         state.isFetching = false;
+        state.error = null;
         state.page = action.payload.page;
         state.record = action.payload.record;
         state.body = action.payload.body;
@@ -39,6 +41,10 @@ const rawRecordSlice = createSlice({
           null,
           `${window.location.pathname}?page=${state.page}&record=${state.record}`
         );
+      })
+      .addCase(askNewRawRecord.rejected, (state, action) => {
+        state.isFetching = false;
+        state.error = "An error occured fetching the raw record.";
       });
   },
 });
