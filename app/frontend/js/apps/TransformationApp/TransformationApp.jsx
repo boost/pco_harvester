@@ -51,11 +51,11 @@ const TransformationApp = ({}) => {
 
   const transformedRecord = () => {
     if(!isEmpty(appDetails.rejectionReasons)) {
-      return `This record would be rejected based on the conditions: ${appDetails.rejectionReasons.join(' ')}`
+      return `Rejected by: ${appDetails.rejectionReasons.join(' ')}`
     }
 
     if(!isEmpty(appDetails.deletionReasons)) {
-      return `This record would be deleted based on the conditions: ${appDetails.deletionReasons.join(' ')}`
+      return `Deleted by: ${appDetails.deletionReasons.join(' ')}`
     }
 
     return appDetails.transformedRecord;
