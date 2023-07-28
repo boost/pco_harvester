@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_27_011824) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_28_043624) do
   create_table "delete_jobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "status"
     t.integer "kind", default: 0, null: false
@@ -145,11 +145,30 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_27_011824) do
     t.index ["status"], name: "index_load_jobs_on_status"
   end
 
+  create_table "parameters", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "key"
+    t.string "value"
+    t.integer "kind", default: 0
+    t.boolean "dynamic", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "request_id", null: false
+    t.index ["request_id"], name: "index_parameters_on_request_id"
+  end
+
   create_table "pipelines", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "requests", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "kind"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "extraction_definition_id", null: false
+    t.index ["extraction_definition_id"], name: "index_requests_on_extraction_definition_id"
   end
 
   create_table "transformation_definitions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
