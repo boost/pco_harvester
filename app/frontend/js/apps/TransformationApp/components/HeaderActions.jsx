@@ -20,9 +20,9 @@ const HeaderActions = () => {
       clickedOnRunFields({
         harvestDefinitionId: appDetails.harvestDefinition.id,
         pipelineId: appDetails.pipeline.id,
-        format: rawRecord.format,
         transformationDefinitionId: appDetails.transformationDefinition.id,
-        record: rawRecord.body,
+        page: rawRecord.page,
+        record: rawRecord.record,
         fields: fieldIds,
       })
     );

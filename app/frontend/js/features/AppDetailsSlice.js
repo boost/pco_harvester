@@ -1,17 +1,24 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { request } from "~/js/utils/request";
+import { askNewRawRecord } from "./RawRecordSlice";
 
 export const clickedOnRunFields = createAsyncThunk(
   "appDetails/clickedOnRunFieldsStatus",
   async (payload) => {
-    const { pipelineId, harvestDefinitionId, transformationDefinitionId, fields, record, format } =
-      payload;
+    const {
+      pipelineId,
+      harvestDefinitionId,
+      transformationDefinitionId,
+      fields,
+      page,
+      record,
+    } = payload;
 
     const response = request
       .post(
         `/pipelines/${pipelineId}/harvest_definitions/${harvestDefinitionId}/transformation_definitions/${transformationDefinitionId}/fields/run`,
-        {  
-          format: format,
+        {
+          page: page,
           record: record,
           fields: fields,
         }
@@ -29,11 +36,17 @@ const AppDetailsSlice = createSlice({
   initialState: {},
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(clickedOnRunFields.fulfilled, (state, action) => {
-      state.transformedRecord = action.payload.transformed_record;
-      state.rejectionReasons = action.payload.rejection_reasons;
-      state.deletionReasons = action.payload.deletion_reasons;
-    });
+    builder
+      .addCase(clickedOnRunFields.fulfilled, (state, action) => {
+        state.transformedRecord = action.payload.transformed_record;
+        state.rejectionReasons = action.payload.rejection_reasons;
+        state.deletionReasons = action.payload.deletion_reasons;
+      })
+      .addCase(askNewRawRecord.fulfilled, (state, action) => {
+        state.transformedRecord = action.payload.transformedRecord.transformed_record;
+        state.rejectionReasons  = action.payload.transformedRecord.rejection_reasons;
+        state.deletionReasons   = action.payload.transformedRecord.deletion_reasons;
+      });
   },
 });
 
