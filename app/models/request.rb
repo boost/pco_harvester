@@ -2,6 +2,5 @@
 
 class Request < ApplicationRecord
   belongs_to :extraction_definition
-
-  validates :kind, presence: true
+  has_many   :parameters
 end

@@ -164,7 +164,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_28_043624) do
   end
 
   create_table "requests", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "kind"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "extraction_definition_id", null: false

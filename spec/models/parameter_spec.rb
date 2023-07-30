@@ -13,4 +13,23 @@ RSpec.describe Parameter, type: :model do
   describe 'associations' do
     it { is_expected.to belong_to(:request) }
   end
+
+  describe 'kinds' do
+    let(:query)  { create(:parameter, kind: 0) }
+    let(:header) { create(:parameter, kind: 1) }
+    let(:slug)   { create(:parameter, kind: 2) }
+
+    it 'can be a query parameter' do
+      expect(query.query?).to eq true
+    end
+
+    
+    it 'can be a header parameter' do
+      expect(header.header?).to eq true
+    end
+
+    it 'can be a slug parameter' do
+      expect(slug.slug?).to eq true
+    end
+  end
 end
