@@ -10,7 +10,9 @@ export const loadDisplayedFields = (state) => {
   let displayedFieldIds = JSON.parse(
     localStorage.getItem("displayedFieldIds") || "[]"
   );
-  if (displayedFieldIds.length === 0) displayedFieldIds = [stateUiFields[0].id];
+  if (displayedFieldIds.length === 0 && stateUiFields.length > 0) {
+    displayedFieldIds = [stateUiFields[0].id];
+  }
 
   stateUiFields.forEach((field) => {
     if (displayedFieldIds.find((id) => id === field.id)) {

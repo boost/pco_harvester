@@ -2,6 +2,8 @@
 
 class FieldsController < ApplicationController
   before_action :find_field, only: %i[update destroy]
+  before_action :find_fields, only: %i[run]
+  before_action :find_transformation_definition, only: %i[run]
 
   def create
     @field = Field.new(field_params)
@@ -24,13 +26,7 @@ class FieldsController < ApplicationController
   end
 
   def run
-    format = params['format']
-
-    record = if %w[XML HTML].include?(format)
-               params['record']
-             elsif format == 'JSON'
-               params['record'].to_unsafe_h
-             end
+    record = @transformation_definition.records(params[:page].to_i)[params['record'].to_i - 1]
 
     providedFields = Field.find(params['fields'])
 
@@ -44,6 +40,14 @@ class FieldsController < ApplicationController
   end
 
   private
+
+  def find_transformation_definition
+    @transformation_definition = TransformationDefinition.find(params[:transformation_definition_id])
+  end
+
+  def find_fields
+    @fields = Field.where(id: params['fields'])
+  end
 
   def find_field
     @field = Field.find(params[:id])

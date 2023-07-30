@@ -1,22 +1,26 @@
-import axios, { isCancel, AxiosError } from "axios";
+import axios from "axios";
 
 export function csrfParam() {
-  const csrfParamDOMElement = document.head.querySelector("[name=csrf-param][content]");
+  const csrfParamDOMElement = document.head.querySelector(
+    "[name=csrf-param][content]"
+  );
 
   if (csrfParamDOMElement) {
     return csrfParamDOMElement.content;
   } else {
-    return '';
+    return "";
   }
 }
 
 export function csrfToken() {
-  const csrfTokenDOMElement = document.head.querySelector("[name=csrf-token][content]");
+  const csrfTokenDOMElement = document.head.querySelector(
+    "[name=csrf-token][content]"
+  );
 
   if (csrfTokenDOMElement) {
     return csrfTokenDOMElement.content;
   } else {
-    return '';
+    return "";
   }
 }
 

@@ -29,7 +29,7 @@ import CodeEditor from "~/js/components/CodeEditor";
   const { name, block, kind } = useSelector((state) => selectFieldById(state, id));
 
   const rawRecord = useSelector(selectRawRecord);
-  
+
   const {
     saved,
     deleting,
@@ -85,8 +85,8 @@ import CodeEditor from "~/js/components/CodeEditor";
         harvestDefinitionId: appDetails.harvestDefinition.id,
         pipelineId: appDetails.pipeline.id,
         transformationDefinitionId: appDetails.transformationDefinition.id,
-        format: rawRecord.format,
-        record: rawRecord.body,
+        page: rawRecord.page,
+        record: rawRecord.record,
         fields: [id],
       })
     );

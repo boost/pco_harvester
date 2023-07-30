@@ -4,12 +4,12 @@ import { request } from "../utils/request";
 export const askNewRawRecord = createAsyncThunk(
   "fields/askNewRawRecordStatus",
   async (payload) => {
-    const { transformationDefinitionId, page, record } = payload;
+    const { transformationDefinitionId, page, record, fields } = payload;
 
     const response = request
       .get(
         `/transformation_definitions/${transformationDefinitionId}/raw_records`,
-        { params: { page: page, record: record } }
+        { params: { page: page, record: record, fields: fields } }
       )
       .then(function (response) {
         return response.data;
@@ -32,9 +32,9 @@ const rawRecordSlice = createSlice({
       .addCase(askNewRawRecord.fulfilled, (state, action) => {
         state.isFetching = false;
         state.error = null;
-        state.page = action.payload.page;
-        state.record = action.payload.record;
-        state.body = action.payload.body;
+        state.page = action.payload.rawRecordSlice.page;
+        state.record = action.payload.rawRecordSlice.record;
+        state.body = action.payload.rawRecordSlice.body;
 
         window.history.replaceState(
           null,
