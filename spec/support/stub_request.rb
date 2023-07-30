@@ -21,6 +21,8 @@ end
 
 def fake_json_headers
   {
+    'Accept' => '*/*',
+    'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
     'Content-Type' => 'application/json',
     'User-Agent' => 'Supplejack Harvester v2.0'
   }
@@ -71,7 +73,6 @@ def stub_figshare_enrichment_page_2(destination)
       .to_return(fake_response('figshare_enrichment_1'))
   end
 end
-
 
 def stub_failed_figshare_enrichment_page_1(destination)
   stub_request(:get, "#{destination.url}/harvester/records")

@@ -1,58 +1,15 @@
 # frozen_string_literal: true
 
 class TransformationDefinitionsController < ApplicationController
-  before_action :find_content_source
+  before_action :find_pipeline
+  before_action :find_harvest_definition
   before_action :find_transformation_definition, only: %w[show edit update destroy update_harvest_definitions]
   before_action :find_extraction_jobs, only: %w[new create edit update]
+  before_action :find_referrer
 
   def show
-    @fields = @transformation_definition.fields.map { |field| { id: field.id, name: field.name, block: field.block } }
-
-    @related_harvest_definitions = @transformation_definition.copies.map do |copy|
-      HarvestDefinition.find_by(transformation_definition_id: copy.id)
-    end.compact
-
-    @props = {
-      entities: {
-        fields: {
-          ids: @transformation_definition.fields.map(&:id),
-          entities: @fields.index_by { |field| field[:id] }
-        },
-        appDetails: {
-          format: @transformation_definition.extraction_job.format,
-          rawRecord: @transformation_definition.records.first,
-          transformedRecord: {},
-          contentSource: @content_source,
-          transformationDefinition: @transformation_definition
-        }
-      },
-      ui: {
-        fields: {
-          ids: @transformation_definition.fields.map(&:id),
-          entities: @fields.map.with_index do |field, index|
-            {
-              id: field[:id],
-              saved: true,
-              deleting: false,
-              saving: false,
-              running: false,
-              hasRun: false,
-              expanded: true,
-              displayed: false
-            }
-          end.index_by { |field| field[:id] }
-        },
-        appDetails: {
-          fieldNavExpanded: true,
-          rawRecordExpanded: true,
-          transformedRecordExpanded: true,
-          readOnly: @transformation_definition.copy?
-        }
-      },
-      config: {
-        environment: Rails.env
-      }
-    }.to_json
+    @fields = @transformation_definition.fields.order(created_at: :desc).map(&:to_h)
+    @props = transformation_app_state
   end
 
   def new
@@ -65,7 +22,10 @@ class TransformationDefinitionsController < ApplicationController
     @transformation_definition = TransformationDefinition.new(transformation_definition_params)
 
     if @transformation_definition.save
-      redirect_to content_source_path(@content_source), notice: 'Transformation Definition created successfully'
+      @harvest_definition.update(transformation_definition_id: @transformation_definition.id)
+
+      redirect_to pipeline_harvest_definition_transformation_definition_path(@pipeline, @harvest_definition, @transformation_definition),
+                  notice: 'Transformation Definition created successfully'
     else
       flash.alert = 'There was an issue creating your Transformation Definition'
 
@@ -76,7 +36,13 @@ class TransformationDefinitionsController < ApplicationController
   def update
     if @transformation_definition.update(transformation_definition_params)
       flash.notice = 'Transformation Definition updated successfully'
-      redirect_to content_source_transformation_definition_path(@content_source, @transformation_definition)
+
+      if @referrer.present?
+        redirect_to pipeline_path(@referrer)
+      else
+        redirect_to pipeline_harvest_definition_transformation_definition_path(@pipeline, @harvest_definition,
+                                                                               @transformation_definition)
+      end
     else
       flash.alert = 'There was an issue updating your Transformation Definition'
       render 'edit'
@@ -85,10 +51,11 @@ class TransformationDefinitionsController < ApplicationController
 
   def destroy
     if @transformation_definition.destroy
-      redirect_to content_source_path(@content_source), notice: 'Transformation Definition deleted successfully'
+      redirect_to pipeline_path(@pipeline), notice: 'Transformation Definition deleted successfully'
     else
       flash.alert = 'There was an issue deleting your Transformation Definition'
-      redirect_to content_source_transformation_definition_path(@content_source, @transformation_definition)
+      redirect_to pipeline_harvest_definition_transformation_definition_path(@pipeline, @harvest_definition,
+                                                                             @transformation_definition)
     end
   end
 
@@ -100,22 +67,20 @@ class TransformationDefinitionsController < ApplicationController
     }
   end
 
-  def update_harvest_definitions
-    @transformation_definition.copies.each do |copy|
-      harvest_definition = HarvestDefinition.find_by(transformation_definition: copy)
-      next if harvest_definition.nil?
-
-      harvest_definition.update_transformation_definition_clone(@transformation_definition)
-    end
-
-    flash.notice = 'Harvest definitions updated.'
-    redirect_to content_source_transformation_definition_path(@content_source, @transformation_definition)
-  end
-
   private
 
-  def find_content_source
-    @content_source = ContentSource.find(params[:content_source_id])
+  def find_pipeline
+    @pipeline = Pipeline.find(params[:pipeline_id])
+  end
+
+  def find_harvest_definition
+    @harvest_definition = HarvestDefinition.find(params[:harvest_definition_id])
+  end
+
+  def find_referrer
+    return if params[:referrer_id].blank?
+
+    @referrer = Pipeline.find(params[:referrer_id])
   end
 
   def find_transformation_definition
@@ -123,11 +88,11 @@ class TransformationDefinitionsController < ApplicationController
   end
 
   def find_extraction_jobs
-    if params['kind'] == 'enrichment' || @transformation_definition&.kind == 'enrichment'
-      extraction_definitions = @content_source.extraction_definitions.enrichment.originals
-    else
-      extraction_definitions = @content_source.extraction_definitions.harvest.originals
-    end
+    extraction_definitions = if params['kind'] == 'enrichment' || @transformation_definition&.kind == 'enrichment'
+                               ExtractionDefinition.all.enrichment
+                             else
+                               ExtractionDefinition.all.harvest
+                             end
 
     @extraction_jobs = extraction_definitions.map do |ed|
       [ed.name, ed.extraction_jobs.map { |job| [job.name, job.id] }]
@@ -136,6 +101,7 @@ class TransformationDefinitionsController < ApplicationController
 
   def transformation_definition_params
     params.require(:transformation_definition).permit(
+      :pipeline_id,
       :content_source_id,
       :name,
       :extraction_job_id,

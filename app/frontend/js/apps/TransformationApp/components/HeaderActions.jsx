@@ -6,22 +6,23 @@ import {
   selectAppDetails,
 } from "/js/features/AppDetailsSlice";
 import { selectFieldIds } from "/js/features/FieldsSlice";
-import AddField from "~/js/apps/TransformationApp/components/AddField";
 import { selectUiAppDetails } from "~/js/features/UiAppDetailsSlice";
+import { selectRawRecord } from "/js/features/RawRecordSlice";
 
 const HeaderActions = () => {
   const dispatch = useDispatch();
   const fieldIds = useSelector(selectFieldIds);
   const appDetails = useSelector(selectAppDetails);
-  const { readOnly } = useSelector(selectUiAppDetails);
+  const rawRecord = useSelector(selectRawRecord);
 
   const runAllFields = () => {
     dispatch(
       clickedOnRunFields({
-        contentSourceId: appDetails.contentSource.id,
-        format: appDetails.format,
+        harvestDefinitionId: appDetails.harvestDefinition.id,
+        pipelineId: appDetails.pipeline.id,
+        format: rawRecord.format,
         transformationDefinitionId: appDetails.transformationDefinition.id,
-        record: appDetails.rawRecord,
+        record: rawRecord.body,
         fields: fieldIds,
       })
     );
@@ -29,9 +30,8 @@ const HeaderActions = () => {
 
   return createPortal(
     <>
-      {!readOnly && <AddField />}
       <button className="btn btn-success" onClick={runAllFields}>
-        <i className="bi bi-play" aria-hidden="true"></i> Run all
+        <i className="bi bi-play" aria-hidden="true"></i> Preview
       </button>
     </>,
     document.getElementById("react-header-actions")

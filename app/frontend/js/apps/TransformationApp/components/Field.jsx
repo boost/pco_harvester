@@ -13,18 +13,23 @@ import {
   clickedOnRunFields,
 } from "~/js/features/AppDetailsSlice";
 import { selectUiAppDetails } from "~/js/features/UiAppDetailsSlice";
+import {
+  toggleDisplayField,
+} from "~/js/features/UiFieldsSlice";
+
+import { selectRawRecord } from "/js/features/RawRecordSlice";
 
 import {
   selectUiFieldById,
-  toggleCollapseField,
 } from "~/js/features/UiFieldsSlice";
 import Tooltip from "~/js/components/Tooltip";
-import ExpandCollapseIcon from "./ExpandCollapseIcon";
 import CodeEditor from "~/js/components/CodeEditor";
-
-const Field = ({ id }) => {
+ const Field = ({ id }) => {
   const appDetails = useSelector(selectAppDetails);
-  const { name, block } = useSelector((state) => selectFieldById(state, id));
+  const { name, block, kind } = useSelector((state) => selectFieldById(state, id));
+
+  const rawRecord = useSelector(selectRawRecord);
+  
   const {
     saved,
     deleting,
@@ -32,18 +37,17 @@ const Field = ({ id }) => {
     running,
     error,
     hasRun,
-    expanded,
     displayed,
   } = useSelector((state) => selectUiFieldById(state, id));
 
   const dispatch = useDispatch();
 
   const [nameValue, setNameValue] = useState(name);
+  const [kindValue, setKindValue] = useState(kind);
   const [blockValue, setBlockValue] = useState(block);
   const [showModal, setShowModal] = useState(false);
 
   const uiAppDetails = useSelector(selectUiAppDetails);
-  const { readOnly } = uiAppDetails;
 
   const handleSaveClick = () => {
     dispatch(
@@ -51,32 +55,38 @@ const Field = ({ id }) => {
         id: id,
         name: nameValue,
         block: blockValue,
+        kind: kindValue,
+        harvestDefinitionId: appDetails.harvestDefinition.id,
+        pipelineId: appDetails.pipeline.id,
+        transformationDefinitionId: appDetails.transformationDefinition.id,
       })
     );
   };
+
+  const handleHideClick = () => {
+    dispatch(toggleDisplayField({ id: id, displayed: false }))
+  }
 
   const handleDeleteClick = () => {
     dispatch(
       deleteField({
         id: id,
-        contentSourceId: appDetails.contentSource.id,
+        harvestDefinitionId: appDetails.harvestDefinition.id,
+        pipelineId: appDetails.pipeline.id,
         transformationDefinitionId: appDetails.transformationDefinition.id,
       })
     );
     handleClose();
   };
 
-  const handleCollapseExpandClick = () => {
-    dispatch(toggleCollapseField({ id, expanded: !expanded }));
-  };
-
   const handleRunClick = () => {
     dispatch(
       clickedOnRunFields({
-        contentSourceId: appDetails.contentSource.id,
+        harvestDefinitionId: appDetails.harvestDefinition.id,
+        pipelineId: appDetails.pipeline.id,
         transformationDefinitionId: appDetails.transformationDefinition.id,
-        format: appDetails.format,
-        record: appDetails.rawRecord,
+        format: rawRecord.format,
+        record: rawRecord.body,
         fields: [id],
       })
     );
@@ -87,7 +97,7 @@ const Field = ({ id }) => {
   };
 
   const hasChanged = () => {
-    return name !== nameValue || block !== blockValue;
+    return name !== nameValue || block !== blockValue || kind !== kindValue;
   };
 
   const isSaveable = () => {
@@ -128,6 +138,8 @@ const Field = ({ id }) => {
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
 
+  const nameColumnClasses = classNames({'col-8': kind != 'field'}, { 'col-12': kind == 'field'});
+
   return (
     <>
       <div id={`field-${id}`} className={fieldClasses} data-testid="field">
@@ -136,71 +148,100 @@ const Field = ({ id }) => {
             <div className="d-flex d-row justify-content-between align-items-center">
               <div>
                 <h5 className="m-0 d-inline">{name}</h5>
-                {!readOnly && name != "" && (
+                {name != "" && (
                   <span className={badgeClasses}>{badgeText()}</span>
                 )}
               </div>
 
-              {!readOnly && (
-                <div className="hstack gap-2">
-                  <button
-                    className="btn btn-primary"
-                    disabled={!isSaveable()}
-                    onClick={handleSaveClick}
-                  >
-                    {saving ? "Saving..." : "Save"}
-                  </button>
-                  <button
-                    className="btn btn-success"
-                    disabled={!saved || hasChanged() || running}
-                    onClick={handleRunClick}
-                  >
-                    {running ? "Running..." : "Run field"}
-                  </button>
-                  <a
-                    onClick={handleCollapseExpandClick}
-                    className="btn btn-outline-success"
-                    data-bs-toggle="collapse"
-                    href={`#field-${id}-content`}
-                    role="button"
-                    aria-expanded={expanded}
-                    aria-controls={`field-${id}-content`}
-                  >
-                    <ExpandCollapseIcon expanded={expanded} vertical={true} />
-                  </a>
-                  <button
-                    className="btn btn-outline-danger"
-                    onClick={handleShow}
-                  >
-                    <i className="bi bi-trash" aria-hidden="true"></i>
-                    {deleting ? " Deleting..." : " Delete"}
-                  </button>
-                </div>
-              )}
+              <div className="hstack gap-2">
+                <button
+                  className="btn btn-outline-primary"
+                  disabled={!isSaveable()}
+                  onClick={handleSaveClick}
+                >
+                  <i className="bi bi-save" aria-hidden="true"></i>
+                  {saving ? " Saving..." : " Save"}
+                </button>
+                <button
+                  className="btn btn-outline-primary"
+                  disabled={!saved || hasChanged() || running}
+                  onClick={handleRunClick}
+                >
+                  <i className="bi bi-play" aria-hidden="true"></i>
+                  {running ? " Previewing..." : " Preview"}
+                </button>
+
+                <button
+                  className="btn btn-outline-primary"
+                  onClick={handleHideClick}
+                >
+                  <i className="bi bi-eye-slash" aria-hidden="true"></i> Hide
+                </button>
+
+                <button
+                  className="btn btn-outline-danger"
+                  onClick={handleShow}
+                >
+                  <i className="bi bi-trash" aria-hidden="true"></i>
+                  {deleting ? " Deleting..." : " Delete"}
+                </button>
+              </div>
             </div>
 
-            <div className="mt-3 collapse show" id={`field-${id}-content`}>
-              <label className="form-label" htmlFor="name">
-                Field Name{" "}
-                <Tooltip data-bs-title="This is the field name that the result of this transformation will appear under on the transformed record.">
-                  <i
-                    className="bi bi-question-circle"
-                    aria-label="help text"
-                  ></i>
-                </Tooltip>
-              </label>
-              <input
-                id="name"
-                type="text"
-                className="form-control"
-                required="required"
-                placeholder="New field"
-                defaultValue={name}
-                onChange={(e) => setNameValue(e.target.value)}
-              />
+            <div className="mt-3 show" id={`field-${id}-content`}>
+
+              <div className="row">
+                <div className={nameColumnClasses}>
+                  <div className='row'>
+                    <label className="col-form-label col-sm-2" htmlFor="name">
+                      <strong>Name{" "}</strong>
+                      <Tooltip data-bs-title="This is the field name that the result of this transformation will appear under on the transformed record.">
+                        <i
+                          className="bi bi-question-circle"
+                          aria-label="help text"
+                        ></i>
+                      </Tooltip>
+                    </label>
+
+                  <div className='col-sm-10'>
+                    <input
+                      id="name"
+                      type="text"
+                      className="form-control"
+                      required="required"
+                      defaultValue={name}
+                      onChange={(e) => setNameValue(e.target.value)}
+                    />
+                  </div>
+                </div>
+              </div>
+
+                { kind != 'field' && (
+                  <div className="col-4">
+                    <div className='row'>
+                      <label className="col-form-label col-sm-4" htmlFor="name">
+                        <strong>Type{" "}</strong>
+                        <Tooltip data-bs-title="A rejected record will be skipped during a harvest. A deleted record will be removed from the API if it has been harvested in the past.">
+                          <i
+                            className="bi bi-question-circle"
+                            aria-label="help text"
+                          ></i>
+                        </Tooltip>
+                      </label>
+
+                      <div className='col-sm-8'>
+                        <select className="form-select" aria-label="Condition type" defaultValue={kind} onChange={(e) => setKindValue(e.target.value)}>
+                          <option value="reject_if">Reject if</option>
+                          <option value="delete_if">Delete if</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
 
               <label className="form-label mt-4" htmlFor="block">
-                Field Block{" "}
+                Block{" "}
                 <Tooltip data-bs-title="This is the code that is applied to create this field on the transformed record.">
                   <i
                     className="bi bi-question-circle"
@@ -210,7 +251,6 @@ const Field = ({ id }) => {
               </label>
 
               <CodeEditor
-                readOnly={readOnly}
                 initContent={block}
                 onChange={(e) => setBlockValue(e.target.value)}
               />

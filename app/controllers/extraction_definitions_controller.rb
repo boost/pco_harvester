@@ -1,17 +1,11 @@
 # frozen_string_literal: true
 
 class ExtractionDefinitionsController < ApplicationController
-  before_action :find_content_source
-  before_action :find_extraction_definition, only: %i[show edit update destroy update_harvest_definitions]
+  before_action :find_pipeline
+  before_action :find_referrer
+  before_action :find_harvest_definition
+  before_action :find_extraction_definition, only: %i[edit update]
   before_action :find_destinations, only: %i[new create edit update]
-
-  def show
-    @extraction_jobs = paginate_and_filter_jobs(@extraction_definition.extraction_jobs)
-
-    @related_harvest_definitions = @extraction_definition.copies.map do |copy|
-      HarvestDefinition.find_by(extraction_definition_id: copy.id)
-    end.compact
-  end
 
   def new
     @extraction_definition = ExtractionDefinition.new(kind: params[:kind])
@@ -23,7 +17,12 @@ class ExtractionDefinitionsController < ApplicationController
     @extraction_definition = ExtractionDefinition.new(extraction_definition_params)
 
     if @extraction_definition.save
-      redirect_to content_source_path(@content_source), notice: 'Extraction Definition created successfully'
+      @harvest_definition.update(extraction_definition_id: @extraction_definition.id)
+
+      @extraction_job = ExtractionJob.create(extraction_definition: @extraction_definition, kind: 'sample')
+      ExtractionWorker.perform_async(@extraction_job.id)
+
+      redirect_to pipeline_path(@pipeline), notice: 'Extraction Definition created successfully'
     else
       flash.alert = 'There was an issue creating your Extraction Definition'
       render :new
@@ -33,28 +32,25 @@ class ExtractionDefinitionsController < ApplicationController
   def update
     if @extraction_definition.update(extraction_definition_params)
       flash.notice = 'Extraction Definition updated successfully'
-      redirect_to content_source_extraction_definition_path(@content_source, @extraction_definition)
+
+      if @referrer.present?
+        redirect_to pipeline_path(@referrer)
+      else
+        redirect_to pipeline_path(@pipeline)
+      end
     else
       flash.alert = 'There was an issue updating your Extraction Definition'
       render 'edit'
     end
   end
 
-  def update_harvest_definitions
-    @extraction_definition.copies.each do |copy|
-      harvest_definition = HarvestDefinition.find_by(extraction_definition: copy)
-      harvest_definition.update_extraction_definition_clone(@extraction_definition)
-    end
-
-    flash.notice = 'Harvest definitions updated.'
-    redirect_to content_source_extraction_definition_path(@content_source, @extraction_definition)
-  end
-
   def test
     @extraction_definition = ExtractionDefinition.new(extraction_definition_params.except('headers_attributes'))
 
-    extraction_definition_params['headers_attributes'].each do |key, header_attributes|
-      @extraction_definition.headers << Header.new(header_attributes)
+    if extraction_definition_params.include?('headers_attributes')
+      extraction_definition_params['headers_attributes'].each do |_key, header_attributes|
+        @extraction_definition.headers << Header.new(header_attributes)
+      end
     end
 
     render json: Extraction::DocumentExtraction.new(@extraction_definition).extract
@@ -77,17 +73,27 @@ class ExtractionDefinitionsController < ApplicationController
 
   def destroy
     if @extraction_definition.destroy
-      redirect_to content_source_path(@content_source), notice: 'Extraction Definition deleted successfully'
+      redirect_to pipeline_path(@pipeline), notice: 'Extraction Definition deleted successfully'
     else
       flash.alert = 'There was an issue deleting your Extraction Definition'
-      redirect_to content_source_extraction_definition_path(@content_source, @extraction_definition)
+      redirect_to pipeline_extraction_definition_path(@pipeline, @extraction_definition)
     end
   end
 
   private
 
-  def find_content_source
-    @content_source = ContentSource.find(params[:content_source_id])
+  def find_pipeline
+    @pipeline = Pipeline.find(params[:pipeline_id])
+  end
+
+  def find_referrer
+    return if params[:referrer_id].blank?
+
+    @referrer = Pipeline.find(params[:referrer_id])
+  end
+
+  def find_harvest_definition
+    @harvest_definition = HarvestDefinition.find(params[:harvest_definition_id])
   end
 
   def find_extraction_definition
@@ -100,13 +106,13 @@ class ExtractionDefinitionsController < ApplicationController
 
   def extraction_definition_params
     params.require(:extraction_definition).permit(
-      :content_source_id,
+      :pipeline_id,
       :name, :format, :base_url, :throttle, :pagination_type,
       :page_parameter, :per_page_parameter, :page, :per_page,
       :total_selector,
-      :kind, :destination_id, :source_id, :enrichment_url, :job_id,
+      :kind, :destination_id, :source_id, :enrichment_url,
       :token_parameter, :token_value, :next_token_path, :initial_params,
-      headers_attributes: [:id, :name, :value]
+      headers_attributes: %i[id name value]
     )
   end
 end

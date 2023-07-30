@@ -4,7 +4,7 @@ import { StreamLanguage } from "@codemirror/language";
 import { EditorState } from "@codemirror/state";
 import { ruby } from "@codemirror/legacy-modes/mode/ruby";
 
-const CodeEditor = ({ readOnly, initContent, onChange, ...props }) => {
+const CodeEditor = ({ initContent, onChange, ...props }) => {
   const editorRef = useRef();
 
   useEffect(() => {
@@ -12,7 +12,6 @@ const CodeEditor = ({ readOnly, initContent, onChange, ...props }) => {
       doc: initContent,
       extensions: [
         basicSetup,
-        EditorState.readOnly.of(readOnly),
         StreamLanguage.define(ruby),
         EditorView.updateListener.of(function (e) {
           onChange({ target: { value: e.state.doc.toString() } });

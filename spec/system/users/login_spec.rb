@@ -9,7 +9,7 @@ RSpec.describe 'Login' do
     click_button 'Log in'
 
     # Then I expect to see an error message
-    expect(page).to have_css('.alert', text: "Invalid Email or password.")
+    expect(page).to have_css('.alert', text: 'Invalid Email or password.')
   end
 
   context 'when enforce_two_factor is false' do
@@ -22,7 +22,7 @@ RSpec.describe 'Login' do
         fill_in 'Password', with: user.password
         click_button 'Log in'
 
-        expect(page).to have_css('.header__title', text: 'Content Sources')
+        expect(page).to have_css('.header__title', text: 'Pipelines')
       end
     end
 
@@ -107,7 +107,7 @@ RSpec.describe 'Login' do
         click_button 'Log in'
 
         expect(page).to have_content('Signed in successfully.')
-        expect(page).to have_css('.header__title', text: 'Content Sources')
+        expect(page).to have_css('.header__title', text: 'Pipelines')
       end
     end
   end

@@ -23,11 +23,11 @@ module Extraction
       {
         @extraction_definition.page_parameter => @extraction_definition.page,
         @extraction_definition.per_page_parameter => @extraction_definition.per_page,
-        @extraction_definition.token_parameter => @extraction_definition.token_value,
+        @extraction_definition.token_parameter => @extraction_definition.token_value
       }
         .reject { |key, value| key.blank? || value.blank? }
         .merge(
-          if @extraction_definition.page == 1          
+          if @extraction_definition.page == 1
             initial_params
           else
             {}
@@ -36,6 +36,8 @@ module Extraction
     end
 
     def headers
+      return super if @extraction_definition.headers.blank?
+
       super
         .merge(
           @extraction_definition.headers.map(&:to_h).reduce(&:merge)

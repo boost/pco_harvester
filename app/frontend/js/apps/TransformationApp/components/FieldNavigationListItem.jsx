@@ -9,7 +9,7 @@ import classNames from "classnames";
 
 const FieldNavigationListItem = ({ id }) => {
   const dispatch = useDispatch();
-  const { name } = useSelector((state) => selectFieldById(state, id));
+  const { name, kind } = useSelector((state) => selectFieldById(state, id));
   const { error, displayed } = useSelector((state) =>
     selectUiFieldById(state, id)
   );
@@ -17,6 +17,14 @@ const FieldNavigationListItem = ({ id }) => {
   const linkClasses = classNames("nav-link", "text-truncate", {
     error: error,
   });
+
+  const placeholderListItemText = () => {
+    if(kind == 'field') {
+      return 'field';
+    } 
+
+    return 'condition';
+  }
 
   return (
     <li className="nav-item">
@@ -31,7 +39,7 @@ const FieldNavigationListItem = ({ id }) => {
         aria-expanded={displayed}
         aria-controls={`field-${id}`}
       >
-        {name || "New field"}{" "}
+        {name || `New ${placeholderListItemText()}`}{" "}
         {error && (
           <i className="bi bi-exclamation-circle-fill" aria-label="error"></i>
         )}

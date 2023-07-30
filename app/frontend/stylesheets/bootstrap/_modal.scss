@@ -1,0 +1,12 @@
+.modal-header {
+  @include modifier('with-subheader') {
+    border-bottom: none;
+    padding-bottom: .5rem;
+  }
+}
+
+.modal-subheader {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-bottom: var(--bs-modal-header-border-width) solid var(--bs-modal-header-border-color);
+}

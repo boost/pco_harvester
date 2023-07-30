@@ -5,8 +5,8 @@ require 'rails_helper'
 RSpec.describe ExtractionJob, type: :model do
   subject { create(:extraction_job, extraction_definition:) }
 
-  let(:content_source) { create(:content_source, name: 'National Library of New Zealand') }
-  let(:extraction_definition) { create(:extraction_definition, content_source:) }
+  let(:pipeline) { create(:pipeline, name: 'National Library of New Zealand') }
+  let(:extraction_definition) { create(:extraction_definition, pipeline:) }
 
   describe '#name' do
     it 'autogenerates a sensible name' do
@@ -164,6 +164,19 @@ RSpec.describe ExtractionJob, type: :model do
       it "can be #{key}" do
         expect(described_class.new(kind: value).kind).to eq(key.to_s)
       end
+    end
+  end
+
+  describe '#finished?' do
+    let(:finished_ej) { create(:extraction_job, status: 'completed') }
+    let(:unfinished_ej) { create(:extraction_job, status: 'running') }
+
+    it 'returns true if the job has finished' do
+      expect(finished_ej.finished?).to eq true
+    end
+
+    it 'returns false if the job has not finished' do
+      expect(unfinished_ej.finished?).to eq false
     end
   end
 end

@@ -3,10 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe Transformation::Execution do
-  let(:content_source) { create(:content_source, :ngataonga) }
-  let(:extraction_definition) { content_source.extraction_definitions.first }
-  let(:extraction_job) { create(:extraction_job, extraction_definition:) }
-  let(:transformation_definition) { create(:transformation_definition, content_source:, extraction_job:) }
+  let(:pipeline)                  { create(:pipeline, :ngataonga) }
+  let(:extraction_definition)     { pipeline.harvest.extraction_definition }
+  let(:extraction_job)            { create(:extraction_job, extraction_definition:) }
+  let(:transformation_definition) { create(:transformation_definition, extraction_job:) }
 
   let(:record) do
     {
@@ -20,13 +20,13 @@ RSpec.describe Transformation::Execution do
 
   describe '#call' do
     it 'returns the result of applying the field to the record' do
-      transformation = described_class.new([record], [field]).call.first.transformed_record
+      transformation = described_class.new([record], [field], [], []).call.first.transformed_record
 
       expect(transformation['title']).to eq ['The title of the record']
     end
 
     it 'updates the error message on the field if an error has occured applying the field' do
-      errors = described_class.new([record], [field_with_error]).call.first.errors
+      errors = described_class.new([record], [field_with_error], [], []).call.first.errors
 
       expect(errors[field_with_error.id][:title]).to eq NameError
       expect(errors[field_with_error.id][:description]).to include "undefined local variable or method `result'"

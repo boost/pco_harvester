@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'TwoFactorSetups', type: :request do
-
   describe '#create' do
     let(:user) { create(:user) }
 
@@ -13,7 +12,7 @@ RSpec.describe 'TwoFactorSetups', type: :request do
     end
 
     it 'sets a flash message if successful' do
-      post two_factor_setups_path, params: { user: { otp_attempt: user.current_otp }}
+      post two_factor_setups_path, params: { user: { otp_attempt: user.current_otp } }
 
       expect(response).to redirect_to root_path
       follow_redirect!
@@ -22,7 +21,7 @@ RSpec.describe 'TwoFactorSetups', type: :request do
     end
 
     it 'sets a error message if not successful and renders show again' do
-      post two_factor_setups_path, params: { user: { otp_attempt: '123' }}
+      post two_factor_setups_path, params: { user: { otp_attempt: '123' } }
 
       expect(response.body).to include 'Two Factor Authentication failed. Please try and input your code again.'
     end

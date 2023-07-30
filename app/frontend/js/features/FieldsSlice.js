@@ -10,17 +10,17 @@ import { request } from "~/js/utils/request";
 export const addField = createAsyncThunk(
   "fields/addFieldStatus",
   async (payload) => {
-    const { name, block, contentSourceId, transformationDefinitionId } =
+    const { name, block, kind, pipelineId, harvestDefinitionId, transformationDefinitionId } =
       payload;
 
     const response = request
       .post(
-        `/content_sources/${contentSourceId}/transformation_definitions/${transformationDefinitionId}/fields`,
+        `/pipelines/${pipelineId}/harvest_definitions/${harvestDefinitionId}/transformation_definitions/${transformationDefinitionId}/fields`,
         {
           field: {
-            content_source_id: contentSourceId,
             transformation_definition_id: transformationDefinitionId,
             name: name,
+            kind: kind,
             block: block,
           },
         }
@@ -36,11 +36,11 @@ export const addField = createAsyncThunk(
 export const deleteField = createAsyncThunk(
   "fields/deleteFieldStatus",
   async (payload) => {
-    const { id, contentSourceId, transformationDefinitionId } = payload;
+    const { id, pipelineId, harvestDefinitionId, transformationDefinitionId } = payload;
 
     const response = request
       .delete(
-        `/content_sources/${contentSourceId}/transformation_definitions/${transformationDefinitionId}/fields/${id}`
+        `/pipelines/${pipelineId}/harvest_definitions/${harvestDefinitionId}/transformation_definitions/${transformationDefinitionId}/fields/${id}`
       )
       .then((response) => {
         return id;
@@ -53,16 +53,17 @@ export const deleteField = createAsyncThunk(
 export const updateField = createAsyncThunk(
   "fields/updateFieldStatus",
   async (payload) => {
-    const { id, contentSourceId, transformationDefinitionId, name, block } =
+    const { id, pipelineId, harvestDefinitionId, transformationDefinitionId, name, block, kind } =
       payload;
 
     const response = request
       .patch(
-        `/content_sources/${contentSourceId}/transformation_definitions/${transformationDefinitionId}/fields/${id}`,
+        `/pipelines/${pipelineId}/harvest_definitions/${harvestDefinitionId}/transformation_definitions/${transformationDefinitionId}/fields/${id}`,
         {
           field: {
             name: name,
             block: block,
+            kind: kind
           },
         }
       )
@@ -78,7 +79,9 @@ export const hasEmptyFields = (state) => {
   return some(selectAllFields(state), { 'name': '' });
 }
 
-const fieldsAdapter = createEntityAdapter();
+const fieldsAdapter = createEntityAdapter({
+  sortComparer: (fieldOne, fieldTwo) => fieldTwo.created_at.localeCompare(fieldOne.created_at),
+});
 
 const fieldsSlice = createSlice({
   name: "fieldsSlice",

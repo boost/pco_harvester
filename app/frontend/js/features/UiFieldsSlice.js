@@ -9,18 +9,22 @@ const uiFieldsSlice = createSlice({
   name: "fieldsSlice",
   initialState: {},
   reducers: {
-    toggleCollapseField(state, action) {
-      uiFieldsAdapter.updateOne(state, {
-        id: action.payload.id,
-        changes: { expanded: action.payload.expanded },
-      });
-    },
     toggleDisplayField(state, action) {
       uiFieldsAdapter.updateOne(state, {
         id: action.payload.id,
         changes: { displayed: action.payload.displayed },
       });
     },
+    toggleDisplayFields(state, action) {
+      const { fields, displayed } = action.payload;
+
+      uiFieldsAdapter.updateMany(
+        state,
+        fields.map((field) => {
+          return { id: field.id, changes: { displayed: displayed } };
+        })
+      );
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -113,6 +117,6 @@ export const selectDisplayedFieldIds = (state) => {
     .map((field) => field.id);
 };
 
-export const { toggleCollapseField, toggleDisplayField } = actions;
+export const { toggleDisplayField, toggleDisplayFields } = actions;
 
 export default reducer;

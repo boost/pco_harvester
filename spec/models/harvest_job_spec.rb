@@ -3,9 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe HarvestJob, type: :model do
-  let(:content_source)    { create(:content_source, name: 'National Library of New Zealand') }
-  let(:harvest_definition) { create(:harvest_definition, content_source:) }
-  let(:harvest_job) { create(:harvest_job, :completed, harvest_definition:) }
+  let(:destination)        { create(:destination) }
+  let(:pipeline)           { create(:pipeline, name: 'NLNZCat') }
+  let(:harvest_definition) { create(:harvest_definition, pipeline:) }
+  let(:harvest_job)        { create(:harvest_job, :completed, harvest_definition:, destination:) }
 
   describe '#duration_seconds' do
     it 'returns nil if extraction_job is nil' do
@@ -31,7 +32,6 @@ RSpec.describe HarvestJob, type: :model do
     it 'returns the number of seconds between the extraction start_time ignoring idle time between jobs and the max load_job end_time' do
       expect(harvest_job.duration_seconds).to eq 3_960.0
     end
-
   end
 
   describe '#transformation_and_load_duration_seconds' do
@@ -63,6 +63,56 @@ RSpec.describe HarvestJob, type: :model do
   describe '#name' do
     it 'automatically generates a sensible name' do
       expect(harvest_job.name).to eq "#{harvest_job.harvest_definition.name}__job-#{harvest_job.id}"
+    end
+  end
+
+  describe 'associations' do
+    it { is_expected.to belong_to(:destination) }
+  end
+
+  describe '#validations' do
+    subject                  { create(:harvest_job, harvest_definition:, destination:) }
+
+    let(:pipeline)           { create(:pipeline, name: 'NLNZCat') }
+    let(:destination)        { create(:destination) }
+    let(:harvest_definition) { create(:harvest_definition, pipeline:) }
+
+    it { is_expected.to validate_uniqueness_of(:key).case_insensitive.with_message('has already been taken') }
+  end
+
+  describe "#completed?" do
+    it 'returns true when extraction, transformation, and load jobs have finished' do
+      expect(harvest_job.completed?).to eq true
+    end
+
+    context 'when a harvest is still running' do
+      it 'returns false when an extraction is still running' do
+        incomplete_harvest_job = create(:harvest_job, :completed, harvest_definition:, destination:)
+
+        incomplete_harvest_job.extraction_job.update(status: 'running')
+
+        incomplete_harvest_job.reload
+        expect(incomplete_harvest_job.completed?).to eq false
+      end
+
+      
+      it 'returns false when a transformation is still running' do
+        incomplete_harvest_job = create(:harvest_job, :completed, harvest_definition:, destination:)
+
+        incomplete_harvest_job.transformation_jobs.first.update(status: 'running')
+
+        incomplete_harvest_job.reload
+        expect(incomplete_harvest_job.completed?).to eq false
+      end
+      
+      it 'returns false when a load is still running' do
+        incomplete_harvest_job = create(:harvest_job, :completed, harvest_definition:, destination:)
+
+        incomplete_harvest_job.load_jobs.first.update(status: 'running')
+
+        incomplete_harvest_job.reload
+        expect(incomplete_harvest_job.completed?).to eq false
+      end
     end
   end
 end

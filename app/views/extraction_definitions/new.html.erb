@@ -22,10 +22,10 @@
     <% end %>
     
     <button type="submit" class="btn btn-primary" data-form="js-extraction-definition-form">
-      Create Extraction Definition
+      Create and Run Sample Extraction
     </button>
 
-    <%= link_to 'Cancel', content_source_path(@content_source, kind: @extraction_definition.kind), class: 'btn btn-outline-danger' %>
+    <%= link_to 'Cancel', pipeline_path(@pipeline), class: 'btn btn-outline-danger' %>
   </div>
 
   <div class="clearfix"></div>

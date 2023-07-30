@@ -10,9 +10,9 @@ RSpec.describe 'Home', type: :request do
   end
 
   describe '#index' do
-    it 'redirects to the content sources page' do
+    it 'redirects to the pipelines page' do
       get root_path
-      expect(response).to redirect_to content_sources_path
+      expect(response).to redirect_to pipelines_path
     end
   end
 end

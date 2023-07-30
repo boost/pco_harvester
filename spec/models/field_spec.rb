@@ -3,10 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe Field, type: :model do
-  let(:content_source) { create(:content_source, :ngataonga) }
-  let(:extraction_definition) { content_source.extraction_definitions.first }
+  let(:pipeline) { create(:pipeline, :ngataonga) }
+  let(:extraction_definition) { pipeline.harvest.extraction_definition }
   let(:extraction_job) { create(:extraction_job, extraction_definition:) }
-  let(:transformation_definition) { create(:transformation_definition, content_source:, extraction_job:) }
+  let(:transformation_definition) { create(:transformation_definition, pipeline:, extraction_job:) }
   let(:subject) { create(:field, transformation_definition:) }
 
   describe '#attributes' do
@@ -20,6 +20,24 @@ RSpec.describe Field, type: :model do
 
     it 'belongs to a transformation' do
       expect(subject.transformation_definition).to eq transformation_definition
+    end
+  end
+
+  describe 'kinds' do
+    let(:field)        { create(:field, transformation_definition:) }
+    let(:reject_field) { create(:field, kind: 1, transformation_definition:) }
+    let(:delete_field) { create(:field, kind: 2, transformation_definition:) }
+
+    it 'can be a field' do
+      expect(field.field?).to eq true
+    end
+
+    it 'can be a reject_if field' do
+      expect(reject_field.reject_if?).to eq true
+    end
+
+    it 'can be a delete_if field' do
+      expect(delete_field.delete_if?).to eq true
     end
   end
 end

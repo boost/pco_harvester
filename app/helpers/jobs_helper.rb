@@ -14,7 +14,6 @@ module JobsHelper
     elsif job.cancelled?
       'Cancelled'
     elsif job.completed?
-      return 'Triggered Successfully' if job.instance_of?(HarvestJob)
       'Completed'
     end
   end

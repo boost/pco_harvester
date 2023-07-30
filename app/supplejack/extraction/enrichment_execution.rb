@@ -7,9 +7,9 @@ module Extraction
     end
 
     def call
-      re = RecordExtraction.new(@extraction_definition, @extraction_definition.page).extract
-      max_pages = JsonPath.new(@extraction_definition.total_selector).on(re.body).first.to_i
+      re = RecordExtraction.new(@extraction_definition, @extraction_definition.page, @harvest_job).extract
 
+      max_pages = JsonPath.new(@extraction_definition.total_selector).on(re.body).first.to_i
       records = JSON.parse(re.body)['records']
 
       extract_and_save_enrichment_documents(records)
@@ -19,7 +19,7 @@ module Extraction
       (@extraction_definition.page...max_pages).each do
         @extraction_definition.page += 1
 
-        re = RecordExtraction.new(@extraction_definition, @extraction_definition.page).extract
+        re = RecordExtraction.new(@extraction_definition, @extraction_definition.page, @harvest_job).extract
         records = JSON.parse(re.body)['records']
 
         extract_and_save_enrichment_documents(records)
@@ -57,7 +57,7 @@ module Extraction
         extraction_job: @extraction_job,
         transformation_definition: @harvest_job.transformation_definition,
         harvest_job: @harvest_job,
-        page: page,
+        page:,
         api_record_id: record['id']
       )
       TransformationWorker.perform_async(transformation_job.id)

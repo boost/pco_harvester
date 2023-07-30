@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Header, type: :model do
-  let(:extraction_definition) { create(:extraction_definition) }
   subject { create(:header, extraction_definition:) }
+
+  let(:extraction_definition) { create(:extraction_definition) }
 
   describe 'validations' do
     subject { build(:header) }

@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe 'Destinations', type: :request do
   let(:user)        { create(:user) }
   let(:destination) { create(:destination) }
-  
+
   before do
     sign_in user
   end

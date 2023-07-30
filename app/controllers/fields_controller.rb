@@ -26,15 +26,19 @@ class FieldsController < ApplicationController
   def run
     format = params['format']
 
-    record = if format == 'XML' || format == 'HTML'
-              params['record']
-            elsif format == 'JSON'
-              params['record'].to_unsafe_h
-            end
+    record = if %w[XML HTML].include?(format)
+               params['record']
+             elsif format == 'JSON'
+               params['record'].to_unsafe_h
+             end
 
-    fields = params['fields'].map { |id| Field.find(id) }
+    providedFields = Field.find(params['fields'])
 
-    transformation = Transformation::Execution.new([record], fields).call.first
+    fields = providedFields.select(&:field?)
+    reject_conditions = providedFields.select(&:reject_if?)
+    delete_conditions = providedFields.select(&:delete_if?)
+
+    transformation = Transformation::Execution.new([record], fields, reject_conditions, delete_conditions).call.first
 
     render json: transformation.to_json
   end
@@ -46,6 +50,6 @@ class FieldsController < ApplicationController
   end
 
   def field_params
-    params.require(:field).permit(:name, :block, :transformation_definition_id)
+    params.require(:field).permit(:name, :block, :transformation_definition_id, :kind)
   end
 end

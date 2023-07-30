@@ -38,8 +38,8 @@ end
 def stub_trove_harvest_requests(extraction_definition, pages_and_tokens)
   pages_and_tokens.each do |page, token|
     stub_request(:get, extraction_definition.base_url).with(
-      query: { 
-        'page' => page, 
+      query: {
+        'page' => page,
         extraction_definition.per_page_parameter => extraction_definition.per_page,
         extraction_definition.token_parameter => token
       },
@@ -51,8 +51,8 @@ end
 def stub_inaturalist_harvest_requests(extraction_definition, pages_and_tokens)
   pages_and_tokens.each do |page, token|
     stub_request(:get, extraction_definition.base_url).with(
-      query: { 
-        'page' => page, 
+      query: {
+        'page' => page,
         extraction_definition.per_page_parameter => extraction_definition.per_page,
         extraction_definition.token_parameter => token
       },
@@ -60,4 +60,3 @@ def stub_inaturalist_harvest_requests(extraction_definition, pages_and_tokens)
     ).to_return(fake_response("inaturalist_#{page}"))
   end
 end
-

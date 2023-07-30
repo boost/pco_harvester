@@ -6,7 +6,6 @@ FactoryBot.define do
     page { 1 }
 
     transformation_definition
-    harvest_job
     extraction_job
   end
 end
