@@ -5,7 +5,7 @@ class RawRecordsController < ApplicationController
   before_action :find_transformation_definition, only: [:index]
 
   def index
-    record = @transformation_definition.records(params[:page].to_i)[params['record'].to_i]
+    record = @transformation_definition.records(params[:page].to_i)[params['record'].to_i - 1]
 
     transformation = Transformation::Execution.new([record], @fields, @reject_conditions, @delete_conditions).call.first
 
@@ -18,7 +18,7 @@ class RawRecordsController < ApplicationController
   private
 
   def find_fields
-    fields = Field.where(id: params['fields'])
+    fields = Field.where(id: params['fields']).order(created_at: :desc)
 
     @fields            = fields.select(&:field?)
     @reject_conditions = fields.select(&:reject_if?)
