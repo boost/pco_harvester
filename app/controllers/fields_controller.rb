@@ -26,7 +26,7 @@ class FieldsController < ApplicationController
   end
 
   def run
-    record = @transformation_definition.records(params[:page].to_i)[params['record'].to_i]
+    record = @transformation_definition.records(params[:page].to_i)[params['record'].to_i - 1]
 
     providedFields = Field.find(params['fields'])
 
