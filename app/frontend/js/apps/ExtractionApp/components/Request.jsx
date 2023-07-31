@@ -22,7 +22,7 @@ const Request = ({}) => {
           </label>
 
           <div className='col-sm-11'>
-             <input type="text" readonly class="form-control" value="http://www.google.co.nz" />
+             <input type="text" className="form-control" value="http://www.google.co.nz" />
           </div>
         </div>
       </div>

@@ -17,6 +17,10 @@ class ExtractionDefinitionsController < ApplicationController
         requests: {
           ids: @extraction_definition.requests.map { |request| request[:id] },
           requests: @extraction_definition.requests.index_by { |request| request[:id] }
+        },
+        parameters: {
+          ids: @extraction_definition.parameters.map { |request| request[:id] },
+          parameters: @extraction_definition.parameters.index_by { |request| request[:id] }
         }
       },
       config: {

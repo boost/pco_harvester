@@ -8,11 +8,11 @@ FactoryBot.define do
     kind { 0 }
 
     pagination_type { 'page' }
-    page_parameter { 'page' }
-    page { 1 }
-    per_page_parameter { 'per_page' }
-    per_page { 50 }
-    total_selector { '$.totalObjects' }
+    # page_parameter { 'page' }
+    # page { 1 }
+    # per_page_parameter { 'per_page' }
+    # per_page { 50 }
+    # total_selector { '$.totalObjects' }
 
     trait :ngataonga do
       name { 'api.ngataonga.org.nz' }

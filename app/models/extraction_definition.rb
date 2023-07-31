@@ -13,6 +13,7 @@ class ExtractionDefinition < ApplicationRecord
   has_many :extraction_jobs
   has_many :headers
   has_many :requests
+  has_many :parameters, through: :requests
 
   enum :kind, { harvest: 0, enrichment: 1 }
 

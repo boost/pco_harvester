@@ -30,7 +30,7 @@ const Parameter = ({}) => {
           </label>
 
           <div className='col-sm-5'>
-             <input type="text" class="form-control" />
+             <input type="text" className="form-control" />
           </div>
 
           
@@ -39,7 +39,7 @@ const Parameter = ({}) => {
           </label>
 
           <div className='col-sm-5'>
-             <input type="text" class="form-control" />
+             <input type="text" className="form-control" />
           </div>
         </div>
       </div>

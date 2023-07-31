@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :request do
-    kind { 0 }
+    http_method { 'GET' }
 
     association :extraction_definition
   end
