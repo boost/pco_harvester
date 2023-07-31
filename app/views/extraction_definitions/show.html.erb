@@ -3,64 +3,20 @@
 <%= content_for(:header) do %>
   <%= render 'shared/breadcrumb_nav' %>
 
-  <h1 class='float-start'><%= @extraction_definition.name %></h1>
+  <h1 class='header__title'><%= @extraction_definition.name %></h1>
 
-  <div class="float-end">
-    <div class="dropdown d-inline me-1">
-      <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="bi bi-play" aria-hidden="true"></i> Run
-      </button>
-      <ul class="dropdown-menu">
-        <li><%= button_to 'Run full job', content_source_extraction_definition_extraction_jobs_path(@content_source, @extraction_definition, kind: :full), class: 'dropdown-item', form_class: 'dropdown-item' %></li>
-        <li><%= button_to 'Run sample', content_source_extraction_definition_extraction_jobs_path(@content_source, @extraction_definition, kind: :sample), class: 'dropdown-item', form_class: 'dropdown-item' %></li>
-      </ul>
-    </div>
-    <%= link_to edit_content_source_extraction_definition_path(@content_source, @extraction_definition), class: 'me-1 btn btn-outline-primary' do %>
-      <i class="bi bi-pencil-square" aria-hidden="true"></i> Edit definition
+  <div class="header__actions">
+    <span id="react-header-actions"></span>
+
+    <%= link_to edit_pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition, @extraction_definition, referrer_id: @referrer), class: 'btn btn-outline-primary' do %>
+      <i class="bi bi-pencil-square" aria-hidden="true"></i> Edit
     <% end %>
-
-    <% if @related_harvest_definitions&.any? %>
-      <button type="button" class="btn btn-outline-primary me-1" data-bs-toggle="modal" data-bs-target="#update-harvest-definition-modal">Update harvest definitions</button>
-    <% end %>
-
     <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">
       <i class="bi bi-trash" aria-hidden="true"></i> Delete
     </button>
   </div>
 
   <div class="clearfix"></div>
-
-  <ul class="nav nav-tabs mt-4">
-    <li class='nav-item'>
-      <%= link_to content_source_extraction_definition_path(@content_source, @extraction_definition), class: class_names("nav-link", active: @status.nil?) do %>
-        All (<%= @extraction_definition.extraction_jobs.count %>)
-      <% end %>
-    </li>
-
-    <% ExtractionJob::STATUSES.each do |status| %>
-      <li class='nav-item'>
-        <%= link_to content_source_extraction_definition_path(@content_source, @extraction_definition, status: status), class: class_names("nav-link", active: @status == status) do %>
-          <%= status.capitalize %> (<%= @extraction_definition.extraction_jobs.where(status: status).count %>)
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
 <% end %>
 
-<%= render partial: 'jobs/jobs', locals: { jobs: @extraction_jobs, type: 'extraction' } %>
-
-<%# Modal %>
-<%= render layout: 'shared/delete-modal', locals: { path: content_source_extraction_definition_path(@content_source, @extraction_definition) } do %>
-  Are you sure you want to delete "<%= @extraction_definition.name %>"?
-<% end %>
-
-
-<% path = update_harvest_definitions_content_source_extraction_definition_path(@content_source, @extraction_definition) %>
-<%= render layout: 'shared/update-harvest-definition-modal', locals: { path: path } do %>
-  This extraction is used by these harvest:
-  <ul>
-    <% @related_harvest_definitions.each do |harvest_definition| %>
-      <li><%= harvest_definition.name %></li>
-    <% end %>
-  </ul>
-<% end %>
+<div id="js-extraction-app" data-props="<%= @props %>"></div>

@@ -4,11 +4,25 @@ class ExtractionDefinitionsController < ApplicationController
   before_action :find_pipeline
   before_action :find_referrer
   before_action :find_harvest_definition
-  before_action :find_extraction_definition, only: %i[edit update]
+  before_action :find_extraction_definition, only: %i[show edit update]
   before_action :find_destinations, only: %i[new create edit update]
 
   def new
     @extraction_definition = ExtractionDefinition.new(kind: params[:kind])
+  end
+
+  def show
+    @props = {
+      entities: {
+        requests: {
+          ids: @extraction_definition.requests.map { |request| request[:id] },
+          requests: @extraction_definition.requests.index_by { |request| request[:id] }
+        }
+      },
+      config: {
+        environment: Rails.env
+      }
+    }.to_json
   end
 
   def edit; end
@@ -18,9 +32,6 @@ class ExtractionDefinitionsController < ApplicationController
 
     if @extraction_definition.save
       @harvest_definition.update(extraction_definition_id: @extraction_definition.id)
-
-      @extraction_job = ExtractionJob.create(extraction_definition: @extraction_definition, kind: 'sample')
-      ExtractionWorker.perform_async(@extraction_job.id)
 
       redirect_to pipeline_path(@pipeline), notice: 'Extraction Definition created successfully'
     else

@@ -24,7 +24,8 @@ import {
 } from "~/js/features/UiFieldsSlice";
 import Tooltip from "~/js/components/Tooltip";
 import CodeEditor from "~/js/components/CodeEditor";
- const Field = ({ id }) => {
+
+const Field = ({ id }) => {
   const appDetails = useSelector(selectAppDetails);
   const { name, block, kind } = useSelector((state) => selectFieldById(state, id));
 
