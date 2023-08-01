@@ -10,6 +10,7 @@ import {
 
 import {
   selectUiParameterById,
+  toggleDisplayParameter
 } from "~/js/features/ExtractionApp/UiParametersSlice";
 
 const Parameter = ({ id }) => {
@@ -80,6 +81,10 @@ const Parameter = ({ id }) => {
     "bg-primary": saved,
     "bg-secondary": hasChanged(),
   });
+  
+  const handleHideClick = () => {
+    dispatch(toggleDisplayParameter({ id: id, displayed: false }))
+  }
 
   return (
     <div id={`parameter-${id}`} className={parameterClasses}>
@@ -104,7 +109,10 @@ const Parameter = ({ id }) => {
                 {saving ? " Saving..." : " Save"}
               </button>
 
-              <button className="btn btn-outline-primary">
+              <button 
+                className="btn btn-outline-primary"
+                onClick={handleHideClick}
+              >
                 <i className="bi bi-eye-slash" aria-hidden="true"></i> Hide
               </button>
 
