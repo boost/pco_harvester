@@ -57,6 +57,23 @@ export const updateParameter = createAsyncThunk(
   }
 )
 
+export const deleteParameter = createAsyncThunk(
+  "parameters/deleteParameterStatus",
+  async (payload) => {
+    const { id, pipelineId, harvestDefinitionId, extractionDefinitionId, requestId } = payload;
+
+    const response = request
+      .delete(
+        `/pipelines/${pipelineId}/harvest_definitions/${harvestDefinitionId}/extraction_definitions/${extractionDefinitionId}/requests/${requestId}/parameters/${id}`
+      )
+      .then((response) => {
+        return id;
+      });
+
+    return response;
+  }
+);
+
 const parametersSlice = createSlice({
   name: "parametersSlice",
   initialState: {},
@@ -65,6 +82,9 @@ const parametersSlice = createSlice({
     builder
       .addCase(addParameter.fulfilled, (state, action) => {
         parametersAdapter.upsertOne(state, action.payload);
+      })
+      .addCase(deleteParameter.fulfilled, (state, action) => {
+        parametersAdapter.removeOne(state, action.payload);
       })
       .addCase(updateParameter.fulfilled, (state, action) => {
         parametersAdapter.setOne(state, action.payload);

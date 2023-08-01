@@ -13,8 +13,8 @@ const AddParameter = ({ kind, buttonText }) => {
   const addNewParameter = () => {
     dispatch(
       addParameter({
-        key: "",
-        value: "",
+        name: "",
+        content: "",
         kind: kind,
         harvestDefinitionId: appDetails.harvestDefinition.id,
         pipelineId: appDetails.pipeline.id,
