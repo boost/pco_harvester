@@ -1,5 +1,7 @@
 import React from "react";
 
+import AddParameter from "~/js/apps/ExtractionApp/components/AddParameter";
+
 const ParameterNavigationPanel = () => {
   return(
     <div className="card field-nav-panel">
@@ -23,6 +25,9 @@ const ParameterNavigationPanel = () => {
         </div>
         
         <div className='field-nav-panel__content'>
+
+          <AddParameter buttonText='+ Add query param' kind='query' />
+
           <ul className="field-nav nav nav-pills flex-column overflow-auto flex-nowrap">
             <li className='nav-item'>
               <a className="nav-link text-truncate">

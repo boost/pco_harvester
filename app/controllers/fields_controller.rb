@@ -10,7 +10,7 @@ class FieldsController < ApplicationController
 
     @field.save!
 
-    render json: @field.to_json
+    render json: @field
   end
 
   def update

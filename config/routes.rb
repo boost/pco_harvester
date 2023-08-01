@@ -36,6 +36,10 @@ Rails.application.routes.draw do
         resources :extraction_jobs, only: %i[index show create destroy] do
           post :cancel, on: :member
         end
+
+        resources :requests do
+          resources :parameters
+        end
       end
       
       resources :transformation_definitions, only: %i[new create show edit update destroy] do

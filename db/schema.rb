@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_31_013700) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_01_024428) do
   create_table "delete_jobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "status"
     t.integer "kind", default: 0, null: false
@@ -137,8 +137,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_31_013700) do
   end
 
   create_table "parameters", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "key"
-    t.string "value"
+    t.string "name"
+    t.string "content"
     t.integer "kind", default: 0
     t.boolean "dynamic", default: false
     t.datetime "created_at", null: false
