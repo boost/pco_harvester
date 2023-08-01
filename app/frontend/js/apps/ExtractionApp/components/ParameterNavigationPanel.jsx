@@ -1,8 +1,21 @@
 import React from "react";
 
+import { filter, map } from 'lodash';
+
+import { selectParameterIds, selectAllParameters } from "~/js/features/ExtractionApp/ParametersSlice";
+
+import { useSelector } from "react-redux";
+
 import AddParameter from "~/js/apps/ExtractionApp/components/AddParameter";
+import ParameterNavigationListItem from '~/js/apps/ExtractionApp/components/ParameterNavigationListItem';
 
 const ParameterNavigationPanel = () => {
+  const allParameters = useSelector(selectAllParameters);
+  
+  const queryParameters  = filter(allParameters, ['kind', 'query']);
+  const headerParameters = filter(allParameters, ['kind', 'header']);
+  const slugParameters   = filter(allParameters, ['kind', 'slug']);
+
   return(
     <div className="card field-nav-panel">
       <div className="d-flex flex-column overflow-auto">
@@ -29,11 +42,9 @@ const ParameterNavigationPanel = () => {
           <AddParameter buttonText='+ Add query param' kind='query' />
 
           <ul className="field-nav nav nav-pills flex-column overflow-auto flex-nowrap">
-            <li className='nav-item'>
-              <a className="nav-link text-truncate">
-                Placeholder
-              </a>
-            </li>
+            {map(queryParameters, (queryParameter) => {
+              return <ParameterNavigationListItem id={queryParameter.id} key={queryParameter.id} />;
+            })}
           </ul>
         </div>
         

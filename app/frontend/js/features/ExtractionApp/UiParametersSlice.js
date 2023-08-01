@@ -9,22 +9,22 @@ const uiParametersSlice = createSlice({
   name: "parametersSlice",
   initialState: {},
   reducers: {
-    // toggleDisplayParameter(state, action) {
-    //   uiParametersAdapter.updateOne(state, {
-    //     id: action.payload.id,
-    //     changes: { displayed: action.payload.displayed },
-    //   });
-    // },
-    // toggleDisplayParameters(state, action) {
-    //   const { parameters, displayed } = action.payload;
+    toggleDisplayParameter(state, action) {
+      uiParametersAdapter.updateOne(state, {
+        id: action.payload.id,
+        changes: { displayed: action.payload.displayed },
+      });
+    },
+    toggleDisplayParameters(state, action) {
+      const { parameters, displayed } = action.payload;
 
-    //   uiParametersAdapter.updateMany(
-    //     state,
-    //     parameters.map((parameter) => {
-    //       return { id: parameter.id, changes: { displayed: displayed } };
-    //     })
-    //   );
-    // }
+      uiParametersAdapter.updateMany(
+        state,
+        parameters.map((parameter) => {
+          return { id: parameter.id, changes: { displayed: displayed } };
+        })
+      );
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -34,8 +34,6 @@ const uiParametersSlice = createSlice({
           saved: true,
           deleting: false,
           saving: false,
-          running: false,
-          hasRun: false,
           expanded: true,
           displayed: true,
         });
@@ -43,7 +41,7 @@ const uiParametersSlice = createSlice({
       .addCase(updateParameter.pending, (state, action) => {
         uiParametersAdapter.updateOne(state, {
           id: action.meta.arg.id,
-          changes: { saving: true, error: false, hasRun: false },
+          changes: { saving: true, hasRun: false },
         });
       })
       .addCase(updateParameter.fulfilled, (state, action) => {

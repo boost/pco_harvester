@@ -4,7 +4,6 @@ import { map } from 'lodash';
 
 import { useDispatch, useSelector } from "react-redux";
 
-
 import Request from '/js/apps/ExtractionApp/components/Request';
 import Parameter from '/js/apps/ExtractionApp/components/Parameter';
 import ParameterNavigationPanel from '/js/apps/ExtractionApp/components/ParameterNavigationPanel';

@@ -72,6 +72,8 @@ const Parameter = ({ id }) => {
     }
   };
 
+  const parameterClasses = classNames("col-12", "collapse", "mt-4", { show: displayed });
+
   const badgeClasses = classNames({
     badge: true,
     "ms-2": true,
@@ -80,63 +82,65 @@ const Parameter = ({ id }) => {
   });
 
   return (
-    <div className="card mt-4">
-      <div className="card-body">
-        <div className="d-flex d-row justify-content-between align-items-center">
-          <div>
-            <h5 className="m-0 d-inline">Parameter!</h5>
+    <div id={`parameter-${id}`} className={parameterClasses}>
+      <div className="card">
+        <div className="card-body">
+          <div className="d-flex d-row justify-content-between align-items-center">
+            <div>
+              <h5 className="m-0 d-inline">Parameter!</h5>
 
-            {name != "" && (
-              <span className={badgeClasses}>{badgeText()}</span>
-            )}
-          </div>
+              {name != "" && (
+                <span className={badgeClasses}>{badgeText()}</span>
+              )}
+            </div>
           
-          <div className="hstack gap-2">
-            <button 
-              className="btn btn-outline-primary" 
-              disabled={!isSaveable()}
-              onClick={handleSaveClick}
-            >
-              <i className="bi bi-save" aria-hidden="true"></i>
-              {saving ? " Saving..." : " Save"}
-            </button>
+            <div className="hstack gap-2">
+              <button 
+                className="btn btn-outline-primary" 
+                disabled={!isSaveable()}
+                onClick={handleSaveClick}
+              >
+                <i className="bi bi-save" aria-hidden="true"></i>
+                {saving ? " Saving..." : " Save"}
+              </button>
 
-            <button className="btn btn-outline-primary">
-              <i className="bi bi-eye-slash" aria-hidden="true"></i> Hide
-            </button>
+              <button className="btn btn-outline-primary">
+                <i className="bi bi-eye-slash" aria-hidden="true"></i> Hide
+              </button>
 
-            <button className="btn btn-outline-danger">
-              <i className="bi bi-trash" aria-hidden="true"></i> Delete
-            </button>
+              <button className="btn btn-outline-danger">
+                <i className="bi bi-trash" aria-hidden="true"></i> Delete
+              </button>
+            </div>
           </div>
-        </div>
 
-        <div className='row mt-3'>
-          <label className="col-form-label col-sm-1" htmlFor="name">
-            <strong>Key</strong>
-          </label>
+          <div className='row mt-3'>
+            <label className="col-form-label col-sm-1" htmlFor="name">
+              <strong>Key</strong>
+            </label>
 
-          <div className='col-sm-5'>
-             <input 
-                type="text" 
-                className="form-control"
-                defaultValue={name}
-                onChange={(e) => setNameValue(e.target.value)}
-               />
-          </div>
+            <div className='col-sm-5'>
+               <input 
+                  type="text" 
+                  className="form-control"
+                  defaultValue={name}
+                  onChange={(e) => setNameValue(e.target.value)}
+                 />
+            </div>
           
-          <label className="col-form-label col-sm-1" htmlFor="name">
-            <strong>Value</strong>
-          </label>
+            <label className="col-form-label col-sm-1" htmlFor="name">
+              <strong>Value</strong>
+            </label>
 
-          <div className='col-sm-5'>
-             <input 
-                type="text" 
-                className="form-control"
-                required="required"
-                defaultValue={contentValue}
-                onChange={(e) => setContentValue(e.target.value)}
-               />
+            <div className='col-sm-5'>
+               <input 
+                  type="text" 
+                  className="form-control"
+                  required="required"
+                  defaultValue={contentValue}
+                  onChange={(e) => setContentValue(e.target.value)}
+                 />
+            </div>
           </div>
         </div>
       </div>
