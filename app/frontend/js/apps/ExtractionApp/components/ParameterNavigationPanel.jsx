@@ -100,8 +100,8 @@ const ParameterNavigationPanel = () => {
           <AddParameter buttonText='+ Add slug param' kind='slug' />
           
           <ul className="field-nav nav nav-pills flex-column overflow-auto flex-nowrap">
-            {map(slugParameters, (slugParameter) => {
-              return <ParameterNavigationListItem id={slugParameter.id} key={slugParameter.id} />;
+            {map(slugParameters, (slugParameter, index) => {
+              return <ParameterNavigationListItem id={slugParameter.id} key={slugParameter.id} index={index} />;
             })}
           </ul>
 

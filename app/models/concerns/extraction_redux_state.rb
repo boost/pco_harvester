@@ -29,7 +29,7 @@ module ExtractionReduxState
   def requests_slice
     {
       ids: @extraction_definition.requests.map { |request| request[:id] },
-      entities: @extraction_definition.requests.index_by { |request| request[:id] },
+      entities: @extraction_definition.requests.map(&:to_h).index_by { |request| request[:id] },
     }
   end
 

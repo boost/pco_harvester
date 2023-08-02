@@ -4,6 +4,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
 import parameters from "/js/features/ExtractionApp/ParametersSlice";
 import appDetails from "/js/features/ExtractionApp/AppDetailsSlice";
+import requests   from "/js/features/ExtractionApp/RequestsSlice";
 
 // ui
 
@@ -16,6 +17,7 @@ export default function configureAppStore(preloadedState) {
   const store = configureStore({
     reducer: combineReducers({
       entities: combineReducers({
+        requests,
         parameters,
         appDetails
       }),

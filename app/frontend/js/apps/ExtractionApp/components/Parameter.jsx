@@ -133,7 +133,7 @@ const Parameter = ({ id }) => {
                 
                 <h5 className="m-0 d-inline">{displayName()}</h5>
 
-                {name != "" && (
+                {displayName() != "" && (
                   <span className={badgeClasses}>{badgeText()}</span>
                 )}
               </div>

@@ -6,7 +6,7 @@ import {
   toggleDisplayParameter,
 } from "~/js/features/ExtractionApp/UiParametersSlice";
 
-const ParameterNavigationListItem = ({ id }) => {
+const ParameterNavigationListItem = ({ id, index }) => {
   const dispatch = useDispatch();
 
   const { name, kind, content } = useSelector((state) => selectParameterById(state, id));
@@ -14,7 +14,7 @@ const ParameterNavigationListItem = ({ id }) => {
 
   const displayName = () => {
     if(kind == 'slug') {
-      return content;
+      return `Slug ${index + 1}`
     }
 
     return name;

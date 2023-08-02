@@ -10,7 +10,7 @@ import { some } from 'lodash';
 const parametersAdapter = createEntityAdapter();
 
 export const addParameter = createAsyncThunk(
-  "fields/addParameterStatus",
+  "parameters/addParameterStatus",
   async (payload) => {
     const { name, content, kind, harvestDefinitionId, pipelineId, extractionDefinitionId, requestId } = payload;
 
@@ -35,7 +35,7 @@ export const addParameter = createAsyncThunk(
 );
 
 export const updateParameter = createAsyncThunk(
-  "fields/updateParameterSlice",
+  "parameters/updateParameterSlice",
   
   async (payload) => {
     const { id, pipelineId, harvestDefinitionId, extractionDefinitionId, requestId, name, content, kind } = payload;
@@ -77,7 +77,7 @@ export const deleteParameter = createAsyncThunk(
 );
 
 export const hasEmptyParameters = (state) => {
-  return some(selectAllParameters(state), { 'name': '' });
+  return some(selectAllParameters(state), { 'value': '' });
 }
 
 const parametersSlice = createSlice({
