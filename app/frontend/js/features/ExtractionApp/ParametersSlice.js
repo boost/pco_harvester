@@ -5,6 +5,8 @@ import {
 } from "@reduxjs/toolkit";
 import { request } from "~/js/utils/request";
 
+import { some } from 'lodash';
+
 const parametersAdapter = createEntityAdapter();
 
 export const addParameter = createAsyncThunk(
@@ -73,6 +75,10 @@ export const deleteParameter = createAsyncThunk(
     return response;
   }
 );
+
+export const hasEmptyParameters = (state) => {
+  return some(selectAllParameters(state), { 'name': '' });
+}
 
 const parametersSlice = createSlice({
   name: "parametersSlice",

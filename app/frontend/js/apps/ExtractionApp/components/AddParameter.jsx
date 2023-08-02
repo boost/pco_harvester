@@ -1,14 +1,13 @@
 
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addParameter } from "~/js/features/ExtractionApp/ParametersSlice";
-// import { addField, hasEmptyFields } from "~/js/features/FieldsSlice";
+import { addParameter, hasEmptyParameters } from "~/js/features/ExtractionApp/ParametersSlice";
 import { selectAppDetails } from "~/js/features/ExtractionApp/AppDetailsSlice";
 
 const AddParameter = ({ kind, buttonText }) => {
   const dispatch = useDispatch();
   const appDetails = useSelector(selectAppDetails);
-  // const emptyFields = useSelector(hasEmptyFields);
+  const emptyParameters = useSelector(hasEmptyParameters);
 
   const addNewParameter = () => {
     dispatch(
@@ -27,7 +26,7 @@ const AddParameter = ({ kind, buttonText }) => {
   return (
     <div className="d-grid gap-2">
       <button
-        // disabled={emptyFields}
+        disabled={emptyParameters}
         className="btn btn-outline-primary"
         onClick={() => addNewParameter()}
       >

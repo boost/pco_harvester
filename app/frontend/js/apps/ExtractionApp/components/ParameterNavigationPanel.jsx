@@ -66,12 +66,13 @@ const ParameterNavigationPanel = () => {
         </div>
         
         <div className='field-nav-panel__content'>
+          
+          <AddParameter buttonText='+ Add header param' kind='header' />
+          
           <ul className="field-nav nav nav-pills flex-column overflow-auto flex-nowrap">
-            <li className='nav-item'>
-              <a className="nav-link text-truncate">
-                Placeholder
-              </a>
-            </li>
+            {map(headerParameters, (headerParameter) => {
+              return <ParameterNavigationListItem id={headerParameter.id} key={headerParameter.id} />;
+            })}
           </ul>
         </div>
         
@@ -91,15 +92,19 @@ const ParameterNavigationPanel = () => {
             </ul>
           </div>
         </div>
+
+        
         
         <div className='field-nav-panel__content'>
+
+          <AddParameter buttonText='+ Add slug param' kind='slug' />
+          
           <ul className="field-nav nav nav-pills flex-column overflow-auto flex-nowrap">
-            <li className='nav-item'>
-              <a className="nav-link text-truncate">
-                Placeholder
-              </a>
-            </li>
+            {map(slugParameters, (slugParameter) => {
+              return <ParameterNavigationListItem id={slugParameter.id} key={slugParameter.id} />;
+            })}
           </ul>
+
         </div>
         
       </div>

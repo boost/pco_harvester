@@ -56,6 +56,10 @@ const Parameter = ({ id }) => {
   }
 
   const isValid = () => {
+    if(kind == 'slug') {
+      return contentValue.trim() !== "";
+    }
+
     return nameValue.trim() !== "" && contentValue.trim() !== "";
   }
 
@@ -106,6 +110,19 @@ const Parameter = ({ id }) => {
     handleClose();
   };
 
+  const valueColumnClasses = classNames({
+    'col-sm-5': kind != 'slug',
+    'col-sm-11': kind == 'slug'    
+  });
+
+  const displayName = () => {
+    if(kind == 'slug') {
+      return content;
+    }
+
+    return name;
+  }
+
   return (
     <>
       <div id={`parameter-${id}`} className={parameterClasses}>
@@ -113,7 +130,8 @@ const Parameter = ({ id }) => {
           <div className="card-body">
             <div className="d-flex d-row justify-content-between align-items-center">
               <div>
-                <h5 className="m-0 d-inline">Parameter!</h5>
+                
+                <h5 className="m-0 d-inline">{displayName()}</h5>
 
                 {name != "" && (
                   <span className={badgeClasses}>{badgeText()}</span>
@@ -145,24 +163,28 @@ const Parameter = ({ id }) => {
             </div>
 
             <div className='row mt-3'>
-              <label className="col-form-label col-sm-1" htmlFor="name">
-                <strong>Key</strong>
-              </label>
+              {kind != 'slug' && (
+                <>
+                  <label className="col-form-label col-sm-1" htmlFor="name">
+                    <strong>Key</strong>
+                  </label>
 
-              <div className='col-sm-5'>
-                 <input 
-                    type="text" 
-                    className="form-control"
-                    defaultValue={name}
-                    onChange={(e) => setNameValue(e.target.value)}
-                   />
-              </div>
+                  <div className='col-sm-5'>
+                     <input 
+                        type="text" 
+                        className="form-control"
+                        defaultValue={name}
+                        onChange={(e) => setNameValue(e.target.value)}
+                       />
+                  </div>
+                </>
+              )}
           
               <label className="col-form-label col-sm-1" htmlFor="name">
                 <strong>Value</strong>
               </label>
 
-              <div className='col-sm-5'>
+              <div className={ valueColumnClasses }>
                  <input 
                     type="text" 
                     className="form-control"
