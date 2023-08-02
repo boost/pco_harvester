@@ -5,9 +5,6 @@ require 'rails_helper'
 RSpec.describe Parameter, type: :model do
   describe 'validations' do
     subject { build(:parameter) }
-
-    it { is_expected.to validate_presence_of(:key) }
-    it { is_expected.to validate_presence_of(:value) }
   end
   
   describe 'associations' do
@@ -30,6 +27,23 @@ RSpec.describe Parameter, type: :model do
 
     it 'can be a slug parameter' do
       expect(slug.slug?).to eq true
+    end
+  end
+
+  describe '#to_h' do
+    let(:query) { create(:parameter, kind: 'query', name: 'itemsPerPage', content: '30') }
+    let(:slug)  { create(:parameter, kind: 'slug', content: 'articles') }
+
+    it 'returns a hash of key => value' do
+      expect(query.to_h).to eq(
+        {
+          'itemsPerPage' => '30'
+        }
+      )
+    end
+
+    it 'returns nothing for a slug parameter' do
+      expect(slug.to_h).to eq nil
     end
   end
 end

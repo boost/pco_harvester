@@ -9,6 +9,12 @@ class RequestsController < ApplicationController
     render json: @request.to_h
   end
 
+  def show
+    @request = Request.find(params[:id])
+
+    render json: Extraction::DocumentExtraction.new(@request)
+  end
+
   private
 
   def request_params

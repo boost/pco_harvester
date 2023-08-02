@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_02_022250) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_02_225713) do
   create_table "delete_jobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "status"
     t.integer "kind", default: 0, null: false
@@ -46,6 +46,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_02_022250) do
     t.string "enrichment_url"
     t.bigint "destination_id"
     t.bigint "pipeline_id"
+    t.integer "page", default: 1
     t.index ["destination_id"], name: "index_extraction_definitions_on_destination_id"
     t.index ["pipeline_id"], name: "index_extraction_definitions_on_pipeline_id"
   end

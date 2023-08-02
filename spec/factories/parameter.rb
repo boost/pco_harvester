@@ -2,8 +2,8 @@
 
 FactoryBot.define do
   factory :parameter do
-    key  { 'key' }
-    value { 'ab.cd.ef.gh' }
+    name  { 'key' }
+    content { 'ab.cd.ef.gh' }
 
     association :request
   end

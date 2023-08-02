@@ -37,4 +37,14 @@ RSpec.describe "Requests", type: :request do
       end
     end
   end
+
+  describe 'GET /test' do
+    let(:request) { create(:request, :figshare) }
+
+    it 'returns a JSON response of the completed request' do
+      get pipeline_harvest_definition_extraction_definition_request_path(pipeline, harvest_definition, extraction_definition, request)
+
+      body = JSON.parse(response.body)
+    end
+  end
 end

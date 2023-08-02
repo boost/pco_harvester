@@ -9,10 +9,14 @@ def stub_ngataonga_harvest_requests(extraction_definition)
   end
 end
 
-def stub_figshare_harvest_requests(extraction_definition)
+def stub_figshare_harvest_requests(request)
   (1..5).each do |page|
-    stub_request(:get, extraction_definition.base_url).with(
-      query: { 'page' => page, 'itemsPerPage' => extraction_definition.per_page },
+    stub_request(:get, request.url).with(
+      query: { 
+        'page' => page, 
+        'itemsPerPage' => 10,
+        'search_for' => 'zealand'
+      },
       headers: fake_json_headers
     ).to_return(fake_response("figshare_#{page}"))
   end

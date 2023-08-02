@@ -4,31 +4,35 @@ import { map } from 'lodash';
 
 import { useDispatch, useSelector } from "react-redux";
 
-import Request from '/js/apps/ExtractionApp/components/Request';
-import Parameter from '/js/apps/ExtractionApp/components/Parameter';
+import Request                  from '/js/apps/ExtractionApp/components/Request';
+import Parameter                from '/js/apps/ExtractionApp/components/Parameter';
+import HeaderActions            from '/js/apps/ExtractionApp/components/HeaderActions';
 import ParameterNavigationPanel from '/js/apps/ExtractionApp/components/ParameterNavigationPanel';
 
 import { selectParameterIds } from "~/js/features/ExtractionApp/ParametersSlice";
 
 const ExtractionApp = ({}) => {
-
   const parameterIds = useSelector(selectParameterIds);
 
   return(
-    <div className='row'>
-      <div className='col-2'>
-        <ParameterNavigationPanel />
+    <>
+      <HeaderActions />
+
+      <div className='row'>
+        <div className='col-2'>
+          <ParameterNavigationPanel />
+        </div>
+
+        <div className='col-10'>
+          <Request />
+
+          { map(parameterIds, (parameterId) => (
+            <Parameter id={parameterId} key={parameterId} />
+          ))}
+
+        </div>
       </div>
-
-      <div className='col-10'>
-        <Request />
-
-        { map(parameterIds, (parameterId) => (
-          <Parameter id={parameterId} key={parameterId} />
-        ))}
-
-      </div>
-    </div>
+    </>
   )
 }
 

@@ -2,9 +2,10 @@
 
 module Extraction
   class DocumentExtraction < AbstractExtraction
-    def initialize(extraction_definition, extraction_folder = nil)
-      @extraction_definition = extraction_definition
+    def initialize(request, extraction_folder = nil)
+      @request = request
       @extraction_folder = extraction_folder
+      @extraction_definition = request.extraction_definition
     end
 
     private
@@ -16,32 +17,17 @@ module Extraction
     end
 
     def url
-      @extraction_definition.base_url
+      @request.url
     end
 
     def params
-      {
-        @extraction_definition.page_parameter => @extraction_definition.page,
-        @extraction_definition.per_page_parameter => @extraction_definition.per_page,
-        @extraction_definition.token_parameter => @extraction_definition.token_value
-      }
-        .reject { |key, value| key.blank? || value.blank? }
-        .merge(
-          if @extraction_definition.page == 1
-            initial_params
-          else
-            {}
-          end
-        )
+      @request.query_parameters
     end
 
     def headers
-      return super if @extraction_definition.headers.blank?
+      return super if @request.headers.blank?
 
-      super
-        .merge(
-          @extraction_definition.headers.map(&:to_h).reduce(&:merge)
-        )
+      super.merge(@request.headers)
     end
 
     # There are scenarios where a harvester adds a string of additional params
@@ -50,10 +36,10 @@ module Extraction
     # These params can also include blocks of Ruby code. For instance they may have a dynamic date.
     #
     # @return Hash of params.
-    def initial_params
-      return {} if @extraction_definition.initial_params.blank?
+    # def initial_params
+    #   return {} if @extraction_definition.initial_params.blank?
 
-      CGI.parse(eval(@extraction_definition.initial_params)).transform_values(&:first)
-    end
+    #   CGI.parse(eval(@extraction_definition.initial_params)).transform_values(&:first)
+    # end
   end
 end
