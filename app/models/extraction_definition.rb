@@ -11,15 +11,10 @@ class ExtractionDefinition < ApplicationRecord
   belongs_to :pipeline
 
   has_many :extraction_jobs
-  has_many :headers
   has_many :requests
   has_many :parameters, through: :requests
 
   enum :kind, { harvest: 0, enrichment: 1 }
-
-  accepts_nested_attributes_for :headers, allow_destroy: true, reject_if: proc { |attribute|
-                                                                            attribute[:name].blank? && attribute[:value].blank?
-                                                                          }
 
   after_create do
     self.name = "#{pipeline.name.parameterize}__#{kind}-extraction-#{id}"

@@ -92,10 +92,9 @@ RSpec.describe ExtractionDefinition, type: :model do
   end
 
   describe '#associations' do
-    subject { create(:extraction_definition, extraction_jobs: [extraction_job], headers: [header]) }
+    subject { create(:extraction_definition, extraction_jobs: [extraction_job]) }
 
     let(:extraction_job) { create(:extraction_job) }
-    let(:header)         { create(:header) }
 
     it 'has many jobs' do
       expect(subject.extraction_jobs).to include(extraction_job)
@@ -103,10 +102,6 @@ RSpec.describe ExtractionDefinition, type: :model do
 
     it 'belongs to a pipeline' do
       expect(subject.pipeline).to be_a Pipeline
-    end
-
-    it 'has many headers' do
-      expect(subject.headers).to include(header)
     end
   end
 

@@ -146,33 +146,6 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
     end
   end
 
-  describe '#test' do
-    let(:ed) { create(:extraction_definition, base_url: 'http://google.com/?url_param=url_value') }
-
-    before do
-      stub_request(:get, 'http://google.com/?url_param=url_value').with(
-        query: { 'page' => 1, 'per_page' => 50 },
-        headers: fake_json_headers
-      ).and_return(fake_response('test'))
-    end
-
-    it 'returns a document extraction as JSON' do
-      post test_pipeline_harvest_definition_extraction_definitions_path(pipeline, harvest_definition), params: {
-        extraction_definition: ed.attributes
-      }
-
-      expect(response.status).to eq 200
-
-      json_data = JSON.parse(response.body)
-
-      expected_keys = %w[url method params request_headers status response_headers body]
-
-      expected_keys.each do |key|
-        expect(json_data).to have_key(key)
-      end
-    end
-  end
-
   describe '#test_record_extraction' do
     let(:destination) { create(:destination) }
     let(:ed) { create(:extraction_definition, :enrichment, destination:) }
