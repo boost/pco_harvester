@@ -6,7 +6,7 @@ RSpec.describe "Requests", type: :request do
   let(:user)                       { create(:user) }
   let(:pipeline)                   { create(:pipeline) }
   let(:harvest_definition)         { create(:harvest_definition, extraction_definition:, pipeline:) }
-  let!(:extraction_definition)     { create(:extraction_definition, pipeline:) }
+  let!(:extraction_definition)     { create(:extraction_definition, :figshare, pipeline:) }
 
   before do
     sign_in user
@@ -38,13 +38,25 @@ RSpec.describe "Requests", type: :request do
     end
   end
 
-  describe 'GET /test' do
-    let(:request) { create(:request, :figshare) }
+  describe 'GET /show' do
+    before do
+      stub_figshare_harvest_requests(request)
+    end
+
+    let(:request) { create(:request, :figshare, extraction_definition:) }
 
     it 'returns a JSON response of the completed request' do
       get pipeline_harvest_definition_extraction_definition_request_path(pipeline, harvest_definition, extraction_definition, request)
 
-      body = JSON.parse(response.body)
+      expect(response.status).to eq 200
+
+      json_data = JSON.parse(response.body)
+
+      expected_keys = %w[url method params request_headers status response_headers body]
+
+      expected_keys.each do |key|
+        expect(json_data).to have_key(key)
+      end
     end
   end
 end

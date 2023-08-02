@@ -12,7 +12,7 @@ class RequestsController < ApplicationController
   def show
     @request = Request.find(params[:id])
 
-    render json: Extraction::DocumentExtraction.new(@request)
+    render json: Extraction::DocumentExtraction.new(@request).extract
   end
 
   private
