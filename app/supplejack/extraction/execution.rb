@@ -7,7 +7,7 @@ module Extraction
       @extraction_job = job
       @extraction_definition = extraction_definition
       @harvest_job = @extraction_job.harvest_job
-      @de = DocumentExtraction.new(@extraction_definition, @extraction_job.extraction_folder)
+      @de = DocumentExtraction.new(@extraction_definition.requests.first, @extraction_job.extraction_folder)
     end
 
     def call

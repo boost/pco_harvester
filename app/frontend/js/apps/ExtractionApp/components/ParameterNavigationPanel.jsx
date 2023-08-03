@@ -4,12 +4,18 @@ import { filter, map } from 'lodash';
 
 import { selectParameterIds, selectAllParameters } from "~/js/features/ExtractionApp/ParametersSlice";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+import {
+  toggleDisplayParameters
+} from "~/js/features/ExtractionApp/UiParametersSlice";
 
 import AddParameter from "~/js/apps/ExtractionApp/components/AddParameter";
 import ParameterNavigationListItem from '~/js/apps/ExtractionApp/components/ParameterNavigationListItem';
 
 const ParameterNavigationPanel = () => {
+  const dispatch = useDispatch();
+  
   const allParameters = useSelector(selectAllParameters);
   
   const queryParameters  = filter(allParameters, ['kind', 'query']);
@@ -26,12 +32,12 @@ const ParameterNavigationPanel = () => {
           <div className="btn-group card__control">
             <i className="bi bi-three-dots-vertical" data-bs-toggle='dropdown'></i>
             <ul className="dropdown-menu dropdown-menu-end">
-              <li className='dropdown-item card__control-acton'>
-                <i className="bi bi-eye-slash me-2"></i> Hide all query parameters
+              <li className='dropdown-item card__control-action' onClick={ () => { dispatch(toggleDisplayParameters({ parameters: queryParameters, displayed: false }))}}>
+                <i className="bi bi-eye-slash me-2"></i> Hide all
               </li>
 
-              <li className='dropdown-item card__control-acton'>
-                <i className="bi bi-eye me-2"></i> Show all query parameters
+              <li className='dropdown-item card__control-action' onClick={ () => { dispatch(toggleDisplayParameters({ parameters: queryParameters, displayed: true }))}}>
+                <i className="bi bi-eye me-2"></i> Show all
               </li>
             </ul>
           </div>
@@ -39,7 +45,7 @@ const ParameterNavigationPanel = () => {
         
         <div className='field-nav-panel__content'>
 
-          <AddParameter buttonText='+ Add query param' kind='query' />
+          <AddParameter buttonText='+ Add' kind='query' />
 
           <ul className="field-nav nav nav-pills flex-column overflow-auto flex-nowrap">
             {map(queryParameters, (queryParameter) => {
@@ -54,12 +60,12 @@ const ParameterNavigationPanel = () => {
           <div className="btn-group card__control">
             <i className="bi bi-three-dots-vertical" data-bs-toggle='dropdown'></i>
             <ul className="dropdown-menu dropdown-menu-end">
-              <li className='dropdown-item card__control-acton'>
-                <i className="bi bi-eye-slash me-2"></i> Hide all header parameters
+              <li className='dropdown-item card__control-action' onClick={ () => { dispatch(toggleDisplayParameters({ parameters: headerParameters, displayed: false }))}}>
+                <i className="bi bi-eye-slash me-2"></i> Hide all
               </li>
 
-              <li className='dropdown-item card__control-acton'>
-                <i className="bi bi-eye me-2"></i> Show all header parameters
+              <li className='dropdown-item card__control-action' onClick={ () => { dispatch(toggleDisplayParameters({ parameters: headerParameters, displayed: true }))}}>
+                <i className="bi bi-eye me-2"></i> Show all
               </li>
             </ul>
           </div>
@@ -67,7 +73,7 @@ const ParameterNavigationPanel = () => {
         
         <div className='field-nav-panel__content'>
           
-          <AddParameter buttonText='+ Add header param' kind='header' />
+          <AddParameter buttonText='+ Add' kind='header' />
           
           <ul className="field-nav nav nav-pills flex-column overflow-auto flex-nowrap">
             {map(headerParameters, (headerParameter) => {
@@ -82,12 +88,12 @@ const ParameterNavigationPanel = () => {
           <div className="btn-group card__control">
             <i className="bi bi-three-dots-vertical" data-bs-toggle='dropdown'></i>
             <ul className="dropdown-menu dropdown-menu-end">
-              <li className='dropdown-item card__control-acton'>
-                <i className="bi bi-eye-slash me-2"></i> Hide all slug parameters
+              <li className='dropdown-item card__control-action' onClick={ () => { dispatch(toggleDisplayParameters({ parameters: slugParameters, displayed: false }))}}>
+                <i className="bi bi-eye-slash me-2"></i> Hide all
               </li>
 
-              <li className='dropdown-item card__control-acton'>
-                <i className="bi bi-eye me-2"></i> Show all slug parameters
+              <li className='dropdown-item card__control-action' onClick={ () => { dispatch(toggleDisplayParameters({ parameters: slugParameters, displayed: true }))}}>
+                <i className="bi bi-eye me-2"></i> Show all
               </li>
             </ul>
           </div>
@@ -97,7 +103,7 @@ const ParameterNavigationPanel = () => {
         
         <div className='field-nav-panel__content'>
 
-          <AddParameter buttonText='+ Add slug param' kind='slug' />
+          <AddParameter buttonText='+ Add' kind='slug' />
           
           <ul className="field-nav nav nav-pills flex-column overflow-auto flex-nowrap">
             {map(slugParameters, (slugParameter, index) => {
