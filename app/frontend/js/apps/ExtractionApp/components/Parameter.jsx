@@ -4,6 +4,7 @@ import classNames from "classnames";
 
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import CodeEditor from "~/js/components/CodeEditor";
 
 import { selectParameterById, updateParameter, deleteParameter } from "~/js/features/ExtractionApp/ParametersSlice";
 
@@ -125,6 +126,29 @@ const Parameter = ({ id }) => {
     return name;
   }
 
+  const handleDropdownClick = (value) => {
+    dispatch(
+      updateParameter(
+        {
+          id: id,
+          dynamic: value,
+          harvestDefinitionId: appDetails.harvestDefinition.id,
+          pipelineId: appDetails.pipeline.id,
+          extractionDefinitionId: appDetails.extractionDefinition.id,
+          requestId: uiAppDetails.activeRequest
+        }
+      )
+    )
+  }
+
+  const dynamicText = () => {
+    if(dynamic) {
+      return 'Dynamic';
+    }
+
+    return 'Static';
+  }
+
   return (
     <>
       <div id={`parameter-${id}`} className={parameterClasses}>
@@ -141,6 +165,17 @@ const Parameter = ({ id }) => {
               </div>
           
               <div className="hstack gap-2">
+
+                <div className="dropdown">
+                  <button className="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i className="bi bi-code-square" aria-hidden="true"></i> { dynamicText() }
+                  </button>
+                  <ul className="dropdown-menu">
+                    <li><a className="dropdown-item" onClick={ () => { handleDropdownClick(false)} }>Static</a></li>
+                    <li><a className="dropdown-item" onClick={ () => { handleDropdownClick(true) } }>Dynamic</a></li>
+                  </ul>
+                </div>
+
                 <button 
                   className="btn btn-outline-primary" 
                   disabled={!isSaveable()}
@@ -187,13 +222,22 @@ const Parameter = ({ id }) => {
               </label>
 
               <div className={ valueColumnClasses }>
-                 <input 
-                    type="text" 
-                    className="form-control"
-                    required="required"
-                    defaultValue={contentValue}
-                    onChange={(e) => setContentValue(e.target.value)}
-                   />
+                { !dynamic && (
+                   <input 
+                      type="text" 
+                      className="form-control"
+                      required="required"
+                      defaultValue={contentValue}
+                      onChange={(e) => setContentValue(e.target.value)}
+                     />
+                  )}
+
+                  { dynamic && (
+                    <CodeEditor
+                      initContent={content}
+                      onChange={(e) => setContentValue(e.target.value)}
+                    />
+                  )}
               </div>
             </div>
           </div>

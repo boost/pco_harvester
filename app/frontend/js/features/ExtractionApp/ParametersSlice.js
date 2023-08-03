@@ -12,7 +12,7 @@ const parametersAdapter = createEntityAdapter();
 export const addParameter = createAsyncThunk(
   "parameters/addParameterStatus",
   async (payload) => {
-    const { name, content, kind, harvestDefinitionId, pipelineId, extractionDefinitionId, requestId } = payload;
+    const { name, content, kind, dynamic, harvestDefinitionId, pipelineId, extractionDefinitionId, requestId } = payload;
 
     const response = request
       .post(
@@ -22,7 +22,8 @@ export const addParameter = createAsyncThunk(
             request_id: requestId,
             kind: kind,
             name: name,
-            content: content
+            content: content,
+            dynamic: dynamic
           },
         }
       )
@@ -38,7 +39,7 @@ export const updateParameter = createAsyncThunk(
   "parameters/updateParameterSlice",
   
   async (payload) => {
-    const { id, pipelineId, harvestDefinitionId, extractionDefinitionId, requestId, name, content, kind } = payload;
+    const { id, pipelineId, harvestDefinitionId, extractionDefinitionId, requestId, name, content, kind, dynamic } = payload;
    
     const response = request
       .patch(
@@ -47,7 +48,8 @@ export const updateParameter = createAsyncThunk(
           parameter: {
             name: name,
             content: content,
-            kind: kind
+            kind: kind,
+            dynamic: dynamic
           },
         }
       )
