@@ -1,4 +1,3 @@
-
 import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
 
 import { addParameter, updateParameter } from "./ParametersSlice";

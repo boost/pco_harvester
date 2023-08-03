@@ -11,7 +11,8 @@ module ExtractionReduxState
         appDetails: app_details_slice
       },
       ui: {
-        parameters: ui_parameters_slice
+        parameters: ui_parameters_slice,
+        requests: ui_requests_slice
       },
       config: config_slice
     }.to_json
@@ -50,6 +51,7 @@ module ExtractionReduxState
 
   def ui_parameters_slice
     parameter_entities = @extraction_definition.parameters.map { |parameter| ui_parameter_entity(parameter) }
+
     {
       ids: @extraction_definition.parameters.map { |parameter| parameter[:id] },
       entities: parameter_entities.index_by { |parameter| parameter[:id] }
@@ -63,6 +65,22 @@ module ExtractionReduxState
       saving: false,
       deleting: false,
       displayed: false
+    }
+  end
+
+  def ui_requests_slice
+    request_entities = @extraction_definition.requests.map { |request| ui_request_entity(request) }
+
+    {
+      ids: @extraction_definition.requests.map { |request| request[:id] },
+      entities: request_entities.index_by { |request| request[:id] }
+    }
+  end
+
+  def ui_request_entity(request)
+    {
+      id: request[:id],
+      loading: false
     }
   end
 end

@@ -7,6 +7,7 @@ class Request < ApplicationRecord
   validates :http_method, presence: true
 
   delegate :base_url, to: :extraction_definition
+  delegate :format,   to: :extraction_definition
   
   enum :http_method, { GET: 0, POST: 1 }
 
@@ -35,7 +36,15 @@ class Request < ApplicationRecord
       updated_at:,
       http_method:,
       base_url:,
-      url: 
+      url:,
+      format:,
+      preview: {
+        url: nil,
+        request_headers: nil,
+        response_headers: nil,
+        status: nil,
+        body: nil
+      }
     }
   end
 

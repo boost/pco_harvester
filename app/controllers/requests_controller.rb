@@ -12,7 +12,9 @@ class RequestsController < ApplicationController
   def show
     @request = Request.find(params[:id])
 
-    render json: Extraction::DocumentExtraction.new(@request).extract
+    render json: @request.to_h.merge(
+      preview: Extraction::DocumentExtraction.new(@request).extract
+    )
   end
 
   private

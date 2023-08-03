@@ -1,35 +1,52 @@
 import React, { useState } from "react";
 import { createPortal } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { map } from 'lodash';
 
-import { filter, map } from 'lodash';
+import {
+  selectUiRequestById,
+} from "~/js/features/ExtractionApp/UiRequestsSlice";
+import { selectRequestById, previewRequest } from "~/js/features/ExtractionApp/RequestsSlice";
 
-import { selectParameterIds, selectAllParameters } from "~/js/features/ExtractionApp/ParametersSlice";
-import { selectRequestById } from "~/js/features/ExtractionApp/RequestsSlice";
+import {
+  selectAppDetails,
+} from "~/js/features/ExtractionApp/AppDetailsSlice";
 
 import Modal from "react-bootstrap/Modal";
 import CodeEditor from "~/js/components/CodeEditor";
 
 const HeaderActions = () => {
-  
-  let allParameters = useSelector(selectAllParameters);
-  allParameters = filter(allParameters, ['request_id', 1]);
 
-  const slugParameters    = filter(allParameters, ['kind', 'slug']);
-  const queryParameters   = filter(allParameters, ['kind', 'query']);
-  const headerParameters  = filter(allParameters, ['kind', 'header']);
+  const dispatch = useDispatch();
+
+  const appDetails = useSelector(selectAppDetails);
+
+  const { loading } = useSelector((state) => selectUiRequestById(state, 1));
+  const { preview } = useSelector((state) => selectRequestById(state, 1));
   
-  const [showModal, setShowModal]         = useState(false);
-  
+  const [showModal, setShowModal] = useState(false);
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
+
+  const handlePreviewClick = () => {
+    handleShow();
+    dispatch(
+      previewRequest(
+        {
+          harvestDefinitionId: appDetails.harvestDefinition.id,
+          pipelineId: appDetails.pipeline.id,
+          extractionDefinitionId: appDetails.extractionDefinition.id,
+          id: 1
+        }
+      )
+    )
+  }
   
-  const { id, base_url, http_method } = useSelector((state) => selectRequestById(state, 1));
+  const { id, base_url, http_method, format } = useSelector((state) => selectRequestById(state, 1));
 
   return createPortal(
     <>
-
-      <button className="btn btn-success" onClick={handleShow}>
+      <button className="btn btn-success" onClick={handlePreviewClick}>
         <i className="bi bi-play" aria-hidden="true"></i> Preview
       </button>
       
@@ -39,86 +56,92 @@ const HeaderActions = () => {
             <div className="col-12">
               <h5>Initial Request</h5>
 
-              <div className="accordion mt-4">
-
-                <div className="accordion-item">
-                  <h2 className="accordion-header">
-                    <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#request" aria-expanded="true" aria-controls="request">
-                      URL ({ http_method })
-                    </button>
-                  </h2>
-                  <div id="request" className="accordion-collapse collapse show">
-                    <div className="accordion-body">
-                      <p>
-                        { base_url }
-
-                        { map(slugParameters, (slugParameter) => {
-                          return (
-                            <>
-                              /{slugParameter.content}
-                            </>
-                          )
-                        })}
-                        ?
-                        { map(queryParameters, (queryParameter) => {
-                          return (
-                            <>
-                              &{queryParameter.name}={queryParameter.content}
-                            </>
-                          )
-                        })}
-                      </p>
-                    </div>
+              { loading && (
+                <div className='d-flex justify-content-center'>
+                  <div className="spinner-border text-primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
                   </div>
                 </div>
-                
-                <div className="accordion-item">
-                  <h2 className="accordion-header">
-                    <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#response" aria-expanded="true" aria-controls="response">
-                      Response Body
-                    </button>
-                  </h2>
-                  <div id="response" className="accordion-collapse collapse show">
-                    <div className="accordion-body">
+              ) }
 
-                      <CodeEditor
-                        initContent={'hello!'}
-                      />
+              { !loading && (
+                <>
+                  <div className="accordion mt-4">
 
+                    <div className="accordion-item">
+                      <h2 className="accordion-header">
+                        <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#request" aria-expanded="true" aria-controls="request">
+                          Request ({ http_method })
+                        </button>
+                      </h2>
+                      <div id="request" className="accordion-collapse collapse show">
+                        <div className="accordion-body">
+                          <p>
+                            { preview.url }
+                          </p>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-                
-                <div className="accordion-item">
-                  <h2 className="accordion-header">
-                    <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#headers" aria-expanded="true" aria-controls="response">
-                      Headers
-                    </button>
-                  </h2>
-                  <div id="headers" className="accordion-collapse collapse show">
-                    <div className="accordion-body">
+                    
+                    <div className="accordion-item">
+                      <h2 className="accordion-header">
+                        <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#headers" aria-expanded="true" aria-controls="response">
+                          Request Headers
+                        </button>
+                      </h2>
+                      <div id="headers" className="accordion-collapse collapse show">
+                        <div className="accordion-body">
+
+                          { map(preview.request_headers, (value, key) => {
+                            return(
+                              <p>
+                                {key}: {value}
+                              </p>
+                            )
+                          })}
                       
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
                 
-                <div className="accordion-item">
-                  <h2 className="accordion-header">
-                    <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#response-headers" aria-expanded="true" aria-controls="response-headers">
-                        Response Headers
-                    </button>
-                  </h2>
-                  <div id="response-headers" className="accordion-collapse collapse show">
-                    <div className="accordion-body">
-                      
+                    <div className="accordion-item">
+                      <h2 className="accordion-header">
+                        <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#response" aria-expanded="true" aria-controls="response">
+                          Response Body
+                        </button>
+                      </h2>
+                      <div id="response" className="accordion-collapse collapse show">
+                        <div className="accordion-body">
+                          <CodeEditor initContent={preview.body} format={format} />
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-
-              </div>              
+                                
+                    <div className="accordion-item">
+                      <h2 className="accordion-header">
+                        <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#response-headers" aria-expanded="true" aria-controls="response-headers">
+                            Response Headers
+                        </button>
+                      </h2>
+                      <div id="response-headers" className="accordion-collapse collapse show">
+                        <div className="accordion-body">
+                          
+                          { map(preview.response_headers, (value, key) => {
+                            return(
+                              <p>
+                                {key}: {value}
+                              </p>
+                            )
+                          })}
+                      
+                        </div>
+                      </div>
+                    </div>
+                  </div>              
+                </>
+              )}
 
             </div>
-
           </div>
         </Modal.Body>
       </Modal>

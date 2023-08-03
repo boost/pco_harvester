@@ -7,6 +7,22 @@ import { request } from "~/js/utils/request";
 
 const requestsAdapter = createEntityAdapter();
 
+export const previewRequest = createAsyncThunk(
+  "requests/previewRequestSlice",
+
+  async (payload) => {
+    const { id, pipelineId, harvestDefinitionId, extractionDefinitionId } = payload;
+   
+    const response = request
+      .get(`/pipelines/${pipelineId}/harvest_definitions/${harvestDefinitionId}/extraction_definitions/${extractionDefinitionId}/requests/${id}`)
+      .then((response) => {
+        return response.data;
+      });
+
+    return response;
+  }
+);
+
 export const updateRequest = createAsyncThunk(
   "requests/updateRequestSlice",
   
@@ -37,6 +53,9 @@ const requestsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(updateRequest.fulfilled, (state, action) => {
+        requestsAdapter.setOne(state, action.payload);
+    })
+      .addCase(previewRequest.fulfilled, (state, action) => {
         requestsAdapter.setOne(state, action.payload);
     })
   }
