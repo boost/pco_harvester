@@ -3,10 +3,12 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addParameter, hasEmptyParameters } from "~/js/features/ExtractionApp/ParametersSlice";
 import { selectAppDetails } from "~/js/features/ExtractionApp/AppDetailsSlice";
+import { selectUiAppDetails } from "~/js/features/ExtractionApp/UiAppDetailsSlice";
 
 const AddParameter = ({ kind, buttonText }) => {
   const dispatch = useDispatch();
   const appDetails = useSelector(selectAppDetails);
+  const uiAppDetails = useSelector(selectUiAppDetails);
   const emptyParameters = useSelector(hasEmptyParameters);
 
   const addNewParameter = () => {
@@ -18,7 +20,7 @@ const AddParameter = ({ kind, buttonText }) => {
         harvestDefinitionId: appDetails.harvestDefinition.id,
         pipelineId: appDetails.pipeline.id,
         extractionDefinitionId: appDetails.extractionDefinition.id,
-        requestId: appDetails.request.id
+        requestId: uiAppDetails.activeRequest
       })
     );
   };

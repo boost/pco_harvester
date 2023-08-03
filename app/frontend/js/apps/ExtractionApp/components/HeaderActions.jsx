@@ -12,6 +12,10 @@ import {
   selectAppDetails,
 } from "~/js/features/ExtractionApp/AppDetailsSlice";
 
+import {
+  selectUiAppDetails,
+} from "~/js/features/ExtractionApp/UiAppDetailsSlice";
+
 import Modal from "react-bootstrap/Modal";
 import CodeEditor from "~/js/components/CodeEditor";
 
@@ -20,9 +24,10 @@ const HeaderActions = () => {
   const dispatch = useDispatch();
 
   const appDetails = useSelector(selectAppDetails);
+  const uiAppDetails = useSelector(selectUiAppDetails);
 
-  const { loading } = useSelector((state) => selectUiRequestById(state, 1));
-  const { preview } = useSelector((state) => selectRequestById(state, 1));
+  const { loading } = useSelector((state) => selectUiRequestById(state, uiAppDetails.activeRequest));
+  const { preview } = useSelector((state) => selectRequestById(state, uiAppDetails.activeRequest));
   
   const [showModal, setShowModal] = useState(false);
   const handleClose = () => setShowModal(false);
@@ -42,7 +47,7 @@ const HeaderActions = () => {
     )
   }
   
-  const { id, base_url, http_method, format } = useSelector((state) => selectRequestById(state, 1));
+  const { http_method, format } = useSelector((state) => selectRequestById(state, 1));
 
   return createPortal(
     <>

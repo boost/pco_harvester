@@ -12,7 +12,8 @@ module ExtractionReduxState
       },
       ui: {
         parameters: ui_parameters_slice,
-        requests: ui_requests_slice
+        requests: ui_requests_slice,
+        appDetails: ui_app_details_slice
       },
       config: config_slice
     }.to_json
@@ -39,7 +40,12 @@ module ExtractionReduxState
       pipeline: @pipeline,
       harvestDefinition: @harvest_definition,
       extractionDefinition: @extraction_definition,
-      request: @extraction_definition.requests.first
+    }
+  end
+
+  def ui_app_details_slice
+    {
+      activeRequest: @extraction_definition.requests.first.id
     }
   end
 

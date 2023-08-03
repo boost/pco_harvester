@@ -3,20 +3,25 @@ import React from "react";
 import { filter, map } from 'lodash';
 
 import { selectParameterIds, selectAllParameters } from "~/js/features/ExtractionApp/ParametersSlice";
-
 import { useSelector, useDispatch } from "react-redux";
 
 import {
   toggleDisplayParameters
 } from "~/js/features/ExtractionApp/UiParametersSlice";
 
+import {
+  selectUiAppDetails,
+} from "~/js/features/ExtractionApp/UiAppDetailsSlice";
+
 import AddParameter from "~/js/apps/ExtractionApp/components/AddParameter";
 import ParameterNavigationListItem from '~/js/apps/ExtractionApp/components/ParameterNavigationListItem';
 
 const ParameterNavigationPanel = () => {
   const dispatch = useDispatch();
+  const uiAppDetails = useSelector(selectUiAppDetails);
   
-  const allParameters = useSelector(selectAllParameters);
+  let allParameters = useSelector(selectAllParameters);
+  allParameters     = filter(allParameters, ['request_id', uiAppDetails.activeRequest])
   
   const queryParameters  = filter(allParameters, ['kind', 'query']);
   const headerParameters = filter(allParameters, ['kind', 'header']);
@@ -98,8 +103,6 @@ const ParameterNavigationPanel = () => {
             </ul>
           </div>
         </div>
-
-        
         
         <div className='field-nav-panel__content'>
 

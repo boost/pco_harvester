@@ -12,22 +12,24 @@ import {
 } from "~/js/features/ExtractionApp/AppDetailsSlice";
 
 import {
+  selectUiAppDetails,
+} from "~/js/features/ExtractionApp/UiAppDetailsSlice";
+
+import {
   selectUiParameterById,
   toggleDisplayParameter
 } from "~/js/features/ExtractionApp/UiParametersSlice";
 
 const Parameter = ({ id }) => {
-
   const appDetails = useSelector(selectAppDetails);
+  const uiAppDetails = useSelector(selectUiAppDetails);
+
   const { name, content, dynamic, kind } = useSelector((state) => selectParameterById(state, id));
   
   const {
     saved,
     deleting,
     saving,
-    running,
-    error,
-    hasRun,
     displayed,
   } = useSelector((state) => selectUiParameterById(state, id));
 
@@ -49,7 +51,7 @@ const Parameter = ({ id }) => {
           harvestDefinitionId: appDetails.harvestDefinition.id,
           pipelineId: appDetails.pipeline.id,
           extractionDefinitionId: appDetails.extractionDefinition.id,
-          requestId: appDetails.request.id
+          requestId: uiAppDetails.activeRequest
         }
       )
     )
@@ -104,7 +106,7 @@ const Parameter = ({ id }) => {
         harvestDefinitionId: appDetails.harvestDefinition.id,
         pipelineId: appDetails.pipeline.id,
         extractionDefinitionId: appDetails.extractionDefinition.id,
-        requestId: appDetails.request.id
+        requestId: uiAppDetails.activeRequest
       })
     );
     handleClose();

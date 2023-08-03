@@ -4,9 +4,10 @@ import { map } from 'lodash';
 
 import { useDispatch, useSelector } from "react-redux";
 
+import HeaderActions            from '/js/apps/ExtractionApp/components/HeaderActions';
+import NavTabs                  from '/js/apps/ExtractionApp/components/NavTabs';
 import Request                  from '/js/apps/ExtractionApp/components/Request';
 import Parameter                from '/js/apps/ExtractionApp/components/Parameter';
-import HeaderActions            from '/js/apps/ExtractionApp/components/HeaderActions';
 import ParameterNavigationPanel from '/js/apps/ExtractionApp/components/ParameterNavigationPanel';
 
 import { selectParameterIds } from "~/js/features/ExtractionApp/ParametersSlice";
@@ -17,6 +18,7 @@ const ExtractionApp = ({}) => {
   return(
     <>
       <HeaderActions />
+      <NavTabs />
 
       <div className='row'>
         <div className='col-2'>

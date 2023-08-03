@@ -17,12 +17,12 @@ RSpec.describe Extraction::Execution do
       let(:subject) { described_class.new(full_job, extraction_definition) }
 
       it 'saves the full response from the content source to the filesystem' do
-        # subject.call
+        subject.call
 
-        # expect(File.exist?(full_job.extraction_folder)).to eq true
-        # extracted_files = Dir.glob("#{full_job.extraction_folder}/*").select { |e| File.file? e }
+        expect(File.exist?(full_job.extraction_folder)).to eq true
+        extracted_files = Dir.glob("#{full_job.extraction_folder}/*").select { |e| File.file? e }
 
-        # expect(extracted_files.count).to eq 5
+        expect(extracted_files.count).to eq 5
       end
     end
 

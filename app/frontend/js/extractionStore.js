@@ -10,6 +10,7 @@ import requests   from "/js/features/ExtractionApp/RequestsSlice";
 
 import uiParameters from "/js/features/ExtractionApp/UiParametersSlice";
 import uiRequests   from "/js/features/ExtractionApp/UiRequestsSlice";
+import uiAppDetails from '/js/features/ExtractionApp/UiAppDetailsSlice';
 
 // config
 import config from "/js/features/ConfigSlice";
@@ -24,7 +25,8 @@ export default function configureAppStore(preloadedState) {
       }),
       ui: combineReducers({
         parameters: uiParameters,
-        requests: uiRequests
+        requests: uiRequests,
+        appDetails: uiAppDetails
       }),
       config,
     }),

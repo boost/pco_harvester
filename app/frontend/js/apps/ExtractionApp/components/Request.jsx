@@ -10,19 +10,25 @@ import {
   selectAppDetails,
 } from "~/js/features/ExtractionApp/AppDetailsSlice";
 
+import {
+  selectUiAppDetails,
+} from "~/js/features/ExtractionApp/UiAppDetailsSlice";
+
 import RequestFragment from "~/js/apps/ExtractionApp/components/RequestFragment";
 
 const Request = ({}) => {
   const dispatch = useDispatch();
+  const appDetails = useSelector(selectAppDetails);
+  const uiAppDetails = useSelector(selectUiAppDetails);
+  
+  const { id, base_url, http_method } = useSelector((state) => selectRequestById(state, uiAppDetails.activeRequest));
+
   let allParameters = useSelector(selectAllParameters);
-  allParameters = filter(allParameters, ['request_id', 1]);
+  allParameters = filter(allParameters, ['request_id', uiAppDetails.activeRequest]);
 
   const slugParameters    = filter(allParameters, ['kind', 'slug']);
   const queryParameters   = filter(allParameters, ['kind', 'query']);
   const headerParameters  = filter(allParameters, ['kind', 'header']);
-
-  const { id, base_url, http_method } = useSelector((state) => selectRequestById(state, 1));
-  const appDetails = useSelector(selectAppDetails);
 
   const handleHttpMethodClick = (method) => {
     dispatch(
@@ -34,7 +40,7 @@ const Request = ({}) => {
           harvestDefinitionId: appDetails.harvestDefinition.id,
           pipelineId: appDetails.pipeline.id,
           extractionDefinitionId: appDetails.extractionDefinition.id,
-          requestId: appDetails.request.id
+          requestId: appDetails.activeRequest
         }        
       )
     )    
