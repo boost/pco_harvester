@@ -2,10 +2,11 @@
 
 module Extraction
   class DocumentExtraction < AbstractExtraction
-    def initialize(request, extraction_folder = nil)
+    def initialize(request, extraction_folder = nil, previous_request = nil)
       @request = request
       @extraction_folder = extraction_folder
       @extraction_definition = request.extraction_definition
+      @previous_request = previous_request
     end
 
     private
@@ -17,29 +18,17 @@ module Extraction
     end
 
     def url
-      @request.url
+      @request.url(@previous_request)
     end
 
     def params
-      @request.query_parameters
+      @request.query_parameters(@previous_request)
     end
 
     def headers
       return super if @request.headers.blank?
 
-      super.merge(@request.headers)
+      super.merge(@request.headers(@previous_request))
     end
-
-    # There are scenarios where a harvester adds a string of additional params
-    # that are only used on the very first API call to the Content Source.
-    # These params can actually break subsequent calls if they are added where they are not expected to be.
-    # These params can also include blocks of Ruby code. For instance they may have a dynamic date.
-    #
-    # @return Hash of params.
-    # def initial_params
-    #   return {} if @extraction_definition.initial_params.blank?
-
-    #   CGI.parse(eval(@extraction_definition.initial_params)).transform_values(&:first)
-    # end
   end
 end

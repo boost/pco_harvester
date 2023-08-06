@@ -11,20 +11,22 @@ class Request < ApplicationRecord
   
   enum :http_method, { GET: 0, POST: 1 }
 
-  def url
-    "#{base_url}/#{slug}"
+  def url(previous_request = nil)
+    "#{base_url}/#{slug(previous_request)}"
   end
 
-  def query_parameters
+  def query_parameters(previous_request = nil)
     parameters
       .query
+      .map { |parameter| parameter.evaluate(previous_request) }
       .map(&:to_h)
       .reduce(&:merge)
   end
 
-  def headers
+  def headers(previous_request = nil)
     parameters
       .header
+      .map { |paramater| paramater.evaluate(previous_request) }
       .map(&:to_h)
       .reduce(&:merge)
   end
@@ -50,9 +52,10 @@ class Request < ApplicationRecord
 
   private
     
-  def slug
+  def slug(previous_request)
    parameters
       .slug
+      .map { |parameter| parameter.evaluate(previous_request) }
       .map(&:content)
       .join('/')
   end

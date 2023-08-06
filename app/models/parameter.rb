@@ -12,4 +12,15 @@ class Parameter < ApplicationRecord
       name => content
     }
   end
+
+  def evaluate(request = nil)
+    return self unless dynamic?
+
+    block = ->(request) { eval(content) }
+
+    Parameter.new(
+      name: name,
+      content: block.call(request)
+    )
+  end
 end
