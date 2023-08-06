@@ -46,4 +46,23 @@ RSpec.describe Parameter, type: :model do
       expect(slug.to_h).to eq nil
     end
   end
+
+  describe '#evaluate' do
+    let(:static) { create(:parameter, kind: 'query', name: 'itemsPerPage') }
+    let(:dynamic) { create(:parameter, kind: 'query', name: 'itemsPerPage', content: '1 + 1', dynamic: true) }
+    let(:dynamic_response) { create(:parameter, kind: 'query', name: 'itemsPerPage', content: 'JSON.parse(response)["page_nr"] + 1', dynamic: true) }
+    let(:response) { '{ "page_nr": 2 }'}
+
+    it 'returns the unevaluated parameter if it is not dynamic' do
+      expect(static.evaluate).to eq static
+    end
+
+    it 'returns the evaluated paramter if it is dynamic' do
+      expect(dynamic.evaluate.content).to eq '2'
+    end
+
+    it 'returns the evaluated parameter based on a response' do
+      expect(dynamic_response.evaluate(response).content).to eq '3'
+    end
+  end
 end

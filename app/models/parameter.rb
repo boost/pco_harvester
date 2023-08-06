@@ -5,14 +5,6 @@ class Parameter < ApplicationRecord
   
   enum :kind, { query: 0, header: 1, slug: 2 }
 
-  def to_h
-    return if slug?
-    
-    {
-      name => content
-    }
-  end
-
   def evaluate(response = nil)
     return self unless dynamic?
 
@@ -22,5 +14,13 @@ class Parameter < ApplicationRecord
       name: name,
       content: block.call(response)
     )
+  end
+  
+  def to_h
+    return if slug?
+    
+    {
+      name => content
+    }
   end
 end
