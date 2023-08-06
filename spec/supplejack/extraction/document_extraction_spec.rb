@@ -42,11 +42,11 @@ RSpec.describe Extraction::DocumentExtraction do
     end
 
     context 'Dynamic Parameters' do
-      let!(:dynamic_query_parameter) { create(:parameter, kind: 'query', name: 'date', content: 'Date.today', request:, dynamic: true) }
-      let!(:dynamic_header_parameter) { create(:parameter, kind: 'header', name: 'X-Forwarded-For', content: '1 + 2', request:, dynamic: true) }
-      let!(:dynamic_slug_parameter) { create(:parameter, kind: 'slug', content: '100 / 2', request:, dynamic: true) }
-
       it 'evaluates provided ruby code as parameters' do
+        create(:parameter, kind: 'query', name: 'date', content: 'Date.today', request:, dynamic: true)
+        create(:parameter, kind: 'header', name: 'X-Forwarded-For', content: '1 + 2', request:, dynamic: true)
+        create(:parameter, kind: 'slug', content: '100 / 2', request:, dynamic: true)
+
         stub_request(:get, "https://api.figshare.com/v1/articles/search/50?date=#{Date.today.to_s}&itemsPerPage=10&page=1&search_for=zealand").
           with(
              headers: {
@@ -74,6 +74,27 @@ RSpec.describe Extraction::DocumentExtraction do
         ).and_call_original
 
         subject.extract
+      end
+
+      it 'evaluates provided ruby code as parameters based on a response' do
+        previous_extraction = subject.extract
+
+        create(:parameter, kind: 'query', name: 'page', content: 'JSON.parse(response)[\'page_nr\'] + 1' , request:, dynamic: true)
+        
+        expect(Extraction::Request).to receive(:new).with(
+          url: request.url,
+          headers: {
+            'Content-Type'    => 'application/json',
+            'User-Agent'      => 'Supplejack Harvester v2.0',
+          },
+          params: {
+            'page'         => '2',
+            'itemsPerPage' => '10',
+            'search_for'   => 'zealand',
+          }
+        ).and_call_original
+
+        described_class.new(request, extraction_job.extraction_folder, previous_extraction.body).extract
       end
     end
   end

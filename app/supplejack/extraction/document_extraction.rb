@@ -2,11 +2,11 @@
 
 module Extraction
   class DocumentExtraction < AbstractExtraction
-    def initialize(request, extraction_folder = nil, previous_request = nil)
+    def initialize(request, extraction_folder = nil, response = nil)
       @request = request
       @extraction_folder = extraction_folder
       @extraction_definition = request.extraction_definition
-      @previous_request = previous_request
+      @response = response
     end
 
     private
@@ -18,17 +18,17 @@ module Extraction
     end
 
     def url
-      @request.url(@previous_request)
+      @request.url(@response)
     end
 
     def params
-      @request.query_parameters(@previous_request)
+      @request.query_parameters(@response)
     end
 
     def headers
       return super if @request.headers.blank?
 
-      super.merge(@request.headers(@previous_request))
+      super.merge(@request.headers(@response))
     end
   end
 end

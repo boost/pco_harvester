@@ -13,14 +13,14 @@ class Parameter < ApplicationRecord
     }
   end
 
-  def evaluate(request = nil)
+  def evaluate(response = nil)
     return self unless dynamic?
 
-    block = ->(request) { eval(content) }
+    block = ->(response) { eval(content) }
 
     Parameter.new(
       name: name,
-      content: block.call(request)
+      content: block.call(response)
     )
   end
 end
