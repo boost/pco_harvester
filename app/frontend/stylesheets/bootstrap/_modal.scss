@@ -10,3 +10,9 @@
   padding-right: 1rem;
   border-bottom: var(--bs-modal-header-border-width) solid var(--bs-modal-header-border-color);
 }
+
+.modal--full-width {
+  .modal-dialog {
+    max-width: 100%;
+  }
+}

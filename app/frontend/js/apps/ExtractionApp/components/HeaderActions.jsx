@@ -5,6 +5,7 @@ import { map } from 'lodash';
 
 import {
   selectUiRequestById,
+  setLoading,
 } from "~/js/features/ExtractionApp/UiRequestsSlice";
 import { selectRequestById, selectRequestIds, previewRequest } from "~/js/features/ExtractionApp/RequestsSlice";
 
@@ -33,9 +34,13 @@ const HeaderActions = () => {
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
 
-  const handlePreviewClick = () => {
+  const handlePreviewClick = async () => {
     handleShow();
-    dispatch(
+
+    dispatch(setLoading(initialRequestId))
+    dispatch(setLoading(mainRequestId));
+
+    const initialPreview = await dispatch(
       previewRequest(
         {
           harvestDefinitionId: appDetails.harvestDefinition.id,
@@ -43,6 +48,18 @@ const HeaderActions = () => {
           extractionDefinitionId: appDetails.extractionDefinition.id,
           id: initialRequestId
         }
+      )
+    )
+
+    dispatch(
+      previewRequest(
+        {
+          harvestDefinitionId: appDetails.harvestDefinition.id,
+          pipelineId: appDetails.pipeline.id,
+          extractionDefinitionId: appDetails.extractionDefinition.id,
+          id: mainRequestId,
+          previousRequestId: initialPreview.payload.id
+        }      
       )
     )
   }
@@ -53,14 +70,19 @@ const HeaderActions = () => {
         <i className="bi bi-play" aria-hidden="true"></i> Preview
       </button>
       
-      <Modal size="lg" show={showModal} onHide={handleClose}>
+      <Modal size="lg" show={showModal} onHide={handleClose} className='modal--full-width'>
         <Modal.Body>
           <div className="row">
             <div className="col-6">
               <h5>Initial Request</h5>
 
               <Preview id={initialRequestId} />
+            </div>
 
+            <div className="col-6">
+              <h5>Main Request</h5>
+              
+              <Preview id={mainRequestId} />
             </div>
           </div>
         </Modal.Body>

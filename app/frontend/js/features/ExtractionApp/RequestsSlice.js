@@ -11,10 +11,16 @@ export const previewRequest = createAsyncThunk(
   "requests/previewRequestSlice",
 
   async (payload) => {
-    const { id, pipelineId, harvestDefinitionId, extractionDefinitionId } = payload;
+    const { id, pipelineId, harvestDefinitionId, extractionDefinitionId, previousRequestId } = payload;
+
+    let path = `/pipelines/${pipelineId}/harvest_definitions/${harvestDefinitionId}/extraction_definitions/${extractionDefinitionId}/requests/${id}`
+
+    if(previousRequestId != undefined) {
+      path = `${path}?previous_request_id=${previousRequestId}`
+    }
    
     const response = request
-      .get(`/pipelines/${pipelineId}/harvest_definitions/${harvestDefinitionId}/extraction_definitions/${extractionDefinitionId}/requests/${id}`)
+      .get(path)
       .then((response) => {
         return response.data;
       });

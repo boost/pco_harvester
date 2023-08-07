@@ -11,7 +11,6 @@ import { selectRequestById, previewRequest } from "~/js/features/ExtractionApp/R
 import CodeEditor from "~/js/components/CodeEditor";
 
 const Preview = ({ id }) => {
-
   const { loading } = useSelector((state) => selectUiRequestById(state, id));
   const { preview, format } = useSelector((state) => selectRequestById(state, id));
   

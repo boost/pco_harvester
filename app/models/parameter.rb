@@ -8,12 +8,15 @@ class Parameter < ApplicationRecord
   def evaluate(response = nil)
     return self unless dynamic?
 
-    block = ->(response) { eval(content) }
+    begin
+      block = ->(response) { eval(content) }
 
-    Parameter.new(
-      name: name,
-      content: block.call(response)
-    )
+      Parameter.new(
+        name: name,
+        content: block.call(response)
+      )
+    rescue
+    end
   end
   
   def to_h

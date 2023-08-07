@@ -7,15 +7,16 @@ const uiRequestsAdapter = createEntityAdapter();
 const uiRequestsSlice = createSlice({
   name: "requestsSlice",
   initialState: {},
-  reducers: {},
+  reducers: {
+    setLoading(state, action) {
+      uiRequestsAdapter.updateOne(state, {
+        id: action.payload,
+        changes: { loading: true },
+      });
+    },
+  },
   extraReducers: (builder) => {
     builder
-      .addCase(previewRequest.pending, (state, action) => {
-        uiRequestsAdapter.updateOne(state, {
-          id: action.meta.arg.id,
-          changes: { loading: true },
-        });
-      })
       .addCase(previewRequest.fulfilled, (state, action) => {
         uiRequestsAdapter.updateOne(state, {
           id: action.meta.arg.id,
@@ -33,6 +34,6 @@ export const {
   selectAll: selectAllUiRequests,
 } = uiRequestsAdapter.getSelectors((state) => state.ui.requests);
 
-export const {} = actions;
+export const { setLoading } = actions;
 
 export default reducer;

@@ -52,11 +52,29 @@ RSpec.describe "Requests", type: :request do
 
       json_data = JSON.parse(response.body)
 
-      expected_keys = %w[url method params request_headers status response_headers body]
+      expected_keys = %w[url format preview http_method created_at updated_at id]
 
       expected_keys.each do |key|
         expect(json_data).to have_key(key)
       end
+    end
+
+    it 'returns a JSON response of the completed request referencing a response' do
+      create(:parameter, kind: 'query', name: 'page', content: 'JSON.parse(response)[\'page_nr\'] + 1' , request:, dynamic: true)
+
+      get pipeline_harvest_definition_extraction_definition_request_path(pipeline, harvest_definition, extraction_definition, request, response_id: request.id)
+
+      expect(response.status).to eq 200
+
+      json_data = JSON.parse(response.body)
+
+      expected_keys = %w[url format preview http_method created_at updated_at id]
+
+      expected_keys.each do |key|
+        expect(json_data).to have_key(key)
+      end
+
+      expect(JSON.parse(json_data['preview']['body'])['page_nr']).to eq 2
     end
   end
 end

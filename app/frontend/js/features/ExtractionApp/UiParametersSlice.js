@@ -42,6 +42,7 @@ const uiParametersSlice = createSlice({
           id: action.meta.arg.id,
           changes: { saving: true, hasRun: false },
         });
+
       })
       .addCase(updateParameter.fulfilled, (state, action) => {
         uiParametersAdapter.updateOne(state, {
