@@ -33,11 +33,11 @@ export const updateRequest = createAsyncThunk(
   "requests/updateRequestSlice",
   
   async (payload) => {
-    const { id, pipelineId, harvestDefinitionId, extractionDefinitionId, requestId, http_method } = payload;
+    const { id, pipelineId, harvestDefinitionId, extractionDefinitionId, http_method } = payload;
    
     const response = request
       .patch(
-        `/pipelines/${pipelineId}/harvest_definitions/${harvestDefinitionId}/extraction_definitions/${extractionDefinitionId}/requests/${requestId}`,
+        `/pipelines/${pipelineId}/harvest_definitions/${harvestDefinitionId}/extraction_definitions/${extractionDefinitionId}/requests/${id}`,
         {
           request: {
             http_method: http_method

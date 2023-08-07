@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_02_231141) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_07_035937) do
   create_table "delete_jobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "status"
     t.integer "kind", default: 0, null: false
@@ -47,6 +47,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_02_231141) do
     t.bigint "destination_id"
     t.bigint "pipeline_id"
     t.integer "page", default: 1
+    t.string "total_selector"
+    t.integer "per_page"
     t.index ["destination_id"], name: "index_extraction_definitions_on_destination_id"
     t.index ["pipeline_id"], name: "index_extraction_definitions_on_pipeline_id"
   end

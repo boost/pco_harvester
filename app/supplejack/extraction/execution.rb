@@ -15,14 +15,14 @@ module Extraction
 
       enqueue_record_transformation
 
-      return if @extraction_job.is_sample?
+      return if @extraction_job.is_sample? || @extraction_definition.requests.count == 1
 
       max_pages = (total_results / @extraction_definition.per_page) + 1
 
       (@extraction_definition.page...max_pages).each do
-        @extraction_definition.page += 1
-        @extraction_definition.token_value = next_token
 
+        # TODO get the previous request into the next extraction        
+        @extraction_definition.page += 1
         @de.extract_and_save
 
         enqueue_record_transformation

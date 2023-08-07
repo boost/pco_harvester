@@ -3,11 +3,9 @@
   <%= hidden_field_tag :referrer_id, @referrer&.id  %>
 
   <div class="row gx-2">
-    <fieldset class="col-6">
+    <fieldset class="col-12">
       <div class="card">
         <div class="card-body">
-          <legend>Common settings</legend>
-
           <div class="row gy-3 align-items-center">
             <% if @extraction_definition.name.present? %>
               <div class="col-3">
@@ -45,25 +43,20 @@
             <div class="col-9">
               <%= form.number_field :throttle, class: "form-control" %>
             </div>
-          </div>
-        </div>
-      </div>
-    </fieldset>
-
-    <fieldset class="col-6">
-      <div class="card">
-        <div class="card-body">
-          <legend>Pagination settings</legend>
-
-          <div class="row gy-3 align-items-center">
-            <div class="col-4">
-              <%= form.label :pagination_type, 'Type', class: "form-label" %>
+            
+            <div class="col-3">
+              <%= form.label :total_selector, 'Total Selector', class: "form-label" %>
             </div>
-            <div class="col-8">
-              <% options = find_options_from_validations(ExtractionDefinition, :pagination_type) %>
-              <%= form.select :pagination_type, options, {}, class: "form-select", id: 'js-extraction-definition-pagination-type' %>
+            <div class="col-9">
+              <%= form.text_field :total_selector, class: "form-control" %>
             </div>
-
+            
+            <div class="col-3">
+              <%= form.label :per_page, 'Per Page', class: "form-label" %>
+            </div>
+            <div class="col-9">
+              <%= form.number_field :per_page, class: "form-control" %>
+            </div>
           </div>
         </div>
       </div>

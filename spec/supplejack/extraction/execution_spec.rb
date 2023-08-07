@@ -3,13 +3,15 @@
 require 'rails_helper'
 
 RSpec.describe Extraction::Execution do
-  let(:full_job)                      { create(:extraction_job) }
-  let(:sample_job)                    { create(:extraction_job, kind: 'sample') }
-  let(:extraction_definition)         { create(:extraction_definition, base_url: 'https://api.figshare.com', extraction_jobs: [full_job, sample_job]) }
-  let(:request)                       { create(:request, :figshare, extraction_definition:) }
+  let(:full_job)                      { create(:extraction_job, extraction_definition:) }
+  let(:sample_job)                    { create(:extraction_job, kind: 'sample', extraction_definition:) }
+  let(:extraction_definition)         { create(:extraction_definition, :figshare) }
+  let(:request_one)                   { create(:request, :figshare_initial_request, extraction_definition:) }
+  let(:request_two)                   { create(:request, :figshare_main_request, extraction_definition:) }
 
   before do
-    stub_figshare_harvest_requests(request)
+    stub_figshare_harvest_requests(request_one)
+    stub_figshare_harvest_requests(request_two)
   end
 
   describe '#call' do
@@ -27,7 +29,7 @@ RSpec.describe Extraction::Execution do
     end
 
     context 'when running a sample job' do
-      let(:subject) { described_class.new(sample_job, ed) }
+      let(:subject) { described_class.new(sample_job, extraction_definition) }
 
       it 'saves the first page from the content source to the filesystem' do
         subject.call
@@ -41,8 +43,8 @@ RSpec.describe Extraction::Execution do
 
     context 'when the extraction definition has a throttle' do
       let(:extraction_job) { create(:extraction_job) }
-      let(:ed) { create(:extraction_definition, base_url: 'http://google.com/?url_param=url_value', throttle: 500, extraction_jobs: [extraction_job]) }
-      let(:subject) { described_class.new(extraction_job, ed) }
+      let(:extraction_definition) { create(:extraction_definition, :figshare, extraction_jobs: [extraction_job]) }
+      let(:subject) { described_class.new(extraction_job, extraction_definition) }
 
       it 'respects the throttle set in the extraction_definition' do
         start_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
@@ -52,14 +54,14 @@ RSpec.describe Extraction::Execution do
         end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
         total_time = end_time - start_time
 
-        expect(total_time.ceil).to eq 3
+        expect(total_time.ceil).to eq 5
       end
     end
 
     context 'when the job has been cancelled' do
       let(:extraction_job) { create(:extraction_job, status: 'cancelled') }
-      let(:ed) { create(:extraction_definition, base_url: 'http://google.com/?url_param=url_value', throttle: 500, extraction_jobs: [extraction_job]) }
-      let(:subject) { described_class.new(extraction_job, ed) }
+      let(:extraction_definition) { create(:extraction_definition, :figshare, throttle: 500, extraction_jobs: [extraction_job]) }
+      let(:subject) { described_class.new(extraction_job, extraction_definition) }
 
       it 'does not extract further pages' do
         subject.call

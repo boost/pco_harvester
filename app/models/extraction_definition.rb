@@ -35,20 +35,9 @@ class ExtractionDefinition < ApplicationRecord
   with_options if: :harvest? do
     validates :format, presence: true, inclusion: { in: %w[JSON XML HTML] }
     validates :base_url, presence: true, format: { with: URI::DEFAULT_PARSER.make_regexp }
-    # validate :total_selector_format
-    # validates :total_selector, presence: true
-
-    # with_options presence: true, if: -> { pagination_type == 'tokenised' } do
-    #   validates :next_token_path
-    #   validates :token_parameter
-    #   validates :token_value
-    # end
+    validate :total_selector_format
+    validates :total_selector, presence: true
   end
-
-  # pagination fields
-  validates :pagination_type, presence: true, inclusion: { in: %w[page tokenised] }, if: -> { harvest? }
-  # validates :page, numericality: { only_integer: true }
-  # validates :per_page, numericality: { only_integer: true }
 
   with_options presence: true, if: :enrichment? do
     validates :destination_id

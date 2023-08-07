@@ -40,7 +40,6 @@ const Request = ({}) => {
           harvestDefinitionId: appDetails.harvestDefinition.id,
           pipelineId: appDetails.pipeline.id,
           extractionDefinitionId: appDetails.extractionDefinition.id,
-          requestId: appDetails.activeRequest
         }        
       )
     )    
@@ -72,12 +71,8 @@ const Request = ({}) => {
             <strong>URL</strong>
           </div>
 
-          <div className='col-sm-3'>
-            <p>{base_url}</p>
-          </div>
-          
-          <div className='col-sm-8'>
-            <p>
+          <div className='col-sm-11'>
+            <p>{base_url}
               {map(slugParameters, (slugParameter, index) => {
                 return <RequestFragment id={slugParameter.id} index={index} key={slugParameter.id} />
               })}

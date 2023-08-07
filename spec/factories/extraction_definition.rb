@@ -6,8 +6,8 @@ FactoryBot.define do
     base_url { "#{Faker::Internet.url}?param=value" }
     throttle { 0 }
     kind { 0 }
-
-    pagination_type { 'page' }
+    per_page { 50 }	
+    total_selector { '$.totalObjects' }
     page { 1 }
 
     trait :ngataonga do
@@ -27,6 +27,8 @@ FactoryBot.define do
       base_url { 'https://api.figshare.com' }
       throttle { 1000 }
       page { 1 }
+      total_selector { '$.items_found' }
+      per_page { 10 }
     end
 
     association :pipeline
