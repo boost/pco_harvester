@@ -24,7 +24,11 @@ class ExtractionDefinitionsController < ApplicationController
     if @extraction_definition.save
       @harvest_definition.update(extraction_definition_id: @extraction_definition.id)
 
-      redirect_to pipeline_path(@pipeline), notice: 'Extraction Definition created successfully'
+      2.times do
+        Request.create(extraction_definition: @extraction_definition)
+      end
+
+      redirect_to pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition, @extraction_definition), notice: 'Extraction Definition created successfully'
     else
       flash.alert = 'There was an issue creating your Extraction Definition'
       render :new

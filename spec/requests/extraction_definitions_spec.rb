@@ -22,13 +22,24 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
 
   describe '#create' do
     context 'with valid parameters' do
+      let(:extraction_definition2) { build(:extraction_definition, pipeline:) }
+
       it 'creates a new extraction definition' do
-        extraction_definition2 = build(:extraction_definition, pipeline:)
         expect do
           post pipeline_harvest_definition_extraction_definitions_path(pipeline, harvest_definition), params: {
             extraction_definition: extraction_definition2.attributes
           }
         end.to change(ExtractionDefinition, :count).by(1)
+      end
+
+      it 'creates 2 requests for the new extraction definition' do
+        expect do
+          post pipeline_harvest_definition_extraction_definitions_path(pipeline, harvest_definition), params: {
+            extraction_definition: extraction_definition2.attributes
+          }
+        end.to change(Request, :count).by(2)
+
+        expect(ExtractionDefinition.last.requests.count).to eq 2
       end
 
       it 'redirects to the pipeline_path' do

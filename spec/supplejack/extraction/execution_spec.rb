@@ -142,7 +142,7 @@ RSpec.describe Extraction::Execution do
         let(:subject) { described_class.new(extraction_job, extraction_definition) }
 
         context 'when the extraction_definition pagination_type is token' do
-          let(:extraction_definition) { create(:extraction_definition, format: 'JSON', pagination_type: 'tokenised', total_selector: '$.total_results', page: 1, paginated: true, per_page: 30) }
+          let(:extraction_definition) { create(:extraction_definition, format: 'JSON', total_selector: '$.total_results', page: 1, paginated: true, per_page: 30) }
           let(:request_one) { create(:request, :inaturalist_initial_request, extraction_definition:) }
           let(:request_two) { create(:request, :inaturalist_main_request, extraction_definition:) }
 

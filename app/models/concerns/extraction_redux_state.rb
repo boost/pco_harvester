@@ -8,14 +8,14 @@ module ExtractionReduxState
       entities: {
         requests: requests_slice,
         parameters: parameters_slice, 
-        appDetails: app_details_slice
+        appDetails: extraction_app_details_slice
       },
       ui: {
         parameters: ui_parameters_slice,
         requests: ui_requests_slice,
-        appDetails: ui_app_details_slice
+        appDetails: ui_extraction_app_details_slice
       },
-      config: config_slice
+      config: extraction_config_slice
     }.to_json
   end
 
@@ -35,7 +35,7 @@ module ExtractionReduxState
     }
   end
 
-  def app_details_slice
+  def extraction_app_details_slice
     {
       pipeline: @pipeline,
       harvestDefinition: @harvest_definition,
@@ -43,13 +43,13 @@ module ExtractionReduxState
     }
   end
 
-  def ui_app_details_slice
+  def ui_extraction_app_details_slice
     {
       activeRequest: @extraction_definition.requests.first.id
     }
   end
 
-  def config_slice
+  def extraction_config_slice
     {
       environment: Rails.env
     }

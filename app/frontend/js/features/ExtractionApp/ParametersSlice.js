@@ -79,7 +79,7 @@ export const deleteParameter = createAsyncThunk(
 );
 
 export const hasEmptyParameters = (state) => {
-  return some(selectAllParameters(state), { 'value': '' });
+  return some(selectAllParameters(state), { 'content': '' });
 }
 
 const parametersSlice = createSlice({

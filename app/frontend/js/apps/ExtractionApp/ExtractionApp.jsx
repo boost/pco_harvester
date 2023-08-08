@@ -12,13 +12,16 @@ import ParameterNavigationPanel from '/js/apps/ExtractionApp/components/Paramete
 
 import { selectParameterIds } from "~/js/features/ExtractionApp/ParametersSlice";
 
+import { selectAppDetails } from "~/js/features/AppDetailsSlice";
+
 const ExtractionApp = ({}) => {
   const parameterIds = useSelector(selectParameterIds);
+  const appDetails   = useSelector(selectAppDetails);
 
   return(
     <>
       <HeaderActions />
-      <NavTabs />
+      { appDetails.extractionDefinition.paginated && <NavTabs /> }
 
       <div className='row'>
         <div className='col-2'>
