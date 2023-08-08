@@ -34,11 +34,7 @@ class ExtractionDefinitionsController < ApplicationController
     if @extraction_definition.update(extraction_definition_params)
       flash.notice = 'Extraction Definition updated successfully'
 
-      if @referrer.present?
-        redirect_to pipeline_path(@referrer)
-      else
-        redirect_to pipeline_path(@pipeline)
-      end
+      redirect_to pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition, @extraction_definition)
     else
       flash.alert = 'There was an issue updating your Extraction Definition'
       render 'edit'
@@ -96,11 +92,9 @@ class ExtractionDefinitionsController < ApplicationController
   def extraction_definition_params
     params.require(:extraction_definition).permit(
       :pipeline_id,
-      :name, :format, :base_url, :throttle, :pagination_type,
-      :page_parameter, :per_page_parameter, :page, :per_page,
-      :total_selector,
-      :kind, :destination_id, :source_id, :enrichment_url,
-      :token_parameter, :token_value, :next_token_path, :initial_params
+      :name, :format, :base_url, :throttle, :page, :per_page,
+      :total_selector, :kind, :destination_id, :source_id, :enrichment_url,
+      :paginated
     )
   end
 end

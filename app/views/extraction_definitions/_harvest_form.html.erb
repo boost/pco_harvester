@@ -57,6 +57,17 @@
             <div class="col-9">
               <%= form.number_field :per_page, class: "form-control" %>
             </div>
+            
+            <div class="col-3">
+              <%= form.label :paginated, 'Paginated', class: "form-label" %>
+            </div>
+
+            <div class="col-9">
+              <div class="form-check">
+                  <%= form.check_box :paginated, class: "form-check-input" %>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
