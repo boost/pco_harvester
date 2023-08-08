@@ -12,6 +12,8 @@ class Request < ApplicationRecord
   enum :http_method, { GET: 0, POST: 1 }
 
   def url(response = nil)
+    return base_url if slug(response).empty?
+
     "#{base_url}/#{slug(response)}"
   end
 

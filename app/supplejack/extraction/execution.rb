@@ -8,22 +8,26 @@ module Extraction
       @extraction_definition = extraction_definition
       @harvest_job = @extraction_job.harvest_job
       @de = DocumentExtraction.new(@extraction_definition.requests.first, @extraction_job.extraction_folder)
+      @previous_request = nil
     end
 
     def call
-      @de.extract_and_save
+      @previous_request = @de.extract
+      @de.save
 
       enqueue_record_transformation
 
-      return if @extraction_job.is_sample? || @extraction_definition.requests.count == 1
+      return if @extraction_job.is_sample?
+      return unless @extraction_definition.paginated?
 
       max_pages = (total_results / @extraction_definition.per_page) + 1
 
       (@extraction_definition.page...max_pages).each do
-
-        # TODO get the previous request into the next extraction        
         @extraction_definition.page += 1
-        @de.extract_and_save
+
+        @de = DocumentExtraction.new(@extraction_definition.requests.last, @extraction_job.extraction_folder, @previous_request.body)
+        @previous_request = @de.extract
+        @de.save
 
         enqueue_record_transformation
 
@@ -49,18 +53,6 @@ module Extraction
       end
 
       JsonPath.new(@extraction_definition.total_selector).on(@de.document.body).first.to_i
-    end
-
-    def next_token
-      return unless @extraction_definition.pagination_type == 'tokenised'
-      if @extraction_definition.format == 'HTML'
-        return Nokogiri::HTML(@de.document.body).xpath(@extraction_definition.next_token_path).first.content
-      end
-      if @extraction_definition.format == 'XML'
-        return Nokogiri::XML(@de.document.body).xpath(@extraction_definition.next_token_path).first.content
-      end
-
-      JsonPath.new(@extraction_definition.next_token_path).on(@de.document.body).first
     end
 
     def enqueue_record_transformation

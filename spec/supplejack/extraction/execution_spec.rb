@@ -74,21 +74,24 @@ RSpec.describe Extraction::Execution do
     end
 
     context 'when the job is part of a harvest' do
-      let(:ej) { create(:extraction_job) }
-      let(:sample_ej) { create(:extraction_job, :sample) }
-      let(:ed) { create(:extraction_definition, :figshare) }
-      let(:pipeline) { create(:pipeline) }
-      let(:harvest_definition) { create(:harvest_definition, pipeline:) }
-      let(:destination) { create(:destination) }
-      let!(:hj) { create(:harvest_job, extraction_job: ej, harvest_definition:, destination:) }
-      let!(:sample_hj) { create(:harvest_job, extraction_job: sample_ej, harvest_definition:, destination:) }
+      let(:extraction_job)                  { create(:extraction_job) }
+      let(:sample_extraction_job)           { create(:extraction_job, :sample) }
+      let(:extraction_definition)           { create(:extraction_definition, :figshare) }
+      let(:pipeline)                        { create(:pipeline) }
+      let(:harvest_definition)              { create(:harvest_definition, pipeline:) }
+      let(:destination)                     { create(:destination) }
+      let!(:harvest_job)                    { create(:harvest_job, extraction_job:, harvest_definition:, destination:) }
+      let!(:sample_harvest_job)             { create(:harvest_job, extraction_job: sample_extraction_job, harvest_definition:, destination:) }
+      let(:request_one)                     { create(:request, :figshare_initial_request, extraction_definition:) }
+      let(:request_two)                     { create(:request, :figshare_main_request, extraction_definition:) }
 
       before do
-        stub_figshare_harvest_requests(ed)
+        stub_figshare_harvest_requests(request_one)
+        stub_figshare_harvest_requests(request_two)
       end
 
       context 'when it is a full harvest' do
-        let(:subject) { described_class.new(ej, ed) }
+        let(:subject) { described_class.new(extraction_job, extraction_definition) }
 
         it 'creates TransformationJobs for each page' do
           expect { subject.call }.to change(TransformationJob, :count).by(5)
@@ -103,7 +106,7 @@ RSpec.describe Extraction::Execution do
       end
 
       context 'when it is a sample harvest' do
-        let(:subject) { described_class.new(sample_ej, ed) }
+        let(:subject) { described_class.new(sample_extraction_job, extraction_definition) }
 
         it 'creates TransformationJobs for the first page' do
           expect { subject.call }.to change(TransformationJob, :count).by(1)
@@ -119,10 +122,10 @@ RSpec.describe Extraction::Execution do
 
       context 'when the document has failed to be extracted' do
         before do
-          stub_failed_figshare_harvest_requests(ed)
+          stub_failed_figshare_harvest_requests(request_one)
         end
 
-        let(:subject) { described_class.new(ej, ed) }
+        let(:subject) { described_class.new(extraction_job, extraction_definition) }
 
         it 'does not create TransformationJobs for failed pages' do
           expect { subject.call }.not_to change(TransformationJob, :count)
@@ -136,16 +139,23 @@ RSpec.describe Extraction::Execution do
       end
 
       context 'when the extraction_definition format is JSON' do
-        let(:subject) { described_class.new(ej, ed) }
+        let(:subject) { described_class.new(extraction_job, extraction_definition) }
 
         context 'when the extraction_definition pagination_type is token' do
-          let(:ed) do
-            create(:extraction_definition, format: 'JSON', pagination_type: 'tokenised', total_selector: '$.total_results',
-                                           page: 1, per_page_parameter: 'per_page', per_page: 30, token_parameter: 'id_above', token_value: '0', next_token_path: '$.results[(@.length-1)].id')
-          end
+          let(:extraction_definition) { create(:extraction_definition, format: 'JSON', pagination_type: 'tokenised', total_selector: '$.total_results', page: 1, paginated: true, per_page: 30) }
+          let(:request_one) { create(:request, :inaturalist_initial_request, extraction_definition:) }
+          let(:request_two) { create(:request, :inaturalist_main_request, extraction_definition:) }
 
           before do
-            stub_inaturalist_harvest_requests(ed,
+            stub_inaturalist_harvest_requests(request_one,
+                                              {
+                                                1 => '0',
+                                                2 => '2098031',
+                                                3 => '4218778',
+                                                4 => '7179629'
+                                              })
+
+            stub_inaturalist_harvest_requests(request_two,
                                               {
                                                 1 => '0',
                                                 2 => '2098031',
@@ -168,16 +178,19 @@ RSpec.describe Extraction::Execution do
       end
 
       context 'when the extraction_definition format is XML' do
-        let(:subject) { described_class.new(ej, ed) }
+        let(:subject) { described_class.new(extraction_job, extraction_definition) }
 
         context 'when the extraction_definition pagination_type is page' do
-          let(:ed) do
-            create(:extraction_definition, format: 'XML', pagination_type: 'page', total_selector: '//count/text()',
-                                           page_parameter: 'page', page: 1, per_page_parameter: 'page_size', per_page: 50)
-          end
+          let(:extraction_definition) {
+            create(:extraction_definition, format: 'XML', paginated: true, total_selector: '//count/text()',
+                                           page: 1, per_page: 50)
+          }
+          let(:request_one) { create(:request, :freesound_initial_request, extraction_definition:) }
+          let(:request_two) { create(:request, :freesound_main_request, extraction_definition:) }
 
           before do
-            stub_freesound_harvest_requests(ed)
+            stub_freesound_harvest_requests(request_one)
+            stub_freesound_harvest_requests(request_two)
           end
 
           it 'creates TransformationJobs for each page' do
@@ -193,13 +206,12 @@ RSpec.describe Extraction::Execution do
         end
 
         context 'when the extraction_definition pagination_type is tokenised' do
-          let(:ed) do
-            create(:extraction_definition, format: 'XML', pagination_type: 'tokenised', total_selector: '//records/@total',
-                                           page: 1, per_page_parameter: 'n', per_page: 100, token_parameter: 's', token_value: '*', next_token_path: '//records/@nextStart')
-          end
+          let(:extraction_definition) { create(:extraction_definition, format: 'XML', pagination_type: 'tokenised', total_selector: '//records/@total', page: 1, paginated: true, per_page: 100) }
+          let(:request_one)           { create(:request, :trove_initial_request, extraction_definition:) }
+          let(:request_two)           { create(:request, :trove_main_request, extraction_definition:) }
 
           before do
-            stub_trove_harvest_requests(ed,
+            stub_trove_harvest_requests(request_one,
                                         {
                                           1 => '*',
                                           2 => 'AoErc3UyMzQwNjY5OTI=',

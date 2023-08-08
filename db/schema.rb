@@ -49,6 +49,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_07_035937) do
     t.integer "page", default: 1
     t.string "total_selector"
     t.integer "per_page"
+    t.boolean "paginated"
     t.index ["destination_id"], name: "index_extraction_definitions_on_destination_id"
     t.index ["pipeline_id"], name: "index_extraction_definitions_on_pipeline_id"
   end
