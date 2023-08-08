@@ -6,7 +6,7 @@ RSpec.describe "Requests", type: :request do
   let(:user)                       { create(:user) }
   let(:pipeline)                   { create(:pipeline) }
   let(:harvest_definition)         { create(:harvest_definition, extraction_definition:, pipeline:) }
-  let!(:extraction_definition)     { create(:extraction_definition, :figshare, pipeline:) }
+  let!(:extraction_definition)     { create(:extraction_definition, pipeline:) }
 
   before do
     sign_in user
@@ -40,13 +40,14 @@ RSpec.describe "Requests", type: :request do
 
   describe 'GET /show' do
     before do
-      stub_figshare_harvest_requests(request)
+      stub_figshare_harvest_requests(request_one)
     end
 
-    let(:request) { create(:request, :figshare, extraction_definition:) }
+    let(:request_one) { create(:request, :figshare_initial_request, extraction_definition:) }
+    let(:request_two) { create(:request, :figshare_main_request, extraction_definition:) }
 
     it 'returns a JSON response of the completed request' do
-      get pipeline_harvest_definition_extraction_definition_request_path(pipeline, harvest_definition, extraction_definition, request)
+      get pipeline_harvest_definition_extraction_definition_request_path(pipeline, harvest_definition, extraction_definition, request_one)
 
       expect(response.status).to eq 200
 
@@ -60,9 +61,7 @@ RSpec.describe "Requests", type: :request do
     end
 
     it 'returns a JSON response of the completed request referencing a response' do
-      create(:parameter, kind: 'query', name: 'page', content: 'JSON.parse(response)[\'page_nr\'] + 1' , request:, dynamic: true)
-
-      get pipeline_harvest_definition_extraction_definition_request_path(pipeline, harvest_definition, extraction_definition, request, response_id: request.id)
+      get pipeline_harvest_definition_extraction_definition_request_path(pipeline, harvest_definition, extraction_definition, request_two, previous_request_id: request_one.id)
 
       expect(response.status).to eq 200
 
