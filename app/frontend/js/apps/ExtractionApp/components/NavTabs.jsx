@@ -4,6 +4,11 @@ import { useSelector, useDispatch } from "react-redux";
 import classNames from "classnames";
 
 import { selectRequestIds } from '~/js/features/ExtractionApp/RequestsSlice';
+import { selectAllParameters } from "~/js/features/ExtractionApp/ParametersSlice";
+
+import {
+  toggleDisplayParameters
+} from "~/js/features/ExtractionApp/UiParametersSlice";
 
 import {
   selectUiAppDetails,
@@ -19,11 +24,11 @@ const NavTabs = () => {
     
     const initialRequestClasses = classNames("nav-link", { active: uiAppDetails.activeRequest == initialRequestId });
     const mainRequestClasses    = classNames("nav-link", { active: uiAppDetails.activeRequest == mainRequestId });
+    const allParameters      = useSelector(selectAllParameters);
 
     const handleTabClick = (id) => {
-      dispatch(
-        updateActiveRequest(id)
-      )
+      dispatch(toggleDisplayParameters({ parameters: allParameters, displayed: false }))
+      dispatch(updateActiveRequest(id))
     }
   
     return createPortal(
@@ -31,7 +36,6 @@ const NavTabs = () => {
       <ul className="nav nav-tabs mt-4" role="tablist">
         <li className="nav-item" role="presentation">
           <button className={initialRequestClasses} type="button" role="tab" onClick={ () => { handleTabClick(initialRequestId)}}>
-
             Initial Request
           </button>
         </li>

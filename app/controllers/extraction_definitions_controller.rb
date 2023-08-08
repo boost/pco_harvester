@@ -12,6 +12,7 @@ class ExtractionDefinitionsController < ApplicationController
   end
 
   def show
+    @parameters = @extraction_definition.parameters.order(kind: :asc)
     @props = extraction_app_state
   end
 

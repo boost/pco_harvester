@@ -10,6 +10,7 @@ export const loadDisplayedParameters = (state) => {
   let displayedParameterIds = JSON.parse(
     localStorage.getItem("displayedParameterIds") || "[]"
   );
+
   if (displayedParameterIds.length === 0 && stateUiParameters.length > 0) {
     displayedParameterIds = [stateUiParameters[0].id];
   }

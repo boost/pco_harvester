@@ -23,8 +23,8 @@ module ExtractionReduxState
 
   def parameters_slice
     {
-      ids: @extraction_definition.parameters.map { |request| request[:id] },
-      entities: @extraction_definition.parameters.index_by { |request| request[:id] }
+      ids: @parameters.map { |request| request[:id] },
+      entities: @parameters.index_by { |request| request[:id] }
     }
   end
 
@@ -56,10 +56,10 @@ module ExtractionReduxState
   end
 
   def ui_parameters_slice
-    parameter_entities = @extraction_definition.parameters.map { |parameter| ui_parameter_entity(parameter) }
+    parameter_entities = @parameters.map { |parameter| ui_parameter_entity(parameter) }
 
     {
-      ids: @extraction_definition.parameters.map { |parameter| parameter[:id] },
+      ids: @parameters.map { |parameter| parameter[:id] },
       entities: parameter_entities.index_by { |parameter| parameter[:id] }
     }
   end
