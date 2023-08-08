@@ -66,23 +66,17 @@ const Request = ({}) => {
           </div>
         </div>
         
-        <div className='row mt-3'>
-          <div className='col-sm-1'>
-            <strong>URL</strong>
-          </div>
+        <strong className='float-start me-2'>URL</strong>
 
-          <div className='col-sm-11'>
-            <p>{base_url}
-              {map(slugParameters, (slugParameter, index) => {
-                return <RequestFragment id={slugParameter.id} index={index} key={slugParameter.id} />
-              })}
+        <p>{base_url}
+          {map(slugParameters, (slugParameter, index) => {
+            return <RequestFragment id={slugParameter.id} index={index} key={slugParameter.id} />
+          })}
 
-              {map(queryParameters, (queryParameter, index) => {
-                return <RequestFragment id={queryParameter.id} index={index} key={queryParameter.id}/>
-              })}
-            </p>
-          </div>
-        </div>
+          {map(queryParameters, (queryParameter, index) => {
+            return <RequestFragment id={queryParameter.id} index={index} key={queryParameter.id}/>
+          })}
+        </p>
       </div>
 
     </div>

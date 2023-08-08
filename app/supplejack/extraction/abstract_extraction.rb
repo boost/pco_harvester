@@ -7,7 +7,7 @@ module Extraction
     end
 
     def extract
-      @document = Extraction::Request.new(url:, params:, headers:).get
+      @document = Extraction::Request.new(url:, params:, headers:).send(@request.http_method.downcase)
     end
 
     def save

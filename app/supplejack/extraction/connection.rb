@@ -21,6 +21,10 @@ module Extraction
       Response.new(@connection.get)
     end
 
+    def post
+      Response.new(@connection.post)
+    end
+
     private
 
     def connection(url, params, headers)

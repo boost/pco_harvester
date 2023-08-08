@@ -16,7 +16,7 @@ class RequestsController < ApplicationController
       @previous_request = Request.find(params[:previous_request_id])
       @previous_response_body = Extraction::DocumentExtraction.new(@previous_request).extract.body
     end
-
+    
     render json: @request.to_h.merge(
       preview: Extraction::DocumentExtraction.new(@request, nil, @previous_response_body).extract
     )

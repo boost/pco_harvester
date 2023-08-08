@@ -13,9 +13,20 @@ module Extraction
     # @return Document object
     def get
       @response = @connection.get
+      document('GET')
+    end
+
+    def post
+      @response = @connection.post
+      document('POST')
+    end
+
+    private
+
+    def document(http_method)
       Document.new(
         url: @connection.url,
-        method: 'GET',
+        method: http_method,
         params: @connection.params,
         request_headers: @connection.headers,
         status: @response.status,

@@ -73,8 +73,6 @@ const Parameter = ({ id }) => {
   const isSaveable = () => {
     return isValid() && hasChanged() && !saving;
   }
-
-  // TODO extract badge into a shared component for both apps
   
   const badgeText = () => {
     if (hasChanged()) {
