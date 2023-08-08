@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { createPortal } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { map } from 'lodash';
+import classNames from "classnames";
 
 import {
   selectUiRequestById,
@@ -51,18 +52,25 @@ const HeaderActions = () => {
       )
     )
 
-    dispatch(
-      previewRequest(
-        {
-          harvestDefinitionId: appDetails.harvestDefinition.id,
-          pipelineId: appDetails.pipeline.id,
-          extractionDefinitionId: appDetails.extractionDefinition.id,
-          id: mainRequestId,
-          previousRequestId: initialPreview.payload.id
-        }      
+    if(appDetails.extractionDefinition.paginated) {
+      dispatch(
+        previewRequest(
+          {
+            harvestDefinitionId: appDetails.harvestDefinition.id,
+            pipelineId: appDetails.pipeline.id,
+            extractionDefinitionId: appDetails.extractionDefinition.id,
+            id: mainRequestId,
+            previousRequestId: initialPreview.payload.id
+          }      
+        )
       )
-    )
+    }
   }
+
+  const initialRequestClasses = classNames({
+    'col-6': appDetails.extractionDefinition.paginated,
+    'col-12': !appDetails.extractionDefinition.paginated
+  })
 
   return createPortal(
     <>
@@ -73,17 +81,19 @@ const HeaderActions = () => {
       <Modal size="lg" show={showModal} onHide={handleClose} className='modal--full-width'>
         <Modal.Body>
           <div className="row">
-            <div className="col-6">
+            <div className={ initialRequestClasses }>
               <h5>Initial Request</h5>
 
               <Preview id={initialRequestId} />
             </div>
 
+            { appDetails.extractionDefinition.paginated && (
             <div className="col-6">
               <h5>Main Request</h5>
               
               <Preview id={mainRequestId} />
             </div>
+            )}
           </div>
         </Modal.Body>
       </Modal>

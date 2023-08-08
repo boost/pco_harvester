@@ -15,9 +15,12 @@ import {
   updateActiveRequest
 } from "~/js/features/ExtractionApp/UiAppDetailsSlice";
 
+import { selectAppDetails } from "~/js/features/AppDetailsSlice";
+
 const NavTabs = () => {
     const dispatch         = useDispatch();
     const uiAppDetails     = useSelector(selectUiAppDetails);
+    const appDetails       = useSelector(selectAppDetails);
     const requestIds       = useSelector(selectRequestIds);
     const initialRequestId = requestIds[0]
     const mainRequestId    = requestIds[1]
@@ -39,11 +42,13 @@ const NavTabs = () => {
             Initial Request
           </button>
         </li>
-        <li className="nav-item" role="presentation" onClick={ () => { handleTabClick(mainRequestId)} }>
-          <button className={mainRequestClasses} type="button" role="tab">
-            Main Request
-          </button>
-        </li>
+        { appDetails.extractionDefinition.paginated && (
+          <li className="nav-item" role="presentation" onClick={ () => { handleTabClick(mainRequestId)} }>
+            <button className={mainRequestClasses} type="button" role="tab">
+              Main Request
+            </button>
+          </li>
+        )}
       </ul>
     </>,
     document.getElementById("react-nav-tabs")
