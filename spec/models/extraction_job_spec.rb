@@ -118,21 +118,26 @@ RSpec.describe ExtractionJob, type: :model do
   end
 
   describe '#extraction_folder_size_in_bytes' do
-    let(:ed) { create(:extraction_definition, base_url: 'http://google.com/?url_param=url_value', extraction_jobs: [subject]) }
+    let(:extraction_definition) { create(:extraction_definition, base_url: 'http://google.com', paginated: true) }
 
     before do
       (1...6).each do |page|
-        stub_request(:get, 'http://google.com/?url_param=url_value').with(
-          query: { 'page' => page, 'per_page' => 50 },
+        request = create(:request, extraction_definition:)
+        create(:parameter, name: 'url_param', content: 'url_value', kind: 'query', request: request)
+        create(:parameter, name: 'per_page', content: '50', kind: 'query', request: request)
+        create(:parameter, name: 'page', content: page, kind: 'query', request: request)
+          
+        stub_request(:get, 'http://google.com').with(
+          query: { 'page' => page, 'per_page' => 50, 'url_param' => 'url_value' },
           headers: fake_json_headers
         ).and_return(fake_response('test'))
       end
     end
 
     it 'returns the size of the extraction folder in bytes' do
-      Extraction::Execution.new(subject, ed).call
+      Extraction::Execution.new(subject, extraction_definition).call
 
-      expect(subject.extraction_folder_size_in_bytes).to eq 1515
+      expect(subject.extraction_folder_size_in_bytes).to eq 1535
     end
   end
 
