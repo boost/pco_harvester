@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { request } from "~/js/utils/request";
-import { askNewRawRecord } from "./RawRecordSlice";
 
 export const clickedOnRunFields = createAsyncThunk(
   "appDetails/clickedOnRunFieldsStatus",
@@ -36,17 +35,12 @@ const AppDetailsSlice = createSlice({
   initialState: {},
   reducers: {},
   extraReducers: (builder) => {
-    builder
-      .addCase(clickedOnRunFields.fulfilled, (state, action) => {
-        state.transformedRecord = action.payload.transformed_record;
-        state.rejectionReasons = action.payload.rejection_reasons;
-        state.deletionReasons = action.payload.deletion_reasons;
-      })
-      .addCase(askNewRawRecord.fulfilled, (state, action) => {
-        state.transformedRecord = action.payload.transformedRecord.transformed_record;
-        state.rejectionReasons  = action.payload.transformedRecord.rejection_reasons;
-        state.deletionReasons   = action.payload.transformedRecord.deletion_reasons;
-      });
+    builder.addCase(clickedOnRunFields.fulfilled, (state, action) => {
+      state.transformedRecord =
+        action.payload.transformation.transformed_record;
+      state.rejectionReasons = action.payload.transformation.rejection_reasons;
+      state.deletionReasons = action.payload.transformation.deletion_reasons;
+    });
   },
 });
 
