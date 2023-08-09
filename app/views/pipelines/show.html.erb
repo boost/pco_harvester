@@ -8,9 +8,36 @@
   </div>
 
   <div class="float-end">
-    <div class="dropdown d-inline me-1">
+    <button
+      type="button"
+      class="btn btn-primary me-1"
+      data-bs-toggle="modal"
+      data-bs-target="#run-pipeline"
+    >
+      <i class='bi bi-play'></i>
+        Run Pipeline
+    </button>
+    
+    <%= render layout: 'shared/create-modal', locals: { modal_heading: 'Run Pipeline', id: 'run-pipeline', modal_subheading: 'Define the settings for this one-off harvest'  } do %>
+      <%= vertical_form_with(model: [@pipeline, @harvest_definition], url: pipeline_harvest_definition_harvest_jobs_path(@pipeline, @harvest_definition)) do |form| %>
+        <div class='row gy-3 align-items-center'>
+          <%= form.hidden_field :harvest_definition_id, value: @harvest_definition.id %>
+          <%= form.hidden_field :key, value: SecureRandom.hex %>
 
-    </div>
+          <div class="col-4">
+            <%= form.label :destination, "Destination", class: "form-label" %>
+          </div>
+
+          <div class='col-8'>
+          <%= form.select :destination_id, options_from_collection_for_select(@destinations, 'id', 'name'), {},  class: "form-select" %>
+          </div>
+        </div>
+
+        <div class='d-grid mt-4'>
+          <button type="submit" class="btn btn-primary">Run harvest</button>
+        </div>
+      <% end %>
+    <% end %>
 
     <%= link_to "Edit",
     edit_pipeline_path(@pipeline),
