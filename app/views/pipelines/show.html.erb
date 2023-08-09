@@ -23,13 +23,29 @@
         <div class='row gy-3 align-items-center'>
           <%= form.hidden_field :harvest_definition_id, value: @harvest_definition.id %>
           <%= form.hidden_field :key, value: SecureRandom.hex %>
+          
+          <div class="col-4">
+            <%= label_tag :extraction_type, "Extraction type", class: "form-label" %>
+          </div>
+          
+          <div class='col-8'>
+            <%= select_tag :extraction_type, raw('<option>Existing job output</option><option>Fetch new data ???</output>'), class: "form-select" %>
+          </div>
+          
+          <div class="col-4">
+            <%= form.label :job_id, "Job output", class: "form-label" %>
+          </div>
+
+          <div class='col-8'>
+            <%= form.select :job_id, options_from_collection_for_select(@destinations, 'id', 'name'), {},  class: "form-select" %>
+          </div>
 
           <div class="col-4">
             <%= form.label :destination, "Destination", class: "form-label" %>
           </div>
 
           <div class='col-8'>
-          <%= form.select :destination_id, options_from_collection_for_select(@destinations, 'id', 'name'), {},  class: "form-select" %>
+            <%= form.select :destination_id, options_from_collection_for_select(@destinations, 'id', 'name'), {},  class: "form-select" %>
           </div>
         </div>
 
