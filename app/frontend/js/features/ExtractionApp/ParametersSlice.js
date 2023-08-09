@@ -7,7 +7,10 @@ import { request } from "~/js/utils/request";
 
 import { some } from "lodash";
 
-const parametersAdapter = createEntityAdapter();
+const parametersAdapter = createEntityAdapter({
+  sortComparer: (parameterOne, parameterTwo) =>
+    parameterTwo.created_at.localeCompare(parameterOne.created_at),
+});
 
 export const addParameter = createAsyncThunk(
   "parameters/addParameterStatus",

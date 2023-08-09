@@ -8,7 +8,7 @@ class ExtractionDefinitionsController < ApplicationController
   before_action :find_destinations, only: %i[new create edit update]
 
   def show
-    @parameters = @extraction_definition.parameters.order(kind: :asc)
+    @parameters = @extraction_definition.parameters.order(created_at: :desc)
     @props = extraction_app_state
   end
 

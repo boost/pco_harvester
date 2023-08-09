@@ -40,8 +40,8 @@ const Preview = ({ id }) => {
                 </button>
               </h2>
               <div id="request" className="accordion-collapse collapse show">
-                <div className="accordion-body" target="_blank">
-                  <a href={preview.url}>{preview.url}</a>
+                <div className="accordion-body">
+                  <a href={preview.url} target="_blank">{preview.url}</a>
                 </div>
               </div>
             </div>
