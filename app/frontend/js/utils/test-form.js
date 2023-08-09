@@ -1,6 +1,12 @@
-import { request } from './request';
+import { request } from "./request";
 
-export function bindTestForm(testRoute, buttonId, formId, successCallback, failureCallback) {
+export function bindTestForm(
+  testRoute,
+  buttonId,
+  formId,
+  successCallback,
+  failureCallback
+) {
   document.addEventListener(
     "DOMContentLoaded",
     function () {

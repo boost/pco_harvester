@@ -34,9 +34,7 @@ if (transformationAppHTMLElement !== null) {
 import ExtractionApp from "/js/apps/ExtractionApp/ExtractionApp";
 import configureExtractionAppStore from "/js/extractionStore";
 
-const extractionAppHTMLElement = document.querySelector(
-  "#js-extraction-app"
-);
+const extractionAppHTMLElement = document.querySelector("#js-extraction-app");
 
 if (extractionAppHTMLElement !== null) {
   const root = ReactDOM.createRoot(extractionAppHTMLElement);

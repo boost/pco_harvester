@@ -1,22 +1,33 @@
-import { each } from 'lodash';
+import { each } from "lodash";
 
-const extractionDefinitionPaginationTypeSelect = document.getElementById('js-extraction-definition-pagination-type');
+const extractionDefinitionPaginationTypeSelect = document.getElementById(
+  "js-extraction-definition-pagination-type"
+);
 
-if(extractionDefinitionPaginationTypeSelect) {
-  const pageElements = document.getElementsByClassName('js-extraction-definition-page-form');
-  const tokenisedElements = document.getElementsByClassName('js-extraction-definition-tokenised-form');
+if (extractionDefinitionPaginationTypeSelect) {
+  const pageElements = document.getElementsByClassName(
+    "js-extraction-definition-page-form"
+  );
+  const tokenisedElements = document.getElementsByClassName(
+    "js-extraction-definition-tokenised-form"
+  );
 
-  extractionDefinitionPaginationLogic(extractionDefinitionPaginationTypeSelect.value);
+  extractionDefinitionPaginationLogic(
+    extractionDefinitionPaginationTypeSelect.value
+  );
 
-  extractionDefinitionPaginationTypeSelect.addEventListener('change', (event) => {
-    extractionDefinitionPaginationLogic(event.target.value);
-  });
+  extractionDefinitionPaginationTypeSelect.addEventListener(
+    "change",
+    (event) => {
+      extractionDefinitionPaginationLogic(event.target.value);
+    }
+  );
 
   function extractionDefinitionPaginationLogic(type) {
-    if(type == 'page') {
+    if (type == "page") {
       hideElements(tokenisedElements);
       showElements(pageElements);
-    } else if(type == 'tokenised') {
+    } else if (type == "tokenised") {
       hideElements(pageElements);
       showElements(tokenisedElements);
     }
@@ -24,26 +35,29 @@ if(extractionDefinitionPaginationTypeSelect) {
 
   function showElements(elements) {
     each(elements, (element) => {
-      element.style.display = 'block';
+      element.style.display = "block";
     });
   }
 
   function hideElements(elements) {
     each(elements, (element) => {
-      element.style.display = 'none';
+      element.style.display = "none";
     });
   }
 
-  const extractionDefinitionAddHeader = document.getElementById('js-extraction-definition-add-header');
+  const extractionDefinitionAddHeader = document.getElementById(
+    "js-extraction-definition-add-header"
+  );
 
-  if(extractionDefinitionAddHeader) {
-    extractionDefinitionAddHeader.addEventListener('click', (event) => {
-
-      const formElements = document.querySelector('#js-extraction-definition-headers').getElementsByClassName('form-control');
+  if (extractionDefinitionAddHeader) {
+    extractionDefinitionAddHeader.addEventListener("click", (event) => {
+      const formElements = document
+        .querySelector("#js-extraction-definition-headers")
+        .getElementsByClassName("form-control");
       const lastElement = formElements[formElements.length - 1];
       let newId;
 
-      if(lastElement != undefined) {
+      if (lastElement != undefined) {
         const lastId = lastElement.id.match(/.+(?<id>\d)/).groups.id;
         newId = parseInt(lastId) + 1;
       } else {
@@ -74,12 +88,9 @@ if(extractionDefinitionPaginationTypeSelect) {
         </div>
       `;
 
-      document.getElementById('js-extraction-definition-headers')
-        .insertAdjacentHTML('beforeend', headerForm);
-
+      document
+        .getElementById("js-extraction-definition-headers")
+        .insertAdjacentHTML("beforeend", headerForm);
     });
   }
 }
-
-
-

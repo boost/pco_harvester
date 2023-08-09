@@ -16,13 +16,12 @@ const uiRequestsSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder
-      .addCase(previewRequest.fulfilled, (state, action) => {
-        uiRequestsAdapter.updateOne(state, {
-          id: action.meta.arg.id,
-          changes: { loading: false },
-        });
-      })
+    builder.addCase(previewRequest.fulfilled, (state, action) => {
+      uiRequestsAdapter.updateOne(state, {
+        id: action.meta.arg.id,
+        changes: { loading: false },
+      });
+    });
   },
 });
 

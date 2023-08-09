@@ -1,7 +1,9 @@
-
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addParameter, hasEmptyParameters } from "~/js/features/ExtractionApp/ParametersSlice";
+import {
+  addParameter,
+  hasEmptyParameters,
+} from "~/js/features/ExtractionApp/ParametersSlice";
 import { selectAppDetails } from "~/js/features/ExtractionApp/AppDetailsSlice";
 import { selectUiAppDetails } from "~/js/features/ExtractionApp/UiAppDetailsSlice";
 
@@ -20,7 +22,7 @@ const AddParameter = ({ kind, buttonText }) => {
         harvestDefinitionId: appDetails.harvestDefinition.id,
         pipelineId: appDetails.pipeline.id,
         extractionDefinitionId: appDetails.extractionDefinition.id,
-        requestId: uiAppDetails.activeRequest
+        requestId: uiAppDetails.activeRequest,
       })
     );
   };
@@ -32,7 +34,7 @@ const AddParameter = ({ kind, buttonText }) => {
         className="btn btn-outline-primary"
         onClick={() => addNewParameter()}
       >
-        { buttonText }
+        {buttonText}
       </button>
     </div>
   );

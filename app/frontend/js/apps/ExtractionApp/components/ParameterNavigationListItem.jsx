@@ -9,16 +9,18 @@ import {
 const ParameterNavigationListItem = ({ id, index }) => {
   const dispatch = useDispatch();
 
-  const { name, kind, content } = useSelector((state) => selectParameterById(state, id));
-  const { displayed }  = useSelector((state) => selectUiParameterById(state, id));
+  const { name, kind } = useSelector((state) => selectParameterById(state, id));
+  const { displayed } = useSelector((state) =>
+    selectUiParameterById(state, id)
+  );
 
   const displayName = () => {
-    if(kind == 'slug') {
-      return `Slug ${index + 1}`
+    if (kind == "slug") {
+      return `Slug ${index + 1}`;
     }
 
     return name;
-  }
+  };
 
   return (
     <li className="nav-item">

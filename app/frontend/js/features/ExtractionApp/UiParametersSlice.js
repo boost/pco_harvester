@@ -23,7 +23,7 @@ const uiParametersSlice = createSlice({
           return { id: parameter.id, changes: { displayed: displayed } };
         })
       );
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -42,14 +42,13 @@ const uiParametersSlice = createSlice({
           id: action.meta.arg.id,
           changes: { saving: true, hasRun: false },
         });
-
       })
       .addCase(updateParameter.fulfilled, (state, action) => {
         uiParametersAdapter.updateOne(state, {
           id: action.meta.arg.id,
           changes: { saving: false },
         });
-      })
+      });
   },
 });
 

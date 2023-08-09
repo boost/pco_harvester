@@ -9,12 +9,12 @@ const AddField = ({ kind }) => {
   const emptyFields = useSelector(hasEmptyFields);
 
   const buttonText = () => {
-    if(kind == 'field') {
-      return 'field'
+    if (kind == "field") {
+      return "field";
     }
 
-    return 'condition';
-  }
+    return "condition";
+  };
 
   const addNewField = () => {
     dispatch(
@@ -36,7 +36,7 @@ const AddField = ({ kind }) => {
         className="btn btn-outline-primary"
         onClick={() => addNewField()}
       >
-        + Add { buttonText() }
+        + Add {buttonText()}
       </button>
     </div>
   );

@@ -5,7 +5,7 @@ const uiAppDetailsSlice = createSlice({
   initialState: {},
   reducers: {
     updateActiveRequest(state, action) {
-      state.activeRequest = action.payload
+      state.activeRequest = action.payload;
     },
   },
 });

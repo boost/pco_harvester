@@ -50,16 +50,16 @@ const TransformationApp = ({}) => {
   };
 
   const transformedRecord = () => {
-    if(!isEmpty(appDetails.rejectionReasons)) {
-      return `Rejected by: ${appDetails.rejectionReasons.join(' ')}`
+    if (!isEmpty(appDetails.rejectionReasons)) {
+      return `Rejected by: ${appDetails.rejectionReasons.join(" ")}`;
     }
 
-    if(!isEmpty(appDetails.deletionReasons)) {
-      return `Deleted by: ${appDetails.deletionReasons.join(' ')}`
+    if (!isEmpty(appDetails.deletionReasons)) {
+      return `Deleted by: ${appDetails.deletionReasons.join(" ")}`;
     }
 
     return appDetails.transformedRecord;
-  }
+  };
 
   return (
     <div className="row">
@@ -98,10 +98,7 @@ const TransformationApp = ({}) => {
                   </button>
                 </div>
 
-                <RecordViewer
-                  record={ transformedRecord() }
-                  format="JSON"
-                />
+                <RecordViewer record={transformedRecord()} format="JSON" />
               </div>
             </div>
           </div>

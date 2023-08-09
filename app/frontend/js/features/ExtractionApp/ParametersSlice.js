@@ -5,14 +5,23 @@ import {
 } from "@reduxjs/toolkit";
 import { request } from "~/js/utils/request";
 
-import { some } from 'lodash';
+import { some } from "lodash";
 
 const parametersAdapter = createEntityAdapter();
 
 export const addParameter = createAsyncThunk(
   "parameters/addParameterStatus",
   async (payload) => {
-    const { name, content, kind, dynamic, harvestDefinitionId, pipelineId, extractionDefinitionId, requestId } = payload;
+    const {
+      name,
+      content,
+      kind,
+      dynamic,
+      harvestDefinitionId,
+      pipelineId,
+      extractionDefinitionId,
+      requestId,
+    } = payload;
 
     const response = request
       .post(
@@ -23,7 +32,7 @@ export const addParameter = createAsyncThunk(
             kind: kind,
             name: name,
             content: content,
-            dynamic: dynamic
+            dynamic: dynamic,
           },
         }
       )
@@ -37,10 +46,20 @@ export const addParameter = createAsyncThunk(
 
 export const updateParameter = createAsyncThunk(
   "parameters/updateParameterSlice",
-  
+
   async (payload) => {
-    const { id, pipelineId, harvestDefinitionId, extractionDefinitionId, requestId, name, content, kind, dynamic } = payload;
-   
+    const {
+      id,
+      pipelineId,
+      harvestDefinitionId,
+      extractionDefinitionId,
+      requestId,
+      name,
+      content,
+      kind,
+      dynamic,
+    } = payload;
+
     const response = request
       .patch(
         `/pipelines/${pipelineId}/harvest_definitions/${harvestDefinitionId}/extraction_definitions/${extractionDefinitionId}/requests/${requestId}/parameters/${id}`,
@@ -49,7 +68,7 @@ export const updateParameter = createAsyncThunk(
             name: name,
             content: content,
             kind: kind,
-            dynamic: dynamic
+            dynamic: dynamic,
           },
         }
       )
@@ -59,12 +78,18 @@ export const updateParameter = createAsyncThunk(
 
     return response;
   }
-)
+);
 
 export const deleteParameter = createAsyncThunk(
   "parameters/deleteParameterStatus",
   async (payload) => {
-    const { id, pipelineId, harvestDefinitionId, extractionDefinitionId, requestId } = payload;
+    const {
+      id,
+      pipelineId,
+      harvestDefinitionId,
+      extractionDefinitionId,
+      requestId,
+    } = payload;
 
     const response = request
       .delete(
@@ -79,8 +104,8 @@ export const deleteParameter = createAsyncThunk(
 );
 
 export const hasEmptyParameters = (state) => {
-  return some(selectAllParameters(state), { 'content': '' });
-}
+  return some(selectAllParameters(state), { content: "" });
+};
 
 const parametersSlice = createSlice({
   name: "parametersSlice",

@@ -1,18 +1,20 @@
 import React from "react";
 
-import { map, filter, concat } from 'lodash';
+import { map, filter, concat } from "lodash";
 import { useSelector, useDispatch } from "react-redux";
 
-import { selectParameterIds, selectAllParameters } from "~/js/features/ExtractionApp/ParametersSlice";
-import { selectRequestById, updateRequest } from "~/js/features/ExtractionApp/RequestsSlice";
-
 import {
-  selectAppDetails,
-} from "~/js/features/ExtractionApp/AppDetailsSlice";
-
+  selectParameterIds,
+  selectAllParameters,
+} from "~/js/features/ExtractionApp/ParametersSlice";
 import {
-  selectUiAppDetails,
-} from "~/js/features/ExtractionApp/UiAppDetailsSlice";
+  selectRequestById,
+  updateRequest,
+} from "~/js/features/ExtractionApp/RequestsSlice";
+
+import { selectAppDetails } from "~/js/features/ExtractionApp/AppDetailsSlice";
+
+import { selectUiAppDetails } from "~/js/features/ExtractionApp/UiAppDetailsSlice";
 
 import RequestFragment from "~/js/apps/ExtractionApp/components/RequestFragment";
 
@@ -20,39 +22,44 @@ const Request = ({}) => {
   const dispatch = useDispatch();
   const appDetails = useSelector(selectAppDetails);
   const uiAppDetails = useSelector(selectUiAppDetails);
-  
-  const { id, base_url, http_method } = useSelector((state) => selectRequestById(state, uiAppDetails.activeRequest));
+
+  const { id, base_url, http_method } = useSelector((state) =>
+    selectRequestById(state, uiAppDetails.activeRequest)
+  );
 
   let allParameters = useSelector(selectAllParameters);
-  allParameters = filter(allParameters, ['request_id', uiAppDetails.activeRequest]);
+  allParameters = filter(allParameters, [
+    "request_id",
+    uiAppDetails.activeRequest,
+  ]);
 
-  const slugParameters    = filter(allParameters, ['kind', 'slug']);
-  const queryParameters   = filter(allParameters, ['kind', 'query']);
-  const headerParameters  = filter(allParameters, ['kind', 'header']);
+  const slugParameters = filter(allParameters, ["kind", "slug"]);
+  const queryParameters = filter(allParameters, ["kind", "query"]);
+  const headerParameters = filter(allParameters, ["kind", "header"]);
 
   const handleHttpMethodClick = (method) => {
     dispatch(
-      updateRequest(
-        {
-          id: id,
-          base_url: base_url,
-          http_method: method,
-          harvestDefinitionId: appDetails.harvestDefinition.id,
-          pipelineId: appDetails.pipeline.id,
-          extractionDefinitionId: appDetails.extractionDefinition.id,
-        }        
-      )
-    )    
-  }
+      updateRequest({
+        id: id,
+        base_url: base_url,
+        http_method: method,
+        harvestDefinitionId: appDetails.harvestDefinition.id,
+        pipelineId: appDetails.pipeline.id,
+        extractionDefinitionId: appDetails.extractionDefinition.id,
+      })
+    );
+  };
 
-  return(
+  return (
     <div className="card">
       <div className="card-body">
-
         <div className="d-flex d-row justify-content-between align-items-center">
           <div>
             <h5 className="m-0 d-inline">Initial request URL</h5>
-            <p>{ queryParameters.length } query parameters, { slugParameters.length } slug parameters, and { headerParameters.length} header parameters.</p>
+            <p>
+              {queryParameters.length} query parameters, {slugParameters.length}{" "}
+              slug parameters, and {headerParameters.length} header parameters.
+            </p>
           </div>
 
           {
@@ -68,22 +75,34 @@ const Request = ({}) => {
             // </div>
           }
         </div>
-        
-        <strong className='float-start me-2'>URL</strong>
 
-        <p>{base_url}
+        <strong className="float-start me-2">URL</strong>
+
+        <p>
+          {base_url}
           {map(slugParameters, (slugParameter, index) => {
-            return <RequestFragment id={slugParameter.id} index={index} key={slugParameter.id} />
+            return (
+              <RequestFragment
+                id={slugParameter.id}
+                index={index}
+                key={slugParameter.id}
+              />
+            );
           })}
 
           {map(queryParameters, (queryParameter, index) => {
-            return <RequestFragment id={queryParameter.id} index={index} key={queryParameter.id}/>
+            return (
+              <RequestFragment
+                id={queryParameter.id}
+                index={index}
+                key={queryParameter.id}
+              />
+            );
           })}
         </p>
       </div>
-
     </div>
-  )
-}
+  );
+};
 
 export default Request;

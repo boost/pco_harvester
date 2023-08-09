@@ -19,12 +19,12 @@ const FieldNavigationListItem = ({ id }) => {
   });
 
   const placeholderListItemText = () => {
-    if(kind == 'field') {
-      return 'field';
-    } 
+    if (kind == "field") {
+      return "field";
+    }
 
-    return 'condition';
-  }
+    return "condition";
+  };
 
   return (
     <li className="nav-item">
