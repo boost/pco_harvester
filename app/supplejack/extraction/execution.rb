@@ -7,15 +7,10 @@ module Extraction
       @extraction_job = job
       @extraction_definition = extraction_definition
       @harvest_job = @extraction_job.harvest_job
-      @de = DocumentExtraction.new(@extraction_definition.requests.first, @extraction_job.extraction_folder)
-      @previous_request = nil
     end
 
     def call
-      @previous_request = @de.extract
-      @de.save
-
-      enqueue_record_transformation
+      extract_and_save_document(@extraction_definition.requests.first)
 
       return if @extraction_job.is_sample?
       return unless @extraction_definition.paginated?
@@ -25,11 +20,7 @@ module Extraction
       (@extraction_definition.page...max_pages).each do
         @extraction_definition.page += 1
 
-        @de = DocumentExtraction.new(@extraction_definition.requests.last, @extraction_job.extraction_folder, @previous_request.body)
-        @previous_request = @de.extract
-        @de.save
-
-        enqueue_record_transformation
+        extract_and_save_document(@extraction_definition.requests.last)
 
         sleep @extraction_definition.throttle / 1000.0
 
@@ -43,6 +34,14 @@ module Extraction
     end
 
     private
+
+    def extract_and_save_document(request)
+      @de = DocumentExtraction.new(request, @extraction_job.extraction_folder, @previous_request&.body)
+      @previous_request = @de.extract
+      @de.save
+      
+      enqueue_record_transformation
+    end
 
     def total_results
       if @extraction_definition.format == 'HTML'
