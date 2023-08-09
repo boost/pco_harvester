@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe Extraction::DocumentExtraction do
   let(:extraction_job)        { create(:extraction_job) }
   let(:extraction_definition) { create(:extraction_definition, base_url: 'https://api.figshare.com') }
-  let(:request)               { create(:request, :figshare, extraction_definition:) }
+  let(:request)               { create(:request, :figshare_initial_request, extraction_definition:) }
   subject                     { described_class.new(request, extraction_job.extraction_folder) }
 
   before do

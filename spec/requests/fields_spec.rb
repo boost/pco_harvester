@@ -4,11 +4,11 @@ require 'rails_helper'
 
 RSpec.describe 'Fields', type: :request do
   let(:user)                       { create(:user) }
-  let(:pipeline)                   { create(:pipeline, :ngataonga) }
+  let(:pipeline)                   { create(:pipeline, :figshare) }
   let(:extraction_definition)      { pipeline.harvest.extraction_definition }
   let(:harvest_definition)         { create(:harvest_definition, transformation_definition:, pipeline:) }
   let(:extraction_job)             { create(:extraction_job, extraction_definition:) }
-  let!(:transformation_definition) { create(:transformation_definition, pipeline:, extraction_job:) }
+  let!(:transformation_definition) { create(:transformation_definition, pipeline:, extraction_job:, record_selector: '$..items') }
 
   before do
     sign_in user
@@ -83,36 +83,31 @@ RSpec.describe 'Fields', type: :request do
 
   describe '#run' do
     context 'with a valid fields' do
+      let(:request) { create(:request, :figshare_initial_request, extraction_definition:) }
       let!(:field_one) do
-        create(:field, name: 'title', block: "JsonPath.new('title').on(record).first", transformation_definition:)
+        create(:field, name: 'title', block: "record['title']", transformation_definition:)
       end
       let!(:field_two) do
-        create(:field, name: 'source', block: "JsonPath.new('source').on(record).first", transformation_definition:)
-      end
-      let!(:field_three) do
-        create(:field, name: 'dc_identifier', block: "JsonPath.new('reference_number').on(record).first",
+        create(:field, name: 'dc_identifier', block: "record['article_id']",
                        transformation_definition:)
       end
-      let!(:field_four) { create(:field, name: 'landing_url', block: '"http://www.ngataonga.org.nz/collections/catalogue/catalogue-item?record_id=#{record[\'record_id\']}"', transformation_definition:) }
 
       before do
-        stub_ngataonga_harvest_requests(extraction_definition)
+        stub_figshare_harvest_requests(request)
         ExtractionWorker.new.perform(extraction_job.id)
       end
 
       it 'returns a new record made up of the given transformation fields' do
         post run_pipeline_harvest_definition_transformation_definition_fields_path(pipeline, harvest_definition, transformation_definition), params: {
-          fields: [field_one.id, field_two.id, field_three.id, field_four.id],
+          fields: [field_one.id, field_two.id],
           page: 1,
           record: 1
         }
 
         transformed_record = JSON.parse(response.body)['transformation']['transformed_record']
 
-        expect(transformed_record['title']).to eq ['U-series. Diary of a member of the Long Range Desert Group. Part 1']
-        expect(transformed_record['source']).to eq ['Sound Collection']
-        expect(transformed_record['dc_identifier']).to eq ['12032']
-        expect(transformed_record['landing_url']).to eq ['http://www.ngataonga.org.nz/collections/catalogue/catalogue-item?record_id=170844']
+        expect(transformed_record['title']).to eq ['Visual outcomes with femtosecond laser-assisted cataract surgery versus conventional cataract surgery in toric IOL insertion']
+        expect(transformed_record['dc_identifier']).to eq [22947914]
       end
 
       it 'returns a new record with rejection reasons if the record should be rejected' do

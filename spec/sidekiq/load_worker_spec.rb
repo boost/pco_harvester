@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe LoadWorker, type: :job do
-  let!(:pipeline)              { create(:pipeline, :ngataonga) }
+  let!(:pipeline)              { create(:pipeline, :figshare) }
   let!(:harvest_definition)    { pipeline.harvest }
   let!(:enrichment_definition) { create(:harvest_definition, kind: 'enrichment', pipeline:) }
   let(:destination)            { create(:destination) }

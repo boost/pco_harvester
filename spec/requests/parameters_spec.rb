@@ -12,7 +12,7 @@ RSpec.describe "Parameters", type: :request do
   end
 
   describe '#create' do
-    let(:parameter) { build(:parameter, request:, key: 'key', value: 'value') }
+    let(:parameter) { build(:parameter, request:, name: 'key', content: 'value') }
 
     context 'with valid parameters' do
       it 'creates a new parameter' do
@@ -31,8 +31,8 @@ RSpec.describe "Parameters", type: :request do
 
         parameter = JSON.parse(response.body)
 
-        expect(parameter['key']).to eq 'key'
-        expect(parameter['value']).to eq 'value'
+        expect(parameter['name']).to eq 'key'
+        expect(parameter['content']).to eq 'value'
       end
     end
   end
@@ -43,23 +43,23 @@ RSpec.describe "Parameters", type: :request do
     context 'with valid parameters' do
       it 'updates the parameter' do
         patch pipeline_harvest_definition_extraction_definition_request_parameter_path(pipeline, harvest_definition, extraction_definition, request, parameter), params: {
-          parameter: { key: 'X-Forwarded-For', value: 'ab.cd.ef.gh' }
+          parameter: { name: 'X-Forwarded-For', content: 'ab.cd.ef.gh' }
         }
 
         parameter.reload
 
-        expect(parameter.key).to eq 'X-Forwarded-For'
-        expect(parameter.value).to eq 'ab.cd.ef.gh'
+        expect(parameter.name).to eq 'X-Forwarded-For'
+        expect(parameter.content).to eq 'ab.cd.ef.gh'
       end
 
       
       it 'returns a JSON hash of the updated parameter' do
         patch pipeline_harvest_definition_extraction_definition_request_parameter_path(pipeline, harvest_definition, extraction_definition, request, parameter), params: {
-          parameter: { key: 'X-Forwarded-For', value: 'ab.cd.ef.gh' }
+          parameter: { name: 'X-Forwarded-For', content: 'ab.cd.ef.gh' }
         }
 
-        expect(JSON.parse(response.body)['key']).to eq 'X-Forwarded-For'
-        expect(JSON.parse(response.body)['value']).to eq 'ab.cd.ef.gh'
+        expect(JSON.parse(response.body)['name']).to eq 'X-Forwarded-For'
+        expect(JSON.parse(response.body)['content']).to eq 'ab.cd.ef.gh'
       end
     end
   end
