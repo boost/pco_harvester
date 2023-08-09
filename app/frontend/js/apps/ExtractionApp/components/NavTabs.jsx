@@ -30,7 +30,7 @@ const NavTabs = () => {
 
   const handleTabClick = (id) => {
     dispatch(
-      toggleDisplayParameters({ parameters: allParameters, displayed: false })
+      toggleDisplayParameters({ parameters: allParameters, displayed: true })
     );
     dispatch(updateActiveRequest(id));
   };
