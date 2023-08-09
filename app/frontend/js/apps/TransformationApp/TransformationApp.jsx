@@ -5,12 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import classNames from "classnames";
 
 // Actions from state
-import { selectFieldIds } from "~/js/features/FieldsSlice";
-import { selectUiAppDetails } from "~/js/features/UiAppDetailsSlice";
-import { toggleSection } from "~/js/features/UiAppDetailsSlice";
+import { selectFieldIds } from "~/js/features/TransformationApp/FieldsSlice";
+import { selectUiAppDetails } from "~/js/features/TransformationApp/UiAppDetailsSlice";
+import { toggleSection } from "~/js/features/TransformationApp/UiAppDetailsSlice";
 
 // Fields from state
-import { selectAppDetails } from "~/js/features/AppDetailsSlice";
+import { selectAppDetails } from "~/js/features/TransformationApp/AppDetailsSlice";
 
 // Components
 import RecordViewer from "~/js/apps/TransformationApp/components/RecordViewer";

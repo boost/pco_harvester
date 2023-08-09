@@ -6,18 +6,18 @@ import { isEmpty } from "lodash";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-import { updateField, deleteField } from "~/js/features/FieldsSlice";
-import { selectFieldById } from "~/js/features/FieldsSlice";
+import { updateField, deleteField } from "~/js/features/TransformationApp/FieldsSlice";
+import { selectFieldById } from "~/js/features/TransformationApp/FieldsSlice";
 import {
   selectAppDetails,
   clickedOnRunFields,
-} from "~/js/features/AppDetailsSlice";
-import { selectUiAppDetails } from "~/js/features/UiAppDetailsSlice";
-import { toggleDisplayField } from "~/js/features/UiFieldsSlice";
+} from "~/js/features/TransformationApp/AppDetailsSlice";
+import { selectUiAppDetails } from "~/js/features/TransformationApp/UiAppDetailsSlice";
+import { toggleDisplayField } from "~/js/features/TransformationApp/UiFieldsSlice";
 
-import { selectRawRecord } from "/js/features/RawRecordSlice";
+import { selectRawRecord } from "/js/features/TransformationApp/RawRecordSlice";
 
-import { selectUiFieldById } from "~/js/features/UiFieldsSlice";
+import { selectUiFieldById } from "~/js/features/TransformationApp/UiFieldsSlice";
 import Tooltip from "~/js/components/Tooltip";
 import CodeEditor from "~/js/components/CodeEditor";
 

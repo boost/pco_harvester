@@ -1,10 +1,10 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectFieldById } from "~/js/features/FieldsSlice";
+import { selectFieldById } from "~/js/features/TransformationApp/FieldsSlice";
 import {
   selectUiFieldById,
   toggleDisplayField,
-} from "~/js/features/UiFieldsSlice";
+} from "~/js/features/TransformationApp/UiFieldsSlice";
 import classNames from "classnames";
 
 const FieldNavigationListItem = ({ id }) => {

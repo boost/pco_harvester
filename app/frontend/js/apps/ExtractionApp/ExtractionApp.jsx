@@ -12,7 +12,7 @@ import ParameterNavigationPanel from "/js/apps/ExtractionApp/components/Paramete
 
 import { selectParameterIds } from "~/js/features/ExtractionApp/ParametersSlice";
 
-import { selectAppDetails } from "~/js/features/AppDetailsSlice";
+import { selectAppDetails } from "~/js/features/TransformationApp/AppDetailsSlice";
 
 const ExtractionApp = ({}) => {
   const parameterIds = useSelector(selectParameterIds);

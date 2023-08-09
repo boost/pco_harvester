@@ -1,10 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { selectUiAppDetails } from "/js/features/UiAppDetailsSlice";
+import { selectUiAppDetails } from "/js/features/TransformationApp/UiAppDetailsSlice";
 import ExpandCollapseIcon from "./components/ExpandCollapseIcon";
 import RecordViewer from "~/js/apps/TransformationApp/components/RecordViewer";
 import JumpTo from "./JumpTo";
-import { selectRawRecord } from "/js/features/RawRecordSlice";
+import { selectRawRecord } from "/js/features/TransformationApp/RawRecordSlice";
 
 const RawDataBody = ({ clickToggleSection }) => {
   const { body, format, error } = useSelector(selectRawRecord);

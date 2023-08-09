@@ -1,9 +1,9 @@
-import { createListenerMiddleware, isAnyOf } from "@reduxjs/toolkit";
+import { createListenerMiddleware } from "@reduxjs/toolkit";
 import {
   selectAllUiFields,
   selectDisplayedFieldIds,
   toggleDisplayField,
-} from "./features/UiFieldsSlice";
+} from "./features/TransformationApp/UiFieldsSlice";
 
 export const loadDisplayedFields = (state) => {
   let stateUiFields = selectAllUiFields(state);

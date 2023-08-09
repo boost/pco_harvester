@@ -5,13 +5,13 @@ import { Provider } from 'react-redux'
 
 // entities
 
-import fields from "~/js/features/FieldsSlice";
-import appDetails from '~/js/features/AppDetailsSlice';
+import fields from "~/js/features/TransformationApp/FieldsSlice";
+import appDetails from '~/js/features/TransformationApp/AppDetailsSlice';
 
 // ui
 
-import uiFields from "~/js/features/UiFieldsSlice";
-import uiAppDetails from "~/js/features/UiAppDetailsSlice";
+import uiFields from "~/js/features/TransformationApp/UiFieldsSlice";
+import uiAppDetails from "~/js/features/TransformationApp/UiAppDetailsSlice";
 
 export function renderWithProviders(
   ui,

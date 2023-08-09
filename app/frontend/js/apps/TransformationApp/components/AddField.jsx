@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addField, hasEmptyFields } from "~/js/features/FieldsSlice";
-import { selectAppDetails } from "~/js/features/AppDetailsSlice";
+import { addField, hasEmptyFields } from "~/js/features/TransformationApp/FieldsSlice";
+import { selectAppDetails } from "~/js/features/TransformationApp/AppDetailsSlice";
 
 const AddField = ({ kind }) => {
   const dispatch = useDispatch();

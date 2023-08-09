@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   clickedOnRunFields,
   selectAppDetails,
-} from "/js/features/AppDetailsSlice";
-import { selectFieldIds } from "/js/features/FieldsSlice";
-import { selectUiAppDetails } from "~/js/features/UiAppDetailsSlice";
-import { selectRawRecord } from "/js/features/RawRecordSlice";
+} from "/js/features/TransformationApp/AppDetailsSlice";
+import { selectFieldIds } from "/js/features/TransformationApp/FieldsSlice";
+import { selectUiAppDetails } from "~/js/features/TransformationApp/UiAppDetailsSlice";
+import { selectRawRecord } from "/js/features/TransformationApp/RawRecordSlice";
 
 const HeaderActions = () => {
   const dispatch = useDispatch();

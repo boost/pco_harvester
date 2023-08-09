@@ -3,7 +3,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import {
   displayedParametersListener,
   loadDisplayedParameters,
-} from "./displayedParametersListener";
+} from "/js/displayedParametersListener";
 
 // entities
 

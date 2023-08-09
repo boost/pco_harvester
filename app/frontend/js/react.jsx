@@ -6,7 +6,7 @@ import ReactDOM from "react-dom/client";
 import TransformationApp from "/js/apps/TransformationApp/TransformationApp";
 
 import { Provider } from "react-redux";
-import configureAppStore from "/js/store";
+import configureAppStore from "/js/apps/TransformationApp/store";
 
 import ErrorBoundary from "./components/ErrorBoundary";
 
@@ -32,7 +32,7 @@ if (transformationAppHTMLElement !== null) {
 // Extraction App
 
 import ExtractionApp from "/js/apps/ExtractionApp/ExtractionApp";
-import configureExtractionAppStore from "/js/extractionStore";
+import configureExtractionAppStore from "/js/apps/ExtractionApp/store";
 
 const extractionAppHTMLElement = document.querySelector("#js-extraction-app");
 
