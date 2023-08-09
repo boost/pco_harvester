@@ -8,7 +8,7 @@ class Request < ApplicationRecord
 
   delegate :base_url, to: :extraction_definition
   delegate :format,   to: :extraction_definition
-  
+
   enum :http_method, { GET: 0, POST: 1 }
 
   def url(response = nil)
@@ -32,7 +32,7 @@ class Request < ApplicationRecord
       .map(&:to_h)
       .reduce(&:merge)
   end
-  
+
   def to_h
     {
       id:,
@@ -53,9 +53,9 @@ class Request < ApplicationRecord
   end
 
   private
-    
+
   def slug(response)
-   parameters
+    parameters
       .slug
       .map { |parameter| parameter.evaluate(response) }
       .map(&:content)

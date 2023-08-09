@@ -39,7 +39,7 @@ module Extraction
       @de = DocumentExtraction.new(request, @extraction_job.extraction_folder, @previous_request&.body)
       @previous_request = @de.extract
       @de.save
-      
+
       enqueue_record_transformation
     end
 

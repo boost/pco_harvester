@@ -163,7 +163,9 @@ RSpec.describe 'Transformation Definitions', type: :request do
     let(:extraction_definition)   { pipeline.harvest.extraction_definition }
     let(:extraction_job)          { create(:extraction_job, extraction_definition:) }
     let(:request)                 { create(:request, :figshare_initial_request, extraction_definition:) }
-    let(:subject)                 { create(:transformation_definition, pipeline:, extraction_job:, record_selector: '$..items') }
+    let(:subject)                 do
+      create(:transformation_definition, pipeline:, extraction_job:, record_selector: '$..items')
+    end
 
     before do
       # that's to test the display of results
@@ -179,7 +181,8 @@ RSpec.describe 'Transformation Definitions', type: :request do
       expect(response.status).to eq 200
 
       json_data = JSON.parse(response.body)['result']
-      expected_keys = %w[article_id title DOI description type url published_date authors links defined_type modified_date]
+      expected_keys = %w[article_id title DOI description type url published_date authors links defined_type
+                         modified_date]
 
       expected_keys.each do |key|
         expect(json_data).to have_key(key)

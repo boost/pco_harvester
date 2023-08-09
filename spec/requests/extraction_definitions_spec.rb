@@ -48,7 +48,8 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
           extraction_definition: extraction_definition2.attributes
         }
 
-        expect(response).to redirect_to pipeline_harvest_definition_extraction_definition_path(pipeline, harvest_definition, ExtractionDefinition.last)
+        expect(response).to redirect_to pipeline_harvest_definition_extraction_definition_path(pipeline,
+                                                                                               harvest_definition, ExtractionDefinition.last)
       end
 
       it 'associates an extraction definition with a provided harvest definition' do
@@ -105,7 +106,8 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
           extraction_definition: { name: 'Flickr' }
         }
 
-        expect(response).to redirect_to(pipeline_harvest_definition_extraction_definition_path(pipeline, harvest_definition, extraction_definition))
+        expect(response).to redirect_to(pipeline_harvest_definition_extraction_definition_path(pipeline,
+                                                                                               harvest_definition, extraction_definition))
       end
     end
 

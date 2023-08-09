@@ -6,7 +6,7 @@ RSpec.describe Parameter, type: :model do
   describe 'validations' do
     subject { build(:parameter) }
   end
-  
+
   describe 'associations' do
     it { is_expected.to belong_to(:request) }
   end
@@ -20,7 +20,6 @@ RSpec.describe Parameter, type: :model do
       expect(query.query?).to eq true
     end
 
-    
     it 'can be a header parameter' do
       expect(header.header?).to eq true
     end
@@ -50,8 +49,11 @@ RSpec.describe Parameter, type: :model do
   describe '#evaluate' do
     let(:static) { create(:parameter, kind: 'query', name: 'itemsPerPage') }
     let(:dynamic) { create(:parameter, kind: 'query', name: 'itemsPerPage', content: '1 + 1', dynamic: true) }
-    let(:dynamic_response) { create(:parameter, kind: 'query', name: 'itemsPerPage', content: 'JSON.parse(response)["page_nr"] + 1', dynamic: true) }
-    let(:response) { '{ "page_nr": 2 }'}
+    let(:dynamic_response) do
+      create(:parameter, kind: 'query', name: 'itemsPerPage', content: 'JSON.parse(response)["page_nr"] + 1',
+                         dynamic: true)
+    end
+    let(:response) { '{ "page_nr": 2 }' }
 
     it 'returns the unevaluated parameter if it is not dynamic' do
       expect(static.evaluate).to eq static

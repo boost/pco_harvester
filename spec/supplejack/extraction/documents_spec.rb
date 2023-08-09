@@ -8,7 +8,7 @@ RSpec.describe Extraction::Documents do
   let(:pipeline) { create(:pipeline, :figshare) }
   let(:extraction_definition) { pipeline.harvest.extraction_definition }
   let(:extraction_job) { create(:extraction_job, extraction_definition:) }
-  let(:request)                 { create(:request, :figshare_initial_request, extraction_definition:) }
+  let(:request) { create(:request, :figshare_initial_request, extraction_definition:) }
 
   before do
     # that's to test the display of results

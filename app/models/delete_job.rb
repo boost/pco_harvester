@@ -2,7 +2,7 @@
 
 class DeleteJob < ApplicationRecord
   include Job
-  
+
   belongs_to :harvest_job, optional: true
   delegate :harvest_definition, to: :harvest_job
 

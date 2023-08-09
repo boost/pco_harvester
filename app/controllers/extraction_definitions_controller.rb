@@ -7,13 +7,13 @@ class ExtractionDefinitionsController < ApplicationController
   before_action :find_extraction_definition, only: %i[show edit update]
   before_action :find_destinations, only: %i[new create edit update]
 
-  def new
-    @extraction_definition = ExtractionDefinition.new(kind: params[:kind])
-  end
-
   def show
     @parameters = @extraction_definition.parameters.order(kind: :asc)
     @props = extraction_app_state
+  end
+
+  def new
+    @extraction_definition = ExtractionDefinition.new(kind: params[:kind])
   end
 
   def edit; end
@@ -28,7 +28,8 @@ class ExtractionDefinitionsController < ApplicationController
         Request.create(extraction_definition: @extraction_definition)
       end
 
-      redirect_to pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition, @extraction_definition), notice: 'Extraction Definition created successfully'
+      redirect_to pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition, @extraction_definition),
+                  notice: 'Extraction Definition created successfully'
     else
       flash.alert = 'There was an issue creating your Extraction Definition'
       render :new
@@ -39,7 +40,8 @@ class ExtractionDefinitionsController < ApplicationController
     if @extraction_definition.update(extraction_definition_params)
       flash.notice = 'Extraction Definition updated successfully'
 
-      redirect_to pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition, @extraction_definition)
+      redirect_to pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition,
+                                                                         @extraction_definition)
     else
       flash.alert = 'There was an issue updating your Extraction Definition'
       render 'edit'

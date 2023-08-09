@@ -8,7 +8,9 @@ RSpec.describe 'Fields', type: :request do
   let(:extraction_definition)      { pipeline.harvest.extraction_definition }
   let(:harvest_definition)         { create(:harvest_definition, transformation_definition:, pipeline:) }
   let(:extraction_job)             { create(:extraction_job, extraction_definition:) }
-  let!(:transformation_definition) { create(:transformation_definition, pipeline:, extraction_job:, record_selector: '$..items') }
+  let!(:transformation_definition) do
+    create(:transformation_definition, pipeline:, extraction_job:, record_selector: '$..items')
+  end
 
   before do
     sign_in user
@@ -107,11 +109,12 @@ RSpec.describe 'Fields', type: :request do
         transformed_record = JSON.parse(response.body)['transformation']['transformed_record']
 
         expect(transformed_record['title']).to eq ['Visual outcomes with femtosecond laser-assisted cataract surgery versus conventional cataract surgery in toric IOL insertion']
-        expect(transformed_record['dc_identifier']).to eq [22947914]
+        expect(transformed_record['dc_identifier']).to eq [22_947_914]
       end
 
       it 'returns a new record with rejection reasons if the record should be rejected' do
-        reject_field = create(:field, kind: 'reject_if', name: 'reject_block', block: "true", transformation_definition:)
+        reject_field = create(:field, kind: 'reject_if', name: 'reject_block', block: 'true',
+                                      transformation_definition:)
 
         post run_pipeline_harvest_definition_transformation_definition_fields_path(pipeline, harvest_definition, transformation_definition), params: {
           fields: [reject_field.id],
@@ -125,7 +128,8 @@ RSpec.describe 'Fields', type: :request do
       end
 
       it 'returns a new record with deletion reasons if the record should be deleted' do
-        delete_field = create(:field, kind: 'delete_if', name: 'delete_block', block: "true", transformation_definition:)
+        delete_field = create(:field, kind: 'delete_if', name: 'delete_block', block: 'true',
+                                      transformation_definition:)
 
         post run_pipeline_harvest_definition_transformation_definition_fields_path(pipeline, harvest_definition, transformation_definition), params: {
           fields: [delete_field.id],

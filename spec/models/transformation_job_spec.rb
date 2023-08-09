@@ -23,7 +23,9 @@ RSpec.describe TransformationJob, type: :model do
     end
 
     context 'when the extracted document is XML' do
-      let(:extraction_definition) { create(:extraction_definition, format: 'XML', total_selector: '//records/@total', page: 1, per_page: 100) }
+      let(:extraction_definition) do
+        create(:extraction_definition, format: 'XML', total_selector: '//records/@total', page: 1, per_page: 100)
+      end
       let(:extraction_job)            { create(:extraction_job, extraction_definition:) }
       let(:transformation_definition) { create(:transformation_definition, record_selector: '//work', extraction_job:) }
       let(:request_one)           { create(:request, :trove_initial_request, extraction_definition:) }
@@ -47,7 +49,10 @@ RSpec.describe TransformationJob, type: :model do
     end
 
     context 'when the extracted document is JSON' do
-      let(:extraction_definition) { create(:extraction_definition, format: 'JSON', total_selector: '$.total_results', page: 1, paginated: true, per_page: 30) }
+      let(:extraction_definition) do
+        create(:extraction_definition, format: 'JSON', total_selector: '$.total_results', page: 1, paginated: true,
+                                       per_page: 30)
+      end
       let(:request_one) { create(:request, :inaturalist_initial_request, extraction_definition:) }
       let(:request_two) { create(:request, :inaturalist_main_request, extraction_definition:) }
       let(:extraction_job)            { create(:extraction_job, extraction_definition:) }

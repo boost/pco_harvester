@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe "Requests", type: :request do
+RSpec.describe 'Requests', type: :request do
   let(:user)                       { create(:user) }
   let(:pipeline)                   { create(:pipeline) }
   let(:harvest_definition)         { create(:harvest_definition, extraction_definition:, pipeline:) }
@@ -12,7 +12,7 @@ RSpec.describe "Requests", type: :request do
     sign_in user
   end
 
-  describe "PATCH /update" do
+  describe 'PATCH /update' do
     let(:request) { create(:request) }
 
     context 'with valid parameters' do
@@ -25,7 +25,7 @@ RSpec.describe "Requests", type: :request do
 
         expect(request.http_method).to eq 'POST'
       end
-      
+
       it 'renders the request as JSON' do
         patch pipeline_harvest_definition_extraction_definition_request_path(pipeline, harvest_definition, extraction_definition, request), params: {
           request: { http_method: 'POST' }
@@ -47,7 +47,8 @@ RSpec.describe "Requests", type: :request do
     let(:request_two) { create(:request, :figshare_main_request, extraction_definition:) }
 
     it 'returns a JSON response of the completed request' do
-      get pipeline_harvest_definition_extraction_definition_request_path(pipeline, harvest_definition, extraction_definition, request_one)
+      get pipeline_harvest_definition_extraction_definition_request_path(pipeline, harvest_definition,
+                                                                         extraction_definition, request_one)
 
       expect(response.status).to eq 200
 
@@ -61,7 +62,8 @@ RSpec.describe "Requests", type: :request do
     end
 
     it 'returns a JSON response of the completed request referencing a response' do
-      get pipeline_harvest_definition_extraction_definition_request_path(pipeline, harvest_definition, extraction_definition, request_two, previous_request_id: request_one.id)
+      get pipeline_harvest_definition_extraction_definition_request_path(pipeline, harvest_definition,
+                                                                         extraction_definition, request_two, previous_request_id: request_one.id)
 
       expect(response.status).to eq 200
 

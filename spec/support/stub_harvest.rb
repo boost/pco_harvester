@@ -12,8 +12,8 @@ end
 def stub_figshare_harvest_requests(request)
   (1..5).each do |page|
     stub_request(:get, request.url).with(
-      query: { 
-        'page' => page, 
+      query: {
+        'page' => page,
         'itemsPerPage' => 10,
         'search_for' => 'zealand'
       },
@@ -25,10 +25,10 @@ end
 def stub_failed_figshare_harvest_requests(request)
   (1..5).each do |page|
     stub_request(:get, request.url).with(
-      query: { 
-        'page'         => page, 
+      query: {
+        'page' => page,
         'itemsPerPage' => request.extraction_definition.per_page,
-        'search_for'   => 'zealand'
+        'search_for' => 'zealand'
       },
       headers: fake_json_headers
     ).to_return(fake_response("failed_figshare_#{page}"))

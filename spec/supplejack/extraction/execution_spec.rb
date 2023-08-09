@@ -60,7 +60,9 @@ RSpec.describe Extraction::Execution do
 
     context 'when the job has been cancelled' do
       let(:extraction_job) { create(:extraction_job, status: 'cancelled') }
-      let(:extraction_definition) { create(:extraction_definition, :figshare, throttle: 500, extraction_jobs: [extraction_job]) }
+      let(:extraction_definition) do
+        create(:extraction_definition, :figshare, throttle: 500, extraction_jobs: [extraction_job])
+      end
       let(:subject) { described_class.new(extraction_job, extraction_definition) }
 
       it 'does not extract further pages' do
@@ -81,7 +83,9 @@ RSpec.describe Extraction::Execution do
       let(:harvest_definition)              { create(:harvest_definition, pipeline:) }
       let(:destination)                     { create(:destination) }
       let!(:harvest_job)                    { create(:harvest_job, extraction_job:, harvest_definition:, destination:) }
-      let!(:sample_harvest_job)             { create(:harvest_job, extraction_job: sample_extraction_job, harvest_definition:, destination:) }
+      let!(:sample_harvest_job)             do
+        create(:harvest_job, extraction_job: sample_extraction_job, harvest_definition:, destination:)
+      end
       let(:request_one)                     { create(:request, :figshare_initial_request, extraction_definition:) }
       let(:request_two)                     { create(:request, :figshare_main_request, extraction_definition:) }
 
@@ -142,7 +146,10 @@ RSpec.describe Extraction::Execution do
         let(:subject) { described_class.new(extraction_job, extraction_definition) }
 
         context 'when the extraction_definition pagination_type is token' do
-          let(:extraction_definition) { create(:extraction_definition, format: 'JSON', total_selector: '$.total_results', page: 1, paginated: true, per_page: 30) }
+          let(:extraction_definition) do
+            create(:extraction_definition, format: 'JSON', total_selector: '$.total_results', page: 1, paginated: true,
+                                           per_page: 30)
+          end
           let(:request_one) { create(:request, :inaturalist_initial_request, extraction_definition:) }
           let(:request_two) { create(:request, :inaturalist_main_request, extraction_definition:) }
 
@@ -181,10 +188,10 @@ RSpec.describe Extraction::Execution do
         let(:subject) { described_class.new(extraction_job, extraction_definition) }
 
         context 'when the extraction_definition pagination_type is page' do
-          let(:extraction_definition) {
+          let(:extraction_definition) do
             create(:extraction_definition, format: 'XML', paginated: true, total_selector: '//count/text()',
                                            page: 1, per_page: 50)
-          }
+          end
           let(:request_one) { create(:request, :freesound_initial_request, extraction_definition:) }
           let(:request_two) { create(:request, :freesound_main_request, extraction_definition:) }
 
@@ -206,7 +213,10 @@ RSpec.describe Extraction::Execution do
         end
 
         context 'when the extraction_definition pagination_type is tokenised' do
-          let(:extraction_definition) { create(:extraction_definition, format: 'XML', pagination_type: 'tokenised', total_selector: '//records/@total', page: 1, paginated: true, per_page: 100) }
+          let(:extraction_definition) do
+            create(:extraction_definition, format: 'XML', pagination_type: 'tokenised', total_selector: '//records/@total',
+                                           page: 1, paginated: true, per_page: 100)
+          end
           let(:request_one)           { create(:request, :trove_initial_request, extraction_definition:) }
           let(:request_two)           { create(:request, :trove_main_request, extraction_definition:) }
 

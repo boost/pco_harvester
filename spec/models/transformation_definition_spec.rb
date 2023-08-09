@@ -7,7 +7,9 @@ RSpec.describe TransformationDefinition, type: :model do
   let(:extraction_definition) { pipeline.harvest.extraction_definition }
   let(:extraction_job)        { create(:extraction_job, extraction_definition:) }
   let(:request)                 { create(:request, :figshare_initial_request, extraction_definition:) }
-  let(:subject)               { create(:transformation_definition, pipeline:, extraction_job:, record_selector: '$..items') }
+  let(:subject) do
+    create(:transformation_definition, pipeline:, extraction_job:, record_selector: '$..items')
+  end
 
   let!(:field_one) do
     create(:field, name: 'title', block: "JsonPath.new('title').on(record).first", transformation_definition: subject)

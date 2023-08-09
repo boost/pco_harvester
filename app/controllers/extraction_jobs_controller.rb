@@ -25,7 +25,8 @@ class ExtractionJobsController < ApplicationController
       flash.alert = 'There was an issue launching the job'
     end
 
-    redirect_to pipeline_harvest_definition_extraction_definition_extraction_jobs_path(@pipeline, @harvest_definition, @extraction_definition)
+    redirect_to pipeline_harvest_definition_extraction_definition_extraction_jobs_path(@pipeline, @harvest_definition,
+                                                                                       @extraction_definition)
   end
 
   def destroy

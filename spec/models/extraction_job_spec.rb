@@ -123,10 +123,10 @@ RSpec.describe ExtractionJob, type: :model do
     before do
       (1...6).each do |page|
         request = create(:request, extraction_definition:)
-        create(:parameter, name: 'url_param', content: 'url_value', kind: 'query', request: request)
-        create(:parameter, name: 'per_page', content: '50', kind: 'query', request: request)
-        create(:parameter, name: 'page', content: page, kind: 'query', request: request)
-          
+        create(:parameter, name: 'url_param', content: 'url_value', kind: 'query', request:)
+        create(:parameter, name: 'per_page', content: '50', kind: 'query', request:)
+        create(:parameter, name: 'page', content: page, kind: 'query', request:)
+
         stub_request(:get, 'http://google.com').with(
           query: { 'page' => page, 'per_page' => 50, 'url_param' => 'url_value' },
           headers: fake_json_headers

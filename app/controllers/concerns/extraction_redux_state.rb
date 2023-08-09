@@ -7,7 +7,7 @@ module ExtractionReduxState
     {
       entities: {
         requests: requests_slice,
-        parameters: parameters_slice, 
+        parameters: parameters_slice,
         appDetails: extraction_app_details_slice
       },
       ui: {
@@ -31,7 +31,7 @@ module ExtractionReduxState
   def requests_slice
     {
       ids: @extraction_definition.requests.map { |request| request[:id] },
-      entities: @extraction_definition.requests.map(&:to_h).index_by { |request| request[:id] },
+      entities: @extraction_definition.requests.map(&:to_h).index_by { |request| request[:id] }
     }
   end
 
@@ -39,7 +39,7 @@ module ExtractionReduxState
     {
       pipeline: @pipeline,
       harvestDefinition: @harvest_definition,
-      extractionDefinition: @extraction_definition,
+      extractionDefinition: @extraction_definition
     }
   end
 
@@ -63,11 +63,11 @@ module ExtractionReduxState
       entities: parameter_entities.index_by { |parameter| parameter[:id] }
     }
   end
-  
+
   def ui_parameter_entity(parameter)
     {
       id: parameter[:id],
-      saved: true, 
+      saved: true,
       saving: false,
       deleting: false,
       displayed: false

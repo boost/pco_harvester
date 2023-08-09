@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Parameters", type: :request do
+RSpec.describe 'Parameters', type: :request do
   let(:user)                       { create(:user) }
   let(:pipeline)                   { create(:pipeline) }
   let(:harvest_definition)         { create(:harvest_definition, extraction_definition:, pipeline:) }
@@ -23,7 +23,6 @@ RSpec.describe "Parameters", type: :request do
         end.to change(Parameter, :count).by(1)
       end
 
-      
       it 'returns a JSON object representing the new parameter' do
         post pipeline_harvest_definition_extraction_definition_request_parameters_path(pipeline, harvest_definition, extraction_definition, request), params: {
           parameter: parameter.attributes
@@ -52,7 +51,6 @@ RSpec.describe "Parameters", type: :request do
         expect(parameter.content).to eq 'ab.cd.ef.gh'
       end
 
-      
       it 'returns a JSON hash of the updated parameter' do
         patch pipeline_harvest_definition_extraction_definition_request_parameter_path(pipeline, harvest_definition, extraction_definition, request, parameter), params: {
           parameter: { name: 'X-Forwarded-For', content: 'ab.cd.ef.gh' }
@@ -69,12 +67,14 @@ RSpec.describe "Parameters", type: :request do
 
     it 'deletes the parameter' do
       expect do
-        delete pipeline_harvest_definition_extraction_definition_request_parameter_path(pipeline, harvest_definition, extraction_definition, request, parameter)
+        delete pipeline_harvest_definition_extraction_definition_request_parameter_path(pipeline, harvest_definition,
+                                                                                        extraction_definition, request, parameter)
       end.to change(Parameter, :count).by(-1)
     end
 
     it 'returns a successful response' do
-      delete pipeline_harvest_definition_extraction_definition_request_parameter_path(pipeline, harvest_definition, extraction_definition, request, parameter)
+      delete pipeline_harvest_definition_extraction_definition_request_parameter_path(pipeline, harvest_definition,
+                                                                                      extraction_definition, request, parameter)
 
       expect(response.status).to eq 200
     end

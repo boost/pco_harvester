@@ -6,7 +6,7 @@ FactoryBot.define do
     base_url { "#{Faker::Internet.url}" }
     throttle { 0 }
     kind { 0 }
-    per_page { 50 }	
+    per_page { 50 }
     total_selector { '$.totalObjects' }
     page { 1 }
     paginated { false }

@@ -2,7 +2,7 @@
 
 class ParametersController < ApplicationController
   before_action :find_parameter, only: %i[update destroy]
-  
+
   def create
     @parameter = Parameter.new(parameter_params)
 
