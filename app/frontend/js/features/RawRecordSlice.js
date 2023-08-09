@@ -1,23 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { request } from "../utils/request";
-
-export const askNewRawRecord = createAsyncThunk(
-  "fields/askNewRawRecordStatus",
-  async (payload) => {
-    const { transformationDefinitionId, page, record, fields } = payload;
-
-    const response = request
-      .get(
-        `/transformation_definitions/${transformationDefinitionId}/raw_records`,
-        { params: { page: page, record: record, fields: fields } }
-      )
-      .then(function (response) {
-        return response.data;
-      });
-
-    return response;
-  }
-);
+import { createSlice } from "@reduxjs/toolkit";
+import { clickedOnRunFields } from "./AppDetailsSlice";
 
 const rawRecordSlice = createSlice({
   name: "rawRecordSlice",
@@ -25,11 +7,11 @@ const rawRecordSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(askNewRawRecord.pending, (state) => {
+      .addCase(clickedOnRunFields.pending, (state) => {
         state.isFetching = true;
         state.error = null;
       })
-      .addCase(askNewRawRecord.fulfilled, (state, action) => {
+      .addCase(clickedOnRunFields.fulfilled, (state, action) => {
         state.isFetching = false;
         state.error = null;
         state.page = action.payload.rawRecordSlice.page;
@@ -42,7 +24,7 @@ const rawRecordSlice = createSlice({
           `${window.location.pathname}?page=${state.page}&record=${state.record}`
         );
       })
-      .addCase(askNewRawRecord.rejected, (state, action) => {
+      .addCase(clickedOnRunFields.rejected, (state, action) => {
         state.isFetching = false;
         state.error = "An error occured fetching the raw record.";
       });

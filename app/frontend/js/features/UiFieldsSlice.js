@@ -24,7 +24,7 @@ const uiFieldsSlice = createSlice({
           return { id: field.id, changes: { displayed: displayed } };
         })
       );
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -75,7 +75,7 @@ const uiFieldsSlice = createSlice({
               id: id,
               changes: {
                 running: false,
-                error: action.payload.errors[id],
+                error: action.payload.transformation.errors[id],
                 hasRun: true,
               },
             };

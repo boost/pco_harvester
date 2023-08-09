@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { askNewRawRecord, selectRawRecord } from "/js/features/RawRecordSlice";
-import { selectAppDetails } from "/js/features/AppDetailsSlice";
+import { selectRawRecord } from "/js/features/RawRecordSlice";
+import {
+  clickedOnRunFields,
+  selectAppDetails,
+} from "/js/features/AppDetailsSlice";
 import { selectFieldIds } from "/js/features/FieldsSlice";
 
 const JumpTo = () => {
   const dispatch = useDispatch();
 
-  const { transformationDefinition } = useSelector(selectAppDetails);
+  const appDetails = useSelector(selectAppDetails);
 
   const fieldIds = useSelector(selectFieldIds);
   const { isFetching, page, record, totalPages, totalRecords } =
@@ -24,33 +27,39 @@ const JumpTo = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(
-      askNewRawRecord({
-        fields: fieldIds,
-        transformationDefinitionId: transformationDefinition.id,
+      clickedOnRunFields({
+        harvestDefinitionId: appDetails.harvestDefinition.id,
+        pipelineId: appDetails.pipeline.id,
+        transformationDefinitionId: appDetails.transformationDefinition.id,
         page: inputPage,
         record: inputRecord,
+        fields: fieldIds,
       })
     );
   };
 
   const handleNextRecordClick = (e) => {
     dispatch(
-      askNewRawRecord({
-        fields: fieldIds,
-        transformationDefinitionId: transformationDefinition.id,
+      clickedOnRunFields({
+        harvestDefinitionId: appDetails.harvestDefinition.id,
+        pipelineId: appDetails.pipeline.id,
+        transformationDefinitionId: appDetails.transformationDefinition.id,
         page: record === totalRecords ? page + 1 : page,
         record: record === totalRecords ? 1 : record + 1,
+        fields: fieldIds,
       })
     );
   };
 
   const handlePreviousRecordClick = (e) => {
     dispatch(
-      askNewRawRecord({
-        fields: fieldIds,
-        transformationDefinitionId: transformationDefinition.id,
+      clickedOnRunFields({
+        harvestDefinitionId: appDetails.harvestDefinition.id,
+        pipelineId: appDetails.pipeline.id,
+        transformationDefinitionId: appDetails.transformationDefinition.id,
         page: record === 1 ? page - 1 : page,
         record: record === 1 ? totalRecords : record - 1,
+        fields: fieldIds,
       })
     );
   };

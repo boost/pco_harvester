@@ -41,7 +41,7 @@ Rails.application.routes.draw do
           resources :parameters
         end
       end
-      
+
       resources :transformation_definitions, only: %i[new create show edit update destroy] do
         post :test, on: :collection
         post :update_harvest_definitions, on: :member
@@ -51,10 +51,6 @@ Rails.application.routes.draw do
         end
       end
     end
-  end
-
-  resources :transformation_definitions, only: [] do
-    resources :raw_records, only: %i[index]
   end
 
   get :jobs, to: 'extraction_jobs#index', as: :extraction_jobs
