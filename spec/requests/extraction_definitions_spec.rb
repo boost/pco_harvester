@@ -42,13 +42,13 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
         expect(ExtractionDefinition.last.requests.count).to eq 2
       end
 
-      it 'redirects to the pipeline_path' do
+      it 'redirects to the extraction definition' do
         extraction_definition2 = build(:extraction_definition, pipeline:)
         post pipeline_harvest_definition_extraction_definitions_path(pipeline, harvest_definition), params: {
           extraction_definition: extraction_definition2.attributes
         }
 
-        expect(response).to redirect_to pipeline_path(pipeline)
+        expect(response).to redirect_to pipeline_harvest_definition_extraction_definition_path(pipeline, harvest_definition, ExtractionDefinition.last)
       end
 
       it 'associates an extraction definition with a provided harvest definition' do

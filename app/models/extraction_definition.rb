@@ -31,6 +31,9 @@ class ExtractionDefinition < ApplicationRecord
 
   validates :throttle, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 60_000 }
 
+  validates :page, numericality: { only_integer: true }
+  validates :per_page, numericality: { only_integer: true }
+
   # Harvest related validation
   with_options if: :harvest? do
     validates :format, presence: true, inclusion: { in: %w[JSON XML HTML] }
