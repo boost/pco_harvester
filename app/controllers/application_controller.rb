@@ -3,7 +3,7 @@
 class ApplicationController < ActionController::Base
   include UserAuthorization
   include DeviseOverrides
-  include ReduxState
+  include TransformationReduxState
   include ExtractionReduxState
 
   def paginate_and_filter_jobs(jobs)
