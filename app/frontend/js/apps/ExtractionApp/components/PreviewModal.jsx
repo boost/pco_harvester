@@ -22,6 +22,9 @@ const PreviewModal = ({ showModal, handleClose, initialRequestId, mainRequestId 
       onHide={handleClose}
       className="modal--full-width"
     >
+      <Modal.Header closeButton>
+        <Modal.Title>Preview</Modal.Title>
+      </Modal.Header>
       <Modal.Body>
         <div className="row">
           <div className={initialRequestClasses}>
