@@ -14,6 +14,8 @@ class HarvestJob < ApplicationRecord
   delegate :pipeline, to: :harvest_definition
   delegate :extraction_definition, to: :harvest_definition
   delegate :transformation_definition, to: :harvest_definition
+  
+  enum :page_type, { all_pages: 0, custom: 1 }
 
   # This is to ensure that there is only ever one version of a HarvestJob running.
   # It is used when enqueing enrichments at the end of a harvest.
@@ -51,6 +53,10 @@ class HarvestJob < ApplicationRecord
     return if end_time.nil? || start_time.nil?
 
     end_time - start_time
+  end
+  
+  with_options if: :custom? do
+    validates :pages, presence: true
   end
 
   def errored?

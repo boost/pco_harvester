@@ -12,32 +12,24 @@
       type="button"
       class="btn btn-primary me-1"
       data-bs-toggle="modal"
-      data-bs-target="#run-pipeline"
+      data-bs-target="#run-settings"
     >
       <i class='bi bi-play'></i>
-        Run Pipeline
+        Run 
     </button>
     
-    <%= render layout: 'shared/create-modal', locals: { modal_heading: 'Run Pipeline', id: 'run-pipeline', modal_subheading: 'Define the settings for this one-off harvest'  } do %>
+    <%= render layout: 'shared/create-modal', locals: { modal_heading: 'Run Settings', id: 'run-settings' } do %>
       <%= vertical_form_with(model: [@pipeline, @harvest_definition, @harvest_job]) do |form| %>
         <div class='row gy-3 align-items-center'>
           <%= form.hidden_field :harvest_definition_id, value: @harvest_definition.id %>
           <%= form.hidden_field :key, value: SecureRandom.hex %>
           
           <div class="col-4">
-            <%= label_tag :extraction_type, "Extraction type", class: "form-label" %>
-          </div>
-          
-          <div class='col-8'>
-            <%= select_tag :extraction_type, raw('<option>Existing job output</option><option>Fetch new data ???</output>'), class: "form-select" %>
-          </div>
-          
-          <div class="col-4">
-            <%= form.label :extraction_job_id, "Job output", class: "form-label" %>
+            <%= form.label :extraction_job_id, "Extraction output", class: "form-label" %>
           </div>
 
           <div class='col-8'>
-            <%= form.collection_select(:extraction_job_id, @extraction_jobs, :id, :name, {}, class: 'form-select') %>
+            <%= form.collection_select(:extraction_job_id, @extraction_jobs, :id, :name, { include_blank: 'Fresh extraction' }, class: 'form-select') %>
           </div>
 
           <div class="col-4">
@@ -50,7 +42,7 @@
         </div>
 
         <div class='d-grid mt-4'>
-          <button type="submit" class="btn btn-primary">Run pipeline</button>
+          <button type="submit" class="btn btn-primary">Run</button>
         </div>
       <% end %>
     <% end %>
