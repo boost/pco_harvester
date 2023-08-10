@@ -1,10 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
-import {
-  displayedParametersListener,
-  loadDisplayedParameters,
-} from "/js/displayedParametersListener";
-
 // entities
 
 import parameters from "/js/features/ExtractionApp/ParametersSlice";
@@ -21,8 +16,6 @@ import uiAppDetails from "/js/features/ExtractionApp/UiAppDetailsSlice";
 import config from "/js/features/ConfigSlice";
 
 export default function configureAppStore(preloadedState) {
-  loadDisplayedParameters(preloadedState);
-
   const store = configureStore({
     reducer: combineReducers({
       entities: combineReducers({
@@ -37,8 +30,6 @@ export default function configureAppStore(preloadedState) {
       }),
       config,
     }),
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(displayedParametersListener.middleware),
     preloadedState,
   });
 

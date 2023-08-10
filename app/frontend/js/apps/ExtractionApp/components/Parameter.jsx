@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import classNames from "classnames";
 
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
+import ParameterDeleteModal from "~/js/apps/ExtractionApp/components/ParameterDeleteModal";
 import CodeEditor from "~/js/components/CodeEditor";
 
 import {
@@ -13,7 +12,6 @@ import {
 } from "~/js/features/ExtractionApp/ParametersSlice";
 
 import { selectAppDetails } from "~/js/features/ExtractionApp/AppDetailsSlice";
-
 import { selectUiAppDetails } from "~/js/features/ExtractionApp/UiAppDetailsSlice";
 
 import {
@@ -95,19 +93,6 @@ const Parameter = ({ id }) => {
 
   const handleHideClick = () => {
     dispatch(toggleDisplayParameter({ id: id, displayed: false }));
-  };
-
-  const handleDeleteClick = () => {
-    dispatch(
-      deleteParameter({
-        id: id,
-        harvestDefinitionId: appDetails.harvestDefinition.id,
-        pipelineId: appDetails.pipeline.id,
-        extractionDefinitionId: appDetails.extractionDefinition.id,
-        requestId: uiAppDetails.activeRequest,
-      })
-    );
-    handleClose();
   };
 
   const valueColumnClasses = classNames({
@@ -261,22 +246,8 @@ const Parameter = ({ id }) => {
         </div>
       </div>
 
-      <Modal show={showModal} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Delete</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          Are you sure you want to delete the parameter "{name}"?
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="danger" onClick={handleDeleteClick}>
-            Delete
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <ParameterDeleteModal showModal={showModal} handleClose={handleClose} id={id} name={name}/>
+
     </>
   );
 };

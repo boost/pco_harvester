@@ -59,7 +59,7 @@ const Preview = ({ id }) => {
                   Request Headers
                 </button>
               </h2>
-              <div id="headers" className="accordion-collapse collapse show">
+              <div id="headers" className="accordion-collapse collapse">
                 <div className="accordion-body">
                   {map(preview.request_headers, (value, key) => {
                     return (
@@ -107,7 +107,7 @@ const Preview = ({ id }) => {
               </h2>
               <div
                 id="response-headers"
-                className="accordion-collapse collapse show"
+                className="accordion-collapse collapse"
               >
                 <div className="accordion-body">
                   {map(preview.response_headers, (value, key) => {

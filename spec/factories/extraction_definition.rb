@@ -11,17 +11,6 @@ FactoryBot.define do
     page { 1 }
     paginated { false }
 
-    trait :ngataonga do
-      name { 'api.ngataonga.org.nz' }
-      base_url { 'http://api.ngataonga.org.nz/records.json/?api_key=MYAPIKEY&and[has_media]=true' }
-      throttle { 0 }
-      page_parameter { 'page' }
-      page { 1 }
-      per_page_parameter { 'per_page' }
-      per_page { 50 }
-      total_selector { '$..result_count' }
-    end
-
     trait :figshare do
       name     { 'api.figshare.com' }
       format   { 'JSON' }

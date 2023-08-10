@@ -17,11 +17,6 @@ RSpec.describe TransformationDefinition, type: :model do
   let!(:field_two) do
     create(:field, name: 'source', block: "JsonPath.new('source').on(record).first", transformation_definition: subject)
   end
-  let!(:field_three) do
-    create(:field, name: 'dc_identifier', block: "JsonPath.new('reference_number').on(record).first",
-                   transformation_definition: subject)
-  end
-  let!(:field_four) { create(:field, name: 'landing_url', block: '"http://www.ngataonga.org.nz/collections/catalogue/catalogue-item?record_id=#{record[\'record_id\']}"', transformation_definition: subject) }
 
   before do
     # that's to test the display of results

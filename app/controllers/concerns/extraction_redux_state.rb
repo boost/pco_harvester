@@ -70,7 +70,7 @@ module ExtractionReduxState
       saved: true,
       saving: false,
       deleting: false,
-      displayed: false
+      displayed: parameter.request == @extraction_definition.requests.first
     }
   end
 
