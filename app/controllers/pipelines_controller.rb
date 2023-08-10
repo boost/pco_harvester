@@ -15,6 +15,8 @@ class PipelinesController < ApplicationController
 
     @enrichment_definition = HarvestDefinition.new(pipeline: @pipeline)
 
+    @extraction_jobs = @harvest_definition.extraction_definition.extraction_jobs.completed.order(created_at: :desc)
+
     @destinations = Destination.all
   end
 

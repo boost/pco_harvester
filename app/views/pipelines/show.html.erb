@@ -19,7 +19,7 @@
     </button>
     
     <%= render layout: 'shared/create-modal', locals: { modal_heading: 'Run Pipeline', id: 'run-pipeline', modal_subheading: 'Define the settings for this one-off harvest'  } do %>
-      <%= vertical_form_with(model: [@pipeline, @harvest_definition], url: pipeline_harvest_definition_harvest_jobs_path(@pipeline, @harvest_definition)) do |form| %>
+      <%= vertical_form_with(model: [@pipeline, @harvest_definition, @harvest_job]) do |form| %>
         <div class='row gy-3 align-items-center'>
           <%= form.hidden_field :harvest_definition_id, value: @harvest_definition.id %>
           <%= form.hidden_field :key, value: SecureRandom.hex %>
@@ -33,11 +33,11 @@
           </div>
           
           <div class="col-4">
-            <%= form.label :job_id, "Job output", class: "form-label" %>
+            <%= form.label :extraction_job_id, "Job output", class: "form-label" %>
           </div>
 
           <div class='col-8'>
-            <%= form.select :job_id, options_from_collection_for_select(@destinations, 'id', 'name'), {},  class: "form-select" %>
+            <%= form.collection_select(:extraction_job_id, @extraction_jobs, :id, :name, {}, class: 'form-select') %>
           </div>
 
           <div class="col-4">
@@ -50,7 +50,7 @@
         </div>
 
         <div class='d-grid mt-4'>
-          <button type="submit" class="btn btn-primary">Run harvest</button>
+          <button type="submit" class="btn btn-primary">Run pipeline</button>
         </div>
       <% end %>
     <% end %>
