@@ -14,6 +14,8 @@ class HarvestJob < ApplicationRecord
   delegate :pipeline, to: :harvest_definition
   delegate :extraction_definition, to: :harvest_definition
   delegate :transformation_definition, to: :harvest_definition
+
+  serialize :harvest_definitions_to_run, Array
   
   enum :page_type, { all_available_pages: 0, set_number: 1 }
 

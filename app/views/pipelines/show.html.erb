@@ -44,6 +44,21 @@
             <%= form.number_field :pages, class: "form-control" %>
           </div>
 
+          <div class='col-5'>
+            <%= form.label :harvest_definitions_to_run, "Blocks to run", class: 'form-label' %>
+          </div>
+
+          <div class='col-7'>
+            <%- @pipeline.harvest_definitions.each do |harvest_definition| %>
+              <div class='form-check'>
+                <%= label_tag do %>
+                  <%= check_box('harvest_job', 'harvest_definitions_to_run', { multiple: true, class: 'form-check-input', checked: true }, harvest_definition.id) %>
+                  <%= harvest_definition.source_id %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+
           <div class="col-5">
             <%= form.label :destination, "Destination", class: "form-label" %>
           </div>
