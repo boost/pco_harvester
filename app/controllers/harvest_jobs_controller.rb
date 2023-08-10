@@ -46,6 +46,6 @@ class HarvestJobsController < ApplicationController
   end
 
   def harvest_job_params
-    params.require(:harvest_job).permit(:extraction_job_id, :harvest_definition_id, :destination_id, :key)
+    params.require(:harvest_job).permit(:extraction_job_id, :harvest_definition_id, :destination_id, :key, :page_type, :pages)
   end
 end

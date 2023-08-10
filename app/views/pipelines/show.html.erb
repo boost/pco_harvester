@@ -36,11 +36,11 @@
             <%= form.label :page_type, "Pages to transform", class: "form-label" %>
           </div>
           
-          <div class='col-5'>
-            <%= form.select :page_type, options_for_select(HarvestJob.page_types.map { |key, value| [key.humanize, value] }), {},  class: "form-select" %>
+          <div id='js-pipeline-page-type' class='col-7'>
+            <%= form.select :page_type, options_for_select(HarvestJob.page_types.map { |key, value| [key.humanize, key] }), {},  id: 'js-pipeline-page-type-select', class: "form-select" %>
           </div>
           
-          <div class='col-2'>
+          <div id='js-pipeline-pages' class='col-2 d-none'>
             <%= form.number_field :pages, class: "form-control" %>
           </div>
 

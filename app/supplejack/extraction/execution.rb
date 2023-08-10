@@ -15,8 +15,6 @@ module Extraction
       return if @extraction_job.is_sample?
       return unless @extraction_definition.paginated?
 
-      max_pages = (total_results / @extraction_definition.per_page) + 1
-
       (@extraction_definition.page...max_pages).each do
         @extraction_definition.page += 1
 
@@ -41,6 +39,12 @@ module Extraction
       @de.save
 
       enqueue_record_transformation
+    end
+
+    def max_pages
+      return @harvest_job.pages if @harvest_job.set_number?
+
+      (total_results / @extraction_definition.per_page) + 1
     end
 
     def total_results
