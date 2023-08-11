@@ -95,6 +95,7 @@ class HarvestJob < ApplicationRecord
       next unless enrichment.ready_to_run?
 
       next if HarvestJob.find_by(key: "#{harvest_key}__enrichment-#{enrichment.id}").present?
+      next unless harvest_definitions_to_run.map(&:to_i).include?(enrichment.id)
 
       enrichment_job = HarvestJob.create(
         harvest_definition: enrichment,

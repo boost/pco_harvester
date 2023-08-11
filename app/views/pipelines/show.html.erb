@@ -52,7 +52,7 @@
             <%- @pipeline.harvest_definitions.each do |harvest_definition| %>
               <div class='form-check'>
                 <%= label_tag do %>
-                  <%= check_box('harvest_job', 'harvest_definitions_to_run', { multiple: true, class: 'form-check-input', checked: true }, harvest_definition.id) %>
+                  <%= check_box('harvest_job', 'harvest_definitions_to_run', { multiple: true, class: 'form-check-input', checked: true }, harvest_definition.id, nil) %>
                   <%= harvest_definition.source_id %>
                 <% end %>
               </div>
