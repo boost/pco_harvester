@@ -61,6 +61,10 @@ class HarvestJob < ApplicationRecord
     validates :pages, presence: true
   end
 
+  def should_run?(id)
+    harvest_definitions_to_run.map(&:to_i).include?(id)
+  end
+
   def errored?
     extraction_job.errored? || (transformation_jobs.any?(&:errored?) && load_jobs.any?(&:errored?))
   end
@@ -92,16 +96,16 @@ class HarvestJob < ApplicationRecord
     return unless harvest_complete?
 
     pipeline.enrichments.each do |enrichment|
+      next unless should_run?(enrichment.id)
       next unless enrichment.ready_to_run?
-
       next if HarvestJob.find_by(key: "#{harvest_key}__enrichment-#{enrichment.id}").present?
-      next unless harvest_definitions_to_run.map(&:to_i).include?(enrichment.id)
 
       enrichment_job = HarvestJob.create(
         harvest_definition: enrichment,
         destination_id: destination.id,
         key: "#{harvest_key}__enrichment-#{enrichment.id}",
-        target_job_id: name
+        target_job_id: name,
+        harvest_definitions_to_run:
       )
 
       HarvestWorker.perform_async(enrichment_job.id)

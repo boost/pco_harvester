@@ -137,4 +137,21 @@ RSpec.describe HarvestJob, type: :model do
       expect(create(:harvest_job, harvest_definition:, destination:, page_type: 1, pages: 10).custom?).to eq true
     end
   end  
+
+  describe '#should_run?' do
+    let(:pipeline) { create(:pipeline) }
+    let!(:harvest_definition) { create(:harvest_definition, pipeline:) }
+    let!(:enrichment_definition_one) { create(:harvest_definition, :enrichment, pipeline:) }
+    let!(:enrichment_definition_two) { create(:harvest_definition, :enrichment, pipeline:) }
+    let(:harvest_job)                { create(:harvest_job, harvest_definitions_to_run: [harvest_definition.id, enrichment_definition_one.id], harvest_definition:, destination:) }
+    let(:no_harvest_job)             { create(:harvest_job, harvest_definitions_to_run: [enrichment_definition_two.id], harvest_definition:, destination:) }
+
+    it 'returns true if the provided id is included in the harvest_definitions_to_run attribute' do
+      expect(harvest_job.should_run?(harvest_definition.id)).to eq true
+    end
+
+    it 'returns false if the provided id is not included in the harvest job' do
+      expect(no_harvest_job.should_run?(enrichment_definition_one.id)).to eq false
+    end
+  end
 end

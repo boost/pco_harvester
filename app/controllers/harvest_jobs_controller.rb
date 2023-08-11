@@ -8,13 +8,31 @@ class HarvestJobsController < ApplicationController
   def show; end
 
   def create
-    @harvest_job = HarvestJob.new(harvest_job_params)
+    if should_queue_harvest_job?
+      @harvest_job = HarvestJob.new(harvest_job_params)
 
-    if @harvest_job.save
-      HarvestWorker.perform_async(@harvest_job.id)
-      flash.notice = 'Harvest job queued successfuly'
+      if @harvest_job.save
+        HarvestWorker.perform_async(@harvest_job.id)
+
+        flash.notice = 'Harvest job queued successfuly'
+      else
+        flash.alert = 'There was an issue launching the harvest job'
+      end
     else
-      flash.alert = 'There was an issue launching the harvest job'
+      @pipeline.enrichments.each do |enrichment|
+        next unless should_queue_job?(enrichment.id)
+
+        enrichment_job = HarvestJob.create(
+          harvest_definition: enrichment,
+          destination_id: harvest_job_params['destination_id'],
+          key: "#{harvest_job_params['harvest_key']}__enrichment-#{enrichment.id}",
+          harvest_definitions_to_run: harvest_job_params['harvest_definitions_to_run']
+        )
+
+        HarvestWorker.perform_async(enrichment_job.id)
+      end
+      
+      flash.notice = 'Enrichment jobs queued successfuly'
     end
 
     redirect_to pipeline_jobs_path(@pipeline)
@@ -32,6 +50,14 @@ class HarvestJobsController < ApplicationController
   end
 
   private
+
+  def should_queue_harvest_job?
+    should_queue_job?(@pipeline.harvest.id)
+  end
+
+  def should_queue_job?(id)
+    harvest_job_params['harvest_definitions_to_run'].map(&:to_i).include?(id)
+  end
 
   def find_pipeline
     @pipeline = Pipeline.find(params[:pipeline_id])
