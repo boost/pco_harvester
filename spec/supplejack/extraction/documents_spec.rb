@@ -5,13 +5,14 @@ require 'rails_helper'
 RSpec.describe Extraction::Documents do
   subject { extraction_job.documents }
 
-  let(:pipeline) { create(:pipeline, :ngataonga) }
+  let(:pipeline) { create(:pipeline, :figshare) }
   let(:extraction_definition) { pipeline.harvest.extraction_definition }
   let(:extraction_job) { create(:extraction_job, extraction_definition:) }
+  let(:request) { create(:request, :figshare_initial_request, extraction_definition:) }
 
   before do
     # that's to test the display of results
-    stub_ngataonga_harvest_requests(extraction_definition)
+    stub_figshare_harvest_requests(request)
     ExtractionWorker.new.perform(extraction_job.id)
   end
 

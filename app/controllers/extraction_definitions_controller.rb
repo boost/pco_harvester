@@ -4,8 +4,13 @@ class ExtractionDefinitionsController < ApplicationController
   before_action :find_pipeline
   before_action :find_referrer
   before_action :find_harvest_definition
-  before_action :find_extraction_definition, only: %i[edit update]
+  before_action :find_extraction_definition, only: %i[show edit update]
   before_action :find_destinations, only: %i[new create edit update]
+
+  def show
+    @parameters = @extraction_definition.parameters.order(created_at: :desc)
+    @props = extraction_app_state
+  end
 
   def new
     @extraction_definition = ExtractionDefinition.new(kind: params[:kind])
@@ -19,10 +24,12 @@ class ExtractionDefinitionsController < ApplicationController
     if @extraction_definition.save
       @harvest_definition.update(extraction_definition_id: @extraction_definition.id)
 
-      @extraction_job = ExtractionJob.create(extraction_definition: @extraction_definition, kind: 'sample')
-      ExtractionWorker.perform_async(@extraction_job.id)
+      2.times do
+        Request.create(extraction_definition: @extraction_definition)
+      end
 
-      redirect_to pipeline_path(@pipeline), notice: 'Extraction Definition created successfully'
+      redirect_to pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition, @extraction_definition),
+                  notice: 'Extraction Definition created successfully'
     else
       flash.alert = 'There was an issue creating your Extraction Definition'
       render :new
@@ -33,8 +40,9 @@ class ExtractionDefinitionsController < ApplicationController
     if @extraction_definition.update(extraction_definition_params)
       flash.notice = 'Extraction Definition updated successfully'
 
-      if @referrer.present?
-        redirect_to pipeline_path(@referrer)
+      if @extraction_definition.harvest?
+        redirect_to pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition,
+                                                                           @extraction_definition)
       else
         redirect_to pipeline_path(@pipeline)
       end
@@ -42,18 +50,6 @@ class ExtractionDefinitionsController < ApplicationController
       flash.alert = 'There was an issue updating your Extraction Definition'
       render 'edit'
     end
-  end
-
-  def test
-    @extraction_definition = ExtractionDefinition.new(extraction_definition_params.except('headers_attributes'))
-
-    if extraction_definition_params.include?('headers_attributes')
-      extraction_definition_params['headers_attributes'].each do |_key, header_attributes|
-        @extraction_definition.headers << Header.new(header_attributes)
-      end
-    end
-
-    render json: Extraction::DocumentExtraction.new(@extraction_definition).extract
   end
 
   def test_record_extraction
@@ -107,12 +103,9 @@ class ExtractionDefinitionsController < ApplicationController
   def extraction_definition_params
     params.require(:extraction_definition).permit(
       :pipeline_id,
-      :name, :format, :base_url, :throttle, :pagination_type,
-      :page_parameter, :per_page_parameter, :page, :per_page,
-      :total_selector,
-      :kind, :destination_id, :source_id, :enrichment_url,
-      :token_parameter, :token_value, :next_token_path, :initial_params,
-      headers_attributes: %i[id name value]
+      :name, :format, :base_url, :throttle, :page, :per_page,
+      :total_selector, :kind, :destination_id, :source_id, :enrichment_url,
+      :paginated
     )
   end
 end

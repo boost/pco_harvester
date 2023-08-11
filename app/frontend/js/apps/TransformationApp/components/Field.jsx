@@ -6,39 +6,31 @@ import { isEmpty } from "lodash";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-import { updateField, deleteField } from "~/js/features/FieldsSlice";
-import { selectFieldById } from "~/js/features/FieldsSlice";
+import { updateField, deleteField } from "~/js/features/TransformationApp/FieldsSlice";
+import { selectFieldById } from "~/js/features/TransformationApp/FieldsSlice";
 import {
   selectAppDetails,
   clickedOnRunFields,
-} from "~/js/features/AppDetailsSlice";
-import { selectUiAppDetails } from "~/js/features/UiAppDetailsSlice";
-import {
-  toggleDisplayField,
-} from "~/js/features/UiFieldsSlice";
+} from "~/js/features/TransformationApp/AppDetailsSlice";
+import { selectUiAppDetails } from "~/js/features/TransformationApp/UiAppDetailsSlice";
+import { toggleDisplayField } from "~/js/features/TransformationApp/UiFieldsSlice";
 
-import { selectRawRecord } from "/js/features/RawRecordSlice";
+import { selectRawRecord } from "/js/features/TransformationApp/RawRecordSlice";
 
-import {
-  selectUiFieldById,
-} from "~/js/features/UiFieldsSlice";
+import { selectUiFieldById } from "~/js/features/TransformationApp/UiFieldsSlice";
 import Tooltip from "~/js/components/Tooltip";
 import CodeEditor from "~/js/components/CodeEditor";
- const Field = ({ id }) => {
+
+const Field = ({ id }) => {
   const appDetails = useSelector(selectAppDetails);
-  const { name, block, kind } = useSelector((state) => selectFieldById(state, id));
+  const { name, block, kind } = useSelector((state) =>
+    selectFieldById(state, id)
+  );
 
   const rawRecord = useSelector(selectRawRecord);
 
-  const {
-    saved,
-    deleting,
-    saving,
-    running,
-    error,
-    hasRun,
-    displayed,
-  } = useSelector((state) => selectUiFieldById(state, id));
+  const { saved, deleting, saving, running, error, hasRun, displayed } =
+    useSelector((state) => selectUiFieldById(state, id));
 
   const dispatch = useDispatch();
 
@@ -46,8 +38,6 @@ import CodeEditor from "~/js/components/CodeEditor";
   const [kindValue, setKindValue] = useState(kind);
   const [blockValue, setBlockValue] = useState(block);
   const [showModal, setShowModal] = useState(false);
-
-  const uiAppDetails = useSelector(selectUiAppDetails);
 
   const handleSaveClick = () => {
     dispatch(
@@ -64,8 +54,8 @@ import CodeEditor from "~/js/components/CodeEditor";
   };
 
   const handleHideClick = () => {
-    dispatch(toggleDisplayField({ id: id, displayed: false }))
-  }
+    dispatch(toggleDisplayField({ id: id, displayed: false }));
+  };
 
   const handleDeleteClick = () => {
     dispatch(
@@ -138,7 +128,10 @@ import CodeEditor from "~/js/components/CodeEditor";
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
 
-  const nameColumnClasses = classNames({'col-8': kind != 'field'}, { 'col-12': kind == 'field'});
+  const nameColumnClasses = classNames(
+    { "col-8": kind != "field" },
+    { "col-12": kind == "field" }
+  );
 
   return (
     <>
@@ -178,10 +171,7 @@ import CodeEditor from "~/js/components/CodeEditor";
                   <i className="bi bi-eye-slash" aria-hidden="true"></i> Hide
                 </button>
 
-                <button
-                  className="btn btn-outline-danger"
-                  onClick={handleShow}
-                >
+                <button className="btn btn-outline-danger" onClick={handleShow}>
                   <i className="bi bi-trash" aria-hidden="true"></i>
                   {deleting ? " Deleting..." : " Delete"}
                 </button>
@@ -189,12 +179,11 @@ import CodeEditor from "~/js/components/CodeEditor";
             </div>
 
             <div className="mt-3 show" id={`field-${id}-content`}>
-
               <div className="row">
                 <div className={nameColumnClasses}>
-                  <div className='row'>
+                  <div className="row">
                     <label className="col-form-label col-sm-2" htmlFor="name">
-                      <strong>Name{" "}</strong>
+                      <strong>Name </strong>
                       <Tooltip data-bs-title="This is the field name that the result of this transformation will appear under on the transformed record.">
                         <i
                           className="bi bi-question-circle"
@@ -203,24 +192,24 @@ import CodeEditor from "~/js/components/CodeEditor";
                       </Tooltip>
                     </label>
 
-                  <div className='col-sm-10'>
-                    <input
-                      id="name"
-                      type="text"
-                      className="form-control"
-                      required="required"
-                      defaultValue={name}
-                      onChange={(e) => setNameValue(e.target.value)}
-                    />
+                    <div className="col-sm-10">
+                      <input
+                        id="name"
+                        type="text"
+                        className="form-control"
+                        required="required"
+                        defaultValue={name}
+                        onChange={(e) => setNameValue(e.target.value)}
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
 
-                { kind != 'field' && (
+                {kind != "field" && (
                   <div className="col-4">
-                    <div className='row'>
+                    <div className="row">
                       <label className="col-form-label col-sm-4" htmlFor="name">
-                        <strong>Type{" "}</strong>
+                        <strong>Type </strong>
                         <Tooltip data-bs-title="A rejected record will be skipped during a harvest. A deleted record will be removed from the API if it has been harvested in the past.">
                           <i
                             className="bi bi-question-circle"
@@ -229,8 +218,13 @@ import CodeEditor from "~/js/components/CodeEditor";
                         </Tooltip>
                       </label>
 
-                      <div className='col-sm-8'>
-                        <select className="form-select" aria-label="Condition type" defaultValue={kind} onChange={(e) => setKindValue(e.target.value)}>
+                      <div className="col-sm-8">
+                        <select
+                          className="form-select"
+                          aria-label="Condition type"
+                          defaultValue={kind}
+                          onChange={(e) => setKindValue(e.target.value)}
+                        >
                           <option value="reject_if">Reject if</option>
                           <option value="delete_if">Delete if</option>
                         </select>

@@ -3,10 +3,13 @@
 require 'rails_helper'
 
 RSpec.describe TransformationDefinition, type: :model do
-  let(:pipeline)              { create(:pipeline, :ngataonga, name: 'National Library of New Zealand') }
+  let(:pipeline)              { create(:pipeline, :figshare, name: 'National Library of New Zealand') }
   let(:extraction_definition) { pipeline.harvest.extraction_definition }
   let(:extraction_job)        { create(:extraction_job, extraction_definition:) }
-  let(:subject)               { create(:transformation_definition, pipeline:, extraction_job:) }
+  let(:request)                 { create(:request, :figshare_initial_request, extraction_definition:) }
+  let(:subject) do
+    create(:transformation_definition, pipeline:, extraction_job:, record_selector: '$..items')
+  end
 
   let!(:field_one) do
     create(:field, name: 'title', block: "JsonPath.new('title').on(record).first", transformation_definition: subject)
@@ -14,21 +17,16 @@ RSpec.describe TransformationDefinition, type: :model do
   let!(:field_two) do
     create(:field, name: 'source', block: "JsonPath.new('source').on(record).first", transformation_definition: subject)
   end
-  let!(:field_three) do
-    create(:field, name: 'dc_identifier', block: "JsonPath.new('reference_number').on(record).first",
-                   transformation_definition: subject)
-  end
-  let!(:field_four) { create(:field, name: 'landing_url', block: '"http://www.ngataonga.org.nz/collections/catalogue/catalogue-item?record_id=#{record[\'record_id\']}"', transformation_definition: subject) }
 
   before do
     # that's to test the display of results
-    stub_ngataonga_harvest_requests(extraction_definition)
+    stub_figshare_harvest_requests(request)
     ExtractionWorker.new.perform(extraction_job.id)
   end
 
   describe '#attributes' do
     it 'has a record selector' do
-      expect(subject.record_selector).to eq '$..results'
+      expect(subject.record_selector).to eq '$..items'
     end
 
     it 'belongs to a pipeline' do
@@ -42,7 +40,7 @@ RSpec.describe TransformationDefinition, type: :model do
 
   describe '#records' do
     it 'returns the records from the job documents' do
-      expect(subject.records.first).to have_key 'record_id'
+      expect(subject.records.first).to have_key 'article_id'
     end
   end
 

@@ -1,4 +1,4 @@
-import { some } from 'lodash';
+import { some } from "lodash";
 
 import {
   createAsyncThunk,
@@ -10,8 +10,14 @@ import { request } from "~/js/utils/request";
 export const addField = createAsyncThunk(
   "fields/addFieldStatus",
   async (payload) => {
-    const { name, block, kind, pipelineId, harvestDefinitionId, transformationDefinitionId } =
-      payload;
+    const {
+      name,
+      block,
+      kind,
+      pipelineId,
+      harvestDefinitionId,
+      transformationDefinitionId,
+    } = payload;
 
     const response = request
       .post(
@@ -36,7 +42,8 @@ export const addField = createAsyncThunk(
 export const deleteField = createAsyncThunk(
   "fields/deleteFieldStatus",
   async (payload) => {
-    const { id, pipelineId, harvestDefinitionId, transformationDefinitionId } = payload;
+    const { id, pipelineId, harvestDefinitionId, transformationDefinitionId } =
+      payload;
 
     const response = request
       .delete(
@@ -53,8 +60,15 @@ export const deleteField = createAsyncThunk(
 export const updateField = createAsyncThunk(
   "fields/updateFieldStatus",
   async (payload) => {
-    const { id, pipelineId, harvestDefinitionId, transformationDefinitionId, name, block, kind } =
-      payload;
+    const {
+      id,
+      pipelineId,
+      harvestDefinitionId,
+      transformationDefinitionId,
+      name,
+      block,
+      kind,
+    } = payload;
 
     const response = request
       .patch(
@@ -63,7 +77,7 @@ export const updateField = createAsyncThunk(
           field: {
             name: name,
             block: block,
-            kind: kind
+            kind: kind,
           },
         }
       )
@@ -76,11 +90,12 @@ export const updateField = createAsyncThunk(
 );
 
 export const hasEmptyFields = (state) => {
-  return some(selectAllFields(state), { 'name': '' });
-}
+  return some(selectAllFields(state), { name: "" });
+};
 
 const fieldsAdapter = createEntityAdapter({
-  sortComparer: (fieldOne, fieldTwo) => fieldTwo.created_at.localeCompare(fieldOne.created_at),
+  sortComparer: (fieldOne, fieldTwo) =>
+    fieldTwo.created_at.localeCompare(fieldOne.created_at),
 });
 
 const fieldsSlice = createSlice({

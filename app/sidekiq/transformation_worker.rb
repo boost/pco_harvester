@@ -7,7 +7,9 @@ class TransformationWorker < ApplicationWorker
 
     transformed_records = transform_records(transformation_job.page).map(&:to_hash)
 
-    valid_records       = transformed_records.select { |record| record['rejection_reasons'].blank? && record['deletion_reasons'].blank? }
+    valid_records       = transformed_records.select do |record|
+      record['rejection_reasons'].blank? && record['deletion_reasons'].blank?
+    end
     rejected_records    = transformed_records.select { |record| record['rejection_reasons'].present? }
     deleted_records     = transformed_records.select { |record| record['deletion_reasons'].present? }
 
@@ -45,7 +47,8 @@ class TransformationWorker < ApplicationWorker
     records_count = @transformation_job.records_transformed + valid_records.count
     rejected_records_count = @transformation_job.records_rejected + rejected_records.count
     deleted_records_count = @transformation_job.records_deleted + deleted_records.count
-    
-    @transformation_job.update(records_transformed: records_count, records_rejected: rejected_records_count, records_deleted: deleted_records_count)
+
+    @transformation_job.update(records_transformed: records_count, records_rejected: rejected_records_count,
+                               records_deleted: deleted_records_count)
   end
 end

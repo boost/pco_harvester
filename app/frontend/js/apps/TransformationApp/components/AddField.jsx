@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addField, hasEmptyFields } from "~/js/features/FieldsSlice";
-import { selectAppDetails } from "~/js/features/AppDetailsSlice";
+import { addField, hasEmptyFields } from "~/js/features/TransformationApp/FieldsSlice";
+import { selectAppDetails } from "~/js/features/TransformationApp/AppDetailsSlice";
 
 const AddField = ({ kind }) => {
   const dispatch = useDispatch();
@@ -9,12 +9,12 @@ const AddField = ({ kind }) => {
   const emptyFields = useSelector(hasEmptyFields);
 
   const buttonText = () => {
-    if(kind == 'field') {
-      return 'field'
+    if (kind == "field") {
+      return "field";
     }
 
-    return 'condition';
-  }
+    return "condition";
+  };
 
   const addNewField = () => {
     dispatch(
@@ -36,7 +36,7 @@ const AddField = ({ kind }) => {
         className="btn btn-outline-primary"
         onClick={() => addNewField()}
       >
-        + Add { buttonText() }
+        + Add {buttonText()}
       </button>
     </div>
   );

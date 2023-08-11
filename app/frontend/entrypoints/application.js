@@ -31,7 +31,6 @@ console.log(
 // import '~/index.css'
 
 import * as bootstrap from "bootstrap";
-import "/js/TestExtraction";
 import "/js/TestRecordExtraction";
 import "/js/TestEnrichmentExtraction";
 import "/js/TestTransformationRecordSelector";
@@ -39,7 +38,6 @@ import "/js/TestDestination";
 import "/js/Tooltips";
 import "/js/CollapseScroll";
 import "/js/ContentSourceFilter";
-import "/js/ExtractionDefinitionFormLogic";
 import "/js/CreateModal";
 import "/js/AutoComplete";
 

@@ -24,14 +24,15 @@ RSpec.describe TransformationJob, type: :model do
 
     context 'when the extracted document is XML' do
       let(:extraction_definition) do
-        create(:extraction_definition, format: 'XML', pagination_type: 'tokenised', total_selector: '//records/@total',
-                                       page: 1, per_page_parameter: 'n', per_page: 100, token_parameter: 's', token_value: '*', next_token_path: '//records/@nextStart')
+        create(:extraction_definition, format: 'XML', total_selector: '//records/@total', page: 1, per_page: 100)
       end
       let(:extraction_job)            { create(:extraction_job, extraction_definition:) }
       let(:transformation_definition) { create(:transformation_definition, record_selector: '//work', extraction_job:) }
+      let(:request_one)           { create(:request, :trove_initial_request, extraction_definition:) }
+      let(:request_two)           { create(:request, :trove_main_request, extraction_definition:) }
 
       before do
-        stub_trove_harvest_requests(extraction_definition,
+        stub_trove_harvest_requests(request_one,
                                     {
                                       1 => '*',
                                       2 => 'AoErc3UyMzQwNjY5OTI=',
@@ -49,16 +50,18 @@ RSpec.describe TransformationJob, type: :model do
 
     context 'when the extracted document is JSON' do
       let(:extraction_definition) do
-        create(:extraction_definition, format: 'JSON', pagination_type: 'tokenised', total_selector: '$.total_results',
-                                       page: 1, per_page_parameter: 'per_page', per_page: 30, token_parameter: 'id_above', token_value: '0', next_token_path: '$.results[(@.length-1)].id')
+        create(:extraction_definition, format: 'JSON', total_selector: '$.total_results', page: 1, paginated: true,
+                                       per_page: 30)
       end
+      let(:request_one) { create(:request, :inaturalist_initial_request, extraction_definition:) }
+      let(:request_two) { create(:request, :inaturalist_main_request, extraction_definition:) }
       let(:extraction_job)            { create(:extraction_job, extraction_definition:) }
       let(:transformation_definition) do
         create(:transformation_definition, record_selector: '$.results', extraction_job:)
       end
 
       before do
-        stub_inaturalist_harvest_requests(extraction_definition,
+        stub_inaturalist_harvest_requests(request_one,
                                           {
                                             1 => '0',
                                             2 => '2098031',

@@ -1,4 +1,4 @@
- # frozen_string_literal: true
+# frozen_string_literal: true
 
 module Delete
   class Execution
@@ -18,7 +18,7 @@ module Delete
           'Content-Type' => 'application/json'
         )
     end
-  
+
     private
 
     def connection(url, params, headers)

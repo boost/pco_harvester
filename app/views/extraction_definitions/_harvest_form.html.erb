@@ -3,11 +3,9 @@
   <%= hidden_field_tag :referrer_id, @referrer&.id  %>
 
   <div class="row gx-2">
-    <fieldset class="col-6">
+    <fieldset class="col-12">
       <div class="card">
         <div class="card-body">
-          <legend>Common settings</legend>
-
           <div class="row gy-3 align-items-center">
             <% if @extraction_definition.name.present? %>
               <div class="col-3">
@@ -45,160 +43,32 @@
             <div class="col-9">
               <%= form.number_field :throttle, class: "form-control" %>
             </div>
-          </div>
-        </div>
-      </div>
-    </fieldset>
-
-    <fieldset class="col-6">
-      <div class="card">
-        <div class="card-body">
-          <legend>Pagination settings</legend>
-
-          <div class="row gy-3 align-items-center">
-            <div class="col-4">
-              <%= form.label :pagination_type, 'Type', class: "form-label" %>
+            
+            <div class="col-3">
+              <%= form.label :total_selector, 'Total Selector', class: "form-label" %>
             </div>
-            <div class="col-8">
-              <% options = find_options_from_validations(ExtractionDefinition, :pagination_type) %>
-              <%= form.select :pagination_type, options, {}, class: "form-select", id: 'js-extraction-definition-pagination-type' %>
-            </div>
-
-            <div class="col-4">
-              <%= form.label :total_selector, class: "form-label" do %>
-                Total selector
-                <span
-                  data-bs-toggle="tooltip"
-                  data-bs-title="Used to calculate the number of pages to extract"
-                ><i class="bi bi-question-circle" aria-label="helper text"></i>
-              <% end %>
-            </div>
-            <div class="col-8">
+            <div class="col-9">
               <%= form.text_field :total_selector, class: "form-control" %>
             </div>
             
-            <div class="col-4 js-extraction-definition-tokenised-form">
-              <%= form.label :initial_params, class: "form-label" do %>
-                Initial Params
-                <span
-                  data-bs-toggle="tooltip"
-                  data-bs-title="Add additional parameters that are only used on the first API request"
-                ><i class="bi bi-question-circle" aria-label="helper text"></i>
-              <% end %>
+            <div class="col-3">
+              <%= form.label :per_page, 'Per Page', class: "form-label" %>
             </div>
-
-            <div class="col-8 js-extraction-definition-tokenised-form">
-              <%= form.hidden_field :initial_params, class: "form-control", id: 'js-initial-params' %>
-              <div id="js-initial-params-editor"></div>
-            </div>
-
-            <div class="col-6 js-extraction-definition-tokenised-form">
-              <%= form.label :token_parameter, class: "form-label" do %>
-                Token Parameter
-              <% end %>
-              <%= form.text_field :token_parameter, class: "form-control" %>
-            </div>
-            
-            <div class="col-4 js-extraction-definition-tokenised-form">
-              <%= form.label :token_value, class: "form-label" do %>
-                Token Value
-              <% end %>
-              <%= form.text_field :token_value, class: "form-control" %>
-            </div>
-            
-            <div class="col-4 js-extraction-definition-tokenised-form">
-              <%= form.label :next_token_path, class: "form-label" do %>
-                Next Token Path
-              <% end %>
-            </div>
-
-            <div class="col-8 js-extraction-definition-tokenised-form">
-              <%= form.text_field :next_token_path, class: "form-control" %>
-            </div>
-
-            <div class="col-6 js-extraction-definition-page-form">
-              <%= form.label :page_parameter, class: "form-label" do %>
-                Page parameter name
-                <span
-                  data-bs-toggle="tooltip"
-                  data-bs-title="This parameter will be appended to the base_url for selecting the page. It will be incremented until the extraction reaches the limit."
-                ><i class="bi bi-question-circle" aria-label="helper text"></i>
-              <% end %>
-              <%= form.text_field :page_parameter, class: "form-control" %>
-            </div>
-
-            <div class="col-6 js-extraction-definition-page-form">
-              <%= form.label :page, class: "form-label" do %>
-                Starting page value
-                <span
-                  data-bs-toggle="tooltip"
-                  data-bs-title="First page being requested"
-                ><i class="bi bi-question-circle" aria-label="helper text"></i>
-              <% end %>
-              <%= form.number_field :page, class: "form-control", value: 1 %>
-            </div>
-
-            <div class="col-6">
-              <%= form.label :per_page_parameter, class: "form-label" do %>
-                Per page parameter name
-                <span
-                  data-bs-toggle="tooltip"
-                  data-bs-title="This parameter will be appended to the base_url"
-                ><i class="bi bi-question-circle" aria-label="helper text"></i>
-              <% end %>
-              <%= form.text_field :per_page_parameter, class: "form-control" %>
-            </div>
-
-            <div class="col-6">
-              <%= form.label :per_page, class: "form-label" do %>
-                Per page value
-                <span
-                  data-bs-toggle="tooltip"
-                  data-bs-title="Number indicating the number of items per page"
-                ><i class="bi bi-question-circle" aria-label="helper text"></i>
-              <% end %>
+            <div class="col-9">
               <%= form.number_field :per_page, class: "form-control" %>
+            </div>
+            
+            <div class="col-3">
+              <%= form.label :paginated, 'Paginated', class: "form-label" %>
+            </div>
+
+            <div class="col-9">
+              <div class="form-check">
+                  <%= form.check_box :paginated, class: "form-check-input" %>
+              </div>
             </div>
 
           </div>
-        </div>
-      </div>
-    </fieldset>
-    
-    <fieldset class="col-12 my-4" >
-      <div class="card">
-        <div class="card-body"> 
-          <legend>Headers</legend>
-
-          <span id='js-extraction-definition-headers'>
-            <%= form.fields_for :headers do |header_form| %>
-              <div class="row gy-3 mb-5 align-items-center">
-                <div class="col-4">
-                  <%= header_form.label :name, class: "form-label" do %>
-                    Header Name
-                  <% end %>
-                </div>
-            
-                <div class="col-8">
-                  <%= header_form.text_field :name, class: "form-control" %>
-                </div>
-              
-                <div class="col-4">
-                  <%= header_form.label :value, class: "form-label" do %>
-                    Header Value
-                  <% end %>
-                </div>
-            
-                <div class="col-8">
-                  <%= header_form.text_field :value, class: "form-control" %>
-                </div>
-              </div>
-            <% end %>
-          </span>
-
-          <button class="btn btn-primary float-end" id="js-extraction-definition-add-header" type="button" aria-selected="true">
-            Add header
-          </button>
         </div>
       </div>
     </fieldset>

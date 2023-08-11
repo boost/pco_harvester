@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_27_011824) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_07_035937) do
   create_table "delete_jobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "status"
     t.integer "kind", default: 0, null: false
@@ -39,22 +39,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_27_011824) do
     t.string "base_url"
     t.integer "throttle", default: 0, null: false
     t.string "pagination_type"
-    t.string "page_parameter"
-    t.string "per_page_parameter"
-    t.integer "page"
-    t.integer "per_page"
-    t.string "total_selector"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "kind", default: 0
     t.string "source_id"
     t.string "enrichment_url"
     t.bigint "destination_id"
-    t.string "next_token_path"
-    t.string "token_parameter"
-    t.string "token_value"
-    t.string "initial_params"
     t.bigint "pipeline_id"
+    t.integer "page", default: 1
+    t.string "total_selector"
+    t.integer "per_page"
+    t.boolean "paginated"
     t.index ["destination_id"], name: "index_extraction_definitions_on_destination_id"
     t.index ["pipeline_id"], name: "index_extraction_definitions_on_pipeline_id"
   end
@@ -120,15 +115,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_27_011824) do
     t.index ["status"], name: "index_harvest_jobs_on_status"
   end
 
-  create_table "headers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "name"
-    t.string "value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "extraction_definition_id", null: false
-    t.index ["extraction_definition_id"], name: "index_headers_on_extraction_definition_id"
-  end
-
   create_table "load_jobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "status", default: 0
     t.integer "kind", default: 0, null: false
@@ -145,11 +131,30 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_27_011824) do
     t.index ["status"], name: "index_load_jobs_on_status"
   end
 
+  create_table "parameters", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.string "content"
+    t.integer "kind", default: 0
+    t.boolean "dynamic", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "request_id", null: false
+    t.index ["request_id"], name: "index_parameters_on_request_id"
+  end
+
   create_table "pipelines", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "requests", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "extraction_definition_id", null: false
+    t.integer "http_method", default: 0
+    t.index ["extraction_definition_id"], name: "index_requests_on_extraction_definition_id"
   end
 
   create_table "transformation_definitions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

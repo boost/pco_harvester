@@ -3,12 +3,13 @@
 require 'rails_helper'
 
 RSpec.describe 'ExtractionJobs', type: :request do
-  subject!             { create(:extraction_job, extraction_definition:) }
+  subject!                    { create(:extraction_job, extraction_definition:) }
 
-  let(:user)           { create(:user) }
-  let(:pipeline) { create(:pipeline, :ngataonga) }
-  let(:harvest_definition) { pipeline.harvest }
+  let(:user)                  { create(:user) }
+  let(:pipeline)              { create(:pipeline, :figshare) }
+  let(:harvest_definition)    { pipeline.harvest }
   let(:extraction_definition) { harvest_definition.extraction_definition }
+  let(:request)                 { create(:request, :figshare_initial_request, extraction_definition:) }
 
   before do
     sign_in user
@@ -17,7 +18,7 @@ RSpec.describe 'ExtractionJobs', type: :request do
   describe '#show' do
     before do
       # that's to test the display of results
-      stub_ngataonga_harvest_requests(extraction_definition)
+      stub_figshare_harvest_requests(request)
       ExtractionWorker.new.perform(subject.id)
       get pipeline_harvest_definition_extraction_definition_extraction_job_path(pipeline, harvest_definition,
                                                                                 extraction_definition, subject)
@@ -39,7 +40,9 @@ RSpec.describe 'ExtractionJobs', type: :request do
         post pipeline_harvest_definition_extraction_definition_extraction_jobs_path(pipeline, harvest_definition, extraction_definition,
                                                                                     kind: 'full')
 
-        expect(response).to redirect_to pipeline_harvest_definition_extraction_definition_extraction_jobs_path(pipeline, harvest_definition, extraction_definition)
+        expect(response).to redirect_to pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
+          pipeline, harvest_definition, extraction_definition
+        )
       end
 
       it 'sets a succesful message' do
@@ -66,7 +69,9 @@ RSpec.describe 'ExtractionJobs', type: :request do
         post pipeline_harvest_definition_extraction_definition_extraction_jobs_path(pipeline, harvest_definition,
                                                                                     extraction_definition)
 
-        expect(response).to redirect_to pipeline_harvest_definition_extraction_definition_extraction_jobs_path(pipeline, harvest_definition, extraction_definition)
+        expect(response).to redirect_to pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
+          pipeline, harvest_definition, extraction_definition
+        )
       end
 
       it 'sets a failure message' do

@@ -6,7 +6,8 @@ import ReactDOM from "react-dom/client";
 import TransformationApp from "/js/apps/TransformationApp/TransformationApp";
 
 import { Provider } from "react-redux";
-import configureAppStore from "/js/store";
+import configureAppStore from "/js/apps/TransformationApp/store";
+
 import ErrorBoundary from "./components/ErrorBoundary";
 
 const transformationAppHTMLElement = document.querySelector(
@@ -22,6 +23,28 @@ if (transformationAppHTMLElement !== null) {
       <ErrorBoundary environment={props.config.environment}>
         <Provider store={configureAppStore(props)}>
           <TransformationApp />
+        </Provider>
+      </ErrorBoundary>
+    </React.StrictMode>
+  );
+}
+
+// Extraction App
+
+import ExtractionApp from "/js/apps/ExtractionApp/ExtractionApp";
+import configureExtractionAppStore from "/js/apps/ExtractionApp/store";
+
+const extractionAppHTMLElement = document.querySelector("#js-extraction-app");
+
+if (extractionAppHTMLElement !== null) {
+  const root = ReactDOM.createRoot(extractionAppHTMLElement);
+  const props = JSON.parse(extractionAppHTMLElement.dataset.props);
+
+  root.render(
+    <React.StrictMode>
+      <ErrorBoundary environment={props.config.environment}>
+        <Provider store={configureExtractionAppStore(props)}>
+          <ExtractionApp />
         </Provider>
       </ErrorBoundary>
     </React.StrictMode>

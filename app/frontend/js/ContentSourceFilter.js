@@ -1,9 +1,9 @@
- const contentSourceFilter = document.getElementById('js-content-source-filter');
+const contentSourceFilter = document.getElementById("js-content-source-filter");
 
-if(contentSourceFilter) {
+if (contentSourceFilter) {
   const form = contentSourceFilter.closest("form");
 
-  contentSourceFilter.addEventListener('change', (event) => {
+  contentSourceFilter.addEventListener("change", (event) => {
     form.submit();
   });
 }

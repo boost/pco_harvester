@@ -80,7 +80,7 @@ RSpec.describe HarvestJob, type: :model do
     it { is_expected.to validate_uniqueness_of(:key).case_insensitive.with_message('has already been taken') }
   end
 
-  describe "#completed?" do
+  describe '#completed?' do
     it 'returns true when extraction, transformation, and load jobs have finished' do
       expect(harvest_job.completed?).to eq true
     end
@@ -95,7 +95,6 @@ RSpec.describe HarvestJob, type: :model do
         expect(incomplete_harvest_job.completed?).to eq false
       end
 
-      
       it 'returns false when a transformation is still running' do
         incomplete_harvest_job = create(:harvest_job, :completed, harvest_definition:, destination:)
 
@@ -104,7 +103,7 @@ RSpec.describe HarvestJob, type: :model do
         incomplete_harvest_job.reload
         expect(incomplete_harvest_job.completed?).to eq false
       end
-      
+
       it 'returns false when a load is still running' do
         incomplete_harvest_job = create(:harvest_job, :completed, harvest_definition:, destination:)
 

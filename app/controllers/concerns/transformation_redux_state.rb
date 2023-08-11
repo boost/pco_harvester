@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ReduxState
+module TransformationReduxState
   extend ActiveSupport::Concern
 
   def transformation_app_state

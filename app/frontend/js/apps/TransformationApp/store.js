@@ -2,16 +2,16 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import {
   displayedFieldsListener,
   loadDisplayedFields,
-} from "./displayedFieldsListener";
+} from "../../displayedFieldsListener";
 
 // entities
-import fields from "/js/features/FieldsSlice";
-import rawRecord from "/js/features/RawRecordSlice";
-import appDetails from "/js/features/AppDetailsSlice";
+import fields from "/js/features/TransformationApp/FieldsSlice";
+import rawRecord from "/js/features/TransformationApp/RawRecordSlice";
+import appDetails from "/js/features/TransformationApp/AppDetailsSlice";
 
 // ui
-import uiFields from "/js/features/UiFieldsSlice";
-import uiAppDetails from "/js/features/UiAppDetailsSlice";
+import uiFields from "/js/features/TransformationApp/UiFieldsSlice";
+import uiAppDetails from "/js/features/TransformationApp/UiAppDetailsSlice";
 
 // config
 import config from "/js/features/ConfigSlice";

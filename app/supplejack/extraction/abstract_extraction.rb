@@ -7,7 +7,7 @@ module Extraction
     end
 
     def extract
-      @document = Extraction::Request.new(url:, params:, headers:).get
+      @document = Extraction::Request.new(url:, params:, headers:).send(http_method)
     end
 
     def save
@@ -41,6 +41,12 @@ module Extraction
         'Content-Type' => 'application/json',
         'User-Agent' => 'Supplejack Harvester v2.0'
       }
+    end
+
+    def http_method
+      return 'get' if @request.nil?
+
+      @request.http_method.downcase
     end
   end
 end

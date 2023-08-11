@@ -26,7 +26,7 @@ Rails.application.routes.draw do
         post :cancel, on: :member
       end
 
-      resources :extraction_definitions, only: %i[edit new create update] do
+      resources :extraction_definitions, only: %i[show edit new create update] do
         collection do
           post :test
           post :test_record_extraction
@@ -35,6 +35,10 @@ Rails.application.routes.draw do
 
         resources :extraction_jobs, only: %i[index show create destroy] do
           post :cancel, on: :member
+        end
+
+        resources :requests do
+          resources :parameters
         end
       end
 

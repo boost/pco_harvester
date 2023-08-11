@@ -7,11 +7,7 @@
 
   <div class="float-end">
 
-    <% if @extraction_definition.harvest? %>
-      <button type="button" class="btn btn-outline-primary me-1" id="js-test-extraction-button">
-        Test Extraction Definition
-      </button>
-    <% else %>
+    <% if @extraction_definition.enrichment? %>
       <button type="button" class="btn btn-outline-primary me-1" id="js-test-record-extraction-button">
         Test Record Extraction
       </button>
@@ -22,7 +18,7 @@
     <% end %>
     
     <button type="submit" class="btn btn-primary" data-form="js-extraction-definition-form">
-      Create and Run Sample Extraction
+      Create
     </button>
 
     <%= link_to 'Cancel', pipeline_path(@pipeline), class: 'btn btn-outline-danger' %>

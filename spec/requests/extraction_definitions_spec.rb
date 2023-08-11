@@ -22,8 +22,9 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
 
   describe '#create' do
     context 'with valid parameters' do
+      let(:extraction_definition2) { build(:extraction_definition, pipeline:) }
+
       it 'creates a new extraction definition' do
-        extraction_definition2 = build(:extraction_definition, pipeline:)
         expect do
           post pipeline_harvest_definition_extraction_definitions_path(pipeline, harvest_definition), params: {
             extraction_definition: extraction_definition2.attributes
@@ -31,30 +32,24 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
         end.to change(ExtractionDefinition, :count).by(1)
       end
 
-      it 'redirects to the pipeline_path' do
+      it 'creates 2 requests for the new extraction definition' do
+        expect do
+          post pipeline_harvest_definition_extraction_definitions_path(pipeline, harvest_definition), params: {
+            extraction_definition: extraction_definition2.attributes
+          }
+        end.to change(Request, :count).by(2)
+
+        expect(ExtractionDefinition.last.requests.count).to eq 2
+      end
+
+      it 'redirects to the extraction definition' do
         extraction_definition2 = build(:extraction_definition, pipeline:)
         post pipeline_harvest_definition_extraction_definitions_path(pipeline, harvest_definition), params: {
           extraction_definition: extraction_definition2.attributes
         }
 
-        expect(response).to redirect_to pipeline_path(pipeline)
-      end
-
-      it 'creates a new extraction definition with associated headers' do
-        extraction_definition2 = build(:extraction_definition, pipeline:)
-        headers = build_list(:header, 2)
-
-        post pipeline_harvest_definition_extraction_definitions_path(pipeline, harvest_definition), params: {
-          extraction_definition: extraction_definition2.attributes.merge('headers_attributes' => headers.map(&:attributes))
-        }
-
-        ed = ExtractionDefinition.last
-
-        expect(ed.headers.first.name).to eq headers.first.name
-        expect(ed.headers.first.value).to eq headers.first.value
-
-        expect(ed.headers.last.name).to eq headers.last.name
-        expect(ed.headers.last.value).to eq headers.last.value
+        expect(response).to redirect_to pipeline_harvest_definition_extraction_definition_path(pipeline,
+                                                                                               harvest_definition, ExtractionDefinition.last)
       end
 
       it 'associates an extraction definition with a provided harvest definition' do
@@ -106,22 +101,13 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
         expect(extraction_definition.name).to eq 'Flickr'
       end
 
-      it 'redirects to the pipeline page' do
+      it 'redirects to the extraction page' do
         patch pipeline_harvest_definition_extraction_definition_path(pipeline, harvest_definition, extraction_definition), params: {
           extraction_definition: { name: 'Flickr' }
         }
 
-        expect(response).to redirect_to(pipeline_path(pipeline))
-      end
-
-      it 'redirects to the referer if it is provided' do
-        pipeline2 = create(:pipeline)
-
-        patch pipeline_harvest_definition_extraction_definition_path(pipeline, harvest_definition, extraction_definition), params: {
-          extraction_definition: { name: 'Flickr' }, referrer_id: pipeline2.id
-        }
-
-        expect(response).to redirect_to(pipeline_path(pipeline2))
+        expect(response).to redirect_to(pipeline_harvest_definition_extraction_definition_path(pipeline,
+                                                                                               harvest_definition, extraction_definition))
       end
     end
 
@@ -146,36 +132,9 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
     end
   end
 
-  describe '#test' do
-    let(:ed) { create(:extraction_definition, base_url: 'http://google.com/?url_param=url_value') }
-
-    before do
-      stub_request(:get, 'http://google.com/?url_param=url_value').with(
-        query: { 'page' => 1, 'per_page' => 50 },
-        headers: fake_json_headers
-      ).and_return(fake_response('test'))
-    end
-
-    it 'returns a document extraction as JSON' do
-      post test_pipeline_harvest_definition_extraction_definitions_path(pipeline, harvest_definition), params: {
-        extraction_definition: ed.attributes
-      }
-
-      expect(response.status).to eq 200
-
-      json_data = JSON.parse(response.body)
-
-      expected_keys = %w[url method params request_headers status response_headers body]
-
-      expected_keys.each do |key|
-        expect(json_data).to have_key(key)
-      end
-    end
-  end
-
   describe '#test_record_extraction' do
-    let(:destination) { create(:destination) }
-    let(:ed) { create(:extraction_definition, :enrichment, destination:) }
+    let(:destination)           { create(:destination) }
+    let(:extraction_definition) { create(:extraction_definition, :enrichment, destination:) }
 
     before do
       stub_figshare_enrichment_page_1(destination)
@@ -183,7 +142,7 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
 
     it 'returns a document extraction of API records' do
       post test_record_extraction_pipeline_harvest_definition_extraction_definitions_path(pipeline, harvest_definition), params: {
-        extraction_definition: ed.attributes
+        extraction_definition: extraction_definition.attributes
       }
 
       expect(response.status).to eq 200

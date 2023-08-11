@@ -92,10 +92,9 @@ RSpec.describe ExtractionDefinition, type: :model do
   end
 
   describe '#associations' do
-    subject { create(:extraction_definition, extraction_jobs: [extraction_job], headers: [header]) }
+    subject { create(:extraction_definition, extraction_jobs: [extraction_job]) }
 
     let(:extraction_job) { create(:extraction_job) }
-    let(:header)         { create(:header) }
 
     it 'has many jobs' do
       expect(subject.extraction_jobs).to include(extraction_job)
@@ -103,10 +102,6 @@ RSpec.describe ExtractionDefinition, type: :model do
 
     it 'belongs to a pipeline' do
       expect(subject.pipeline).to be_a Pipeline
-    end
-
-    it 'has many headers' do
-      expect(subject.headers).to include(header)
     end
   end
 
@@ -117,33 +112,6 @@ RSpec.describe ExtractionDefinition, type: :model do
       it "can be #{key}" do
         expect(ExtractionDefinition.new(kind: value).kind).to eq(key.to_s)
       end
-    end
-  end
-
-  describe '#pagination_type' do
-    %w[
-      page
-      tokenised
-    ].each do |pagination_type|
-      it { is_expected.to allow_value(pagination_type).for(:pagination_type) }
-    end
-
-    context 'when the type is tokenised' do
-      subject! { build(:extraction_definition, name: 'Flickr API', pagination_type: 'tokenised') }
-
-      it { is_expected.to validate_presence_of(:next_token_path).with_message("can't be blank") }
-      it { is_expected.to validate_presence_of(:token_parameter).with_message("can't be blank") }
-      it { is_expected.to validate_presence_of(:token_value).with_message("can't be blank") }
-      it { is_expected.to validate_presence_of(:total_selector).with_message("can't be blank") }
-    end
-
-    context 'when the type is page' do
-      subject! { build(:extraction_definition, name: 'Flickr API', pagination_type: 'page') }
-
-      it { is_expected.to validate_presence_of(:total_selector).with_message("can't be blank") }
-      it { is_expected.not_to validate_presence_of(:next_token_path).with_message("can't be blank") }
-      it { is_expected.not_to validate_presence_of(:token_parameter).with_message("can't be blank") }
-      it { is_expected.not_to validate_presence_of(:token_value).with_message("can't be blank") }
     end
   end
 end
