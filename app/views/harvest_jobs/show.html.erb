@@ -24,6 +24,18 @@
     <tbody>
       <% if @harvest_job.extraction_job %>
         <tr>
+          <th scope="row">Job Type</th>
+          <td><%= @harvest_job.page_type.humanize %></td>
+        </tr>
+
+        <% if @harvest_job.set_number? %>
+          <tr>
+            <th scope="row">Pages</th>
+            <td><%= @harvest_job.pages %></td>
+          </tr>
+        <% end %>
+
+        <tr>
           <th scope="row">Extraction Status</th>
           <td><%= job_status_text(@harvest_job.extraction_job) %></td>
         </tr>
@@ -62,7 +74,6 @@
           </td>
         </tr>
       <% end %>
-
 
       <tr>
         <th scope="row">Load Destination</th>
