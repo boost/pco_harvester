@@ -21,18 +21,23 @@ class HarvestJobsController < ApplicationController
     else
       @pipeline.enrichments.each do |enrichment|
         next unless should_queue_job?(enrichment.id)
-
-        enrichment_job = HarvestJob.create(
+        
+        enrichment_job = HarvestJob.new(
           harvest_definition: enrichment,
           destination_id: harvest_job_params['destination_id'],
-          key: "#{harvest_job_params['harvest_key']}__enrichment-#{enrichment.id}",
-          harvest_definitions_to_run: harvest_job_params['harvest_definitions_to_run']
+          key: "#{harvest_job_params['key']}__enrichment-#{enrichment.id}",
+          harvest_definitions_to_run: harvest_job_params['harvest_definitions_to_run'],
+          page_type: harvest_job_params['page_type'],
+          pages: harvest_job_params['pages']
         )
 
-        HarvestWorker.perform_async(enrichment_job.id)
+        if enrichment_job.save
+          HarvestWorker.perform_async(enrichment_job.id)
+          flash.notice = 'Enrichment jobs queued successfuly'
+        else
+          flash.alert = 'There was an issue launching the enrichment'
+        end
       end
-      
-      flash.notice = 'Enrichment jobs queued successfuly'
     end
 
     redirect_to pipeline_jobs_path(@pipeline)

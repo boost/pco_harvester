@@ -9,14 +9,13 @@ module Extraction
     def call
       re = RecordExtraction.new(@extraction_definition, @extraction_definition.page, @harvest_job).extract
 
-      max_pages = JsonPath.new(@extraction_definition.total_selector).on(re.body).first.to_i
       records = JSON.parse(re.body)['records']
 
       extract_and_save_enrichment_documents(records)
 
       return if @extraction_job.is_sample?
 
-      (@extraction_definition.page...max_pages).each do
+      (@extraction_definition.page...max_pages(re)).each do
         @extraction_definition.page += 1
 
         re = RecordExtraction.new(@extraction_definition, @extraction_definition.page, @harvest_job).extract
@@ -29,6 +28,12 @@ module Extraction
     end
 
     private
+
+    def max_pages(record_extraction)
+      return @harvest_job.pages if @harvest_job.set_number?
+      
+      JsonPath.new(@extraction_definition.total_selector).on(record_extraction.body).first.to_i
+    end
 
     def extract_and_save_enrichment_documents(records)
       records.each_with_index do |record, index|
