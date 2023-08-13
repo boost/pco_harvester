@@ -32,18 +32,20 @@
             <%- @pipeline.harvest_definitions.each do |harvest_definition| %>
               <div class='form-check'>
                 <%= label_tag do %>
-                  <%= check_box('harvest_job', 'harvest_definitions_to_run', { multiple: true, class: 'form-check-input', checked: true }, harvest_definition.id, nil) %>
+
+                  <%= check_box('harvest_job', 'harvest_definitions_to_run', { multiple: true, class: 'form-check-input', checked: true, class: "js-pipeline-#{harvest_definition.kind}-checkbox" }, harvest_definition.id, nil) %>
+
                   <%= harvest_definition.source_id %>
                 <% end %>
               </div>
             <% end %>
           </div>
-          
-          <div class="col-5">
+
+          <div class="col-5 js-transformation-input">
             <%= form.label :extraction_job_id, "Transformation input", class: "form-label" %>
           </div>
 
-          <div class='col-7'>
+          <div class='col-7 js-transformation-input'>
             <%= form.collection_select(:extraction_job_id, @extraction_jobs, :id, :name, { include_blank: 'Fresh extraction' }, class: 'form-select') %>
           </div>
           
