@@ -11,8 +11,8 @@ if(pipelinePageTypeSelect) {
       pipelinePages.setAttribute('class', 'col-2 d-none');
       pipelinePagesInput.removeAttribute('required');
     } else if(event.target.value == 'set_number') {
-      pipelinePageType.setAttribute('class', 'col-5');
-      pipelinePages.setAttribute('class', 'col-2');
+      pipelinePageType.setAttribute('class', 'col-4');
+      pipelinePages.setAttribute('class', 'col-3');
       pipelinePagesInput.setAttribute('required', 'true');
     }
   });

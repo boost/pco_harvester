@@ -8,36 +8,24 @@ class HarvestJobsController < ApplicationController
   def show; end
 
   def create
-    if should_queue_harvest_job?
-      @harvest_job = HarvestJob.new(harvest_job_params)
+    [@pipeline.harvest, @pipeline.enrichments].flatten.each do |definition|
+      next unless should_queue_job?(definition.id)
+      job_params = harvest_job_params.to_h
 
-      if @harvest_job.save
-        HarvestWorker.perform_async(@harvest_job.id)
+      job_params.merge!(harvest_definition_id: definition.id)
+      job_params.merge!(key: "#{harvest_job_params['key']}__enrichment-#{definition.id}") if definition.enrichment?
+      job = HarvestJob.new(job_params)
 
-        flash.notice = 'Harvest job queued successfuly'
+      if job.save
+        HarvestWorker.perform_async(job.id)
+        flash.notice = 'Job queued successfully'
       else
-        flash.alert = 'There was an issue launching the harvest job'
+        flash.alert = 'There was an issue queueing your job'
       end
-    else
-      @pipeline.enrichments.each do |enrichment|
-        next unless should_queue_job?(enrichment.id)
-        
-        enrichment_job = HarvestJob.new(
-          harvest_definition: enrichment,
-          destination_id: harvest_job_params['destination_id'],
-          key: "#{harvest_job_params['key']}__enrichment-#{enrichment.id}",
-          harvest_definitions_to_run: harvest_job_params['harvest_definitions_to_run'],
-          page_type: harvest_job_params['page_type'],
-          pages: harvest_job_params['pages']
-        )
 
-        if enrichment_job.save
-          HarvestWorker.perform_async(enrichment_job.id)
-          flash.notice = 'Enrichment jobs queued successfuly'
-        else
-          flash.alert = 'There was an issue launching the enrichment'
-        end
-      end
+      # If the user has scheduled a harvest we do not need to enqueue the enrichments now
+      # as they will be enqueued once the harvest job has finished. 
+      break if definition.harvest?
     end
 
     redirect_to pipeline_jobs_path(@pipeline)
@@ -56,11 +44,9 @@ class HarvestJobsController < ApplicationController
 
   private
 
-  def should_queue_harvest_job?
-    should_queue_job?(@pipeline.harvest.id)
-  end
-
   def should_queue_job?(id)
+    return false if harvest_job_params['harvest_definitions_to_run'].nil?
+
     harvest_job_params['harvest_definitions_to_run'].map(&:to_i).include?(id)
   end
 
@@ -77,6 +63,6 @@ class HarvestJobsController < ApplicationController
   end
 
   def harvest_job_params
-    params.require(:harvest_job).permit(:extraction_job_id, :harvest_definition_id, :destination_id, :key, :page_type, :pages, harvest_definitions_to_run: [])
+    params.require(:harvest_job).permit(:extraction_job_id, :destination_id, :key, :page_type, :pages, harvest_definitions_to_run: [])
   end
 end
