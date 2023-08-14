@@ -17,6 +17,6 @@ class Pipeline < ApplicationRecord
   def ready_to_run?
     return false if harvest_definitions.empty?
 
-    harvest_definitions.all? { |definition| definition.ready_to_run? }
+    harvest_definitions.any? { |definition| definition.ready_to_run? }
   end
 end
