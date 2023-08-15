@@ -43,5 +43,6 @@ import "/js/AutoComplete";
 
 import "/js/editor";
 import "/js/form-header-submission";
+import "/js/pipeline";
 
 import "/js/react";

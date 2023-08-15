@@ -8,37 +8,73 @@
   </div>
 
   <div class="float-end">
-    <div class="dropdown d-inline me-1">
+    <%= button_tag(type: 'button', class: 'btn btn-primary me-1', data: { 'bs-toggle' => 'modal', 'bs-target' => '#run-settings'}, disabled: !@pipeline.ready_to_run?) do %>
+      <i class='bi bi-play'></i>
+        Run 
+    <% end %>
 
-      <% if @pipeline.ready_to_run? %>
-        <button
-          class="btn btn-primary dropdown-toggle"
-          type="button"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          <i class="bi bi-play" aria-hidden="true"></i>
-          Run
-        </button>
+    <% if @pipeline.ready_to_run? %>
+      <%= render layout: 'shared/create-modal', locals: { modal_heading: 'Run Settings', id: 'run-settings' } do %>
+        <%= vertical_form_with(model: [@pipeline, @harvest_definition, @harvest_job]) do |form| %>
+          <div class='row gy-3 align-items-center'>
+            <%= form.hidden_field :harvest_definition_id, value: @harvest_definition.id %>
+            <%= form.hidden_field :key, value: SecureRandom.hex %>
+          
+            <div class='col-5'>
+              <%= form.label :harvest_definitions_to_run, "Blocks to run", class: 'form-label' %>
+            </div>
 
-        <ul class="dropdown-menu">
-          <% @destinations.each do |destination| %>
-            <li><%= button_to destination.name,
-              pipeline_harvest_definition_harvest_jobs_path(@pipeline, @harvest_definition),
-              params: {
-                harvest_job: {
-                  harvest_definition_id: @harvest_definition.id,
-                  destination_id: destination.id,
-                  key: SecureRandom.hex
-                }
-              },
-              class: "dropdown-item",
-              form_class: "dropdown-item" %></li>
-          <% end %>
-        </ul>
+            <div class='col-7'>
+              <%- @pipeline.harvest_definitions.each do |harvest_definition| %>
+                <div class='form-check'>
+                  <%= label_tag do %>
+
+                    <%= check_box('harvest_job', 'harvest_definitions_to_run', { multiple: true, class: 'form-check-input', checked: harvest_definition.ready_to_run?, class: "js-pipeline-#{harvest_definition.kind}-checkbox", disabled: !harvest_definition.ready_to_run? }, harvest_definition.id, nil) %>
+
+                    <%= harvest_definition.source_id %>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+
+            <% if @extraction_jobs %>
+              <div class="col-5 js-transformation-input">
+                <%= form.label :extraction_job_id, "Transformation input", class: "form-label" %>
+              </div>
+
+              <div class='col-7 js-transformation-input'>
+                <%= form.collection_select(:extraction_job_id, @extraction_jobs, :id, :name, { include_blank: 'Fresh extraction' }, class: 'form-select') %>
+              </div>
+            <% end %>
+          
+            <div class="col-5">
+              <%= form.label :page_type, "Pages to transform", class: "form-label" %>
+            </div>
+          
+            <div id='js-pipeline-page-type' class='col-7'>
+              <%= form.select :page_type, options_for_select(HarvestJob.page_types.map { |key, value| [key.humanize, key] }), {},  id: 'js-pipeline-page-type-select', class: "form-select" %>
+            </div>
+          
+            <div id='js-pipeline-pages' class='col-3 d-none'>
+              <%= form.number_field :pages, class: "form-control" %>
+            </div>
+
+
+            <div class="col-5">
+              <%= form.label :destination, "Destination", class: "form-label" %>
+            </div>
+
+            <div class='col-7'>
+              <%= form.select :destination_id, options_from_collection_for_select(@destinations, 'id', 'name'), {},  class: "form-select" %>
+            </div>
+          </div>
+
+          <div class='d-grid mt-4'>
+            <button type="submit" class="btn btn-primary">Run</button>
+          </div>
+        <% end %>
       <% end %>
-
-    </div>
+    <% end %>
 
     <%= link_to "Edit",
     edit_pipeline_path(@pipeline),

@@ -15,6 +15,10 @@ class HarvestJob < ApplicationRecord
   delegate :extraction_definition, to: :harvest_definition
   delegate :transformation_definition, to: :harvest_definition
 
+  serialize :harvest_definitions_to_run, Array
+  
+  enum :page_type, { all_available_pages: 0, set_number: 1 }
+
   # This is to ensure that there is only ever one version of a HarvestJob running.
   # It is used when enqueing enrichments at the end of a harvest.
   validates :key, uniqueness: true
@@ -52,6 +56,14 @@ class HarvestJob < ApplicationRecord
 
     end_time - start_time
   end
+  
+  with_options if: :set_number? do
+    validates :pages, presence: true
+  end
+
+  def should_run?(id)
+    harvest_definitions_to_run.map(&:to_i).include?(id)
+  end
 
   def errored?
     extraction_job.errored? || (transformation_jobs.any?(&:errored?) && load_jobs.any?(&:errored?))
@@ -84,15 +96,16 @@ class HarvestJob < ApplicationRecord
     return unless harvest_complete?
 
     pipeline.enrichments.each do |enrichment|
+      next unless should_run?(enrichment.id)
       next unless enrichment.ready_to_run?
-
       next if HarvestJob.find_by(key: "#{harvest_key}__enrichment-#{enrichment.id}").present?
 
       enrichment_job = HarvestJob.create(
         harvest_definition: enrichment,
         destination_id: destination.id,
         key: "#{harvest_key}__enrichment-#{enrichment.id}",
-        target_job_id: name
+        target_job_id: name,
+        harvest_definitions_to_run:
       )
 
       HarvestWorker.perform_async(enrichment_job.id)
