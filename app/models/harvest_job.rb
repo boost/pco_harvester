@@ -16,7 +16,7 @@ class HarvestJob < ApplicationRecord
   delegate :transformation_definition, to: :harvest_definition
 
   serialize :harvest_definitions_to_run, Array
-  
+
   enum :page_type, { all_available_pages: 0, set_number: 1 }
 
   # This is to ensure that there is only ever one version of a HarvestJob running.
@@ -56,7 +56,7 @@ class HarvestJob < ApplicationRecord
 
     end_time - start_time
   end
-  
+
   with_options if: :set_number? do
     validates :pages, presence: true
   end
