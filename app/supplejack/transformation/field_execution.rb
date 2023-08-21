@@ -15,6 +15,7 @@ module Transformation
         block = ->(record) { eval(@field.block) }
 
         @value = block.call(api_record)
+        raise TypeError, "Field returns wrong type: #{@value}" unless TypeChecker.new(@value).valid?
       rescue Exception => e
         @error = e
       end
