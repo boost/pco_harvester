@@ -3,7 +3,11 @@
 require 'webmock/rspec'
 
 WebMock.disable_net_connect!(
-  allow: ['https://chromedriver.storage.googleapis.com'],
+  allow: [
+    'https://chromedriver.storage.googleapis.com',
+    'https://googlechromelabs.github.io',
+    'https://edgedl.me.gvt1.com'
+  ],
   allow_localhost: true
 )
 
