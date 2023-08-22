@@ -11,9 +11,5 @@ module Transformation
       @value = value
       @error = exception.present? ? Error.new(exception) : nil
     end
-
-    def condition_met?
-      @value.include?(true)
-    end
   end
 end

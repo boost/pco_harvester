@@ -20,7 +20,7 @@ RSpec.describe Load::Execution do
       before do
         stub_request(:post, 'http://www.localhost:3000/harvester/records')
           .with(
-            body: "{\"record\":{\"title\":\"title\",\"description\":\"description\",\"source_id\":\"test\",\"priority\":0,\"job_id\":\"test__harvest-#{harvest_definition.id}__job-#{harvest_job.id}\"}}",
+            body: "{\"record\":{\"title\":[\"title\"],\"description\":[\"description\"],\"source_id\":\"test\",\"priority\":0,\"job_id\":\"test__harvest-#{harvest_definition.id}__job-#{harvest_job.id}\"}}",
             headers: {
               'Accept' => '*/*',
               'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
@@ -37,7 +37,7 @@ RSpec.describe Load::Execution do
       let(:load_job)           { create(:load_job, harvest_job:) }
 
       it 'sends the record to the API correctly' do
-        expect(Load::Execution.new(record, load_job).call.status).to eq 200
+        expect(described_class.new(record, load_job).call.status).to eq 200
       end
     end
 
@@ -49,7 +49,7 @@ RSpec.describe Load::Execution do
       before do
         stub_request(:post, 'http://www.localhost:3000/harvester/records/record_id/fragments.json')
           .with(
-            body: "{\"fragment\":{\"title\":\"title\",\"description\":\"description\",\"source_id\":\"test\",\"priority\":0,\"job_id\":\"test__enrichment-#{harvest_definition.id}__job-#{harvest_job.id}\"},\"required_fragments\":null}",
+            body: "{\"fragment\":{\"title\":[\"title\"],\"description\":[\"description\"],\"source_id\":\"test\",\"priority\":0,\"job_id\":\"test__enrichment-#{harvest_definition.id}__job-#{harvest_job.id}\"},\"required_fragments\":null}",
             headers: {
               'Accept' => '*/*',
               'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
@@ -62,7 +62,7 @@ RSpec.describe Load::Execution do
       end
 
       it 'sends the record to the API correctly' do
-        expect(Load::Execution.new(record, load_job).call.status).to eq 200
+        expect(described_class.new(record, load_job).call.status).to eq 200
       end
     end
   end
