@@ -9,6 +9,14 @@ RSpec.describe Transformation::TypeChecker do
         expect(described_class.new(nil).valid?).to be true
       end
 
+      it 'returns true with TrueClass' do
+        expect(described_class.new(true).valid?).to be true
+      end
+
+      it 'returns true with FalseClass' do
+        expect(described_class.new(false).valid?).to be true
+      end
+
       it 'returns true with Integer' do
         expect(described_class.new(1).valid?).to be true
       end
@@ -33,6 +41,14 @@ RSpec.describe Transformation::TypeChecker do
         expect(described_class.new([nil, nil]).valid?).to be true
       end
 
+      it 'returns true with array of TrueClass' do
+        expect(described_class.new([true]).valid?).to be true
+      end
+
+      it 'returns true with array of FalseClass' do
+        expect(described_class.new([false]).valid?).to be true
+      end
+
       it 'returns true with array of Integer' do
         expect(described_class.new([1, 1]).valid?).to be true
       end
@@ -45,8 +61,16 @@ RSpec.describe Transformation::TypeChecker do
         expect(described_class.new(%w[String String]).valid?).to be true
       end
 
+      it 'returns true with Hash of String => TrueClass' do
+        expect(described_class.new('1' => true).valid?).to be true
+      end
+
+      it 'returns true with Hash of String => FalseClass' do
+        expect(described_class.new('1' => false).valid?).to be true
+      end
+
       it 'returns true with Hash of Integer => nil' do
-        expect(described_class.new({1 => nil}).valid?).to be true
+        expect(described_class.new(1 => nil).valid?).to be true
       end
 
       it 'returns true with Hash of String => Integer' do

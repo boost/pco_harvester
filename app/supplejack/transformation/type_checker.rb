@@ -22,7 +22,7 @@ module Transformation
     end
 
     def allowed_raw_types
-      [NilClass, Boolean, Integer, Float, String, Symbol]
+      [NilClass, TrueClass, FalseClass, Integer, Float, String, Symbol]
     end
   end
 end
