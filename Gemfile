@@ -18,6 +18,7 @@ gem 'mysql2', '~> 0.5'
 gem 'puma', '~> 5.0'
 
 gem 'vite_rails'
+gem 'elastic-apm'
 
 # handles pagination
 gem 'kaminari'
