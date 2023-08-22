@@ -25,13 +25,13 @@ module Transformation
 
     def rejection_reasons
       @reject_fields.each_with_object([]) do |field, reasons|
-        reasons.push(field.name) if field.condition_met?
+        reasons.push(field.name) if field.value == true
       end
     end
 
     def deletion_reasons
       @delete_fields.each_with_object([]) do |field, reasons|
-        reasons.push(field.name) if field.condition_met?
+        reasons.push(field.name) if field.value == true
       end
     end
 

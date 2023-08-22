@@ -136,7 +136,7 @@ RSpec.describe HarvestJob, type: :model do
     it 'can be custom' do
       expect(create(:harvest_job, harvest_definition:, destination:, page_type: 1, pages: 10).custom?).to eq true
     end
-  end  
+  end
 
   describe '#should_run?' do
     let(:pipeline) { create(:pipeline) }

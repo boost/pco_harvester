@@ -21,15 +21,20 @@ RSpec.describe LoadWorker, type: :job do
         expect(HarvestWorker).to receive(:perform_async)
 
         expect do
-          LoadWorker.new.perform(load_job.id, '[]')
+          described_class.new.perform(load_job.id, '[]')
         end.to change(HarvestJob, :count).by(1)
 
         expect(HarvestJob.last.target_job_id).to eq harvest_job.name
       end
 
-      it 'does not queue enrichments if there is allready an existing enrichment with the same key' do
-        enrichment_job = create(:harvest_job, :completed, harvest_definition: enrichment_definition, destination:,
-                                                          key: "test__enrichment-#{enrichment_definition.id}")
+      it 'does not queue enrichments if there is already an existing enrichment with the same key' do
+        enrichment_job = create(
+          :harvest_job,
+          :completed,
+          harvest_definition: enrichment_definition,
+          destination:,
+          key: "test__enrichment-#{enrichment_definition.id}"
+        )
         enrichment_load_job = create(:load_job, harvest_job: enrichment_job)
 
         HarvestJob.create(
@@ -39,7 +44,7 @@ RSpec.describe LoadWorker, type: :job do
         )
 
         expect do
-          LoadWorker.new.perform(enrichment_load_job.id, '[]')
+          described_class.new.perform(enrichment_load_job.id, '[]')
         end.not_to change(HarvestJob, :count)
       end
     end
@@ -52,7 +57,7 @@ RSpec.describe LoadWorker, type: :job do
         expect(HarvestWorker).not_to receive(:perform_async)
 
         expect do
-          LoadWorker.new.perform(load_job.id, '[]')
+          described_class.new.perform(load_job.id, '[]')
         end.not_to change(HarvestJob, :count)
       end
     end
