@@ -8,14 +8,8 @@ module Transformation
     def initialize(id, name, value, exception)
       @id = id
       @name = name
-      @value = cast(value)
+      @value = value
       @error = exception.present? ? Error.new(exception) : nil
-    end
-
-    def cast(value)
-      return value.to_time.to_s if value.class.in?([Date, DateTime, Time])
-
-      value
     end
   end
 end
