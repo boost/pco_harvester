@@ -6,7 +6,7 @@ class RequestsController < ApplicationController
 
     if params[:previous_request_id].present?
       @previous_request = Request.find(params[:previous_request_id])
-      
+
       @previous_response = Extraction::DocumentExtraction.new(@previous_request).extract
     end
 
