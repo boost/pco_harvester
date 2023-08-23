@@ -36,7 +36,10 @@
     <li class="list-group-item">Filesize: <%= number_to_human_size(@extraction_job.extraction_folder_size_in_bytes) %></li>
     <li class="list-group-item">Records Per Page: <%= @extraction_definition.per_page %></li>
     <li class="list-group-item">Total Pages: <%= @extraction_job.documents.total_pages %></li>
-    <li class="list-group-item"><span data-bs-toggle="tooltip" title="This is based on the per_page and the total_pages amount, not the extracted data.">Estimated Records: <%= @extraction_definition.per_page * @extraction_job.documents.total_pages %></span></li>
+
+    <% if @extraction_definition.per_page.present? %>
+      <li class="list-group-item"><span data-bs-toggle="tooltip" title="This is based on the per_page and the total_pages amount, not the extracted data.">Estimated Records: <%= @extraction_definition.per_page * @extraction_job.documents.total_pages %></span></li>
+    <% end %>
 </ul>
 
 <% if @document.blank? %>

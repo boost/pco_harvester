@@ -9,6 +9,7 @@ class HarvestJobsController < ApplicationController
 
   def create
     [@pipeline.harvest, @pipeline.enrichments].flatten.each do |definition|
+      next if definition.nil?
       next unless should_queue_job?(definition.id)
       job_params = harvest_job_params.to_h
 
