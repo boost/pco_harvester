@@ -18,7 +18,7 @@ module Extraction
 
     def params
       {
-        search: {}.merge(
+        search: { status: :active }.merge(
           if @harvest_job&.target_job_id.present?
             { 'fragments.job_id' => @harvest_job.target_job_id }
           else
