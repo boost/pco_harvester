@@ -19,7 +19,7 @@ module TransformationReduxState
 
   def fields_slice
     {
-      ids: @fields.map { |field| field[:id] },
+      ids: @fields.pluck(:id),
       entities: @fields.index_by { |field| field[:id] }
     }
   end
@@ -42,7 +42,7 @@ module TransformationReduxState
   def ui_fields_slice
     field_entities = @fields.map { |field| ui_field_entity(field) }
     {
-      ids: @fields.map { |field| field[:id] },
+      ids: @fields.pluck(:id),
       entities: field_entities.index_by { |field| field[:id] }
     }
   end

@@ -23,14 +23,14 @@ module ExtractionReduxState
 
   def parameters_slice
     {
-      ids: @parameters.map { |request| request[:id] },
+      ids: @parameters.pluck(:id),
       entities: @parameters.index_by { |request| request[:id] }
     }
   end
 
   def requests_slice
     {
-      ids: @extraction_definition.requests.map { |request| request[:id] },
+      ids: @extraction_definition.requests.pluck(:id),
       entities: @extraction_definition.requests.map(&:to_h).index_by { |request| request[:id] }
     }
   end
@@ -59,7 +59,7 @@ module ExtractionReduxState
     parameter_entities = @parameters.map { |parameter| ui_parameter_entity(parameter) }
 
     {
-      ids: @parameters.map { |parameter| parameter[:id] },
+      ids: @parameters.pluck(:id),
       entities: parameter_entities.index_by { |parameter| parameter[:id] }
     }
   end
@@ -78,7 +78,7 @@ module ExtractionReduxState
     request_entities = @extraction_definition.requests.map { |request| ui_request_entity(request) }
 
     {
-      ids: @extraction_definition.requests.map { |request| request[:id] },
+      ids: @extraction_definition.requests.pluck(:id),
       entities: request_entities.index_by { |request| request[:id] }
     }
   end

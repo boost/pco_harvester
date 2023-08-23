@@ -14,8 +14,8 @@ class HarvestJobsController < ApplicationController
 
       job_params = harvest_job_params.to_h
 
-      job_params.merge!(harvest_definition_id: definition.id)
-      job_params.merge!(key: "#{harvest_job_params['key']}__enrichment-#{definition.id}") if definition.enrichment?
+      job_params[:harvest_definition_id] = definition.id
+      job_params[:key] = "#{harvest_job_params['key']}__enrichment-#{definition.id}" if definition.enrichment?
       job = HarvestJob.new(job_params)
 
       if job.save

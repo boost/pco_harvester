@@ -40,7 +40,7 @@ class HarvestJob < ApplicationRecord
     return if transformation_jobs_start_time.nil? || extraction_job_end_time.nil?
 
     idle_offset = transformation_jobs_start_time - extraction_job_end_time
-    idle_offset = 0 if idle_offset < 0
+    idle_offset = 0 if idle_offset.negative?
 
     return if load_jobs_end_time.nil? || extraction_job_start_time.nil?
 
