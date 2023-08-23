@@ -8,7 +8,6 @@ class Parameter < ApplicationRecord
 
   # rubocop:disable Lint/UnusedBlockArgument
   # rubocop:disable Security/Eval
-  # rubocop:disable Lint/RescueException
   def evaluate(response = nil)
     return self if static?
     return Parameter.new(name:, content: response.params[name].to_i + content.to_i) if incremental?
@@ -25,7 +24,6 @@ class Parameter < ApplicationRecord
   end
   # rubocop:enable Lint/UnusedBlockArgument
   # rubocop:enable Security/Eval
-  # rubocop:enable Lint/RescueException
 
   def to_h
     return if slug?

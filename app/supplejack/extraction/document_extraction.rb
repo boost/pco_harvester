@@ -26,7 +26,7 @@ module Extraction
     end
 
     def headers
-      return super if @request.headers(@extraction_definition.page).blank?
+      return super if @request.headers.blank?
 
       super.merge(@request.headers(@response))
     end

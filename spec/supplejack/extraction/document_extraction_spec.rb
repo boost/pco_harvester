@@ -44,7 +44,7 @@ RSpec.describe Extraction::DocumentExtraction do
       end
     end
 
-    context 'Dynamic Parameters' do
+    context 'when using Dynamic parameters' do
       it 'evaluates provided ruby code as parameters' do
         create(:parameter, kind: 'query', name: 'date', content: 'Date.today', request:, content_type: 1)
         create(:parameter, kind: 'header', name: 'X-Forwarded-For', content: '1 + 2', request:, content_type: 1)
@@ -98,7 +98,7 @@ RSpec.describe Extraction::DocumentExtraction do
           }
         ).and_call_original
 
-        described_class.new(request, extraction_job.extraction_folder, previous_extraction.body).extract
+        described_class.new(request, extraction_job.extraction_folder, previous_extraction).extract
       end
     end
   end
