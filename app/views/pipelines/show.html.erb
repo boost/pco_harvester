@@ -10,7 +10,7 @@
   <div class="float-end">
     <%= button_tag(type: 'button', class: 'btn btn-primary me-1', data: { 'bs-toggle' => 'modal', 'bs-target' => '#run-settings'}, disabled: !@pipeline.ready_to_run?) do %>
       <i class='bi bi-play'></i>
-        Run 
+        Run
     <% end %>
 
     <% if @pipeline.ready_to_run? %>
@@ -19,7 +19,7 @@
           <div class='row gy-3 align-items-center'>
             <%= form.hidden_field :harvest_definition_id, value: @harvest_definition.id %>
             <%= form.hidden_field :key, value: SecureRandom.hex %>
-          
+
             <div class='col-5'>
               <%= form.label :harvest_definitions_to_run, "Blocks to run", class: 'form-label' %>
             </div>
@@ -29,7 +29,13 @@
                 <div class='form-check'>
                   <%= label_tag do %>
 
-                    <%= check_box('harvest_job', 'harvest_definitions_to_run', { multiple: true, class: 'form-check-input', checked: harvest_definition.ready_to_run?, class: "js-pipeline-#{harvest_definition.kind}-checkbox", disabled: !harvest_definition.ready_to_run? }, harvest_definition.id, nil) %>
+                    <%= check_box('harvest_job', 'harvest_definitions_to_run', {
+                          multiple: true,
+                          checked: harvest_definition.ready_to_run?,
+                          class: "form-check-input js-pipeline-#{harvest_definition.kind}-checkbox",
+                          disabled: !harvest_definition.ready_to_run?
+                        }, harvest_definition.id, nil)
+                    %>
 
                     <%= harvest_definition.source_id %>
                   <% end %>
@@ -46,15 +52,15 @@
                 <%= form.collection_select(:extraction_job_id, @extraction_jobs, :id, :name, { include_blank: 'Fresh extraction' }, class: 'form-select') %>
               </div>
             <% end %>
-          
+
             <div class="col-5">
               <%= form.label :page_type, "Pages to transform", class: "form-label" %>
             </div>
-          
+
             <div id='js-pipeline-page-type' class='col-7'>
               <%= form.select :page_type, options_for_select(HarvestJob.page_types.map { |key, value| [key.humanize, key] }), {},  id: 'js-pipeline-page-type-select', class: "form-select" %>
             </div>
-          
+
             <div id='js-pipeline-pages' class='col-3 d-none'>
               <%= form.number_field :pages, class: "form-control" %>
             </div>
@@ -193,24 +199,24 @@
                 referrer_id: @pipeline.id
               ),
             edit_text: "Edit Extraction",
-            jobs_path: 
+            jobs_path:
               pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
                 @harvest_definition.extraction_definition.pipeline,
                 @harvest_definition,
                 @harvest_definition.extraction_definition
               ),
-            run_sample_extraction_path: 
+            run_sample_extraction_path:
               pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
-                @harvest_definition.extraction_definition.pipeline, 
+                @harvest_definition.extraction_definition.pipeline,
                 @harvest_definition,
-                @harvest_definition.extraction_definition, 
+                @harvest_definition.extraction_definition,
                 kind: :sample
               ),
-            run_full_extraction_path: 
+            run_full_extraction_path:
               pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
-                @harvest_definition.extraction_definition.pipeline, 
+                @harvest_definition.extraction_definition.pipeline,
                 @harvest_definition,
-                @harvest_definition.extraction_definition, 
+                @harvest_definition.extraction_definition,
                 kind: :full
               )
           } %>
@@ -347,24 +353,24 @@
                   referrer_id: @pipeline.id
                 ),
               edit_text: "Edit Extraction",
-              jobs_path: 
+              jobs_path:
                 pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
                   enrichment_definition.extraction_definition.pipeline,
                   enrichment_definition,
                   enrichment_definition.extraction_definition
                 ),
-              run_sample_extraction_path: 
+              run_sample_extraction_path:
                 pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
-                  enrichment_definition.extraction_definition.pipeline, 
+                  enrichment_definition.extraction_definition.pipeline,
                   enrichment_definition,
-                  enrichment_definition.extraction_definition, 
+                  enrichment_definition.extraction_definition,
                   kind: :sample
                 ),
-              run_full_extraction_path: 
+              run_full_extraction_path:
                 pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
-                  enrichment_definition.extraction_definition.pipeline, 
+                  enrichment_definition.extraction_definition.pipeline,
                   enrichment_definition,
-                  enrichment_definition.extraction_definition, 
+                  enrichment_definition.extraction_definition,
                   kind: :full
                 )
             } %>
@@ -617,4 +623,3 @@
     </div>
   <% end %>
 <% end %>
-

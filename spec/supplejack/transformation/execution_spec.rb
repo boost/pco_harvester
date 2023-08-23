@@ -22,7 +22,7 @@ RSpec.describe Transformation::Execution do
     it 'returns the result of applying the field to the record' do
       transformation = described_class.new([record], [field], [], []).call.first.transformed_record
 
-      expect(transformation['title']).to eq ['The title of the record']
+      expect(transformation['title']).to eq 'The title of the record'
     end
 
     it 'updates the error message on the field if an error has occured applying the field' do
