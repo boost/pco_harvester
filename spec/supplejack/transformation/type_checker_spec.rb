@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Transformation::TypeChecker do
-  describe '#check' do
+  describe '#valid?' do
     describe 'allowed types' do
       it 'returns true with NilClass' do
         expect(described_class.new(nil).valid?).to be true
@@ -96,12 +96,26 @@ RSpec.describe Transformation::TypeChecker do
       end
 
       it 'returns false with an Object in Hash key' do
-        expect(described_class.new({Object.new => 1}).valid?).to be false
+        expect(described_class.new(Object.new => 1).valid?).to be false
       end
 
       it 'returns false with an Object in Hash value' do
-        expect(described_class.new({1 => Object.new}).valid?).to be false
+        expect(described_class.new(1 => Object.new).valid?).to be false
       end
+    end
+  end
+
+  describe '#error' do
+    it 'returns nil if there is no errors' do
+      check = described_class.new('a')
+      check.valid?
+      expect(check.error).to be_nil
+    end
+
+    it 'returns the error message if there is an error' do
+      check = described_class.new(Object.new)
+      check.valid?
+      expect(check.error).to include 'Field contains a wrong type: Object. The field returned:'
     end
   end
 end

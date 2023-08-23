@@ -15,12 +15,13 @@ module Transformation
         block = ->(record) { eval(@field.block) }
 
         @value = block.call(api_record)
-        raise TypeError, "Field returns wrong type: #{@value}" unless TypeChecker.new(@value).valid?
+        type_checker = TypeChecker.new(@value)
+        raise TypeError, type_checker.error unless type_checker.valid?
       rescue Exception => e
         @error = e
       end
 
-      Transformation::Field.new(@field.id, @field.name, @value, @error)
+      Transformation::TransformedField.new(@field.id, @field.name, @value, @error)
     end
     # rubocop:enable Lint/UnusedBlockArgument
     # rubocop:enable Security/Eval
