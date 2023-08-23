@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_11_012924) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_23_011255) do
   create_table "delete_jobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "status"
     t.integer "kind", default: 0, null: false
@@ -138,10 +138,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_11_012924) do
     t.string "name"
     t.string "content"
     t.integer "kind", default: 0
-    t.boolean "dynamic", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "request_id", null: false
+    t.integer "content_type", default: 0
     t.index ["request_id"], name: "index_parameters_on_request_id"
   end
 

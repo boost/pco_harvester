@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import classNames from "classnames";
+import { capitalize } from 'lodash';
 
 import ParameterDeleteModal from "~/js/apps/ExtractionApp/components/ParameterDeleteModal";
 import CodeEditor from "~/js/components/CodeEditor";
@@ -23,7 +24,7 @@ const Parameter = ({ id }) => {
   const appDetails = useSelector(selectAppDetails);
   const uiAppDetails = useSelector(selectUiAppDetails);
 
-  const { name, content, dynamic, kind } = useSelector((state) =>
+  const { name, content, content_type, kind } = useSelector((state) =>
     selectParameterById(state, id)
   );
 
@@ -112,21 +113,13 @@ const Parameter = ({ id }) => {
     dispatch(
       updateParameter({
         id: id,
-        dynamic: value,
+        content_type: value,
         harvestDefinitionId: appDetails.harvestDefinition.id,
         pipelineId: appDetails.pipeline.id,
         extractionDefinitionId: appDetails.extractionDefinition.id,
         requestId: uiAppDetails.activeRequest,
       })
     );
-  };
-
-  const dynamicText = () => {
-    if (dynamic) {
-      return "Dynamic";
-    }
-
-    return "Static";
   };
 
   return (
@@ -152,14 +145,14 @@ const Parameter = ({ id }) => {
                     aria-expanded="false"
                   >
                     <i className="bi bi-code-square" aria-hidden="true"></i>{" "}
-                    {dynamicText()}
+                    { capitalize(content_type) }
                   </button>
                   <ul className="dropdown-menu">
                     <li>
                       <a
                         className="dropdown-item"
                         onClick={() => {
-                          handleDropdownClick(false);
+                          handleDropdownClick(0);
                         }}
                       >
                         Static
@@ -169,10 +162,20 @@ const Parameter = ({ id }) => {
                       <a
                         className="dropdown-item"
                         onClick={() => {
-                          handleDropdownClick(true);
+                          handleDropdownClick(1);
                         }}
                       >
                         Dynamic
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="dropdown-item"
+                        onClick={() => {
+                          handleDropdownClick(2);
+                        }}
+                      >
+                        Incremental
                       </a>
                     </li>
                   </ul>
@@ -224,7 +227,7 @@ const Parameter = ({ id }) => {
               </label>
 
               <div className={valueColumnClasses}>
-                {!dynamic && (
+                {content_type != 'dynamic' && (
                   <input
                     type="text"
                     className="form-control"
@@ -234,7 +237,7 @@ const Parameter = ({ id }) => {
                   />
                 )}
 
-                {dynamic && (
+                {content_type == 'dynamic' && (
                   <CodeEditor
                     initContent={content}
                     onChange={(e) => setContentValue(e.target.value)}

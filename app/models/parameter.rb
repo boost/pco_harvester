@@ -4,9 +4,11 @@ class Parameter < ApplicationRecord
   belongs_to :request
 
   enum :kind, { query: 0, header: 1, slug: 2 }
+  enum :content_type, { static: 0, dynamic: 1, incremental: 2 }
 
-  def evaluate(response = nil)
-    return self unless dynamic?
+  def evaluate(response = nil, page = nil)
+    return self if static?
+    return Parameter.new(name:, content: content.to_i * (page - 1)) if incremental?
 
     begin
       block = ->(_response) { eval(content) }

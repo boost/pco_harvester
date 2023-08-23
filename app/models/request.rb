@@ -11,24 +11,24 @@ class Request < ApplicationRecord
 
   enum :http_method, { GET: 0, POST: 1 }
 
-  def url(response = nil)
-    return base_url if slug(response).empty?
+  def url(page, response = nil)
+    return base_url if slug(response, page).empty?
 
     "#{base_url}/#{slug(response)}"
   end
 
-  def query_parameters(response = nil)
+  def query_parameters(page, response = nil)
     parameters
       .query
-      .map { |parameter| parameter.evaluate(response) }
+      .map { |parameter| parameter.evaluate(response, page) }
       .map(&:to_h)
       .reduce(&:merge)
   end
 
-  def headers(response = nil)
+  def headers(page, response = nil)
     parameters
       .header
-      .map { |paramater| paramater.evaluate(response) }
+      .map { |paramater| paramater.evaluate(response, page) }
       .map(&:to_h)
       .reduce(&:merge)
   end
@@ -54,10 +54,10 @@ class Request < ApplicationRecord
 
   private
 
-  def slug(response)
+  def slug(response, page)
     parameters
       .slug
-      .map { |parameter| parameter.evaluate(response) }
+      .map { |parameter| parameter.evaluate(response, page) }
       .map(&:content)
       .join('/')
   end
