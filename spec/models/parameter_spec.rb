@@ -68,13 +68,16 @@ RSpec.describe Parameter, type: :model do
     let(:static)      { create(:parameter, kind: 'query', name: 'itemsPerPage') }
     let(:dynamic)     { create(:parameter, kind: 'query', name: 'itemsPerPage', content: '1 + 1', content_type: 1) }
     let(:incremental) { create(:parameter, kind: 'query', name: 'itemsPerPage', content: '12', content_type: 2) }
-    let(:incremental_two) { create(:parameter, kind: 'query', name: 'itemsPerPage', content: '1', content_type: 2) }
-    
     let(:dynamic_response) do
-      create(:parameter, kind: 'query', name: 'itemsPerPage', content: 'JSON.parse(response)["page_nr"] + 1',
-                         content_type: 1)
+      create(:parameter, kind: 'query', name: 'itemsPerPage', content: 'JSON.parse(response)["items_found"] + 10', content_type: 1)
     end
-    let(:response)    { '{ "page_nr": 2 }' }
+    let(:extraction_definition)         { create(:extraction_definition, :figshare) }
+    let(:request)                       { create(:request, :figshare_initial_request, extraction_definition:) }
+    let(:response)                      { Extraction::DocumentExtraction.new(request).extract }
+    
+    before do
+      stub_figshare_harvest_requests(request)
+    end
 
     it 'returns the unevaluated parameter if it is not dynamic' do
       expect(static.evaluate).to eq static
@@ -85,15 +88,11 @@ RSpec.describe Parameter, type: :model do
     end
 
     it 'returns the evaluated parameter based on a response' do
-      expect(dynamic_response.evaluate(response).content).to eq '3'
+      expect(dynamic_response.evaluate(response).content).to eq '50'
     end
 
     it 'returns the incremented parameter if it is incremental' do
-      expect(incremental.evaluate(nil, 2).content).to eq "12"
-    end
-
-    it 'returns the incremented page number if it is incremental and incremented by 1' do
-      expect(incremental_two.evaluate(nil, 2).content).to eq "2"
+      expect(incremental.evaluate(response).content).to eq "22"
     end
   end
 end
