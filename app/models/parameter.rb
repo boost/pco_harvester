@@ -4,13 +4,13 @@ class Parameter < ApplicationRecord
   belongs_to :request
 
   enum :kind, { query: 0, header: 1, slug: 2 }
-  enum :content_type, { static: 0, dynamic: 1, incremental: 2 }
+  enum :content_type, { static: 0, dynamic: 1, increment_by: 2 }
 
   # rubocop:disable Lint/UnusedBlockArgument
   # rubocop:disable Security/Eval
   def evaluate(response = nil)
     return self if static?
-    return Parameter.new(name:, content: response.params[name].to_i + content.to_i) if incremental?
+    return Parameter.new(name:, content: response.params[name].to_i + content.to_i) if increment_by?
 
     begin
       block = ->(response) { eval(content) }

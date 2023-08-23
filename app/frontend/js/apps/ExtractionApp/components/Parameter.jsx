@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import classNames from "classnames";
-import { capitalize } from 'lodash';
+import { startCase } from 'lodash';
 
 import ParameterDeleteModal from "~/js/apps/ExtractionApp/components/ParameterDeleteModal";
 import CodeEditor from "~/js/components/CodeEditor";
@@ -145,7 +145,7 @@ const Parameter = ({ id }) => {
                     aria-expanded="false"
                   >
                     <i className="bi bi-code-square" aria-hidden="true"></i>{" "}
-                    { capitalize(content_type) }
+                    { startCase(content_type) }
                   </button>
                   <ul className="dropdown-menu">
                     <li>
@@ -175,7 +175,7 @@ const Parameter = ({ id }) => {
                           handleDropdownClick(2);
                         }}
                       >
-                        Incremental
+                        Increment By
                       </a>
                     </li>
                   </ul>
