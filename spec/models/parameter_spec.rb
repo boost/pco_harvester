@@ -68,6 +68,8 @@ RSpec.describe Parameter, type: :model do
     let(:static)      { create(:parameter, kind: 'query', name: 'itemsPerPage') }
     let(:dynamic)     { create(:parameter, kind: 'query', name: 'itemsPerPage', content: '1 + 1', content_type: 1) }
     let(:incremental) { create(:parameter, kind: 'query', name: 'itemsPerPage', content: '12', content_type: 2) }
+    let(:incremental_two) { create(:parameter, kind: 'query', name: 'itemsPerPage', content: '1', content_type: 2) }
+    
     let(:dynamic_response) do
       create(:parameter, kind: 'query', name: 'itemsPerPage', content: 'JSON.parse(response)["page_nr"] + 1',
                          content_type: 1)
@@ -88,6 +90,10 @@ RSpec.describe Parameter, type: :model do
 
     it 'returns the incremented parameter if it is incremental' do
       expect(incremental.evaluate(nil, 2).content).to eq "12"
+    end
+
+    it 'returns the incremented page number if it is incremental and incremented by 1' do
+      expect(incremental_two.evaluate(nil, 2).content).to eq "2"
     end
   end
 end

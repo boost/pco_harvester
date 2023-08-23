@@ -18,17 +18,17 @@ module Extraction
     end
 
     def url
-      @request.url(@extraction_definition.page, @response)
+      @request.url(@response)
     end
 
     def params
-      @request.query_parameters(@extraction_definition.page, @response)
+      @request.query_parameters(@response)
     end
 
     def headers
       return super if @request.headers(@extraction_definition.page).blank?
 
-      super.merge(@request.headers(@extraction_definition.page, @response))
+      super.merge(@request.headers(@response))
     end
   end
 end

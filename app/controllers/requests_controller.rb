@@ -6,11 +6,12 @@ class RequestsController < ApplicationController
 
     if params[:previous_request_id].present?
       @previous_request = Request.find(params[:previous_request_id])
-      @previous_response_body = Extraction::DocumentExtraction.new(@previous_request).extract.body
+      
+      @previous_response = Extraction::DocumentExtraction.new(@previous_request).extract
     end
 
     render json: @request.to_h.merge(
-      preview: Extraction::DocumentExtraction.new(@request, nil, @previous_response_body).extract
+      preview: Extraction::DocumentExtraction.new(@request, nil, @previous_response).extract
     )
   end
 

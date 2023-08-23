@@ -6,16 +6,16 @@ class Parameter < ApplicationRecord
   enum :kind, { query: 0, header: 1, slug: 2 }
   enum :content_type, { static: 0, dynamic: 1, incremental: 2 }
 
-  def evaluate(response = nil, page = nil)
+  def evaluate(response = nil)
     return self if static?
-    return Parameter.new(name:, content: content.to_i * (page - 1)) if incremental?
+    return Parameter.new(name:, content: response.params[name].to_i + content.to_i) if incremental?
 
     begin
       block = ->(_response) { eval(content) }
 
       Parameter.new(
         name:,
-        content: block.call(response)
+        content: block.call(response.body)
       )
     rescue StandardError
     end

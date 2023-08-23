@@ -69,18 +69,15 @@ const Request = ({}) => {
             </p>
           </div>
 
-          {
-            // TODO once we support POST requests
-            // <div className="dropdown">
-            //   <button className="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            //     <i className="bi bi-arrow-down-up" aria-hidden="true"></i> { http_method }
-            //   </button>
-            //   <ul className="dropdown-menu">
-            //     <li><a className="dropdown-item" onClick={ () => { handleHttpMethodClick('GET') }}>GET</a></li>
-            //     <li><a className="dropdown-item" onClick={ () => { handleHttpMethodClick('POST') }}>POST</a></li>
-            //   </ul>
-            // </div>
-          }
+          <div className="dropdown">
+            <button className="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i className="bi bi-arrow-down-up" aria-hidden="true"></i> { http_method }
+            </button>
+            <ul className="dropdown-menu">
+              <li><a className="dropdown-item" onClick={ () => { handleHttpMethodClick('GET') }}>GET</a></li>
+              <li><a className="dropdown-item" onClick={ () => { handleHttpMethodClick('POST') }}>POST</a></li>
+            </ul>
+          </div>
         </div>
 
         <strong className="float-start me-2">URL</strong>
