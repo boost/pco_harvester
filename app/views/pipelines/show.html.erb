@@ -29,7 +29,7 @@
                 <div class='form-check'>
                   <%= label_tag do %>
 
-                    <%= check_box('harvest_job', 'harvest_definitions_to_run', { multiple: true, class: 'form-check-input', checked: harvest_definition.ready_to_run?, class: "js-pipeline-#{harvest_definition.kind}-checkbox", disabled: !harvest_definition.ready_to_run? }, harvest_definition.id, nil) %>
+                    <%= check_box('harvest_job', 'harvest_definitions_to_run', { multiple: true, checked: harvest_definition.ready_to_run?, class: "js-pipeline-#{harvest_definition.kind}-checkbox form-check-input", disabled: !harvest_definition.ready_to_run? }, harvest_definition.id, nil) %>
 
                     <%= harvest_definition.source_id %>
                   <% end %>
