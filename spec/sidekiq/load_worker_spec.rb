@@ -50,8 +50,8 @@ RSpec.describe LoadWorker, type: :job do
     end
 
     context 'when the harvest is not completed' do
-      let(:harvest_job)            { create(:harvest_job, harvest_definition:, destination:, key: 'test') }
-      let!(:load_job)              { create(:load_job, harvest_job:) }
+      let(:harvest_job) { create(:harvest_job, harvest_definition:, destination:, key: 'test') }
+      let!(:load_job) { create(:load_job, harvest_job:) }
 
       it 'does not queue enrichments' do
         expect(HarvestWorker).not_to receive(:perform_async)
