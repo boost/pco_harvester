@@ -20,7 +20,6 @@ const Request = ({}) => {
   );
 
   const initialRequestId = requestIds[0];
-  const mainRequestId    = requestIds[1];
 
   let allParameters = useSelector(selectAllParameters);
   allParameters = filter(allParameters, [

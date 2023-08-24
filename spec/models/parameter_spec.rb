@@ -43,7 +43,7 @@ RSpec.describe Parameter, type: :model do
     end
 
     it 'can be incremental' do
-      expect(incremental.increment_by?).to eq true
+      expect(incremental.incremental?).to eq true
     end
   end
 

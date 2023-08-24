@@ -12,7 +12,6 @@ import {
   selectAppDetails,
   clickedOnRunFields,
 } from "~/js/features/TransformationApp/AppDetailsSlice";
-import { selectUiAppDetails } from "~/js/features/TransformationApp/UiAppDetailsSlice";
 import { toggleDisplayField } from "~/js/features/TransformationApp/UiFieldsSlice";
 
 import { selectRawRecord } from "/js/features/TransformationApp/RawRecordSlice";
