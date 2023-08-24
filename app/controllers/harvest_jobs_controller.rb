@@ -11,10 +11,11 @@ class HarvestJobsController < ApplicationController
     [@pipeline.harvest, @pipeline.enrichments].flatten.each do |definition|
       next if definition.nil?
       next unless should_queue_job?(definition.id)
+
       job_params = harvest_job_params.to_h
 
-      job_params.merge!(harvest_definition_id: definition.id)
-      job_params.merge!(key: "#{harvest_job_params['key']}__enrichment-#{definition.id}") if definition.enrichment?
+      job_params[:harvest_definition_id] = definition.id
+      job_params[:key] = "#{harvest_job_params['key']}__enrichment-#{definition.id}" if definition.enrichment?
       job = HarvestJob.new(job_params)
 
       if job.save
@@ -25,7 +26,7 @@ class HarvestJobsController < ApplicationController
       end
 
       # If the user has scheduled a harvest we do not need to enqueue the enrichments now
-      # as they will be enqueued once the harvest job has finished. 
+      # as they will be enqueued once the harvest job has finished.
       break if definition.harvest?
     end
 
@@ -64,6 +65,7 @@ class HarvestJobsController < ApplicationController
   end
 
   def harvest_job_params
-    params.require(:harvest_job).permit(:extraction_job_id, :destination_id, :key, :page_type, :pages, harvest_definitions_to_run: [])
+    params.require(:harvest_job).permit(:extraction_job_id, :destination_id, :key, :page_type, :pages,
+                                        harvest_definitions_to_run: [])
   end
 end

@@ -14,10 +14,12 @@ module Extraction
     def params; end
 
     # rubocop:disable Lint/UnusedBlockArgument
+    # rubocop:disable Security/Eval
     def url
       block = ->(record) { eval(@extraction_definition.enrichment_url) }
       block.call(@record)
     end
+    # rubocop:enable Security/Eval
     # rubocop:enable Lint/UnusedBlockArgument
 
     def file_path
