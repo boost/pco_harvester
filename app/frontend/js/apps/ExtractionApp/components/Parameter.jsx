@@ -265,7 +265,7 @@ const Parameter = ({ id }) => {
               <label className="col-form-label col-sm-1" htmlFor="name">
                 <strong>Value </strong>
                 {content_type == 'incremental' && (
-                    <Tooltip data-bs-title="Please input the amount you want this key to be incremented by">
+                    <Tooltip data-bs-title="Please input the amount you want the value of this key to be incremented by">
                       <i
                         className="bi bi-question-circle"
                         aria-label="help text"
