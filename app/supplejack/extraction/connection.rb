@@ -11,13 +11,12 @@ module Extraction
     def initialize(url:, params: {}, headers: {})
       headers ||= {}
       @connection = connection(url, params, headers)
-      @url        = url
+      @url        = @connection.build_url
       @params     = @connection.params
       @headers    = @connection.headers
     end
 
     def get
-      @url = @connection.build_url
       Response.new(@connection.get)
     end
 

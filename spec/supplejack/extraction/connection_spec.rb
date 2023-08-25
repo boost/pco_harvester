@@ -3,26 +3,63 @@
 require 'rails_helper'
 
 RSpec.describe Extraction::Connection do
-  describe '#url' do
-    it 'is a URI' do
-      conn = described_class.new(url: 'https://google.com/hello')
-      expect(conn.url).to be_a URI
-      expect(conn.url.to_s).to eq 'https://google.com/hello'
+  describe '#get' do
+    before do
+       stub_request(:get, "https://google.com/hello?param=value").
+         with(
+           headers: {
+       	 'Accept'=>'*/*',
+       	 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+       	 'User-Agent'=>'Supplejack Harvester v2.0'
+           }).
+         to_return(status: 200, body: "", headers: {})
+
+       stub_request(:get, "https://google.com/hello?my_param=my_value&param=value").
+         with(
+           headers: {
+       	 'Accept'=>'*/*',
+       	 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+       	 'User-Agent'=>'Supplejack Harvester v2.0'
+           }).
+         to_return(status: 200, body: "", headers: {})      
+
     end
 
     it 'contains the params from the params parameter' do
       conn = described_class.new(url: 'https://google.com/hello', params: { param: :value })
+      conn.get
       expect(conn.url.to_s).to eq 'https://google.com/hello?param=value'
     end
 
     it 'contains the params from the URL parameter' do
       conn = described_class.new(url: 'https://google.com/hello?param=value')
+      conn.get
       expect(conn.url.to_s).to eq 'https://google.com/hello?param=value'
     end
 
     it 'contains both the params from the URL and the params parameter' do
       conn = described_class.new(url: 'https://google.com/hello?param=value', params: { my_param: :my_value })
+      conn.get
       expect(conn.url.to_s).to eq 'https://google.com/hello?my_param=my_value&param=value'
+    end
+  end
+
+  describe '#post' do
+    before do
+     stub_request(:post, "https://google.com/hello?page=1&supplejack=jack").
+       with(
+         body: "{\"supplejack\":\"jack\",\"page\":1}",
+         headers: {
+         	 'Accept'=>'*/*',
+         	 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+         	 'User-Agent'=>'Supplejack Harvester v2.0'
+         }).
+       to_return(status: 200, body: "", headers: {})
+    end
+
+    it 'sends the provided params in the payload' do
+      conn = described_class.new(url: 'https://google.com/hello', params: { 'supplejack': 'jack', 'page': '1' })
+      conn.post
     end
   end
 
