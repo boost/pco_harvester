@@ -2,7 +2,7 @@
 
 ## This project is a work in progress and is not ready to be run in production environments. It is subject to change at any time and existing versions may not be compatible with new versions. 
 
-The Supplejack Harvester performs the data ingestion process for the Supplejack API.
+The Supplejack Harvester performs the data ingestion process for the Supplejack API. If you are familiar with the existing Supplejack stack, the Supplejack Harvester is a replacement for the Supplejack Worker and Supplejack Manager. 
 
 It uses the following technologies:
 
