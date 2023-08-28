@@ -251,6 +251,7 @@ const Parameter = ({ id }) => {
                   { (content_type == 'incremental' && kind == 'query') && (
                     <div className="col-sm-5">
                       <select className="form-select" defaultValue={name} onChange={(e) => setNameValue(e.target.value)}>
+                        <option value="">Please select a parameter to be incremented...</option>
                         { map(initialRequestQueryParameters, (parameter) => {
                           return (
                             <option value={parameter.name}>{ parameter.name }</option>
