@@ -10,7 +10,7 @@ In the interest of fostering an open and welcoming environment, we as contributo
 
 ## Our Standards
 
-Examples of behavior that contributes to creating a positive environment include:
+Examples of behaviour that contributes to creating a positive environment include:
 
 - Using welcoming and inclusive language
 - Being respectful of differing viewpoints and experiences
@@ -43,7 +43,7 @@ This Code of Conduct applies both within project spaces and in public spaces whe
 
 ## Enforcement
 
-Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting us. We don’t have an anonymised form for the receipt of complaints, but we will keep your communication private by default unless requested otherwise and won’t provide any bad-faith responses. All complaints will be reviewed in the context of the standards listed above, investigated, and will result in a response that is deemed necessary and appropriate to the circumstances. The project team will maintain confidentiality with regard to the reporter of an incident.
+Instances of abusive, harassing, or otherwise unacceptable behaviour may be reported by contacting us. We don’t have an anonymised form for the receipt of complaints, but we will keep your communication private by default unless requested otherwise and won’t provide any bad-faith responses. All complaints will be reviewed in the context of the standards listed above, investigated, and will result in a response that is deemed necessary and appropriate to the circumstances. The project team will maintain confidentiality with regard to the reporter of an incident.
 
 Project maintainers who do not follow or enforce the Code of Conduct in good faith may face temporary or permanent repercussions as determined by other members of the project's leadership.
 

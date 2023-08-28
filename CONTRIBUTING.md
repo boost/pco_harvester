@@ -1,6 +1,6 @@
 # Contributing to Supplejack Harvester
 
-Thank you for your interest in contributing to Supplejack Harvester. We welcome your thoughts and feedback and ask that you follow our code of conduct and contrubuting guidelines.
+Thank you for your interest in contributing to Supplejack Harvester. We welcome your thoughts and feedback and ask that you follow our code of conduct and contributing guidelines.
 
 ## Code of Conduct
 
