@@ -4,6 +4,7 @@ Thank you for your interest in contributing to Supplejack Harvester. We welcome 
 
 ## Code of Conduct
 
+All contributors are expected to follow the Code of Conduct as described in the CODE_OF_CODUCT.md file in the root of this repository.
 
 
 ## Getting Started
