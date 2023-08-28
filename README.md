@@ -20,8 +20,9 @@ To get up and running:
 
 1. Clone this repository:
 
-`git clone https://github.com/DigitalNZ/supplejack_worker.git`
+`git clone https://github.com/DigitalNZ/supplejack_harvester.git`
 
+2. Follow these steps:
 
 ```bash
 bundle install
