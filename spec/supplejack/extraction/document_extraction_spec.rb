@@ -44,11 +44,11 @@ RSpec.describe Extraction::DocumentExtraction do
       end
     end
 
-    context 'Dynamic Parameters' do
+    context 'when using Dynamic parameters' do
       it 'evaluates provided ruby code as parameters' do
-        create(:parameter, kind: 'query', name: 'date', content: 'Date.today', request:, dynamic: true)
-        create(:parameter, kind: 'header', name: 'X-Forwarded-For', content: '1 + 2', request:, dynamic: true)
-        create(:parameter, kind: 'slug', content: '100 / 2', request:, dynamic: true)
+        create(:parameter, kind: 'query', name: 'date', content: 'Date.today', request:, content_type: 1)
+        create(:parameter, kind: 'header', name: 'X-Forwarded-For', content: '1 + 2', request:, content_type: 1)
+        create(:parameter, kind: 'slug', content: '100 / 2', request:, content_type: 1)
 
         stub_request(:get, "https://api.figshare.com/v1/articles/search/50?date=#{Date.today}&itemsPerPage=10&page=1&search_for=zealand")
           .with(
@@ -83,8 +83,7 @@ RSpec.describe Extraction::DocumentExtraction do
       it 'evaluates provided ruby code as parameters based on a response' do
         previous_extraction = subject.extract
 
-        create(:parameter, kind: 'query', name: 'page', content: 'JSON.parse(response)[\'page_nr\'] + 1', request:,
-                           dynamic: true)
+        create(:parameter, kind: 'query', name: 'page', content: 'JSON.parse(response)[\'page_nr\'] + 1', request:, content_type: 1)
 
         expect(Extraction::Request).to receive(:new).with(
           url: request.url,
@@ -99,7 +98,7 @@ RSpec.describe Extraction::DocumentExtraction do
           }
         ).and_call_original
 
-        described_class.new(request, extraction_job.extraction_folder, previous_extraction.body).extract
+        described_class.new(request, extraction_job.extraction_folder, previous_extraction).extract
       end
     end
   end

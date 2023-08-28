@@ -12,6 +12,8 @@ import { selectUiAppDetails } from "~/js/features/ExtractionApp/UiAppDetailsSlic
 import AddParameter from "~/js/apps/ExtractionApp/components/AddParameter";
 import ParameterNavigationListItem from "~/js/apps/ExtractionApp/components/ParameterNavigationListItem";
 
+import { selectRequestById } from "~/js/features/ExtractionApp/RequestsSlice";
+
 const ParameterNavigationPanel = () => {
   const dispatch = useDispatch();
   const uiAppDetails = useSelector(selectUiAppDetails);
@@ -22,15 +24,27 @@ const ParameterNavigationPanel = () => {
     uiAppDetails.activeRequest,
   ]);
 
-  const queryParameters = filter(allParameters, ["kind", "query"]);
+  const queryParameters  = filter(allParameters, ["kind", "query"]);
   const headerParameters = filter(allParameters, ["kind", "header"]);
-  const slugParameters = filter(allParameters, ["kind", "slug"]);
+  const slugParameters   = filter(allParameters, ["kind", "slug"]);
+
+  const request = useSelector((state) =>
+    selectRequestById(state, uiAppDetails.activeRequest)
+  );
+
+  const queryHeading = () => {
+    if(request.http_method == 'POST') {
+      return 'Payload'
+    }
+
+    return 'Query'
+  }
 
   return (
     <div className="card field-nav-panel">
       <div className="d-flex flex-column overflow-auto">
         <div className="field-nav-panel__header">
-          <h5>Query</h5>
+          <h5>{ queryHeading() }</h5>
 
           <div className="btn-group card__control">
             <i

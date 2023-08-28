@@ -9,7 +9,7 @@ RSpec.describe LoadWorker, type: :job do
   let(:destination)            { create(:destination) }
 
   describe '#perform' do
-    let(:harvest_job) { create(:harvest_job, :completed, harvest_definition:, destination:, key: 'test') }
+    let(:harvest_job) { create(:harvest_job, :completed, harvest_definition:, destination:, key: 'test', harvest_definitions_to_run: [enrichment_definition.id]) }
     let!(:field) do
       create(:field, name: 'title', block: "JsonPath.new('title').on(record).first",
                      transformation_definition: enrichment_definition.transformation_definition)

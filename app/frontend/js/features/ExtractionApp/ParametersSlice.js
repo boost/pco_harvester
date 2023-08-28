@@ -19,7 +19,7 @@ export const addParameter = createAsyncThunk(
       name,
       content,
       kind,
-      dynamic,
+      content_type,
       harvestDefinitionId,
       pipelineId,
       extractionDefinitionId,
@@ -35,7 +35,7 @@ export const addParameter = createAsyncThunk(
             kind: kind,
             name: name,
             content: content,
-            dynamic: dynamic,
+            content_type: content_type,
           },
         }
       )
@@ -60,7 +60,7 @@ export const updateParameter = createAsyncThunk(
       name,
       content,
       kind,
-      dynamic,
+      content_type,
     } = payload;
 
     const response = request
@@ -71,7 +71,7 @@ export const updateParameter = createAsyncThunk(
             name: name,
             content: content,
             kind: kind,
-            dynamic: dynamic,
+            content_type: content_type,
           },
         }
       )

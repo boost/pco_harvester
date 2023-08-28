@@ -26,7 +26,7 @@ FactoryBot.define do
 
         create(:parameter, name: 'search_for',   content: 'zealand', request:)
         create(:parameter, name: 'page',         content: "JSON.parse(response)['page_nr'] + 1", request:,
-                           dynamic: true)
+                           content_type: 1)
         create(:parameter, name: 'itemsPerPage', content: '10', request:)
       end
     end
@@ -43,7 +43,7 @@ FactoryBot.define do
     after(:create) do |request|
       create(:parameter, name: 'per_page',   content: '30', request:)
       create(:parameter, name: 'id_above',   content: 'JsonPath.new("$.results[(@.length-1)].id").on(response).first',
-                         request:, dynamic: true)
+                         request:, content_type: 1)
     end
   end
 
@@ -57,7 +57,7 @@ FactoryBot.define do
   trait :freesound_main_request do
     after(:create) do |request|
       create(:parameter, name: 'page',
-                         content: 'Nokogiri::HTML.parse(response).at_xpath(\'./html/body/root/next\').content.match(/.+page=(?<page>.+?)&/)[:page]', request:, dynamic: true)
+                         content: 'Nokogiri::HTML.parse(response).at_xpath(\'./html/body/root/next\').content.match(/.+page=(?<page>.+?)&/)[:page]', request:, content_type: 1)
       create(:parameter, name: 'page_size', content: '50', request:)
     end
   end
@@ -73,7 +73,7 @@ FactoryBot.define do
     after(:create) do |request|
       create(:parameter, name: 'n',   content: '100', request:)
       create(:parameter, name: 's',   content: 'Nokogiri::XML.parse(response).at_xpath(\'//records/@nextStart\')',
-                         request:, dynamic: true)
+                         request:, content_type: 1)
     end
   end
 end

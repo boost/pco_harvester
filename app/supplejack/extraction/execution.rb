@@ -34,7 +34,7 @@ module Extraction
     private
 
     def extract_and_save_document(request)
-      @de = DocumentExtraction.new(request, @extraction_job.extraction_folder, @previous_request&.body)
+      @de = DocumentExtraction.new(request, @extraction_job.extraction_folder, @previous_request)
       @previous_request = @de.extract
       @de.save
 

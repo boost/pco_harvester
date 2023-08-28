@@ -1,29 +1,45 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import classNames from "classnames";
+import { capitalize, filter, map } from 'lodash';
 
 import ParameterDeleteModal from "~/js/apps/ExtractionApp/components/ParameterDeleteModal";
 import CodeEditor from "~/js/components/CodeEditor";
 
 import {
   selectParameterById,
+  selectAllParameters,
   updateParameter,
-  deleteParameter,
 } from "~/js/features/ExtractionApp/ParametersSlice";
 
 import { selectAppDetails } from "~/js/features/ExtractionApp/AppDetailsSlice";
 import { selectUiAppDetails } from "~/js/features/ExtractionApp/UiAppDetailsSlice";
+import { selectRequestIds } from "~/js/features/ExtractionApp/RequestsSlice";
 
 import {
   selectUiParameterById,
   toggleDisplayParameter,
 } from "~/js/features/ExtractionApp/UiParametersSlice";
 
+import Tooltip from '~/js/components/Tooltip';
+
 const Parameter = ({ id }) => {
   const appDetails = useSelector(selectAppDetails);
   const uiAppDetails = useSelector(selectUiAppDetails);
+  let allParameters = useSelector(selectAllParameters);
 
-  const { name, content, dynamic, kind } = useSelector((state) =>
+  const requestIds = useSelector(selectRequestIds);
+  const initialRequestId = requestIds[0];
+  const mainRequestId    = requestIds[1];
+
+  allParameters = filter(allParameters, [
+    "request_id",
+    initialRequestId,
+  ]);
+
+  const initialRequestQueryParameters = filter(allParameters, ["kind", "query"]);
+
+  const { name, content, content_type, kind } = useSelector((state) =>
     selectParameterById(state, id)
   );
 
@@ -112,21 +128,13 @@ const Parameter = ({ id }) => {
     dispatch(
       updateParameter({
         id: id,
-        dynamic: value,
+        content_type: value,
         harvestDefinitionId: appDetails.harvestDefinition.id,
         pipelineId: appDetails.pipeline.id,
         extractionDefinitionId: appDetails.extractionDefinition.id,
         requestId: uiAppDetails.activeRequest,
       })
     );
-  };
-
-  const dynamicText = () => {
-    if (dynamic) {
-      return "Dynamic";
-    }
-
-    return "Static";
   };
 
   return (
@@ -152,14 +160,14 @@ const Parameter = ({ id }) => {
                     aria-expanded="false"
                   >
                     <i className="bi bi-code-square" aria-hidden="true"></i>{" "}
-                    {dynamicText()}
+                    { capitalize(content_type) }
                   </button>
                   <ul className="dropdown-menu">
                     <li>
                       <a
                         className="dropdown-item"
                         onClick={() => {
-                          handleDropdownClick(false);
+                          handleDropdownClick(0);
                         }}
                       >
                         Static
@@ -169,12 +177,24 @@ const Parameter = ({ id }) => {
                       <a
                         className="dropdown-item"
                         onClick={() => {
-                          handleDropdownClick(true);
+                          handleDropdownClick(1);
                         }}
                       >
                         Dynamic
                       </a>
                     </li>
+                    { (uiAppDetails.activeRequest == mainRequestId && kind == 'query') && (
+                      <li>
+                        <a
+                          className="dropdown-item"
+                          onClick={() => {
+                            handleDropdownClick(2);
+                          }}
+                        >
+                          Incremental
+                        </a>
+                      </li>
+                    )}
                   </ul>
                 </div>
 
@@ -205,26 +225,58 @@ const Parameter = ({ id }) => {
               {kind != "slug" && (
                 <>
                   <label className="col-form-label col-sm-1" htmlFor="name">
-                    <strong>Key</strong>
-                  </label>
+                    <strong>Key </strong>
 
-                  <div className="col-sm-5">
-                    <input
-                      type="text"
-                      className="form-control"
-                      defaultValue={name}
-                      onChange={(e) => setNameValue(e.target.value)}
-                    />
-                  </div>
+                    {content_type == 'incremental' && (
+                      <Tooltip data-bs-title="Please select the key of the initial request that you want to be incremented.">
+                        <i
+                          className="bi bi-question-circle"
+                          aria-label="help text"
+                        ></i>
+                      </Tooltip>
+                    )}
+                  </label>
+                
+                  { content_type != 'incremental' && (
+                    <div className="col-sm-5">
+                      <input
+                        type="text"
+                        className="form-control"
+                        defaultValue={name}
+                        onChange={(e) => setNameValue(e.target.value)}
+                      />
+                    </div>
+                  )}
+
+                  { (content_type == 'incremental' && kind == 'query') && (
+                    <div className="col-sm-5">
+                      <select className="form-select" defaultValue={name} onChange={(e) => setNameValue(e.target.value)}>
+                        <option value="">Please select a parameter to be incremented...</option>
+                        { map(initialRequestQueryParameters, (parameter) => {
+                          return (
+                            <option value={parameter.name}>{ parameter.name }</option>
+                          )
+                        })}
+                      </select>
+                    </div> 
+                  )}
                 </>
               )}
 
               <label className="col-form-label col-sm-1" htmlFor="name">
-                <strong>Value</strong>
+                <strong>Value </strong>
+                {content_type == 'incremental' && (
+                    <Tooltip data-bs-title="Please input the amount you want the value of this key to be incremented by">
+                      <i
+                        className="bi bi-question-circle"
+                        aria-label="help text"
+                      ></i>
+                    </Tooltip>
+                  )}
               </label>
 
               <div className={valueColumnClasses}>
-                {!dynamic && (
+                {content_type != 'dynamic' && (
                   <input
                     type="text"
                     className="form-control"
@@ -234,7 +286,7 @@ const Parameter = ({ id }) => {
                   />
                 )}
 
-                {dynamic && (
+                {content_type == 'dynamic' && (
                   <CodeEditor
                     initContent={content}
                     onChange={(e) => setContentValue(e.target.value)}

@@ -1,8 +1,8 @@
 import React from "react";
 
-import { map, filter, concat } from "lodash";
+import { map, filter } from "lodash";
 import { useSelector, useDispatch } from "react-redux";
-import { selectParameterIds, selectAllParameters } from "~/js/features/ExtractionApp/ParametersSlice";
+import { selectAllParameters } from "~/js/features/ExtractionApp/ParametersSlice";
 import { selectRequestById, selectRequestIds, updateRequest } from "~/js/features/ExtractionApp/RequestsSlice";
 import { selectAppDetails } from "~/js/features/ExtractionApp/AppDetailsSlice";
 import { selectUiAppDetails } from "~/js/features/ExtractionApp/UiAppDetailsSlice";
@@ -20,7 +20,6 @@ const Request = ({}) => {
   );
 
   const initialRequestId = requestIds[0];
-  const mainRequestId    = requestIds[1];
 
   let allParameters = useSelector(selectAllParameters);
   allParameters = filter(allParameters, [
@@ -57,6 +56,50 @@ const Request = ({}) => {
     }
   }
 
+  const formattedSlugParameters = () => {
+    return(
+      map(slugParameters, (slugParameter, index) => {
+        return (
+          <RequestFragment
+            id={slugParameter.id}
+            index={index}
+            key={slugParameter.id}
+          />
+        );
+      })
+    )
+  }
+
+  const formattedQueryParameters = () => {
+    return(
+      map(queryParameters, (queryParameter, index) => {
+        return (
+          <RequestFragment
+            id={queryParameter.id}
+            index={index}
+            key={queryParameter.id}
+          />
+        );
+      })
+    )
+  }
+
+  const formattedPayload = () => {
+    const params = map(queryParameters, (queryParameter) => {
+      return { [queryParameter.name]: queryParameter.content }
+    });
+
+    return (
+      <>
+        <br />
+        <br />
+        <pre>
+          { JSON.stringify(Object.assign({}, ...params), null, 2) }
+        </pre>
+      </>
+    )
+  }
+
   return (
     <div className="card">
       <div className="card-body">
@@ -69,44 +112,29 @@ const Request = ({}) => {
             </p>
           </div>
 
-          {
-            // TODO once we support POST requests
-            // <div className="dropdown">
-            //   <button className="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            //     <i className="bi bi-arrow-down-up" aria-hidden="true"></i> { http_method }
-            //   </button>
-            //   <ul className="dropdown-menu">
-            //     <li><a className="dropdown-item" onClick={ () => { handleHttpMethodClick('GET') }}>GET</a></li>
-            //     <li><a className="dropdown-item" onClick={ () => { handleHttpMethodClick('POST') }}>POST</a></li>
-            //   </ul>
-            // </div>
-          }
+          <div className="dropdown">
+            <button className="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i className="bi bi-arrow-down-up" aria-hidden="true"></i> { http_method }
+            </button>
+            <ul className="dropdown-menu">
+              <li><a className="dropdown-item" onClick={ () => { handleHttpMethodClick('GET') }}>GET</a></li>
+              <li><a className="dropdown-item" onClick={ () => { handleHttpMethodClick('POST') }}>POST</a></li>
+            </ul>
+          </div>
         </div>
 
         <strong className="float-start me-2">URL</strong>
 
         <p>
           <span className='text-secondary'>{base_url}</span>
-          {map(slugParameters, (slugParameter, index) => {
-            return (
-              <RequestFragment
-                id={slugParameter.id}
-                index={index}
-                key={slugParameter.id}
-              />
-            );
-          })}
-
-          {map(queryParameters, (queryParameter, index) => {
-            return (
-              <RequestFragment
-                id={queryParameter.id}
-                index={index}
-                key={queryParameter.id}
-              />
-            );
-          })}
+          { formattedSlugParameters() }
+          { http_method == 'GET' && formattedQueryParameters() }
         </p>
+
+        { http_method == 'POST' && <strong className="float-start me-2">Payload</strong> }
+        { http_method == 'POST' && (
+          formattedPayload() 
+        )}
       </div>
     </div>
   );

@@ -17,8 +17,8 @@ gem 'mysql2', '~> 0.5'
 # Use the Puma web server [https://github.com/puma/puma]
 gem 'puma', '~> 5.0'
 
-gem 'vite_rails'
 gem 'elastic-apm'
+gem 'vite_rails'
 
 # handles pagination
 gem 'kaminari'
