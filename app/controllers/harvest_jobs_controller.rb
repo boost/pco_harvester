@@ -19,7 +19,9 @@ class HarvestJobsController < ApplicationController
       job = HarvestJob.new(job_params)
 
       if job.save
-        HarvestWorker.perform_async(job.id)
+        pipeline_report = PipelineReport.create(pipeline: @pipeline)
+
+        HarvestWorker.perform_async(job.id, pipeline_report.id)
         flash.notice = 'Job queued successfully'
       else
         flash.alert = 'There was an issue queueing your job'

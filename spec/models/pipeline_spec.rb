@@ -20,6 +20,8 @@ RSpec.describe Pipeline, type: :model do
     it 'has_many enrichments' do
       expect(pipeline.enrichments).to eq [enrichment_definition_one, enrichment_definition_two]
     end
+
+    it { is_expected.to have_many(:pipeline_reports) }
   end
 
   describe '#ready_to_run?' do
