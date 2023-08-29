@@ -17,9 +17,9 @@ Rails.application.routes.draw do
       resource :two_factor_setups, only: %i[show create destroy]
     end
   end
-
+  
   resources :pipelines, only: %i[index show create update edit destroy] do
-    resources :jobs
+    resources :pipeline_jobs, only: %i[create show]
 
     resources :harvest_definitions, only: %i[create update] do
       resources :harvest_jobs, only: %i[show create destroy] do

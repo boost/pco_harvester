@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_29_031244) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_29_032817) do
   create_table "delete_jobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "status"
     t.integer "kind", default: 0, null: false
@@ -89,7 +89,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_29_031244) do
     t.integer "priority", default: 0
     t.boolean "required_for_active_record", default: false
     t.bigint "pipeline_id"
+    t.bigint "pipeline_block_report_id"
     t.index ["extraction_definition_id"], name: "index_harvest_definitions_on_extraction_definition_id"
+    t.index ["pipeline_block_report_id"], name: "index_harvest_definitions_on_pipeline_block_report_id"
     t.index ["pipeline_id"], name: "index_harvest_definitions_on_pipeline_id"
     t.index ["transformation_definition_id"], name: "index_harvest_definitions_on_transformation_definition_id"
   end
@@ -164,6 +166,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_29_031244) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "pipeline_job_id"
+    t.bigint "harvest_definition_id"
+    t.index ["harvest_definition_id"], name: "index_pipeline_block_reports_on_harvest_definition_id"
     t.index ["pipeline_job_id"], name: "index_pipeline_block_reports_on_pipeline_job_id"
   end
 
@@ -174,6 +178,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_29_031244) do
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "pipeline_id"
+    t.string "key"
+    t.index ["key"], name: "index_pipeline_jobs_on_key", unique: true
+    t.index ["pipeline_id"], name: "index_pipeline_jobs_on_pipeline_id"
   end
 
   create_table "pipelines", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

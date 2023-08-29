@@ -15,13 +15,13 @@
 
     <% if @pipeline.ready_to_run? %>
       <%= render layout: 'shared/create-modal', locals: { modal_heading: 'Run Settings', id: 'run-settings' } do %>
-        <%= vertical_form_with(model: [@pipeline, @harvest_definition, @harvest_job]) do |form| %>
+        <%= vertical_form_with(model: [@pipeline, @pipeline_job]) do |form| %>
           <div class='row gy-3 align-items-center'>
-            <%= form.hidden_field :harvest_definition_id, value: @harvest_definition.id %>
+            <%= form.hidden_field :pipeline_id, value: @pipeline.id %>
             <%= form.hidden_field :key, value: SecureRandom.hex %>
 
             <div class='col-5'>
-              <%= form.label :harvest_definitions_to_run, "Blocks to run", class: 'form-label' %>
+              <%= form.label :blocks_to_run, "Blocks to run", class: 'form-label' %>
             </div>
 
             <div class='col-7'>
@@ -29,7 +29,7 @@
                 <div class='form-check'>
                   <%= label_tag do %>
 
-                    <%= check_box('harvest_job', 'harvest_definitions_to_run', {
+                    <%= check_box('settings', 'blocks_to_run', {
                           multiple: true,
                           checked: harvest_definition.ready_to_run?,
                           class: "form-check-input js-pipeline-#{harvest_definition.kind}-checkbox",
@@ -64,7 +64,6 @@
             <div id='js-pipeline-pages' class='col-3 d-none'>
               <%= form.number_field :pages, class: "form-control" %>
             </div>
-
 
             <div class="col-5">
               <%= form.label :destination, "Destination", class: "form-label" %>
@@ -103,7 +102,7 @@
     </li>
 
     <li class='nav-item'>
-      <%= link_to "Jobs", pipeline_jobs_path(@pipeline), class: "nav-link" %>
+      <%= link_to "Jobs", pipeline_pipeline_job_path(@pipeline, @pipeline.pipeline_jobs.last), class: "nav-link" %>
     </li>
   </ul>
 <% end %>

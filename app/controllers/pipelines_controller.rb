@@ -11,7 +11,7 @@ class PipelinesController < ApplicationController
 
   def show
     @harvest_definition = @pipeline.harvest || HarvestDefinition.new(pipeline: @pipeline)
-    @harvest_job = HarvestJob.new
+    @pipeline_job = PipelineJob.new
 
     @enrichment_definition = HarvestDefinition.new(pipeline: @pipeline)
 
@@ -52,10 +52,6 @@ class PipelinesController < ApplicationController
       flash.alert = 'There was an issue deleting your Pipeline'
       redirect_to pipeline_path(@pipeline)
     end
-  end
-
-  def run
-
   end
 
   private
