@@ -38,7 +38,9 @@ module Extraction
       @previous_request = @de.extract
       @de.save
 
-      enqueue_record_transformation
+      # TODO commented out for testing
+      # Put me back!
+      # enqueue_record_transformation
     end
 
     def max_pages

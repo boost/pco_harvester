@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_29_011620) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_29_031244) do
   create_table "delete_jobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "status"
     t.integer "kind", default: 0, null: false
@@ -145,7 +145,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_29_011620) do
     t.index ["request_id"], name: "index_parameters_on_request_id"
   end
 
-  create_table "pipeline_reports", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "pipeline_block_reports", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "extraction_status", default: 0
     t.timestamp "extraction_start_time"
     t.timestamp "extraction_end_time"
@@ -163,8 +163,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_29_011620) do
     t.text "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "pipeline_id"
-    t.index ["pipeline_id"], name: "index_pipeline_reports_on_pipeline_id"
+    t.bigint "pipeline_job_id"
+    t.index ["pipeline_job_id"], name: "index_pipeline_block_reports_on_pipeline_job_id"
+  end
+
+  create_table "pipeline_jobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.timestamp "start_time"
+    t.timestamp "end_time"
+    t.text "name"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "pipelines", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

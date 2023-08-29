@@ -1,6 +1,6 @@
 class CreateReports < ActiveRecord::Migration[7.0]
   def change
-    create_table :pipeline_reports do |t|
+    create_table :pipeline_block_reports do |t|
       t.integer   'extraction_status', default: 0
       t.timestamp 'extraction_start_time'
       t.timestamp 'extraction_end_time'
@@ -19,7 +19,5 @@ class CreateReports < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
-
-    add_reference :pipeline_reports, :pipeline
   end
 end

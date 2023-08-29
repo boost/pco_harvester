@@ -54,6 +54,10 @@ class PipelinesController < ApplicationController
     end
   end
 
+  def run
+
+  end
+
   private
 
   def find_pipeline

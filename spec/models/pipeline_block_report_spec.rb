@@ -2,12 +2,12 @@
 
 require 'rails_helper'
 
-RSpec.describe PipelineReport, type: :model do
-  let(:pipeline) { create(:pipeline) }
-  subject        { create(:pipeline_report, pipeline:) }
+RSpec.describe PipelineBlockReport, type: :model do
+  let(:pipeline_job) { create(:pipeline_job) }
+  subject            { create(:pipeline_block_report, pipeline_job:) }
 
   describe 'associations' do
-    it { is_expected.to belong_to(:pipeline) }
+    it { is_expected.to belong_to(:pipeline_job) }
   end
 
   describe 'status checks' do
