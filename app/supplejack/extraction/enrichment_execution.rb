@@ -9,33 +9,14 @@ module Extraction
     end
 
     def call
-      re = RecordExtraction.new(@extraction_definition, @extraction_definition.page, @harvest_job).extract
-
-      api_records = JSON.parse(re.body)['records']
-
-      extract_and_save_enrichment_documents(api_records)
-
-      return if @extraction_job.is_sample?
-
-      (@extraction_definition.page...max_pages(re)).each do
-        @extraction_definition.page += 1
-
-        re = RecordExtraction.new(@extraction_definition, @extraction_definition.page, @harvest_job).extract
-        api_records = JSON.parse(re.body)['records']
-
+      EnrichmentIterator.new(@extraction_job).each do |api_document, page|
+        @extraction_definition.page = page
+        api_records = JSON.parse(api_document.body)['records']
         extract_and_save_enrichment_documents(api_records)
-
-        break if @extraction_job.cancelled?
       end
     end
 
     private
-
-    def max_pages(record_extraction)
-      return @harvest_job.pages if @harvest_job.present? && @harvest_job.set_number?
-
-      JsonPath.new(@extraction_definition.total_selector).on(record_extraction.body).first.to_i
-    end
 
     def extract_and_save_enrichment_documents(api_records)
       api_records.each_with_index do |api_record, index|
