@@ -9,7 +9,9 @@ import {
 const ParameterNavigationListItem = ({ id, index }) => {
   const dispatch = useDispatch();
 
-  const { name, kind, content } = useSelector((state) => selectParameterById(state, id));
+  const { name, kind, content } = useSelector((state) =>
+    selectParameterById(state, id)
+  );
   const { displayed } = useSelector((state) =>
     selectUiParameterById(state, id)
   );

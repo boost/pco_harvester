@@ -1,5 +1,5 @@
-import React from 'react';
-import { createPortal } from 'react-dom';
+import React from "react";
+import { createPortal } from "react-dom";
 import { useSelector } from "react-redux";
 import classNames from "classnames";
 import { selectAppDetails } from "~/js/features/ExtractionApp/AppDetailsSlice";
@@ -7,7 +7,12 @@ import { selectAppDetails } from "~/js/features/ExtractionApp/AppDetailsSlice";
 import Modal from "react-bootstrap/Modal";
 import Preview from "~/js/apps/ExtractionApp/components/Preview";
 
-const PreviewModal = ({ showModal, handleClose, initialRequestId, mainRequestId }) => {
+const PreviewModal = ({
+  showModal,
+  handleClose,
+  initialRequestId,
+  mainRequestId,
+}) => {
   const appDetails = useSelector(selectAppDetails);
 
   const initialRequestClasses = classNames({
@@ -43,8 +48,8 @@ const PreviewModal = ({ showModal, handleClose, initialRequestId, mainRequestId 
         </div>
       </Modal.Body>
     </Modal>,
-    document.getElementById('react-modals')
-  )
-}
+    document.getElementById("react-modals")
+  );
+};
 
 export default PreviewModal;
