@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Report < ApplicationRecord
+class HarvestReport < ApplicationRecord
   belongs_to :pipeline_job
   belongs_to :harvest_definition
 

@@ -1,6 +1,6 @@
 class CreateReports < ActiveRecord::Migration[7.0]
   def change
-    create_table :reports do |t|
+    create_table :harvest_reports do |t|
       t.integer   'extraction_status', default: 0
       t.timestamp 'extraction_start_time'
       t.timestamp 'extraction_end_time'
