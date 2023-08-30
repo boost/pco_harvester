@@ -32,6 +32,8 @@ COPY . .
 
 ARG RAILS_ENV="production"
 ENV RAILS_ENV=$RAILS_ENV
+ARG RAILS_MASTER_KEY
+ENV RAILS_MASTER_KEY=$RAILS_MASTER_KEY
 
 RUN bundle exec rails assets:precompile
 
