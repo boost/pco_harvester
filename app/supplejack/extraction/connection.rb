@@ -10,7 +10,6 @@ module Extraction
 
     def initialize(url:, params: {}, headers: {})
       headers ||= {}
-
       @connection = connection(url, params, headers)
       @url        = @connection.build_url
       @params     = @connection.params
@@ -22,7 +21,7 @@ module Extraction
     end
 
     def post
-      Response.new(@connection.post)
+      Response.new(@connection.post(url, normalized_params.to_json, headers))
     end
 
     private
@@ -31,6 +30,19 @@ module Extraction
       Faraday.new(url:, params:, headers:) do |f|
         f.response :follow_redirects, limit: 5
         f.adapter Faraday.default_adapter
+      end
+    end
+
+    # We store all values in the database as a string
+    # but for POST requests the type can be important to the content source
+    # so we need to convert string Integers into Integers
+    def normalized_params
+      params.transform_values do |value|
+        if Integer(value, exception: false)
+          Integer(value)
+        else
+          value
+        end
       end
     end
   end

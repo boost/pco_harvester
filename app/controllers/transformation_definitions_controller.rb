@@ -3,7 +3,7 @@
 class TransformationDefinitionsController < ApplicationController
   before_action :find_pipeline
   before_action :find_harvest_definition
-  before_action :find_transformation_definition, only: %w[show edit update destroy update_harvest_definitions]
+  before_action :find_transformation_definition, only: %w[show edit update destroy]
   before_action :find_extraction_jobs, only: %w[new create edit update]
   before_action :find_referrer
 

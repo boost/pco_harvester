@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Extraction
   class RecordExtraction < AbstractExtraction
     def initialize(extraction_definition, page, harvest_job = nil)

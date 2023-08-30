@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Extraction
   class AbstractExtraction
     attr_accessor :document
@@ -11,8 +13,8 @@ module Extraction
     end
 
     def save
-      raise ArgumentError, 'extraction_folder was not provided in #new' unless @extraction_folder.present?
-      raise '#extract must be called before #save AbstractExtraction' unless @document.present?
+      raise ArgumentError, 'extraction_folder was not provided in #new' if @extraction_folder.blank?
+      raise '#extract must be called before #save AbstractExtraction' if @document.blank?
 
       @document.save(file_path)
     end

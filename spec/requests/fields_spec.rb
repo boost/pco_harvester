@@ -108,8 +108,8 @@ RSpec.describe 'Fields', type: :request do
 
         transformed_record = JSON.parse(response.body)['transformation']['transformed_record']
 
-        expect(transformed_record['title']).to eq ['Visual outcomes with femtosecond laser-assisted cataract surgery versus conventional cataract surgery in toric IOL insertion']
-        expect(transformed_record['dc_identifier']).to eq [22_947_914]
+        expect(transformed_record['title']).to eq 'Visual outcomes with femtosecond laser-assisted cataract surgery versus conventional cataract surgery in toric IOL insertion'
+        expect(transformed_record['dc_identifier']).to eq 22_947_914
       end
 
       it 'returns a new record with rejection reasons if the record should be rejected' do

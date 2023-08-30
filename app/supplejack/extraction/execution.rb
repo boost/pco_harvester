@@ -34,7 +34,7 @@ module Extraction
     private
 
     def extract_and_save_document(request)
-      @de = DocumentExtraction.new(request, @extraction_job.extraction_folder, @previous_request&.body)
+      @de = DocumentExtraction.new(request, @extraction_job.extraction_folder, @previous_request)
       @previous_request = @de.extract
       @de.save
 
@@ -42,7 +42,7 @@ module Extraction
     end
 
     def max_pages
-      return @harvest_job.pages if @harvest_job.set_number?
+      return @harvest_job.pages if @harvest_job.present? && @harvest_job.set_number?
 
       (total_results / @extraction_definition.per_page) + 1
     end

@@ -2,7 +2,7 @@
 
 module Transformation
   # Only stores the result of the transformation or the error associated with it
-  class Field
+  class TransformedField
     attr_reader :id, :name, :value, :error
 
     def initialize(id, name, value, exception)
@@ -10,10 +10,6 @@ module Transformation
       @name = name
       @value = value
       @error = exception.present? ? Error.new(exception) : nil
-    end
-
-    def condition_met?
-      @value.include?(true)
     end
   end
 end

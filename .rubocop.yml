@@ -14,6 +14,8 @@ AllCops:
     - "db/schema.rb"
     - "Rakefile"
     - "config.ru"
+    - "spec/**/*"
+    - "db/migrate/*"
 
 Style/Documentation:
   Enabled: false

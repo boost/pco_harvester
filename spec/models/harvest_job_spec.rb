@@ -79,15 +79,15 @@ RSpec.describe HarvestJob, type: :model do
 
     it { is_expected.to validate_uniqueness_of(:key).case_insensitive.with_message('has already been taken') }
 
-    it 'requires pages if the page_type is custom' do
-      job = build(:harvest_job, harvest_definition:, destination:, page_type: 'custom')
+    it 'requires pages if the page_type is set_number' do
+      job = build(:harvest_job, harvest_definition:, destination:, page_type: 'set_number')
 
       expect(job).not_to be_valid
       expect(job.errors['pages']).to include "can't be blank"
     end
 
-    it 'does not requires pages if the page_type is all' do
-      job = build(:harvest_job, harvest_definition:, destination:, page_type: 'all_pages')
+    it 'does not requires pages if the page_type is all_available_pages' do
+      job = build(:harvest_job, harvest_definition:, destination:, page_type: 'all_available_pages')
 
       expect(job).to be_valid
     end
@@ -129,14 +129,14 @@ RSpec.describe HarvestJob, type: :model do
   end
 
   describe '#page_type' do
-    it 'can be all' do
-      expect(create(:harvest_job, harvest_definition:, destination:,  page_type: 0).all_pages?).to eq true
+    it 'can be all_available_pages' do
+      expect(create(:harvest_job, harvest_definition:, destination:,  page_type: 0).all_available_pages?).to eq true
     end
 
-    it 'can be custom' do
-      expect(create(:harvest_job, harvest_definition:, destination:, page_type: 1, pages: 10).custom?).to eq true
+    it 'can be set_number' do
+      expect(create(:harvest_job, harvest_definition:, destination:, page_type: 1, pages: 10).set_number?).to eq true
     end
-  end  
+  end
 
   describe '#should_run?' do
     let(:pipeline) { create(:pipeline) }

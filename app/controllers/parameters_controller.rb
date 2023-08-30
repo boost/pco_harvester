@@ -30,6 +30,6 @@ class ParametersController < ApplicationController
   end
 
   def parameter_params
-    params.require(:parameter).permit(:name, :content, :request_id, :kind, :dynamic)
+    params.require(:parameter).permit(:name, :content, :request_id, :kind, :content_type)
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Extraction
   class EnrichmentExecution
     def initialize(extraction_job)
@@ -30,8 +32,8 @@ module Extraction
     private
 
     def max_pages(record_extraction)
-      return @harvest_job.pages if @harvest_job.set_number?
-      
+      return @harvest_job.pages if @harvest_job.present? && @harvest_job.set_number?
+
       JsonPath.new(@extraction_definition.total_selector).on(record_extraction.body).first.to_i
     end
 

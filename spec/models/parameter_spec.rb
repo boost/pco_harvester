@@ -29,6 +29,24 @@ RSpec.describe Parameter, type: :model do
     end
   end
 
+  describe "#content_type" do
+    let(:static)       { create(:parameter, content_type: 0) }
+    let(:dynamic)      { create(:parameter, content_type: 1) }
+    let(:incremental)  { create(:parameter, content_type: 2) }
+
+    it 'can be static' do
+      expect(static.static?).to eq true
+    end
+
+    it 'can be dynamic' do
+      expect(dynamic.dynamic?).to eq true
+    end
+
+    it 'can be incremental' do
+      expect(incremental.incremental?).to eq true
+    end
+  end
+
   describe '#to_h' do
     let(:query) { create(:parameter, kind: 'query', name: 'itemsPerPage', content: '30') }
     let(:slug)  { create(:parameter, kind: 'slug', content: 'articles') }
@@ -47,13 +65,19 @@ RSpec.describe Parameter, type: :model do
   end
 
   describe '#evaluate' do
-    let(:static) { create(:parameter, kind: 'query', name: 'itemsPerPage') }
-    let(:dynamic) { create(:parameter, kind: 'query', name: 'itemsPerPage', content: '1 + 1', dynamic: true) }
+    let(:static)      { create(:parameter, kind: 'query', name: 'itemsPerPage') }
+    let(:dynamic)     { create(:parameter, kind: 'query', name: 'itemsPerPage', content: '1 + 1', content_type: 1) }
+    let(:incremental) { create(:parameter, kind: 'query', name: 'itemsPerPage', content: '12', content_type: 2) }
     let(:dynamic_response) do
-      create(:parameter, kind: 'query', name: 'itemsPerPage', content: 'JSON.parse(response)["page_nr"] + 1',
-                         dynamic: true)
+      create(:parameter, kind: 'query', name: 'itemsPerPage', content: 'JSON.parse(response)["items_found"] + 10', content_type: 1)
     end
-    let(:response) { '{ "page_nr": 2 }' }
+    let(:extraction_definition)         { create(:extraction_definition, :figshare) }
+    let(:request)                       { create(:request, :figshare_initial_request, extraction_definition:) }
+    let(:response)                      { Extraction::DocumentExtraction.new(request).extract }
+    
+    before do
+      stub_figshare_harvest_requests(request)
+    end
 
     it 'returns the unevaluated parameter if it is not dynamic' do
       expect(static.evaluate).to eq static
@@ -64,7 +88,11 @@ RSpec.describe Parameter, type: :model do
     end
 
     it 'returns the evaluated parameter based on a response' do
-      expect(dynamic_response.evaluate(response).content).to eq '3'
+      expect(dynamic_response.evaluate(response).content).to eq '50'
+    end
+
+    it 'returns the incremented parameter if it is incremental' do
+      expect(incremental.evaluate(response).content).to eq "22"
     end
   end
 end

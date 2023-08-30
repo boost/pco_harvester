@@ -11,6 +11,7 @@ module Load
 
     def call
       record = JSON.parse(@record.to_json)['transformed_record']
+      record.transform_values! { |value| [value].flatten(1) }
 
       record['source_id'] = @harvest_definition.source_id
       record['priority']  = @harvest_definition.priority
