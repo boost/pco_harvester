@@ -16,6 +16,7 @@ class PipelineJobsController < ApplicationController
       end
 
       # TODO queue enrichments etc..
+      
 
     end
 
