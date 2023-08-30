@@ -2,9 +2,11 @@
 
 require 'rails_helper'
 
-RSpec.describe PipelineBlockReport, type: :model do
-  let(:pipeline_job) { create(:pipeline_job) }
-  subject            { create(:pipeline_block_report, pipeline_job:) }
+RSpec.describe Report, type: :model do
+  let(:pipeline)           { create(:pipeline) }
+  let(:pipeline_job)       { create(:pipeline_job) }
+  let(:harvest_definition) { create(:harvest_definition, pipeline:) }
+  subject                  { create(:report, pipeline_job:, harvest_definition:) }
 
   describe 'associations' do
     it { is_expected.to belong_to(:pipeline_job) }

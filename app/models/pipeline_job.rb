@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 class PipelineJob < ApplicationRecord
-  has_many :pipeline_block_reports
+  has_many :reports
 end

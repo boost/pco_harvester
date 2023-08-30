@@ -102,7 +102,9 @@
     </li>
 
     <li class='nav-item'>
-      <%= link_to "Jobs", pipeline_pipeline_job_path(@pipeline, @pipeline.pipeline_jobs.last), class: "nav-link" %>
+      <% if @pipeline.pipeline_jobs.any? %>
+        <%= link_to "Jobs", pipeline_pipeline_job_path(@pipeline, @pipeline.pipeline_jobs.last), class: "nav-link" %>
+      <% end %>
     </li>
   </ul>
 <% end %>

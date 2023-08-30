@@ -8,6 +8,6 @@ class CreatePipelineJobs < ActiveRecord::Migration[7.0]
       t.timestamps
     end
 
-    add_reference :pipeline_block_reports, :pipeline_job
+    add_reference :reports, :pipeline_job
   end
 end

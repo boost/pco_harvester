@@ -12,8 +12,11 @@ class PipelineJobsController < ApplicationController
 
     if @pipeline_job.save
       params['settings']['blocks_to_run'].each do |block|
-        PipelineBlockReport.create(pipeline_job: @pipeline_job, harvest_definition_id: block)
+        Report.create(pipeline_job: @pipeline_job, harvest_definition_id: block)
       end
+
+      # TODO queue enrichments etc..
+
     end
 
     redirect_to pipeline_pipeline_job_path(@pipeline, @pipeline_job)

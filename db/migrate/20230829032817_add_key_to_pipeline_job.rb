@@ -4,7 +4,7 @@ class AddKeyToPipelineJob < ActiveRecord::Migration[7.0]
     add_index :pipeline_jobs,  :key, unique: true
   end
 
-  add_reference :harvest_definitions, :pipeline_block_report
-  add_reference :pipeline_block_reports, :harvest_definition
+  add_reference :harvest_definitions, :report
+  add_reference :reports, :harvest_definition
   add_reference :pipeline_jobs, :pipeline
 end

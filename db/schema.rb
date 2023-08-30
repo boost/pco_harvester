@@ -89,10 +89,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_29_032817) do
     t.integer "priority", default: 0
     t.boolean "required_for_active_record", default: false
     t.bigint "pipeline_id"
-    t.bigint "pipeline_block_report_id"
+    t.bigint "report_id"
     t.index ["extraction_definition_id"], name: "index_harvest_definitions_on_extraction_definition_id"
-    t.index ["pipeline_block_report_id"], name: "index_harvest_definitions_on_pipeline_block_report_id"
     t.index ["pipeline_id"], name: "index_harvest_definitions_on_pipeline_id"
+    t.index ["report_id"], name: "index_harvest_definitions_on_report_id"
     t.index ["transformation_definition_id"], name: "index_harvest_definitions_on_transformation_definition_id"
   end
 
@@ -147,7 +147,27 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_29_032817) do
     t.index ["request_id"], name: "index_parameters_on_request_id"
   end
 
-  create_table "pipeline_block_reports", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "pipeline_jobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.timestamp "start_time"
+    t.timestamp "end_time"
+    t.text "name"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "pipeline_id"
+    t.string "key"
+    t.index ["key"], name: "index_pipeline_jobs_on_key", unique: true
+    t.index ["pipeline_id"], name: "index_pipeline_jobs_on_pipeline_id"
+  end
+
+  create_table "pipelines", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "reports", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "extraction_status", default: 0
     t.timestamp "extraction_start_time"
     t.timestamp "extraction_end_time"
@@ -167,28 +187,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_29_032817) do
     t.datetime "updated_at", null: false
     t.bigint "pipeline_job_id"
     t.bigint "harvest_definition_id"
-    t.index ["harvest_definition_id"], name: "index_pipeline_block_reports_on_harvest_definition_id"
-    t.index ["pipeline_job_id"], name: "index_pipeline_block_reports_on_pipeline_job_id"
-  end
-
-  create_table "pipeline_jobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.timestamp "start_time"
-    t.timestamp "end_time"
-    t.text "name"
-    t.integer "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "pipeline_id"
-    t.string "key"
-    t.index ["key"], name: "index_pipeline_jobs_on_key", unique: true
-    t.index ["pipeline_id"], name: "index_pipeline_jobs_on_pipeline_id"
-  end
-
-  create_table "pipelines", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "name"
-    t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.index ["harvest_definition_id"], name: "index_reports_on_harvest_definition_id"
+    t.index ["pipeline_job_id"], name: "index_reports_on_pipeline_job_id"
   end
 
   create_table "requests", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

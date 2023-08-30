@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
-class PipelineBlockReport < ApplicationRecord
+class Report < ApplicationRecord
   belongs_to :pipeline_job
-  
+  belongs_to :harvest_definition
+
   STATUSES = %w[queued cancelled running completed errored].freeze
 
   enum :extraction_status,     STATUSES, prefix: :extraction
