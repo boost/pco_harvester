@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class FieldsController < ApplicationController
-  before_action :find_field, only: %i[update destroy]
+  before_action :find_transformation_definition, only: %i[update destroy run]
   before_action :find_fields, only: %i[run]
-  before_action :find_transformation_definition, only: %i[run]
+  before_action :find_field, only: %i[update destroy]
 
   def create
     @field = Field.new(field_params)
@@ -28,7 +28,7 @@ class FieldsController < ApplicationController
   def run
     record = @transformation_definition.records(params[:page].to_i)[params['record'].to_i - 1]
 
-    provided_fields = Field.find(params['fields'])
+    provided_fields = @transformation_definition.fields.find(params['fields'])
 
     fields = provided_fields.select(&:field?)
     reject_conditions = provided_fields.select(&:reject_if?)
@@ -49,11 +49,11 @@ class FieldsController < ApplicationController
   end
 
   def find_fields
-    @fields = Field.where(id: params['fields'])
+    @fields = @transformation_definition.fields.where(id: params['fields'])
   end
 
   def find_field
-    @field = Field.find(params[:id])
+    @field = @transformation_definition.fields.find(params[:id])
   end
 
   def field_params

@@ -65,6 +65,6 @@ class ExtractionJobsController < ApplicationController
   end
 
   def find_extraction_job
-    @extraction_job = ExtractionJob.find(params[:id])
+    @extraction_job = @extraction_definition.extraction_jobs.find(params[:id])
   end
 end
