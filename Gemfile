@@ -25,6 +25,9 @@ gem 'kaminari'
 
 gem 'foreman'
 
+# used for pipelines
+gem 'activerecord-nulldb-adapter' # allows to run pipeline without credentials
+
 # user management
 gem 'devise'
 gem 'devise_invitable', '~> 2.0.0'
