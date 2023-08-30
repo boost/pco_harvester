@@ -11,13 +11,11 @@ class HarvestJob < ApplicationRecord
   has_many   :load_jobs
   has_many   :delete_jobs
 
-  delegate :pipeline, to: :harvest_definition
-  delegate :extraction_definition, to: :harvest_definition
-  delegate :transformation_definition, to: :harvest_definition
+  # delegate :pipeline, to: :harvest_definition
+  # delegate :extraction_definition, to: :harvest_definition
+  # delegate :transformation_definition, to: :harvest_definition
 
-  serialize :harvest_definitions_to_run, Array
-
-  enum :page_type, { all_available_pages: 0, set_number: 1 }
+  # enum :page_type, { all_available_pages: 0, set_number: 1 }
 
   # This is to ensure that there is only ever one version of a HarvestJob running.
   # It is used when enqueing enrichments at the end of a harvest.

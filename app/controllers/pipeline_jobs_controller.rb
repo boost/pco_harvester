@@ -10,15 +10,9 @@ class PipelineJobsController < ApplicationController
   def create
     @pipeline_job = PipelineJob.new(pipeline_job_params)
 
-    if @pipeline_job.save
-      params['settings']['blocks_to_run'].each do |block|
-        Report.create(pipeline_job: @pipeline_job, harvest_definition_id: block)
-      end
+    @pipeline_job.save!
 
-      # TODO queue enrichments etc..
-      
-
-    end
+    PipelineWorker.perform_async(@pipeline_job.id)
 
     redirect_to pipeline_pipeline_job_path(@pipeline, @pipeline_job)
   end
@@ -30,6 +24,6 @@ class PipelineJobsController < ApplicationController
   end
 
   def pipeline_job_params
-    params.require(:pipeline_job).permit(:pipeline_id, :key)
+    params.require(:pipeline_job).permit(:pipeline_id, :key, :extraction_job_id, :destination_id, :page_type, :pages, harvest_definitions_to_run: [])
   end
 end

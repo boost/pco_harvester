@@ -21,7 +21,7 @@
             <%= form.hidden_field :key, value: SecureRandom.hex %>
 
             <div class='col-5'>
-              <%= form.label :blocks_to_run, "Blocks to run", class: 'form-label' %>
+              <%= form.label :harvest_definitions_to_run, "Blocks to run", class: 'form-label' %>
             </div>
 
             <div class='col-7'>
@@ -29,7 +29,7 @@
                 <div class='form-check'>
                   <%= label_tag do %>
 
-                    <%= check_box('settings', 'blocks_to_run', {
+                    <%= check_box('pipeline_job', 'harvest_definitions_to_run', {
                           multiple: true,
                           checked: harvest_definition.ready_to_run?,
                           class: "form-check-input js-pipeline-#{harvest_definition.kind}-checkbox",
@@ -58,7 +58,7 @@
             </div>
 
             <div id='js-pipeline-page-type' class='col-7'>
-              <%= form.select :page_type, options_for_select(HarvestJob.page_types.map { |key, value| [key.humanize, key] }), {},  id: 'js-pipeline-page-type-select', class: "form-select" %>
+              <%= form.select :page_type, options_for_select(PipelineJob.page_types.map { |key, value| [key.humanize, key] }), {},  id: 'js-pipeline-page-type-select', class: "form-select" %>
             </div>
 
             <div id='js-pipeline-pages' class='col-3 d-none'>
