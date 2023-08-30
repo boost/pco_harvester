@@ -38,13 +38,15 @@ module Extraction
       @previous_request = @de.extract
       @de.save
 
+      @harvest_job.harvest_report.increment_pages_extracted!
+
       # TODO commented out for testing
       # Put me back!
       # enqueue_record_transformation
     end
 
     def max_pages
-      return @harvest_job.pages if @harvest_job.present? && @harvest_job.set_number?
+      return @harvest_job.pipeline_job.pages if @harvest_job.present? && @harvest_job.pipeline_job.set_number?
 
       (total_results / @extraction_definition.per_page) + 1
     end

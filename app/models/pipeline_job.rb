@@ -14,4 +14,8 @@ class PipelineJob < ApplicationRecord
   enum :page_type, { all_available_pages: 0, set_number: 1 }
 
   validates :key, uniqueness: true
+
+  with_options if: :set_number? do
+    validates :pages, presence: true
+  end
 end

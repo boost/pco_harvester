@@ -3,8 +3,11 @@
 class HarvestWorker < ApplicationWorker
   def child_perform(harvest_job)
     @harvest_job = harvest_job
+    @pipeline_job = harvest_job.pipeline_job
 
-    if @harvest_job.extraction_job.nil?
+    HarvestReport.create(pipeline_job: @pipeline_job, harvest_job: @harvest_job)
+
+    if @pipeline_job.extraction_job.nil?
       create_extraction_job
     else
       create_transformation_jobs
@@ -14,9 +17,9 @@ class HarvestWorker < ApplicationWorker
   def create_extraction_job
     extraction_job = ExtractionJob.create(
       extraction_definition: @harvest_job.extraction_definition,
-      harvest_job: @harvest_job,
-      kind: :full
+      harvest_job: @harvest_job
     )
+
     ExtractionWorker.perform_async(extraction_job.id)
   end
 

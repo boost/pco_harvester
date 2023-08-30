@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_30_025229) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_30_044400) do
   create_table "delete_jobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "status"
     t.integer "kind", default: 0, null: false
@@ -105,15 +105,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_30_025229) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "harvest_definition_id"
-    t.bigint "extraction_job_id"
     t.text "name"
-    t.bigint "destination_id"
     t.string "key"
     t.string "target_job_id"
-    t.integer "page_type", default: 0
-    t.integer "pages"
-    t.index ["destination_id"], name: "index_harvest_jobs_on_destination_id"
-    t.index ["extraction_job_id"], name: "index_harvest_jobs_on_extraction_job_id"
+    t.integer "pipeline_job_id"
+    t.integer "extraction_job_id"
     t.index ["harvest_definition_id"], name: "index_harvest_jobs_on_harvest_definition_id"
     t.index ["key"], name: "index_harvest_jobs_on_key", unique: true
     t.index ["status"], name: "index_harvest_jobs_on_status"
@@ -138,8 +134,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_30_025229) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "pipeline_job_id"
-    t.bigint "harvest_definition_id"
-    t.index ["harvest_definition_id"], name: "index_harvest_reports_on_harvest_definition_id"
+    t.bigint "harvest_job_id"
+    t.index ["harvest_job_id"], name: "index_harvest_reports_on_harvest_job_id"
     t.index ["pipeline_job_id"], name: "index_harvest_reports_on_pipeline_job_id"
   end
 

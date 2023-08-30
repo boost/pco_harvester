@@ -4,18 +4,16 @@
 class HarvestJob < ApplicationRecord
   include Job
 
+  belongs_to :pipeline_job
   belongs_to :harvest_definition
-  belongs_to :destination
   belongs_to :extraction_job, optional: true
   has_many   :transformation_jobs
   has_many   :load_jobs
   has_many   :delete_jobs
+  has_one    :harvest_report
 
-  # delegate :pipeline, to: :harvest_definition
-  # delegate :extraction_definition, to: :harvest_definition
-  # delegate :transformation_definition, to: :harvest_definition
-
-  # enum :page_type, { all_available_pages: 0, set_number: 1 }
+  delegate :extraction_definition, to: :harvest_definition
+  delegate :transformation_definition, to: :harvest_definition
 
   # This is to ensure that there is only ever one version of a HarvestJob running.
   # It is used when enqueing enrichments at the end of a harvest.
@@ -53,10 +51,6 @@ class HarvestJob < ApplicationRecord
     return if end_time.nil? || start_time.nil?
 
     end_time - start_time
-  end
-
-  with_options if: :set_number? do
-    validates :pages, presence: true
   end
 
   def should_run?(id)

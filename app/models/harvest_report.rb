@@ -2,7 +2,7 @@
 
 class HarvestReport < ApplicationRecord
   belongs_to :pipeline_job
-  belongs_to :harvest_definition
+  belongs_to :harvest_job
 
   STATUSES = %w[queued cancelled running completed errored].freeze
 
@@ -12,21 +12,26 @@ class HarvestReport < ApplicationRecord
 
   def increment_pages_extracted!
     increment(:pages_extracted)
+    save!
   end
 
   def increment_records_transformed!
     increment(:records_transformed)
+    save!
   end
 
   def increment_records_loaded!
     increment(:records_loaded)
+    save!
   end
 
   def increment_records_rejected!
     increment(:records_rejected)
+    save!
   end
 
   def increment_records_deleted!
     increment(:records_deleted)
+    save!
   end
 end

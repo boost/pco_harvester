@@ -16,6 +16,6 @@ class ExtractionWorker < ApplicationWorker
 
   def job_end
     super
-    @job.harvest_job.enqueue_enrichment_jobs if @job.harvest_job.present?
+    # @job.harvest_job.enqueue_enrichment_jobs if @job.harvest_job.present?
   end
 end
