@@ -52,4 +52,15 @@ RSpec.describe Extraction::EnrichmentExtraction do
       subject.extract_and_save
     end
   end
+
+  describe '#valid?' do
+    it 'returns true if the provided enrichment url returns something from the record' do
+      expect(subject.valid?).to eq true
+    end
+
+    it 'returns false if the provided enrichment url returns nothing from the record' do
+      ed = create(:extraction_definition, :enrichment, destination:, extraction_jobs: [extraction_job], enrichment_url: 'http://www.google.co.nz/#{record[\'bla\']}')
+      expect(described_class.new(ed, records.first, 1, extraction_job.extraction_folder).valid?).to eq false
+    end
+  end
 end

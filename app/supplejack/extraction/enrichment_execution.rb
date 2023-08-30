@@ -43,6 +43,8 @@ module Extraction
 
         ee = EnrichmentExtraction.new(@extraction_definition, record, page, @extraction_job.extraction_folder)
 
+        next unless ee.valid?
+
         ee.extract_and_save
 
         enqueue_record_transformation(record, ee.document, page)
