@@ -10,21 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_31_013723) do
-  create_table "delete_jobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "status"
-    t.integer "kind", default: 0, null: false
-    t.timestamp "start_time"
-    t.timestamp "end_time"
-    t.integer "records_deleted", default: 0
-    t.text "name"
-    t.integer "page", default: 1, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "harvest_job_id"
-    t.index ["harvest_job_id"], name: "index_delete_jobs_on_harvest_job_id"
-  end
-
+ActiveRecord::Schema[7.0].define(version: 2023_08_31_043449) do
   create_table "destinations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "url", null: false
@@ -148,22 +134,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_31_013723) do
     t.index ["pipeline_job_id"], name: "index_harvest_reports_on_pipeline_job_id"
   end
 
-  create_table "load_jobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "status", default: 0
-    t.integer "kind", default: 0, null: false
-    t.timestamp "start_time"
-    t.timestamp "end_time"
-    t.integer "records_loaded", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "harvest_job_id"
-    t.integer "page", default: 1, null: false
-    t.text "name"
-    t.string "api_record_id"
-    t.index ["harvest_job_id"], name: "index_load_jobs_on_harvest_job_id"
-    t.index ["status"], name: "index_load_jobs_on_status"
-  end
-
   create_table "parameters", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "content"
@@ -220,29 +190,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_31_013723) do
     t.bigint "pipeline_id"
     t.index ["extraction_job_id"], name: "index_transformation_definitions_on_extraction_job_id"
     t.index ["pipeline_id"], name: "index_transformation_definitions_on_pipeline_id"
-  end
-
-  create_table "transformation_jobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "status", default: 0
-    t.integer "kind", default: 0, null: false
-    t.integer "page"
-    t.timestamp "start_time"
-    t.timestamp "end_time"
-    t.text "error_message"
-    t.integer "records_transformed", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "transformation_definition_id"
-    t.bigint "harvest_job_id"
-    t.bigint "extraction_job_id"
-    t.text "name"
-    t.string "api_record_id"
-    t.integer "records_rejected", default: 0
-    t.integer "records_deleted", default: 0
-    t.index ["extraction_job_id"], name: "index_transformation_jobs_on_extraction_job_id"
-    t.index ["harvest_job_id"], name: "index_transformation_jobs_on_harvest_job_id"
-    t.index ["status"], name: "index_transformation_jobs_on_status"
-    t.index ["transformation_definition_id"], name: "index_transformation_jobs_on_transformation_definition_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
