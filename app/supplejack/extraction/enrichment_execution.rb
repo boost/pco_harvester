@@ -22,9 +22,6 @@ module Extraction
         @extraction_definition.page += 1
 
         re = RecordExtraction.new(@extraction_definition, @extraction_definition.page, @harvest_job).extract
-
-        binding.pry
-
         records = JSON.parse(re.body)['records']
 
         extract_and_save_enrichment_documents(records)
@@ -38,6 +35,7 @@ module Extraction
     def max_pages(record_extraction)
       # TODO why do we do this?
       # Shouldn't it always be whatever the API has for the number of records in the job?
+      # Or is it intended for when we are running an enrichment by itself?
       # return @harvest_job.pipeline_job.pages if @harvest_job.present? && @harvest_job.pipeline_job.set_number?
 
       JsonPath.new(@extraction_definition.total_selector).on(record_extraction.body).first.to_i
@@ -55,8 +53,7 @@ module Extraction
 
         @harvest_report.increment_pages_extracted!
 
-        # TODO commented out for testing
-        # enqueue_record_transformation(record, ee.document, page)
+        enqueue_record_transformation(record, ee.document, page)
 
         sleep @extraction_definition.throttle / 1000.0
         @extraction_job.reload
@@ -71,14 +68,8 @@ module Extraction
     def enqueue_record_transformation(record, document, page)
       return unless @harvest_job.present? && document.successful?
 
-      transformation_job = TransformationJob.create(
-        extraction_job: @extraction_job,
-        transformation_definition: @harvest_job.transformation_definition,
-        harvest_job: @harvest_job,
-        page:,
-        api_record_id: record['id']
-      )
-      TransformationWorker.perform_async(transformation_job.id)
+      TransformationWorker.perform_async(@extraction_job.id, @harvest_job.transformation_definition.id, @harvest_job.id, page, record['id'])
+      @harvest_report.increment_transformation_workers_queued!
     end
   end
 end

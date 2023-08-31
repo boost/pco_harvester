@@ -36,7 +36,7 @@ class TransformationWorker < ApplicationWorker
   def job_end
     @harvest_report.increment_transformation_workers_completed!
     @harvest_report.reload
-    @harvest_report.transformation_complete! if @harvest_report.extraction_completed? && @harvest_report.transformation_workers_queued == @harvest_report.transformation_workers_completed
+    @harvest_report.transformation_completed! if @harvest_report.extraction_completed? && @harvest_report.transformation_workers_queued == @harvest_report.transformation_workers_completed
   end
 
   def transform_records(page)
