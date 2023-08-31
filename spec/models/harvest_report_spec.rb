@@ -38,6 +38,7 @@ RSpec.describe HarvestReport, type: :model do
     it 'increments the pages extracted count' do
       expect(subject.pages_extracted).to eq 0
       subject.increment_pages_extracted!
+      subject.reload
       expect(subject.pages_extracted).to eq 1
     end
   end
@@ -46,6 +47,7 @@ RSpec.describe HarvestReport, type: :model do
     it 'increments the records transformed count' do
       expect(subject.records_transformed).to eq 0
       subject.increment_records_transformed!(10)
+      subject.reload
       expect(subject.records_transformed).to eq 10
     end
   end
@@ -54,6 +56,7 @@ RSpec.describe HarvestReport, type: :model do
     it 'increments the records loaded count' do
       expect(subject.records_loaded).to eq 0
       subject.increment_records_loaded!
+      subject.reload
       expect(subject.records_loaded).to eq 1
     end
   end
@@ -61,8 +64,9 @@ RSpec.describe HarvestReport, type: :model do
   describe '#increment_records_rejected!' do
     it 'increments the records rejected count' do
       expect(subject.records_rejected).to eq 0
-      subject.increment_records_rejected!
-      expect(subject.records_rejected).to eq 1
+      subject.increment_records_rejected!(5)
+      subject.reload
+      expect(subject.records_rejected).to eq 5
     end
   end
   
@@ -70,6 +74,7 @@ RSpec.describe HarvestReport, type: :model do
     it 'increments the records deleted count' do
       expect(subject.records_deleted).to eq 0
       subject.increment_records_deleted!
+      subject.reload
       expect(subject.records_deleted).to eq 1
     end
   end
