@@ -4,9 +4,11 @@ require 'rails_helper'
 
 RSpec.describe HarvestReport, type: :model do
   let(:pipeline)           { create(:pipeline) }
-  let(:pipeline_job)       { create(:pipeline_job) }
+  let(:destination)        { create(:destination) }
+  let(:pipeline_job)       { create(:pipeline_job, pipeline:, destination:) }
   let(:harvest_definition) { create(:harvest_definition, pipeline:) }
-  subject                  { create(:harvest_report, pipeline_job:, harvest_definition:) }
+  let(:harvest_job)        { create(:harvest_job, harvest_definition:, pipeline_job:) }
+  subject                  { create(:harvest_report, pipeline_job:, harvest_job:) }
 
   describe 'associations' do
     it { is_expected.to belong_to(:pipeline_job) }
@@ -43,8 +45,8 @@ RSpec.describe HarvestReport, type: :model do
   describe '#increment_records_transformed!' do
     it 'increments the records transformed count' do
       expect(subject.records_transformed).to eq 0
-      subject.increment_records_transformed!
-      expect(subject.records_transformed).to eq 1
+      subject.increment_records_transformed!(10)
+      expect(subject.records_transformed).to eq 10
     end
   end
 

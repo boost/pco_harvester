@@ -16,22 +16,22 @@ class TransformationJob < ApplicationRecord
   # Returns the records from the job based on the given record_selector
   #
   # @return Array
-  def records(page = 1)
-    return [] if transformation_definition.record_selector.blank? || extraction_job.documents[page].nil?
+  # def records(page = 1)
+  #   return [] if transformation_definition.record_selector.blank? || extraction_job.documents[page].nil?
 
-    case transformation_definition.extraction_job.format
-    when 'HTML'
-      Nokogiri::HTML(extraction_job.documents[page].body)
-              .xpath(transformation_definition.record_selector)
-              .map(&:to_xml)
-    when 'XML'
-      Nokogiri::XML(extraction_job.documents[page].body)
-              .xpath(transformation_definition.record_selector)
-              .map(&:to_xml)
-    when 'JSON'
-      JsonPath.new(transformation_definition.record_selector)
-              .on(extraction_job.documents[page].body)
-              .flatten
-    end
-  end
+  #   case transformation_definition.extraction_job.format
+  #   when 'HTML'
+  #     Nokogiri::HTML(extraction_job.documents[page].body)
+  #             .xpath(transformation_definition.record_selector)
+  #             .map(&:to_xml)
+  #   when 'XML'
+  #     Nokogiri::XML(extraction_job.documents[page].body)
+  #             .xpath(transformation_definition.record_selector)
+  #             .map(&:to_xml)
+  #   when 'JSON'
+  #     JsonPath.new(transformation_definition.record_selector)
+  #             .on(extraction_job.documents[page].body)
+  #             .flatten
+  #   end
+  # end
 end

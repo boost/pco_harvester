@@ -7,6 +7,7 @@ module Extraction
       @extraction_job = job
       @extraction_definition = extraction_definition
       @harvest_job = @extraction_job.harvest_job
+      @harvest_report = @harvest_job.harvest_report
     end
 
     def call
@@ -38,11 +39,9 @@ module Extraction
       @previous_request = @de.extract
       @de.save
 
-      @harvest_job.harvest_report.increment_pages_extracted!
+      @harvest_report.increment_pages_extracted! if @harvest_job.present?
 
-      # TODO commented out for testing
-      # Put me back!
-      # enqueue_record_transformation
+      enqueue_record_transformation
     end
 
     def max_pages
@@ -65,13 +64,15 @@ module Extraction
     def enqueue_record_transformation
       return unless @harvest_job.present? && @de.document.successful?
 
-      transformation_job = TransformationJob.create(
-        extraction_job: @extraction_job,
-        transformation_definition: @harvest_job.transformation_definition,
-        harvest_job: @harvest_job,
-        page: @extraction_definition.page
-      )
-      TransformationWorker.perform_async(transformation_job.id)
+      # transformation_job = TransformationJob.create(
+      #   extraction_job: @extraction_job,
+      #   transformation_definition: @harvest_job.transformation_definition,
+      #   harvest_job: @harvest_job,
+      #   page: @extraction_definition.page
+      # )
+
+      TransformationWorker.perform_async(@extraction_job.id, @harvest_job.transformation_definition.id, @harvest_job.id, @extraction_definition.page)
+      @harvest_report.increment_transformation_workers_queued!
     end
   end
 end

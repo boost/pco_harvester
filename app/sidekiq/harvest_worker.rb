@@ -5,7 +5,7 @@ class HarvestWorker < ApplicationWorker
     @harvest_job = harvest_job
     @pipeline_job = harvest_job.pipeline_job
 
-    HarvestReport.create(pipeline_job: @pipeline_job, harvest_job: @harvest_job)
+    @harvest_report = HarvestReport.create(pipeline_job: @pipeline_job, harvest_job: @harvest_job)
 
     if @pipeline_job.extraction_job.nil?
       create_extraction_job
@@ -20,7 +20,7 @@ class HarvestWorker < ApplicationWorker
       harvest_job: @harvest_job
     )
 
-    ExtractionWorker.perform_async(extraction_job.id)
+    ExtractionWorker.perform_async(extraction_job.id, @harvest_report.id)
   end
 
   def create_transformation_jobs
