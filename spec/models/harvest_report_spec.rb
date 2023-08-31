@@ -78,4 +78,58 @@ RSpec.describe HarvestReport, type: :model do
       expect(subject.records_deleted).to eq 1
     end
   end
+  
+  describe '#increment_transformation_workers_queued!' do
+    it 'increments the transformation workers queued count count' do
+      expect(subject.transformation_workers_queued).to eq 0
+      subject.increment_transformation_workers_queued!
+      subject.reload
+      expect(subject.transformation_workers_queued).to eq 1
+    end
+  end
+  
+  describe '#increment_transformation_workers_completed!' do
+    it 'increments the transformation workers completed count count' do
+      expect(subject.transformation_workers_completed).to eq 0
+      subject.increment_transformation_workers_completed!
+      subject.reload
+      expect(subject.transformation_workers_completed).to eq 1
+    end
+  end
+  
+  describe '#increment_load_workers_queued!' do
+    it 'increments the load workers queued count count' do
+      expect(subject.load_workers_queued).to eq 0
+      subject.increment_load_workers_queued!
+      subject.reload
+      expect(subject.load_workers_queued).to eq 1
+    end
+  end
+  
+  describe '#increment_load_workers_completed!' do
+    it 'increments the load workers completed count count' do
+      expect(subject.load_workers_completed).to eq 0
+      subject.increment_load_workers_completed!
+      subject.reload
+      expect(subject.load_workers_completed).to eq 1
+    end
+  end
+
+  describe '#increment_delete_workers_queued!' do
+    it 'increments the delete workers queued count count' do
+      expect(subject.delete_workers_queued).to eq 0
+      subject.increment_delete_workers_queued!
+      subject.reload
+      expect(subject.delete_workers_queued).to eq 1
+    end
+  end
+  
+  describe '#increment_delete_workers_completed!' do
+    it 'increments the delete workers completed count count' do
+      expect(subject.delete_workers_completed).to eq 0
+      subject.increment_delete_workers_completed!
+      subject.reload
+      expect(subject.delete_workers_completed).to eq 1
+    end
+  end
 end
