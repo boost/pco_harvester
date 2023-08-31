@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_31_043449) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_31_213342) do
   create_table "destinations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "url", null: false
@@ -130,6 +130,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_31_043449) do
     t.integer "delete_status", default: 0
     t.timestamp "delete_start_time"
     t.timestamp "delete_end_time"
+    t.integer "kind", default: 0
     t.index ["harvest_job_id"], name: "index_harvest_reports_on_harvest_job_id"
     t.index ["pipeline_job_id"], name: "index_harvest_reports_on_pipeline_job_id"
   end

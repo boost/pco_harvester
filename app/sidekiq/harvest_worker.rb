@@ -5,7 +5,7 @@ class HarvestWorker < ApplicationWorker
     @harvest_job = harvest_job
     @pipeline_job = harvest_job.pipeline_job
 
-    @harvest_report = HarvestReport.create(pipeline_job: @pipeline_job, harvest_job: @harvest_job)
+    @harvest_report = HarvestReport.create(pipeline_job: @pipeline_job, harvest_job: @harvest_job, kind: @harvest_job.harvest_definition.kind)
 
     if @pipeline_job.extraction_job.nil? || @harvest_job.harvest_definition.enrichment?
       create_extraction_job

@@ -43,11 +43,7 @@ class PipelineJob < ApplicationRecord
   private
 
   def harvest_complete?
-    # TODO 
-    # put the kind on the report, so you don't have to do this..
-    harvest_report = harvest_reports.find { |report| report.harvest_job.harvest_definition.harvest? }
-
-    harvest_report.complete?
+    harvest_reports.find_by(kind: 'harvest').complete?
   end
 
   def should_run?(id)

@@ -11,6 +11,8 @@ class HarvestReport < ApplicationRecord
   enum :load_status,           STATUSES, prefix: :load
   enum :delete_status,         STATUSES, prefix: :delete
 
+  enum :kind, { harvest: 0, enrichment: 1 }
+
   METRICS = %w[
     pages_extracted 
     records_transformed 
