@@ -2,10 +2,9 @@
 
 module Delete
   class Execution
-    def initialize(record, delete_job)
+    def initialize(record, destination)
       @record = record
-      @delete_job = delete_job
-      @destination = delete_job.harvest_job.destination
+      @destination = destination
     end
 
     def call
@@ -13,7 +12,7 @@ module Delete
         .put(
           '/harvester/records/delete',
           {
-            id: @record['transformed_record']['internal_identifier'].first
+            id: @record['transformed_record']['internal_identifier']
           }.to_json,
           'Content-Type' => 'application/json'
         )

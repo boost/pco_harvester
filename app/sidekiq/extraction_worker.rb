@@ -27,9 +27,16 @@ class ExtractionWorker < ApplicationWorker
     if @harvest_report
       @harvest_report.extraction_completed! unless @harvest_report.extraction_cancelled?
       @harvest_report.update(extraction_end_time: Time.zone.now) if @harvest_report.extraction_end_time.blank?
+
+      if @harvest_report.transformation_workers_queued == @harvest_report.transformation_workers_completed
+        @harvest_report.transformation_completed!
+        @harvest_report.load_completed! if @harvest_report.load_workers_queued == @harvest_report.load_workers_completed
+        @harvest_report.delete_completed! if @harvest_report.delete_workers_queued == @harvest_report.delete_workers_completed
+      end
     end
 
+    @harvest_report.pipeline_job.enqueue_enrichment_jobs(@harvest_report.harvest_job.name) if @harvest_report.present?
+
     super
-    # @job.harvest_job.enqueue_enrichment_jobs if @job.harvest_job.present?
   end
 end

@@ -2,11 +2,12 @@
 
 module Load
   class Execution
-    def initialize(record, load_job)
-      @record = record
-      @load_job = load_job
-      @destination = load_job.harvest_job.destination
-      @harvest_definition = load_job.harvest_definition
+    def initialize(record, harvest_job, api_record_id = nil)
+      @record             = record
+      @harvest_job        = harvest_job
+      @destination        = harvest_job.pipeline_job.destination
+      @harvest_definition = harvest_job.harvest_definition
+      @api_record_id      = api_record_id
     end
 
     def call
@@ -15,7 +16,7 @@ module Load
 
       record['source_id'] = @harvest_definition.source_id
       record['priority']  = @harvest_definition.priority
-      record['job_id']    = @load_job.harvest_job.name
+      record['job_id']    = @harvest_job.name
 
       if @harvest_definition.harvest?
         connection(@destination.url, {}, { 'Authentication-Token' => @destination.api_key })
@@ -31,7 +32,7 @@ module Load
 
         connection(@destination.url, {}, { 'Authentication-Token' => @destination.api_key })
           .post(
-            "/harvester/records/#{@load_job.api_record_id}/fragments.json",
+            "/harvester/records/#{@api_record_id}/fragments.json",
             {
               fragment: record,
               required_fragments:

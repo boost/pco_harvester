@@ -53,62 +53,28 @@ class HarvestJob < ApplicationRecord
     end_time - start_time
   end
 
-  def should_run?(id)
-    harvest_definitions_to_run.map(&:to_i).include?(id)
-  end
+  # def errored?
+  #   extraction_job.errored? || (transformation_jobs.any?(&:errored?) && load_jobs.any?(&:errored?))
+  # end
 
-  def errored?
-    extraction_job.errored? || (transformation_jobs.any?(&:errored?) && load_jobs.any?(&:errored?))
-  end
+  # def cancelled?
+  #   extraction_job.cancelled? || (transformation_jobs.any?(&:cancelled?) && load_jobs.any?(&:cancelled?))
+  # end
 
-  def cancelled?
-    extraction_job.cancelled? || (transformation_jobs.any?(&:cancelled?) && load_jobs.any?(&:cancelled?))
-  end
+  # def running?
+  #   extraction_job.running? || (transformation_jobs.any?(&:running?) && load_jobs.any?(&:running?))
+  # end
 
-  def running?
-    extraction_job.running? || (transformation_jobs.any?(&:running?) && load_jobs.any?(&:running?))
-  end
+  # def completed?
+  #   return false unless extraction_job.completed?
+  #   return false unless transformation_jobs.where.not(status: 'completed').empty?
 
-  def completed?
-    return false unless extraction_job.completed?
-    return false unless transformation_jobs.where.not(status: 'completed').empty?
+  #   load_jobs.where.not(status: 'completed').empty?
+  # end
 
-    load_jobs.where.not(status: 'completed').empty?
-  end
+  # def harvest_complete?
+  #   extraction_job.reload && transformation_jobs.each(&:reload) && load_jobs.each(&:reload)
 
-  def harvest_complete?
-    extraction_job.reload && transformation_jobs.each(&:reload) && load_jobs.each(&:reload)
-
-    completed?
-  end
-
-  def enqueue_enrichment_jobs
-    return if harvest_definition.enrichment?
-    return if pipeline.enrichments.empty?
-    return unless harvest_complete?
-
-    pipeline.enrichments.each do |enrichment|
-      next unless should_run?(enrichment.id)
-      next unless enrichment.ready_to_run?
-      next if HarvestJob.find_by(key: "#{harvest_key}__enrichment-#{enrichment.id}").present?
-
-      enrichment_job = HarvestJob.create(
-        harvest_definition: enrichment,
-        destination_id: destination.id,
-        key: "#{harvest_key}__enrichment-#{enrichment.id}",
-        target_job_id: name,
-        harvest_definitions_to_run:
-      )
-
-      HarvestWorker.perform_async(enrichment_job.id)
-    end
-  end
-
-  private
-
-  def harvest_key
-    return key unless key.include?('__')
-
-    key.match(/(?<key>.+)__/)[:key]
-  end
+  #   completed?
+  # end
 end

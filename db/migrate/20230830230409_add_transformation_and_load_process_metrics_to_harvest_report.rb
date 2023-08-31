@@ -5,5 +5,8 @@ class AddTransformationAndLoadProcessMetricsToHarvestReport < ActiveRecord::Migr
 
     add_column :harvest_reports, :load_workers_queued,                 :integer, default: 0
     add_column :harvest_reports, :load_workers_completed,              :integer, default: 0
+
+    add_column :harvest_reports, :delete_workers_queued,               :integer, default: 0
+    add_column :harvest_reports, :delete_workers_completed,            :integer, default: 0
   end
 end

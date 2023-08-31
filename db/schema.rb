@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_30_230409) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_31_013723) do
   create_table "delete_jobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "status"
     t.integer "kind", default: 0, null: false
@@ -139,6 +139,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_30_230409) do
     t.integer "transformation_workers_completed", default: 0
     t.integer "load_workers_queued", default: 0
     t.integer "load_workers_completed", default: 0
+    t.integer "delete_workers_queued", default: 0
+    t.integer "delete_workers_completed", default: 0
+    t.integer "delete_status", default: 0
+    t.timestamp "delete_start_time"
+    t.timestamp "delete_end_time"
     t.index ["harvest_job_id"], name: "index_harvest_reports_on_harvest_job_id"
     t.index ["pipeline_job_id"], name: "index_harvest_reports_on_pipeline_job_id"
   end

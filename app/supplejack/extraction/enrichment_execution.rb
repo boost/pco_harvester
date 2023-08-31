@@ -6,6 +6,7 @@ module Extraction
       @extraction_job = extraction_job
       @extraction_definition = extraction_job.extraction_definition
       @harvest_job = extraction_job.harvest_job
+      @harvest_report = @harvest_job.harvest_report
     end
 
     def call
@@ -21,6 +22,9 @@ module Extraction
         @extraction_definition.page += 1
 
         re = RecordExtraction.new(@extraction_definition, @extraction_definition.page, @harvest_job).extract
+
+        binding.pry
+
         records = JSON.parse(re.body)['records']
 
         extract_and_save_enrichment_documents(records)
@@ -32,7 +36,9 @@ module Extraction
     private
 
     def max_pages(record_extraction)
-      return @harvest_job.pages if @harvest_job.present? && @harvest_job.set_number?
+      # TODO why do we do this?
+      # Shouldn't it always be whatever the API has for the number of records in the job?
+      # return @harvest_job.pipeline_job.pages if @harvest_job.present? && @harvest_job.pipeline_job.set_number?
 
       JsonPath.new(@extraction_definition.total_selector).on(record_extraction.body).first.to_i
     end
@@ -47,7 +53,10 @@ module Extraction
 
         ee.extract_and_save
 
-        enqueue_record_transformation(record, ee.document, page)
+        @harvest_report.increment_pages_extracted!
+
+        # TODO commented out for testing
+        # enqueue_record_transformation(record, ee.document, page)
 
         sleep @extraction_definition.throttle / 1000.0
         @extraction_job.reload

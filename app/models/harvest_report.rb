@@ -7,14 +7,13 @@ class HarvestReport < ApplicationRecord
   STATUSES = %w[queued cancelled running completed errored].freeze
 
   enum :extraction_status,     STATUSES, prefix: :extraction
-
   enum :transformation_status, STATUSES, prefix: :transformation
   enum :load_status,           STATUSES, prefix: :load
+  enum :delete_status,         STATUSES, prefix: :delete
 
-  def transformation_status
-    return 'completed' if extraction_completed? && transformation_workers_queued == transformation_workers_completed
-
-    super
+  def complete?
+    reload
+    extraction_completed? && transformation_completed? && load_completed? && delete_completed?
   end
 
   def increment_pages_extracted!
@@ -27,8 +26,8 @@ class HarvestReport < ApplicationRecord
     save!
   end
 
-  def increment_records_loaded!(amount)
-    increment(:records_loaded, amount)
+  def increment_records_loaded!
+    increment(:records_loaded)
     save!
   end
 
@@ -37,8 +36,8 @@ class HarvestReport < ApplicationRecord
     save!
   end
 
-  def increment_records_deleted!(amount)
-    increment(:records_deleted, amount)
+  def increment_records_deleted!
+    increment(:records_deleted)
     save!
   end
 
@@ -49,6 +48,26 @@ class HarvestReport < ApplicationRecord
 
   def increment_transformation_workers_completed!
     increment(:transformation_workers_completed)
+    save!
+  end
+  
+  def increment_load_workers_queued!
+    increment(:load_workers_queued)
+    save!
+  end
+
+  def increment_load_workers_completed!
+    increment(:load_workers_completed)
+    save!
+  end
+  
+  def increment_delete_workers_queued!
+    increment(:delete_workers_queued)
+    save!
+  end
+
+  def increment_delete_workers_completed!
+    increment(:delete_workers_completed)
     save!
   end
 end

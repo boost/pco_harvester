@@ -22,8 +22,8 @@ class TransformationWorker < ApplicationWorker
     @harvest_report.increment_records_transformed!(valid_records.count)
     @harvest_report.increment_records_rejected!(rejected_records.count)
     
-    # queue_load_worker(valid_records)
-    # queue_delete_worker(deleted_records) unless deleted_records.empty?
+    queue_load_worker(valid_records) if valid_records.any?
+    queue_delete_worker(deleted_records) if deleted_records.any?
 
     job_end
   end
@@ -35,6 +35,8 @@ class TransformationWorker < ApplicationWorker
 
   def job_end
     @harvest_report.increment_transformation_workers_completed!
+    @harvest_report.reload
+    @harvest_report.transformation_complete! if @harvest_report.extraction_completed? && @harvest_report.transformation_workers_queued == @harvest_report.transformation_workers_completed
   end
 
   def transform_records(page)
@@ -48,16 +50,13 @@ class TransformationWorker < ApplicationWorker
   end
 
   def queue_load_worker(records)
-    load_job = LoadJob.create(harvest_job: @harvest_job, page: @page,
-                              api_record_id: @api_record_id)
-
-    LoadWorker.perform_async(load_job.id, records.to_json)
+    LoadWorker.perform_async(@harvest_job.id, records.to_json, @api_record_id)
+    @harvest_report.increment_load_workers_queued!
   end
 
   def queue_delete_worker(records)
-    delete_job = DeleteJob.create(harvest_job: @harvest_job, page: @transformation_job.page)
-
-    DeleteWorker.perform_async(delete_job.id, records.to_json)
+    DeleteWorker.perform_async(records.to_json, @harvest_job.pipeline_job.destination.id, @harvest_report.id)
+    @harvest_report.increment_delete_workers_queued!
   end
   
   def records(page = 1)
