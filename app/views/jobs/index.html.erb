@@ -7,22 +7,22 @@
     <h1><%= @pipeline.name %></h1>
     <p><%= @pipeline.description %></p>
   </div>
-  
+
   <div class="float-end">
-    <%= link_to "Edit", edit_pipeline_path(@pipeline), class: 'me-1 btn btn-outline-primary' %>
+    <%= link_to 'Edit', edit_pipeline_path(@pipeline), class: 'me-1 btn btn-outline-primary' %>
     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">Delete</button>
   </div>
 
   <div class='clearfix'></div>
-  
+
   <div class='mt-4'></div>
   <ul class="nav nav-tabs">
     <li class='nav-item'>
-      <%= link_to 'Pipeline', pipeline_path(@pipeline), class: "nav-link" %>
+      <%= link_to 'Pipeline', pipeline_path(@pipeline), class: 'nav-link' %>
     </li>
 
     <li class='nav-item'>
-      <%= link_to 'Jobs', pipeline_jobs_path(@pipeline), class: "nav-link active" %>
+      <%= link_to 'Jobs', pipeline_jobs_path(@pipeline), class: 'nav-link active' %>
     </li>
   </ul>
 <% end %>
@@ -39,4 +39,3 @@
 
   <%= render partial: 'jobs/jobs', locals: { jobs: @enrichment_jobs, type: 'harvest', pipeline: @pipeline } %>
 <% end %>
-
