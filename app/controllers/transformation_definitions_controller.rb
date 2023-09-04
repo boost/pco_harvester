@@ -24,10 +24,11 @@ class TransformationDefinitionsController < ApplicationController
     if @transformation_definition.save
       @harvest_definition.update(transformation_definition_id: @transformation_definition.id)
 
-      redirect_to pipeline_harvest_definition_transformation_definition_path(@pipeline, @harvest_definition, @transformation_definition),
-                  notice: 'Transformation Definition created successfully'
+      redirect_to pipeline_harvest_definition_transformation_definition_path(
+        @pipeline, @harvest_definition, @transformation_definition
+      ), notice: t('.success')
     else
-      flash.alert = 'There was an issue creating your Transformation Definition'
+      flash.alert = t('.failure')
 
       render :new
     end
@@ -35,7 +36,7 @@ class TransformationDefinitionsController < ApplicationController
 
   def update
     if @transformation_definition.update(transformation_definition_params)
-      flash.notice = 'Transformation Definition updated successfully'
+      flash.notice = t('.success')
 
       if @referrer.present?
         redirect_to pipeline_path(@referrer)
@@ -44,16 +45,16 @@ class TransformationDefinitionsController < ApplicationController
                                                                                @transformation_definition)
       end
     else
-      flash.alert = 'There was an issue updating your Transformation Definition'
+      flash.alert = t('.failure')
       render 'edit'
     end
   end
 
   def destroy
     if @transformation_definition.destroy
-      redirect_to pipeline_path(@pipeline), notice: 'Transformation Definition deleted successfully'
+      redirect_to pipeline_path(@pipeline), notice: t('.success')
     else
-      flash.alert = 'There was an issue deleting your Transformation Definition'
+      flash.alert = t('.failure')
       redirect_to pipeline_harvest_definition_transformation_definition_path(@pipeline, @harvest_definition,
                                                                              @transformation_definition)
     end

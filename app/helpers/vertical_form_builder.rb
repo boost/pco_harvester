@@ -1,15 +1,17 @@
 # frozen_string_literal: true
 
 class VerticalFormBuilder < ActionView::Helpers::FormBuilder
+  include ActionView::Helpers::OutputSafetyHelper # for #safe_join
+
   def errors(method)
     # errors from source or source_id are refering to the Source model
     errors = object.errors[method] + object.errors[method.to_s.gsub(/_id$/, '')]
 
-    errors.uniq.map do |error_msg|
+    safe_join(errors.uniq.map do |error_msg|
       @template.tag.div(class: 'invalid-feedback') do
         error_msg
       end
-    end.join.html_safe
+    end)
   end
 
   def error_wrapper(method)

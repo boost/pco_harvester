@@ -2,6 +2,7 @@
 
 class DestinationsController < ApplicationController
   before_action :find_destination, only: %i[show edit update destroy]
+
   def index
     @destinations = Destination.order(:name).page(params[:page])
   end
@@ -18,24 +19,26 @@ class DestinationsController < ApplicationController
     render json: { status: Faraday.get(test_url).status }
   end
 
+  def edit; end
+
   def create
     @destination = Destination.new(destination_params)
 
     if @destination.save
-      redirect_to destinations_path, notice: 'Destination created successfully'
+      redirect_to destinations_path, notice: t('.success')
     else
-      flash.alert = 'There was an issue creating your Destination'
+      flash.alert = t('.failure')
       render :new
     end
   end
 
   def update
     if @destination.update(destination_params)
-      flash.notice = 'Destination updated successfully'
+      flash.notice = t('.success')
 
       redirect_to destinations_path
     else
-      flash.alert = 'There was an issue updating your Destination'
+      flash.alert = t('.failure')
 
       render 'edit'
     end
@@ -43,9 +46,9 @@ class DestinationsController < ApplicationController
 
   def destroy
     if @destination.destroy
-      redirect_to destinations_path, notice: 'Destination deleted successfully'
+      redirect_to destinations_path, notice: t('.success')
     else
-      flash.alert = 'There was an issue deleting your Destination'
+      flash.alert = t('.failure')
 
       redirect_to destination_path(@destination)
     end

@@ -28,9 +28,9 @@ class PipelinesController < ApplicationController
     @pipeline = Pipeline.new(pipeline_params)
 
     if @pipeline.save
-      redirect_to pipeline_path(@pipeline)
+      redirect_to pipeline_path(@pipeline), notice: t('.success')
     else
-      flash.now[:alert] = 'There was an issue creating your Pipeline'
+      flash.alert = t('.failure')
       @pipelines = Pipeline.order(@sort_by).page(params[:page])
       render :index
     end
@@ -38,18 +38,18 @@ class PipelinesController < ApplicationController
 
   def update
     if @pipeline.update(pipeline_params)
-      redirect_to pipeline_path(@pipeline), notice: 'Pipeline updated successfully'
+      redirect_to pipeline_path(@pipeline), notice: t('.success')
     else
-      flash.alert = 'There was an issue updating your Pipeline'
+      flash.alert = t('.failure')
       render :edit
     end
   end
 
   def destroy
     if @pipeline.destroy
-      redirect_to pipelines_path, notice: 'Pipeline deleted successfully'
+      redirect_to pipelines_path, notice: t('.success')
     else
-      flash.alert = 'There was an issue deleting your Pipeline'
+      flash.alert = t('.failure')
       redirect_to pipeline_path(@pipeline)
     end
   end

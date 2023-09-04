@@ -53,7 +53,7 @@ RSpec.describe 'TwoFactorSetups', type: :request do
       delete two_factor_setups_path
       expect(response).to redirect_to edit_profile_path
       follow_redirect!
-      expect(response.body).to include 'There was a problem disabling 2FA.'
+      expect(response.body).to include 'There was a problem disabling 2FA'
     end
 
     it 'sets an successful message' do
@@ -62,7 +62,7 @@ RSpec.describe 'TwoFactorSetups', type: :request do
 
       expect(response).to redirect_to edit_profile_path
       follow_redirect!
-      expect(response.body).to include 'Two Factor Authentication successfully disabled.'
+      expect(response.body).to include 'Two Factor Authentication successfully disabled'
     end
   end
 end

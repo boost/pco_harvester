@@ -10,8 +10,8 @@ class ExtractionDefinition < ApplicationRecord
   belongs_to :destination, optional: true
   belongs_to :pipeline
 
-  has_many :extraction_jobs
-  has_many :requests
+  has_many :extraction_jobs, dependent: :restrict_with_exception
+  has_many :requests, dependent: :destroy
   has_many :parameters, through: :requests
 
   enum :kind, { harvest: 0, enrichment: 1 }
