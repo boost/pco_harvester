@@ -12,6 +12,7 @@ AllCops:
   Exclude:
     - "config/**/*"
     - "bin/**/*"
+    - "vendor/**/*"
     - "db/schema.rb"
     - "Rakefile"
     - "config.ru"
