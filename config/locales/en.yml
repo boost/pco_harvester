@@ -30,4 +30,97 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  destinations:
+    create:
+      success: Destination created successfully
+      failure: There was an issue creating your Destination
+    update:
+      success: Destination updated successfully
+      failure: There was an issue updating your Destination
+    destroy:
+      success: Destination deleted successfully
+      failure: There was an issue deleting your Destination
+
+  extraction_definitions:
+    create:
+      success: Extraction Definition created successfully
+      failure: There was an issue creating your Extraction Definition
+    update:
+      success: Extraction Definition updated successfully
+      failure: There was an issue updating your Extraction Definition
+    destroy:
+      success: Extraction Definition deleted successfully
+      failure: There was an issue deleting your Extraction Definition
+
+  extraction_jobs:
+    create:
+      success: Job queued successfuly
+      failure: There was an issue launching the job
+    destroy:
+      success: Results deleted successfully
+      failure: There was an issue deleting the results
+    cancel:
+      success: Job cancelled successfully
+      failure: There was an issue cancelling the job
+
+  harvest_definitions:
+    create:
+      success: "%{kind} created successfully"
+      failure: "There was an issue creating your %{kind}"
+    update:
+      success: Harvest Definition updated successfully
+      failure: There was an issue updating your Harvest Definition
+
+  harvest_jobs:
+    create:
+      success: Job queued successfully
+      failure: There was an issue queueing your job
+    cancel:
+      success: Harvest job cancelled successfully
+      failure: There was an issue cancelling the harvest job
+
+  pipelines:
+    create:
+      success: Pipeline create successfully
+      failure: There was an issue creating your Pipeline
+    update:
+      success: Pipeline updated successfully
+      failure: There was an issue updating your Pipeline
+    destroy:
+      success: Pipeline deleted successfully
+      failure: There was an issue deleting your Pipeline
+
+  sessions:
+    create:
+      otp_failure: Invalid two factor code
+
+  transformation_definitions:
+    create:
+      success: Transformation Definition created successfully
+      failure: There was an issue creating your Transformation Definition
+    update:
+      success: Transformation Definition updated successfully
+      failure: There was an issue updating your Transformation Definition
+    destroy:
+      success: Transformation Definition deleted successfully
+      failure: There was an issue deleting your Transformation Definition
+
+  two_factor_setups:
+    create:
+      success: Two Factor Authentication successfully set up
+      failure: Two Factor Authentication failed. Please try and input your code again.
+    destroy:
+      mandatory: 2FA was made mandatory for you by admins
+      success: Two Factor Authentication successfully disabled
+      failure: There was a problem disabling 2FA
+
+  users:
+    unauthorized: You are not authorized to access this page
+
+    update:
+      success: User updated successfully
+      failure: There was an issue updating the user
+
+    destroy:
+      success: User removed successfully
+      failure: There was an issue deleting the user

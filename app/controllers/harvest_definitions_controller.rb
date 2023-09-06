@@ -11,9 +11,9 @@ class HarvestDefinitionsController < ApplicationController
     harvest_kind = @harvest_definition.kind.capitalize
 
     if @harvest_definition.save
-      redirect_to pipeline_path(@pipeline), notice: "#{harvest_kind} created successfully"
+      redirect_to pipeline_path(@pipeline), notice: t('.success', kind: harvest_kind)
     else
-      flash.alert = "There was an issue creating your #{harvest_kind}"
+      flash.alert = t('.failure', kind: harvest_kind)
 
       @enrichment_definition = HarvestDefinition.new(pipeline: @pipeline)
 
@@ -23,36 +23,40 @@ class HarvestDefinitionsController < ApplicationController
 
   def update
     respond_to do |format|
-      format.html do
-        if @harvest_definition.update(harvest_definition_params)
-          flash.notice = 'Harvest definition update successfully'
-        else
-          flash.alert = 'There was an issue updating your Harvest Definition'
-        end
-
-        redirect_to pipeline_path(@pipeline)
-      end
-      format.json do
-        if @harvest_definition.update(harvest_definition_params)
-          render status: :ok, json: 'Harvest Definition update successfully'
-        else
-          render status: :internal_server_error, json: 'There was an issue updating your Harvest Definition'
-        end
-      end
+      format.html { html_update }
+      format.json { json_update }
     end
   end
 
   def destroy
     if @harvest_definition.destroy
-      flash.notice = 'Harvest Definition deleted successfully'
+      flash.notice = t('.success')
     else
-      flash.alert = 'There was an issue deleting your Harvest Definition'
+      flash.alert = t('.failure')
     end
 
     redirect_to pipeline_path(@pipeline)
   end
 
   private
+
+  def html_update
+    if @harvest_definition.update(harvest_definition_params)
+      flash.notice = t('.success')
+    else
+      flash.alert = t('.failure')
+    end
+
+    redirect_to pipeline_path(@pipeline)
+  end
+
+  def json_update
+    if @harvest_definition.update(harvest_definition_params)
+      render status: :ok, json: t('.success')
+    else
+      render status: :internal_server_error, json: t('.failure')
+    end
+  end
 
   def find_pipeline
     @pipeline = Pipeline.find(params[:pipeline_id])

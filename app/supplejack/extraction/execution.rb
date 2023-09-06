@@ -48,13 +48,18 @@ module Extraction
     end
 
     def total_results
-      if @extraction_definition.format == 'HTML'
-        return Nokogiri::HTML(@de.document.body).xpath(@extraction_definition.total_selector).first.content.to_i
-      end
-      if @extraction_definition.format == 'XML'
-        return Nokogiri::XML(@de.document.body).xpath(@extraction_definition.total_selector).first.content.to_i
-      end
+      send("#{@extraction_definition.format.downcase}_total_results_extractor")
+    end
 
+    def html_total_results_extractor
+      Nokogiri::HTML(@de.document.body).xpath(@extraction_definition.total_selector).first.content.to_i
+    end
+
+    def xml_total_results_extractor
+      Nokogiri::XML(@de.document.body).xpath(@extraction_definition.total_selector).first.content.to_i
+    end
+
+    def json_total_results_extractor
       JsonPath.new(@extraction_definition.total_selector).on(@de.document.body).first.to_i
     end
 

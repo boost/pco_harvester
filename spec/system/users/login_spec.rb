@@ -55,7 +55,7 @@ RSpec.describe 'Login' do
         fill_in '2FA Code', with: 'invalid-otp'
         click_button 'Log in'
 
-        expect(page).to have_content('Invalid two factor code.')
+        expect(page).to have_content('Invalid two factor code')
       end
     end
   end

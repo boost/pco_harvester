@@ -4,10 +4,6 @@ module Extraction
   class AbstractExtraction
     attr_accessor :document
 
-    def initialize
-      raise 'You cannot initialize an AbstractExtraction'
-    end
-
     def extract
       @document = Extraction::Request.new(url:, params:, headers:).send(http_method)
     end

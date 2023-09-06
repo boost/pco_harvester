@@ -24,27 +24,27 @@ const ParameterNavigationPanel = () => {
     uiAppDetails.activeRequest,
   ]);
 
-  const queryParameters  = filter(allParameters, ["kind", "query"]);
+  const queryParameters = filter(allParameters, ["kind", "query"]);
   const headerParameters = filter(allParameters, ["kind", "header"]);
-  const slugParameters   = filter(allParameters, ["kind", "slug"]);
+  const slugParameters = filter(allParameters, ["kind", "slug"]);
 
   const request = useSelector((state) =>
     selectRequestById(state, uiAppDetails.activeRequest)
   );
 
   const queryHeading = () => {
-    if(request.http_method == 'POST') {
-      return 'Payload'
+    if (request.http_method == "POST") {
+      return "Payload";
     }
 
-    return 'Query'
-  }
+    return "Query";
+  };
 
   return (
     <div className="card field-nav-panel">
       <div className="d-flex flex-column overflow-auto">
         <div className="field-nav-panel__header">
-          <h5>{ queryHeading() }</h5>
+          <h5>{queryHeading()}</h5>
 
           <div className="btn-group card__control">
             <i

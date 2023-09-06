@@ -1,6 +1,6 @@
 <%= content_for(:title) { @pipeline.name_in_database } %>
 <%= content_for(:header) do %>
-  <%= render "shared/breadcrumb_nav" %>
+  <%= render 'shared/breadcrumb_nav' %>
 
   <div class='float-start'>
     <h1><%= @pipeline.name %></h1>
@@ -8,20 +8,21 @@
   </div>
 
   <div class="float-end">
-    <%= button_tag(type: 'button', class: 'btn btn-primary me-1', data: { 'bs-toggle' => 'modal', 'bs-target' => '#run-settings'}, disabled: !@pipeline.ready_to_run?) do %>
+    <%= button_tag(type: 'button', class: 'btn btn-primary me-1',
+                   data: { 'bs-toggle' => 'modal', 'bs-target' => '#run-settings' }, disabled: !@pipeline.ready_to_run?) do %>
       <i class='bi bi-play'></i>
         Run
     <% end %>
 
     <% if @pipeline.ready_to_run? %>
-      <%= render layout: 'shared/create-modal', locals: { modal_heading: 'Run Settings', id: 'run-settings' } do %>
+      <%= render layout: 'shared/create_modal', locals: { modal_heading: 'Run Settings', id: 'run-settings' } do %>
         <%= vertical_form_with(model: [@pipeline, @harvest_definition, @harvest_job]) do |form| %>
           <div class='row gy-3 align-items-center'>
             <%= form.hidden_field :harvest_definition_id, value: @harvest_definition.id %>
             <%= form.hidden_field :key, value: SecureRandom.hex %>
 
             <div class='col-5'>
-              <%= form.label :harvest_definitions_to_run, "Blocks to run", class: 'form-label' %>
+              <%= form.label :harvest_definitions_to_run, 'Blocks to run', class: 'form-label' %>
             </div>
 
             <div class='col-7'>
@@ -30,12 +31,11 @@
                   <%= label_tag do %>
 
                     <%= check_box('harvest_job', 'harvest_definitions_to_run', {
-                          multiple: true,
-                          checked: harvest_definition.ready_to_run?,
-                          class: "form-check-input js-pipeline-#{harvest_definition.kind}-checkbox",
-                          disabled: !harvest_definition.ready_to_run?
-                        }, harvest_definition.id, nil)
-                    %>
+                                    multiple: true,
+                                    checked: harvest_definition.ready_to_run?,
+                                    class: "form-check-input js-pipeline-#{harvest_definition.kind}-checkbox",
+                                    disabled: !harvest_definition.ready_to_run?
+                                  }, harvest_definition.id, nil) %>
 
                     <%= harvest_definition.source_id %>
                   <% end %>
@@ -45,33 +45,38 @@
 
             <% if @extraction_jobs %>
               <div class="col-5 js-transformation-input">
-                <%= form.label :extraction_job_id, "Transformation input", class: "form-label" %>
+                <%= form.label :extraction_job_id, 'Transformation input', class: 'form-label' %>
               </div>
 
               <div class='col-7 js-transformation-input'>
-                <%= form.collection_select(:extraction_job_id, @extraction_jobs, :id, :name, { include_blank: 'Fresh extraction' }, class: 'form-select') %>
+                <%= form.collection_select(:extraction_job_id, @extraction_jobs, :id, :name,
+                                           { include_blank: 'Fresh extraction' }, class: 'form-select') %>
               </div>
             <% end %>
 
             <div class="col-5">
-              <%= form.label :page_type, "Pages to transform", class: "form-label" %>
+              <%= form.label :page_type, 'Pages to transform', class: 'form-label' %>
             </div>
 
             <div id='js-pipeline-page-type' class='col-7'>
-              <%= form.select :page_type, options_for_select(HarvestJob.page_types.map { |key, value| [key.humanize, key] }), {},  id: 'js-pipeline-page-type-select', class: "form-select" %>
+              <%= form.select(
+                    :page_type,
+                    options_for_select(HarvestJob.page_types.map { |key, _value| [key.humanize, key] }),
+                    {}, id: 'js-pipeline-page-type-select', class: 'form-select'
+                  ) %>
             </div>
 
             <div id='js-pipeline-pages' class='col-3 d-none'>
-              <%= form.number_field :pages, class: "form-control" %>
+              <%= form.number_field :pages, class: 'form-control' %>
             </div>
 
-
             <div class="col-5">
-              <%= form.label :destination, "Destination", class: "form-label" %>
+              <%= form.label :destination, 'Destination', class: 'form-label' %>
             </div>
 
             <div class='col-7'>
-              <%= form.select :destination_id, options_from_collection_for_select(@destinations, 'id', 'name'), {},  class: "form-select" %>
+              <%= form.select :destination_id, options_from_collection_for_select(@destinations, 'id', 'name'), {},
+                              class: 'form-select' %>
             </div>
           </div>
 
@@ -82,16 +87,15 @@
       <% end %>
     <% end %>
 
-    <%= link_to "Edit",
-    edit_pipeline_path(@pipeline),
-    class: "me-1 btn btn-outline-primary" %>
+    <%= link_to 'Edit',
+                edit_pipeline_path(@pipeline),
+                class: 'me-1 btn btn-outline-primary' %>
 
     <button
       type="button"
       class="btn btn-danger"
       data-bs-toggle="modal"
-      data-bs-target="#delete-modal"
-    >Delete</button>
+      data-bs-target="#delete-modal">Delete</button>
   </div>
 
   <div class='clearfix'></div>
@@ -99,11 +103,11 @@
   <div class='mt-4'></div>
   <ul class="nav nav-tabs">
     <li class='nav-item'>
-      <%= link_to "Pipeline", pipeline_path(@pipeline), class: "nav-link active" %>
+      <%= link_to 'Pipeline', pipeline_path(@pipeline), class: 'nav-link active' %>
     </li>
 
     <li class='nav-item'>
-      <%= link_to "Jobs", pipeline_jobs_path(@pipeline), class: "nav-link" %>
+      <%= link_to 'Jobs', pipeline_jobs_path(@pipeline), class: 'nav-link' %>
     </li>
   </ul>
 <% end %>
@@ -115,8 +119,7 @@
         type="button"
         class="card card--create-cta d-flex"
         data-bs-toggle="modal"
-        data-bs-target="#add-harvest"
-      >
+        data-bs-target="#add-harvest">
         <div class="card-body align-items-center d-flex justify-content-center">
           <p class='card-text'>+ Add harvest</p>
         </div>
@@ -137,26 +140,25 @@
           type="button"
           class="btn btn-outline-primary"
           data-bs-toggle="modal"
-          data-bs-target="#edit-harvest"
-        >Edit Harvest</button>
+          data-bs-target="#edit-harvest">Edit Harvest</button>
       </div>
 
-      <%= render layout: 'shared/create-modal', locals: { modal_heading: 'Edit harvest', id: 'edit-harvest'  } do %>
+      <%= render layout: 'shared/create_modal', locals: { modal_heading: 'Edit harvest', id: 'edit-harvest' } do %>
         <div class='d-grid mt-4'>
           <%= vertical_form_with model: [@pipeline, @harvest_definition] do |form| %>
             <div class='row gy-3 align-items-center'>
               <%= form.hidden_field :pipeline_id, value: @pipeline.id %>
-              <%= form.hidden_field :kind, value: "harvest" %>
+              <%= form.hidden_field :kind, value: 'harvest' %>
 
               <div class="col-4">
-                <%= form.label :source_id, "Source ID", class: "form-label" %>
+                <%= form.label :source_id, 'Source ID', class: 'form-label' %>
               </div>
               <div class='col-8'>
                 <%= form.text_field :source_id,
-                                class: {
-                                  "form-control": true,
-                                  "is-invalid": @harvest_definition.errors[:source_id].any?
-                                } %>
+                                    class: {
+                                      'form-control': true,
+                                      'is-invalid': @harvest_definition.errors[:source_id].any?
+                                    } %>
               </div>
             </div>
 
@@ -172,62 +174,59 @@
       type='hidden'
       value="<%= @pipeline.id %>"
       name='pipeline_id'
-      id='js-pipeline-id'
-    />
+      id='js-pipeline-id'>
     <input
       type='hidden'
       value="<%= @pipeline.harvest.id %>"
       name='harvest_id'
-      id='js-harvest-definition-id'
-    />
+      id='js-harvest-definition-id'>
 
     <div class='row'>
       <div class='col-6'>
         <% if @harvest_definition.extraction_definition.present? %>
 
-          <%= render partial: "pipelines/card",
-          locals: {
-            pipeline: @pipeline,
-            position: "first",
-            definition: @harvest_definition,
-            type: 'extraction',
-            edit_path:
+          <%= render partial: 'pipelines/card',
+                     locals: {
+                       pipeline: @pipeline,
+                       position: 'first',
+                       definition: @harvest_definition,
+                       type: 'extraction',
+                       edit_path:
               pipeline_harvest_definition_extraction_definition_path(
                 @harvest_definition.extraction_definition.pipeline,
                 @harvest_definition,
                 @harvest_definition.extraction_definition,
                 referrer_id: @pipeline.id
               ),
-            edit_text: "Edit Extraction",
-            jobs_path:
+                       edit_text: 'Edit Extraction',
+                       jobs_path:
               pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
                 @harvest_definition.extraction_definition.pipeline,
                 @harvest_definition,
                 @harvest_definition.extraction_definition
               ),
-            run_sample_extraction_path:
+                       run_sample_extraction_path:
               pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
                 @harvest_definition.extraction_definition.pipeline,
                 @harvest_definition,
                 @harvest_definition.extraction_definition,
                 kind: :sample
               ),
-            run_full_extraction_path:
+                       run_full_extraction_path:
               pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
                 @harvest_definition.extraction_definition.pipeline,
                 @harvest_definition,
                 @harvest_definition.extraction_definition,
                 kind: :full
               )
-          } %>
+                     } %>
 
         <% else %>
           <button
             type="button"
             class="card card--create-cta d-flex"
             data-bs-toggle="modal"
-            data-bs-target="#add-harvest-extraction"
-          >
+            data-bs-target="#add-harvest-extraction">
             <div class="card-body align-items-center d-flex justify-content-center">
               <p class='card-text'>+ Add harvest extraction</p>
             </div>
@@ -239,33 +238,35 @@
       <div class='col-6'>
         <% if @harvest_definition.transformation_definition.present? %>
 
-          <%= render partial: "pipelines/card",
-          locals: {
-            pipeline: @pipeline,
-            definition: @harvest_definition,
-            type: 'transformation',
-            position: "last",
-            edit_path:
+          <%= render partial: 'pipelines/card',
+                     locals: {
+                       pipeline: @pipeline,
+                       definition: @harvest_definition,
+                       type: 'transformation',
+                       position: 'last',
+                       edit_path:
               pipeline_harvest_definition_transformation_definition_path(
                 @harvest_definition.transformation_definition.pipeline,
                 @harvest_definition,
                 @harvest_definition.transformation_definition,
                 referrer_id: @pipeline.id
               ),
-            edit_text: "Edit Transformation",
-            jobs_path: ''
-          } %>
+                       edit_text: 'Edit Transformation',
+                       jobs_path: ''
+                     } %>
 
         <% else %>
+          <% disabled = !@harvest_definition&.extraction_definition&.extraction_jobs&.any?(&:completed?) %>
           <button
             type="button"
-            class="<%= class_names('card', 'card--create-cta', 'd-flex', 'card--create-cta-disabled': !@harvest_definition&.extraction_definition&.extraction_jobs&.any?(&:completed?)) %>"
-
+            class="<%= class_names(
+                         'card', 'card--create-cta', 'd-flex',
+                         'card--create-cta-disabled': disabled
+                       ) %>"
             <% if @harvest_definition&.extraction_definition&.extraction_jobs&.any?(&:completed?) %>
               data-bs-toggle="modal"
               data-bs-target="#add-harvest-transformation"
-            <% end %>
-          >
+            <% end %>>
             <div class="card-body align-items-center d-flex justify-content-center">
               <p class="card-text">+ Add harvest transformation</p>
             </div>
@@ -293,37 +294,38 @@
             type="button"
             class="btn btn-outline-primary"
             data-bs-toggle="modal"
-            data-bs-target=<%= "#edit-enrichment-#{enrichment_definition.id}" %>
-          >Edit Enrichment</button>
+            data-bs-target="<%= "#edit-enrichment-#{enrichment_definition.id}" %>">Edit Enrichment</button>
         </div>
 
-        <%= render layout: 'shared/create-modal', locals: { modal_heading: 'Edit enrichment', id: "edit-enrichment-#{enrichment_definition.id}"  } do %>
+        <%= render layout: 'shared/create_modal',
+                   locals: { modal_heading: 'Edit enrichment',
+                             id: "edit-enrichment-#{enrichment_definition.id}" } do %>
           <div class='d-grid mt-4'>
             <%= vertical_form_with model: [@pipeline, enrichment_definition] do |form| %>
               <div class='row gy-3 align-items-center'>
                 <%= form.hidden_field :pipeline_id, value: @pipeline.id %>
-                <%= form.hidden_field :kind, value: "enrichment" %>
+                <%= form.hidden_field :kind, value: 'enrichment' %>
 
                 <div class="col-4">
-                  <%= form.label :source_id, "Source ID", class: "form-label" %>
+                  <%= form.label :source_id, 'Source ID', class: 'form-label' %>
                 </div>
                 <div class='col-8'>
                   <%= form.text_field :source_id,
-                                  class: {
-                                    "form-control": true,
-                                    "is-invalid": enrichment_definition.errors[:source_id].any?
-                                  } %>
+                                      class: {
+                                        'form-control': true,
+                                        'is-invalid': enrichment_definition.errors[:source_id].any?
+                                      } %>
                 </div>
 
                 <div class="col-4">
-                  <%= form.label :priority, "Priority", class: "form-label" %>
+                  <%= form.label :priority, 'Priority', class: 'form-label' %>
                 </div>
                 <div class='col-8'>
                   <%= form.text_field :priority,
-                                  class: {
-                                    "form-control": true,
-                                    "is-invalid": enrichment_definition.errors[:priority].any?
-                                  } %>
+                                      class: {
+                                        'form-control': true,
+                                        'is-invalid': enrichment_definition.errors[:priority].any?
+                                      } %>
                 </div>
               </div>
 
@@ -339,41 +341,41 @@
         <div class='col-6'>
           <% if enrichment_definition.extraction_definition.present? %>
 
-          <%= render partial: "pipelines/card",
-            locals: {
-              definition: enrichment_definition,
-              type: 'extraction',
-              position: "first",
-              pipeline: @pipeline,
-              edit_path:
+          <%= render partial: 'pipelines/card',
+                     locals: {
+                       definition: enrichment_definition,
+                       type: 'extraction',
+                       position: 'first',
+                       pipeline: @pipeline,
+                       edit_path:
                 edit_pipeline_harvest_definition_extraction_definition_path(
                   enrichment_definition.extraction_definition.pipeline,
                   enrichment_definition,
                   enrichment_definition.extraction_definition,
                   referrer_id: @pipeline.id
                 ),
-              edit_text: "Edit Extraction",
-              jobs_path:
+                       edit_text: 'Edit Extraction',
+                       jobs_path:
                 pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
                   enrichment_definition.extraction_definition.pipeline,
                   enrichment_definition,
                   enrichment_definition.extraction_definition
                 ),
-              run_sample_extraction_path:
+                       run_sample_extraction_path:
                 pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
                   enrichment_definition.extraction_definition.pipeline,
                   enrichment_definition,
                   enrichment_definition.extraction_definition,
                   kind: :sample
                 ),
-              run_full_extraction_path:
+                       run_full_extraction_path:
                 pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
                   enrichment_definition.extraction_definition.pipeline,
                   enrichment_definition,
                   enrichment_definition.extraction_definition,
                   kind: :full
                 )
-            } %>
+                     } %>
 
           <% else %>
 
@@ -381,15 +383,22 @@
               type="button"
               class="card card--create-cta d-flex"
               data-bs-toggle="modal"
-              data-bs-target="#add-enrichment-extraction-<%= enrichment_definition.id %>"
-            >
+              data-bs-target="#add-enrichment-extraction-<%= enrichment_definition.id %>">
               <div class="card-body d-flex align-items-center justify-content-center">
                 <p class='card-text'>+ Add enrichment extraction</p>
               </div>
               <i class="bi bi-arrow-right card__right-arrow"></i>
             </button>
 
-            <%= render layout: 'shared/create-modal', locals: { modal_heading: 'Add enrichment extraction', id: "add-enrichment-extraction-#{enrichment_definition.id}", modal_subheading: 'An enrichment extraction is a set of rules that define how you collect records from a content source' } do %>
+            <%= render(
+                  layout: 'shared/create_modal',
+                  locals: {
+                    modal_heading: 'Add enrichment extraction',
+                    id: "add-enrichment-extraction-#{enrichment_definition.id}",
+                    modal_subheading: 'An enrichment extraction is a set of rules that ' \
+                                      'define how you collect records from a content source'
+                  }
+                ) do %>
 
               <div class='d-grid mt-4'>
                 <input
@@ -399,20 +408,19 @@
                   data-path="<%= "/pipelines/#{@pipeline.id}/harvest_definitions/#{enrichment_definition.id}.json" %>"
                   data-field="extraction_definition_id"
                   data-placeholder='Start typing to use an existing definition..'
-                  data-key='name'
-                >
+                  data-key='name'>
 
                 <div class='text-center mt-4 mb-4'>
                   or
                 </div>
 
-                <%= link_to "+ Add new extraction definition",
-                new_pipeline_harvest_definition_extraction_definition_path(
-                  @pipeline,
-                  enrichment_definition,
-                  kind: "enrichment"
-                ),
-                class: "btn btn-primary" %>
+                <%= link_to '+ Add new extraction definition',
+                            new_pipeline_harvest_definition_extraction_definition_path(
+                              @pipeline,
+                              enrichment_definition,
+                              kind: 'enrichment'
+                            ),
+                            class: 'btn btn-primary' %>
 
               </div>
             <% end %>
@@ -422,36 +430,43 @@
         <div class='col-6'>
           <% if enrichment_definition.transformation_definition.present? %>
 
-          <%= render partial: "pipelines/card",
-            locals: {
-              definition: enrichment_definition,
-              type: 'transformation',
-              position: "last",
-              pipeline: @pipeline,
-              edit_path:
+          <%= render partial: 'pipelines/card',
+                     locals: {
+                       definition: enrichment_definition,
+                       type: 'transformation',
+                       position: 'last',
+                       pipeline: @pipeline,
+                       edit_path:
                 pipeline_harvest_definition_transformation_definition_path(
                   enrichment_definition.transformation_definition.pipeline,
                   @harvest_definition,
                   enrichment_definition.transformation_definition,
                   referrer_id: @pipeline.id
                 ),
-              edit_text: "Edit Transformation",
-              jobs_path: ''
-            } %>
+                       edit_text: 'Edit Transformation',
+                       jobs_path: ''
+                     } %>
 
           <% else %>
             <button
               type="button"
               class="card mb-3 card--create-cta d-flex"
               data-bs-toggle="modal"
-              data-bs-target="#add-enrichment-transformation-<%= enrichment_definition.id %>"
-            >
+              data-bs-target="#add-enrichment-transformation-<%= enrichment_definition.id %>">
               <div class="card-body d-flex align-items-center justify-content-center d-flex">
                 <p class="card-text">+ Add enrichment transformation</p>
               </div>
             </button>
 
-            <%= render layout: 'shared/create-modal', locals: { modal_heading: 'Add enrichment transformation', id: "add-enrichment-transformation-#{enrichment_definition.id}", modal_subheading: 'An enrichment transformation is a set of rules that defines the shape you want your enriched fragments to have' } do %>
+            <%= render(
+                  layout: 'shared/create_modal',
+                  locals: {
+                    modal_heading: 'Add enrichment transformation',
+                    id: "add-enrichment-transformation-#{enrichment_definition.id}",
+                    modal_subheading: 'An enrichment transformation is a set of rules that defines ' \
+                                      'the shape you want your enriched fragments to have'
+                  }
+                ) do %>
               <div class='d-grid mt-4'>
                 <input
                   id="js-auto-complete-enrichment-transformation-definition-<%= enrichment_definition.id %>"
@@ -460,20 +475,19 @@
                   data-placeholder='Start typing to use an existing definition..'
                   data-path="<%= "/pipelines/#{@pipeline.id}/harvest_definitions/#{enrichment_definition.id}.json" %>"
                   data-field="transformation_definition_id"
-                  data-key='name'
-                >
+                  data-key='name'>
 
                 <div class='text-center mt-4 mb-4'>
                   or
                 </div>
 
-                <%= link_to "+ Add new transformation definition",
-                new_pipeline_harvest_definition_transformation_definition_path(
-                  @pipeline,
-                  enrichment_definition,
-                  kind: "enrichment"
-                ),
-                class: "btn btn-primary" %>
+                <%= link_to '+ Add new transformation definition',
+                            new_pipeline_harvest_definition_transformation_definition_path(
+                              @pipeline,
+                              enrichment_definition,
+                              kind: 'enrichment'
+                            ),
+                            class: 'btn btn-primary' %>
 
               </div>
             <% end %>
@@ -491,8 +505,7 @@
       type="button"
       class="card card--create-cta d-flex"
       data-bs-toggle="modal"
-      data-bs-target="#add-enrichment"
-    >
+      data-bs-target="#add-enrichment">
       <div class="card-body align-items-center d-flex justify-content-center">
         <p class='card-text'>+ Add Enrichment</p>
       </div>
@@ -502,26 +515,28 @@
 
 <%# -- Modals -- %>
 
-<%= render layout: 'shared/delete-modal', locals: { path: pipeline_path(@pipeline) } do %>
+<%= render layout: 'shared/delete_modal', locals: { path: pipeline_path(@pipeline) } do %>
   Are you sure you want to delete "<%= @pipeline.name %>"?
 <% end %>
 
-<%= render layout: 'shared/create-modal', locals: { modal_heading: 'Add harvest', id: 'add-harvest', modal_subheading: 'Add a source_id to identify records from this harvest.' } do %>
+<%= render layout: 'shared/create_modal',
+           locals: { modal_heading: 'Add harvest', id: 'add-harvest',
+                     modal_subheading: 'Add a source_id to identify records from this harvest.' } do %>
   <div class='d-grid mt-4'>
     <%= vertical_form_with model: [@pipeline, @harvest_definition] do |form| %>
       <div class='row gy-3 align-items-center'>
         <%= form.hidden_field :pipeline_id, value: @pipeline.id %>
-        <%= form.hidden_field :kind, value: "harvest" %>
+        <%= form.hidden_field :kind, value: 'harvest' %>
 
         <div class="col-4">
-          <%= form.label :source_id, "Source ID", class: "form-label" %>
+          <%= form.label :source_id, 'Source ID', class: 'form-label' %>
         </div>
         <div class='col-8'>
           <%= form.text_field :source_id,
-                          class: {
-                            "form-control": true,
-                            "is-invalid": @harvest_definition.errors[:source_id].any?
-                          } %>
+                              class: {
+                                'form-control': true,
+                                'is-invalid': @harvest_definition.errors[:source_id].any?
+                              } %>
         </div>
       </div>
 
@@ -532,33 +547,35 @@
   </div>
 <% end %>
 
-<%= render layout: 'shared/create-modal', locals: { modal_heading: 'Add enrichment', id: 'add-enrichment', modal_subheading: 'Add a source_id to identify records from this enrichment'  } do %>
+<%= render layout: 'shared/create_modal',
+           locals: { modal_heading: 'Add enrichment', id: 'add-enrichment',
+                     modal_subheading: 'Add a source_id to identify records from this enrichment' } do %>
   <div class='d-grid mt-4'>
     <%= vertical_form_with model: [@pipeline, @enrichment_definition] do |form| %>
       <div class='row gy-3 align-items-center'>
         <%= form.hidden_field :pipeline_id, value: @pipeline.id %>
-        <%= form.hidden_field :kind, value: "enrichment" %>
+        <%= form.hidden_field :kind, value: 'enrichment' %>
 
         <div class="col-4">
-          <%= form.label :source_id, "Source ID", class: "form-label" %>
+          <%= form.label :source_id, 'Source ID', class: 'form-label' %>
         </div>
         <div class='col-8'>
           <%= form.text_field :source_id,
-                          class: {
-                            "form-control": true,
-                            "is-invalid": @enrichment_definition.errors[:source_id].any?
-                          } %>
+                              class: {
+                                'form-control': true,
+                                'is-invalid': @enrichment_definition.errors[:source_id].any?
+                              } %>
         </div>
 
         <div class="col-4">
-          <%= form.label :priority, "Priority", class: "form-label" %>
+          <%= form.label :priority, 'Priority', class: 'form-label' %>
         </div>
         <div class='col-8'>
           <%= form.number_field :priority,
-                            class: {
-                              "form-control": true,
-                              "is-invalid": @enrichment_definition.errors[:priority].any?
-                            } %>
+                                class: {
+                                  'form-control': true,
+                                  'is-invalid': @enrichment_definition.errors[:priority].any?
+                                } %>
         </div>
       </div>
 
@@ -570,7 +587,15 @@
 <% end %>
 
 <% if @harvest_definition.persisted? %>
-  <%= render layout: 'shared/create-modal', locals: { modal_heading: 'Add harvest extraction', id: 'add-harvest-extraction', modal_subheading: 'A harvest extraction is a set of rules that define how you collect records from a content source' } do %>
+  <%= render(
+        layout: 'shared/create_modal',
+        locals: {
+          modal_heading: 'Add harvest extraction',
+          id: 'add-harvest-extraction',
+          modal_subheading:
+            'A harvest extraction is a set of rules that define how you collect records from a content source'
+        }
+      ) do %>
 
     <div class='d-grid mt-4'>
       <input
@@ -580,24 +605,31 @@
         data-path="<%= "/pipelines/#{@pipeline.id}/harvest_definitions/#{@harvest_definition.id}.json" %>"
         data-field="extraction_definition_id"
         data-placeholder='Start typing to use an existing definition..'
-        data-key='name'
-      >
+        data-key='name'>
 
       <div class='text-center mt-4 mb-4'>
         or
       </div>
 
-      <%= link_to "+ Add new extraction definition",
-      new_pipeline_harvest_definition_extraction_definition_path(
-        @pipeline,
-        @harvest_definition,
-        kind: "harvest"
-      ),
-      class: "btn btn-primary" %>
+      <%= link_to '+ Add new extraction definition',
+                  new_pipeline_harvest_definition_extraction_definition_path(
+                    @pipeline,
+                    @harvest_definition,
+                    kind: 'harvest'
+                  ),
+                  class: 'btn btn-primary' %>
     </div>
   <% end %>
 
-  <%= render layout: 'shared/create-modal', locals: { modal_heading: 'Add harvest transformation', id: 'add-harvest-transformation', modal_subheading: 'A harvest transformation is a set of rules that defines the shape you want your harvested records to have' } do %>
+  <%= render(
+        layout: 'shared/create_modal',
+        locals: {
+          modal_heading: 'Add harvest transformation',
+          id: 'add-harvest-transformation',
+          modal_subheading:
+            'A harvest transformation is a set of rules that defines the shape you want your harvested records to have'
+        }
+      ) do %>
     <div class='d-grid mt-4'>
       <input
         id="js-auto-complete-transformation-definition"
@@ -606,20 +638,19 @@
         data-placeholder='Start typing to use an existing definition..'
         data-path="<%= "/pipelines/#{@pipeline.id}/harvest_definitions/#{@harvest_definition.id}.json" %>"
         data-field="transformation_definition_id"
-        data-key='name'
-      >
+        data-key='name'>
 
       <div class='text-center mt-4 mb-4'>
         or
       </div>
 
-      <%= link_to "+ Add new transformation definition",
-      new_pipeline_harvest_definition_transformation_definition_path(
-        @pipeline,
-        @harvest_definition,
-        kind: "harvest"
-      ),
-      class: "btn btn-primary" %>
+      <%= link_to '+ Add new transformation definition',
+                  new_pipeline_harvest_definition_transformation_definition_path(
+                    @pipeline,
+                    @harvest_definition,
+                    kind: 'harvest'
+                  ),
+                  class: 'btn btn-primary' %>
     </div>
   <% end %>
 <% end %>

@@ -2,7 +2,7 @@
 
 class Request < ApplicationRecord
   belongs_to :extraction_definition
-  has_many   :parameters
+  has_many   :parameters, dependent: :destroy
 
   validates :http_method, presence: true
 
@@ -35,19 +35,9 @@ class Request < ApplicationRecord
 
   def to_h
     {
-      id:,
-      created_at:,
-      updated_at:,
-      http_method:,
-      base_url:,
-      url:,
-      format:,
+      id:, created_at:, updated_at:, http_method:, base_url:, url:, format:,
       preview: {
-        url: nil,
-        request_headers: nil,
-        response_headers: nil,
-        status: nil,
-        body: nil
+        url: nil, request_headers: nil, response_headers: nil, status: nil, body: nil
       }
     }
   end

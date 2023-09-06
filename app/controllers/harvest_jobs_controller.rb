@@ -9,20 +9,14 @@ class HarvestJobsController < ApplicationController
 
   def create
     [@pipeline.harvest, @pipeline.enrichments].flatten.each do |definition|
-      next if definition.nil?
-      next unless should_queue_job?(definition.id)
-
-      job_params = harvest_job_params.to_h
-
-      job_params[:harvest_definition_id] = definition.id
-      job_params[:key] = "#{harvest_job_params['key']}__enrichment-#{definition.id}" if definition.enrichment?
-      job = HarvestJob.new(job_params)
+      job = build_job(definition)
+      next if job.nil?
 
       if job.save
         HarvestWorker.perform_async(job.id)
-        flash.notice = 'Job queued successfully'
+        flash.notice = t('.success')
       else
-        flash.alert = 'There was an issue queueing your job'
+        flash.alert = t('.failure')
       end
 
       # If the user has scheduled a harvest we do not need to enqueue the enrichments now
@@ -36,15 +30,26 @@ class HarvestJobsController < ApplicationController
   def cancel
     if @harvest_job.cancelled!
       @harvest_job.extraction_job.cancelled!
-      flash.notice = 'Harvest job cancelled successfully'
+      flash.notice = t('.success')
     else
-      flash.alert = 'There was an issue cancelling the harvest job'
+      flash.alert = t('.failure')
     end
 
     redirect_to pipeline_jobs_path(@pipeline)
   end
 
   private
+
+  def build_job(definition)
+    return if definition.nil?
+    return unless should_queue_job?(definition.id)
+
+    job_params = harvest_job_params.to_h
+
+    job_params[:harvest_definition_id] = definition.id
+    job_params[:key] = "#{harvest_job_params['key']}__enrichment-#{definition.id}" if definition.enrichment?
+    HarvestJob.new(job_params)
+  end
 
   def should_queue_job?(id)
     return false if harvest_job_params['harvest_definitions_to_run'].nil?

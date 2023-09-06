@@ -8,7 +8,12 @@
   <div class="header__actions">
     <span id="react-header-actions"></span>
 
-    <%= link_to edit_pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition, @extraction_definition, referrer_id: @referrer), class: 'btn btn-outline-primary' do %>
+    <%= link_to(
+          edit_pipeline_harvest_definition_extraction_definition_path(
+            @pipeline, @harvest_definition, @extraction_definition, referrer_id: @referrer
+          ),
+          class: 'btn btn-outline-primary'
+        ) do %>
       <i class="bi bi-pencil-square" aria-hidden="true"></i> Edit
     <% end %>
     <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">

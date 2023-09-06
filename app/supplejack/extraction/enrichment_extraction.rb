@@ -3,6 +3,7 @@
 module Extraction
   class EnrichmentExtraction < AbstractExtraction
     def initialize(extraction_definition, record, page, extraction_folder = nil)
+      super()
       @extraction_definition = extraction_definition
       @record = record
       @page = page
@@ -18,7 +19,7 @@ module Extraction
     def params; end
 
     def expression
-      @extraction_definition.enrichment_url.match(/.+(\#{(?<expression>.+)})/)[:expression]
+      @extraction_definition.enrichment_url.match(/.+\#{(?<expression>.+)}/)[:expression]
     end
 
     # rubocop:disable Lint/UnusedBlockArgument
