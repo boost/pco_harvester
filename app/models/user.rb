@@ -10,4 +10,6 @@ class User < ApplicationRecord
   enum :role, { harvester: 0, admin: 1 }
 
   validates :username, length: { minimum: 2 }
+
+  has_many :pipelines, dependent: :nullify
 end

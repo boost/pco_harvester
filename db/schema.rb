@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_04_200614) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_05_203215) do
   create_table "delete_jobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "status"
     t.integer "kind", default: 0, null: false
@@ -151,6 +151,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_04_200614) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "last_edited_by_id"
+    t.index ["last_edited_by_id"], name: "index_pipelines_on_last_edited_by_id"
   end
 
   create_table "requests", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -226,4 +228,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_04_200614) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "pipelines", "users", column: "last_edited_by_id"
 end
