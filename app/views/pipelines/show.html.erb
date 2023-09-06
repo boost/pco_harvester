@@ -8,8 +8,8 @@
   </div>
 
   <div class="float-end">
-    <%= button_tag(type: 'button', class: 'btn btn-primary me-1',
-                   data: { 'bs-toggle' => 'modal', 'bs-target' => '#run-settings' }, disabled: !@pipeline.ready_to_run?) do %>
+      <%= button_tag(type: 'button', class: 'btn btn-primary me-1',
+                     data: { 'bs-toggle' => 'modal', 'bs-target' => '#run-settings' }, disabled: !@pipeline.ready_to_run?) do %>
       <i class='bi bi-play'></i>
         Run
     <% end %>
@@ -188,9 +188,8 @@
           <%= render partial: 'pipelines/card',
                      locals: {
                        pipeline: @pipeline,
-                       position: 'first',
-                       definition: @harvest_definition,
-                       type: 'extraction',
+                       block_definition: @harvest_definition,
+                       definition: @harvest_definition.extraction_definition,
                        edit_path:
               pipeline_harvest_definition_extraction_definition_path(
                 @harvest_definition.extraction_definition.pipeline,
@@ -241,9 +240,8 @@
           <%= render partial: 'pipelines/card',
                      locals: {
                        pipeline: @pipeline,
-                       definition: @harvest_definition,
-                       type: 'transformation',
-                       position: 'last',
+                       block_definition: @harvest_definition,
+                       definition: @harvest_definition.transformation_definition,
                        edit_path:
               pipeline_harvest_definition_transformation_definition_path(
                 @harvest_definition.transformation_definition.pipeline,
@@ -343,10 +341,9 @@
 
           <%= render partial: 'pipelines/card',
                      locals: {
-                       definition: enrichment_definition,
-                       type: 'extraction',
-                       position: 'first',
                        pipeline: @pipeline,
+                       block_definition: enrichment_definition,
+                       definition: enrichment_definition.extraction_definition,
                        edit_path:
                 edit_pipeline_harvest_definition_extraction_definition_path(
                   enrichment_definition.extraction_definition.pipeline,
@@ -432,10 +429,9 @@
 
           <%= render partial: 'pipelines/card',
                      locals: {
-                       definition: enrichment_definition,
-                       type: 'transformation',
-                       position: 'last',
                        pipeline: @pipeline,
+                       block_definition: enrichment_definition,
+                       definition: enrichment_definition.transformation_definition,
                        edit_path:
                 pipeline_harvest_definition_transformation_definition_path(
                   enrichment_definition.transformation_definition.pipeline,

@@ -1,19 +1,21 @@
 <% jobs_path ||= ''
    run_sample_extraction_path ||= ''
-   run_full_extraction_path ||= '' %>
+   run_full_extraction_path ||= ''
+   type = definition.class.name.gsub(/Definition$/, '').downcase
+   position = type == 'extraction' ? 'first' : 'last' %>
 
 <div class="card">
   <div class='card-body'>
-    <h5 class="card-title"><%= definition.send("#{type}_definition").name %></h5>
+    <h5 class="card-title"><%= definition.name %></h5>
 
-    <% if reference?(pipeline, definition.send("#{type}_definition")) %>
+    <% if reference?(pipeline, definition) %>
       <span class="badge text-bg-light">Reference</span>
     <% end %>
 
     <div class="btn-group card__control">
       <i class="bi bi-three-dots-vertical" data-bs-toggle='dropdown'></i>
       <ul class="dropdown-menu dropdown-menu-end">
-        <% if reference?(pipeline, definition.send("#{type}_definition")) %>
+        <% if reference?(pipeline, definition) %>
           <li>
             <%= link_to edit_path, class: 'dropdown-item card__control-action' do %>
               <i class="bi bi-link-45deg me-2"></i>Go to reference source
@@ -28,13 +30,13 @@
           </li>
         <% end %>
 
-        <% if reference?(pipeline, definition.send("#{type}_definition")) %>
+        <% if reference?(pipeline, definition) %>
           <li>
             <a
               class="dropdown-item card__control-action"
               href="#"
               data-bs-toggle='modal'
-              data-bs-target="<%= "#remove-reference-#{definition.send("#{type}_definition").id}" %>">
+              data-bs-target="<%= "#remove-reference-#{definition.id}" %>">
                 <i class="bi bi-trash me-2"></i>Remove definition
               </a>
           </li>
@@ -74,7 +76,7 @@
 
 <div
   class="modal fade"
-  id="<%= "remove-reference-#{definition.send("#{type}_definition").id}" %>">
+  id="<%= "remove-reference-#{definition.id}" %>">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -86,7 +88,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <%= button_to 'Remove', pipeline_harvest_definition_path(@pipeline, definition),
+        <%= button_to 'Remove', pipeline_harvest_definition_path(@pipeline, block_definition),
                       params: {
                         harvest_definition: {
                           "#{type}_definition_id": nil
