@@ -87,15 +87,17 @@
       <% end %>
     <% end %>
 
-    <%= link_to 'Edit',
-                edit_pipeline_path(@pipeline),
-                class: 'me-1 btn btn-outline-primary' %>
+    <%= link_to edit_pipeline_path(@pipeline), class: 'me-1 btn btn-outline-primary' do %>
+      <i class="bi bi-pencil-square" aria-hidden="true"></i> Edit
+    <% end %>
 
     <button
       type="button"
       class="btn btn-danger"
       data-bs-toggle="modal"
-      data-bs-target="#delete-modal">Delete</button>
+      data-bs-target="#delete-modal">
+      <i class="bi bi-trash" aria-hidden="true"></i> Delete
+    </button>
   </div>
 
   <div class='clearfix'></div>
@@ -140,7 +142,9 @@
           type="button"
           class="btn btn-outline-primary"
           data-bs-toggle="modal"
-          data-bs-target="#edit-harvest">Edit Harvest</button>
+          data-bs-target="#edit-harvest">
+          <i class="bi bi-pencil-square" aria-hidden="true"></i> Edit Harvest
+        </button>
       </div>
 
       <%= render layout: 'shared/create_modal', locals: { modal_heading: 'Edit harvest', id: 'edit-harvest' } do %>
@@ -292,7 +296,9 @@
             type="button"
             class="btn btn-outline-primary"
             data-bs-toggle="modal"
-            data-bs-target="<%= "#edit-enrichment-#{enrichment_definition.id}" %>">Edit Enrichment</button>
+            data-bs-target="<%= "#edit-enrichment-#{enrichment_definition.id}" %>">
+            <i class="bi bi-pencil-square" aria-hidden="true"></i> Edit Enrichment
+          </button>
         </div>
 
         <%= render layout: 'shared/create_modal',
