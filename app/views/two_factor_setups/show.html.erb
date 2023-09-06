@@ -22,8 +22,9 @@
             <div class='row gy-3 align-items-center'>
 
               <p class='text-center'>
-                <%== qr_code_as_svg(current_user.otp_provisioning_uri(current_user.email,
-                                                                      issuer: 'Supplejack Harvester')) %>
+                <%== qr_code_as_svg(
+                       current_user.otp_provisioning_uri(current_user.email, issuer: 'Harvester')
+                     ) %>
               </p>
 
               <p>
