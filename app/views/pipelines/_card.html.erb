@@ -7,6 +7,17 @@
 <div class="card">
   <div class='card-body'>
     <h5 class="card-title"><%= definition.name %></h5>
+    <h6 class="card-subtitle">
+      <%= last_edited_by(definition) %>
+      <% if type == 'extraction' %>
+        <% total_pages = definition.extraction_jobs.is_full.last&.documents&.total_pages %>
+        <%= last_edited_by(definition) && total_pages && ' | ' %>
+        <%= total_pages %> pages
+      <% else %>
+        <%= last_edited_by(definition) && ' | ' %>
+        <%= definition.fields.count %> fields
+      <% end %>
+    </h6>
 
     <% if reference?(pipeline, definition) %>
       <span class="badge text-bg-light">Reference</span>
