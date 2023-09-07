@@ -52,5 +52,3 @@ If you are unsure whether an incident is a violation, or whether the space where
 ## Attribution
 
 This Code of Conduct is a secondary adaptation from the template at https://github.com/auth0/open-source-template/blob/master/CODE-OF-CONDUCT.md, which is adapted from the Contributor Covenant, version 1.4.
-
- 
