@@ -42,6 +42,14 @@ RSpec.describe 'Transformation Definitions', type: :request do
         end.to change(TransformationDefinition, :count).by(1)
       end
 
+      it 'stores the user who created it' do
+        post pipeline_harvest_definition_transformation_definitions_path(pipeline, harvest_definition), params: {
+          transformation_definition: transformation_definition.attributes
+        }
+
+        expect(TransformationDefinition.last.last_edited_by).to eq user
+      end
+
       it 'redirects to the pipeline transformation definition path' do
         post pipeline_harvest_definition_transformation_definitions_path(pipeline, harvest_definition), params: {
           transformation_definition: transformation_definition.attributes
@@ -95,6 +103,17 @@ RSpec.describe 'Transformation Definitions', type: :request do
         transformation_definition.reload
 
         expect(transformation_definition.name).to eq 'Flickr'
+      end
+
+      it 'stores the user who updated it' do
+        sign_out(user)
+        new_user = create(:user)
+        sign_in(new_user)
+        patch pipeline_harvest_definition_transformation_definition_path(pipeline, harvest_definition, transformation_definition), params: {
+          transformation_definition: { name: 'Flickr' }
+        }
+
+        expect(transformation_definition.reload.last_edited_by).to eq new_user
       end
 
       it 'redirects to the transformation_definitions page' do

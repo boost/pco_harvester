@@ -32,6 +32,14 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
         end.to change(ExtractionDefinition, :count).by(1)
       end
 
+      it 'stores the user who created it' do
+        post pipeline_harvest_definition_extraction_definitions_path(pipeline, harvest_definition), params: {
+          extraction_definition: extraction_definition2.attributes
+        }
+
+        expect(ExtractionDefinition.last.last_edited_by).to eq user
+      end
+
       it 'creates 2 requests for the new extraction definition' do
         expect do
           post pipeline_harvest_definition_extraction_definitions_path(pipeline, harvest_definition), params: {
@@ -99,6 +107,17 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
         extraction_definition.reload
 
         expect(extraction_definition.name).to eq 'Flickr'
+      end
+
+      it 'stores the user who updated it' do
+        sign_out(user)
+        new_user = create(:user)
+        sign_in(new_user)
+        patch pipeline_harvest_definition_extraction_definition_path(pipeline, harvest_definition, extraction_definition), params: {
+          extraction_definition: { name: 'Flickr' }
+        }
+
+        expect(extraction_definition.reload.last_edited_by).to eq new_user
       end
 
       it 'redirects to the extraction page' do

@@ -11,5 +11,14 @@ class User < ApplicationRecord
 
   validates :username, length: { minimum: 2 }
 
-  has_many :pipelines, dependent: :nullify
+  # last_edited_by
+  has_many(
+    :pipelines, foreign_key: 'last_edited_by_id', inverse_of: :last_edited_by, dependent: :nullify
+  )
+  has_many(
+    :extraction_definitions, foreign_key: 'last_edited_by_id', inverse_of: :last_edited_by, dependent: :nullify
+  )
+  has_many(
+    :transformation_definitions, foreign_key: 'last_edited_by_id', inverse_of: :last_edited_by, dependent: :nullify
+  )
 end

@@ -104,11 +104,11 @@ RSpec.describe 'Pipelines', type: :request do
         sign_out(user)
         new_user = create(:user)
         sign_in(new_user)
-        post pipelines_path, params: {
-          pipeline: attributes_for(:pipeline)
+        patch pipeline_path(pipeline), params: {
+          pipeline: { name: 'National Library of New Zealand' }
         }
 
-        expect(Pipeline.last.last_edited_by).to eq new_user
+        expect(pipeline.reload.last_edited_by).to eq new_user
       end
 
       it 'redirects to the pipeline page' do
