@@ -28,6 +28,14 @@ RSpec.describe 'Fields', type: :request do
         end.to change(Field, :count).by(1)
       end
 
+      it 'updates the transformation definition last_edited_by' do
+        post pipeline_harvest_definition_transformation_definition_fields_path(pipeline, harvest_definition, transformation_definition), params: {
+          field: field.attributes
+        }
+
+        expect(transformation_definition.reload.last_edited_by).to eq user
+      end
+
       it 'returns a JSON object representing the new field' do
         post pipeline_harvest_definition_transformation_definition_fields_path(pipeline, harvest_definition, transformation_definition), params: {
           field: field.attributes
@@ -50,9 +58,15 @@ RSpec.describe 'Fields', type: :request do
           field: { name: 'Description' }
         }
 
-        field.reload
+        expect(field.reload.name).to eq 'Description'
+      end
 
-        expect(field.name).to eq 'Description'
+      it 'updates the transformation definition last_edited_by' do
+        patch pipeline_harvest_definition_transformation_definition_field_path(pipeline, harvest_definition, transformation_definition, field), params: {
+          field: { name: 'Description' }
+        }
+
+        expect(transformation_definition.reload.last_edited_by).to eq user
       end
 
       it 'returns a JSON hash of the updated field' do
@@ -73,6 +87,14 @@ RSpec.describe 'Fields', type: :request do
         delete pipeline_harvest_definition_transformation_definition_field_path(pipeline, harvest_definition, transformation_definition,
                                                                                 field)
       end.to change(Field, :count).by(-1)
+    end
+
+    it 'updates the transformation definition last_edited_by' do
+      delete pipeline_harvest_definition_transformation_definition_field_path(
+        pipeline, harvest_definition, transformation_definition, field
+      )
+
+      expect(transformation_definition.reload.last_edited_by).to eq user
     end
 
     it 'returns a successful response' do
@@ -140,13 +162,6 @@ RSpec.describe 'Fields', type: :request do
         body = JSON.parse(response.body)['transformation']
 
         expect(body['deletion_reasons']).to include 'delete_block'
-      end
-    end
-
-    context 'with invalid transformations' do
-      it 'returns the errors from the given transformation fields' do
-        pending 'not yet implemented'
-        raise
       end
     end
   end

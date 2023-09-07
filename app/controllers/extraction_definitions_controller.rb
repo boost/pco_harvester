@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class ExtractionDefinitionsController < ApplicationController
-  include LastEditedBy
-
   before_action :find_pipeline
   before_action :find_referrer
   before_action :find_harvest_definition

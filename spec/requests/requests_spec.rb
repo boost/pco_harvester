@@ -13,7 +13,7 @@ RSpec.describe 'Requests', type: :request do
   end
 
   describe 'PATCH /update' do
-    let(:request) { create(:request) }
+    let(:request) { create(:request, extraction_definition:) }
 
     context 'with valid parameters' do
       it 'updates the request' do
@@ -21,9 +21,15 @@ RSpec.describe 'Requests', type: :request do
           request: { http_method: 'POST' }
         }
 
-        request.reload
+        expect(request.reload.http_method).to eq 'POST'
+      end
 
-        expect(request.http_method).to eq 'POST'
+      it 'updates the extraction definition last edited by' do
+        patch pipeline_harvest_definition_extraction_definition_request_path(pipeline, harvest_definition, extraction_definition, request), params: {
+          request: { http_method: 'POST' }
+        }
+
+        expect(request.reload.extraction_definition.last_edited_by).to eq user
       end
 
       it 'renders the request as JSON' do

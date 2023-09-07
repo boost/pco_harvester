@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  include ErrorHandling
   include UserAuthorization
   include DeviseOverrides
   include TransformationReduxState
   include ExtractionReduxState
+  include LastEditedBy
 
   def paginate_and_filter_jobs(jobs)
     @status = params[:status]
