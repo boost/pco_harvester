@@ -8,8 +8,12 @@
   </div>
 
   <div class="float-end">
-      <%= button_tag(type: 'button', class: 'btn btn-primary me-1',
-                     data: { 'bs-toggle' => 'modal', 'bs-target' => '#run-settings' }, disabled: !@pipeline.ready_to_run?) do %>
+      <%= button_tag(
+            type: 'button',
+            class: 'btn btn-primary me-1',
+            disabled: !@pipeline.ready_to_run?,
+            data: { 'bs-toggle' => 'modal', 'bs-target' => '#run-settings' }
+          ) do %>
       <i class='bi bi-play'></i>
         Run
     <% end %>
