@@ -10,10 +10,8 @@ module LastEditedBy
   # `last_edited_by_resources` method that can be defined in the
   # controller
   #
-  # @params resource: a model having the last_edited_by attribute
-  def update_last_edited_by(resource = nil)
-    resources = resource || last_edited_by_resources
-    resources = [resources] if resource.class != Array
+  # @params resources: active records with the last_edited_by attribute
+  def update_last_edited_by(resources)
     resources.each do |r|
       r.update(last_edited_by: current_user)
     end

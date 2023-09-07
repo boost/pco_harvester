@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class FieldsController < ApplicationController
+  include LastEditedBy
+
   before_action :find_transformation_definition, only: %i[update destroy run]
   before_action :find_fields, only: %i[run]
   before_action :find_field, only: %i[update destroy]
@@ -9,7 +11,7 @@ class FieldsController < ApplicationController
     @field = Field.new(field_params)
 
     if @field.save
-      update_last_edited_by(@field.transformation_definition)
+      update_last_edited_by([@field.transformation_definition])
       render json: @field
     else
       render500
@@ -18,7 +20,7 @@ class FieldsController < ApplicationController
 
   def update
     if @field.update(field_params)
-      update_last_edited_by(@field.transformation_definition)
+      update_last_edited_by([@field.transformation_definition])
       render json: @field
     else
       render500
@@ -27,7 +29,7 @@ class FieldsController < ApplicationController
 
   def destroy
     if @field.destroy
-      update_last_edited_by(@field.transformation_definition)
+      update_last_edited_by([@field.transformation_definition])
       render json: {}, status: :ok
     else
       render500

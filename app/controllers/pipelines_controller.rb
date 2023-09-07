@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class PipelinesController < ApplicationController
+  include LastEditedBy
+
   before_action :assign_sort_by, only: %w[index create]
   before_action :find_pipeline, only: %w[show destroy edit update]
 

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class TransformationDefinitionsController < ApplicationController
+  include LastEditedBy
+
   before_action :find_pipeline
   before_action :find_harvest_definition
   before_action :find_transformation_definition, only: %w[show edit update destroy]
