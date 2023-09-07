@@ -5,17 +5,8 @@ module ErrorHandling
 
   protected
 
-  def render_bad_request(resource)
-    render_bad_request_json(resource)
-  end
-
   def render500
-    format.html { render500_html }
     format.json { render500_json }
-  end
-
-  def render500_html
-    # to be implemented if needed
   end
 
   def render500_json
