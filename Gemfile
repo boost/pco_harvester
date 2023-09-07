@@ -25,6 +25,9 @@ gem 'kaminari'
 
 gem 'foreman'
 
+# used for pipelines
+gem 'activerecord-nulldb-adapter' # allows to run pipeline without credentials
+
 # user management
 gem 'devise'
 gem 'devise_invitable', '~> 2.0.0'
@@ -51,6 +54,7 @@ group :development, :test do
   gem 'rspec-rails'
 
   # syntax checker
+  gem 'erb_lint', require: false
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false

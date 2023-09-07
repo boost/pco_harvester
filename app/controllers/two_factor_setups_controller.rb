@@ -11,23 +11,20 @@ class TwoFactorSetupsController < ApplicationController
     if current_user.validate_and_consume_otp!(user_params[:otp_attempt])
       current_user.update(otp_required_for_login: true, two_factor_setup: true)
 
-      flash.notice = 'Two Factor Authentication successfully set up'
-      redirect_to root_path
+      redirect_to root_path, notice: t('.success')
     else
-      flash.alert = 'Two Factor Authentication failed. Please try and input your code again.'
+      flash.alert = t('.failure')
       render :show
     end
   end
 
   def destroy
-    if current_user.enforce_two_factor?
-      return redirect_back fallback_location: root_path, alert: '2FA was made mandatory for you by admins'
-    end
+    return redirect_back(fallback_location: root_path, alert: t('.mandatory')) if current_user.enforce_two_factor?
 
     if current_user.update(otp_required_for_login: false, otp_secret: nil, two_factor_setup: false)
-      flash.notice = 'Two Factor Authentication successfully disabled.'
+      flash.notice = t('.success')
     else
-      flash.alert = 'There was a problem disabling 2FA.'
+      flash.alert = t('.failure')
     end
 
     redirect_to edit_profile_path

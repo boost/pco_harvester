@@ -28,17 +28,18 @@ class ExtractionDefinitionsController < ApplicationController
         Request.create(extraction_definition: @extraction_definition)
       end
 
-      redirect_to pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition, @extraction_definition),
-                  notice: 'Extraction Definition created successfully'
+      redirect_to pipeline_harvest_definition_extraction_definition_path(
+        @pipeline, @harvest_definition, @extraction_definition
+      ), notice: t('.success')
     else
-      flash.alert = 'There was an issue creating your Extraction Definition'
+      flash.alert = t('.failure')
       render :new
     end
   end
 
   def update
     if @extraction_definition.update(extraction_definition_params)
-      flash.notice = 'Extraction Definition updated successfully'
+      flash.notice = t('.success')
 
       if @extraction_definition.harvest?
         redirect_to pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition,
@@ -47,7 +48,7 @@ class ExtractionDefinitionsController < ApplicationController
         redirect_to pipeline_path(@pipeline)
       end
     else
-      flash.alert = 'There was an issue updating your Extraction Definition'
+      flash.alert = t('.failure')
       render 'edit'
     end
   end
@@ -69,9 +70,9 @@ class ExtractionDefinitionsController < ApplicationController
 
   def destroy
     if @extraction_definition.destroy
-      redirect_to pipeline_path(@pipeline), notice: 'Extraction Definition deleted successfully'
+      redirect_to pipeline_path(@pipeline), notice: t('.success')
     else
-      flash.alert = 'There was an issue deleting your Extraction Definition'
+      flash.alert = t('.failure')
       redirect_to pipeline_extraction_definition_path(@pipeline, @extraction_definition)
     end
   end

@@ -36,7 +36,7 @@ module AuthenticateWithTwoFactor
       set_flash_message!(:notice, :signed_in)
       sign_in_and_redirect(user, event: :authentication)
     else
-      flash.now[:alert] = 'Invalid two factor code.'
+      flash.alert = t('.otp_failure')
       prompt_for_otp_two_factor(user)
     end
   end

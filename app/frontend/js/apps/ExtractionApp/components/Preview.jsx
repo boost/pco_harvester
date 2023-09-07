@@ -13,18 +13,16 @@ const Preview = ({ id }) => {
   const { preview, format } = useSelector((state) =>
     selectRequestById(state, id)
   );
-  
+
   const formattedPayload = () => {
     return (
       <>
         <br />
         <br />
-        <pre>
-          { JSON.stringify(preview.params, null, 2) }
-        </pre>
+        <pre>{JSON.stringify(preview.params, null, 2)}</pre>
       </>
-    )
-  }
+    );
+  };
 
   return (
     <>
@@ -53,9 +51,13 @@ const Preview = ({ id }) => {
               </h2>
               <div id="request" className="accordion-collapse collapse show">
                 <div className="accordion-body">
-                  { preview.method == 'GET' && (<a href={preview.url} target="_blank">{preview.url}</a>) }
-                  { preview.method == 'POST' && preview.url}
-                  { preview.method == 'POST' && formattedPayload() }
+                  {preview.method == "GET" && (
+                    <a href={preview.url} target="_blank">
+                      {preview.url}
+                    </a>
+                  )}
+                  {preview.method == "POST" && preview.url}
+                  {preview.method == "POST" && formattedPayload()}
                 </div>
               </div>
             </div>

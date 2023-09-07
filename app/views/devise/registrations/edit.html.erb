@@ -13,13 +13,13 @@
         <div class="card-body">
 
           <div class="mb-3">
-            <%= f.label :username, class: "form-label" %>
-            <%= f.text_field :username, class: 'form-control', autofocus: true, autocomplete: "username" %>
+            <%= f.label :username, class: 'form-label' %>
+            <%= f.text_field :username, class: 'form-control', autofocus: true, autocomplete: 'username' %>
           </div>
 
           <div class="mb-3">
-            <%= f.label :email, class: "form-label" %>
-            <%= f.email_field :email, class: 'form-control', autofocus: true, autocomplete: "email" %>
+            <%= f.label :email, class: 'form-label' %>
+            <%= f.email_field :email, class: 'form-control', autofocus: true, autocomplete: 'email' %>
           </div>
 
           <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -27,25 +27,25 @@
           <% end %>
 
           <div class="mb-3">
-            <%= f.label :password, class: "form-label" %> <i>(leave blank if you don't want to change it)</i>
-            <%= f.password_field :password, class: 'form-control', autocomplete: "new-password" %>
+            <%= f.label :password, class: 'form-label' %> <i>(leave blank if you don't want to change it)</i>
+            <%= f.password_field :password, class: 'form-control', autocomplete: 'new-password' %>
             <% if @minimum_password_length %>
               <div class="form-text"><%= @minimum_password_length %> characters minimum</div>
             <% end %>
           </div>
 
           <div class="mb-3">
-            <%= f.label :password_confirmation, class: "form-label" %>
-            <%= f.password_field :password_confirmation, class: 'form-control', autocomplete: "new-password" %>
+            <%= f.label :password_confirmation, class: 'form-label' %>
+            <%= f.password_field :password_confirmation, class: 'form-control', autocomplete: 'new-password' %>
           </div>
 
           <div class="mb-3">
-            <%= f.label :current_password, class: "form-label" %> <i>(we need your current password to confirm your changes)</i>
-            <%= f.password_field :current_password, class: 'form-control', autocomplete: "current-password" %>
+            <%= f.label :current_password, class: 'form-label' %> <i>(we need your current password to confirm your changes)</i>
+            <%= f.password_field :current_password, class: 'form-control', autocomplete: 'current-password' %>
           </div>
 
           <div class="actions">
-            <%= f.submit "Update", class: 'btn btn-primary' %>
+            <%= f.submit 'Update', class: 'btn btn-primary' %>
           </div>
         </div>
       </div>
@@ -72,7 +72,7 @@
           <% end %>
         <% else %>
           <p>Want more security?</p>
-          <%= link_to 'Set up 2FA', two_factor_setups_path, class: "btn btn-primary" %>
+          <%= link_to 'Set up 2FA', two_factor_setups_path, class: 'btn btn-primary' %>
         <% end %>
       </div>
     </div>
@@ -97,8 +97,7 @@
   id="cancel-account-modal"
   tabindex="-1"
   aria-labelledby="Cancel account"
-  aria-hidden="true"
->
+  aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -111,7 +110,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <%= button_to "Cancel my account", cancel_account_path, method: :delete, class: "btn btn-danger" %>
+        <%= button_to 'Cancel my account', cancel_account_path, method: :delete, class: 'btn btn-danger' %>
       </div>
     </div>
   </div>
@@ -122,8 +121,7 @@
   id="disable-2fa-modal"
   tabindex="-1"
   aria-labelledby="Disable 2FA"
-  aria-hidden="true"
->
+  aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -135,7 +133,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <%= button_to('Disable', two_factor_setups_path(resource), method: :delete, class: "btn btn-danger") %>
+        <%= button_to('Disable', two_factor_setups_path(resource), method: :delete, class: 'btn btn-danger') %>
       </div>
     </div>
   </div>

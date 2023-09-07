@@ -22,7 +22,7 @@ RSpec.describe 'User can manage OTP' do
       within('#disable-2fa-modal') do
         click_button 'Disable' # confirmation modal
       end
-      expect(page).to have_content('Two Factor Authentication successfully disabled.')
+      expect(page).to have_content('Two Factor Authentication successfully disabled')
     end
   end
 

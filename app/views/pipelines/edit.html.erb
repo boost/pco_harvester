@@ -23,23 +23,21 @@
     <div class="card-body">
       <div class='row gy-3 align-items-center'>
         <div class="col-3">
-          <%= form.label :name, 'Name', class: "form-label" %>
+          <%= form.label :name, 'Name', class: 'form-label' %>
         </div>
         <div class='col-9'>
-          <%= form.text_field :name, class: {"form-control": true, "is-invalid": @pipeline.errors[:name].any? } %>
+          <%= form.text_field :name, class: { 'form-control': true, 'is-invalid': @pipeline.errors[:name].any? } %>
         </div>
-        
+
         <div class="col-3">
-          <%= form.label :description, 'Description', class: "form-label" %>
+          <%= form.label :description, 'Description', class: 'form-label' %>
         </div>
         <div class='col-9'>
-          <%= form.text_field :description, class: {"form-control": true, "is-invalid": @pipeline.errors[:description].any? } %>
+          <%= form.text_field :description,
+                              class: { 'form-control': true, 'is-invalid': @pipeline.errors[:description].any? } %>
         </div>
       </div>
     </div>
   </div>
 
 <% end %>
-
-
-

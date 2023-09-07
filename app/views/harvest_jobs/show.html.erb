@@ -12,7 +12,7 @@
   <% if @harvest_job&.extraction_job&.queued? || @harvest_job&.extraction_job&.running? %>
     <div class="float-end">
       <% cancel_path = cancel_pipeline_harvest_definition_harvest_job_path(@pipeline, @harvest_definition, @harvest_job) %>
-      <%= button_to "Cancel job", cancel_path, class: "btn btn-outline-danger me-1", form_class: 'd-inline me-1' %>
+      <%= button_to 'Cancel job', cancel_path, class: 'btn btn-outline-danger me-1', form_class: 'd-inline me-1' %>
     </div>
   <% end %>
 
@@ -69,8 +69,10 @@
         <tr>
           <th scope="row"></th>
           <td>
-            <% path = pipeline_harvest_definition_extraction_definition_extraction_job_path(@pipeline, @harvest_definition, @harvest_job.extraction_definition, @harvest_job.extraction_job) %>
-            <%= link_to "View Extraction Results", path, class: "btn btn-outline-primary" %>
+            <% path = pipeline_harvest_definition_extraction_definition_extraction_job_path(
+                 @pipeline, @harvest_definition, @harvest_job.extraction_definition, @harvest_job.extraction_job
+               ) %>
+            <%= link_to 'View Extraction Results', path, class: 'btn btn-outline-primary' %>
           </td>
         </tr>
       <% end %>
@@ -94,12 +96,12 @@
         <th scope="row">Total Records Transformed</th>
         <td><%= @harvest_job.transformation_jobs.sum(:records_transformed) %></td>
       </tr>
-      
+
       <tr>
         <th scope="row">Total Records Rejected</th>
         <td><%= @harvest_job.transformation_jobs.sum(:records_rejected) %></td>
       </tr>
-      
+
       <tr>
         <th scope="row">Total Records Deleted</th>
         <td><%= @harvest_job.transformation_jobs.sum(:records_deleted) %></td>
@@ -142,7 +144,7 @@
           <% TransformationJob.statuses.keys.each do |status| %>
             <tr>
               <th scope="row">Number <%= status %></th>
-              <td><%= @harvest_job.transformation_jobs.where(status: status).count %></td>
+              <td><%= @harvest_job.transformation_jobs.where(status:).count %></td>
             </tr>
           <% end %>
         </tbody>
@@ -202,7 +204,7 @@
           <% LoadJob.statuses.keys.each do |status| %>
             <tr>
               <th scope="row">Number <%= status %></th>
-              <td><%= @harvest_job.load_jobs.where(status: status).count %></td>
+              <td><%= @harvest_job.load_jobs.where(status:).count %></td>
             </tr>
           <% end %>
         </tbody>
@@ -240,7 +242,6 @@
     </div>
   </div>
 
-  
   <h3 class='my-4'>Delete Jobs</h3>
 
   <ul class="nav nav-tabs" role="tablist">
@@ -262,7 +263,7 @@
           <% DeleteJob.statuses.keys.each do |status| %>
             <tr>
               <th scope="row">Number <%= status %></th>
-              <td><%= @harvest_job.delete_jobs.where(status: status).count %></td>
+              <td><%= @harvest_job.delete_jobs.where(status:).count %></td>
             </tr>
           <% end %>
         </tbody>

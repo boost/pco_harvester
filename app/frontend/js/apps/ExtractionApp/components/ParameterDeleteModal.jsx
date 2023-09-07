@@ -1,5 +1,5 @@
-import React from 'react';
-import { createPortal } from 'react-dom';
+import React from "react";
+import { createPortal } from "react-dom";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useSelector, useDispatch } from "react-redux";
@@ -9,10 +9,10 @@ import { selectAppDetails } from "~/js/features/ExtractionApp/AppDetailsSlice";
 import { selectUiAppDetails } from "~/js/features/ExtractionApp/UiAppDetailsSlice";
 
 const ParameterDeleteModal = ({ showModal, handleClose, id, name }) => {
-  const dispatch = useDispatch();  
+  const dispatch = useDispatch();
   const appDetails = useSelector(selectAppDetails);
   const uiAppDetails = useSelector(selectUiAppDetails);
-  
+
   const handleDeleteClick = () => {
     dispatch(
       deleteParameter({
@@ -43,8 +43,8 @@ const ParameterDeleteModal = ({ showModal, handleClose, id, name }) => {
         </Button>
       </Modal.Footer>
     </Modal>,
-    document.getElementById('react-modals')
-  )
-}
+    document.getElementById("react-modals")
+  );
+};
 
 export default ParameterDeleteModal;

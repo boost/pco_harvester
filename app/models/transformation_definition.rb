@@ -4,7 +4,7 @@ class TransformationDefinition < ApplicationRecord
   belongs_to :extraction_job # used for previewing, needs to be refactored
   belongs_to :pipeline
 
-  has_many :fields
+  has_many :fields, dependent: :destroy
 
   scope :originals, -> { where(original_transformation_definition: nil) }
 
@@ -22,22 +22,7 @@ class TransformationDefinition < ApplicationRecord
   #
   # @return Array
   def records(page = 1)
-    return [] if record_selector.blank? || extraction_job.documents[page].nil?
-
-    case extraction_job.extraction_definition.format
-    when 'HTML'
-      Nokogiri::HTML(extraction_job.documents[page].body)
-              .xpath(record_selector)
-              .map(&:to_xml)
-    when 'XML'
-      Nokogiri::XML(extraction_job.documents[page].body)
-              .xpath(record_selector)
-              .map(&:to_xml)
-    when 'JSON'
-      JsonPath.new(record_selector)
-              .on(extraction_job.documents[page].body)
-              .flatten
-    end
+    Transformation::RawRecordsExtractor.new(self, extraction_job).records(page)
   end
 
   def to_h

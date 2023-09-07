@@ -2,13 +2,12 @@
 <% heading_text ||= 'Delete' %>
 
 <%= tag.div(
-  class: "modal fade",
-  id: id,
-  tabindex: "-1",
-  'aria-labelledby': "Delete",
-  'aria-hidden': "true"
-) do
-%>
+      class: 'modal fade',
+      id:,
+      tabindex: '-1',
+      'aria-labelledby': 'Delete',
+      'aria-hidden': 'true'
+    ) do %>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -20,7 +19,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <%= button_to("Delete", path, method: :delete, class: "btn btn-danger") %>
+        <%= button_to('Delete', path, method: :delete, class: 'btn btn-danger') %>
       </div>
     </div>
   </div>

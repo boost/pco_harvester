@@ -7,9 +7,9 @@ class HarvestJob < ApplicationRecord
   belongs_to :harvest_definition
   belongs_to :destination
   belongs_to :extraction_job, optional: true
-  has_many   :transformation_jobs
-  has_many   :load_jobs
-  has_many   :delete_jobs
+  has_many   :transformation_jobs, dependent: :restrict_with_exception
+  has_many   :load_jobs, dependent: :restrict_with_exception
+  has_many   :delete_jobs, dependent: :restrict_with_exception
 
   delegate :pipeline, to: :harvest_definition
   delegate :extraction_definition, to: :harvest_definition
@@ -30,21 +30,26 @@ class HarvestJob < ApplicationRecord
 
   def duration_seconds
     return if extraction_job.nil? || load_jobs.empty?
+    return if extraction_job.start_time.nil? || extraction_job.end_time.nil?
+    return if transformation_jobs_start_time.nil? || load_jobs_end_time.nil?
 
-    extraction_job_start_time = extraction_job.start_time
-    extraction_job_end_time   = extraction_job.end_time
+    (load_jobs_end_time - extraction_job.start_time) - idle_offset
+  end
 
-    transformation_jobs_start_time = transformation_jobs.minimum(:start_time)
-    load_jobs_end_time = load_jobs.maximum(:end_time)
+  def transformation_jobs_start_time
+    @transformation_jobs_start_time ||= transformation_jobs.minimum(:start_time)
+  end
 
-    return if transformation_jobs_start_time.nil? || extraction_job_end_time.nil?
+  def load_jobs_end_time
+    @load_jobs_end_time ||= load_jobs.maximum(:end_time)
+  end
 
-    idle_offset = transformation_jobs_start_time - extraction_job_end_time
-    idle_offset = 0 if idle_offset.negative?
+  def idle_offset
+    return @idle_offset if @idle_offset.present?
 
-    return if load_jobs_end_time.nil? || extraction_job_start_time.nil?
-
-    (load_jobs_end_time - extraction_job_start_time) - idle_offset
+    @idle_offset = transformation_jobs_start_time - extraction_job.end_time
+    @idle_offset = 0 if @idle_offset.negative?
+    @idle_offset
   end
 
   def transformation_and_load_duration_seconds
@@ -95,21 +100,22 @@ class HarvestJob < ApplicationRecord
     return if pipeline.enrichments.empty?
     return unless harvest_complete?
 
-    pipeline.enrichments.each do |enrichment|
-      next unless should_run?(enrichment.id)
-      next unless enrichment.ready_to_run?
-      next if HarvestJob.find_by(key: "#{harvest_key}__enrichment-#{enrichment.id}").present?
+    pipeline.enrichments.each { |enrichment| enqueue_enrichment_job(enrichment) }
+  end
 
-      enrichment_job = HarvestJob.create(
-        harvest_definition: enrichment,
-        destination_id: destination.id,
-        key: "#{harvest_key}__enrichment-#{enrichment.id}",
-        target_job_id: name,
-        harvest_definitions_to_run:
-      )
+  def enqueue_enrichment_job(enrichment)
+    return if !should_run?(enrichment.id) || !enrichment.ready_to_run?
+    return if HarvestJob.find_by(key: enrichment_key(enrichment)).present?
 
-      HarvestWorker.perform_async(enrichment_job.id)
-    end
+    enrichment_job = HarvestJob.create(
+      harvest_definition: enrichment,
+      destination_id: destination.id,
+      key: enrichment_key(enrichment),
+      target_job_id: name,
+      harvest_definitions_to_run:
+    )
+
+    HarvestWorker.perform_async(enrichment_job.id)
   end
 
   private
@@ -118,5 +124,9 @@ class HarvestJob < ApplicationRecord
     return key unless key.include?('__')
 
     key.match(/(?<key>.+)__/)[:key]
+  end
+
+  def enrichment_key(enrichment)
+    "#{harvest_key}__enrichment-#{enrichment.id}"
   end
 end
