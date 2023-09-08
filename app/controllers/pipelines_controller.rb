@@ -68,6 +68,7 @@ class PipelinesController < ApplicationController
   end
 
   def pipeline_params
-    merge_last_edited_by(params.require(:pipeline).permit(:name, :description))
+    safe_params = params.require(:pipeline).permit(:name, :description)
+    merge_last_edited_by(safe_params)
   end
 end
