@@ -21,8 +21,7 @@
 
 <p><%= @destination.api_key %></p>
 
-
 <%# Modal %>
-<%= render layout: 'shared/delete-modal', locals: { path: destination_path(@destination) } do %>
+<%= render layout: 'shared/delete_modal', locals: { path: destination_path(@destination) } do %>
   Are you sure you want to delete "<%= @destination.name %>"?
 <% end %>

@@ -3,6 +3,7 @@
 module Extraction
   class DocumentExtraction < AbstractExtraction
     def initialize(request, extraction_folder = nil, response = nil)
+      super()
       @request = request
       @extraction_folder = extraction_folder
       @extraction_definition = request.extraction_definition

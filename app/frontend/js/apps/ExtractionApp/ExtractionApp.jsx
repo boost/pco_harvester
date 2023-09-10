@@ -15,7 +15,7 @@ import { selectUiAppDetails } from "~/js/features/TransformationApp/UiAppDetails
 const ExtractionApp = ({}) => {
   const appDetails = useSelector(selectAppDetails);
   const uiAppDetails = useSelector(selectUiAppDetails);
- 
+
   let allParameters = useSelector(selectAllParameters);
   allParameters = filter(allParameters, [
     "request_id",
@@ -42,11 +42,11 @@ const ExtractionApp = ({}) => {
           {map(queryParameters, (parameter) => (
             <Parameter id={parameter.id} key={parameter.id} />
           ))}
-          
+
           {map(headerParameters, (parameter) => (
             <Parameter id={parameter.id} key={parameter.id} />
           ))}
-          
+
           {map(slugParameters, (parameter) => (
             <Parameter id={parameter.id} key={parameter.id} />
           ))}

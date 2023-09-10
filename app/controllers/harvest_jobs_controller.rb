@@ -10,16 +10,15 @@ class HarvestJobsController < ApplicationController
   def cancel
     if @harvest_job.cancelled!
       @harvest_job.extraction_job.cancelled!
-      flash.notice = 'Harvest job cancelled successfully'
+      flash.notice = t('.success')
     else
-      flash.alert = 'There was an issue cancelling the harvest job'
+      flash.alert = t('.failure')
     end
 
     redirect_to pipeline_jobs_path(@pipeline)
   end
 
   private
-
 
   def find_pipeline
     @pipeline = Pipeline.find(params[:pipeline_id])

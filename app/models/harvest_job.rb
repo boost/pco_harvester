@@ -7,10 +7,7 @@ class HarvestJob < ApplicationRecord
   belongs_to :pipeline_job
   belongs_to :harvest_definition
   belongs_to :extraction_job, optional: true
-  has_many   :transformation_jobs
-  has_many   :load_jobs
-  has_many   :delete_jobs
-  has_one    :harvest_report
+  has_one    :harvest_report, dependent: :restrict_with_exception
 
   delegate :extraction_definition, to: :harvest_definition
   delegate :transformation_definition, to: :harvest_definition
@@ -26,21 +23,26 @@ class HarvestJob < ApplicationRecord
 
   def duration_seconds
     return if extraction_job.nil? || load_jobs.empty?
+    return if extraction_job.start_time.nil? || extraction_job.end_time.nil?
+    return if transformation_jobs_start_time.nil? || load_jobs_end_time.nil?
 
-    extraction_job_start_time = extraction_job.start_time
-    extraction_job_end_time   = extraction_job.end_time
+    (load_jobs_end_time - extraction_job.start_time) - idle_offset
+  end
 
-    transformation_jobs_start_time = transformation_jobs.minimum(:start_time)
-    load_jobs_end_time = load_jobs.maximum(:end_time)
+  def transformation_jobs_start_time
+    @transformation_jobs_start_time ||= transformation_jobs.minimum(:start_time)
+  end
 
-    return if transformation_jobs_start_time.nil? || extraction_job_end_time.nil?
+  def load_jobs_end_time
+    @load_jobs_end_time ||= load_jobs.maximum(:end_time)
+  end
 
-    idle_offset = transformation_jobs_start_time - extraction_job_end_time
-    idle_offset = 0 if idle_offset.negative?
+  def idle_offset
+    return @idle_offset if @idle_offset.present?
 
-    return if load_jobs_end_time.nil? || extraction_job_start_time.nil?
-
-    (load_jobs_end_time - extraction_job_start_time) - idle_offset
+    @idle_offset = transformation_jobs_start_time - extraction_job.end_time
+    @idle_offset = 0 if @idle_offset.negative?
+    @idle_offset
   end
 
   def transformation_and_load_duration_seconds

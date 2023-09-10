@@ -17,6 +17,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_31_213342) do
     t.string "api_key", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_destinations_on_name", unique: true
   end
 
   create_table "extraction_definitions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

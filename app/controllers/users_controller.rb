@@ -16,18 +16,18 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to user_path(@user), notice: 'User updated successfully'
+      redirect_to user_path(@user), notice: t('.success')
     else
-      flash.alert = 'There was an issue updating the user'
+      flash.alert = t('.failure')
       render :edit
     end
   end
 
   def destroy
     if @user.destroy
-      redirect_to users_path, notice: 'User removed successfully'
+      redirect_to users_path, notice: t('.success')
     else
-      flash.alert = 'There was an issue deleting the user'
+      flash.alert = t('.failure')
       redirect_to users_path
     end
   end
@@ -39,6 +39,8 @@ class UsersController < ApplicationController
   end
 
   def user_params
+    # In case you use this method, make sure that the user is an admin
+    # brakeman warns against having :role as a permitted attribute
     params.require(:user).permit(:username, :role, :enforce_two_factor)
   end
 end

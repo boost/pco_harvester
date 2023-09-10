@@ -1,56 +1,57 @@
-<%= vertical_form_with model: [@pipeline, @harvest_definition, @extraction_definition], id: 'js-extraction-definition-form' do |form| %>
+<%= vertical_form_with model: [@pipeline, @harvest_definition, @extraction_definition],
+                       id: 'js-extraction-definition-form' do |form| %>
   <%= form.hidden_field :pipeline_id, value: @pipeline.id %>
   <%= form.hidden_field :kind, value: 'enrichment' %>
-  <%= hidden_field_tag :referrer_id, @referrer&.id  %>
- 
+  <%= hidden_field_tag :referrer_id, @referrer&.id %>
+
   <div class='card'>
     <div class='card-body'>
       <div class='row gy-3 align-items-center'>
         <% if @extraction_definition.name.present? %>
           <div class="col-3">
-            <%= form.label :name, 'Name', class: "form-label" %>
+            <%= form.label :name, 'Name', class: 'form-label' %>
           </div>
 
           <div class='col-9'>
-            <%= form.text_field :name, class: "form-control" %>
+            <%= form.text_field :name, class: 'form-control' %>
           </div>
         <% end %>
 
         <div class="col-3">
-          <%= form.label :destination_id, 'Enrichment Target', class: "form-label" %>
+          <%= form.label :destination_id, 'Enrichment Target', class: 'form-label' %>
         </div>
 
         <div class='col-9'>
-          <%= form.select :destination_id, options_from_collection_for_select(@destinations, 'id', 'name'), {},  class: "form-select" %>
-        </div>
-
-        <div class="col-3">
-          <%= form.label :source_id, 'Enrichment Target Source ID', class: "form-label" %>
-        </div>
-        <div class='col-9'>
-          <%= form.text_field :source_id, class: "form-control" %>
+          <%= form.select :destination_id, options_from_collection_for_select(@destinations, 'id', 'name'), {},
+                          class: 'form-select' %>
         </div>
 
         <div class="col-3">
-          <%= form.label :enrichment_url, 'Enrichment URL', class: "form-label" %>
+          <%= form.label :source_id, 'Enrichment Target Source ID', class: 'form-label' %>
         </div>
         <div class='col-9'>
-          <%= form.hidden_field :enrichment_url, class: "form-control", id: 'js-enrichment-url' %>
+          <%= form.text_field :source_id, class: 'form-control' %>
+        </div>
+
+        <div class="col-3">
+          <%= form.label :enrichment_url, 'Enrichment URL', class: 'form-label' %>
+        </div>
+        <div class='col-9'>
+          <%= form.hidden_field :enrichment_url, class: 'form-control', id: 'js-enrichment-url' %>
           <div id="js-enrichment-editor"></div>
         </div>
-        
+
         <div class="col-3">
-          <%= form.label :format, class: "form-label" do %>
+          <%= form.label :format, class: 'form-label' do %>
             Format
             <span
               data-bs-toggle="tooltip"
-              data-bs-title="The format the API returns"
-            ><i class="bi bi-question-circle" aria-label="helper text"></i>
+              data-bs-title="The format the API returns"><i class="bi bi-question-circle" aria-label="helper text"></i>
           <% end %>
         </div>
         <div class="col-9">
           <% options = find_options_from_validations(ExtractionDefinition, :format) %>
-          <%= form.select :format, options, {}, class: "form-select" %>
+          <%= form.select :format, options, {}, class: 'form-select' %>
         </div>
 
         <%= form.hidden_field :page, value: 1 %>
@@ -58,10 +59,10 @@
         <%= form.hidden_field :total_selector, value: '$.meta.total_pages' %>
 
         <div class="col-3">
-          <%= form.label :throttle, 'Enrichment Throttle (in ms)', class: "form-label" %>
+          <%= form.label :throttle, 'Enrichment Throttle (in ms)', class: 'form-label' %>
         </div>
         <div class='col-9'>
-          <%= form.number_field :throttle, class: "form-control" %>
+          <%= form.number_field :throttle, class: 'form-control' %>
         </div>
       </div>
     </div>

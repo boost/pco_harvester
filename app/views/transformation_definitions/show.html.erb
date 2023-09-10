@@ -8,7 +8,12 @@
   <div class="header__actions">
     <span id="react-header-actions"></span>
 
-    <%= link_to edit_pipeline_harvest_definition_transformation_definition_path(@pipeline, @harvest_definition, @transformation_definition, referrer_id: @referrer), class: 'btn btn-outline-primary' do %>
+    <%= link_to(
+          edit_pipeline_harvest_definition_transformation_definition_path(
+            @pipeline, @harvest_definition, @transformation_definition, referrer_id: @referrer
+          ),
+          class: 'btn btn-outline-primary'
+        ) do %>
       <i class="bi bi-pencil-square" aria-hidden="true"></i> Edit
     <% end %>
     <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">
@@ -22,6 +27,8 @@
 <div id="js-transformation-app" data-props="<%= @props %>"></div>
 
 <%# Modals %>
-<%= render layout: 'shared/delete-modal', locals: { path: pipeline_harvest_definition_transformation_definition_path(@pipeline, @harvest_definition, @transformation_definition) } do %>
+<%= render layout: 'shared/delete_modal',
+           locals: { path: pipeline_harvest_definition_transformation_definition_path(@pipeline, @harvest_definition,
+                                                                                      @transformation_definition) } do %>
   Are you sure you want to delete "<%= @transformation_definition.name %>"?
 <% end %>

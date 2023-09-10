@@ -20,9 +20,9 @@ class ExtractionJobsController < ApplicationController
 
     if @extraction_job.save
       ExtractionWorker.perform_async(@extraction_job.id)
-      flash.notice = 'Job queued successfuly'
+      flash.notice = t('.success')
     else
-      flash.alert = 'There was an issue launching the job'
+      flash.alert = t('.failure')
     end
 
     redirect_to pipeline_harvest_definition_extraction_definition_extraction_jobs_path(@pipeline, @harvest_definition,
@@ -31,20 +31,21 @@ class ExtractionJobsController < ApplicationController
 
   def destroy
     if @extraction_job.destroy
-      flash.notice = 'Results deleted successfully'
+      flash.notice = t('.success')
       redirect_to pipeline_jobs_path(@pipeline)
     else
-      flash.alert = 'There was an issue deleting the results'
-      redirect_to pipeline_harvest_definition_extraction_definition_extraction_job_path(@pipeline, @harvest_definition, @extraction_definition,
-                                                                                        @extraction_job)
+      flash.alert = t('.failure')
+      redirect_to pipeline_harvest_definition_extraction_definition_extraction_job_path(
+        @pipeline, @harvest_definition, @extraction_definition, @extraction_job
+      )
     end
   end
 
   def cancel
     if @extraction_job.cancelled!
-      flash.notice = 'Job cancelled successfully'
+      flash.notice = t('.success')
     else
-      flash.alert = 'There was an issue cancelling the job'
+      flash.alert = t('.failure')
     end
 
     redirect_to pipeline_jobs_path(@pipeline)
@@ -65,6 +66,6 @@ class ExtractionJobsController < ApplicationController
   end
 
   def find_extraction_job
-    @extraction_job = ExtractionJob.find(params[:id])
+    @extraction_job = @extraction_definition.extraction_jobs.find(params[:id])
   end
 end

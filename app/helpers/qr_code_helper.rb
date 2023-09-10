@@ -7,6 +7,6 @@ module QrCodeHelper
       color: '000',
       shape_rendering: 'crispEdges',
       module_size: 3
-    ).html_safe
+    )
   end
 end
