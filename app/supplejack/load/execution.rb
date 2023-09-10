@@ -34,7 +34,7 @@ module Load
 
       connection(@destination.url, {}, { 'Authentication-Token' => @destination.api_key })
         .post(
-          "/harvester/records/#{@load_job.api_record_id}/fragments.json",
+          "/harvester/records/#{@api_record_id}/fragments.json",
           { fragment: build_record, required_fragments: }.to_json,
           headers
         )
@@ -46,7 +46,7 @@ module Load
 
       record['source_id'] = @harvest_definition.source_id
       record['priority']  = @harvest_definition.priority
-      record['job_id']    = @load_job.harvest_job.name
+      record['job_id']    = @harvest_job.name
       record
     end
 

@@ -15,7 +15,7 @@
     <% end %>
 
     <% if @pipeline.ready_to_run? %>
-      <%= render layout: 'shared/create-modal', locals: { modal_heading: 'Run Settings', id: 'run-settings' } do %>
+      <%= render layout: 'shared/create_modal', locals: { modal_heading: 'Run Settings', id: 'run-settings' } do %>
         <%= vertical_form_with(model: [@pipeline, @pipeline_job]) do |form| %>
           <div class='row gy-3 align-items-center'>
             <%= form.hidden_field :pipeline_id, value: @pipeline.id %>
