@@ -32,7 +32,7 @@
     </div>
 
     <div class='row'>
-      <div class='col-3'>
+      <div class='col'>
         <div class='card'>
           <div class='card-body'>
             <h5 class='card-title'>Extraction</h5>
@@ -45,20 +45,25 @@
         </div>
       </div>
 
-      <div class='col-3'>
+      <div class='col'>
         <div class='card'>
           <div class='card-body'>
             <h5 class='card-title'>Transformation</h5>
 
             <p><%= report.transformation_status %></p>
-            <p><%= report.records_transformed %> transformed | <%= report.records_rejected %> rejected</p>
+            <p>
+              <%= report.records_transformed %> transformed 
+              <% if report.transformation_definition.fields.any?(&:reject_if?) %>
+                | <%= report.records_rejected %> rejected
+              <% end %>
+            </p>
           </div>
 
           <i class='bi bi-arrow-right card__right-arrow'></i>
         </div>
       </div>
       
-      <div class='col-3'>
+      <div class='col'>
         <div class='card'>
           <div class='card-body'>
             <h5 class='card-title'>Load</h5>
@@ -67,21 +72,25 @@
             <p><%= report.records_loaded %> records</p>
           </div>
 
-          <i class='bi bi-arrow-right card__right-arrow'></i>
+          <% if report.transformation_definition.fields.any?(&:delete_if?) %>
+            <i class='bi bi-arrow-right card__right-arrow'></i>
+          <% end %>
         </div>
       </div>
-      
-      <div class='col-3'>
-        <div class='card'>
-          <div class='card-body'>
-            <h5 class='card-title'>Delete</h5>
 
-            <p><%= report.load_status %></p>
-            <p><%= report.records_deleted %> deleted</p>
+      <% if report.transformation_definition.fields.any?(&:delete_if?) %>
+        <div class='col'>
+          <div class='card'>
+            <div class='card-body'>
+              <h5 class='card-title'>Delete</h5>
+
+              <p><%= report.load_status %></p>
+              <p><%= report.records_deleted %> deleted</p>
+            </div>
+
           </div>
-
         </div>
-      </div>
+      <% end %>
     </div>
   </div> 
 
