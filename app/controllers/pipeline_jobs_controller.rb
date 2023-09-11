@@ -4,7 +4,7 @@ class PipelineJobsController < ApplicationController
   before_action :find_pipeline
 
   def index
-    
+    @pipeline_jobs = paginate_and_filter_jobs(@pipeline.pipeline_jobs)    
   end
 
   def show

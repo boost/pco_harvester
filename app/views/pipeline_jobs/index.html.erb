@@ -22,10 +22,10 @@
 <% end %>
 
 <div class='card'>
-  <table class="table table-borderless">
+  <table class="table table-borderless table--jobs">
     <thead>
-      <tr>
-        <th scope="col">Pipeline Job</th>
+      <tr class='table-primary'>
+        <th scope="col">Pipeline jobs</th>
         <th scope="col">Status</th>
         <th scope="col">Job started</th>
         <th scope="col">Duration</th>
@@ -37,7 +37,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @pipeline.pipeline_jobs.each do |pipeline_job| %>
+      <% @pipeline_jobs.each.with_index(1) do |pipeline_job, index| %>
         <% next if pipeline_job.harvest_reports.empty? %>
           <% pipeline_job.harvest_reports.each do |report| %>
 
@@ -65,12 +65,17 @@
               <td><%= report.records_deleted %></td>
             </tr>
           <% end %>
-        <tr>
-          <td colspan='9'>
-            <hr />
-          </td>
-        </tr>
+
+        <% if index != (@pipeline_jobs.count) %>
+          <tr class='table__divider'>
+            <td colspan='9'>
+              <hr />
+            </td>
+          </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>
 </div>
+
+<%= render 'shared/pagination_below_table', items: @pipeline_jobs %>
