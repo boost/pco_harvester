@@ -30,6 +30,21 @@ class HarvestReport < ApplicationRecord
     delete_workers_completed
   ]
 
+  TIME_METRICS = %i[
+    extraction_start_time
+    extraction_updated_time
+    extraction_end_time
+    transformation_start_time
+    transformation_updated_time
+    transformation_end_time
+    load_start_time
+    load_updated_time
+    load_end_time
+    delete_start_time
+    delete_updated_time
+    delete_end_time
+  ]
+
   def complete?
     reload
     # TODO do we need to know if the delete is completed in order to queue the enrichments?
@@ -43,5 +58,40 @@ class HarvestReport < ApplicationRecord
     define_method("increment_#{metric}!") do |amount = 1|
       HarvestReport.where(id: id).update_all("#{metric} = #{metric} + #{amount}")
     end
+  end
+
+  def times
+    TIME_METRICS.map { |time| send(time) }.reject(&:nil?)
+  end
+
+  def duration_seconds
+    return nil if times.empty?
+
+    min = times.min
+    max = times.max
+
+    (max - min) - idle_offset
+  end
+
+  def status
+    return 'queued'    if statuses.all?('queued')
+    return 'running'   if statuses.any?('running')
+    return 'running'   if statuses.any?('completed') && statuses.any?('queued')
+    return 'completed' if statuses.all?('completed')
+  end
+
+  private
+
+  def statuses
+    [extraction_status, transformation_status, load_status, delete_status]
+  end
+
+  def idle_offset
+    return 0 if extraction_end_time.blank?
+    return @idle_offset if @idle_offset.present?
+
+    @idle_offset = transformation_start_time - extraction_end_time
+    @idle_offset = 0 if @idle_offset.negative?
+    @idle_offset
   end
 end

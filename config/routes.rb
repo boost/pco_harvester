@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   end
   
   resources :pipelines, only: %i[index show create update edit destroy] do
-    resources :pipeline_jobs, only: %i[create show]
+    resources :pipeline_jobs, only: %i[create show index]
 
     resources :harvest_definitions, only: %i[create update] do
       resources :harvest_jobs, only: %i[show create destroy] do

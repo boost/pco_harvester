@@ -39,7 +39,10 @@ module Extraction
       @previous_request = @de.extract
       @de.save
 
-      @harvest_report.increment_pages_extracted! if @harvest_job.present?
+      if @harvest_report.present?
+        @harvest_report.increment_pages_extracted!
+        @harvest_report.update(extraction_updated_time: Time.zone.now)
+      end
 
       enqueue_record_transformation
     end

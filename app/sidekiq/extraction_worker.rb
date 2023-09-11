@@ -30,8 +30,16 @@ class ExtractionWorker < ApplicationWorker
 
       if @harvest_report.transformation_workers_queued == @harvest_report.transformation_workers_completed
         @harvest_report.transformation_completed!
-        @harvest_report.load_completed! if @harvest_report.load_workers_queued == @harvest_report.load_workers_completed
-        @harvest_report.delete_completed! if @harvest_report.delete_workers_queued == @harvest_report.delete_workers_completed
+        @harvest_report.update(transformation_end_time: Time.zone.now)
+
+        if @harvest_report.load_workers_queued == @harvest_report.load_workers_completed
+          @harvest_report.load_completed!
+          @harvest_report.update(load_end_time: Time.zone.now)
+        end
+
+        if @harvest_report.delete_workers_queued == @harvest_report.delete_workers_completed
+          @harvest_report.delete_completed!
+        end
       end
     end
 

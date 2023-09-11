@@ -52,6 +52,7 @@ module Extraction
         ee.extract_and_save
 
         @harvest_report.increment_pages_extracted!
+        @harvest_report.update(extraction_updated_time: Time.zone.now)
 
         enqueue_record_transformation(record, ee.document, page)
 

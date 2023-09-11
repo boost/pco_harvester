@@ -132,4 +132,49 @@ RSpec.describe HarvestReport, type: :model do
       expect(subject.delete_workers_completed).to eq 1
     end
   end
+
+  describe '#duration_seconds' do
+    let(:nil_report) { create(:harvest_report, pipeline_job:, harvest_job:) }
+    let(:in_progress_report) do
+      create(:harvest_report, pipeline_job:, harvest_job:, 
+                              extraction_start_time: 20.minutes.ago,
+                              extraction_updated_time: 15.minutes.ago,
+                              transformation_start_time: 18.minutes.ago,
+                              transformation_updated_time: 16.minutes.ago,
+                              load_start_time: 14.minutes.ago,
+                              load_updated_time: 12.minutes.ago
+      )
+    end
+
+    it 'returns nil if there are no times' do
+      expect(nil_report.duration_seconds).to eq nil
+    end
+
+    it 'returns the time between the extraction start and the latest updated time between the extraction, transformation, and load' do
+      expect(in_progress_report.duration_seconds).to eq 480
+    end
+  end
+
+  describe '#status' do
+    let(:queued)      { create(:harvest_report, pipeline_job:, harvest_job:, extraction_status: 'queued', transformation_status: 'queued', load_status: 'queued', delete_status: 'queued') }
+    let(:running_one) { create(:harvest_report, pipeline_job:, harvest_job:, extraction_status: 'running', transformation_status: 'queued', load_status: 'queued', delete_status: 'queued') }
+    let(:running_two) { create(:harvest_report, pipeline_job:, harvest_job:, extraction_status: 'completed', transformation_status: 'queued', load_status: 'queued', delete_status: 'queued') }
+    let(:completed) { create(:harvest_report, pipeline_job:, harvest_job:, extraction_status: 'completed', transformation_status: 'completed', load_status: 'completed', delete_status: 'completed') }
+
+    it 'returns queued if all processes are queued' do
+      expect(queued.status).to eq 'queued'
+    end
+
+    it 'returns running if anything is running' do
+      expect(running_one.status).to eq 'running'
+    end
+
+    it 'returns running if something is completed and something is queued' do
+      expect(running_two.status).to eq 'running'
+    end
+
+    it 'returns completed if all processes are completed' do
+      expect(completed.status).to eq 'completed'
+    end
+  end
 end

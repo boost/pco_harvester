@@ -3,6 +3,10 @@
 class PipelineJobsController < ApplicationController
   before_action :find_pipeline
 
+  def index
+    
+  end
+
   def show
     @pipeline_job = PipelineJob.find(params[:id])
   end

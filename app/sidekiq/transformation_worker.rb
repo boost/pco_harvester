@@ -21,6 +21,7 @@ class TransformationWorker < ApplicationWorker
 
     @harvest_report.increment_records_transformed!(valid_records.count)
     @harvest_report.increment_records_rejected!(rejected_records.count)
+    @harvest_report.update(transformation_updated_time: Time.zone.now)
     
     queue_load_worker(valid_records) if valid_records.any?
     queue_delete_worker(deleted_records) if deleted_records.any?
@@ -36,7 +37,11 @@ class TransformationWorker < ApplicationWorker
   def job_end
     @harvest_report.increment_transformation_workers_completed!
     @harvest_report.reload
-    @harvest_report.transformation_completed! if @harvest_report.extraction_completed? && @harvest_report.transformation_workers_queued == @harvest_report.transformation_workers_completed
+
+    if @harvest_report.extraction_completed? && @harvest_report.transformation_workers_queued == @harvest_report.transformation_workers_completed
+      @harvest_report.transformation_completed!   
+      @harvest_report.update(transformation_end_time: Time.zone.now)
+    end
   end
 
   def transform_records(page)
