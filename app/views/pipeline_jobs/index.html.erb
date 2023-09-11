@@ -21,6 +21,16 @@
   </ul>
 <% end %>
 
+<div class='float-start'>
+  <h3><%= page_entries_info @pipeline_jobs %></h3>
+</div>
+
+<div class='float-end'>
+  <%= paginate @pipeline_jobs %>
+</div>
+
+<div class='clearfix'></div>
+
 <div class='card'>
   <table class="table table-borderless table--jobs">
     <thead>
@@ -65,7 +75,7 @@
               <td><%= report.records_rejected %></td>
               <td><%= report.records_deleted %></td>
               <td>
-                <i class="bi bi-three-dots-vertical" data-bs-toggle='dropdown'></i>
+                <i class="bi bi-three-dots-vertical table__control" data-bs-toggle='dropdown'></i>
                 <ul class="dropdown-menu dropdown-menu-end">
                   <% if report.harvest_job.extraction_job_id.present? %>
                     <li>
@@ -91,4 +101,3 @@
   </table>
 </div>
 
-<%= render 'shared/pagination_below_table', items: @pipeline_jobs %>

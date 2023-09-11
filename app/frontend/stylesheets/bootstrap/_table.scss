@@ -14,4 +14,10 @@
       margin: 0;
     }
   }
+
+  @include element('control') {
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
