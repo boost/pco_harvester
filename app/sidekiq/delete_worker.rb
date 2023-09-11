@@ -25,5 +25,10 @@ class DeleteWorker < ApplicationWorker
 
   def job_end
     @harvest_report.increment_delete_workers_completed!
+
+    if @harvest_report.transformation_completed? && @harvest_report.delete_workers_queued == @harvest_report.delete_workers_completed
+      @harvest_report.delete_completed!
+      @harvest_report.update(delete_end_time: Time.zone.now)
+    end
   end
 end

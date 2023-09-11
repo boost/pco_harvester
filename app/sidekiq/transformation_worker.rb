@@ -41,6 +41,11 @@ class TransformationWorker < ApplicationWorker
     if @harvest_report.extraction_completed? && @harvest_report.transformation_workers_queued == @harvest_report.transformation_workers_completed
       @harvest_report.transformation_completed!   
       @harvest_report.update(transformation_end_time: Time.zone.now)
+
+      if @harvest_report.delete_workers_queued.zero?
+        @harvest_report.delete_completed!
+        @harvest_report.update(delete_end_time: Time.zone.now)
+      end
     end
   end
 

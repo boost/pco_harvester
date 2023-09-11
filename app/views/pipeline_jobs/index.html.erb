@@ -34,6 +34,7 @@
         <th scope="col">Records Loaded</th>
         <th scope="col">Records Rejected</th>
         <th scope="col">Records Deleted</th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -63,12 +64,24 @@
               <td><%= report.records_loaded %></td>
               <td><%= report.records_rejected %></td>
               <td><%= report.records_deleted %></td>
+              <td>
+                <i class="bi bi-three-dots-vertical" data-bs-toggle='dropdown'></i>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <% if report.harvest_job.extraction_job_id.present? %>
+                    <li>
+                      <%= link_to pipeline_harvest_definition_extraction_definition_extraction_job_path(@pipeline.id, report.harvest_definition.id, report.extraction_definition.id, report.harvest_job.extraction_job_id), class: 'dropdown-item card__control-action' do %>
+                        <i class="bi bi-link-45deg me-2"></i>View Extracted Data
+                      <% end %>
+                    </li>
+                  <% end %>
+                </ul>
+              </td>
             </tr>
           <% end %>
 
         <% if index != (@pipeline_jobs.count) %>
           <tr class='table__divider'>
-            <td colspan='9'>
+            <td colspan='10'>
               <hr />
             </td>
           </tr>

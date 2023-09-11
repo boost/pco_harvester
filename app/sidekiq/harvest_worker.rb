@@ -25,6 +25,7 @@ class HarvestWorker < ApplicationWorker
 
   def create_transformation_jobs
     extraction_job = @pipeline_job.extraction_job
+    @harvest_job.update(extraction_job_id: extraction_job.id)
     @harvest_report.extraction_completed!
 
     (extraction_job.extraction_definition.page..extraction_job.documents.total_pages).each do |page|

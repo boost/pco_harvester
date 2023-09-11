@@ -11,6 +11,7 @@ class HarvestReport < ApplicationRecord
   enum :load_status,           STATUSES, prefix: :load
   enum :delete_status,         STATUSES, prefix: :delete
 
+  delegate :harvest_definition, to: :harvest_job
   delegate :extraction_definition, to: :harvest_job
   delegate :transformation_definition, to: :harvest_job
 
@@ -47,9 +48,7 @@ class HarvestReport < ApplicationRecord
 
   def complete?
     reload
-    # TODO do we need to know if the delete is completed in order to queue the enrichments?
-    # extraction_completed? && transformation_completed? && load_completed? && delete_completed?
-    extraction_completed? && transformation_completed? && load_completed?
+    extraction_completed? && transformation_completed? && load_completed? && delete_completed?
   end
 
   ## These queries are all done atomically on the database
@@ -58,10 +57,6 @@ class HarvestReport < ApplicationRecord
     define_method("increment_#{metric}!") do |amount = 1|
       HarvestReport.where(id: id).update_all("#{metric} = #{metric} + #{amount}")
     end
-  end
-
-  def times
-    TIME_METRICS.map { |time| send(time) }.reject(&:nil?)
   end
 
   def duration_seconds
@@ -81,6 +76,10 @@ class HarvestReport < ApplicationRecord
   end
 
   private
+  
+  def times
+    TIME_METRICS.map { |time| send(time) }.reject(&:nil?)
+  end
 
   def statuses
     [extraction_status, transformation_status, load_status, delete_status]

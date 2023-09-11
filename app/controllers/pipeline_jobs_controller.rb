@@ -18,7 +18,7 @@ class PipelineJobsController < ApplicationController
 
     PipelineWorker.perform_async(@pipeline_job.id)
 
-    redirect_to pipeline_pipeline_job_path(@pipeline, @pipeline_job)
+    redirect_to pipeline_pipeline_jobs_path(@pipeline)
   end
 
   private
