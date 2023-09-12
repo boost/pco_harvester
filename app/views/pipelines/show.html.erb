@@ -35,12 +35,11 @@
                   <%= label_tag do %>
 
                     <%= check_box('pipeline_job', 'harvest_definitions_to_run', {
-                          multiple: true,
-                          checked: harvest_definition.ready_to_run?,
-                          class: "form-check-input js-pipeline-#{harvest_definition.kind}-checkbox",
-                          disabled: !harvest_definition.ready_to_run?
-                        }, harvest_definition.id, nil)
-                    %>
+                                    multiple: true,
+                                    checked: harvest_definition.ready_to_run?,
+                                    class: "form-check-input js-pipeline-#{harvest_definition.kind}-checkbox",
+                                    disabled: !harvest_definition.ready_to_run?
+                                  }, harvest_definition.id, nil) %>
 
                     <%= harvest_definition.source_id %>
                   <% end %>
@@ -64,7 +63,9 @@
             </div>
 
             <div id='js-pipeline-page-type' class='col-7'>
-              <%= form.select :page_type, options_for_select(PipelineJob.page_types.map { |key, _value| [key.humanize, key] }), {},  id: 'js-pipeline-page-type-select', class: "form-select" %>
+              <%= form.select :page_type, options_for_select(PipelineJob.page_types.map do |key, _value|
+                                                               [key.humanize, key]
+                                                             end), {}, id: 'js-pipeline-page-type-select', class: 'form-select' %>
             </div>
 
             <div id='js-pipeline-pages' class='col-3 d-none'>
