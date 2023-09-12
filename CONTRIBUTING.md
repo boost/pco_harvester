@@ -13,17 +13,14 @@ If you find a problem with Supplejack Harvester the best way to let us know is t
 
 ## Issues
 
-When creating a new issue, it is important to let us know how to reproduce this issue and what is the expected behaviour. Supplejack Harvester is a complicated application and it's important we have enough information to accurately reproduce the issue so that we can be confident that it has been resolved correctly. 
+When creating a new issue, it is important to let us know how to reproduce this issue and what is the expected behaviour. Supplejack Harvester is a complicated application and it's important we have enough information to accurately reproduce the issue so that we can be confident that it has been resolved correctly.
 
-Before opening an issue please look at existing issues to see if it has been discussed before. If you find an existing issue describing your problem please add your information to that issue so we have more detail around reproducing it. It also helps us to prioritise issues if we know that it is affecting a large group of users. 
+Before opening an issue please look at existing issues to see if it has been discussed before. If you find an existing issue describing your problem please add your information to that issue so we have more detail around reproducing it. It also helps us to prioritise issues if we know that it is affecting a large group of users.
 
 ## Pull Requests
 
-When creating a Pull Request, please add a descriptive title and explanation so we know what your feature or fix is. All features require an appropriate level of test coverage to be merged and we will not be merging any changes which break existing tests. 
+When creating a Pull Request, please add a descriptive title and explanation so we know what your feature or fix is. All features require an appropriate level of test coverage to be merged and we will not be merging any changes which break existing tests.
 
 ## Getting Help
 
-If you have a question or would like to discuss a proposed change, it's best to create an issue on this repo and we will get back to you as soon as we can. 
-
-
-
+If you have a question or would like to discuss a proposed change, it's best to create an issue on this repo and we will get back to you as soon as we can.

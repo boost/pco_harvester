@@ -31,6 +31,20 @@ RSpec.describe 'HarvestDefinitions', type: :request do
         end.to change(HarvestDefinition, :count).by(1)
       end
 
+      it 'updates the pipeline last_edited_by' do
+        post pipeline_harvest_definitions_path(pipeline), params: {
+          harvest_definition: {
+            name: 'Staging',
+            pipeline_id: pipeline.id,
+            extraction_definition_id: extraction_definition.id,
+            transformation_definition_id: transformation_definition.id,
+            source_id: 'test'
+          }
+        }
+
+        expect(pipeline.reload.last_edited_by).to eq user
+      end
+
       it 'redirects to the pipeline path' do
         post pipeline_harvest_definitions_path(pipeline), params: {
           harvest_definition: {
@@ -79,6 +93,16 @@ RSpec.describe 'HarvestDefinitions', type: :request do
         harvest_definition.reload
 
         expect(harvest_definition.source_id).to eq 'testing'
+      end
+
+      it 'updates the pipeline last_edited_by' do
+        patch pipeline_harvest_definition_path(pipeline, harvest_definition), params: {
+          harvest_definition: {
+            source_id: 'testing'
+          }
+        }
+
+        expect(pipeline.reload.last_edited_by).to eq user
       end
 
       it 'redirects to the pipeline path' do

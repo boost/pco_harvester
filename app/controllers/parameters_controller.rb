@@ -1,29 +1,45 @@
 # frozen_string_literal: true
 
 class ParametersController < ApplicationController
+  include LastEditedBy
+
+  before_action :find_parameter, only: %i[update destroy]
+  before_action :find_parameter, only: %i[update destroy]
   before_action :find_parameter, only: %i[update destroy]
 
   def create
     @parameter = Parameter.new(parameter_params)
-
-    @parameter.save!
-
-    render json: @parameter
+    if @parameter.save
+      update_last_edited_by(last_edited_by_resources)
+      render json: @parameter
+    else
+      render500
+    end
   end
 
   def update
-    @parameter.update(parameter_params)
-
-    render json: @parameter
+    if @parameter.update(parameter_params)
+      update_last_edited_by(last_edited_by_resources)
+      render json: @parameter
+    else
+      render500
+    end
   end
 
   def destroy
-    @parameter.destroy!
-
-    render json: {}, status: :ok
+    if @parameter.destroy
+      update_last_edited_by(last_edited_by_resources)
+      render json: {}, status: :ok
+    else
+      render500
+    end
   end
 
   private
+
+  def last_edited_by_resources
+    [@parameter.request.extraction_definition]
+  end
 
   def find_parameter
     @parameter = Parameter.find(params[:id])

@@ -3,6 +3,7 @@
 class TransformationDefinition < ApplicationRecord
   belongs_to :extraction_job # used for previewing, needs to be refactored
   belongs_to :pipeline
+  belongs_to :last_edited_by, class_name: 'User', optional: true
 
   has_many :fields, dependent: :destroy
 

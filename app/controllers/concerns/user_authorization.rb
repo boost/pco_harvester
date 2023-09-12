@@ -32,7 +32,7 @@ module UserAuthorization
   def authenticate_admin!
     return current_user if current_user.admin? || performed?
 
-    flash.alert = t('.users.unauthorized')
+    flash.alert = t('users.unauthorized')
     redirect_back fallback_location: root_path
   end
 end

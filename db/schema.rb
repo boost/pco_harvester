@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_04_200614) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_05_203215) do
   create_table "delete_jobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "status"
     t.integer "kind", default: 0, null: false
@@ -51,7 +51,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_04_200614) do
     t.string "total_selector"
     t.integer "per_page"
     t.boolean "paginated"
+    t.bigint "last_edited_by_id"
     t.index ["destination_id"], name: "index_extraction_definitions_on_destination_id"
+    t.index ["last_edited_by_id"], name: "index_extraction_definitions_on_last_edited_by_id"
     t.index ["pipeline_id"], name: "index_extraction_definitions_on_pipeline_id"
   end
 
@@ -151,6 +153,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_04_200614) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "last_edited_by_id"
+    t.index ["last_edited_by_id"], name: "index_pipelines_on_last_edited_by_id"
   end
 
   create_table "requests", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -169,7 +173,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_04_200614) do
     t.bigint "extraction_job_id", null: false
     t.integer "kind", default: 0
     t.bigint "pipeline_id"
+    t.bigint "last_edited_by_id"
     t.index ["extraction_job_id"], name: "index_transformation_definitions_on_extraction_job_id"
+    t.index ["last_edited_by_id"], name: "index_transformation_definitions_on_last_edited_by_id"
     t.index ["pipeline_id"], name: "index_transformation_definitions_on_pipeline_id"
   end
 
@@ -226,4 +232,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_04_200614) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "extraction_definitions", "users", column: "last_edited_by_id"
+  add_foreign_key "pipelines", "users", column: "last_edited_by_id"
+  add_foreign_key "transformation_definitions", "users", column: "last_edited_by_id"
 end

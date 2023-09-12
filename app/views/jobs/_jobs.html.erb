@@ -15,12 +15,11 @@
         <%= link_to path, class: 'card mb-3' do %>
           <div class='card-body'>
             <h5 class='card-title'><%= job.name %></h5>
+            <h6 class='card-subtitle'><%= job.updated_at.to_fs(:light) %></h6>
 
-              <%= job.updated_at.to_fs(:light) %>
-
-              <span class="badge bg-light text-dark">
-                <%= job_status_text(job) %>
-              </span>
+            <span class="badge bg-light text-dark">
+              <%= job_status_text(job) %>
+            </span>
           </div>
         <% end %>
 
