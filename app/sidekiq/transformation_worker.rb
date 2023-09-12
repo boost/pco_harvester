@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 class TransformationWorker < ApplicationWorker
-  def child_perform(transformation_job, api_record)
+  def child_perform(transformation_job)
     @transformation_job = transformation_job
     @harvest_job = @transformation_job.harvest_job
 
-    transformed_records = transform_records(transformation_job.page, api_record).map(&:to_hash)
+    transformed_records = transform_records(transformation_job.page).map(&:to_hash)
 
     valid_records       = select_valid_records(transformed_records)
     rejected_records    = transformed_records.select { |record| record['rejection_reasons'].present? }
@@ -17,13 +17,10 @@ class TransformationWorker < ApplicationWorker
     update_transformation_report(valid_records, rejected_records, deleted_records)
   end
 
-  def transform_records(page, api_record)
-    transformation_definition_fields =
-
+  def transform_records(page)
     Transformation::Execution.new(
       @transformation_job.records(page),
       @transformation_job.transformation_definition.fields
-      api_record
     ).call
   end
 
@@ -43,8 +40,9 @@ class TransformationWorker < ApplicationWorker
   end
 
   def queue_delete_worker(records)
-    delete_job = DeleteJob.create(harvest_job: @harvest_job, page: @transformation_job.page)
+    return if records.empty?
 
+    delete_job = DeleteJob.create(harvest_job: @harvest_job, page: @transformation_job.page)
     DeleteWorker.perform_async(delete_job.id, records.to_json)
   end
 

@@ -10,11 +10,11 @@ module Transformation
     # rubocop:disable Lint/UnusedBlockArgument
     # rubocop:disable Security/Eval
     # rubocop:disable Lint/RescueException
-    def execute(extracted_record, api_record)
+    def execute(extracted_record)
       begin
         block = ->(record) { eval(@field.block) }
 
-        @value = block.call(extracted_record, api_record)
+        @value = block.call(extracted_record)
         type_checker = TypeChecker.new(@value)
         raise TypeError, type_checker.error unless type_checker.valid?
       rescue Exception => e

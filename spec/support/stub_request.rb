@@ -38,6 +38,7 @@ def stub_figshare_enrichment_page_1(destination)
       query: {
         'api_key' => 'testkey',
         'search' => {
+          'status' => 'active',
           'fragments.source_id' => 'test'
         },
         'search_options' => {
@@ -61,6 +62,7 @@ def stub_figshare_enrichment_page_2(destination)
       query: {
         'api_key' => 'testkey',
         'search' => {
+          'status' => 'active',
           'fragments.source_id' => 'test'
         },
         'search_options' => {
@@ -84,6 +86,7 @@ def stub_failed_figshare_enrichment_page_1(destination)
       query: {
         'api_key' => 'testkey',
         'search' => {
+          'status' => 'active',
           'fragments.source_id' => 'test'
         },
         'search_options' => {
@@ -107,6 +110,7 @@ def stub_failed_figshare_enrichment_page_2(destination)
       query: {
         'api_key' => 'testkey',
         'search' => {
+          'status' => 'active',
           'fragments.source_id' => 'test'
         },
         'search_options' => {
