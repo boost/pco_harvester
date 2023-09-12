@@ -33,9 +33,10 @@ RSpec.describe Extraction::RecordExtraction do
 
     context 'when the enrichment is scheduled after a harvest' do
       let(:pipeline)           { create(:pipeline, name: 'NLNZCat') }
+      let(:pipeline_job)       { create(:pipeline_job, pipeline:, destination:) }
       let(:harvest_definition) { create(:harvest_definition, pipeline:, extraction_definition:) }
       let(:harvest_job)        do
-        create(:harvest_job, :completed, harvest_definition:, destination:, target_job_id: 'harvest-job-1')
+        create(:harvest_job, :completed, harvest_definition:, pipeline_job:, target_job_id: 'harvest-job-1')
       end
       let(:subject) { described_class.new(extraction_definition, 1, harvest_job) }
 
