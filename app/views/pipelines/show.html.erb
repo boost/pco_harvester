@@ -8,8 +8,12 @@
   </div>
 
   <div class="float-end">
-    <%= button_tag(type: 'button', class: 'btn btn-primary me-1',
-                   data: { 'bs-toggle' => 'modal', 'bs-target' => '#run-settings' }, disabled: !@pipeline.ready_to_run?) do %>
+      <%= button_tag(
+            type: 'button',
+            class: 'btn btn-primary me-1',
+            disabled: !@pipeline.ready_to_run?,
+            data: { 'bs-toggle' => 'modal', 'bs-target' => '#run-settings' }
+          ) do %>
       <i class='bi bi-play'></i>
         Run
     <% end %>
@@ -84,15 +88,17 @@
       <% end %>
     <% end %>
 
-    <%= link_to 'Edit',
-                edit_pipeline_path(@pipeline),
-                class: 'me-1 btn btn-outline-primary' %>
+    <%= link_to edit_pipeline_path(@pipeline), class: 'me-1 btn btn-outline-primary' do %>
+      <i class="bi bi-pencil-square" aria-hidden="true"></i> Edit
+    <% end %>
 
     <button
       type="button"
       class="btn btn-danger"
       data-bs-toggle="modal"
-      data-bs-target="#delete-modal">Delete</button>
+      data-bs-target="#delete-modal">
+      <i class="bi bi-trash" aria-hidden="true"></i> Delete
+    </button>
   </div>
 
   <div class='clearfix'></div>
@@ -137,7 +143,9 @@
           type="button"
           class="btn btn-outline-primary"
           data-bs-toggle="modal"
-          data-bs-target="#edit-harvest">Edit Harvest</button>
+          data-bs-target="#edit-harvest">
+          <i class="bi bi-pencil-square" aria-hidden="true"></i> Edit Harvest
+        </button>
       </div>
 
       <%= render layout: 'shared/create_modal', locals: { modal_heading: 'Edit harvest', id: 'edit-harvest' } do %>
@@ -185,9 +193,8 @@
           <%= render partial: 'pipelines/card',
                      locals: {
                        pipeline: @pipeline,
-                       position: 'first',
-                       definition: @harvest_definition,
-                       type: 'extraction',
+                       block_definition: @harvest_definition,
+                       definition: @harvest_definition.extraction_definition,
                        edit_path:
               pipeline_harvest_definition_extraction_definition_path(
                 @harvest_definition.extraction_definition.pipeline,
@@ -238,9 +245,8 @@
           <%= render partial: 'pipelines/card',
                      locals: {
                        pipeline: @pipeline,
-                       definition: @harvest_definition,
-                       type: 'transformation',
-                       position: 'last',
+                       block_definition: @harvest_definition,
+                       definition: @harvest_definition.transformation_definition,
                        edit_path:
               pipeline_harvest_definition_transformation_definition_path(
                 @harvest_definition.transformation_definition.pipeline,
@@ -291,7 +297,9 @@
             type="button"
             class="btn btn-outline-primary"
             data-bs-toggle="modal"
-            data-bs-target="<%= "#edit-enrichment-#{enrichment_definition.id}" %>">Edit Enrichment</button>
+            data-bs-target="<%= "#edit-enrichment-#{enrichment_definition.id}" %>">
+            <i class="bi bi-pencil-square" aria-hidden="true"></i> Edit Enrichment
+          </button>
         </div>
 
         <%= render layout: 'shared/create_modal',
@@ -340,10 +348,9 @@
 
           <%= render partial: 'pipelines/card',
                      locals: {
-                       definition: enrichment_definition,
-                       type: 'extraction',
-                       position: 'first',
                        pipeline: @pipeline,
+                       block_definition: enrichment_definition,
+                       definition: enrichment_definition.extraction_definition,
                        edit_path:
                 edit_pipeline_harvest_definition_extraction_definition_path(
                   enrichment_definition.extraction_definition.pipeline,
@@ -429,10 +436,9 @@
 
           <%= render partial: 'pipelines/card',
                      locals: {
-                       definition: enrichment_definition,
-                       type: 'transformation',
-                       position: 'last',
                        pipeline: @pipeline,
+                       block_definition: enrichment_definition,
+                       definition: enrichment_definition.transformation_definition,
                        edit_path:
                 pipeline_harvest_definition_transformation_definition_path(
                   enrichment_definition.transformation_definition.pipeline,

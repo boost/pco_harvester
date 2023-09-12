@@ -18,15 +18,15 @@
         </strong>
       </li>
 
-    <li class='list-inline-item'>
-      <%= form_with url: '/pipelines', method: :get do |form| %>
-        <%= select_tag(
-              :sort_by,
-              options_for_select([['Alphabetical', 'name'], ['Last Edited', 'updated_at']], @sort_by.first),
-              class: ' form-select', id: 'js-content-source-filter'
-            ) %>
-      <% end %>
-    </li>
+      <li class='list-inline-item'>
+        <%= form_with url: '/pipelines', method: :get do |form| %>
+          <%= select_tag(
+                :sort_by,
+                options_for_select([['Alphabetical', 'name'], ['Last Edited', 'updated_at']], @sort_by.first),
+                class: ' form-select', id: 'js-content-source-filter'
+              ) %>
+        <% end %>
+      </li>
 
     </ul>
   </div>
@@ -48,8 +48,19 @@
     <%- @pipelines.each do |pipeline| %>
       <div class='col-3'>
         <%= link_to pipeline, class: 'card mb-3 d-flex' do %>
-          <div class="card-body align-items-center d-flex justify-content-center">
+          <div class="card-body">
             <h5 class="card-title"><%= pipeline.name %></h5>
+            <h6 class="card-subtitle">
+              <%= last_edited_by(pipeline) %>
+            </h6>
+            <div>
+              <span class="badge bg-light text-dark">
+                <%= pipeline.harvest_definitions.harvest.count %> Harvest
+              </span>
+              <span class="badge bg-light text-dark">
+                <%= pipeline.harvest_definitions.enrichment.count %> Enrichments
+              </span>
+            </div>
           </div>
         <% end %>
       </div>

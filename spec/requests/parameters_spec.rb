@@ -5,7 +5,7 @@ RSpec.describe 'Parameters', type: :request do
   let(:pipeline)                   { create(:pipeline) }
   let(:harvest_definition)         { create(:harvest_definition, extraction_definition:, pipeline:) }
   let!(:extraction_definition)     { create(:extraction_definition, pipeline:) }
-  let!(:request)                   { create(:request) }
+  let!(:request)                   { create(:request, extraction_definition:) }
 
   before do
     sign_in user
@@ -21,6 +21,14 @@ RSpec.describe 'Parameters', type: :request do
             parameter: parameter.attributes
           }
         end.to change(Parameter, :count).by(1)
+      end
+
+      it 'updates the extraction definition last edited by' do
+        post pipeline_harvest_definition_extraction_definition_request_parameters_path(pipeline, harvest_definition, extraction_definition, request), params: {
+          parameter: parameter.attributes
+        }
+
+        expect(extraction_definition.reload.last_edited_by).to eq user
       end
 
       it 'returns a JSON object representing the new parameter' do
@@ -45,10 +53,16 @@ RSpec.describe 'Parameters', type: :request do
           parameter: { name: 'X-Forwarded-For', content: 'ab.cd.ef.gh' }
         }
 
-        parameter.reload
-
-        expect(parameter.name).to eq 'X-Forwarded-For'
+        expect(parameter.reload.name).to eq 'X-Forwarded-For'
         expect(parameter.content).to eq 'ab.cd.ef.gh'
+      end
+
+      it 'updates the extraction definition last edited by' do
+        patch pipeline_harvest_definition_extraction_definition_request_parameter_path(pipeline, harvest_definition, extraction_definition, request, parameter), params: {
+          parameter: { name: 'X-Forwarded-For', content: 'ab.cd.ef.gh' }
+        }
+
+        expect(extraction_definition.reload.last_edited_by).to eq user
       end
 
       it 'returns a JSON hash of the updated parameter' do
@@ -70,6 +84,14 @@ RSpec.describe 'Parameters', type: :request do
         delete pipeline_harvest_definition_extraction_definition_request_parameter_path(pipeline, harvest_definition,
                                                                                         extraction_definition, request, parameter)
       end.to change(Parameter, :count).by(-1)
+    end
+
+    it 'updates the extraction definition last edited by' do
+      delete pipeline_harvest_definition_extraction_definition_request_parameter_path(
+        pipeline, harvest_definition, extraction_definition, request, parameter
+      )
+
+      expect(extraction_definition.reload.last_edited_by).to eq user
     end
 
     it 'returns a successful response' do

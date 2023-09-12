@@ -4,6 +4,16 @@
   width: 100%;
   position: relative;
 
+  .card-title {
+    font-size: 1.125rem;
+  }
+
+  .card-subtitle {
+    color: $pompeii-ash;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
   @include modifier('create-cta') {
     background-color: transparent;
     border: 1px solid $primary;
@@ -22,7 +32,7 @@
       cursor: default
     }
   }
-  
+
   @include element('control-action') {
     padding: 10px 16px 9px 16px;
   }
@@ -39,7 +49,7 @@
       cursor: pointer;
     }
   }
- 
+
   @include element('right-arrow') {
       position: absolute;
       right: -1.5rem;

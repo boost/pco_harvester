@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class RequestsController < ApplicationController
+  include LastEditedBy
+
   def show
     @request = Request.find(params[:id])
 
@@ -18,9 +20,12 @@ class RequestsController < ApplicationController
   def update
     @request = Request.find(params[:id])
 
-    @request.update!(request_params)
-
-    render json: @request.to_h
+    if @request.update(request_params)
+      update_last_edited_by([@request.extraction_definition])
+      render json: @request.to_h
+    else
+      render500
+    end
   end
 
   private

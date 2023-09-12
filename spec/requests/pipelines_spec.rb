@@ -27,6 +27,14 @@ RSpec.describe 'Pipelines', type: :request do
         end.to change(Pipeline, :count).by(1)
       end
 
+      it 'stores the user who created it' do
+        post pipelines_path, params: {
+          pipeline: attributes_for(:pipeline)
+        }
+
+        expect(Pipeline.last.last_edited_by).to eq user
+      end
+
       it 'redirects to the created pipeline' do
         post pipelines_path, params: {
           pipeline: attributes_for(:pipeline)
@@ -90,6 +98,17 @@ RSpec.describe 'Pipelines', type: :request do
         pipeline.reload
 
         expect(pipeline.name).to eq 'National Library of New Zealand'
+      end
+
+      it 'stores the user who updated it' do
+        sign_out(user)
+        new_user = create(:user)
+        sign_in(new_user)
+        patch pipeline_path(pipeline), params: {
+          pipeline: { name: 'National Library of New Zealand' }
+        }
+
+        expect(pipeline.reload.last_edited_by).to eq new_user
       end
 
       it 'redirects to the pipeline page' do

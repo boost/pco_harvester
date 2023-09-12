@@ -12,4 +12,10 @@ module ApplicationHelper
       path && !active ? link_to(text, path) : text&.to_s
     end
   end
+
+  def last_edited_by(resource)
+    return if resource&.last_edited_by.nil?
+
+    "Last edited by #{resource.last_edited_by.username}"
+  end
 end

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ExtractionDefinitionsController < ApplicationController
+  include LastEditedBy
+
   before_action :find_pipeline
   before_action :find_referrer
   before_action :find_harvest_definition
@@ -102,11 +104,12 @@ class ExtractionDefinitionsController < ApplicationController
   end
 
   def extraction_definition_params
-    params.require(:extraction_definition).permit(
+    safe_params = params.require(:extraction_definition).permit(
       :pipeline_id,
       :name, :format, :base_url, :throttle, :page, :per_page,
       :total_selector, :kind, :destination_id, :source_id, :enrichment_url,
       :paginated
     )
+    merge_last_edited_by(safe_params)
   end
 end

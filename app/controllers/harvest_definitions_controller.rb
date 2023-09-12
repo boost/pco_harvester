@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class HarvestDefinitionsController < ApplicationController
+  include LastEditedBy
+
   before_action :find_pipeline
   before_action :find_harvest_definition, only: %i[update]
   before_action :find_destinations
@@ -11,6 +13,7 @@ class HarvestDefinitionsController < ApplicationController
     harvest_kind = @harvest_definition.kind.capitalize
 
     if @harvest_definition.save
+      update_last_edited_by([@pipeline])
       redirect_to pipeline_path(@pipeline), notice: t('.success', kind: harvest_kind)
     else
       flash.alert = t('.failure', kind: harvest_kind)
@@ -30,6 +33,7 @@ class HarvestDefinitionsController < ApplicationController
 
   def destroy
     if @harvest_definition.destroy
+      update_last_edited_by([@pipeline])
       flash.notice = t('.success')
     else
       flash.alert = t('.failure')
@@ -42,6 +46,7 @@ class HarvestDefinitionsController < ApplicationController
 
   def html_update
     if @harvest_definition.update(harvest_definition_params)
+      update_last_edited_by([@pipeline])
       flash.notice = t('.success')
     else
       flash.alert = t('.failure')
