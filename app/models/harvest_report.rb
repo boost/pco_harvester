@@ -51,6 +51,26 @@ class HarvestReport < ApplicationRecord
     extraction_completed? && transformation_completed? && load_completed? && delete_completed?
   end
 
+  def extraction_completed!
+    super
+    update(extraction_end_time: Time.zone.now)
+  end
+
+  def transformation_completed!
+    super
+    update(transformation_end_time: Time.zone.now)
+  end
+
+  def load_completed!
+    super
+    update(load_end_time: Time.zone.now)
+  end
+
+  def delete_completed!
+    super
+    update(delete_end_time: Time.zone.now)
+  end
+
   ## These queries are all done atomically on the database
   # To prevent race conditions when multiple sidekiq processes are updating the same report at the same time.
   METRICS.each do |metric|

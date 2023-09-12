@@ -24,6 +24,11 @@ class ExtractionJob < ApplicationRecord
 
   delegate :format, to: :extraction_definition
 
+  def completed!
+    super
+    update(end_time: Time.zone.now)
+  end
+
   # Returns the fullpath to the extraction folder for this job
   #
   # @example job.extraction_folder #=> /app/extractions/development/2023-04-28_08-51-16_-_19
