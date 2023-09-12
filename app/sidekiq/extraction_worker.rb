@@ -6,15 +6,15 @@ class ExtractionWorker
   sidekiq_options retry: 0
 
   sidekiq_retries_exhausted do |job, _ex|
-    @extraction_job = ExtractionJob.find(extraction_job_id)
+    @extraction_job = ExtractionJob.find(job['args'].first)
     @extraction_job.errored!
     @extraction_job.update(error_message: job['error_message'])
     Sidekiq.logger.warn "Failed #{job['class']} with #{job['args']}: #{job['error_message']}"
   end
 
-  def perform(extraction_job_id, harvest_report_id)
+  def perform(extraction_job_id, harvest_report_id = nil)
     @extraction_job = ExtractionJob.find(extraction_job_id)
-    @harvest_report = HarvestReport.find(harvest_report_id)
+    @harvest_report = HarvestReport.find(harvest_report_id) if harvest_report_id.present?
 
     job_start
 

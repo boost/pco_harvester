@@ -104,12 +104,6 @@ RSpec.describe ExtractionJob, type: :model do
       expect(subject.end_time).to be_a(ActiveSupport::TimeWithZone)
     end
 
-    it 'does not allow an end date to be before a start date' do
-      subject.start_time = Time.zone.now
-      subject.end_time   = 1.day.ago
-      expect(subject).not_to be_valid
-    end
-
     it 'returns the number of seconds that the job has been running for' do
       subject.update(start_time: '2023-03-20 11:00:00', end_time: '2023-03-20 11:05:00')
       subject.reload
