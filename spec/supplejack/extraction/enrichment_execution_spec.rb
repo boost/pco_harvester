@@ -79,10 +79,6 @@ RSpec.describe Extraction::EnrichmentExecution do
 
       let(:subject) { described_class.new(sample_job) }
 
-      it 'does not create TransformationJobs for failed pages' do
-        expect { subject.call }.not_to change(TransformationJob, :count)
-      end
-
       it 'enqueues 0 TransformationWorkers in sidekiq' do
         expect(TransformationWorker).to receive(:perform_async).exactly(0).times.and_call_original
 

@@ -6,7 +6,7 @@ module Extraction
       @extraction_job = extraction_job
       @extraction_definition = extraction_job.extraction_definition
       @harvest_job = extraction_job.harvest_job
-      @harvest_report = @harvest_job.harvest_report
+      @harvest_report = @harvest_job.harvest_report if @harvest_job.present?
     end
 
     def call
@@ -33,11 +33,6 @@ module Extraction
     private
 
     def max_pages(record_extraction)
-      # TODO why do we do this?
-      # Shouldn't it always be whatever the API has for the number of records in the job?
-      # Or is it intended for when we are running an enrichment by itself?
-      # return @harvest_job.pipeline_job.pages if @harvest_job.present? && @harvest_job.pipeline_job.set_number?
-
       JsonPath.new(@extraction_definition.total_selector).on(record_extraction.body).first.to_i
     end
 
@@ -51,8 +46,10 @@ module Extraction
 
         ee.extract_and_save
 
-        @harvest_report.increment_pages_extracted!
-        @harvest_report.update(extraction_updated_time: Time.zone.now)
+        if @harvest_report.present?
+          @harvest_report.increment_pages_extracted!
+          @harvest_report.update(extraction_updated_time: Time.zone.now)
+        end
 
         enqueue_record_transformation(record, ee.document, page)
 
@@ -70,7 +67,7 @@ module Extraction
       return unless @harvest_job.present? && document.successful?
 
       TransformationWorker.perform_async(@extraction_job.id, @harvest_job.transformation_definition.id, @harvest_job.id, page, record['id'])
-      @harvest_report.increment_transformation_workers_queued!
+      @harvest_report.increment_transformation_workers_queued! if @harvest_report.present?
     end
   end
 end
