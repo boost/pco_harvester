@@ -80,10 +80,13 @@ RSpec.describe Extraction::Execution do
       let(:sample_extraction_job)           { create(:extraction_job, :sample) }
       let(:extraction_definition)           { create(:extraction_definition, :figshare) }
       let(:pipeline)                        { create(:pipeline) }
+      let(:pipeline_job)                    { create(:pipeline_job, pipeline:, destination:) }
       let(:harvest_definition)              { create(:harvest_definition, pipeline:) }
       let(:destination)                     { create(:destination) }
-      let!(:harvest_job)                    { create(:harvest_job, extraction_job:, harvest_definition:, destination:) }
-      let!(:sample_harvest_job)             { create(:harvest_job, extraction_job: sample_extraction_job, harvest_definition:, destination:) }
+      let!(:harvest_job)                    { create(:harvest_job, extraction_job:, harvest_definition:, pipeline_job:) }
+      let!(:harvest_report)                 { create(:harvest_report, pipeline_job:, harvest_job:) }
+      let!(:sample_harvest_job)             { create(:harvest_job, extraction_job: sample_extraction_job, harvest_definition:, pipeline_job:) }
+      let!(:sample_harvest_report)          { create(:harvest_report, pipeline_job:, harvest_job: sample_harvest_job) }
       let(:request_one)                     { create(:request, :figshare_initial_request, extraction_definition:) }
       let(:request_two)                     { create(:request, :figshare_main_request, extraction_definition:) }
 
@@ -95,11 +98,6 @@ RSpec.describe Extraction::Execution do
       context 'when it is a full harvest' do
         let(:subject) { described_class.new(extraction_job, extraction_definition) }
 
-        it 'creates TransformationJobs for each page' do
-          expect { subject.call }.to change(TransformationJob, :count).by(5)
-          expect(TransformationJob.last(5).map(&:page)).to eq [1, 2, 3, 4, 5]
-        end
-
         it 'enqueues 5 TransformationWorkers in sidekiq' do
           expect(TransformationWorker).to receive(:perform_async).exactly(5).times.and_call_original
 
@@ -110,11 +108,6 @@ RSpec.describe Extraction::Execution do
       context 'when it is a sample harvest' do
         let(:subject) { described_class.new(sample_extraction_job, extraction_definition) }
 
-        it 'creates TransformationJobs for the first page' do
-          expect { subject.call }.to change(TransformationJob, :count).by(1)
-          expect(TransformationJob.last(1).map(&:page)).to eq [1]
-        end
-
         it 'enqueues 1 TransformationWorker in sidekiq' do
           expect(TransformationWorker).to receive(:perform_async).once.and_call_original
 
@@ -123,13 +116,9 @@ RSpec.describe Extraction::Execution do
       end
 
       context 'when it is a harvest for a specific number of pages' do
-        let!(:harvest_job)                    { create(:harvest_job, extraction_job:, harvest_definition:, destination:, page_type: 'set_number', pages: 3) }
+        let(:pipeline_job)                    { create(:pipeline_job, page_type: 'set_number', pages: 3, destination:, pipeline:) }
+        let!(:harvest_job)                    { create(:harvest_job, extraction_job:, harvest_definition:, pipeline_job:) }
         let(:subject) { described_class.new(extraction_job, extraction_definition) }
-
-        it 'creates TransformationJobs for 3 pages' do
-          expect { subject.call }.to change(TransformationJob, :count).by(3)
-          expect(TransformationJob.last(5).map(&:page)).to eq [1, 2, 3]
-        end
 
         it 'enqueues 3 Transformation Workers in Sidekiq' do
           expect(TransformationWorker).to receive(:perform_async).exactly(3).times.and_call_original
@@ -144,10 +133,6 @@ RSpec.describe Extraction::Execution do
         end
 
         let(:subject) { described_class.new(extraction_job, extraction_definition) }
-
-        it 'does not create TransformationJobs for failed pages' do
-          expect { subject.call }.not_to change(TransformationJob, :count)
-        end
 
         it 'enqueues 0 TransformationWorkers in sidekiq' do
           expect(TransformationWorker).to receive(:perform_async).exactly(0).times.and_call_original
@@ -185,11 +170,6 @@ RSpec.describe Extraction::Execution do
                                               })
           end
 
-          it 'creates TransformationJobs for each page' do
-            expect { subject.call }.to change(TransformationJob, :count).by(4)
-            expect(TransformationJob.last(4).map(&:page)).to eq [1, 2, 3, 4]
-          end
-
           it 'enqueues 4 TransformationWorkers in sidekiq' do
             expect(TransformationWorker).to receive(:perform_async).exactly(4).times.and_call_original
 
@@ -212,11 +192,6 @@ RSpec.describe Extraction::Execution do
           before do
             stub_freesound_harvest_requests(request_one)
             stub_freesound_harvest_requests(request_two)
-          end
-
-          it 'creates TransformationJobs for each page' do
-            expect { subject.call }.to change(TransformationJob, :count).by(4)
-            expect(TransformationJob.last(4).map(&:page)).to eq [1, 2, 3, 4]
           end
 
           it 'enqueues 4 TransformationWorkers in sidekiq' do
@@ -242,11 +217,6 @@ RSpec.describe Extraction::Execution do
                                           3 => 'AoErc3UyMzQwNjcwOTI=',
                                           4 => 'AoErc3UyMzQwNjcxOTQ='
                                         })
-          end
-
-          it 'creates TransformationJobs for each page' do
-            expect { subject.call }.to change(TransformationJob, :count).by(4)
-            expect(TransformationJob.last(4).map(&:page)).to eq [1, 2, 3, 4]
           end
 
           it 'enqueues 4 TransformationWorkers in sidekiq' do
