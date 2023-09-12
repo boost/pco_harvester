@@ -29,12 +29,10 @@ class ExtractionWorker
 
   def job_start
     @extraction_job.running!
-    @extraction_job.update(start_time: Time.zone.now) if @extraction_job.start_time.blank?
 
     return if @harvest_report.blank?
 
     @harvest_report.extraction_running!
-    @harvest_report.update(extraction_start_time: Time.zone.now) if @harvest_report.extraction_start_time.blank?
   end
 
   def job_end

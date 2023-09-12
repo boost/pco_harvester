@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
-class DeleteWorker < ApplicationWorker
+class DeleteWorker
+  include Sidekiq::Job
+
+  sidekiq_options retry: 0
+
   def perform(records, destination_id, harvest_report_id)
     destination = Destination.find(destination_id)
     @harvest_report = HarvestReport.find(harvest_report_id)
@@ -20,7 +24,6 @@ class DeleteWorker < ApplicationWorker
 
   def job_start
     @harvest_report.delete_running!
-    @harvest_report.update(delete_start_time: Time.zone.now) if @harvest_report.delete_start_time.blank?
   end
 
   def job_end
@@ -29,6 +32,5 @@ class DeleteWorker < ApplicationWorker
     return unless @harvest_report.delete_workers_completed?
 
     @harvest_report.delete_completed!
-    @harvest_report.update(delete_end_time: Time.zone.now)
   end
 end

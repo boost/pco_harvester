@@ -24,6 +24,11 @@ class ExtractionJob < ApplicationRecord
 
   delegate :format, to: :extraction_definition
 
+  def running!
+    super
+    update(start_time: Time.zone.now)
+  end
+
   def completed!
     super
     update(end_time: Time.zone.now)

@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
-class TransformationWorker < ApplicationWorker
+class TransformationWorker
+  include Sidekiq::Job
+
+  sidekiq_options retry: 0
+
   def perform(extraction_job_id, transformation_definition_id, harvest_job_id, page, api_record_id = nil)
     @extraction_job = ExtractionJob.find(extraction_job_id)
     @transformation_definition = TransformationDefinition.find(transformation_definition_id)
@@ -31,7 +35,6 @@ class TransformationWorker < ApplicationWorker
 
   def job_start
     @harvest_report.transformation_running!
-    @harvest_report.update(transformation_start_time: Time.zone.now) if @harvest_report.transformation_start_time.blank?
   end
 
   def job_end
@@ -41,12 +44,10 @@ class TransformationWorker < ApplicationWorker
     return unless @harvest_report.transformation_workers_completed?
 
     @harvest_report.transformation_completed!
-    @harvest_report.update(transformation_end_time: Time.zone.now)
 
     return unless @harvest_report.delete_workers_queued.zero?
 
     @harvest_report.delete_completed!
-    @harvest_report.update(delete_end_time: Time.zone.now)
   end
 
   def transform_records(page)
