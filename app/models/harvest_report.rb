@@ -65,7 +65,7 @@ class HarvestReport < ApplicationRecord
     min = times.min
     max = times.max
 
-    (max - min) - idle_offset
+    ((max - min) - idle_offset).to_i
   end
 
   def status
