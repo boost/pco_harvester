@@ -21,6 +21,8 @@ class PipelineJob < ApplicationRecord
   end
   
   def enqueue_enrichment_jobs(job_id)
+    reload
+    return if cancelled?
     return if pipeline.enrichments.empty?
     return unless harvest_complete?
 

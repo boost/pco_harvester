@@ -69,6 +69,7 @@ class HarvestReport < ApplicationRecord
   end
 
   def status
+    return 'cancelled' if pipeline_job.cancelled?
     return 'queued'    if statuses.all?('queued')
     return 'running'   if statuses.any?('running')
     return 'running'   if statuses.any?('completed') && statuses.any?('queued')
