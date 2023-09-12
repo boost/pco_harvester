@@ -51,39 +51,16 @@ class HarvestReport < ApplicationRecord
     extraction_completed? && transformation_completed? && load_completed? && delete_completed?
   end
 
-  def extraction_running!
-    super
-    update(extraction_start_time: Time.zone.now)
-  end
+  %i[extraction transformation load delete].each do |process|
+    define_method("#{process}_running!") do
+      super()
+      send(:update, "#{process}_start_time" => Time.zone.now)
+    end
 
-  def extraction_completed!
-    super
-    update(extraction_end_time: Time.zone.now)
-  end
-
-  def transformation_running!
-    super
-    update(transformation_start_time: Time.zone.now)
-  end
-
-  def transformation_completed!
-    super
-    update(transformation_end_time: Time.zone.now)
-  end
-
-  def load_running!
-    super
-    update(load_start_time: Time.zone.now)
-  end
-
-  def load_completed!
-    super
-    update(load_end_time: Time.zone.now)
-  end
-
-  def delete_completed!
-    super
-    update(delete_end_time: Time.zone.now)
+    define_method("#{process}_completed!") do
+      super()
+      send(:update, "#{process}_end_time" => Time.zone.now)
+    end
   end
 
   ## These queries are all done atomically on the database
