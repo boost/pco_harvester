@@ -33,6 +33,8 @@ module JobsHelper
   def job_duration_seconds(seconds)
     return '-' if seconds.nil?
 
-    ActiveSupport::Duration.build(seconds).inspect
+    ActiveSupport::Duration.build(seconds).parts.map do |key, value|
+      [value.to_i, key].join(' ')
+    end.join(' and ')
   end
 end

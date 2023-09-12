@@ -41,6 +41,14 @@ class PipelineJob < ApplicationRecord
       HarvestWorker.perform_async(enrichment_job.id)
     end
   end
+
+  def has_report_for?(id)
+    harvest_jobs.map(&:harvest_definition_id).include?(id.to_i)
+  end
+
+  def report(id)
+    harvest_reports.find { |report| report.harvest_job.harvest_definition_id == id.to_i }
+  end
   
   private
 
