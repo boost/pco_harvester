@@ -32,7 +32,7 @@ class ExtractionJobsController < ApplicationController
   def destroy
     if @extraction_job.destroy
       flash.notice = t('.success')
-      redirect_to pipeline_jobs_path(@pipeline)
+      redirect_to pipeline_pipeline_jobs_path(@pipeline)
     else
       flash.alert = t('.failure')
       redirect_to pipeline_harvest_definition_extraction_definition_extraction_job_path(

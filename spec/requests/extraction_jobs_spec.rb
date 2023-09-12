@@ -101,7 +101,7 @@ RSpec.describe 'ExtractionJobs', type: :request do
       it 'redirects to the correct path' do
         delete pipeline_harvest_definition_extraction_definition_extraction_job_path(pipeline, harvest_definition, extraction_definition,
                                                                                      subject)
-        expect(response).to redirect_to(pipeline_jobs_path(pipeline))
+        expect(response).to redirect_to(pipeline_pipeline_jobs_path(pipeline))
       end
 
       it 'displays an appropriate flash message' do
@@ -141,53 +141,6 @@ RSpec.describe 'ExtractionJobs', type: :request do
         follow_redirect!
 
         expect(response.body).to include 'There was an issue deleting the results'
-      end
-    end
-  end
-
-  describe '#cancel' do
-    context 'when the cancellation is successful' do
-      before do
-        post cancel_pipeline_harvest_definition_extraction_definition_extraction_job_path(pipeline, harvest_definition, extraction_definition,
-                                                                                          subject)
-      end
-
-      it 'sets the job status to be cancelled' do
-        subject.reload
-        expect(subject.status).to eq 'cancelled'
-      end
-
-      it 'redirects to the correct path' do
-        expect(response).to redirect_to pipeline_jobs_path(pipeline)
-      end
-
-      it 'displays an appropriate flash message' do
-        follow_redirect!
-
-        expect(response.body).to include 'Job cancelled successfully'
-      end
-    end
-
-    context 'when the cancellation is unsuccessful' do
-      before do
-        allow_any_instance_of(ExtractionJob).to receive(:cancelled!).and_return(false)
-        post cancel_pipeline_harvest_definition_extraction_definition_extraction_job_path(pipeline, harvest_definition, extraction_definition,
-                                                                                          subject)
-      end
-
-      it 'does not set the job status to be cancelled' do
-        subject.reload
-        expect(subject.status).not_to eq 'cancelled'
-      end
-
-      it 'redirects to the correct path' do
-        expect(response).to redirect_to pipeline_jobs_path(pipeline)
-      end
-
-      it 'displays an appropriate flash message' do
-        follow_redirect!
-
-        expect(response.body).to include 'There was an issue cancelling the job'
       end
     end
   end

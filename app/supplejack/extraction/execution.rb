@@ -7,7 +7,7 @@ module Extraction
       @extraction_job = job
       @extraction_definition = extraction_definition
       @harvest_job = @extraction_job.harvest_job
-      @harvest_report = @harvest_job.harvest_report
+      @harvest_report = @harvest_job.harvest_report if @harvest_job.present?
     end
 
     def call
