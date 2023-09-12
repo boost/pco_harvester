@@ -50,7 +50,7 @@
     <tbody>
       <% @pipeline_jobs.each.with_index(1) do |pipeline_job, index| %>
           <% pipeline_job.harvest_definitions_to_run.each do |definition| %>
-            <% if pipeline_job.has_report_for?(definition) %>
+            <% if pipeline_job.report_for?(definition) %>
               <% report = pipeline_job.report(definition) %>
 
               <% badge_classes = class_names(

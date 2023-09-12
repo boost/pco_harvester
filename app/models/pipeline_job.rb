@@ -9,7 +9,7 @@ class PipelineJob < ApplicationRecord
   belongs_to :extraction_job, optional: true
   belongs_to :destination
 
-  has_many :harvest_reports
+  has_many :harvest_reports, dependent: :destroy
   has_many :harvest_jobs, through: :harvest_reports
 
   enum :page_type, { all_available_pages: 0, set_number: 1 }
@@ -42,7 +42,7 @@ class PipelineJob < ApplicationRecord
     end
   end
 
-  def has_report_for?(id)
+  def report_for?(id)
     harvest_jobs.map(&:harvest_definition_id).include?(id.to_i)
   end
 

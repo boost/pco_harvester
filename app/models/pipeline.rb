@@ -4,7 +4,7 @@ class Pipeline < ApplicationRecord
   has_many :harvest_definitions, dependent: :restrict_with_exception
   has_many :harvest_jobs, through: :harvest_definitions
 
-  has_many :pipeline_jobs
+  has_many :pipeline_jobs, dependent: :destroy
 
   validates :name, presence: true
 

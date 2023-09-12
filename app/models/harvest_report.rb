@@ -29,7 +29,7 @@ class HarvestReport < ApplicationRecord
     load_workers_completed
     delete_workers_queued
     delete_workers_completed
-  ]
+  ].freeze
 
   TIME_METRICS = %i[
     extraction_start_time
@@ -44,7 +44,7 @@ class HarvestReport < ApplicationRecord
     delete_start_time
     delete_updated_time
     delete_end_time
-  ]
+  ].freeze
 
   def complete?
     reload
@@ -55,7 +55,9 @@ class HarvestReport < ApplicationRecord
   # To prevent race conditions when multiple sidekiq processes are updating the same report at the same time.
   METRICS.each do |metric|
     define_method("increment_#{metric}!") do |amount = 1|
+      # rubocop:disable Rails/SkipsModelValidations
       HarvestReport.where(id:).update_all("#{metric} = #{metric} + #{amount}")
+      # rubocop:enable Rails/SkipsModelValidations
     end
   end
 
@@ -79,7 +81,7 @@ class HarvestReport < ApplicationRecord
   private
 
   def times
-    TIME_METRICS.map { |time| send(time) }.reject(&:nil?)
+    TIME_METRICS.filter_map { |time| send(time) }
   end
 
   def statuses
