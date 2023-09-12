@@ -24,9 +24,7 @@ Rails.application.routes.draw do
     end
 
     resources :harvest_definitions, only: %i[create update] do
-      resources :harvest_jobs, only: %i[show create destroy] do
-        post :cancel, on: :member
-      end
+      resources :harvest_jobs, only: %i[show create destroy]
 
       resources :extraction_definitions, only: %i[show edit new create update] do
         collection do
@@ -35,9 +33,7 @@ Rails.application.routes.draw do
           post :test_enrichment_extraction
         end
 
-        resources :extraction_jobs, only: %i[index show create destroy] do
-          post :cancel, on: :member
-        end
+        resources :extraction_jobs, only: %i[index show create destroy]
 
         resources :requests do
           resources :parameters

@@ -4,7 +4,7 @@ class ExtractionJobsController < ApplicationController
   before_action :find_pipeline
   before_action :find_harvest_definition
   before_action :find_extraction_definition
-  before_action :find_extraction_job, only: %i[show destroy cancel]
+  before_action :find_extraction_job, only: %i[show destroy]
 
   def index
     @extraction_jobs = paginate_and_filter_jobs(@extraction_definition.extraction_jobs)
@@ -39,16 +39,6 @@ class ExtractionJobsController < ApplicationController
         @pipeline, @harvest_definition, @extraction_definition, @extraction_job
       )
     end
-  end
-
-  def cancel
-    if @extraction_job.cancelled!
-      flash.notice = t('.success')
-    else
-      flash.alert = t('.failure')
-    end
-
-    redirect_to pipeline_jobs_path(@pipeline)
   end
 
   private
