@@ -21,10 +21,7 @@ class PipelineJob < ApplicationRecord
   end
 
   def enqueue_enrichment_jobs(job_id)
-    reload
-    return if cancelled?
-    return if pipeline.enrichments.empty?
-    return unless harvest_complete?
+    return unless should_queue_enrichments?
 
     pipeline.enrichments.each do |enrichment|
       next unless should_run?(enrichment.id)
@@ -51,6 +48,11 @@ class PipelineJob < ApplicationRecord
   end
 
   private
+
+  def should_queue_enrichments?
+    reload
+    !cancelled? && pipeline.enrichments.present? && harvest_complete?
+  end
 
   def harvest_complete?
     harvest_reports.find_by(kind: 'harvest').complete?
