@@ -38,9 +38,7 @@ class TransformationWorker < ApplicationWorker
     @harvest_report.increment_transformation_workers_completed!
     @harvest_report.reload
 
-    unless @harvest_report.extraction_completed? && @harvest_report.transformation_workers_queued == @harvest_report.transformation_workers_completed
-      return
-    end
+    return unless @harvest_report.transformation_workers_completed?
 
     @harvest_report.transformation_completed!
     @harvest_report.update(transformation_end_time: Time.zone.now)

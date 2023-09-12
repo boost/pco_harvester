@@ -25,9 +25,8 @@ class LoadWorker < ApplicationWorker
 
   def job_end
     @harvest_report.increment_load_workers_completed!
-    @harvest_report.reload
 
-    if @harvest_report.transformation_completed? && @harvest_report.load_workers_queued == @harvest_report.load_workers_completed
+    if @harvest_report.load_workers_completed?
       @harvest_report.load_completed!
       @harvest_report.update(load_end_time: Time.zone.now)
     end

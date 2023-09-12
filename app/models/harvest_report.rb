@@ -78,6 +78,21 @@ class HarvestReport < ApplicationRecord
     return 'completed' if statuses.all?('completed')
   end
 
+  def transformation_workers_completed?
+    reload
+    extraction_completed? && transformation_workers_queued == transformation_workers_completed
+  end
+
+  def load_workers_completed?
+    reload
+    transformation_completed? && load_workers_queued == load_workers_completed
+  end
+
+  def delete_workers_completed?
+    reload
+    transformation_completed? && delete_workers_queued == delete_workers_completed
+  end
+
   private
 
   def times
