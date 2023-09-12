@@ -5,7 +5,7 @@ class PipelineJobsController < ApplicationController
   before_action :find_pipeline_job, only: %i[show cancel]
 
   def index
-    @pipeline_jobs = paginate_and_filter_jobs(@pipeline.pipeline_jobs)    
+    @pipeline_jobs = paginate_and_filter_jobs(@pipeline.pipeline_jobs)
   end
 
   def show; end
@@ -46,6 +46,7 @@ class PipelineJobsController < ApplicationController
   end
 
   def pipeline_job_params
-    params.require(:pipeline_job).permit(:pipeline_id, :key, :extraction_job_id, :destination_id, :page_type, :pages, harvest_definitions_to_run: [])
+    params.require(:pipeline_job).permit(:pipeline_id, :key, :extraction_job_id, :destination_id, :page_type, :pages,
+                                         harvest_definitions_to_run: [])
   end
 end

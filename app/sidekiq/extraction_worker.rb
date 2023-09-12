@@ -36,7 +36,7 @@ class ExtractionWorker < ApplicationWorker
           @harvest_report.load_completed!
           @harvest_report.update(load_end_time: Time.zone.now)
         end
-        
+
         if @harvest_report.delete_workers_queued == @harvest_report.delete_workers_completed
           @harvest_report.delete_completed!
           @harvest_report.update(delete_end_time: Time.zone.now)

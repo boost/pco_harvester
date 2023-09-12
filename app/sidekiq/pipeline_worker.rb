@@ -10,7 +10,7 @@ class PipelineWorker < ApplicationWorker
 
       key = @pipeline_job.key
       key = "#{key}__enrichment-#{definition.id}" if definition.enrichment?
-      
+
       job = HarvestJob.create(pipeline_job: @pipeline_job, harvest_definition: definition, key:)
 
       HarvestWorker.perform_async(job.id)

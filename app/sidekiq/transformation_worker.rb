@@ -10,7 +10,7 @@ class TransformationWorker < ApplicationWorker
     @api_record_id = api_record_id
 
     job_start
-    
+
     transformed_records = transform_records(page).map(&:to_hash)
 
     valid_records       = transformed_records.select do |record|
@@ -22,7 +22,7 @@ class TransformationWorker < ApplicationWorker
     @harvest_report.increment_records_transformed!(valid_records.count)
     @harvest_report.increment_records_rejected!(rejected_records.count)
     @harvest_report.update(transformation_updated_time: Time.zone.now)
-    
+
     queue_load_worker(valid_records) if valid_records.any?
     queue_delete_worker(deleted_records) if deleted_records.any?
 
@@ -38,15 +38,17 @@ class TransformationWorker < ApplicationWorker
     @harvest_report.increment_transformation_workers_completed!
     @harvest_report.reload
 
-    if @harvest_report.extraction_completed? && @harvest_report.transformation_workers_queued == @harvest_report.transformation_workers_completed
-      @harvest_report.transformation_completed!   
-      @harvest_report.update(transformation_end_time: Time.zone.now)
-
-      if @harvest_report.delete_workers_queued.zero?
-        @harvest_report.delete_completed!
-        @harvest_report.update(delete_end_time: Time.zone.now)
-      end
+    unless @harvest_report.extraction_completed? && @harvest_report.transformation_workers_queued == @harvest_report.transformation_workers_completed
+      return
     end
+
+    @harvest_report.transformation_completed!
+    @harvest_report.update(transformation_end_time: Time.zone.now)
+
+    return unless @harvest_report.delete_workers_queued.zero?
+
+    @harvest_report.delete_completed!
+    @harvest_report.update(delete_end_time: Time.zone.now)
   end
 
   def transform_records(page)
@@ -68,7 +70,7 @@ class TransformationWorker < ApplicationWorker
     DeleteWorker.perform_async(records.to_json, @harvest_job.pipeline_job.destination.id, @harvest_report.id)
     @harvest_report.increment_delete_workers_queued!
   end
-  
+
   def records(page = 1)
     return [] if @transformation_definition.record_selector.blank? || @extraction_job.documents[page].nil?
 

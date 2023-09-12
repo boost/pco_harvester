@@ -66,7 +66,8 @@ module Extraction
     def enqueue_record_transformation(record, document, page)
       return unless @harvest_job.present? && document.successful?
 
-      TransformationWorker.perform_async(@extraction_job.id, @harvest_job.transformation_definition.id, @harvest_job.id, page, record['id'])
+      TransformationWorker.perform_async(@extraction_job.id, @harvest_job.transformation_definition.id,
+                                         @harvest_job.id, page, record['id'])
       @harvest_report.increment_transformation_workers_queued! if @harvest_report.present?
     end
   end

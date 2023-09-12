@@ -18,10 +18,10 @@ class HarvestReport < ApplicationRecord
   enum :kind, { harvest: 0, enrichment: 1 }
 
   METRICS = %w[
-    pages_extracted 
-    records_transformed 
-    records_loaded 
-    records_rejected 
+    pages_extracted
+    records_transformed
+    records_loaded
+    records_rejected
     records_deleted
     transformation_workers_queued
     transformation_workers_completed
@@ -55,7 +55,7 @@ class HarvestReport < ApplicationRecord
   # To prevent race conditions when multiple sidekiq processes are updating the same report at the same time.
   METRICS.each do |metric|
     define_method("increment_#{metric}!") do |amount = 1|
-      HarvestReport.where(id: id).update_all("#{metric} = #{metric} + #{amount}")
+      HarvestReport.where(id:).update_all("#{metric} = #{metric} + #{amount}")
     end
   end
 
@@ -77,7 +77,7 @@ class HarvestReport < ApplicationRecord
   end
 
   private
-  
+
   def times
     TIME_METRICS.map { |time| send(time) }.reject(&:nil?)
   end

@@ -3,10 +3,10 @@
 class LoadWorker < ApplicationWorker
   def perform(harvest_job_id, records, api_record_id = nil)
     @harvest_job = HarvestJob.find(harvest_job_id)
-    @harvest_report  = @harvest_job.harvest_report
+    @harvest_report = @harvest_job.harvest_report
 
     job_start
-    
+
     transformed_records = JSON.parse(records)
 
     transformed_records.each do |transformed_record|
@@ -28,7 +28,7 @@ class LoadWorker < ApplicationWorker
     @harvest_report.reload
 
     if @harvest_report.transformation_completed? && @harvest_report.load_workers_queued == @harvest_report.load_workers_completed
-      @harvest_report.load_completed! 
+      @harvest_report.load_completed!
       @harvest_report.update(load_end_time: Time.zone.now)
     end
 

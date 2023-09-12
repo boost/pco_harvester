@@ -19,7 +19,7 @@ class PipelineJob < ApplicationRecord
   with_options if: :set_number? do
     validates :pages, presence: true
   end
-  
+
   def enqueue_enrichment_jobs(job_id)
     reload
     return if cancelled?
@@ -49,7 +49,7 @@ class PipelineJob < ApplicationRecord
   def report(id)
     harvest_reports.find { |report| report.harvest_job.harvest_definition_id == id.to_i }
   end
-  
+
   private
 
   def harvest_complete?
