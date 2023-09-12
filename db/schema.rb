@@ -48,11 +48,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_10_230548) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "extraction_definition_id", null: false
-    t.integer "kind", default: 0, null: false
     t.timestamp "start_time"
     t.timestamp "end_time"
     t.text "error_message"
     t.text "name"
+    t.integer "kind"
     t.index ["extraction_definition_id"], name: "index_extraction_jobs_on_extraction_definition_id"
     t.index ["status"], name: "index_extraction_jobs_on_status"
   end

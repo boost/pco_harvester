@@ -5,10 +5,10 @@ class TransformationWorker
 
   sidekiq_options retry: 0
 
-  def perform(extraction_job_id, transformation_definition_id, harvest_job_id, page, api_record_id = nil)
+  def perform(extraction_job_id, harvest_job_id, page, api_record_id = nil)
     @extraction_job = ExtractionJob.find(extraction_job_id)
-    @transformation_definition = TransformationDefinition.find(transformation_definition_id)
     @harvest_job = HarvestJob.find(harvest_job_id)
+    @transformation_definition = TransformationDefinition.find(@harvest_job.transformation_definition.id)
     @harvest_report = @harvest_job.harvest_report
     @page = page
     @api_record_id = api_record_id
