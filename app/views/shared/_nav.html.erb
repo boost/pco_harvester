@@ -1,6 +1,6 @@
 <nav class="<%= class_names('navbar navbar-expand-md', {
-                              'navbar-dark bg-dark' => Rails.env.production? || Rails.env.test?,
-                              'navbar-light bg-light border-bottom border-2' => !Rails.env.production? || !Rails.env.test
+                              'navbar-dark bg-dark' => %w[production test].include?(Rails.env),
+                              'navbar-light bg-light border-bottom border-2' => %w[production test].exclude?(Rails.env)
                             }) %>">
   <div class="container-fluid">
     <%= link_to root_path, class: 'navbar-brand' do %>
