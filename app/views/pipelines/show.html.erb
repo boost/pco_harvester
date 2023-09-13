@@ -63,9 +63,11 @@
             </div>
 
             <div id='js-pipeline-page-type' class='col-7'>
-              <%= form.select :page_type, options_for_select(PipelineJob.page_types.map do |key, _value|
-                                                               [key.humanize, key]
-                                                             end), {}, id: 'js-pipeline-page-type-select', class: 'form-select' %>
+              <%= form.select :page_type, options_for_select(
+                    PipelineJob.page_types.map do |key, _value|
+                      [key.humanize, key]
+                    end
+                  ), {}, id: 'js-pipeline-page-type-select', class: 'form-select' %>
             </div>
 
             <div id='js-pipeline-pages' class='col-3 d-none'>

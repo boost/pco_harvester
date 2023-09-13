@@ -57,7 +57,7 @@
                    'badge',
                    {
                      'bg-primary': report.status == 'completed',
-                     'bg-secondary': report.status == 'running' || report.status == 'queued' || report.status == 'cancelled'
+                     'bg-secondary': %w[running queued cancelled].include?(report.status)
                    }
                  ) %>
 
@@ -80,8 +80,12 @@
                   <ul class="dropdown-menu dropdown-menu-end">
                     <% if report.harvest_job.extraction_job_id.present? %>
                       <li>
-                        <%= link_to pipeline_harvest_definition_extraction_definition_extraction_job_path(@pipeline.id, report.harvest_definition.id, report.extraction_definition.id, report.harvest_job.extraction_job_id),
-                                    class: 'dropdown-item' do %>
+                        <%= link_to pipeline_harvest_definition_extraction_definition_extraction_job_path(
+                              @pipeline.id,
+                              report.harvest_definition.id,
+                              report.extraction_definition.id,
+                              report.harvest_job.extraction_job_id
+                            ), class: 'dropdown-item' do %>
                           <i class="bi bi-link-45deg me-2"></i> View Extracted Data
                         <% end %>
                       </li>
