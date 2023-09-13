@@ -18,6 +18,16 @@ class VerticalFormBuilder < ActionView::Helpers::FormBuilder
     yield + errors(method)
   end
 
+  def modify_options(options)
+    if options[:class].is_a? Hash
+      options[:class]['is-invalid'] = true
+    else
+      options[:class] = "is-invalid #{options[:class]}"
+    end
+
+    options
+  end
+
   ############################################
   # Overriding existing helpers              #
   ############################################
@@ -44,14 +54,7 @@ class VerticalFormBuilder < ActionView::Helpers::FormBuilder
       return super(method, options) if disable_errors_display
 
       error_wrapper(method) do
-        if @object.errors[method].any?
-          if options[:class].is_a? Hash
-            options[:class]['is-invalid'] = true
-          else
-            options[:class] = "is-invalid #{options[:class]}"
-          end
-        end
-
+        options = modify_options(options) if @object.errors[method].any?
         super(method, options)
       end
     end

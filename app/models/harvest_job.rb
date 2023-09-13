@@ -29,11 +29,17 @@ class HarvestJob < ApplicationRecord
   end
 
   def duration_seconds
-    return if extraction_job.nil? || load_jobs.empty?
-    return if extraction_job.start_time.nil? || extraction_job.end_time.nil?
-    return if transformation_jobs_start_time.nil? || load_jobs_end_time.nil?
+    return unless duration_seconds?
 
     (load_jobs_end_time - extraction_job.start_time) - idle_offset
+  end
+
+  def duration_seconds?
+    return false if extraction_job.nil? || load_jobs.empty?
+    return false if extraction_job.start_time.nil? || extraction_job.end_time.nil?
+    return false if transformation_jobs_start_time.nil? || load_jobs_end_time.nil?
+
+    true
   end
 
   def transformation_jobs_start_time
@@ -79,7 +85,7 @@ class HarvestJob < ApplicationRecord
   end
 
   def running?
-    extraction_job.running? || (transformation_jobs.any?(&:running?) && load_jobs.any?(&:running?))
+    extraction_job&.running? || (transformation_jobs.any?(&:running?) && load_jobs.any?(&:running?))
   end
 
   def completed?

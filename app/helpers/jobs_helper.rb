@@ -1,21 +1,21 @@
 # frozen_string_literal: true
 
 module JobsHelper
+  STATUS_TO_TEXT = {
+    'queued' => 'Waiting in queue...',
+    'running' => 'Running...',
+    'errored' => 'An error occured',
+    'cancelled' => 'Cancelled',
+    'completed' => 'Completed'
+  }.freeze
+
   # Returns the human readable text for the status of a given job
   #
   # @return String
   def job_status_text(job)
-    if job.queued?
-      'Waiting in queue...'
-    elsif job.running?
-      job.instance_of?(ExtractionJob) ? "Running #{job.kind} job..." : 'Running...'
-    elsif job.errored?
-      'An error occured'
-    elsif job.cancelled?
-      'Cancelled'
-    elsif job.completed?
-      'Completed'
-    end
+    return "Running #{job.kind} job..." if job.running? && job.instance_of?(ExtractionJob)
+
+    STATUS_TO_TEXT[job.status]
   end
 
   def job_start_time(job)

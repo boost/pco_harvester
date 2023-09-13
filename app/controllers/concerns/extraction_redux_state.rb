@@ -5,21 +5,29 @@ module ExtractionReduxState
 
   def extraction_app_state
     {
-      entities: {
-        requests: requests_slice,
-        parameters: parameters_slice,
-        appDetails: extraction_app_details_slice
-      },
-      ui: {
-        parameters: ui_parameters_slice,
-        requests: ui_requests_slice,
-        appDetails: ui_extraction_app_details_slice
-      },
+      entities: entities_slices,
+      ui: ui_slices,
       config: extraction_config_slice
     }.to_json
   end
 
   private
+
+  def entities_slices
+    {
+      requests: requests_slice,
+      parameters: parameters_slice,
+      appDetails: extraction_app_details_slice
+    }
+  end
+
+  def ui_slices
+    {
+      parameters: ui_parameters_slice,
+      requests: ui_requests_slice,
+      appDetails: ui_extraction_app_details_slice
+    }
+  end
 
   def parameters_slice
     {
