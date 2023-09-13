@@ -10,63 +10,51 @@ module Extraction
     end
 
     def call
-      re = RecordExtraction.new(@extraction_definition, @extraction_definition.page, @harvest_job).extract
-
-      records = JSON.parse(re.body)['records']
-
-      extract_and_save_enrichment_documents(records)
-
-      return if @extraction_job.is_sample?
-
-      (@extraction_definition.page...max_pages(re)).each do
-        @extraction_definition.page += 1
-
-        re = RecordExtraction.new(@extraction_definition, @extraction_definition.page, @harvest_job).extract
-        records = JSON.parse(re.body)['records']
-
-        extract_and_save_enrichment_documents(records)
-
-        break if @extraction_job.cancelled?
+      SjApiEnrichmentIterator.new(@extraction_job).each do |api_document, page|
+        @extraction_definition.page = page
+        api_records = JSON.parse(api_document.body)['records']
+        extract_and_save_enrichment_documents(api_records)
       end
     end
 
     private
 
-    def max_pages(record_extraction)
-      JsonPath.new(@extraction_definition.total_selector).on(record_extraction.body).first.to_i
-    end
+    def extract_and_save_enrichment_documents(api_records)
+      api_records.each_with_index do |api_record, index|
+        page = page_from_index(index)
 
-    def extract_and_save_enrichment_documents(records)
-      records.each_with_index do |record, index|
-        page = ((@extraction_definition.page - 1) * @extraction_definition.per_page) + (index + 1)
-
-        ee = EnrichmentExtraction.new(@extraction_definition, record, page, @extraction_job.extraction_folder)
-
+        ee = new_enrichment_extraction(api_record, page)
         next unless ee.valid?
 
         ee.extract_and_save
+        enqueue_record_transformation(api_record, ee.document, page)
 
         if @harvest_report.present?
           @harvest_report.increment_pages_extracted!
           @harvest_report.update(extraction_updated_time: Time.zone.now)
         end
 
-        enqueue_record_transformation(record, ee.document, page)
-
-        sleep @extraction_definition.throttle / 1000.0
-        @extraction_job.reload
-
-        if @extraction_job.cancelled?
-          @extraction_job.update(end_time: Time.zone.now)
-          break
-        end
+        throttle
+        break if @extraction_job.reload.cancelled?
       end
     end
 
-    def enqueue_record_transformation(record, document, page)
+    def throttle
+      sleep @extraction_definition.throttle / 1000.0
+    end
+
+    def page_from_index(index)
+      ((@extraction_definition.page - 1) * @extraction_definition.per_page) + (index + 1)
+    end
+
+    def new_enrichment_extraction(api_record, page)
+      EnrichmentExtraction.new(@extraction_definition, api_record, page, @extraction_job.extraction_folder)
+    end
+
+    def enqueue_record_transformation(api_record, document, page)
       return unless @harvest_job.present? && document.successful?
 
-      TransformationWorker.perform_async(@extraction_job.id, @harvest_job.id, page, record['id'])
+      TransformationWorker.perform_async(@extraction_job.id, @harvest_job.id, page, api_record)
       @harvest_report.increment_transformation_workers_queued! if @harvest_report.present?
     end
   end

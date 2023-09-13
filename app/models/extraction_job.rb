@@ -29,6 +29,11 @@ class ExtractionJob < ApplicationRecord
     update(start_time: Time.zone.now)
   end
 
+  def cancelled!
+    super
+    update(end_time: Time.zone.now)
+  end
+
   def completed!
     super
     update(end_time: Time.zone.now)

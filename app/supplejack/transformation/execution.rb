@@ -3,16 +3,14 @@
 module Transformation
   # Performs the transformation details as described in a field of a transformation definition
   class Execution
-    def initialize(records, fields, reject_conditions, delete_conditions)
-      @records = records
+    def initialize(extracted_records, fields)
+      @extracted_records = extracted_records
       @fields = fields
-      @reject_conditions = reject_conditions
-      @delete_conditions = delete_conditions
     end
 
     def call
-      @records.map do |record|
-        RecordTransformation.new(record, @fields, @reject_conditions, @delete_conditions).transform
+      @extracted_records.map do |extracted_record|
+        RecordTransformation.new(extracted_record, @fields).transform
       end
     end
   end

@@ -38,14 +38,7 @@ class TransformationDefinitionsController < ApplicationController
 
   def update
     if @transformation_definition.update(transformation_definition_params)
-      flash.notice = t('.success')
-
-      if @referrer.present?
-        redirect_to pipeline_path(@referrer)
-      else
-        redirect_to pipeline_harvest_definition_transformation_definition_path(@pipeline, @harvest_definition,
-                                                                               @transformation_definition)
-      end
+      redirect_to update_redirect_path, notice: t('.success')
     else
       flash.alert = t('.failure')
       render 'edit'
@@ -72,6 +65,16 @@ class TransformationDefinitionsController < ApplicationController
   end
 
   private
+
+  def update_redirect_path
+    if @referrer.present?
+      pipeline_path(@referrer)
+    else
+      pipeline_harvest_definition_transformation_definition_path(
+        @pipeline, @harvest_definition, @transformation_definition
+      )
+    end
+  end
 
   def find_pipeline
     @pipeline = Pipeline.find(params[:pipeline_id])

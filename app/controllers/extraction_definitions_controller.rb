@@ -26,13 +26,9 @@ class ExtractionDefinitionsController < ApplicationController
     if @extraction_definition.save
       @harvest_definition.update(extraction_definition_id: @extraction_definition.id)
 
-      2.times do
-        Request.create(extraction_definition: @extraction_definition)
-      end
+      2.times { Request.create(extraction_definition: @extraction_definition) }
 
-      redirect_to pipeline_harvest_definition_extraction_definition_path(
-        @pipeline, @harvest_definition, @extraction_definition
-      ), notice: t('.success')
+      redirect_to create_redirect_path, notice: t('.success')
     else
       flash.alert = t('.failure')
       render :new
@@ -41,14 +37,7 @@ class ExtractionDefinitionsController < ApplicationController
 
   def update
     if @extraction_definition.update(extraction_definition_params)
-      flash.notice = t('.success')
-
-      if @extraction_definition.harvest?
-        redirect_to pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition,
-                                                                           @extraction_definition)
-      else
-        redirect_to pipeline_path(@pipeline)
-      end
+      redirect_to update_redirect_path, notice: t('.success')
     else
       flash.alert = t('.failure')
       render 'edit'
@@ -80,6 +69,22 @@ class ExtractionDefinitionsController < ApplicationController
   end
 
   private
+
+  def create_redirect_path
+    pipeline_harvest_definition_extraction_definition_path(
+      @pipeline, @harvest_definition, @extraction_definition
+    )
+  end
+
+  def update_redirect_path
+    if @extraction_definition.harvest?
+      pipeline_harvest_definition_extraction_definition_path(
+        @pipeline, @harvest_definition, @extraction_definition
+      )
+    else
+      pipeline_path(@pipeline)
+    end
+  end
 
   def find_pipeline
     @pipeline = Pipeline.find(params[:pipeline_id])

@@ -14,6 +14,7 @@ RSpec.describe Extraction::RecordExtraction do
             query: {
               'api_key' => 'testkey',
               'search' => {
+                'status' => 'active',
                 'fragments.source_id' => 'test'
               },
               'search_options' => {
@@ -46,6 +47,7 @@ RSpec.describe Extraction::RecordExtraction do
             query: {
               'api_key' => 'testkey',
               'search' => {
+                'status' => 'active',
                 'fragments.job_id' => 'harvest-job-1'
               },
               'search_options' => {
