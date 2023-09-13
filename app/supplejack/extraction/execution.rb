@@ -20,18 +20,16 @@ module Extraction
 
         extract_and_save_document(@extraction_definition.requests.last)
 
-        sleep @extraction_definition.throttle / 1000.0
-
-        @extraction_job.reload
-
-        if @extraction_job.cancelled?
-          @extraction_job.update(end_time: Time.zone.now)
-          break
-        end
+        throttle
+        break if @extraction_job.reload.cancelled?
       end
     end
 
     private
+
+    def throttle
+      sleep @extraction_definition.throttle / 1000.0
+    end
 
     def extract_and_save_document(request)
       @de = DocumentExtraction.new(request, @extraction_job.extraction_folder, @previous_request)

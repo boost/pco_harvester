@@ -77,16 +77,8 @@ class HarvestDefinitionsController < ApplicationController
 
   def harvest_definition_params
     params.require(:harvest_definition).permit(
-      :pipeline_id,
-      :extraction_definition_id,
-      :job_id,
-      :transformation_definition_id,
-      :destination_id,
-      :source_id,
-      :priority,
-      :kind,
-      :required_for_active_record,
-      :name
+      :pipeline_id, :extraction_definition_id, :job_id, :transformation_definition_id, :destination_id,
+      :source_id, :priority, :kind, :required_for_active_record, :name
     )
   end
 end

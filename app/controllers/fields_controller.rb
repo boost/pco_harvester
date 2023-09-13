@@ -38,17 +38,19 @@ class FieldsController < ApplicationController
 
   def run
     record = @transformation_definition.records(params[:page].to_i)[params['record'].to_i - 1]
-    fields = @transformation_definition.fields.find(params['fields'])
-
-    transformation = Transformation::Execution.new([record], fields).call.first
+    transformation = Transformation::Execution.new([record], @fields).call.first
 
     render json: {
-      rawRecordSlice: RawRecordSlice.new(@transformation_definition, params[:page], params[:record]).call,
+      rawRecordSlice: raw_record_slice,
       transformation:
     }
   end
 
   private
+
+  def raw_record_slice
+    RawRecordSlice.new(@transformation_definition, params[:page], params[:record]).call
+  end
 
   def find_transformation_definition
     @transformation_definition = TransformationDefinition.find(params[:transformation_definition_id])

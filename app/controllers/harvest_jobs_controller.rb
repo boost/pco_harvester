@@ -12,12 +12,7 @@ class HarvestJobsController < ApplicationController
       job = build_job(definition)
       next if job.nil?
 
-      if job.save
-        HarvestWorker.perform_async(job.id)
-        flash.notice = t('.success')
-      else
-        flash.alert = t('.failure')
-      end
+      save_and_enqueue_job(job)
 
       # If the user has scheduled a harvest we do not need to enqueue the enrichments now
       # as they will be enqueued once the harvest job has finished.
@@ -49,6 +44,15 @@ class HarvestJobsController < ApplicationController
     job_params[:harvest_definition_id] = definition.id
     job_params[:key] = "#{harvest_job_params['key']}__enrichment-#{definition.id}" if definition.enrichment?
     HarvestJob.new(job_params)
+  end
+
+  def save_and_enqueue_job(job)
+    if job.save
+      HarvestWorker.perform_async(job.id)
+      flash.notice = t('.success')
+    else
+      flash.alert = t('.failure')
+    end
   end
 
   def should_queue_job?(id)

@@ -9,7 +9,7 @@ module Extraction
     end
 
     def call
-      EnrichmentIterator.new(@extraction_job).each do |api_document, page|
+      SjApiEnrichmentIterator.new(@extraction_job).each do |api_document, page|
         @extraction_definition.page = page
         api_records = JSON.parse(api_document.body)['records']
         extract_and_save_enrichment_documents(api_records)
@@ -20,24 +20,29 @@ module Extraction
 
     def extract_and_save_enrichment_documents(api_records)
       api_records.each_with_index do |api_record, index|
-        page = ((@extraction_definition.page - 1) * @extraction_definition.per_page) + (index + 1)
+        page = page_from_index(index)
 
-        ee = EnrichmentExtraction.new(@extraction_definition, api_record, page, @extraction_job.extraction_folder)
-
+        ee = new_enrichment_extraction(api_record, page)
         next unless ee.valid?
 
         ee.extract_and_save
-
         enqueue_record_transformation(api_record, ee.document, page)
 
-        sleep @extraction_definition.throttle / 1000.0
-        @extraction_job.reload
-
-        if @extraction_job.cancelled?
-          @extraction_job.update(end_time: Time.zone.now)
-          break
-        end
+        throttle
+        break if @extraction_job.reload.cancelled?
       end
+    end
+
+    def throttle
+      sleep @extraction_definition.throttle / 1000.0
+    end
+
+    def page_from_index(index)
+      ((@extraction_definition.page - 1) * @extraction_definition.per_page) + (index + 1)
+    end
+
+    def new_enrichment_extraction(api_record, page)
+      EnrichmentExtraction.new(@extraction_definition, api_record, page, @extraction_job.extraction_folder)
     end
 
     def enqueue_record_transformation(api_record, document, page)

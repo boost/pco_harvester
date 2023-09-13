@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Extraction
-  class EnrichmentIterator
+  class SjApiEnrichmentIterator
     def initialize(extraction_job)
       @extraction_job = extraction_job
       @extraction_definition = extraction_job.extraction_definition
