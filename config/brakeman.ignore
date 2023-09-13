@@ -1,6 +1,140 @@
 {
   "ignored_warnings": [
     {
+      "warning_type": "Unscoped Find",
+      "warning_code": 82,
+      "fingerprint": "01b260d393e8f26b4eb829d222ed061bb2ef27cdee801b60b1418545bd9e1f90",
+      "check_name": "UnscopedFind",
+      "message": "Unscoped call to `Parameter#find`",
+      "file": "app/controllers/parameters_controller.rb",
+      "line": 29,
+      "link": "https://brakemanscanner.org/docs/warning_types/unscoped_find/",
+      "code": "Parameter.find(params[:id])",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "ParametersController",
+        "method": "find_parameter"
+      },
+      "user_input": "params[:id]",
+      "confidence": "Weak",
+      "cwe_id": [
+        285
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Unscoped Find",
+      "warning_code": 82,
+      "fingerprint": "10b7e0993b71887c2d7dd30be4473f773190435a5a9cd2f2a24a117ac248056f",
+      "check_name": "UnscopedFind",
+      "message": "Unscoped call to `TransformationDefinition#find`",
+      "file": "app/controllers/fields_controller.rb",
+      "line": 48,
+      "link": "https://brakemanscanner.org/docs/warning_types/unscoped_find/",
+      "code": "TransformationDefinition.find(params[:transformation_definition_id])",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "FieldsController",
+        "method": "find_transformation_definition"
+      },
+      "user_input": "params[:transformation_definition_id]",
+      "confidence": "Weak",
+      "cwe_id": [
+        285
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Unscoped Find",
+      "warning_code": 82,
+      "fingerprint": "261c1a2f6e3d6a5dcc68742d402e2ac22dd3e7cb28583003adef70a3493ee6f2",
+      "check_name": "UnscopedFind",
+      "message": "Unscoped call to `TransformationDefinition#find`",
+      "file": "app/controllers/raw_records_controller.rb",
+      "line": 29,
+      "link": "https://brakemanscanner.org/docs/warning_types/unscoped_find/",
+      "code": "TransformationDefinition.find(params[:transformation_definition_id])",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "RawRecordsController",
+        "method": "find_transformation_definition"
+      },
+      "user_input": "params[:transformation_definition_id]",
+      "confidence": "Weak",
+      "cwe_id": [
+        285
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Unscoped Find",
+      "warning_code": 82,
+      "fingerprint": "69e3f99994e0e9c44f225f05b6ac546f17a9718d9b06dcac073601dda834875b",
+      "check_name": "UnscopedFind",
+      "message": "Unscoped call to `Request#find`",
+      "file": "app/controllers/requests_controller.rb",
+      "line": 19,
+      "link": "https://brakemanscanner.org/docs/warning_types/unscoped_find/",
+      "code": "Request.find(params[:id])",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "RequestsController",
+        "method": "update"
+      },
+      "user_input": "params[:id]",
+      "confidence": "Weak",
+      "cwe_id": [
+        285
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Missing Encryption",
+      "warning_code": 109,
+      "fingerprint": "6a26086cd2400fbbfb831b2f8d7291e320bcc2b36984d2abc359e41b3b63212b",
+      "check_name": "ForceSSL",
+      "message": "The application does not force use of HTTPS: `config.force_ssl` is not enabled",
+      "file": "config/environments/production.rb",
+      "line": 1,
+      "link": "https://brakemanscanner.org/docs/warning_types/missing_encryption/",
+      "code": null,
+      "render_path": null,
+      "location": null,
+      "user_input": null,
+      "confidence": "High",
+      "cwe_id": [
+        311
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Unscoped Find",
+      "warning_code": 82,
+      "fingerprint": "80cd626861db94d291b01519b71b81522b32db087a8eb1ecbbbc1cb99de52884",
+      "check_name": "UnscopedFind",
+      "message": "Unscoped call to `Request#find`",
+      "file": "app/controllers/requests_controller.rb",
+      "line": 8,
+      "link": "https://brakemanscanner.org/docs/warning_types/unscoped_find/",
+      "code": "Request.find(params[:previous_request_id])",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "RequestsController",
+        "method": "show"
+      },
+      "user_input": "params[:previous_request_id]",
+      "confidence": "Weak",
+      "cwe_id": [
+        285
+      ],
+      "note": ""
+    },
+    {
       "warning_type": "SQL Injection",
       "warning_code": 0,
       "fingerprint": "8693c77808bb3f437c4a0977763dec619cd40744470c416e59ff6ff8fa89aafc",
@@ -20,6 +154,52 @@
       "confidence": "Medium",
       "cwe_id": [
         89
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Unscoped Find",
+      "warning_code": 82,
+      "fingerprint": "b6ca2c9a96ef1c619aa2f8ee1cd35181a4580c8001bad4dd95bdccf807d3f746",
+      "check_name": "UnscopedFind",
+      "message": "Unscoped call to `Request#find`",
+      "file": "app/controllers/requests_controller.rb",
+      "line": 5,
+      "link": "https://brakemanscanner.org/docs/warning_types/unscoped_find/",
+      "code": "Request.find(params[:id])",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "RequestsController",
+        "method": "show"
+      },
+      "user_input": "params[:id]",
+      "confidence": "Weak",
+      "cwe_id": [
+        285
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Unscoped Find",
+      "warning_code": 82,
+      "fingerprint": "bbebeaefcd2656802772ec7874fe108c948ebf9071ff4fbe16d1b6b56625da15",
+      "check_name": "UnscopedFind",
+      "message": "Unscoped call to `TransformationDefinition#find`",
+      "file": "app/controllers/transformation_definitions_controller.rb",
+      "line": 88,
+      "link": "https://brakemanscanner.org/docs/warning_types/unscoped_find/",
+      "code": "TransformationDefinition.find(params[:id])",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "TransformationDefinitionsController",
+        "method": "find_transformation_definition"
+      },
+      "user_input": "params[:id]",
+      "confidence": "Weak",
+      "cwe_id": [
+        285
       ],
       "note": ""
     },
@@ -47,6 +227,6 @@
       "note": ""
     }
   ],
-  "updated": "2023-09-13 11:15:29 +1200",
-  "brakeman_version": "5.4.1"
+  "updated": "2023-09-13 13:16:31 +1200",
+  "brakeman_version": "6.0.1"
 }
