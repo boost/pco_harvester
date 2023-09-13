@@ -51,7 +51,7 @@ class TransformationWorker
   def transform_records(page)
     Transformation::Execution.new(
       records(page),
-      @transformation_job.transformation_definition.fields
+      @transformation_definition.fields
     ).call
   end
 
