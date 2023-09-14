@@ -28,7 +28,6 @@ class ExtractionWorker < ApplicationWorker
     super
 
     update_harvest_report
-    @harvest_report.pipeline_job.enqueue_enrichment_jobs(@harvest_report.harvest_job.name)
   end
 
   def update_harvest_report
@@ -43,5 +42,7 @@ class ExtractionWorker < ApplicationWorker
     @harvest_report.transformation_completed! if @harvest_report.transformation_workers_completed?
     @harvest_report.load_completed! if @harvest_report.load_workers_completed?
     @harvest_report.delete_completed! if @harvest_report.delete_workers_completed?
+
+    @harvest_report.pipeline_job.enqueue_enrichment_jobs(@harvest_report.harvest_job.name)
   end
 end

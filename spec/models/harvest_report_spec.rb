@@ -160,6 +160,7 @@ RSpec.describe HarvestReport, type: :model do
     let(:running_one) { create(:harvest_report, pipeline_job:, harvest_job:, extraction_status: 'running', transformation_status: 'queued', load_status: 'queued', delete_status: 'queued') }
     let(:running_two) { create(:harvest_report, pipeline_job:, harvest_job:, extraction_status: 'completed', transformation_status: 'queued', load_status: 'queued', delete_status: 'queued') }
     let(:completed) { create(:harvest_report, pipeline_job:, harvest_job:, extraction_status: 'completed', transformation_status: 'completed', load_status: 'completed', delete_status: 'completed') }
+    let(:cancelled) { create(:harvest_report, pipeline_job:, harvest_job:, extraction_status: 'cancelled', transformation_status: 'completed', load_status: 'completed', delete_status: 'completed') }
 
     it 'returns queued if all processes are queued' do
       expect(queued.status).to eq 'queued'
@@ -175,6 +176,46 @@ RSpec.describe HarvestReport, type: :model do
 
     it 'returns completed if all processes are completed' do
       expect(completed.status).to eq 'completed'
+    end
+
+    it 'returns canclled if something has been cancelled' do
+      expect(cancelled.status).to eq 'cancelled'
+    end
+  end
+
+  describe '#transformation_workers_completed?' do
+    let(:completed)             { create(:harvest_report, pipeline_job:, harvest_job:, extraction_status: 'completed', transformation_workers_queued: 1, transformation_workers_completed: 1) }
+    let(:incomplete_extraction) { create(:harvest_report, pipeline_job:, harvest_job:, extraction_status: 'running', transformation_workers_queued: 1, transformation_workers_completed: 1) }
+    let(:incomplete_transformation) { create(:harvest_report, pipeline_job:, harvest_job:, extraction_status: 'completed', transformation_workers_queued: 2, transformation_workers_completed: 1) }
+
+    it 'returns true if the extraction is completed and the number of transformation workers queued matches the number of transformation workers completed' do
+      expect(completed.transformation_workers_completed?).to eq true
+    end
+
+    it 'returns false if the extraction is not completed even if the number of transformation workers queued matches the number of transformation workers completed' do
+      expect(incomplete_extraction.transformation_workers_completed?).to eq false
+    end
+
+    it 'returns false if the extraction is completed but the number of transformation workers queued does not match the number of transformation workers completed' do
+      expect(incomplete_transformation.transformation_workers_completed?).to eq false
+    end
+  end
+
+  describe '#load_workers_completed?' do
+    let(:completed)             { create(:harvest_report, pipeline_job:, harvest_job:, extraction_status: 'completed', transformation_status: 'completed', transformation_workers_queued: 1, transformation_workers_completed: 1, load_workers_queued: 1, load_workers_completed: 1) }
+    let(:incomplete_transformation) { create(:harvest_report, pipeline_job:, harvest_job:, extraction_status: 'completed', transformation_status: 'running', transformation_workers_queued: 1, transformation_workers_completed: 1, load_workers_queued: 1, load_workers_completed: 1) }
+    let(:incomplete_load) { create(:harvest_report, pipeline_job:, harvest_job:, extraction_status: 'completed', transformation_status: 'completed', transformation_workers_queued: 2, transformation_workers_completed: 1, load_workers_queued: 2, load_workers_completed: 1) }
+
+    it 'returns true if the transformation is completed and the number of load workers queued matches the number of load workers completed' do
+      expect(completed.load_workers_completed?).to eq true
+    end
+
+    it 'returns false if the extraction is not completed even if the number of load workers queued matches the number of load workers completed' do
+      expect(incomplete_transformation.load_workers_completed?).to eq false
+    end
+
+    it 'returns false if the transformation is completed but the number of load workers queued does not match the number of load workers completed' do
+      expect(incomplete_load.transformation_workers_completed?).to eq false
     end
   end
 end
