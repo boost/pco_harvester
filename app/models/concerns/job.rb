@@ -9,6 +9,7 @@ module Job
     enum :status, STATUSES
 
     validates :status, presence: true, inclusion: { in: STATUSES }, if: -> { status.present? }
+    validates :end_time, comparison: { greater_than_or_equal_to: :start_time }, if: -> { end_time.present? }
   end
 
   # Returns the number of seconds a job has been running for
