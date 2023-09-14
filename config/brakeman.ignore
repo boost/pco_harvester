@@ -135,29 +135,6 @@
       "note": ""
     },
     {
-      "warning_type": "SQL Injection",
-      "warning_code": 0,
-      "fingerprint": "8693c77808bb3f437c4a0977763dec619cd40744470c416e59ff6ff8fa89aafc",
-      "check_name": "SQL",
-      "message": "Possible SQL injection",
-      "file": "app/models/harvest_report.rb",
-      "line": 71,
-      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
-      "code": "HarvestReport.where(:id => id).update_all(\"#{:BRAKEMAN_SAFE_LITERAL} = #{:BRAKEMAN_SAFE_LITERAL} + #{amount}\")",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "HarvestReport",
-        "method": null
-      },
-      "user_input": "amount",
-      "confidence": "Medium",
-      "cwe_id": [
-        89
-      ],
-      "note": ""
-    },
-    {
       "warning_type": "Unscoped Find",
       "warning_code": 82,
       "fingerprint": "b6ca2c9a96ef1c619aa2f8ee1cd35181a4580c8001bad4dd95bdccf807d3f746",

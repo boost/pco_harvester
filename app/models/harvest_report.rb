@@ -47,7 +47,6 @@ class HarvestReport < ApplicationRecord
   ].freeze
 
   def completed?
-    reload
     extraction_completed? && transformation_completed? && load_completed? && delete_completed?
   end
 
@@ -67,9 +66,9 @@ class HarvestReport < ApplicationRecord
   # To prevent race conditions when multiple sidekiq processes are updating the same report at the same time.
   METRICS.each do |metric|
     define_method("increment_#{metric}!") do |amount = 1|
-      # rubocop:disable Rails/SkipsModelValidations
-      HarvestReport.where(id:).update_all("#{metric} = #{metric} + #{amount}")
-      # rubocop:enable Rails/SkipsModelValidations
+      with_lock do
+        send(:increment!, metric, amount)
+      end
     end
   end
 
