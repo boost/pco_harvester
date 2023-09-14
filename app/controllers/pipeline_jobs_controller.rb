@@ -20,7 +20,6 @@ class PipelineJobsController < ApplicationController
       flash.alert = t('.failure')
     end
 
-
     redirect_to pipeline_pipeline_jobs_path(@pipeline)
   end
 
