@@ -19,37 +19,94 @@ RSpec.describe 'PipelineJobs', type: :request do
   end
 
   describe 'POST /create' do
-    it 'creates a new PipelineJob' do
-      expect do
+    context 'with valid parameters' do
+      it 'creates a new PipelineJob' do
+        expect do
+          post pipeline_pipeline_jobs_path(pipeline), params: {
+            pipeline_job: {
+              destination_id: destination.id,
+              pipeline_id: pipeline.id
+            }
+          }
+        end.to change(PipelineJob, :count).by(1)
+      end
+  
+      it 'queues a PipelineWorker' do
+        expect(PipelineWorker).to receive(:perform_async)
+  
         post pipeline_pipeline_jobs_path(pipeline), params: {
           pipeline_job: {
             destination_id: destination.id,
             pipeline_id: pipeline.id
           }
         }
-      end.to change(PipelineJob, :count).by(1)
+      end
+  
+      it 'redirects to the Pipeline Jobs table' do
+        post pipeline_pipeline_jobs_path(pipeline), params: {
+          pipeline_job: {
+            destination_id: destination.id,
+            pipeline_id: pipeline.id
+          }
+        }
+  
+        expect(response).to redirect_to(pipeline_pipeline_jobs_path(pipeline))
+      end
+
+      it 'displays an appropriate message' do
+        post pipeline_pipeline_jobs_path(pipeline), params: {
+          pipeline_job: {
+            destination_id: destination.id,
+            pipeline_id: pipeline.id
+          }
+        }
+
+        follow_redirect!
+        expect(response.body).to include 'Pipeline job created successfully'
+      end
     end
 
-    it 'queues a PipelineWorker' do
-      expect(PipelineWorker).to receive(:perform_async)
-
-      post pipeline_pipeline_jobs_path(pipeline), params: {
-        pipeline_job: {
-          destination_id: destination.id,
-          pipeline_id: pipeline.id
+    context 'with invalid parameters' do
+      it 'does not create a new PipelineJob' do
+        expect do
+          post pipeline_pipeline_jobs_path(pipeline), params: {
+            pipeline_job: {
+              destination_id: nil
+            }
+          }
+        end.to change(PipelineJob, :count).by(0)
+      end
+      
+      it 'does not queue a PipelineWorker' do
+        expect(PipelineWorker).not_to receive(:perform_async)
+  
+        post pipeline_pipeline_jobs_path(pipeline), params: {
+          pipeline_job: {
+            destination_id: nil
+          }
         }
-      }
-    end
-
-    it 'redirects to the Pipeline Jobs table' do
-      post pipeline_pipeline_jobs_path(pipeline), params: {
-        pipeline_job: {
-          destination_id: destination.id,
-          pipeline_id: pipeline.id
+      end
+  
+      it 'redirects to the Pipeline Jobs table' do
+        post pipeline_pipeline_jobs_path(pipeline), params: {
+          pipeline_job: {
+            destination_id: nil
+          }
         }
-      }
+  
+        expect(response).to redirect_to(pipeline_pipeline_jobs_path(pipeline))
+      end
 
-      expect(response).to redirect_to(pipeline_pipeline_jobs_path(pipeline))
+      it 'displays an appropriate message' do
+        post pipeline_pipeline_jobs_path(pipeline), params: {
+          pipeline_job: {
+            destination_id: nil
+          }
+        }
+
+        follow_redirect!
+        expect(response.body).to include 'There was an issue creating your pipeline job'
+      end
     end
   end
 
@@ -110,7 +167,7 @@ RSpec.describe 'PipelineJobs', type: :request do
         post cancel_pipeline_pipeline_job_path(pipeline, pipeline_job)
 
         follow_redirect!
-        expect(response.body).to include 'There was an issue cancelling the pipeline job'
+        expect(response.body).to include 'There was an issue cancelling your pipeline job'
       end
 
       it 'redirects to the pipeline jobs table' do

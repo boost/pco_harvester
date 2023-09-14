@@ -92,11 +92,11 @@ en:
   
   pipeline_jobs:
     create:
-      success: Job queued successfully
-      failure: There was an issue queueing your job
+      success: Pipeline job created successfully
+      failure: There was an issue creating your pipeline job
     cancel:
       success: Pipeline job cancelled successfully
-      failure: There was an issue cancelling the pipeline job
+      failure: There was an issue cancelling your pipeline job
 
   sessions:
     create:

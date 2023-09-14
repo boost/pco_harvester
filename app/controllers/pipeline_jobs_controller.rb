@@ -13,9 +13,13 @@ class PipelineJobsController < ApplicationController
   def create
     @pipeline_job = PipelineJob.new(pipeline_job_params)
 
-    @pipeline_job.save!
+    if @pipeline_job.save
+      PipelineWorker.perform_async(@pipeline_job.id)
+      flash.notice = t('.success')
+    else
+      flash.alert = t('.failure')
+    end
 
-    PipelineWorker.perform_async(@pipeline_job.id)
 
     redirect_to pipeline_pipeline_jobs_path(@pipeline)
   end
