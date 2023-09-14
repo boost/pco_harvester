@@ -215,7 +215,25 @@ RSpec.describe HarvestReport, type: :model do
     end
 
     it 'returns false if the transformation is completed but the number of load workers queued does not match the number of load workers completed' do
-      expect(incomplete_load.transformation_workers_completed?).to eq false
+      expect(incomplete_load.load_workers_completed?).to eq false
+    end
+  end
+
+  describe '#delete_workers_completed?' do
+    let(:completed)             { create(:harvest_report, pipeline_job:, harvest_job:, extraction_status: 'completed', transformation_status: 'completed', transformation_workers_queued: 1, transformation_workers_completed: 1, delete_workers_queued: 1, delete_workers_completed: 1) }
+    let(:incomplete_transformation) { create(:harvest_report, pipeline_job:, harvest_job:, extraction_status: 'completed', transformation_status: 'running', transformation_workers_queued: 1, transformation_workers_completed: 1, delete_workers_queued: 1, delete_workers_completed: 1) }
+    let(:incomplete_delete) { create(:harvest_report, pipeline_job:, harvest_job:, extraction_status: 'completed', transformation_status: 'completed', transformation_workers_queued: 2, transformation_workers_completed: 1, delete_workers_queued: 2, delete_workers_completed: 1) }
+
+    it 'returns true if the transformation is completed and the number of load workers queued matches the number of load workers completed' do
+      expect(completed.delete_workers_completed?).to eq true
+    end
+
+    it 'returns false if the extraction is not completed even if the number of load workers queued matches the number of load workers completed' do
+      expect(incomplete_transformation.delete_workers_completed?).to eq false
+    end
+
+    it 'returns false if the transformation is completed but the number of load workers queued does not match the number of load workers completed' do
+      expect(incomplete_delete.delete_workers_completed?).to eq false
     end
   end
 end
