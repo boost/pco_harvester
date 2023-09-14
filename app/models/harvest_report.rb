@@ -46,7 +46,7 @@ class HarvestReport < ApplicationRecord
     delete_end_time
   ].freeze
 
-  def complete?
+  def completed?
     reload
     extraction_completed? && transformation_completed? && load_completed? && delete_completed?
   end

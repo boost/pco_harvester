@@ -43,11 +43,11 @@ class PipelineJob < ApplicationRecord
 
   def should_queue_enrichments?
     reload
-    !cancelled? && pipeline.enrichments.present? && harvest_complete?
+    !cancelled? && pipeline.enrichments.present? && harvest_completed?
   end
 
-  def harvest_complete?
-    harvest_reports.find_by(kind: 'harvest').complete?
+  def harvest_completed?
+    harvest_reports.find_by(kind: 'harvest').completed?
   end
 
   def should_run?(id)
