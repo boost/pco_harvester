@@ -1,34 +1,23 @@
 # frozen_string_literal: true
 
-class ExtractionWorker
-  include Sidekiq::Job
-
-  sidekiq_options retry: 0
-
+class ExtractionWorker < ApplicationWorker
   sidekiq_retries_exhausted do |job, _ex|
-    @extraction_job = ExtractionJob.find(job['args'].first)
-    @extraction_job.errored!
-    @extraction_job.update(error_message: job['error_message'])
+    @job = ExtractionJob.find(job['args'].first)
+    @job.errored!
+    @job.update(error_message: job['error_message'])
     Sidekiq.logger.warn "Failed #{job['class']} with #{job['args']}: #{job['error_message']}"
   end
 
-  def perform(extraction_job_id, harvest_report_id = nil)
-    @extraction_job = ExtractionJob.find(extraction_job_id)
-    @harvest_report = HarvestReport.find(harvest_report_id) if harvest_report_id.present?
-
-    job_start
-
-    if @extraction_job.extraction_definition.enrichment?
-      Extraction::EnrichmentExecution.new(@extraction_job).call
+  def child_perform(extraction_job)
+    if extraction_job.extraction_definition.enrichment?
+      Extraction::EnrichmentExecution.new(extraction_job).call
     else
-      Extraction::Execution.new(@extraction_job, @extraction_job.extraction_definition).call
+      Extraction::Execution.new(extraction_job, extraction_job.extraction_definition).call
     end
-
-    job_end
   end
 
   def job_start
-    @extraction_job.running!
+    super
 
     return if @harvest_report.blank?
 
@@ -36,7 +25,7 @@ class ExtractionWorker
   end
 
   def job_end
-    @extraction_job.completed! unless @extraction_job.cancelled?
+    super
 
     return if @harvest_report.blank?
 
