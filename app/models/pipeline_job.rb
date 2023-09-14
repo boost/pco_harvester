@@ -10,7 +10,7 @@ class PipelineJob < ApplicationRecord
   belongs_to :destination
 
   has_many :harvest_reports, dependent: :destroy
-  has_many :harvest_jobs, through: :harvest_reports
+  has_many :harvest_jobs, dependent: :destroy
 
   enum :page_type, { all_available_pages: 0, set_number: 1 }
 

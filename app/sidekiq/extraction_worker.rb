@@ -27,18 +27,21 @@ class ExtractionWorker < ApplicationWorker
   def job_end
     super
 
+    update_harvest_report
+    @harvest_report.pipeline_job.enqueue_enrichment_jobs(@harvest_report.harvest_job.name)
+  end
+
+  def update_harvest_report
     return if @harvest_report.blank?
 
     @harvest_report.reload
+    @harvest_report.extraction_cancelled!
 
-    @harvest_report.extraction_completed! unless @harvest_report.extraction_cancelled?
+    return if @job.cancelled?
 
+    @harvest_report.extraction_completed!
     @harvest_report.transformation_completed! if @harvest_report.transformation_workers_completed?
-
     @harvest_report.load_completed! if @harvest_report.load_workers_completed?
-
     @harvest_report.delete_completed! if @harvest_report.delete_workers_completed?
-
-    @harvest_report.pipeline_job.enqueue_enrichment_jobs(@harvest_report.harvest_job.name)
   end
 end
