@@ -48,12 +48,12 @@
       </tr>
     </thead>
     <tbody>
-      <% @pipeline_jobs.each.with_index(1) do |pipeline_job, index| %>
-          <% pipeline_job.harvest_definitions_to_run.each do |definition| %>
-            <% if pipeline_job.report_for?(definition) %>
-              <% report = pipeline_job.report(definition) %>
+      <% total_pipeline_jobs = @pipeline_jobs.count %>
 
-              <% badge_classes = class_names(
+      <% @pipeline_jobs.each.with_index(1) do |pipeline_job, index| %>
+        <% pipeline_job.harvest_definitions_to_run.zip(pipeline_job.harvest_reports) do |definition_id, report| %>
+          <% if report.present? %>
+            <% badge_classes = class_names(
                    'badge',
                    {
                      'bg-primary': report.status == 'completed',
@@ -99,38 +99,39 @@
                         <% end %>
                       </li>
                     <% end %>
-
                   </ul>
                 </td>
               </tr>
-            <% else %>
-              <tr>
-                <td><%= HarvestDefinition.find(definition).name %></td>
-                <td>
-                  <span class='badge bg-secondary'>
-                    <% if pipeline_job.cancelled? %>
-                      Cancelled
-                    <% else %>
-                      Waiting
-                    <% end %>
-                  </span>
-                </td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-            <% end %>
+          <% else %>
+            <tr>
+              <td><%= HarvestDefinition.find(definition_id).name %></td>
+              <td>
+                <span class='badge bg-secondary'>
+                  <% if pipeline_job.cancelled? %>
+                    Cancelled
+                  <% else %>
+                    Waiting
+                  <% end %>
+                </span>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
           <% end %>
+        <% end %>
 
-        <% if index != (@pipeline_jobs.count) %>
+        <% if index != total_pipeline_jobs %>
           <tr class='table__divider'>
             <td colspan='10'>
               <hr>
             </td>
           </tr>
         <% end %>
+
       <% end %>
+
     </tbody>
   </table>
 </div>
