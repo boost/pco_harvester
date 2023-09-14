@@ -49,8 +49,6 @@ Rails.application.routes.draw do
     end
   end
 
-  get :jobs, to: 'extraction_jobs#index', as: :extraction_jobs
-
   resources :destinations do
     post :test, on: :collection
   end
