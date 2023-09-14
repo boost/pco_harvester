@@ -28,6 +28,7 @@ class LoadWorker
 
   def job_end
     @harvest_report.increment_load_workers_completed!
+    @harvest_report.reload
 
     @harvest_report.load_completed! if @harvest_report.load_workers_completed?
 

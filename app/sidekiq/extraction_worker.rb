@@ -40,6 +40,8 @@ class ExtractionWorker
 
     return if @harvest_report.blank?
 
+    @harvest_report.reload
+
     @harvest_report.extraction_completed! unless @harvest_report.extraction_cancelled?
 
     @harvest_report.transformation_completed! if @harvest_report.transformation_workers_completed?

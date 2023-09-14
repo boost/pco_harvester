@@ -28,6 +28,7 @@ class DeleteWorker
 
   def job_end
     @harvest_report.increment_delete_workers_completed!
+    @harvest_report.reload
 
     return unless @harvest_report.delete_workers_completed?
 
