@@ -24,15 +24,11 @@ class PipelineJob < ApplicationRecord
     return unless should_queue_enrichments?
 
     pipeline.enrichments.each do |enrichment|
-      next unless should_run?(enrichment.id)
-      next unless enrichment.ready_to_run?
-      next if HarvestJob.find_by(key: "#{harvest_key}__enrichment-#{enrichment.id}").present?
+      next unless should_queue_enrichment?(enrichment)
 
       enrichment_job = HarvestJob.create(
-        harvest_definition: enrichment,
-        pipeline_job: self,
-        key: "#{harvest_key}__enrichment-#{enrichment.id}",
-        target_job_id: job_id
+        harvest_definition: enrichment, pipeline_job: self,
+        key: "#{harvest_key}__enrichment-#{enrichment.id}", target_job_id: job_id
       )
 
       HarvestWorker.perform_async(enrichment_job.id)
@@ -44,6 +40,12 @@ class PipelineJob < ApplicationRecord
   def should_queue_enrichments?
     reload
     !cancelled? && pipeline.enrichments.present? && harvest_completed?
+  end
+
+  def should_queue_enrichment?(enrichment)
+    should_run?(enrichment.id) &&
+      enrichment.ready_to_run? &&
+      HarvestJob.find_by(key: "#{harvest_key}__enrichment-#{enrichment.id}").blank?
   end
 
   def harvest_completed?

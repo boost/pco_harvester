@@ -5,7 +5,7 @@ class TransformationWorker
 
   sidekiq_options retry: 0
 
-  def perform(extraction_job_id, harvest_job_id, page, api_record_id = nil)
+  def perform(extraction_job_id, harvest_job_id, page = 1, api_record_id = nil)
     @extraction_job = ExtractionJob.find(extraction_job_id)
     @harvest_job = HarvestJob.find(harvest_job_id)
     @transformation_definition = TransformationDefinition.find(@harvest_job.transformation_definition.id)
@@ -14,25 +14,31 @@ class TransformationWorker
     @api_record_id = api_record_id
 
     job_start
-
-    transformed_records = transform_records(page).map(&:to_hash)
-
-    valid_records       = select_valid_records(transformed_records)
-    rejected_records    = transformed_records.select { |record| record['rejection_reasons'].present? }
-    deleted_records     = transformed_records.select { |record| record['deletion_reasons'].present? }
-
-    @harvest_report.increment_records_transformed!(valid_records.count)
-    @harvest_report.increment_records_rejected!(rejected_records.count)
-    @harvest_report.update(transformation_updated_time: Time.zone.now)
-
-    queue_load_worker(valid_records)
-    queue_delete_worker(deleted_records)
-
+    child_perform
     job_end
   end
 
   def job_start
     @harvest_report.transformation_running!
+  end
+
+  def child_perform
+    transformed_records = transform_records.map(&:to_hash)
+
+    valid_records       = select_valid_records(transformed_records)
+    rejected_records    = transformed_records.select { |record| record['rejection_reasons'].present? }
+    deleted_records     = transformed_records.select { |record| record['deletion_reasons'].present? }
+
+    update_harvest_report(transformed_records.count, rejected_records.count)
+
+    queue_load_worker(valid_records)
+    queue_delete_worker(deleted_records)
+  end
+
+  def update_harvest_report(transformed_records_count, rejected_records_count)
+    @harvest_report.increment_records_transformed!(transformed_records_count)
+    @harvest_report.increment_records_rejected!(rejected_records_count)
+    @harvest_report.update(transformation_updated_time: Time.zone.now)
   end
 
   def job_end
@@ -48,9 +54,9 @@ class TransformationWorker
     @harvest_report.delete_completed!
   end
 
-  def transform_records(page)
+  def transform_records
     Transformation::Execution.new(
-      records(page),
+      records,
       @transformation_definition.fields
     ).call
   end
@@ -69,8 +75,8 @@ class TransformationWorker
     @harvest_report.increment_delete_workers_queued!
   end
 
-  def records(page = 1)
-    Transformation::RawRecordsExtractor.new(@transformation_definition, @extraction_job).records(page)
+  def records
+    Transformation::RawRecordsExtractor.new(@transformation_definition, @extraction_job).records(@page)
   end
 
   def select_valid_records(records)

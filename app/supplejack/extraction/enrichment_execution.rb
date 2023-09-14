@@ -29,14 +29,18 @@ module Extraction
         ee.extract_and_save
         enqueue_record_transformation(api_record, ee.document, page)
 
-        if @harvest_report.present?
-          @harvest_report.increment_pages_extracted!
-          @harvest_report.update(extraction_updated_time: Time.zone.now)
-        end
+        update_harvest_report
 
         throttle
         break if @extraction_job.reload.cancelled?
       end
+    end
+
+    def update_harvest_report
+      return if @harvest_report.blank?
+
+      @harvest_report.increment_pages_extracted!
+      @harvest_report.update(extraction_updated_time: Time.zone.now)
     end
 
     def throttle
