@@ -6,7 +6,6 @@ class ExtractionDefinition < ApplicationRecord
   # The destination is used for Enrichment Extractions
   # To know where to pull the records that are to be enriched from
   belongs_to :destination, optional: true
-  belongs_to :pipeline
   belongs_to :last_edited_by, class_name: 'User', optional: true
 
   has_many :extraction_jobs, dependent: :restrict_with_exception

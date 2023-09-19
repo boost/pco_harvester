@@ -11,39 +11,28 @@
       <%= send("#{type}_card_subtitle", definition) %>
     </h6>
 
-    <% if reference?(pipeline, definition) %>
+    <!-- 
       <span class="badge text-bg-light">Reference</span>
-    <% end %>
+    -->
 
     <div class="btn-group card__control">
       <i class="bi bi-three-dots-vertical" data-bs-toggle='dropdown'></i>
       <ul class="dropdown-menu dropdown-menu-end">
-        <% if reference?(pipeline, definition) %>
-          <li>
-            <%= link_to edit_path, class: 'dropdown-item card__control-action' do %>
-              <i class="bi bi-link-45deg me-2"></i>Go to reference source
-            <% end %>
-          </li>
-          <li><hr class="dropdown-divider"></li>
-        <% else %>
-          <li>
-            <%= link_to edit_path, class: 'dropdown-item card__control-action' do %>
-              <i class="bi bi-link-45deg me-2"></i><%= edit_text %>
-            <% end %>
-          </li>
-        <% end %>
+        <li>
+          <%= link_to edit_path, class: 'dropdown-item card__control-action' do %>
+            <i class="bi bi-link-45deg me-2"></i><%= edit_text %>
+          <% end %>
+        </li>
 
-        <% if reference?(pipeline, definition) %>
-          <li>
-            <a
-              class="dropdown-item card__control-action"
-              href="#"
-              data-bs-toggle='modal'
-              data-bs-target="<%= "#remove-reference-#{definition.id}" %>">
-                <i class="bi bi-trash me-2"></i>Remove definition
-              </a>
-          </li>
-        <% end %>
+        <li>
+          <a
+            class="dropdown-item card__control-action"
+            href="#"
+            data-bs-toggle='modal'
+            data-bs-target="<%= "#remove-reference-#{definition.id}" %>">
+              <i class="bi bi-trash me-2"></i>Remove definition
+            </a>
+        </li>
 
         <% if jobs_path.present? %>
           <li>

@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 module PipelinesHelper
-  def reference?(pipeline, definition)
-    pipeline != definition.pipeline
-  end
-
   def definition_help_text(definition, type)
     return "Please add a #{type} extraction" if definition.extraction_definition.blank?
     return extraction_definition_help_text(definition, type) if definition.transformation_definition.blank?

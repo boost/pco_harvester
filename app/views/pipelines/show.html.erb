@@ -200,7 +200,7 @@
                        definition: @harvest_definition.extraction_definition,
                        edit_path:
               pipeline_harvest_definition_extraction_definition_path(
-                @harvest_definition.extraction_definition.pipeline,
+                @pipeline,
                 @harvest_definition,
                 @harvest_definition.extraction_definition,
                 referrer_id: @pipeline.id
@@ -208,20 +208,20 @@
                        edit_text: 'Edit Extraction',
                        jobs_path:
               pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
-                @harvest_definition.extraction_definition.pipeline,
+                @pipeline,
                 @harvest_definition,
                 @harvest_definition.extraction_definition
               ),
                        run_sample_extraction_path:
               pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
-                @harvest_definition.extraction_definition.pipeline,
+                @pipeline,
                 @harvest_definition,
                 @harvest_definition.extraction_definition,
                 kind: :sample
               ),
                        run_full_extraction_path:
               pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
-                @harvest_definition.extraction_definition.pipeline,
+                @pipeline,
                 @harvest_definition,
                 @harvest_definition.extraction_definition,
                 kind: :full
