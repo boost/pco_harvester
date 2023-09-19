@@ -6,9 +6,6 @@ class TransformationDefinition < ApplicationRecord
   belongs_to :last_edited_by, class_name: 'User', optional: true
 
   has_many :fields, dependent: :destroy
-
-  scope :originals, -> { where(original_transformation_definition: nil) }
-
   enum :kind, { harvest: 0, enrichment: 1 }
 
   validates :record_selector, presence: true

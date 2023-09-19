@@ -3,8 +3,6 @@
 # Used to store the information for running an extraction
 #
 class ExtractionDefinition < ApplicationRecord
-  scope :originals, -> { where(original_extraction_definition: nil) }
-
   # The destination is used for Enrichment Extractions
   # To know where to pull the records that are to be enriched from
   belongs_to :destination, optional: true
