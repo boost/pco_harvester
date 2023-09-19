@@ -22,8 +22,6 @@ FactoryBot.define do
       paginated { true }
     end
 
-    association :pipeline
-
     trait :harvest do
       kind { 0 }
     end
