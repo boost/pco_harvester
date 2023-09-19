@@ -27,4 +27,13 @@ class HarvestDefinition < ApplicationRecord
 
     true
   end
+
+  def to_h
+    {
+      id:,
+      name:,
+      pipeline_name: pipeline.name,
+      pipeline_id: pipeline.id
+    }
+  end
 end

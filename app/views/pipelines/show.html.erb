@@ -356,7 +356,7 @@
                        definition: enrichment_definition.extraction_definition,
                        edit_path:
                 edit_pipeline_harvest_definition_extraction_definition_path(
-                  enrichment_definition.extraction_definition.pipeline,
+                  @pipeline,
                   enrichment_definition,
                   enrichment_definition.extraction_definition,
                   referrer_id: @pipeline.id
@@ -364,20 +364,20 @@
                        edit_text: 'Edit Extraction',
                        jobs_path:
                 pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
-                  enrichment_definition.extraction_definition.pipeline,
+                  @pipeline,
                   enrichment_definition,
                   enrichment_definition.extraction_definition
                 ),
                        run_sample_extraction_path:
                 pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
-                  enrichment_definition.extraction_definition.pipeline,
+                  @pipeline,
                   enrichment_definition,
                   enrichment_definition.extraction_definition,
                   kind: :sample
                 ),
                        run_full_extraction_path:
                 pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
-                  enrichment_definition.extraction_definition.pipeline,
+                  @pipeline,
                   enrichment_definition,
                   enrichment_definition.extraction_definition,
                   kind: :full

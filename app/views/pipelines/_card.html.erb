@@ -11,9 +11,9 @@
       <%= send("#{type}_card_subtitle", definition) %>
     </h6>
 
-    <!-- 
-      <span class="badge text-bg-light">Reference</span>
-    -->
+    <% if definition.shared? %>
+      <span class="badge text-bg-light">Shared</span>
+    <% end %>
 
     <div class="btn-group card__control">
       <i class="bi bi-three-dots-vertical" data-bs-toggle='dropdown'></i>

@@ -9,12 +9,14 @@ import Parameter from "/js/apps/ExtractionApp/components/Parameter";
 import ParameterNavigationPanel from "/js/apps/ExtractionApp/components/ParameterNavigationPanel";
 
 import { selectAllParameters } from "~/js/features/ExtractionApp/ParametersSlice";
+import { selectAllSharedDefinitions } from "~/js/features/ExtractionApp/SharedDefinitionsSlice";
 import { selectAppDetails } from "~/js/features/TransformationApp/AppDetailsSlice";
 import { selectUiAppDetails } from "~/js/features/TransformationApp/UiAppDetailsSlice";
 
 const ExtractionApp = ({}) => {
   const appDetails = useSelector(selectAppDetails);
   const uiAppDetails = useSelector(selectUiAppDetails);
+  const sharedDefinitions = useSelector(selectAllSharedDefinitions);
 
   let allParameters = useSelector(selectAllParameters);
   allParameters = filter(allParameters, [
@@ -26,12 +28,9 @@ const ExtractionApp = ({}) => {
   const headerParameters = filter(allParameters, ["kind", "header"]);
   const slugParameters = filter(allParameters, ["kind", "slug"]);
 
-  return (
-    <>
-      <HeaderActions />
-      {appDetails.extractionDefinition.paginated && <NavTabs />}
-
-      <div className="row">
+  const queryBuilderView = () => {
+    return (
+      <>
         <div className="col-2">
           <ParameterNavigationPanel />
         </div>
@@ -51,6 +50,43 @@ const ExtractionApp = ({}) => {
             <Parameter id={parameter.id} key={parameter.id} />
           ))}
         </div>
+      </>
+    )
+  }
+
+  const sharedDefinitionsView = () => {
+    // TODO I would like to use the rails view for this instead of doing it with React.
+    return (
+      <>
+        <p>These pipelines all share this extraction definition</p> 
+
+        <div className="row">
+          {
+            map(sharedDefinitions, (sharedDefinition) => {
+              return(
+                <div className='col-3'>
+                  <a className="card mb-3" href={`/pipelines/${sharedDefinition.pipeline_id}`}>
+                    <div className="card-body">
+                      <h5 className="card-title">{ sharedDefinition.pipeline_name }</h5>
+                    </div>
+                  </a>
+                </div>
+              );
+            })
+          }
+        </div>
+      </>
+    )
+  }
+
+  return (
+    <>
+      <HeaderActions />
+      <NavTabs />
+
+      <div className="row">
+        { !uiAppDetails.sharedTabActive && queryBuilderView() }
+        { uiAppDetails.sharedTabActive && sharedDefinitionsView() }
       </div>
     </>
   );
