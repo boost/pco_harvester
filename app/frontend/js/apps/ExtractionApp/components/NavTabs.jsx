@@ -43,6 +43,14 @@ const NavTabs = () => {
     dispatch(updateActiveRequest(id));
   };
 
+  const pageOneTabText = () => {
+    if(appDetails.extractionDefinition.paginated) {
+      return 'Initial Request'
+    }
+
+    return 'Request'
+  }
+
   const pageOne = () => {
     return (<li className="nav-item" role="presentation">
               <button
@@ -53,7 +61,7 @@ const NavTabs = () => {
                   handleTabClick(initialRequestId);
                 }}
               >
-                Initial Request
+                { pageOneTabText() }
               </button>
             </li>
     )
@@ -95,7 +103,7 @@ const NavTabs = () => {
   return createPortal(
     <>
       <ul className="nav nav-tabs mt-4" role="tablist">
-        { appDetails.extractionDefinition.paginated && pageOne() }
+        { pageOne() }
         { appDetails.extractionDefinition.paginated && pageTwo() }
         { shared() }
 

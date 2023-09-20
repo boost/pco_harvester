@@ -6,7 +6,8 @@ module TransformationReduxState
   def transformation_app_state
     {
       entities: {
-        fields: fields_slice, rawRecord: raw_record_slice, appDetails: app_details_slice
+        fields: fields_slice, rawRecord: raw_record_slice,
+        appDetails: app_details_slice, sharedDefinitions: shared_definitions_slice
       },
       ui: {
         fields: ui_fields_slice, appDetails: ui_app_details_slice
@@ -36,6 +37,13 @@ module TransformationReduxState
       transformationDefinition: @transformation_definition,
       rejectionReasons: [],
       deletionReasons: []
+    }
+  end
+
+  def shared_definitions_slice
+    {
+      ids: @transformation_definition.harvest_definitions.pluck(:id),
+      entities: @transformation_definition.harvest_definitions.map(&:to_h).index_by { |definition| definition[:id] }
     }
   end
 
