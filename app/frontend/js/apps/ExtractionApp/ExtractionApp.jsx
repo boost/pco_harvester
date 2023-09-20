@@ -55,7 +55,6 @@ const ExtractionApp = ({}) => {
   }
 
   const sharedDefinitionsView = () => {
-    // TODO I would like to use the rails view for this instead of doing it with React.
     return (
       <>
         <p>These pipelines all share this extraction definition</p> 
@@ -65,9 +64,16 @@ const ExtractionApp = ({}) => {
             map(sharedDefinitions, (sharedDefinition) => {
               return(
                 <div className='col-3'>
-                  <a className="card mb-3" href={`/pipelines/${sharedDefinition.pipeline_id}`}>
+                  <a className="card mb-3" href={`/pipelines/${sharedDefinition.pipeline.id}`}>
                     <div className="card-body">
-                      <h5 className="card-title">{ sharedDefinition.pipeline_name }</h5>
+                      <h5 className="card-title">{ sharedDefinition.pipeline.name }</h5>
+
+                      <span className="badge bg-light text-dark">
+                        { sharedDefinition.pipeline.harvests } Harvest
+                      </span>
+                      <span className="badge bg-light text-dark">
+                        { sharedDefinition.pipeline.enrichments } Enrichments
+                      </span>
                     </div>
                   </a>
                 </div>

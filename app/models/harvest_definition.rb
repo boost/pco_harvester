@@ -32,8 +32,12 @@ class HarvestDefinition < ApplicationRecord
     {
       id:,
       name:,
-      pipeline_name: pipeline.name,
-      pipeline_id: pipeline.id
+      pipeline: {
+        id: pipeline.id,
+        name: pipeline.name,
+        harvests: pipeline.harvest_definitions.harvest.count,
+        enrichments: pipeline.enrichments.count
+      }
     }
   end
 end

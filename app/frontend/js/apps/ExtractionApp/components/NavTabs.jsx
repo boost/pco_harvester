@@ -6,6 +6,7 @@ import classNames from "classnames";
 import { selectRequestIds } from "~/js/features/ExtractionApp/RequestsSlice";
 import { selectAllParameters } from "~/js/features/ExtractionApp/ParametersSlice";
 import { selectAppDetails } from "~/js/features/TransformationApp/AppDetailsSlice";
+import { selectAllSharedDefinitions } from "~/js/features/ExtractionApp/SharedDefinitionsSlice";
 
 import { toggleDisplayParameters } from "~/js/features/ExtractionApp/UiParametersSlice";
 
@@ -22,6 +23,7 @@ const NavTabs = () => {
   const requestIds = useSelector(selectRequestIds);
   const initialRequestId = requestIds[0];
   const mainRequestId = requestIds[1];
+  const sharedDefinitions = useSelector(selectAllSharedDefinitions);
 
   const initialRequestClasses = classNames("nav-link", {
     active: uiAppDetails.activeRequest == initialRequestId,
@@ -68,7 +70,7 @@ const NavTabs = () => {
             dispatch(activateSharedTab());
           }}
         >
-          Shared Definitions
+          Shared Definitions ({ sharedDefinitions.length})
       </button>
     </li> 
     )
