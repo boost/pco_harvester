@@ -1,12 +1,4 @@
 .dropdown-menu {
-  padding: 0;
-
-  .dropdown-item:hover, .dropdown-item:focus {
-    color: $white;
-    background-color: $primary;
-  }
-
-  .dropdown-divider {
-    margin: 0;
-  }
+  --bs-dropdown-link-hover-color: #{$white};
+  --bs-dropdown-link-hover-bg: #{$primary};
 }
