@@ -9,7 +9,7 @@ import Parameter from "/js/apps/ExtractionApp/components/Parameter";
 import ParameterNavigationPanel from "/js/apps/ExtractionApp/components/ParameterNavigationPanel";
 
 import { selectAllParameters } from "~/js/features/ExtractionApp/ParametersSlice";
-import { selectAllSharedDefinitions } from "~/js/features/ExtractionApp/SharedDefinitionsSlice";
+import { selectAllSharedDefinitions } from "~/js/features/SharedDefinitionsSlice";
 import { selectAppDetails } from "~/js/features/TransformationApp/AppDetailsSlice";
 import { selectUiAppDetails } from "~/js/features/TransformationApp/UiAppDetailsSlice";
 

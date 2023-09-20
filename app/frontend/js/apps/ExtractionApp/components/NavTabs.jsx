@@ -6,7 +6,7 @@ import classNames from "classnames";
 import { selectRequestIds } from "~/js/features/ExtractionApp/RequestsSlice";
 import { selectAllParameters } from "~/js/features/ExtractionApp/ParametersSlice";
 import { selectAppDetails } from "~/js/features/TransformationApp/AppDetailsSlice";
-import { selectAllSharedDefinitions } from "~/js/features/ExtractionApp/SharedDefinitionsSlice";
+import { selectAllSharedDefinitions } from "~/js/features/SharedDefinitionsSlice";
 
 import { toggleDisplayParameters } from "~/js/features/ExtractionApp/UiParametersSlice";
 

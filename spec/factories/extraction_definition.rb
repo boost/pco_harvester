@@ -32,5 +32,7 @@ FactoryBot.define do
       enrichment_url { '"https://api.figshare.com/v1/articles/#{record[\'dc_identifier\'].first}"' }
       throttle { 1000 }
     end
+
+    association :pipeline
   end
 end

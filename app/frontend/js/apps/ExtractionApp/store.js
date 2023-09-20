@@ -5,7 +5,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import parameters from "/js/features/ExtractionApp/ParametersSlice";
 import appDetails from "/js/features/ExtractionApp/AppDetailsSlice";
 import requests from "/js/features/ExtractionApp/RequestsSlice";
-import sharedDefinitions from "/js/features/ExtractionApp/SharedDefinitionsSlice";
+
 
 // ui
 
@@ -15,6 +15,7 @@ import uiAppDetails from "/js/features/ExtractionApp/UiAppDetailsSlice";
 
 // config
 import config from "/js/features/ConfigSlice";
+import sharedDefinitions from "/js/features/SharedDefinitionsSlice";
 
 export default function configureAppStore(preloadedState) {
   const store = configureStore({

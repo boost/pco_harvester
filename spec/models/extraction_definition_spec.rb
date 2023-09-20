@@ -3,7 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe ExtractionDefinition, type: :model do
-  subject! { create(:extraction_definition) }
+  subject! { create(:extraction_definition, pipeline: pipeline1) }
+
+  let!(:pipeline1) { create(:pipeline, name: 'National Library of New Zealand') }
+  let!(:pipeline2) { create(:pipeline) }
 
   describe '#name' do
     it 'autogenerates a sensible name' do
@@ -23,7 +26,7 @@ RSpec.describe ExtractionDefinition, type: :model do
     end
 
     context 'when the extraction definition is for an enrichment' do
-      subject! { create(:extraction_definition, :enrichment, name: 'Flickr API', destination:) }
+      subject! { create(:extraction_definition, :enrichment, name: 'Flickr API', destination:, pipeline: pipeline1) }
 
       let(:destination) { create(:destination) }
 
@@ -54,6 +57,13 @@ RSpec.describe ExtractionDefinition, type: :model do
       expect(subject).to validate_inclusion_of(:format).in_array(%w[JSON
                                                                     XML]).with_message('is not included in the list')
     }
+
+    it 'requires a pipeline' do
+      extraction_definition = build(:extraction_definition, pipeline: nil)
+      expect(extraction_definition).not_to be_valid
+
+      expect(extraction_definition.errors[:pipeline]).to include 'must exist'
+    end
   end
 
   describe '#validations base_url' do
@@ -107,8 +117,8 @@ RSpec.describe ExtractionDefinition, type: :model do
     let!(:harvest_definition_two)   { create(:harvest_definition, extraction_definition: shared, pipeline:) }
     let!(:harvest_definition_three) { create(:harvest_definition, extraction_definition: standalone, pipeline:) }
 
-    let(:shared)                    { create(:extraction_definition) }
-    let(:standalone)                { create(:extraction_definition) }
+    let(:shared)                    { create(:extraction_definition, pipeline:) }
+    let(:standalone)                { create(:extraction_definition, pipeline:) }
 
     it 'returns true if the extraction definition is used in more than one harvest definition' do
       expect(shared.shared?).to eq true
