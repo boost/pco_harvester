@@ -106,10 +106,6 @@ export const deleteParameter = createAsyncThunk(
   }
 );
 
-export const hasEmptyParameters = (state) => {
-  return some(selectAllParameters(state), { content: "" });
-};
-
 const parametersSlice = createSlice({
   name: "parametersSlice",
   initialState: {},
@@ -135,6 +131,17 @@ export const {
   selectIds: selectParameterIds,
   selectAll: selectAllParameters,
 } = parametersAdapter.getSelectors((state) => state.entities.parameters);
+
+export const hasEmptyParameters = (state) => {
+  return some(selectAllParameters(state), { content: "" });
+};
+
+export const selectParameterIdsByRequestAndKind = (state, requestId, type) => {
+  return selectAllParameters(state)
+    .filter((parameter) => parameter.request_id === requestId)
+    .filter((parameter) => parameter.kind === type)
+    .map((parameter) => parameter.id);
+};
 
 export const {} = actions;
 

@@ -11,7 +11,6 @@ import { toggleSection } from "~/js/features/TransformationApp/UiAppDetailsSlice
 
 // Fields from state
 import { selectAppDetails } from "~/js/features/TransformationApp/AppDetailsSlice";
-import { selectAllSharedDefinitions } from "~/js/features/SharedDefinitionsSlice";
 
 // Components
 import RecordViewer from "~/js/apps/TransformationApp/components/RecordViewer";
@@ -31,8 +30,6 @@ const TransformationApp = ({}) => {
   const fieldIds = useSelector(selectFieldIds);
   const appDetails = useSelector(selectAppDetails);
   const uiAppDetails = useSelector(selectUiAppDetails);
-
-  const sharedDefinitions = useSelector(selectAllSharedDefinitions);
 
   const { rawRecordExpanded, transformedRecordExpanded } = uiAppDetails;
 
@@ -130,10 +127,7 @@ const TransformationApp = ({}) => {
 
       {!uiAppDetails.sharedDefinitionsTabActive && transformationBuilderView()}
       {uiAppDetails.sharedDefinitionsTabActive && (
-        <SharedDefinitionsView
-          definitionType="transformation"
-          sharedDefinitions={sharedDefinitions}
-        />
+        <SharedDefinitionsView definitionType="transformation" />
       )}
     </div>
   );

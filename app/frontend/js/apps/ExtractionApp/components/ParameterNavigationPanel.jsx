@@ -1,18 +1,15 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import { filter, map } from "lodash";
 
 import { selectAllParameters } from "~/js/features/ExtractionApp/ParametersSlice";
-import { useSelector, useDispatch } from "react-redux";
-
 import { toggleDisplayParameters } from "~/js/features/ExtractionApp/UiParametersSlice";
-
 import { selectUiAppDetails } from "~/js/features/ExtractionApp/UiAppDetailsSlice";
-
-import AddParameter from "~/js/apps/ExtractionApp/components/AddParameter";
-import ParameterNavigationListItem from "~/js/apps/ExtractionApp/components/ParameterNavigationListItem";
-
 import { selectRequestById } from "~/js/features/ExtractionApp/RequestsSlice";
+
+import AddParameter from "./AddParameter";
+import ParameterNavigationList from "./ParameterNavigationList";
 
 const ParameterNavigationPanel = () => {
   const dispatch = useDispatch();
@@ -87,14 +84,10 @@ const ParameterNavigationPanel = () => {
           <AddParameter buttonText="+ Add" kind="query" />
 
           <ul className="field-nav nav nav-pills flex-column overflow-auto flex-nowrap">
-            {map(queryParameters, (queryParameter) => {
-              return (
-                <ParameterNavigationListItem
-                  id={queryParameter.id}
-                  key={queryParameter.id}
-                />
-              );
-            })}
+            <ParameterNavigationList
+              requestId={uiAppDetails.activeRequest}
+              kind="query"
+            />
           </ul>
         </div>
 
@@ -142,14 +135,10 @@ const ParameterNavigationPanel = () => {
           <AddParameter buttonText="+ Add" kind="header" />
 
           <ul className="field-nav nav nav-pills flex-column overflow-auto flex-nowrap">
-            {map(headerParameters, (headerParameter) => {
-              return (
-                <ParameterNavigationListItem
-                  id={headerParameter.id}
-                  key={headerParameter.id}
-                />
-              );
-            })}
+            <ParameterNavigationList
+              requestId={uiAppDetails.activeRequest}
+              kind="header"
+            />
           </ul>
         </div>
 
@@ -197,15 +186,10 @@ const ParameterNavigationPanel = () => {
           <AddParameter buttonText="+ Add" kind="slug" />
 
           <ul className="field-nav nav nav-pills flex-column overflow-auto flex-nowrap">
-            {map(slugParameters, (slugParameter, index) => {
-              return (
-                <ParameterNavigationListItem
-                  id={slugParameter.id}
-                  key={slugParameter.id}
-                  index={index}
-                />
-              );
-            })}
+            <ParameterNavigationList
+              requestId={uiAppDetails.activeRequest}
+              kind="slug"
+            />
           </ul>
         </div>
       </div>
