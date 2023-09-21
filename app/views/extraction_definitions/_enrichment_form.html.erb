@@ -2,7 +2,6 @@
                        id: 'js-extraction-definition-form' do |form| %>
   <%= form.hidden_field :pipeline_id, value: @pipeline.id %>
   <%= form.hidden_field :kind, value: 'enrichment' %>
-  <%= hidden_field_tag :referrer_id, @referrer&.id %>
 
   <div class='card'>
     <div class='card-body'>

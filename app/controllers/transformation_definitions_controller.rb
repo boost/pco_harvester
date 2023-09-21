@@ -7,7 +7,6 @@ class TransformationDefinitionsController < ApplicationController
   before_action :find_harvest_definition
   before_action :find_transformation_definition, only: %w[show edit update destroy]
   before_action :find_extraction_jobs, only: %w[new create edit update]
-  before_action :find_referrer
 
   def show
     @fields = @transformation_definition.fields.order(created_at: :desc).map(&:to_h)
@@ -38,7 +37,9 @@ class TransformationDefinitionsController < ApplicationController
 
   def update
     if @transformation_definition.update(transformation_definition_params)
-      redirect_to update_redirect_path, notice: t('.success')
+      redirect_to pipeline_harvest_definition_transformation_definition_path(
+        @pipeline, @harvest_definition, @transformation_definition
+      ), notice: t('.success')
     else
       flash.alert = t('.failure')
       render 'edit'
@@ -66,28 +67,12 @@ class TransformationDefinitionsController < ApplicationController
 
   private
 
-  def update_redirect_path
-    if @referrer.present?
-      pipeline_path(@referrer)
-    else
-      pipeline_harvest_definition_transformation_definition_path(
-        @pipeline, @harvest_definition, @transformation_definition
-      )
-    end
-  end
-
   def find_pipeline
     @pipeline = Pipeline.find(params[:pipeline_id])
   end
 
   def find_harvest_definition
     @harvest_definition = HarvestDefinition.find(params[:harvest_definition_id])
-  end
-
-  def find_referrer
-    return if params[:referrer_id].blank?
-
-    @referrer = Pipeline.find(params[:referrer_id])
   end
 
   def find_transformation_definition

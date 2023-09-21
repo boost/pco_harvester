@@ -4,7 +4,6 @@ class ExtractionDefinitionsController < ApplicationController
   include LastEditedBy
 
   before_action :find_pipeline
-  before_action :find_referrer
   before_action :find_harvest_definition
   before_action :find_extraction_definition, only: %i[show edit update]
   before_action :find_destinations, only: %i[new create edit update]
@@ -71,9 +70,13 @@ class ExtractionDefinitionsController < ApplicationController
   private
 
   def create_redirect_path
-    pipeline_harvest_definition_extraction_definition_path(
-      @pipeline, @harvest_definition, @extraction_definition
-    )
+    if @extraction_definition.harvest?
+      pipeline_harvest_definition_extraction_definition_path(
+        @pipeline, @harvest_definition, @extraction_definition
+      )
+    else
+      pipeline_path(@pipeline)
+    end
   end
 
   def update_redirect_path
@@ -88,12 +91,6 @@ class ExtractionDefinitionsController < ApplicationController
 
   def find_pipeline
     @pipeline = Pipeline.find(params[:pipeline_id])
-  end
-
-  def find_referrer
-    return if params[:referrer_id].blank?
-
-    @referrer = Pipeline.find(params[:referrer_id])
   end
 
   def find_harvest_definition
