@@ -70,7 +70,8 @@ module TransformationReduxState
     {
       fieldNavExpanded: true,
       rawRecordExpanded: true,
-      transformedRecordExpanded: true
+      transformedRecordExpanded: true,
+      sharedDefinitionsTabActive: false
     }
   end
 

@@ -62,7 +62,7 @@ module ExtractionReduxState
   def ui_extraction_app_details_slice
     {
       activeRequest: @extraction_definition.requests.first.id,
-      sharedTabActive: false
+      sharedDefinitionsTabActive: false
     }
   end
 

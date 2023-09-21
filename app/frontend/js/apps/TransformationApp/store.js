@@ -15,6 +15,7 @@ import uiAppDetails from "/js/features/TransformationApp/UiAppDetailsSlice";
 
 // config
 import config from "/js/features/ConfigSlice";
+import sharedDefinitions from "/js/features/SharedDefinitionsSlice";
 
 export default function configureAppStore(preloadedState) {
   loadDisplayedFields(preloadedState);
@@ -25,6 +26,7 @@ export default function configureAppStore(preloadedState) {
         fields,
         rawRecord,
         appDetails,
+        sharedDefinitions
       }),
       ui: combineReducers({
         fields: uiFields,

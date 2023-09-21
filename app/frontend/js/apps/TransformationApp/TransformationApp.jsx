@@ -11,6 +11,7 @@ import { toggleSection } from "~/js/features/TransformationApp/UiAppDetailsSlice
 
 // Fields from state
 import { selectAppDetails } from "~/js/features/TransformationApp/AppDetailsSlice";
+import { selectAllSharedDefinitions } from "~/js/features/SharedDefinitionsSlice";
 
 // Components
 import RecordViewer from "~/js/apps/TransformationApp/components/RecordViewer";
@@ -18,7 +19,10 @@ import Field from "~/js/apps/TransformationApp/components/Field";
 import FieldNavigationPanel from "./components/FieldNavigationPanel";
 import ExpandCollapseIcon from "./components/ExpandCollapseIcon";
 import HeaderActions from "./components/HeaderActions";
+import NavTabs from "./components/NavTabs";
 import RawDataBody from "./RawDataBody";
+
+import SharedDefinitionsView from "/js/components/SharedDefinitionsView";
 
 const TransformationApp = ({}) => {
   const dispatch = useDispatch();
@@ -26,6 +30,8 @@ const TransformationApp = ({}) => {
   const fieldIds = useSelector(selectFieldIds);
   const appDetails = useSelector(selectAppDetails);
   const uiAppDetails = useSelector(selectUiAppDetails);
+
+  const sharedDefinitions = useSelector(selectAllSharedDefinitions);
 
   const { rawRecordExpanded, transformedRecordExpanded } = uiAppDetails;
 
@@ -61,57 +67,67 @@ const TransformationApp = ({}) => {
     return appDetails.transformedRecord;
   };
 
-  return (
-    <div className="row">
-      <HeaderActions />
+  const transformationBuilderView = () => {
+    return(
+      <>
+        <div className="col-2">
+          <FieldNavigationPanel />
+        </div>
 
-      <div className="col-2">
-        <FieldNavigationPanel />
-      </div>
-
-      <div className="col-10">
-        <div className="row gy-4">
-          <div className={rawRecordClasses}>
-            <div className="card">
-              <div className="card-body">
-                <RawDataBody clickToggleSection={clickToggleSection} />
-              </div>
-            </div>
-          </div>
-
-          <div className={transformedRecordClasses}>
-            <div className="card">
-              <div className="card-body">
-                <div className="d-flex flex-row flex-nowrap justify-content-between mb-4">
-                  <h5 className="text-truncate">Transformed</h5>
-
-                  <button
-                    onClick={() =>
-                      clickToggleSection("transformedRecordExpanded")
-                    }
-                    type="button"
-                    className="btn btn-outline-primary"
-                  >
-                    <ExpandCollapseIcon
-                      expanded={uiAppDetails["transformedRecordExpanded"]}
-                    />
-                  </button>
+        <div className="col-10">
+          <div className="row gy-4">
+            <div className={rawRecordClasses}>
+              <div className="card">
+                <div className="card-body">
+                  <RawDataBody clickToggleSection={clickToggleSection} />
                 </div>
-
-                <RecordViewer record={transformedRecord()} format="JSON" />
               </div>
             </div>
-          </div>
 
-          <div className="col-12 mb-4">
-            <div className="row gy-4">
-              {map(fieldIds, (fieldId) => (
-                <Field id={fieldId} key={fieldId} />
-              ))}
+            <div className={transformedRecordClasses}>
+              <div className="card">
+                <div className="card-body">
+                  <div className="d-flex flex-row flex-nowrap justify-content-between mb-4">
+                    <h5 className="text-truncate">Transformed</h5>
+
+                    <button
+                      onClick={() =>
+                        clickToggleSection("transformedRecordExpanded")
+                      }
+                      type="button"
+                      className="btn btn-outline-primary"
+                    >
+                      <ExpandCollapseIcon
+                        expanded={uiAppDetails["transformedRecordExpanded"]}
+                      />
+                    </button>
+                  </div>
+
+                  <RecordViewer record={transformedRecord()} format="JSON" />
+                </div>
+              </div>
+            </div>
+
+            <div className="col-12 mb-4">
+              <div className="row gy-4">
+                {map(fieldIds, (fieldId) => (
+                  <Field id={fieldId} key={fieldId} />
+                ))}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </>
+    )
+  }
+
+  return (
+    <div className="row">
+      <HeaderActions />
+      <NavTabs />
+
+      { !uiAppDetails.sharedDefinitionsTabActive && transformationBuilderView() }
+      { uiAppDetails.sharedDefinitionsTabActive && <SharedDefinitionsView definitionType="transformation" sharedDefinitions={sharedDefinitions} /> }
     </div>
   );
 };

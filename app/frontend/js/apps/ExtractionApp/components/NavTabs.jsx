@@ -13,7 +13,7 @@ import { toggleDisplayParameters } from "~/js/features/ExtractionApp/UiParameter
 import {
   selectUiAppDetails,
   updateActiveRequest,
-  activateSharedTab
+  activateSharedDefinitionsTab
 } from "~/js/features/ExtractionApp/UiAppDetailsSlice";
 
 const NavTabs = () => {
@@ -32,7 +32,7 @@ const NavTabs = () => {
     active: uiAppDetails.activeRequest == mainRequestId,
   });
   const sharedClasses = classNames("nav-link", {
-    active: uiAppDetails.sharedTabActive == true,
+    active: uiAppDetails.sharedDefinitionsTabActive == true,
   });
   const allParameters = useSelector(selectAllParameters);
 
@@ -75,7 +75,7 @@ const NavTabs = () => {
           type="button"
           role="tab"
           onClick={() =>{
-            dispatch(activateSharedTab());
+            dispatch(activateSharedDefinitionsTab());
           }}
         >
           Shared Definitions ({ sharedDefinitions.length})
