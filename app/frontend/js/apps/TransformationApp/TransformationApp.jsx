@@ -127,9 +127,7 @@ const TransformationApp = ({}) => {
 
       {!uiAppDetails.sharedDefinitionsTabActive && transformationBuilderView()}
       {uiAppDetails.sharedDefinitionsTabActive && (
-        <SharedDefinitionsView
-          definitionType="transformation"
-        />
+        <SharedDefinitionsView definitionType="transformation" />
       )}
     </div>
   );

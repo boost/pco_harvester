@@ -45,9 +45,7 @@ const ExtractionApp = ({}) => {
       <div className="row">
         {!uiAppDetails.sharedDefinitionsTabActive && queryBuilderView()}
         {uiAppDetails.sharedDefinitionsTabActive && (
-          <SharedDefinitionsView
-            definitionType="extraction"
-          />
+          <SharedDefinitionsView definitionType="extraction" />
         )}
       </div>
     </>

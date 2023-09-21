@@ -5,7 +5,6 @@ import { map } from "lodash";
 import { selectAllSharedDefinitions } from "~/js/features/SharedDefinitionsSlice";
 
 const SharedDefinitionsView = ({ definitionType }) => {
-
   const sharedDefinitions = useSelector(selectAllSharedDefinitions);
 
   return (
