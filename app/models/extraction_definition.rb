@@ -8,7 +8,7 @@ class ExtractionDefinition < ApplicationRecord
   belongs_to :destination, optional: true
   belongs_to :pipeline
   belongs_to :last_edited_by, class_name: 'User', optional: true
-  
+
   has_many :harvest_definitions, dependent: :restrict_with_exception
   has_many :extraction_jobs, dependent: :restrict_with_exception
   has_many :requests, dependent: :destroy
