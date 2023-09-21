@@ -26,7 +26,7 @@ export default function configureAppStore(preloadedState) {
         fields,
         rawRecord,
         appDetails,
-        sharedDefinitions
+        sharedDefinitions,
       }),
       ui: combineReducers({
         fields: uiFields,

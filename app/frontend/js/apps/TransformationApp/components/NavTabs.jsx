@@ -6,9 +6,7 @@ import classNames from "classnames";
 import { selectUiAppDetails } from "~/js/features/TransformationApp/UiAppDetailsSlice";
 import { selectAllSharedDefinitions } from "~/js/features/SharedDefinitionsSlice";
 
-import {
-  toggleSharedDefinitionsTab
-} from "~/js/features/TransformationApp/UiAppDetailsSlice";
+import { toggleSharedDefinitionsTab } from "~/js/features/TransformationApp/UiAppDetailsSlice";
 
 const NavTabs = () => {
   const dispatch = useDispatch();
@@ -26,21 +24,25 @@ const NavTabs = () => {
   return createPortal(
     <>
       <ul className="nav nav-tabs mt-4" role="tablist">
-        <li
-          className="nav-item"
-          role="presentation"
-        >
-          <button className={transformationClasses} type="button" role="tab" onClick={ () => dispatch(toggleSharedDefinitionsTab(false))}>
+        <li className="nav-item" role="presentation">
+          <button
+            className={transformationClasses}
+            type="button"
+            role="tab"
+            onClick={() => dispatch(toggleSharedDefinitionsTab(false))}
+          >
             Transformation
           </button>
         </li>
 
-        <li
-          className="nav-item"
-          role="presentation"
-        >
-          <button className={sharedDefinitionClasses} type="button" role="tab" onClick={ () => dispatch(toggleSharedDefinitionsTab(true))}>
-            Shared Definitions ({ sharedDefinitions.length})
+        <li className="nav-item" role="presentation">
+          <button
+            className={sharedDefinitionClasses}
+            type="button"
+            role="tab"
+            onClick={() => dispatch(toggleSharedDefinitionsTab(true))}
+          >
+            Shared Definitions ({sharedDefinitions.length})
           </button>
         </li>
       </ul>

@@ -14,8 +14,8 @@ const SharedDefinitionsModal = ({ pipelineId }) => {
   const handleShowModalClose = () => setShowModal(false);
 
   useEffect(() => {
-    setShowModal(sharedDefinitions.length > 1) 
-   }, [sharedDefinitions]);
+    setShowModal(sharedDefinitions.length > 1);
+  }, [sharedDefinitions]);
 
   return createPortal(
     <Modal
@@ -30,13 +30,15 @@ const SharedDefinitionsModal = ({ pipelineId }) => {
       <Modal.Body>
         <div className="row">
           <p>
-            Are you sure you want to edit this definition? Any changes you make will also be applied to these pipelines:
-
+            Are you sure you want to edit this definition? Any changes you make
+            will also be applied to these pipelines:
             <ul className="mt-2">
-              { map(sharedDefinitions, (sharedDefinition) => {
+              {map(sharedDefinitions, (sharedDefinition) => {
                 return (
-                  <li key={sharedDefinition.id}>{sharedDefinition.pipeline.name}</li>
-                )
+                  <li key={sharedDefinition.id}>
+                    {sharedDefinition.pipeline.name}
+                  </li>
+                );
               })}
             </ul>
           </p>

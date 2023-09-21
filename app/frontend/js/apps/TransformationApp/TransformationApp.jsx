@@ -69,7 +69,7 @@ const TransformationApp = ({}) => {
   };
 
   const transformationBuilderView = () => {
-    return(
+    return (
       <>
         <div className="col-2">
           <FieldNavigationPanel />
@@ -119,17 +119,22 @@ const TransformationApp = ({}) => {
           </div>
         </div>
       </>
-    )
-  }
+    );
+  };
 
   return (
     <div className="row">
       <HeaderActions />
       <NavTabs />
-      <SharedDefinitionsModal pipelineId={ appDetails.pipeline.id } />
+      <SharedDefinitionsModal pipelineId={appDetails.pipeline.id} />
 
-      { !uiAppDetails.sharedDefinitionsTabActive && transformationBuilderView() }
-      { uiAppDetails.sharedDefinitionsTabActive && <SharedDefinitionsView definitionType="transformation" sharedDefinitions={sharedDefinitions} /> }
+      {!uiAppDetails.sharedDefinitionsTabActive && transformationBuilderView()}
+      {uiAppDetails.sharedDefinitionsTabActive && (
+        <SharedDefinitionsView
+          definitionType="transformation"
+          sharedDefinitions={sharedDefinitions}
+        />
+      )}
     </div>
   );
 };

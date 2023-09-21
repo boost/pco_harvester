@@ -8,12 +8,14 @@ const SharedDefinitionsSlice = createSlice({
   reducers: {},
 });
 
-export const selectSharedDefinitions = (state) => state.entities.sharedDefinitions;
+export const selectSharedDefinitions = (state) =>
+  state.entities.sharedDefinitions;
 
 const { actions, reducer } = SharedDefinitionsSlice;
 
-export const {
-  selectAll: selectAllSharedDefinitions,
-} = sharedDefinitionsAdapter.getSelectors((state) => state.entities.sharedDefinitions);
+export const { selectAll: selectAllSharedDefinitions } =
+  sharedDefinitionsAdapter.getSelectors(
+    (state) => state.entities.sharedDefinitions
+  );
 
 export default reducer;

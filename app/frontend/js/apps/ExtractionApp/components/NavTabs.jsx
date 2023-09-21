@@ -13,7 +13,7 @@ import { toggleDisplayParameters } from "~/js/features/ExtractionApp/UiParameter
 import {
   selectUiAppDetails,
   updateActiveRequest,
-  activateSharedDefinitionsTab
+  activateSharedDefinitionsTab,
 } from "~/js/features/ExtractionApp/UiAppDetailsSlice";
 
 const NavTabs = () => {
@@ -44,28 +44,29 @@ const NavTabs = () => {
   };
 
   const pageOneTabText = () => {
-    if(appDetails.extractionDefinition.paginated) {
-      return 'Initial Request'
+    if (appDetails.extractionDefinition.paginated) {
+      return "Initial Request";
     }
 
-    return 'Request'
-  }
+    return "Request";
+  };
 
   const pageOne = () => {
-    return (<li className="nav-item" role="presentation">
-              <button
-                className={initialRequestClasses}
-                type="button"
-                role="tab"
-                onClick={() => {
-                  handleTabClick(initialRequestId);
-                }}
-              >
-                { pageOneTabText() }
-              </button>
-            </li>
-    )
-  }
+    return (
+      <li className="nav-item" role="presentation">
+        <button
+          className={initialRequestClasses}
+          type="button"
+          role="tab"
+          onClick={() => {
+            handleTabClick(initialRequestId);
+          }}
+        >
+          {pageOneTabText()}
+        </button>
+      </li>
+    );
+  };
 
   const shared = () => {
     return (
@@ -74,15 +75,15 @@ const NavTabs = () => {
           className={sharedClasses}
           type="button"
           role="tab"
-          onClick={() =>{
+          onClick={() => {
             dispatch(activateSharedDefinitionsTab());
           }}
         >
-          Shared Definitions ({ sharedDefinitions.length})
-      </button>
-    </li> 
-    )
-  }
+          Shared Definitions ({sharedDefinitions.length})
+        </button>
+      </li>
+    );
+  };
 
   const pageTwo = () => {
     return (
@@ -97,16 +98,15 @@ const NavTabs = () => {
           Main Request
         </button>
       </li>
-    )
-  }
+    );
+  };
 
   return createPortal(
     <>
       <ul className="nav nav-tabs mt-4" role="tablist">
-        { pageOne() }
-        { appDetails.extractionDefinition.paginated && pageTwo() }
-        { shared() }
-
+        {pageOne()}
+        {appDetails.extractionDefinition.paginated && pageTwo()}
+        {shared()}
       </ul>
     </>,
     document.getElementById("react-nav-tabs")

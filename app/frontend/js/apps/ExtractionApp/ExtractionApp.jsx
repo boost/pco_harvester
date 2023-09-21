@@ -53,19 +53,24 @@ const ExtractionApp = ({}) => {
           ))}
         </div>
       </>
-    )
-  }
+    );
+  };
 
   return (
     <>
       <HeaderActions />
       <NavTabs />
 
-      <SharedDefinitionsModal pipelineId={ appDetails.pipeline.id } />
+      <SharedDefinitionsModal pipelineId={appDetails.pipeline.id} />
 
       <div className="row">
-        { !uiAppDetails.sharedDefinitionsTabActive && queryBuilderView() }
-        { uiAppDetails.sharedDefinitionsTabActive && <SharedDefinitionsView definitionType="extraction" sharedDefinitions={sharedDefinitions} /> }
+        {!uiAppDetails.sharedDefinitionsTabActive && queryBuilderView()}
+        {uiAppDetails.sharedDefinitionsTabActive && (
+          <SharedDefinitionsView
+            definitionType="extraction"
+            sharedDefinitions={sharedDefinitions}
+          />
+        )}
       </div>
     </>
   );
