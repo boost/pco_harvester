@@ -31,6 +31,10 @@ Rails.application.routes.draw do
           post :test_enrichment_extraction
         end
 
+        member do
+          post :clone
+        end
+
         resources :extraction_jobs, only: %i[index show create destroy]
 
         resources :requests do
@@ -40,7 +44,6 @@ Rails.application.routes.draw do
 
       resources :transformation_definitions, only: %i[new create show edit update destroy] do
         post :test, on: :collection
-        post :update_harvest_definitions, on: :member
 
         resources :fields, only: %i[create update destroy] do
           post :run, on: :collection

@@ -5,7 +5,7 @@ class ExtractionDefinitionsController < ApplicationController
 
   before_action :find_pipeline
   before_action :find_harvest_definition
-  before_action :find_extraction_definition, only: %i[show edit update]
+  before_action :find_extraction_definition, only: %i[show edit update clone]
   before_action :find_destinations, only: %i[new create edit update]
 
   def show
@@ -65,6 +65,25 @@ class ExtractionDefinitionsController < ApplicationController
       flash.alert = t('.failure')
       redirect_to pipeline_extraction_definition_path(@pipeline, @extraction_definition)
     end
+  end
+
+  def clone
+    cloned_extraction_definition = @extraction_definition.dup
+
+    @extraction_definition.requests.each do |request|
+      cloned_request = request.dup
+      request.parameters.each do |parameter|
+        cloned_request.parameters << parameter.dup
+      end
+
+      cloned_extraction_definition.requests << cloned_request
+      cloned_extraction_definition.save
+    end
+
+    cloned_extraction_definition.update(pipeline: @pipeline, name: extraction_definition_params['name'])
+    @harvest_definition.update(extraction_definition: cloned_extraction_definition)
+
+    redirect_to edit_pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition, cloned_extraction_definition)
   end
 
   private
