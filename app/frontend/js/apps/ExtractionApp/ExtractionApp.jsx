@@ -11,14 +11,12 @@ import SharedDefinitionsView from "/js/components/SharedDefinitionsView";
 import SharedDefinitionsModal from "/js/components/SharedDefinitionsModal";
 
 import { selectAllParameters } from "~/js/features/ExtractionApp/ParametersSlice";
-import { selectAllSharedDefinitions } from "~/js/features/SharedDefinitionsSlice";
 import { selectAppDetails } from "~/js/features/TransformationApp/AppDetailsSlice";
 import { selectUiAppDetails } from "~/js/features/TransformationApp/UiAppDetailsSlice";
 
 const ExtractionApp = ({}) => {
   const appDetails = useSelector(selectAppDetails);
   const uiAppDetails = useSelector(selectUiAppDetails);
-  const sharedDefinitions = useSelector(selectAllSharedDefinitions);
 
   let allParameters = useSelector(selectAllParameters);
   allParameters = filter(allParameters, [
@@ -68,7 +66,6 @@ const ExtractionApp = ({}) => {
         {uiAppDetails.sharedDefinitionsTabActive && (
           <SharedDefinitionsView
             definitionType="extraction"
-            sharedDefinitions={sharedDefinitions}
           />
         )}
       </div>

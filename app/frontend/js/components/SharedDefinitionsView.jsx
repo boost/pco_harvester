@@ -1,7 +1,13 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { map } from "lodash";
 
-const SharedDefinitionsView = ({ definitionType, sharedDefinitions }) => {
+import { selectAllSharedDefinitions } from "~/js/features/SharedDefinitionsSlice";
+
+const SharedDefinitionsView = ({ definitionType }) => {
+
+  const sharedDefinitions = useSelector(selectAllSharedDefinitions);
+
   return (
     <>
       <p>These pipelines all share this {definitionType} definition</p>
