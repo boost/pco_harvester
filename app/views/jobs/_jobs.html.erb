@@ -2,17 +2,7 @@
   <div class='row'>
     <%- jobs.each do |job| %>
       <div class='col-3'>
-        <% definition = job.send("#{type}_definition") %>
-        <% next if definition.nil? %>
-
-        <% if type == 'harvest' %>
-          <% path = send("pipeline_harvest_definition_#{type}_job_path", pipeline, pipeline.harvest, job) %>
-        <% else %>
-          <% path = send("pipeline_harvest_definition_#{type}_definition_#{type}_job_path", pipeline, pipeline.harvest,
-                         pipeline.harvest.extraction_definition, job) %>
-        <% end %>
-
-        <%= link_to path, class: 'card mb-3' do %>
+        <%= link_to pipeline_harvest_definition_extraction_definition_extraction_job_path(pipeline, harvest_definition, extraction_definition, job), class: 'card mb-3' do %>
           <div class='card-body'>
             <h5 class='card-title'><%= job.name %></h5>
             <h6 class='card-subtitle'><%= job.updated_at.to_fs(:light) %></h6>
