@@ -29,9 +29,11 @@ const SharedDefinitionsModal = ({ pipelineId }) => {
       </Modal.Header>
       <Modal.Body>
         <div className="row">
-          <p>
-            Are you sure you want to edit this definition? Any changes you make
-            will also be applied to these pipelines:
+          <div className="col">
+            <p>
+              Are you sure you want to edit this definition? Any changes you
+              make will also be applied to these pipelines:
+            </p>
             <ul className="mt-2">
               {map(sharedDefinitions, (sharedDefinition) => {
                 return (
@@ -41,7 +43,7 @@ const SharedDefinitionsModal = ({ pipelineId }) => {
                 );
               })}
             </ul>
-          </p>
+          </div>
         </div>
       </Modal.Body>
       <Modal.Footer>
