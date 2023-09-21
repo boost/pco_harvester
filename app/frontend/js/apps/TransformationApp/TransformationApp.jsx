@@ -23,6 +23,7 @@ import NavTabs from "./components/NavTabs";
 import RawDataBody from "./RawDataBody";
 
 import SharedDefinitionsView from "/js/components/SharedDefinitionsView";
+import SharedDefinitionsModal from "/js/components/SharedDefinitionsModal";
 
 const TransformationApp = ({}) => {
   const dispatch = useDispatch();
@@ -125,6 +126,7 @@ const TransformationApp = ({}) => {
     <div className="row">
       <HeaderActions />
       <NavTabs />
+      <SharedDefinitionsModal pipelineId={ appDetails.pipeline.id } />
 
       { !uiAppDetails.sharedDefinitionsTabActive && transformationBuilderView() }
       { uiAppDetails.sharedDefinitionsTabActive && <SharedDefinitionsView definitionType="transformation" sharedDefinitions={sharedDefinitions} /> }

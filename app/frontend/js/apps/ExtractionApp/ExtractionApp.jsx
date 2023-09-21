@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { map, filter } from "lodash";
 import { useSelector } from "react-redux";
 
@@ -8,6 +8,7 @@ import Request from "/js/apps/ExtractionApp/components/Request";
 import Parameter from "/js/apps/ExtractionApp/components/Parameter";
 import ParameterNavigationPanel from "/js/apps/ExtractionApp/components/ParameterNavigationPanel";
 import SharedDefinitionsView from "/js/components/SharedDefinitionsView";
+import SharedDefinitionsModal from "/js/components/SharedDefinitionsModal";
 
 import { selectAllParameters } from "~/js/features/ExtractionApp/ParametersSlice";
 import { selectAllSharedDefinitions } from "~/js/features/SharedDefinitionsSlice";
@@ -59,6 +60,8 @@ const ExtractionApp = ({}) => {
     <>
       <HeaderActions />
       <NavTabs />
+
+      <SharedDefinitionsModal pipelineId={ appDetails.pipeline.id } />
 
       <div className="row">
         { !uiAppDetails.sharedDefinitionsTabActive && queryBuilderView() }
