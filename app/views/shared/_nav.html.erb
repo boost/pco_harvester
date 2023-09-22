@@ -1,7 +1,6 @@
 <nav class="<%= class_names('navbar navbar-expand-md', {
-                              'navbar-dark bg-dark' => Rails.env.production? || Rails.env.test?,
-                              'navbar-light bg-info' => Rails.env.staging? || Rails.env.development?,
-                              'navbar-light bg-light border-bottom border-2' => Rails.env.uat?
+                              'navbar-dark bg-dark' => %w[production test].include?(Rails.env),
+                              'navbar-light bg-light border-bottom border-2' => %w[production test].exclude?(Rails.env)
                             }) %>">
   <div class="container-fluid">
     <%= link_to root_path, class: 'navbar-brand' do %>
@@ -21,7 +20,6 @@
 
     <% pipelines_classes = class_names('nav-link', active: request.path.include?('pipelines')) %>
     <% destinations_classes = class_names('nav-link', active: request.path.include?('destinations')) %>
-    <% extraction_jobs_classes = class_names('nav-link', active: current_page?(extraction_jobs_path)) %>
 
     <div class="collapse navbar-collapse justify-content-between" id="navbar-nav">
       <ul class="navbar-nav">
@@ -31,9 +29,6 @@
           </li>
           <li class="nav-item">
             <%= link_to 'Destinations', destinations_path, class: destinations_classes %>
-          </li>
-          <li class="nav-item">
-            <%= link_to 'Jobs', extraction_jobs_path, class: extraction_jobs_classes %>
           </li>
         <% end %>
       </ul>

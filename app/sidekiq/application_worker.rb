@@ -7,8 +7,10 @@ class ApplicationWorker
 
   def perform(*args)
     @job = find_job(args[0])
+    @harvest_report = HarvestReport.find_by(id: args[1])
+
     job_start
-    child_perform(@job, *args[1..])
+    child_perform(@job, *args[2..])
     job_end
   end
 

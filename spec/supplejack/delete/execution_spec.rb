@@ -6,16 +6,16 @@ RSpec.describe Delete::Execution do
   let(:record) do
     {
       'transformed_record' => {
-        'internal_identifier' => ['abc']
+        'internal_identifier' => 'abc'
       }
     }
   end
 
   let(:pipeline)           { create(:pipeline, name: 'test') }
   let(:destination)        { create(:destination) }
+  let(:pipeline_job)       { create(:pipeline_job, pipeline:, destination:)}
   let(:harvest_definition) { create(:harvest_definition, pipeline:, kind: 'harvest') }
-  let(:harvest_job)        { create(:harvest_job, harvest_definition:, destination:) }
-  let(:delete_job)         { create(:delete_job, harvest_job:) }
+  let(:harvest_job)        { create(:harvest_job, harvest_definition:, pipeline_job:) }
 
   before do
     stub_request(:put, 'http://www.localhost:3000/harvester/records/delete')
@@ -34,7 +34,7 @@ RSpec.describe Delete::Execution do
 
   describe '#call' do
     it 'sends the internal identifier to the API to be deleted' do
-      expect(Delete::Execution.new(record, delete_job).call.status).to eq 200
+      expect(Delete::Execution.new(record, destination).call.status).to eq 200
     end
   end
 end

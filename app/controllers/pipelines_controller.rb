@@ -13,7 +13,7 @@ class PipelinesController < ApplicationController
 
   def show
     @harvest_definition = @pipeline.harvest || HarvestDefinition.new(pipeline: @pipeline)
-    @harvest_job = HarvestJob.new
+    @pipeline_job = PipelineJob.new
 
     @enrichment_definition = HarvestDefinition.new(pipeline: @pipeline)
 

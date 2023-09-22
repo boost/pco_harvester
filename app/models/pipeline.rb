@@ -5,6 +5,8 @@ class Pipeline < ApplicationRecord
   has_many :harvest_jobs, through: :harvest_definitions
   belongs_to :last_edited_by, class_name: 'User', optional: true
 
+  has_many :pipeline_jobs, dependent: :destroy
+
   validates :name, presence: true
 
   def harvest

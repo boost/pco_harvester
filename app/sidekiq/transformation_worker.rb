@@ -1,57 +1,87 @@
 # frozen_string_literal: true
 
-class TransformationWorker < ApplicationWorker
-  def child_perform(transformation_job)
-    @transformation_job = transformation_job
-    @harvest_job = @transformation_job.harvest_job
+class TransformationWorker
+  include Sidekiq::Job
 
-    transformed_records = transform_records(transformation_job.page).map(&:to_hash)
+  sidekiq_options retry: 0
+
+  def perform(extraction_job_id, harvest_job_id, page = 1, api_record_id = nil)
+    @extraction_job = ExtractionJob.find(extraction_job_id)
+    @harvest_job = HarvestJob.find(harvest_job_id)
+    @transformation_definition = TransformationDefinition.find(@harvest_job.transformation_definition.id)
+    @harvest_report = @harvest_job.harvest_report
+    @page = page
+    @api_record_id = api_record_id
+
+    job_start
+    child_perform
+    job_end
+  end
+
+  def job_start
+    @harvest_report.transformation_running!
+  end
+
+  def child_perform
+    transformed_records = transform_records.map(&:to_hash)
 
     valid_records       = select_valid_records(transformed_records)
     rejected_records    = transformed_records.select { |record| record['rejection_reasons'].present? }
     deleted_records     = transformed_records.select { |record| record['deletion_reasons'].present? }
 
+    update_harvest_report(transformed_records.count, rejected_records.count)
+
     queue_load_worker(valid_records)
     queue_delete_worker(deleted_records)
-
-    update_transformation_report(valid_records, rejected_records, deleted_records)
   end
 
-  def transform_records(page)
+  def update_harvest_report(transformed_records_count, rejected_records_count)
+    @harvest_report.increment_records_transformed!(transformed_records_count)
+    @harvest_report.increment_records_rejected!(rejected_records_count)
+    @harvest_report.update(transformation_updated_time: Time.zone.now)
+  end
+
+  def job_end
+    @harvest_report.increment_transformation_workers_completed!
+    @harvest_report.reload
+
+    return unless @harvest_report.transformation_workers_completed?
+
+    @harvest_report.transformation_completed!
+
+    return unless @harvest_report.delete_workers_queued.zero?
+
+    @harvest_report.delete_completed!
+  end
+
+  def transform_records
     Transformation::Execution.new(
-      @transformation_job.records(page),
-      @transformation_job.transformation_definition.fields
+      records,
+      @transformation_definition.fields
     ).call
+  end
+
+  def queue_load_worker(records)
+    return if records.empty?
+
+    LoadWorker.perform_async(@harvest_job.id, records.to_json, @api_record_id)
+    @harvest_report.increment_load_workers_queued!
+  end
+
+  def queue_delete_worker(records)
+    return if records.empty?
+
+    DeleteWorker.perform_async(records.to_json, @harvest_job.pipeline_job.destination.id, @harvest_report.id)
+    @harvest_report.increment_delete_workers_queued!
+  end
+
+  def records
+    Transformation::RawRecordsExtractor.new(@transformation_definition, @extraction_job).records(@page)
   end
 
   def select_valid_records(records)
     records.select do |record|
       record['rejection_reasons'].blank? && record['deletion_reasons'].blank?
     end
-  end
-
-  def queue_load_worker(records)
-    return if records.empty?
-
-    load_job = LoadJob.create(harvest_job: @harvest_job, page: @transformation_job.page,
-                              api_record_id: @transformation_job.api_record_id)
-
-    LoadWorker.perform_async(load_job.id, records.to_json)
-  end
-
-  def queue_delete_worker(records)
-    return if records.empty?
-
-    delete_job = DeleteJob.create(harvest_job: @harvest_job, page: @transformation_job.page)
-    DeleteWorker.perform_async(delete_job.id, records.to_json)
-  end
-
-  def update_transformation_report(valid_records, rejected_records, deleted_records)
-    @transformation_job.reload
-    @transformation_job.update(
-      records_transformed: @transformation_job.records_transformed + valid_records.count,
-      records_rejected: @transformation_job.records_rejected + rejected_records.count,
-      records_deleted: @transformation_job.records_deleted + deleted_records.count
-    )
   end
 end

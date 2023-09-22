@@ -6,6 +6,7 @@ module Extraction
       @extraction_job = extraction_job
       @extraction_definition = extraction_job.extraction_definition
       @harvest_job = extraction_job.harvest_job
+      @harvest_report = @harvest_job.harvest_report if @harvest_job.present?
     end
 
     def call
@@ -28,9 +29,18 @@ module Extraction
         ee.extract_and_save
         enqueue_record_transformation(api_record, ee.document, page)
 
+        update_harvest_report
+
         throttle
         break if @extraction_job.reload.cancelled?
       end
+    end
+
+    def update_harvest_report
+      return if @harvest_report.blank?
+
+      @harvest_report.increment_pages_extracted!
+      @harvest_report.update(extraction_updated_time: Time.zone.now)
     end
 
     def throttle
@@ -48,14 +58,8 @@ module Extraction
     def enqueue_record_transformation(api_record, document, page)
       return unless @harvest_job.present? && document.successful?
 
-      transformation_job = TransformationJob.create(
-        extraction_job: @extraction_job,
-        transformation_definition: @harvest_job.transformation_definition,
-        harvest_job: @harvest_job,
-        page:,
-        api_record_id: api_record['id']
-      )
-      TransformationWorker.perform_async(transformation_job.id, api_record)
+      TransformationWorker.perform_async(@extraction_job.id, @harvest_job.id, page, api_record['id'])
+      @harvest_report.increment_transformation_workers_queued! if @harvest_report.present?
     end
   end
 end

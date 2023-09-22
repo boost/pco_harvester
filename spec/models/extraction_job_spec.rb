@@ -45,6 +45,12 @@ RSpec.describe ExtractionJob, type: :model do
 
   describe 'validations' do
     it { is_expected.to validate_presence_of(:extraction_definition).with_message('must exist') }
+
+    it 'does not allow an end date to be before a start date' do
+      subject.start_time = Time.zone.now
+      subject.end_time   = 1.day.ago
+      expect(subject).not_to be_valid
+    end
   end
 
   describe '#associations' do
@@ -102,12 +108,6 @@ RSpec.describe ExtractionJob, type: :model do
       subject.update(end_time: 1.day.from_now)
 
       expect(subject.end_time).to be_a(ActiveSupport::TimeWithZone)
-    end
-
-    it 'does not allow an end date to be before a start date' do
-      subject.start_time = Time.zone.now
-      subject.end_time   = 1.day.ago
-      expect(subject).not_to be_valid
     end
 
     it 'returns the number of seconds that the job has been running for' do

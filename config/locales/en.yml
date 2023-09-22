@@ -89,6 +89,14 @@ en:
     destroy:
       success: Pipeline deleted successfully
       failure: There was an issue deleting your Pipeline
+  
+  pipeline_jobs:
+    create:
+      success: Pipeline job created successfully
+      failure: There was an issue creating your pipeline job
+    cancel:
+      success: Pipeline job cancelled successfully
+      failure: There was an issue cancelling your pipeline job
 
   sessions:
     create:

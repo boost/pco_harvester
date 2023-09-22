@@ -1,0 +1,23 @@
+.table {
+  @include modifier('jobs') {
+    th, td {
+      padding: 1rem;
+    }
+  }
+
+  @include element('divider')  {
+    td {
+      padding: 0;      
+    }
+
+    hr {
+      margin: 0;
+    }
+  }
+
+  @include element('control') {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

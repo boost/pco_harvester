@@ -23,11 +23,6 @@ RSpec.describe JobsHelper do
       expect(job_status_text(full_running_job)).to eq 'Running full job...'
     end
 
-    it 'returns Running... when running a full job if not ExtractionJob' do
-      job = TransformationJob.new(status: 'running')
-      expect(job_status_text(job)).to eq 'Running...'
-    end
-
     it 'returns Running sample job... when running a sample job' do
       expect(job_status_text(sample_running_job)).to eq 'Running sample job...'
     end
