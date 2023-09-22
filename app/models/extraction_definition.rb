@@ -64,4 +64,23 @@ class ExtractionDefinition < ApplicationRecord
   def shared?
     harvest_definitions.count > 1
   end
+
+  def clone(pipeline, harvest_definition, name)
+    cloned_extraction_definition = dup
+
+    requests.each do |request|
+      cloned_request = request.dup
+      request.parameters.each do |parameter|
+        cloned_request.parameters << parameter.dup
+      end
+
+      cloned_extraction_definition.requests << cloned_request
+      cloned_extraction_definition.save
+    end
+
+    cloned_extraction_definition.update(pipeline:, name:)
+    harvest_definition.update(extraction_definition: cloned_extraction_definition)
+
+    cloned_extraction_definition
+  end
 end

@@ -68,22 +68,17 @@ class ExtractionDefinitionsController < ApplicationController
   end
 
   def clone
-    cloned_extraction_definition = @extraction_definition.dup
+    cloned_extraction_definition = @extraction_definition.clone(
+      @pipeline,
+      @harvest_definition,
+      extraction_definition_params['name']
+    )
 
-    @extraction_definition.requests.each do |request|
-      cloned_request = request.dup
-      request.parameters.each do |parameter|
-        cloned_request.parameters << parameter.dup
-      end
-
-      cloned_extraction_definition.requests << cloned_request
-      cloned_extraction_definition.save
-    end
-
-    cloned_extraction_definition.update(pipeline: @pipeline, name: extraction_definition_params['name'])
-    @harvest_definition.update(extraction_definition: cloned_extraction_definition)
-
-    redirect_to edit_pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition, cloned_extraction_definition)
+    redirect_to edit_pipeline_harvest_definition_extraction_definition_path(
+      @pipeline,
+      @harvest_definition,
+      cloned_extraction_definition
+    )
   end
 
   private
