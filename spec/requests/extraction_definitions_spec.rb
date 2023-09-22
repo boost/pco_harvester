@@ -208,14 +208,56 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
     let(:pipeline_two)              { create(:pipeline) }
     let!(:harvest_definition_two)    { create(:harvest_definition, extraction_definition:, pipeline:) }
 
-    it 'redirects to the Extraction Definition Edit page' do
-      post clone_pipeline_harvest_definition_extraction_definition_path(pipeline_two, harvest_definition_two, extraction_definition), params: {
-        extraction_definition: {
-          name: 'copy'
+    context 'when the clone is successful' do
+      it 'redirects to the Extraction Definition Edit page' do
+        post clone_pipeline_harvest_definition_extraction_definition_path(pipeline_two, harvest_definition_two, extraction_definition), params: {
+          extraction_definition: {
+            name: 'copy'
+          }
         }
-      }
+  
+        expect(response).to redirect_to edit_pipeline_harvest_definition_extraction_definition_path(pipeline_two, harvest_definition_two, ExtractionDefinition.last)
+      end
 
-      expect(response).to redirect_to edit_pipeline_harvest_definition_extraction_definition_path(pipeline_two, harvest_definition_two, ExtractionDefinition.last)
+      it 'displays an appropriate message' do
+        post clone_pipeline_harvest_definition_extraction_definition_path(pipeline_two, harvest_definition_two, extraction_definition), params: {
+          extraction_definition: {
+            name: 'copy'
+          }
+        }
+
+        follow_redirect!
+        
+        expect(response.body).to include('Extraction Definition cloned successfully')
+      end
+    end
+
+    context 'when the clone fails' do
+      before do
+        allow_any_instance_of(ExtractionDefinition).to receive(:clone).and_return(false)
+      end
+
+      it 'redirects to the pipeline page' do
+        post clone_pipeline_harvest_definition_extraction_definition_path(pipeline_two, harvest_definition_two, extraction_definition), params: {
+          extraction_definition: {
+            name: 'copy'
+          }
+        }
+  
+        expect(response).to redirect_to pipeline_path(pipeline_two)
+      end
+
+      it 'displays an appropriate message' do
+        post clone_pipeline_harvest_definition_extraction_definition_path(pipeline_two, harvest_definition_two, extraction_definition), params: {
+          extraction_definition: {
+            name: 'copy'
+          }
+        }
+
+        follow_redirect!
+        
+        expect(response.body).to include('Extraction Definition clone failed')
+      end
     end
   end
 end

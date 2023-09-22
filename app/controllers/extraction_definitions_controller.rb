@@ -74,11 +74,16 @@ class ExtractionDefinitionsController < ApplicationController
       extraction_definition_params['name']
     )
 
-    redirect_to edit_pipeline_harvest_definition_extraction_definition_path(
-      @pipeline,
-      @harvest_definition,
-      cloned_extraction_definition
-    )
+    if cloned_extraction_definition
+      redirect_to edit_pipeline_harvest_definition_extraction_definition_path(
+        @pipeline,
+        @harvest_definition,
+        cloned_extraction_definition
+      ), notice: t('.success')
+    else
+      flash.alert = t('.failure')
+      redirect_to pipeline_path(@pipeline)
+    end
   end
 
   private

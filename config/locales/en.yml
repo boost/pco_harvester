@@ -51,6 +51,9 @@ en:
     destroy:
       success: Extraction Definition deleted successfully
       failure: There was an issue deleting your Extraction Definition
+    clone:
+      success: Extraction Definition cloned successfully
+      failure: Extraction Definition clone failed
 
   extraction_jobs:
     create:
@@ -112,6 +115,9 @@ en:
     destroy:
       success: Transformation Definition deleted successfully
       failure: There was an issue deleting your Transformation Definition
+    clone:
+      success: Transformation Definition cloned successfully
+      failure: Transformation Definition clone failed
 
   two_factor_setups:
     create:
