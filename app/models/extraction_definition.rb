@@ -70,15 +70,13 @@ class ExtractionDefinition < ApplicationRecord
 
     requests.each do |request|
       cloned_request = request.dup
-      request.parameters.each do |parameter|
-        cloned_request.parameters << parameter.dup
-      end
+      request.parameters.each { |parameter| cloned_request.parameters << parameter.dup }
 
       cloned_extraction_definition.requests << cloned_request
       cloned_extraction_definition.save
     end
 
-    cloned_extraction_definition.update(pipeline:, name:)
+    cloned_extraction_definition.update!(pipeline:, name:)
     harvest_definition.update(extraction_definition: cloned_extraction_definition)
 
     cloned_extraction_definition

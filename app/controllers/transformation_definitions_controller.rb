@@ -70,8 +70,9 @@ class TransformationDefinitionsController < ApplicationController
                                                                         transformation_definition_params['name'])
 
     if cloned_transformation_definition
+      flash.notice = t('.success')
       redirect_to edit_pipeline_harvest_definition_transformation_definition_path(@pipeline, @harvest_definition,
-                                                                                  cloned_transformation_definition), notice: t('.success')
+                                                                                  cloned_transformation_definition)
     else
       flash.alert = t('.failure')
       redirect_to pipeline_path(@pipeline)

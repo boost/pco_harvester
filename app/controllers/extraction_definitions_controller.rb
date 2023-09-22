@@ -68,18 +68,13 @@ class ExtractionDefinitionsController < ApplicationController
   end
 
   def clone
-    cloned_extraction_definition = @extraction_definition.clone(
-      @pipeline,
-      @harvest_definition,
-      extraction_definition_params['name']
-    )
+    cloned_extraction_definition = @extraction_definition.clone(@pipeline, @harvest_definition,
+                                                                extraction_definition_params['name'])
 
     if cloned_extraction_definition
-      redirect_to edit_pipeline_harvest_definition_extraction_definition_path(
-        @pipeline,
-        @harvest_definition,
-        cloned_extraction_definition
-      ), notice: t('.success')
+      flash.notice = t('.success')
+      redirect_to edit_pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition,
+                                                                              cloned_extraction_definition)
     else
       flash.alert = t('.failure')
       redirect_to pipeline_path(@pipeline)
@@ -126,10 +121,8 @@ class ExtractionDefinitionsController < ApplicationController
 
   def extraction_definition_params
     safe_params = params.require(:extraction_definition).permit(
-      :pipeline_id,
-      :name, :format, :base_url, :throttle, :page, :per_page,
-      :total_selector, :kind, :destination_id, :source_id, :enrichment_url,
-      :paginated
+      :pipeline_id, :name, :format, :base_url, :throttle, :page, :per_page,
+      :total_selector, :kind, :destination_id, :source_id, :enrichment_url, :paginated
     )
     merge_last_edited_by(safe_params)
   end

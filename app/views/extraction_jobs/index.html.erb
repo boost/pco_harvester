@@ -33,4 +33,7 @@
   </ul>
 <% end %>
 
-<%= render partial: 'jobs/jobs', locals: { jobs: @extraction_jobs, type: 'extraction', pipeline: @pipeline, harvest_definition: @harvest_definition, extraction_definition: @extraction_definition } %>
+<%= render partial: 'jobs/jobs',
+           locals: { jobs: @extraction_jobs, type: 'extraction', pipeline: @pipeline,
+                     harvest_definition: @harvest_definition,
+                     extraction_definition: @extraction_definition } %>
