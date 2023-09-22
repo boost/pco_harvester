@@ -30,7 +30,7 @@
               class="dropdown-item card__control-action"
               href="#"
               data-bs-toggle='modal'
-              data-bs-target="<%= "#clone-definition-#{definition.id}" %>">
+              data-bs-target="<%= "#clone-definition-#{type}-#{definition.id}" %>">
                 <i class="bi bi-layers me-2"></i>Clone definition
               </a>
           </li> 
@@ -80,7 +80,7 @@
 
 <div
   class="modal fade"
-  id="<%= "remove-reference-#{definition.id}" %>">
+  id="<%= "remove-reference-#{type}-#{definition.id}" %>">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -107,7 +107,7 @@
 
 <div
   class="modal fade"
-  id="<%= "clone-definition-#{definition.id}" %>">
+  id="<%= "clone-definition-#{type}-#{definition.id}" %>">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -117,7 +117,7 @@
       <div class="modal-body">
         <p>Please name the new definition which you are cloning</p>
 
-        <%= vertical_form_with(model: definition, url: clone_pipeline_harvest_definition_extraction_definition_path(@pipeline, block_definition, definition), method: :post) do |f| %>
+        <%= vertical_form_with(model: definition, url: send("clone_pipeline_harvest_definition_#{type}_definition_path", @pipeline, block_definition, definition), method: :post) do |f| %>
 
           <%= f.text_field :name, required: true, class: 'form-control', value: "[COPY] #{definition.name}" %>
 
