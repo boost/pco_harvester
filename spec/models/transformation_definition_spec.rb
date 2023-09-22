@@ -79,4 +79,48 @@ RSpec.describe TransformationDefinition, type: :model do
       expect(standalone.shared?).to eq false
     end
   end
+
+  describe '#clone' do
+    let(:pipeline_two)               { create(:pipeline) }
+
+    let!(:harvest_definition)        { create(:harvest_definition, transformation_definition: subject, pipeline:) }
+    let!(:harvest_definition_two)    { create(:harvest_definition, transformation_definition: subject, pipeline: pipeline_two) }
+
+    it 'creates a new TransformationDefinition with the same details for the provided HarvestDefinition' do
+      cloned_transformation_definition = subject.clone(pipeline_two, harvest_definition_two, 'clone')
+
+      expect(cloned_transformation_definition.fields.count).to eq subject.fields.count
+
+      cloned_transformation_definition.fields.zip(subject.fields) do |cloned_field, field|
+        expect(cloned_field.name).to eq field.name
+        expect(cloned_field.block).to eq field.block
+        expect(cloned_field.kind).to eq field.kind
+      end
+    end
+
+    it 'assigns the new Transformation Definition to the provided Pipeline and Harvest Definition' do
+      expect(harvest_definition_two.transformation_definition).to eq subject
+
+      cloned_transformation_definition = subject.clone(pipeline_two, harvest_definition_two, 'clone')
+
+      harvest_definition_two.reload
+      expect(cloned_transformation_definition.pipeline).to eq pipeline_two
+      expect(harvest_definition_two.transformation_definition).to eq cloned_transformation_definition
+    end
+
+    it 'turns a shared Transformation Definition into a standalone one if it was only shared with one other pipeline' do
+      expect(subject.shared?).to eq true
+
+      subject.clone(pipeline_two, harvest_definition_two, 'clone')
+      subject.reload
+
+      expect(subject.shared?).to eq false
+    end
+
+    it 'assigns the provided name to the ExtractionDefinition clone' do
+      cloned_transformation_definition = subject.clone(pipeline_two, harvest_definition_two, 'clone')
+
+      expect(cloned_transformation_definition.name).to eq 'clone'
+    end
+  end
 end

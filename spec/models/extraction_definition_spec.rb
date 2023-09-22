@@ -139,7 +139,7 @@ RSpec.describe ExtractionDefinition, type: :model do
     let!(:harvest_definition)    { create(:harvest_definition, extraction_definition:, pipeline:) }
     let!(:harvest_definition_two)    { create(:harvest_definition, extraction_definition:, pipeline:) }
 
-    it 'creates a new Extraction Definition as the one provided for the specified Harvest Definition' do
+    it 'creates a new Extraction Definition with the same details for the provided HarvestDefinition' do
       cloned_extraction_definition = extraction_definition.clone(pipeline_two, harvest_definition_two, 'clone')
 
       expect(cloned_extraction_definition.requests.count).to eq extraction_definition.requests.count
@@ -158,7 +158,7 @@ RSpec.describe ExtractionDefinition, type: :model do
       end
     end
 
-    it 'assigns the new ExtractionDefinition to the provided Pipeline and Extraction Definition' do
+    it 'assigns the new ExtractionDefinition to the provided Pipeline and Harvest Definition' do
       expect(harvest_definition_two.extraction_definition).to eq extraction_definition
 
       cloned_extraction_definition = extraction_definition.clone(pipeline_two, harvest_definition_two, 'clone')

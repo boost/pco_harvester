@@ -34,4 +34,20 @@ class TransformationDefinition < ApplicationRecord
   def shared?
     harvest_definitions.count > 1
   end
+
+  def clone(pipeline, harvest_definition, name)
+    cloned_transformation_definition = dup
+
+    fields.each do |field|
+      cloned_field = field.dup
+
+      cloned_transformation_definition.fields << cloned_field
+    end
+
+    cloned_transformation_definition.save
+    cloned_transformation_definition.update(pipeline:, name:)
+    harvest_definition.update(transformation_definition: cloned_transformation_definition)
+
+    cloned_transformation_definition
+  end
 end
