@@ -64,6 +64,8 @@ RSpec.describe ExtractionDefinition, type: :model do
 
       expect(extraction_definition.errors[:pipeline]).to include 'must exist'
     end
+
+    it { is_expected.to validate_uniqueness_of(:name).case_insensitive.with_message('has already been taken') }
   end
 
   describe '#validations base_url' do
