@@ -4,7 +4,7 @@ class PipelinesController < ApplicationController
   include LastEditedBy
 
   before_action :assign_sort_by, only: %w[index create]
-  before_action :find_pipeline, only: %w[show destroy edit update]
+  before_action :find_pipeline, only: %w[show destroy edit update clone]
 
   def index
     @pipelines = Pipeline.order(@sort_by).page(params[:page])
@@ -50,6 +50,22 @@ class PipelinesController < ApplicationController
   def destroy
     if @pipeline.destroy
       redirect_to pipelines_path, notice: t('.success')
+    else
+      flash.alert = t('.failure')
+      redirect_to pipeline_path(@pipeline)
+    end
+  end
+
+  def clone
+    cloned_pipeline = Pipeline.new(pipeline_params)
+
+    if cloned_pipeline.save
+
+      @pipeline.harvest_definitions.each do |harvest_definition|
+        harvest_definition.clone(cloned_pipeline).save!
+      end
+
+      redirect_to pipeline_path(cloned_pipeline), notice: t('.success')
     else
       flash.alert = t('.failure')
       redirect_to pipeline_path(@pipeline)

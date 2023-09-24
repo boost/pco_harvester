@@ -40,4 +40,8 @@ class HarvestDefinition < ApplicationRecord
       }
     }
   end
+
+  def clone(pipeline)
+    HarvestDefinition.new(dup.attributes.merge(pipeline:))
+  end
 end

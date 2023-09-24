@@ -7,7 +7,7 @@ class Pipeline < ApplicationRecord
 
   has_many :pipeline_jobs, dependent: :destroy
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
 
   def harvest
     harvest_definitions.find_by(kind: 'harvest')

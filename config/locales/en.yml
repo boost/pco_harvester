@@ -92,6 +92,9 @@ en:
     destroy:
       success: Pipeline deleted successfully
       failure: There was an issue deleting your Pipeline
+    clone:
+      success: Pipeline cloned successfully
+      failure: Pipeline clone failed. Please confirm that your Pipeline name is unique and then try again.
   
   pipeline_jobs:
     create:

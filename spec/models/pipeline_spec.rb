@@ -5,6 +5,7 @@ RSpec.describe Pipeline, type: :model do
     subject { build(:pipeline) }
 
     it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to validate_uniqueness_of(:name).case_insensitive.with_message('has already been taken') }
   end
 
   describe 'associations' do

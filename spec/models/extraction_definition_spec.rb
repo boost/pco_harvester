@@ -141,7 +141,7 @@ RSpec.describe ExtractionDefinition, type: :model do
     let!(:harvest_definition)    { create(:harvest_definition, extraction_definition:, pipeline:) }
     let!(:harvest_definition_two)    { create(:harvest_definition, extraction_definition:, pipeline:) }
 
-    it 'creates a new Extraction Definition with the same details for the provided HarvestDefinition' do
+    it 'creates a new Extraction Definition with the same details' do
       cloned_extraction_definition = extraction_definition.clone(pipeline_two, 'clone')
 
       cloned_extraction_definition.save

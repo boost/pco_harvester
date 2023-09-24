@@ -88,7 +88,7 @@ RSpec.describe TransformationDefinition, type: :model do
     let!(:harvest_definition)        { create(:harvest_definition, transformation_definition: subject, pipeline:) }
     let!(:harvest_definition_two)    { create(:harvest_definition, transformation_definition: subject, pipeline: pipeline_two) }
 
-    it 'creates a new TransformationDefinition with the same details for the provided HarvestDefinition' do
+    it 'creates a new TransformationDefinition with the same details' do
       cloned_transformation_definition = subject.clone(pipeline_two, 'clone')
 
       cloned_transformation_definition.save
