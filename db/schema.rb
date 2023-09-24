@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_10_230548) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_24_223008) do
   create_table "destinations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "url", null: false
@@ -21,7 +21,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_10_230548) do
   end
 
   create_table "extraction_definitions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.text "name"
+    t.string "name"
     t.string "format"
     t.string "base_url"
     t.integer "throttle", default: 0, null: false
@@ -40,6 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_10_230548) do
     t.bigint "pipeline_id"
     t.index ["destination_id"], name: "index_extraction_definitions_on_destination_id"
     t.index ["last_edited_by_id"], name: "index_extraction_definitions_on_last_edited_by_id"
+    t.index ["name"], name: "index_extraction_definitions_on_name", unique: true
     t.index ["pipeline_id"], name: "index_extraction_definitions_on_pipeline_id"
   end
 
@@ -68,7 +69,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_10_230548) do
   end
 
   create_table "harvest_definitions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.text "name"
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "extraction_definition_id"
@@ -180,6 +181,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_10_230548) do
     t.datetime "updated_at", null: false
     t.bigint "last_edited_by_id"
     t.index ["last_edited_by_id"], name: "index_pipelines_on_last_edited_by_id"
+    t.index ["name"], name: "index_pipelines_on_name", unique: true
   end
 
   create_table "requests", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -191,7 +193,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_10_230548) do
   end
 
   create_table "transformation_definitions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.text "name"
+    t.string "name"
     t.string "record_selector", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -201,6 +203,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_10_230548) do
     t.bigint "last_edited_by_id"
     t.index ["extraction_job_id"], name: "index_transformation_definitions_on_extraction_job_id"
     t.index ["last_edited_by_id"], name: "index_transformation_definitions_on_last_edited_by_id"
+    t.index ["name"], name: "index_transformation_definitions_on_name", unique: true
     t.index ["pipeline_id"], name: "index_transformation_definitions_on_pipeline_id"
   end
 

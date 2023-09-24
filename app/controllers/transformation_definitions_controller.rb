@@ -66,14 +66,13 @@ class TransformationDefinitionsController < ApplicationController
   end
 
   def clone
-    cloned_transformation_definition = @transformation_definition.clone(@pipeline,
-                                                                        transformation_definition_params['name'])
+    clone = @transformation_definition.clone(@pipeline, transformation_definition_params['name'])
 
-    if cloned_transformation_definition.save
-      @harvest_definition.update(transformation_definition: cloned_transformation_definition)
+    if clone.save
+      @harvest_definition.update(transformation_definition: clone)
       flash.notice = t('.success')
       redirect_to edit_pipeline_harvest_definition_transformation_definition_path(@pipeline, @harvest_definition,
-                                                                                  cloned_transformation_definition)
+                                                                                  clone)
     else
       flash.alert = t('.failure')
       redirect_to pipeline_path(@pipeline)

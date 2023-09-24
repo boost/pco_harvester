@@ -68,14 +68,13 @@ class ExtractionDefinitionsController < ApplicationController
   end
 
   def clone
-    cloned_extraction_definition = @extraction_definition.clone(@pipeline,
-                                                                extraction_definition_params['name'])
+    clone = @extraction_definition.clone(@pipeline, extraction_definition_params['name'])
 
-    if cloned_extraction_definition.save
-      @harvest_definition.update(extraction_definition: cloned_extraction_definition)
+    if clone.save
+      @harvest_definition.update(extraction_definition: clone)
       flash.notice = t('.success')
       redirect_to edit_pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition,
-                                                                              cloned_extraction_definition)
+                                                                              clone)
     else
       flash.alert = t('.failure')
       redirect_to pipeline_path(@pipeline)
