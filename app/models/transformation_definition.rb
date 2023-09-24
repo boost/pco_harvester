@@ -39,7 +39,7 @@ class TransformationDefinition < ApplicationRecord
     harvest_definitions.count > 1
   end
 
-  def clone(pipeline, harvest_definition, name)
+  def clone(pipeline, name)
     cloned_transformation_definition = TransformationDefinition.new(dup.attributes.merge(name:, pipeline:))
 
     fields.each do |field|
@@ -47,9 +47,6 @@ class TransformationDefinition < ApplicationRecord
 
       cloned_transformation_definition.fields << cloned_field
     end
-
-    cloned_transformation_definition.save
-    harvest_definition.update(transformation_definition: cloned_transformation_definition)
 
     cloned_transformation_definition
   end

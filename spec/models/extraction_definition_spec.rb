@@ -142,8 +142,9 @@ RSpec.describe ExtractionDefinition, type: :model do
     let!(:harvest_definition_two)    { create(:harvest_definition, extraction_definition:, pipeline:) }
 
     it 'creates a new Extraction Definition with the same details for the provided HarvestDefinition' do
-      cloned_extraction_definition = extraction_definition.clone(pipeline_two, harvest_definition_two, 'clone')
+      cloned_extraction_definition = extraction_definition.clone(pipeline_two, 'clone')
 
+      cloned_extraction_definition.save
       expect(cloned_extraction_definition.requests.count).to eq extraction_definition.requests.count
 
       cloned_extraction_definition.requests.zip(extraction_definition.requests) do |cloned_request, original_request|
@@ -160,28 +161,18 @@ RSpec.describe ExtractionDefinition, type: :model do
       end
     end
 
-    it 'assigns the new ExtractionDefinition to the provided Pipeline and Harvest Definition' do
+    it 'assigns the new ExtractionDefinition to the provided Pipeline' do
       expect(harvest_definition_two.extraction_definition).to eq extraction_definition
 
-      cloned_extraction_definition = extraction_definition.clone(pipeline_two, harvest_definition_two, 'clone')
-
-      harvest_definition_two.reload
+      cloned_extraction_definition = extraction_definition.clone(pipeline_two, 'clone')
+      cloned_extraction_definition.save
       expect(cloned_extraction_definition.pipeline).to eq pipeline_two
-      expect(harvest_definition_two.extraction_definition).to eq cloned_extraction_definition
-    end
-
-    it 'turns a shared ExtractionDefinition into a stand alone one if it was only shared with one other pipeline' do
-      expect(extraction_definition.shared?).to eq true
-
-      extraction_definition.clone(pipeline_two, harvest_definition_two, 'clone')
-      extraction_definition.reload
-
-      expect(extraction_definition.shared?).to eq false
     end
 
     it 'assigns the provided name to the ExtractionDefinition clone' do
-      cloned_extraction_definition = extraction_definition.clone(pipeline_two, harvest_definition_two, 'clone')
+      cloned_extraction_definition = extraction_definition.clone(pipeline_two, 'clone')
 
+      cloned_extraction_definition.save
       expect(cloned_extraction_definition.name).to eq 'clone'
     end
   end

@@ -68,7 +68,7 @@ class ExtractionDefinition < ApplicationRecord
     harvest_definitions.count > 1
   end
 
-  def clone(pipeline, harvest_definition, name)
+  def clone(pipeline, name)
     cloned_extraction_definition = ExtractionDefinition.new(dup.attributes.merge(name:, pipeline:))
 
     requests.each do |request|
@@ -77,9 +77,6 @@ class ExtractionDefinition < ApplicationRecord
 
       cloned_extraction_definition.requests << cloned_request
     end
-
-    cloned_extraction_definition.save
-    harvest_definition.update(extraction_definition: cloned_extraction_definition)
 
     cloned_extraction_definition
   end
