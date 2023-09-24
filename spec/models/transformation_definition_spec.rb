@@ -62,4 +62,21 @@ RSpec.describe TransformationDefinition, type: :model do
       expect(subject.name).to eq "national-library-of-new-zealand__harvest-transformation-#{subject.id}"
     end
   end
+
+  describe '#shared?' do
+    let!(:harvest_definition_one) { create(:harvest_definition, transformation_definition: shared, pipeline:) }
+    let!(:harvest_definition_two) { create(:harvest_definition, transformation_definition: shared, pipeline:) }
+    let!(:harvest_definition_three) { create(:harvest_definition, transformation_definition: standalone, pipeline:) }
+
+    let(:shared)     { create(:transformation_definition, pipeline:) }
+    let(:standalone) { create(:transformation_definition, pipeline:) }
+
+    it 'returns true if the transformation definition is used in more than one harvest definition' do
+      expect(shared.shared?).to eq true
+    end
+
+    it 'returns false if the transformation definition is used in only one harvest definition' do
+      expect(standalone.shared?).to eq false
+    end
+  end
 end

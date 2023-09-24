@@ -200,28 +200,27 @@
                        definition: @harvest_definition.extraction_definition,
                        edit_path:
               pipeline_harvest_definition_extraction_definition_path(
-                @harvest_definition.extraction_definition.pipeline,
+                @pipeline,
                 @harvest_definition,
-                @harvest_definition.extraction_definition,
-                referrer_id: @pipeline.id
+                @harvest_definition.extraction_definition
               ),
                        edit_text: 'Edit Extraction',
                        jobs_path:
               pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
-                @harvest_definition.extraction_definition.pipeline,
+                @pipeline,
                 @harvest_definition,
                 @harvest_definition.extraction_definition
               ),
                        run_sample_extraction_path:
               pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
-                @harvest_definition.extraction_definition.pipeline,
+                @pipeline,
                 @harvest_definition,
                 @harvest_definition.extraction_definition,
                 kind: :sample
               ),
                        run_full_extraction_path:
               pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
-                @harvest_definition.extraction_definition.pipeline,
+                @pipeline,
                 @harvest_definition,
                 @harvest_definition.extraction_definition,
                 kind: :full
@@ -252,10 +251,9 @@
                        definition: @harvest_definition.transformation_definition,
                        edit_path:
               pipeline_harvest_definition_transformation_definition_path(
-                @harvest_definition.transformation_definition.pipeline,
+                @pipeline,
                 @harvest_definition,
-                @harvest_definition.transformation_definition,
-                referrer_id: @pipeline.id
+                @harvest_definition.transformation_definition
               ),
                        edit_text: 'Edit Transformation',
                        jobs_path: ''
@@ -356,28 +354,27 @@
                        definition: enrichment_definition.extraction_definition,
                        edit_path:
                 edit_pipeline_harvest_definition_extraction_definition_path(
-                  enrichment_definition.extraction_definition.pipeline,
+                  @pipeline,
                   enrichment_definition,
-                  enrichment_definition.extraction_definition,
-                  referrer_id: @pipeline.id
+                  enrichment_definition.extraction_definition
                 ),
                        edit_text: 'Edit Extraction',
                        jobs_path:
                 pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
-                  enrichment_definition.extraction_definition.pipeline,
+                  @pipeline,
                   enrichment_definition,
                   enrichment_definition.extraction_definition
                 ),
                        run_sample_extraction_path:
                 pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
-                  enrichment_definition.extraction_definition.pipeline,
+                  @pipeline,
                   enrichment_definition,
                   enrichment_definition.extraction_definition,
                   kind: :sample
                 ),
                        run_full_extraction_path:
                 pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
-                  enrichment_definition.extraction_definition.pipeline,
+                  @pipeline,
                   enrichment_definition,
                   enrichment_definition.extraction_definition,
                   kind: :full
@@ -444,10 +441,9 @@
                        definition: enrichment_definition.transformation_definition,
                        edit_path:
                 pipeline_harvest_definition_transformation_definition_path(
-                  enrichment_definition.transformation_definition.pipeline,
+                  @pipeline,
                   @harvest_definition,
-                  enrichment_definition.transformation_definition,
-                  referrer_id: @pipeline.id
+                  enrichment_definition.transformation_definition
                 ),
                        edit_text: 'Edit Transformation',
                        jobs_path: ''

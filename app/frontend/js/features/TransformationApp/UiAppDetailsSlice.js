@@ -9,6 +9,9 @@ const uiAppDetailsSlice = createSlice({
 
       state[sectionName] = !state[sectionName];
     },
+    toggleSharedDefinitionsTab(state, action) {
+      state.sharedDefinitionsTabActive = action.payload;
+    },
   },
 });
 
@@ -16,6 +19,6 @@ const { actions, reducer } = uiAppDetailsSlice;
 
 export const selectUiAppDetails = (state) => state.ui.appDetails;
 
-export const { toggleSection } = actions;
+export const { toggleSection, toggleSharedDefinitionsTab } = actions;
 
 export default reducer;

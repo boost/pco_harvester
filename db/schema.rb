@@ -32,12 +32,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_10_230548) do
     t.string "source_id"
     t.string "enrichment_url"
     t.bigint "destination_id"
-    t.bigint "pipeline_id"
     t.integer "page", default: 1
     t.string "total_selector"
     t.integer "per_page"
     t.boolean "paginated"
     t.bigint "last_edited_by_id"
+    t.bigint "pipeline_id"
     t.index ["destination_id"], name: "index_extraction_definitions_on_destination_id"
     t.index ["last_edited_by_id"], name: "index_extraction_definitions_on_last_edited_by_id"
     t.index ["pipeline_id"], name: "index_extraction_definitions_on_pipeline_id"

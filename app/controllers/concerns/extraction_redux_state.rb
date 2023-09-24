@@ -17,6 +17,7 @@ module ExtractionReduxState
     {
       requests: requests_slice,
       parameters: parameters_slice,
+      sharedDefinitions: extraction_shared_definitions_slice,
       appDetails: extraction_app_details_slice
     }
   end
@@ -43,6 +44,13 @@ module ExtractionReduxState
     }
   end
 
+  def extraction_shared_definitions_slice
+    {
+      ids: @extraction_definition.harvest_definitions.pluck(:id),
+      entities: @extraction_definition.harvest_definitions.map(&:to_h).index_by { |definition| definition[:id] }
+    }
+  end
+
   def extraction_app_details_slice
     {
       pipeline: @pipeline,
@@ -53,7 +61,8 @@ module ExtractionReduxState
 
   def ui_extraction_app_details_slice
     {
-      activeRequest: @extraction_definition.requests.first.id
+      activeRequest: @extraction_definition.requests.first.id,
+      sharedDefinitionsTabActive: false
     }
   end
 

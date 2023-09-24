@@ -6,6 +6,11 @@ const uiAppDetailsSlice = createSlice({
   reducers: {
     updateActiveRequest(state, action) {
       state.activeRequest = action.payload;
+      state.sharedDefinitionsTabActive = false;
+    },
+    activateSharedDefinitionsTab(state, action) {
+      state.activeRequest = 0;
+      state.sharedDefinitionsTabActive = true;
     },
   },
 });
@@ -14,6 +19,6 @@ const { actions, reducer } = uiAppDetailsSlice;
 
 export const selectUiAppDetails = (state) => state.ui.appDetails;
 
-export const { updateActiveRequest } = actions;
+export const { updateActiveRequest, activateSharedDefinitionsTab } = actions;
 
 export default reducer;

@@ -10,7 +10,7 @@
 
     <%= link_to(
           edit_pipeline_harvest_definition_transformation_definition_path(
-            @pipeline, @harvest_definition, @transformation_definition, referrer_id: @referrer
+            @pipeline, @harvest_definition, @transformation_definition
           ),
           class: 'btn btn-outline-primary'
         ) do %>
@@ -22,6 +22,8 @@
   </div>
 
   <div class="clearfix"></div>
+
+  <span id='react-nav-tabs'></span>
 <% end %>
 
 <div id="js-transformation-app" data-props="<%= @props %>"></div>

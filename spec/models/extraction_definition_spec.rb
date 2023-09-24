@@ -26,7 +26,7 @@ RSpec.describe ExtractionDefinition, type: :model do
     end
 
     context 'when the extraction definition is for an enrichment' do
-      subject! { create(:extraction_definition, :enrichment, pipeline: pipeline1, name: 'Flickr API', destination:) }
+      subject! { create(:extraction_definition, :enrichment, name: 'Flickr API', destination:, pipeline: pipeline1) }
 
       let(:destination) { create(:destination) }
 
@@ -99,10 +99,6 @@ RSpec.describe ExtractionDefinition, type: :model do
     it 'has many jobs' do
       expect(subject.extraction_jobs).to include(extraction_job)
     end
-
-    it 'belongs to a pipeline' do
-      expect(subject.pipeline).to be_a Pipeline
-    end
   end
 
   describe '#kinds' do
@@ -112,6 +108,24 @@ RSpec.describe ExtractionDefinition, type: :model do
       it "can be #{key}" do
         expect(ExtractionDefinition.new(kind: value).kind).to eq(key.to_s)
       end
+    end
+  end
+
+  describe '#shared?' do
+    let(:pipeline)                  { create(:pipeline) }
+    let!(:harvest_definition_one)   { create(:harvest_definition, extraction_definition: shared, pipeline:) }
+    let!(:harvest_definition_two)   { create(:harvest_definition, extraction_definition: shared, pipeline:) }
+    let!(:harvest_definition_three) { create(:harvest_definition, extraction_definition: standalone, pipeline:) }
+
+    let(:shared)                    { create(:extraction_definition, pipeline:) }
+    let(:standalone)                { create(:extraction_definition, pipeline:) }
+
+    it 'returns true if the extraction definition is used in more than one harvest definition' do
+      expect(shared.shared?).to eq true
+    end
+
+    it 'returns false if the extraction definition is only used in one harvest definition' do
+      expect(standalone.shared?).to eq false
     end
   end
 end

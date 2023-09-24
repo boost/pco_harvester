@@ -14,6 +14,7 @@ import uiAppDetails from "/js/features/ExtractionApp/UiAppDetailsSlice";
 
 // config
 import config from "/js/features/ConfigSlice";
+import sharedDefinitions from "/js/features/SharedDefinitionsSlice";
 
 export default function configureAppStore(preloadedState) {
   const store = configureStore({
@@ -22,6 +23,7 @@ export default function configureAppStore(preloadedState) {
         requests,
         parameters,
         appDetails,
+        sharedDefinitions,
       }),
       ui: combineReducers({
         parameters: uiParameters,

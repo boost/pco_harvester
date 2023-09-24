@@ -22,8 +22,6 @@ FactoryBot.define do
       paginated { true }
     end
 
-    association :pipeline
-
     trait :harvest do
       kind { 0 }
     end
@@ -34,5 +32,7 @@ FactoryBot.define do
       enrichment_url { '"https://api.figshare.com/v1/articles/#{record[\'dc_identifier\'].first}"' }
       throttle { 1000 }
     end
+
+    association :pipeline
   end
 end

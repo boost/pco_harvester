@@ -3,14 +3,13 @@
 # Used to store the information for running an extraction
 #
 class ExtractionDefinition < ApplicationRecord
-  scope :originals, -> { where(original_extraction_definition: nil) }
-
   # The destination is used for Enrichment Extractions
   # To know where to pull the records that are to be enriched from
   belongs_to :destination, optional: true
   belongs_to :pipeline
   belongs_to :last_edited_by, class_name: 'User', optional: true
 
+  has_many :harvest_definitions, dependent: :restrict_with_exception
   has_many :extraction_jobs, dependent: :restrict_with_exception
   has_many :requests, dependent: :destroy
   has_many :parameters, through: :requests
@@ -60,5 +59,9 @@ class ExtractionDefinition < ApplicationRecord
       id:,
       name:
     }
+  end
+
+  def shared?
+    harvest_definitions.count > 1
   end
 end
