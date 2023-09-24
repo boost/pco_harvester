@@ -61,6 +61,8 @@ RSpec.describe TransformationDefinition, type: :model do
     it 'automatically generates a sensible name' do
       expect(subject.name).to eq "national-library-of-new-zealand__harvest-transformation-#{subject.id}"
     end
+    
+    it { is_expected.to validate_uniqueness_of(:name).case_insensitive.with_message('has already been taken') }
   end
 
   describe '#shared?' do

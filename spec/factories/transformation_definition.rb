@@ -2,7 +2,6 @@
 
 FactoryBot.define do
   factory :transformation_definition do
-    name { Faker::Company.name }
     record_selector { '$..results' }
 
     extraction_job

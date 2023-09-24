@@ -9,11 +9,15 @@ class TransformationDefinition < ApplicationRecord
   has_many :fields, dependent: :destroy
   enum :kind, { harvest: 0, enrichment: 1 }
 
+  validates :name, uniqueness: true
+
   validates :record_selector, presence: true
 
   after_create do
-    self.name = "#{pipeline.name.parameterize}__#{kind}-transformation-#{id}"
-    save!
+    if name.blank?
+      self.name = "#{pipeline.name.parameterize}__#{kind}-transformation-#{id}"
+      save!
+    end
   end
 
   # Returns the records from the job based on the given record_selector
