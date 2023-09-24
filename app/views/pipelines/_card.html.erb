@@ -117,12 +117,13 @@
       <div class="modal-body">
         <p>Please name the new definition which you are cloning</p>
 
-        <% clone_url = send("clone_pipeline_harvest_definition_#{type}_definition_path", @pipeline, block_definition, definition) %>
+        <% clone_url = send("clone_pipeline_harvest_definition_#{type}_definition_path", @pipeline, block_definition,
+                            definition) %>
 
         <%= vertical_form_with(model: definition,
                                url: clone_url, method: :post) do |f| %>
 
-          <%= f.text_field :name, required: true, class: 'form-control', value: "[COPY] #{definition.name}" %>
+          <%= f.text_field :name, required: true, class: 'form-control', value: "[CLONE] #{definition.name}" %>
 
           <br>
 
