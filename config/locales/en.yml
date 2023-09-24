@@ -53,7 +53,7 @@ en:
       failure: There was an issue deleting your Extraction Definition
     clone:
       success: Extraction Definition cloned successfully
-      failure: Extraction Definition clone failed
+      failure: Extraction Definition clone failed. Please confirm that your Extraction Definition name is unique and then try again.
 
   extraction_jobs:
     create:
@@ -117,7 +117,7 @@ en:
       failure: There was an issue deleting your Transformation Definition
     clone:
       success: Transformation Definition cloned successfully
-      failure: Transformation Definition clone failed
+      failure: Transformation Definition clone failed. Please confirm that your Transformation Definition name is unique and then try again.
 
   two_factor_setups:
     create:

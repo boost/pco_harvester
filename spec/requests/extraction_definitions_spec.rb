@@ -201,7 +201,7 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
   end
 
   describe '#clone' do
-    let!(:extraction_definition)    { create(:extraction_definition) }
+    let!(:extraction_definition)    { create(:extraction_definition, name: 'one') }
     let!(:request_one)              { create(:request, :figshare_initial_request, extraction_definition:) }
     let!(:request_two)              { create(:request, :figshare_main_request, extraction_definition:) }
 
@@ -233,14 +233,10 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
     end
 
     context 'when the clone fails' do
-      before do
-        allow_any_instance_of(ExtractionDefinition).to receive(:clone).and_return(false)
-      end
-
       it 'redirects to the pipeline page' do
         post clone_pipeline_harvest_definition_extraction_definition_path(pipeline_two, harvest_definition_two, extraction_definition), params: {
           extraction_definition: {
-            name: 'copy'
+            name: extraction_definition.name
           }
         }
   
@@ -250,13 +246,13 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
       it 'displays an appropriate message' do
         post clone_pipeline_harvest_definition_extraction_definition_path(pipeline_two, harvest_definition_two, extraction_definition), params: {
           extraction_definition: {
-            name: 'copy'
+            name: extraction_definition.name
           }
         }
 
         follow_redirect!
         
-        expect(response.body).to include('Extraction Definition clone failed')
+        expect(response.body).to include('Extraction Definition clone failed. Please confirm that your Extraction Definition name is unique and then try again.')
       end
     end
   end

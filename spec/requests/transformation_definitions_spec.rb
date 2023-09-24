@@ -225,14 +225,10 @@ RSpec.describe 'Transformation Definitions', type: :request do
     end
 
     context 'when the clone fails' do
-      before do
-        allow_any_instance_of(TransformationDefinition).to receive(:clone).and_return false
-      end
-
       it 'redirects to the Pipeline page' do
         post clone_pipeline_harvest_definition_transformation_definition_path(pipeline, harvest_definition, transformation_definition), params: {
           transformation_definition: {
-            name: 'copy'
+            name: transformation_definition.name
           }
         }
 
@@ -242,13 +238,13 @@ RSpec.describe 'Transformation Definitions', type: :request do
       it 'displays an appropriate message' do
         post clone_pipeline_harvest_definition_transformation_definition_path(pipeline, harvest_definition, transformation_definition), params: {
           transformation_definition: {
-            name: 'copy'
+            name: transformation_definition.name
           }
         }
 
         follow_redirect!
 
-        expect(response.body).to include('Transformation Definition clone failed')
+        expect(response.body).to include('Transformation Definition clone failed. Please confirm that your Transformation Definition name is unique and then try again.')
       end
     end
   end
