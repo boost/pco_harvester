@@ -229,12 +229,11 @@
       <div class='col-6'>
         <% if @harvest_definition.extraction_definition.present? %>
 
-          <% 
-            if @harvest_definition.extraction_definition.shared?
-              edit_text = 'Edit shared Extraction'
+edit_text = if @harvest_definition.extraction_definition.shared?
+              'Edit shared Extraction'
             else
-              edit_text = 'Edit Extraction'
-            end
+              'Edit Extraction'
+                        end
           %>
 
           <%= render partial: 'pipelines/card',
@@ -288,12 +287,11 @@
       <div class='col-6'>
         <% if @harvest_definition.transformation_definition.present? %>
 
-          <% 
-            if @harvest_definition.transformation_definition.shared?
-              edit_text = 'Edit shared Transformation'
+edit_text = if @harvest_definition.transformation_definition.shared?
+              'Edit shared Transformation'
             else
-              edit_text = 'Edit Transformation'
-            end
+              'Edit Transformation'
+                        end
           %>
 
           <%= render partial: 'pipelines/card',
@@ -399,12 +397,11 @@
         <div class='col-6'>
           <% if enrichment_definition.extraction_definition.present? %>
 
-          <% 
-            if enrichment_definition.extraction_definition.shared?
-              edit_text = 'Edit shared Extraction'
+edit_text = if enrichment_definition.extraction_definition.shared?
+              'Edit shared Extraction'
             else
-              edit_text = 'Edit Extraction'
-            end
+              'Edit Extraction'
+                        end
           %>
 
           <%= render partial: 'pipelines/card',
@@ -494,12 +491,11 @@
         <div class='col-6'>
           <% if enrichment_definition.transformation_definition.present? %>
 
-          <% 
-            if enrichment_definition.transformation_definition.shared?
-              edit_text = 'Edit shared Transformation'
+edit_text = if enrichment_definition.transformation_definition.shared?
+              'Edit shared Transformation'
             else
-              edit_text = 'Edit Transformation'
-            end
+              'Edit Transformation'
+                        end
           %>
 
           <%= render partial: 'pipelines/card',
