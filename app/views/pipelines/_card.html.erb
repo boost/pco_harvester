@@ -34,17 +34,18 @@
                 <i class="bi bi-layers me-2"></i>Clone and edit new definition
               </a>
           </li>
-        <% end %>
 
-        <li>
-          <a
-            class="dropdown-item card__control-action"
-            href="#"
-            data-bs-toggle='modal'
-            data-bs-target="<%= "#remove-reference-#{definition.id}" %>">
-              <i class="bi bi-trash me-2"></i>Remove definition
-            </a>
-        </li>
+        
+          <li>
+            <a
+              class="dropdown-item card__control-action"
+              href="#"
+              data-bs-toggle='modal'
+              data-bs-target="<%= "#remove-shared-#{type}-definition-#{definition.id}" %>">
+                <i class="bi bi-trash me-2"></i>Remove shared definition
+              </a>
+          </li>
+        <% end %>
 
         <% if jobs_path.present? %>
           <li>
@@ -80,15 +81,15 @@
 
 <div
   class="modal fade"
-  id="<%= "remove-reference-#{type}-#{definition.id}" %>">
+  id="<%= "remove-shared-#{type}-definition-#{definition.id}" %>">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Remove reference</h5>
+        <h5 class="modal-title">Remove shared definition</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p>Are you sure you want to remove this reference?</p>
+        <p>Are you sure you want to remove this shared definition?</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
