@@ -104,9 +104,9 @@ const NavTabs = () => {
   return createPortal(
     <>
       <ul className="nav nav-tabs mt-4" role="tablist">
-        {pageOne()}
-        {appDetails.extractionDefinition.paginated && pageTwo()}
-        {shared()}
+        { (appDetails.extractionDefinition.paginated || sharedDefinitions.length > 1) && pageOne()}
+        { appDetails.extractionDefinition.paginated && pageTwo()}
+        { sharedDefinitions.length > 1 && shared()}
       </ul>
     </>,
     document.getElementById("react-nav-tabs")
