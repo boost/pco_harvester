@@ -71,8 +71,8 @@ class TransformationDefinitionsController < ApplicationController
     if clone.save
       @harvest_definition.update(transformation_definition: clone)
       flash.notice = t('.success')
-      redirect_to edit_pipeline_harvest_definition_transformation_definition_path(@pipeline, @harvest_definition,
-                                                                                  clone)
+      redirect_to pipeline_harvest_definition_transformation_definition_path(@pipeline, @harvest_definition,
+                                                                             clone)
     else
       flash.alert = t('.failure')
       redirect_to pipeline_path(@pipeline)

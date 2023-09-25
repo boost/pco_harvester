@@ -209,14 +209,14 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
     let!(:harvest_definition_two)    { create(:harvest_definition, extraction_definition:, pipeline:) }
 
     context 'when the clone is successful' do
-      it 'redirects to the Extraction Definition Edit page' do
+      it 'redirects to the Extraction Definition page' do
         post clone_pipeline_harvest_definition_extraction_definition_path(pipeline_two, harvest_definition_two, extraction_definition), params: {
           extraction_definition: {
             name: 'copy'
           }
         }
   
-        expect(response).to redirect_to edit_pipeline_harvest_definition_extraction_definition_path(pipeline_two, harvest_definition_two, ExtractionDefinition.last)
+        expect(response).to redirect_to pipeline_harvest_definition_extraction_definition_path(pipeline_two, harvest_definition_two, ExtractionDefinition.last)
       end
 
       it 'displays an appropriate message' do

@@ -73,8 +73,7 @@ class ExtractionDefinitionsController < ApplicationController
     if clone.save
       @harvest_definition.update(extraction_definition: clone)
       flash.notice = t('.success')
-      redirect_to edit_pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition,
-                                                                              clone)
+      successful_clone_path(clone)
     else
       flash.alert = t('.failure')
       redirect_to pipeline_path(@pipeline)
@@ -100,6 +99,15 @@ class ExtractionDefinitionsController < ApplicationController
       )
     else
       pipeline_path(@pipeline)
+    end
+  end
+
+  def successful_clone_path(clone)
+    if @harvest_definition.enrichment?
+      redirect_to edit_pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition,
+                                                                              clone)
+    else
+      redirect_to pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition, clone)
     end
   end
 

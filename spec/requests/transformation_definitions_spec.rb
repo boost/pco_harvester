@@ -201,14 +201,14 @@ RSpec.describe 'Transformation Definitions', type: :request do
 
   describe '#clone' do
     context 'when the clone is successful' do
-      it 'redirects to the Transformation Definition Edit page' do
+      it 'redirects to the Transformation Definition page' do
         post clone_pipeline_harvest_definition_transformation_definition_path(pipeline, harvest_definition, transformation_definition), params: {
           transformation_definition: {
             name: 'copy'
           }
         }
   
-        expect(response).to redirect_to edit_pipeline_harvest_definition_transformation_definition_path(pipeline, harvest_definition, TransformationDefinition.last)
+        expect(response).to redirect_to pipeline_harvest_definition_transformation_definition_path(pipeline, harvest_definition, TransformationDefinition.last)
       end
 
       it 'displays an appropriate message' do
