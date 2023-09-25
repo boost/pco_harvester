@@ -229,6 +229,14 @@
       <div class='col-6'>
         <% if @harvest_definition.extraction_definition.present? %>
 
+          <% 
+            if @harvest_definition.extraction_definition.shared?
+              edit_text = 'Edit shared Extraction'
+            else
+              edit_text = 'Edit Extraction'
+            end
+          %>
+
           <%= render partial: 'pipelines/card',
                      locals: {
                        pipeline: @pipeline,
@@ -240,7 +248,7 @@
                 @harvest_definition,
                 @harvest_definition.extraction_definition
               ),
-                       edit_text: 'Edit Extraction',
+                       edit_text:,
                        jobs_path:
               pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
                 @pipeline,
@@ -280,6 +288,14 @@
       <div class='col-6'>
         <% if @harvest_definition.transformation_definition.present? %>
 
+          <% 
+            if @harvest_definition.transformation_definition.shared?
+              edit_text = 'Edit shared Transformation'
+            else
+              edit_text = 'Edit Transformation'
+            end
+          %>
+
           <%= render partial: 'pipelines/card',
                      locals: {
                        pipeline: @pipeline,
@@ -291,7 +307,7 @@
                 @harvest_definition,
                 @harvest_definition.transformation_definition
               ),
-                       edit_text: 'Edit Transformation',
+                       edit_text:,
                        jobs_path: ''
                      } %>
 
@@ -383,6 +399,14 @@
         <div class='col-6'>
           <% if enrichment_definition.extraction_definition.present? %>
 
+          <% 
+            if enrichment_definition.extraction_definition.shared?
+              edit_text = 'Edit shared Extraction'
+            else
+              edit_text = 'Edit Extraction'
+            end
+          %>
+
           <%= render partial: 'pipelines/card',
                      locals: {
                        pipeline: @pipeline,
@@ -394,7 +418,7 @@
                   enrichment_definition,
                   enrichment_definition.extraction_definition
                 ),
-                       edit_text: 'Edit Extraction',
+                       edit_text:,
                        jobs_path:
                 pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
                   @pipeline,
@@ -470,6 +494,14 @@
         <div class='col-6'>
           <% if enrichment_definition.transformation_definition.present? %>
 
+          <% 
+            if enrichment_definition.transformation_definition.shared?
+              edit_text = 'Edit shared Transformation'
+            else
+              edit_text = 'Edit Transformation'
+            end
+          %>
+
           <%= render partial: 'pipelines/card',
                      locals: {
                        pipeline: @pipeline,
@@ -481,7 +513,7 @@
                   @harvest_definition,
                   enrichment_definition.transformation_definition
                 ),
-                       edit_text: 'Edit Transformation',
+                       edit_text:,
                        jobs_path: ''
                      } %>
 

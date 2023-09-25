@@ -12,7 +12,7 @@
     </h6>
 
     <% if definition.shared? %>
-      <span class="badge text-bg-light">Shared</span>
+      <span class="badge text-bg-light">Shared (<%= "#{definition.harvest_definitions.count} pipelines" %>)</span>
     <% end %>
 
     <div class="btn-group card__control">
@@ -31,7 +31,7 @@
               href="#"
               data-bs-toggle='modal'
               data-bs-target="<%= "#clone-definition-#{type}-#{definition.id}" %>">
-                <i class="bi bi-layers me-2"></i>Clone definition
+                <i class="bi bi-layers me-2"></i>Clone and edit new definition
               </a>
           </li>
         <% end %>
