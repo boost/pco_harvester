@@ -163,6 +163,18 @@ RSpec.describe 'Fields', type: :request do
 
         expect(body['deletion_reasons']).to include 'delete_block'
       end
+
+      it 'returns a new record with the fields ordered by created at' do
+        post run_pipeline_harvest_definition_transformation_definition_fields_path(pipeline, harvest_definition, transformation_definition), params: {
+          fields: [field_one.id, field_two.id],
+          page: 1,
+          record: 1
+        }
+
+        transformed_record = JSON.parse(response.body)['transformation']['transformed_record']
+
+        expect(transformed_record.keys.first).to eq 'dc_identifier'
+      end
     end
   end
 end
