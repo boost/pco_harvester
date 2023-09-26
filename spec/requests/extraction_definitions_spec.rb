@@ -256,4 +256,57 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
       end
     end
   end
+
+  describe '#destroy' do
+    let!(:request_one)              { create(:request, :figshare_initial_request, extraction_definition:) }
+    let!(:request_two)              { create(:request, :figshare_main_request, extraction_definition:) }
+
+    context 'when the deletion is successful' do
+      it 'destroys the Extraction Definition' do
+        expect do
+          delete pipeline_harvest_definition_extraction_definition_path(pipeline, harvest_definition, extraction_definition)
+        end.to change(ExtractionDefinition, :count).by(-1)
+      end
+
+      it 'redirects to the pipeline path' do
+        delete pipeline_harvest_definition_extraction_definition_path(pipeline, harvest_definition, extraction_definition)
+  
+        expect(response).to redirect_to(pipeline_path(pipeline))
+      end
+  
+      it 'displays an appropriate message' do
+        delete pipeline_harvest_definition_extraction_definition_path(pipeline, harvest_definition, extraction_definition)
+
+        follow_redirect!
+
+        expect(response.body).to include('Extraction Definition deleted successfully')
+      end
+    end
+
+    context 'when the deletion is unsuccessful' do
+      before do
+        allow_any_instance_of(ExtractionDefinition).to receive(:destroy).and_return(false)
+      end
+
+      it 'does not destroy the Extraction Definition' do
+        expect do
+          delete pipeline_harvest_definition_extraction_definition_path(pipeline, harvest_definition, extraction_definition)
+        end.to change(ExtractionDefinition, :count).by(0)
+      end
+
+      it 'redirects to the Extraction Definition path' do
+        delete pipeline_harvest_definition_extraction_definition_path(pipeline, harvest_definition, extraction_definition)
+  
+        expect(response).to redirect_to(pipeline_harvest_definition_extraction_definition_path(pipeline, harvest_definition, extraction_definition))
+      end
+
+      it 'displays an appropriate message' do
+        delete pipeline_harvest_definition_extraction_definition_path(pipeline, harvest_definition, extraction_definition)
+
+        follow_redirect!
+
+        expect(response.body).to include('There was an issue deleting your Extraction Definition')
+      end
+    end
+  end
 end

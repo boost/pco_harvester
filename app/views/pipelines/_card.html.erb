@@ -2,6 +2,7 @@
    run_sample_extraction_path ||= ''
    run_full_extraction_path ||= ''
    type = definition.class.name.gsub(/Definition$/, '').downcase
+   delete_path ||= ''
    position = type == 'extraction' ? 'first' : 'last' %>
 
 <div class="card">
@@ -115,9 +116,14 @@
   </div>
 </div>
 
-<%= render layout: 'shared/delete_modal', locals: { path: '', id: "delete-#{type}-definition-#{definition.id}" } do %>
-  <p>Are you sure you want to delete this definition?</p>
-  <p>It will also delete all the data associated with it.</p>
+<%= render layout: 'shared/delete_modal', locals: { path: delete_path, id: "delete-#{type}-definition-#{definition.id}", heading_text: "Delete #{type.capitalize} definition" } do %>
+  <p>Are you sure you want to delete "<%= definition.name %>"?</p>
+
+  <% if type == 'transformation' %>
+    <p>This will also delete all the fields associated with it.</p>
+  <% else %>
+    <p>This will also delete the extracted data associated with it.</p>
+  <% end %>
 <% end %>
 
 <div

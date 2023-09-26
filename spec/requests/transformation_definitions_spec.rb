@@ -7,7 +7,7 @@ RSpec.describe 'Transformation Definitions', type: :request do
   let!(:pipeline) { create(:pipeline) }
   let!(:harvest_definition) { create(:harvest_definition, pipeline:) }
   let(:extraction_job)            { create(:extraction_job) }
-  let(:transformation_definition) { create(:transformation_definition, extraction_job:) }
+  let!(:transformation_definition) { create(:transformation_definition, extraction_job:) }
 
   before do
     sign_in user
@@ -148,22 +148,43 @@ RSpec.describe 'Transformation Definitions', type: :request do
   end
 
   describe '#destroy' do
-    it 'destroys the transformation_definition' do
-      delete pipeline_harvest_definition_transformation_definition_path(pipeline, harvest_definition,
-                                                                        transformation_definition)
+    context 'when the deletion is successful' do
+      it 'deletes the Extraction Definition' do
+        expect do
+          delete pipeline_harvest_definition_transformation_definition_path(pipeline, harvest_definition,
+            transformation_definition)
+        end.to change(TransformationDefinition, :count).by(-1)
+      end
 
-      expect(response).to redirect_to(pipeline_path(pipeline))
-      follow_redirect!
-      expect(response.body).to include('Transformation Definition deleted successfully')
+      it 'redirects to the pipeline page' do
+        delete pipeline_harvest_definition_transformation_definition_path(pipeline, harvest_definition,
+                                                                          transformation_definition)
+  
+        expect(response).to redirect_to(pipeline_path(pipeline))
+        follow_redirect!
+        expect(response.body).to include('Transformation Definition deleted successfully')
+      end
     end
 
-    it 'displays a message when failing' do
-      allow_any_instance_of(TransformationDefinition).to receive(:destroy).and_return false
-      delete pipeline_harvest_definition_transformation_definition_path(pipeline, harvest_definition,
-                                                                        transformation_definition)
-      follow_redirect!
+    context 'when the deletion is not successful' do
+      before do
+        allow_any_instance_of(TransformationDefinition).to receive(:destroy).and_return(false)
+      end
 
-      expect(response.body).to include('There was an issue deleting your Transformation Definition')
+      it 'does not delete the Transformation Definition' do
+        expect do
+          delete pipeline_harvest_definition_transformation_definition_path(pipeline, harvest_definition,
+            transformation_definition)
+        end.to change(TransformationDefinition, :count).by(0) 
+      end
+
+      it 'displays an appropriate message' do
+        delete pipeline_harvest_definition_transformation_definition_path(pipeline, harvest_definition,
+                                                                          transformation_definition)
+        follow_redirect!
+  
+        expect(response.body).to include('There was an issue deleting your Transformation Definition')
+      end
     end
   end
 

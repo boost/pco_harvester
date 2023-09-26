@@ -5,7 +5,7 @@ class TransformationDefinition < ApplicationRecord
   belongs_to :pipeline
   belongs_to :last_edited_by, class_name: 'User', optional: true
 
-  has_many :harvest_definitions, dependent: :restrict_with_exception
+  has_many :harvest_definitions, dependent: :nullify
   has_many :fields, dependent: :destroy
   enum :kind, { harvest: 0, enrichment: 1 }
 
