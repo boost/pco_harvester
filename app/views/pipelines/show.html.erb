@@ -202,11 +202,11 @@
           <p>Are you sure you want to delete "<%= @harvest_definition.source_id %>"?</p>
 
           <% if @harvest_definition.extraction_definition.present? %>
-            <%= definition_delete_text(@harvest_definition.extraction_definition, 'extraction') %>
+            <p><%= definition_delete_text(@harvest_definition.extraction_definition, 'extraction') %></p>
           <% end %>
 
           <% if @harvest_definition.transformation_definition.present? %>
-            <%= definition_delete_text(@harvest_definition.transformation_definition, 'transformation') %>
+            <p><%= definition_delete_text(@harvest_definition.transformation_definition, 'transformation') %></p>
           <% end %>
         <% end %>
       <% end %>
@@ -390,11 +390,11 @@
           <p>Are you sure you want to delete "<%= enrichment_definition.source_id %>"?</p>
 
           <% if enrichment_definition.extraction_definition.present? %>
-            <%= definition_delete_text(enrichment_definition.extraction_definition, 'extraction') %>
+            <p><%= definition_delete_text(enrichment_definition.extraction_definition, 'extraction') %></p>
           <% end %>
 
           <% if enrichment_definition.transformation_definition.present? %>
-            <%= definition_delete_text(enrichment_definition.transformation_definition, 'transformation') %>
+            <p><%= definition_delete_text(enrichment_definition.transformation_definition, 'transformation') %></p>
           <% end %>
         <% end %>
 
@@ -630,11 +630,11 @@
 
   <% @pipeline.harvest_definitions.each do |definition| %>
     <% if definition.extraction_definition.present? %>
-      <%= definition_delete_text(definition.extraction_definition, 'extraction') %>
+      <p><%= definition_delete_text(definition.extraction_definition, 'extraction') %></p>
     <% end %>
 
     <% if definition.transformation_definition.present? %>
-      <%= definition_delete_text(definition.transformation_definition, 'transformation') %>
+      <p><%= definition_delete_text(definition.transformation_definition, 'transformation') %></p>
     <% end %>
   <% end %>
 <% end %>

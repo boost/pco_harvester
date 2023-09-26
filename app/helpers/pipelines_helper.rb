@@ -16,15 +16,11 @@ module PipelinesHelper
   end
 
   def definition_delete_text(definition, type)
-    # rubocop:disable Rails/OutputSafety
     if definition.shared?
-      "<p>This will <strong>NOT</strong> delete the #{type} definition '#{definition.name}'
-          as it is shared with another pipeline.</p>".html_safe
+      "This will NOT delete the #{type} definition '#{definition.name}' as it is shared with another pipeline."
     else
-      "<p>This <strong>WILL</strong> delete the #{type} definition '#{definition.name}
-          as it is <strong>NOT</strong> shared with another pipeline.</p>".html_safe
+      "This WILL delete the #{type} definition '#{definition.name} as it is NOT shared with another pipeline."
     end
-    # rubocop:enable Rails/OutputSafety
   end
 
   private
