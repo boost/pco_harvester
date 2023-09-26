@@ -116,7 +116,9 @@
   </div>
 </div>
 
-<%= render layout: 'shared/delete_modal', locals: { path: delete_path, id: "delete-#{type}-definition-#{definition.id}", heading_text: "Delete #{type.capitalize} definition" } do %>
+<%= render layout: 'shared/delete_modal',
+           locals: { path: delete_path, id: "delete-#{type}-definition-#{definition.id}",
+                     heading_text: "Delete #{type.capitalize} definition" } do %>
   <p>Are you sure you want to delete "<%= definition.name %>"?</p>
 
   <% if type == 'transformation' %>

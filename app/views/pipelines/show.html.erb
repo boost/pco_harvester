@@ -195,15 +195,19 @@
         </button>
       </div>
 
-      <%= render layout: 'shared/delete_modal', locals: { path: pipeline_harvest_definition_path(@pipeline, @harvest_definition), id: "delete-harvest-definition-#{@harvest_definition.id}", heading_text: "Delete Harvest" } do %>
-        <p>Are you sure you want to delete "<%= @harvest_definition.source_id %>"?</p>
+      <% if @harvest_definition.persisted? %>
+        <%= render layout: 'shared/delete_modal',
+                   locals: { path: pipeline_harvest_definition_path(@pipeline, @harvest_definition),
+                             id: "delete-harvest-definition-#{@harvest_definition.id}", heading_text: 'Delete Harvest' } do %>
+          <p>Are you sure you want to delete "<%= @harvest_definition.source_id %>"?</p>
 
-        <% if @harvest_definition.extraction_definition.present? %>
-          <%= definition_delete_text(@harvest_definition.extraction_definition, 'extraction').html_safe %>
-        <% end %>
+          <% if @harvest_definition.extraction_definition.present? %>
+            <%= definition_delete_text(@harvest_definition.extraction_definition, 'extraction') %>
+          <% end %>
 
-        <% if @harvest_definition.transformation_definition.present? %>
-          <%= definition_delete_text(@harvest_definition.transformation_definition, 'transformation').html_safe %>
+          <% if @harvest_definition.transformation_definition.present? %>
+            <%= definition_delete_text(@harvest_definition.transformation_definition, 'transformation') %>
+          <% end %>
         <% end %>
       <% end %>
 
@@ -281,7 +285,7 @@
                 @harvest_definition.extraction_definition,
                 kind: :full
               ),
-                      delete_path:
+                       delete_path:
               pipeline_harvest_definition_extraction_definition_path(
                 @pipeline,
                 @harvest_definition,
@@ -379,15 +383,18 @@
           </button>
         </div>
 
-        <%= render layout: 'shared/delete_modal', locals: { path: pipeline_harvest_definition_path(@pipeline, enrichment_definition), id: "delete-harvest-definition-#{enrichment_definition.id}", heading_text: "Delete Enrichment" } do %>
+        <%= render layout: 'shared/delete_modal',
+                   locals: { path: pipeline_harvest_definition_path(@pipeline, enrichment_definition),
+                             id: "delete-harvest-definition-#{enrichment_definition.id}",
+                             heading_text: 'Delete Enrichment' } do %>
           <p>Are you sure you want to delete "<%= enrichment_definition.source_id %>"?</p>
 
           <% if enrichment_definition.extraction_definition.present? %>
-            <%= definition_delete_text(enrichment_definition.extraction_definition, 'extraction').html_safe %>
+            <%= definition_delete_text(enrichment_definition.extraction_definition, 'extraction') %>
           <% end %>
 
           <% if enrichment_definition.transformation_definition.present? %>
-            <%= definition_delete_text(enrichment_definition.transformation_definition, 'transformation').html_safe %>
+            <%= definition_delete_text(enrichment_definition.transformation_definition, 'transformation') %>
           <% end %>
         <% end %>
 
@@ -467,7 +474,7 @@
                   enrichment_definition.extraction_definition,
                   kind: :full
                 ),
-                                      delete_path:
+                       delete_path:
               pipeline_harvest_definition_extraction_definition_path(
                 @pipeline,
                 enrichment_definition,
@@ -618,17 +625,16 @@
 
 <%# -- Modals -- %>
 
-<%= render layout: 'shared/delete_modal', locals: { path: pipeline_path(@pipeline), heading_text: "Delete Pipeline" } do %>
+<%= render layout: 'shared/delete_modal', locals: { path: pipeline_path(@pipeline), heading_text: 'Delete Pipeline' } do %>
   <p>Are you sure you want to delete "<%= @pipeline.name %>"?</p>
-
 
   <% @pipeline.harvest_definitions.each do |definition| %>
     <% if definition.extraction_definition.present? %>
-      <%= definition_delete_text(definition.extraction_definition, 'extraction').html_safe %>
+      <%= definition_delete_text(definition.extraction_definition, 'extraction') %>
     <% end %>
 
     <% if definition.transformation_definition.present? %>
-      <%= definition_delete_text(definition.transformation_definition, 'transformation').html_safe %>
+      <%= definition_delete_text(definition.transformation_definition, 'transformation') %>
     <% end %>
   <% end %>
 <% end %>

@@ -64,7 +64,8 @@ class ExtractionDefinitionsController < ApplicationController
     else
       flash.alert = t('.failure')
 
-      redirect_to pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition, @extraction_definition)
+      redirect_to pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition,
+                                                                         @extraction_definition)
     end
   end
 

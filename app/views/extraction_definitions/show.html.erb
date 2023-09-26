@@ -13,7 +13,7 @@
             @pipeline, @harvest_definition, @extraction_definition
           ),
           class: 'btn btn-outline-primary'
-      ) do %>
+        ) do %>
       <i class="bi bi-pencil-square" aria-hidden="true"></i> Edit
     <% end %>
     <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">
@@ -28,12 +28,14 @@
 
 <div id="js-extraction-app" data-props="<%= @props %>"></div>
 
-<%= render layout: 'shared/delete_modal', locals: { path: pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition, @extraction_definition) } do %>
+<%= render layout: 'shared/delete_modal',
+           locals: { path: pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition,
+                                                                                  @extraction_definition) } do %>
   <p>
     Are you sure you want to delete "<%= @extraction_definition.name %>"?
   </p>
 
-  <p> 
+  <p>
     This will also delete the extracted data associated with it.
   </p>
 <% end %>
