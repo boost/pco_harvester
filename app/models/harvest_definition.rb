@@ -4,10 +4,10 @@ class HarvestDefinition < ApplicationRecord
   belongs_to :pipeline
   belongs_to :content_source, optional: true
 
-  belongs_to :extraction_definition, optional: true, dependent: :destroy
+  belongs_to :extraction_definition, optional: true
   belongs_to :extraction_job, optional: true
 
-  belongs_to :transformation_definition, dependent: :destroy, optional: true
+  belongs_to :transformation_definition, optional: true
 
   has_many :harvest_jobs, dependent: :destroy
 
@@ -15,9 +15,16 @@ class HarvestDefinition < ApplicationRecord
 
   enum :kind, { harvest: 0, enrichment: 1 }
 
+  before_destroy :destroy_associated_definitions
+
   after_create do
     self.name = "#{pipeline.name.parameterize}__#{kind}-#{id}"
     save!
+  end
+
+  def destroy_associated_definitions
+    extraction_definition.destroy unless extraction_definition.nil? || extraction_definition.shared?
+    transformation_definition.destroy unless transformation_definition.nil? || transformation_definition.shared?
   end
 
   def ready_to_run?

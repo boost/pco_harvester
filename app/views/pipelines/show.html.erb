@@ -185,7 +185,35 @@
           data-bs-target="#edit-harvest">
           <i class="bi bi-pencil-square" aria-hidden="true"></i> Edit Harvest
         </button>
+
+        <button
+          type="button"
+          class="btn btn-outline-danger"
+          data-bs-toggle="modal"
+          data-bs-target="<%= "#delete-harvest-definition-#{@harvest_definition.id}" %>">
+          <i class="bi bi-trash" aria-hidden="true"></i> Delete Harvest
+        </button>
       </div>
+
+      <%= render layout: 'shared/delete_modal', locals: { path: pipeline_harvest_definition_path(@pipeline, @harvest_definition), id: "delete-harvest-definition-#{@harvest_definition.id}", heading_text: "Delete Harvest" } do %>
+        <p>Are you sure you want to delete "<%= @harvest_definition.source_id %>"?</p>
+
+        <% if @harvest_definition.extraction_definition.present? %>
+          <% if @harvest_definition.extraction_definition.shared? %>
+            <p>This will <strong>NOT</strong> delete the extraction definition "<%= @harvest_definition.extraction_definition.name %>" as it is shared with another pipeline.</p>
+          <% else %>
+            <p>This <strong>WILL</strong> delete the extraction definition "<%= @harvest_definition.extraction_definition.name %>" as it is not shared with another pipeline.</p>
+          <% end %>
+        <% end %>
+
+        <% if @harvest_definition.transformation_definition.present? %>
+          <% if @harvest_definition.transformation_definition.shared? %>
+            <p>This will <strong>NOT</strong> delete the transformation definition "<%= @harvest_definition.transformation_definition.name %>" as it is shared with another pipeline.</p>
+          <% else %>
+            <p>This <strong>WILL</strong> delete the transformation definition "<%= @harvest_definition.transformation_definition.name %>" as it is not shared with another pipeline.</p>
+          <% end %>
+        <% end %>
+      <% end %>
 
       <%= render layout: 'shared/create_modal', locals: { modal_heading: 'Edit harvest', id: 'edit-harvest' } do %>
         <div class='d-grid mt-4'>
@@ -349,7 +377,35 @@
             data-bs-target="<%= "#edit-enrichment-#{enrichment_definition.id}" %>">
             <i class="bi bi-pencil-square" aria-hidden="true"></i> Edit Enrichment
           </button>
+
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            data-bs-toggle="modal"
+            data-bs-target="<%= "#delete-harvest-definition-#{enrichment_definition.id}" %>">
+            <i class="bi bi-trash" aria-hidden="true"></i> Delete Enrichment
+          </button>
         </div>
+
+        <%= render layout: 'shared/delete_modal', locals: { path: pipeline_harvest_definition_path(@pipeline, enrichment_definition), id: "delete-harvest-definition-#{enrichment_definition.id}", heading_text: "Delete Enrichment" } do %>
+          <p>Are you sure you want to delete "<%= enrichment_definition.source_id %>"?</p>
+
+          <% if enrichment_definition.extraction_definition.present? %>
+            <% if enrichment_definition.extraction_definition.shared? %>
+              <p>This will <strong>NOT</strong> delete the extraction definition "<%= enrichment_definition.extraction_definition.name %>" as it is shared with another pipeline.</p>
+            <% else %>
+              <p>This <strong>WILL</strong> delete the extraction definition "<%= enrichment_definition.extraction_definition.name %>" as it is not shared with another pipeline.</p>
+            <% end %>
+          <% end %>
+
+          <% if enrichment_definition.transformation_definition.present? %>
+            <% if enrichment_definition.transformation_definition.shared? %>
+              <p>This will <strong>NOT</strong> delete the transformation definition "<%= enrichment_definition.transformation_definition.name %>" as it is shared with another pipeline.</p>
+            <% else %>
+              <p>This <strong>WILL</strong> delete the transformation definition "<%= enrichment_definition.transformation_definition.name %>" as it is not shared with another pipeline.</p>
+            <% end %>
+          <% end %>
+        <% end %>
 
         <%= render layout: 'shared/create_modal',
                    locals: { modal_heading: 'Edit enrichment',
@@ -496,7 +552,7 @@
                        edit_path:
                 pipeline_harvest_definition_transformation_definition_path(
                   @pipeline,
-                  @harvest_definition,
+                  enrichment_definition,
                   enrichment_definition.transformation_definition
                 ),
                        edit_text: definition_edit_text(enrichment_definition.transformation_definition,

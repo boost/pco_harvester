@@ -4,7 +4,7 @@ class HarvestDefinitionsController < ApplicationController
   include LastEditedBy
 
   before_action :find_pipeline
-  before_action :find_harvest_definition, only: %i[update]
+  before_action :find_harvest_definition, only: %i[update destroy]
   before_action :find_destinations
 
   def create
@@ -32,11 +32,13 @@ class HarvestDefinitionsController < ApplicationController
   end
 
   def destroy
+    harvest_kind = @harvest_definition.kind.capitalize
+
     if @harvest_definition.destroy
       update_last_edited_by([@pipeline])
-      flash.notice = t('.success')
+      flash.notice = t('.success', kind: harvest_kind)
     else
-      flash.alert = t('.failure')
+      flash.alert = t('.failure', kind: harvest_kind)
     end
 
     redirect_to pipeline_path(@pipeline)
