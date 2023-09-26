@@ -61,6 +61,8 @@ RSpec.describe TransformationDefinition, type: :model do
     it 'automatically generates a sensible name' do
       expect(subject.name).to eq "national-library-of-new-zealand__harvest-transformation-#{subject.id}"
     end
+    
+    it { is_expected.to validate_uniqueness_of(:name).case_insensitive.with_message('has already been taken') }
   end
 
   describe '#shared?' do
@@ -77,6 +79,42 @@ RSpec.describe TransformationDefinition, type: :model do
 
     it 'returns false if the transformation definition is used in only one harvest definition' do
       expect(standalone.shared?).to eq false
+    end
+  end
+
+  describe '#clone' do
+    let(:pipeline_two)               { create(:pipeline) }
+
+    let!(:harvest_definition)        { create(:harvest_definition, transformation_definition: subject, pipeline:) }
+    let!(:harvest_definition_two)    { create(:harvest_definition, transformation_definition: subject, pipeline: pipeline_two) }
+
+    it 'creates a new TransformationDefinition with the same details' do
+      cloned_transformation_definition = subject.clone(pipeline_two, 'clone')
+
+      cloned_transformation_definition.save
+      expect(cloned_transformation_definition.fields.count).to eq subject.fields.count
+
+      cloned_transformation_definition.fields.zip(subject.fields) do |cloned_field, field|
+        expect(cloned_field.name).to eq field.name
+        expect(cloned_field.block).to eq field.block
+        expect(cloned_field.kind).to eq field.kind
+      end
+    end
+
+    it 'assigns the new Transformation Definition to the provided Pipeline' do
+      expect(harvest_definition_two.transformation_definition).to eq subject
+
+      cloned_transformation_definition = subject.clone(pipeline_two, 'clone')
+
+      cloned_transformation_definition.save
+      expect(cloned_transformation_definition.pipeline).to eq pipeline_two
+    end
+
+    it 'assigns the provided name to the ExtractionDefinition clone' do
+      cloned_transformation_definition = subject.clone(pipeline_two, 'clone')
+
+      cloned_transformation_definition.save
+      expect(cloned_transformation_definition.name).to eq 'clone'
     end
   end
 end

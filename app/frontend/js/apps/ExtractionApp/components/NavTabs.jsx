@@ -79,7 +79,7 @@ const NavTabs = () => {
             dispatch(activateSharedDefinitionsTab());
           }}
         >
-          Shared Definitions ({sharedDefinitions.length})
+          Shared ({sharedDefinitions.length} pipelines)
         </button>
       </li>
     );
@@ -104,9 +104,11 @@ const NavTabs = () => {
   return createPortal(
     <>
       <ul className="nav nav-tabs mt-4" role="tablist">
-        {pageOne()}
+        {(appDetails.extractionDefinition.paginated ||
+          sharedDefinitions.length > 1) &&
+          pageOne()}
         {appDetails.extractionDefinition.paginated && pageTwo()}
-        {shared()}
+        {sharedDefinitions.length > 1 && shared()}
       </ul>
     </>,
     document.getElementById("react-nav-tabs")

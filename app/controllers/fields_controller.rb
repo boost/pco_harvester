@@ -57,7 +57,7 @@ class FieldsController < ApplicationController
   end
 
   def find_fields
-    @fields = @transformation_definition.fields.where(id: params['fields'])
+    @fields = @transformation_definition.fields.where(id: params['fields']).order(created_at: :desc)
   end
 
   def find_field

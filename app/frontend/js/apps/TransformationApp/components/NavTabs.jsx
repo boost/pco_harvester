@@ -23,29 +23,31 @@ const NavTabs = () => {
 
   return createPortal(
     <>
-      <ul className="nav nav-tabs mt-4" role="tablist">
-        <li className="nav-item" role="presentation">
-          <button
-            className={transformationClasses}
-            type="button"
-            role="tab"
-            onClick={() => dispatch(toggleSharedDefinitionsTab(false))}
-          >
-            Transformation
-          </button>
-        </li>
+      {sharedDefinitions.length > 1 && (
+        <ul className="nav nav-tabs mt-4" role="tablist">
+          <li className="nav-item" role="presentation">
+            <button
+              className={transformationClasses}
+              type="button"
+              role="tab"
+              onClick={() => dispatch(toggleSharedDefinitionsTab(false))}
+            >
+              Transformation
+            </button>
+          </li>
 
-        <li className="nav-item" role="presentation">
-          <button
-            className={sharedDefinitionClasses}
-            type="button"
-            role="tab"
-            onClick={() => dispatch(toggleSharedDefinitionsTab(true))}
-          >
-            Shared Definitions ({sharedDefinitions.length})
-          </button>
-        </li>
-      </ul>
+          <li className="nav-item" role="presentation">
+            <button
+              className={sharedDefinitionClasses}
+              type="button"
+              role="tab"
+              onClick={() => dispatch(toggleSharedDefinitionsTab(true))}
+            >
+              Shared ({sharedDefinitions.length} pipelines)
+            </button>
+          </li>
+        </ul>
+      )}
     </>,
     document.getElementById("react-nav-tabs")
   );

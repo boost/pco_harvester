@@ -5,7 +5,7 @@ class TransformationDefinitionsController < ApplicationController
 
   before_action :find_pipeline
   before_action :find_harvest_definition
-  before_action :find_transformation_definition, only: %w[show edit update destroy]
+  before_action :find_transformation_definition, only: %w[show edit update destroy clone]
   before_action :find_extraction_jobs, only: %w[new create edit update]
 
   def show
@@ -63,6 +63,20 @@ class TransformationDefinitionsController < ApplicationController
       result: (@transformation_definition.records.first || []),
       format: @transformation_definition.extraction_job.extraction_definition.format
     }
+  end
+
+  def clone
+    clone = @transformation_definition.clone(@pipeline, transformation_definition_params['name'])
+
+    if clone.save
+      @harvest_definition.update(transformation_definition: clone)
+      flash.notice = t('.success')
+      redirect_to pipeline_harvest_definition_transformation_definition_path(@pipeline, @harvest_definition,
+                                                                             clone)
+    else
+      flash.alert = t('.failure')
+      redirect_to pipeline_path(@pipeline)
+    end
   end
 
   private

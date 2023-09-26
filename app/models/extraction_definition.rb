@@ -13,12 +13,15 @@ class ExtractionDefinition < ApplicationRecord
   has_many :extraction_jobs, dependent: :restrict_with_exception
   has_many :requests, dependent: :destroy
   has_many :parameters, through: :requests
+  validates :name, uniqueness: true
 
   enum :kind, { harvest: 0, enrichment: 1 }
 
   after_create do
-    self.name = "#{pipeline.name.parameterize}__#{kind}-extraction-#{id}"
-    save!
+    if name.blank?
+      self.name = "#{pipeline.name.parameterize}__#{kind}-extraction-#{id}"
+      save!
+    end
   end
 
   # find good regex or another implementation
@@ -63,5 +66,18 @@ class ExtractionDefinition < ApplicationRecord
 
   def shared?
     harvest_definitions.count > 1
+  end
+
+  def clone(pipeline, name)
+    cloned_extraction_definition = ExtractionDefinition.new(dup.attributes.merge(name:, pipeline:))
+
+    requests.each do |request|
+      cloned_request = request.dup
+      request.parameters.each { |parameter| cloned_request.parameters << parameter.dup }
+
+      cloned_extraction_definition.requests << cloned_request
+    end
+
+    cloned_extraction_definition
   end
 end

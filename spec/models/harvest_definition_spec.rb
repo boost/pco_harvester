@@ -86,4 +86,40 @@ RSpec.describe HarvestDefinition, type: :model do
       expect(harvest_definition.ready_to_run?).to eq true
     end
   end
+
+  describe '#clone' do
+    let(:pipeline)                  { create(:pipeline) }
+    let(:pipeline_two)              { create(:pipeline) }
+
+    let(:extraction_definition)     { create(:extraction_definition) }
+    let!(:request_one)              { create(:request, :figshare_initial_request, extraction_definition:) }
+    let!(:request_two)              { create(:request, :figshare_main_request, extraction_definition:) }
+
+    let(:extraction_job)            { create(:extraction_job, extraction_definition:) }
+    let(:request)                   { create(:request, :figshare_initial_request, extraction_definition:) }
+    let(:transformation_definition) do
+      create(:transformation_definition, pipeline:, extraction_job:, record_selector: '$..items')
+    end
+  
+    let!(:field_one) do
+      create(:field, name: 'title', block: "JsonPath.new('title').on(record).first", transformation_definition:)
+    end
+    let!(:field_two) do
+      create(:field, name: 'source', block: "JsonPath.new('source').on(record).first", transformation_definition:)
+    end
+
+    let!(:harvest_definition)    { create(:harvest_definition, extraction_definition:, transformation_definition:, pipeline:, priority: -1) }
+
+    it 'creates a new HarvestDefinition with the same attributes' do
+      cloned_harvest_definition = harvest_definition.clone(pipeline_two)
+
+      cloned_harvest_definition.save
+
+      expect(cloned_harvest_definition.kind).to eq harvest_definition.kind
+      expect(cloned_harvest_definition.priority).to eq harvest_definition.priority
+
+      expect(cloned_harvest_definition.extraction_definition).to eq harvest_definition.extraction_definition
+      expect(cloned_harvest_definition.transformation_definition).to eq harvest_definition.transformation_definition
+    end
+  end
 end

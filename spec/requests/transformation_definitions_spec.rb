@@ -198,4 +198,54 @@ RSpec.describe 'Transformation Definitions', type: :request do
       end
     end
   end
+
+  describe '#clone' do
+    context 'when the clone is successful' do
+      it 'redirects to the Transformation Definition page' do
+        post clone_pipeline_harvest_definition_transformation_definition_path(pipeline, harvest_definition, transformation_definition), params: {
+          transformation_definition: {
+            name: 'copy'
+          }
+        }
+  
+        expect(response).to redirect_to pipeline_harvest_definition_transformation_definition_path(pipeline, harvest_definition, TransformationDefinition.last)
+      end
+
+      it 'displays an appropriate message' do
+        post clone_pipeline_harvest_definition_transformation_definition_path(pipeline, harvest_definition, transformation_definition), params: {
+          transformation_definition: {
+            name: 'copy'
+          }
+        }
+
+        follow_redirect!
+
+        expect(response.body).to include('Transformation Definition cloned successfully')
+      end
+    end
+
+    context 'when the clone fails' do
+      it 'redirects to the Pipeline page' do
+        post clone_pipeline_harvest_definition_transformation_definition_path(pipeline, harvest_definition, transformation_definition), params: {
+          transformation_definition: {
+            name: transformation_definition.name
+          }
+        }
+
+        expect(response).to redirect_to pipeline_path(pipeline)
+      end
+
+      it 'displays an appropriate message' do
+        post clone_pipeline_harvest_definition_transformation_definition_path(pipeline, harvest_definition, transformation_definition), params: {
+          transformation_definition: {
+            name: transformation_definition.name
+          }
+        }
+
+        follow_redirect!
+
+        expect(response.body).to include('Transformation Definition clone failed. Please confirm that your Transformation Definition name is unique and then try again.')
+      end
+    end
+  end
 end

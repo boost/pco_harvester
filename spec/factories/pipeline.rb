@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :pipeline do
-    name { 'DigitalNZ Production' }
+    name        { Faker::Name.unique.name }
     description { 'Description' }
 
     trait :figshare do

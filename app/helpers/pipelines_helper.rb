@@ -9,6 +9,12 @@ module PipelinesHelper
     "Your #{type} is ready to run"
   end
 
+  def definition_edit_text(definition, type)
+    return "Edit shared #{type.capitalize}" if definition.shared?
+
+    "Edit #{type}"
+  end
+
   private
 
   def extraction_definition_help_text(definition, type)

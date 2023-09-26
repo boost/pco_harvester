@@ -179,4 +179,105 @@ RSpec.describe 'Pipelines', type: :request do
       end
     end
   end
+
+  describe '/POST clone' do
+
+    let(:pipeline)                  { create(:pipeline) }
+
+    let(:extraction_definition)     { create(:extraction_definition) }
+    let!(:request_one)              { create(:request, :figshare_initial_request, extraction_definition:) }
+    let!(:request_two)              { create(:request, :figshare_main_request, extraction_definition:) }
+
+    let(:extraction_job)            { create(:extraction_job, extraction_definition:) }
+    let(:request)                   { create(:request, :figshare_initial_request, extraction_definition:) }
+    let(:transformation_definition) do
+      create(:transformation_definition, pipeline:, extraction_job:, record_selector: '$..items')
+    end
+
+    let!(:field_one) do
+      create(:field, name: 'title', block: "JsonPath.new('title').on(record).first", transformation_definition:)
+    end
+    let!(:field_two) do
+      create(:field, name: 'source', block: "JsonPath.new('source').on(record).first", transformation_definition:)
+    end
+
+    let!(:harvest_definition)    { create(:harvest_definition, extraction_definition:, transformation_definition:, pipeline:, priority: -1) }
+    
+    context 'when the clone is successful' do
+      it 'redirects to the new Pipeline page' do
+        post clone_pipeline_path(pipeline), params: {
+          pipeline: {
+            name: 'copy'
+          }
+        }
+  
+        expect(response).to redirect_to pipeline_path(Pipeline.last)
+      end
+  
+      it 'creates a new pipeline' do
+        expect do
+          post clone_pipeline_path(pipeline), params: {
+            pipeline: {
+              name: 'copy'
+            }
+          }
+        end.to change(Pipeline, :count).by(1)
+      end
+  
+      it 'creates new harvest definitions based on the provided pipeline' do
+        post clone_pipeline_path(pipeline), params: {
+          pipeline: {
+            name: 'copy'
+          }
+        }
+  
+        cloned_pipeline = Pipeline.last
+  
+        expect(cloned_pipeline).not_to eq pipeline
+  
+        expect(cloned_pipeline.harvest_definitions.count).to eq pipeline.harvest_definitions.count
+        expect(cloned_pipeline.harvest_definitions.first.extraction_definition).to eq pipeline.harvest_definitions.first.extraction_definition
+        expect(cloned_pipeline.harvest_definitions.first.transformation_definition).to eq pipeline.harvest_definitions.first.transformation_definition
+  
+        expect(cloned_pipeline.harvest_definitions.first.extraction_definition.shared?).to eq true
+        expect(cloned_pipeline.harvest_definitions.first.transformation_definition.shared?).to eq true
+      end
+  
+      it 'displays a successful message' do
+        post clone_pipeline_path(pipeline), params: {
+          pipeline: {
+            name: 'copy'
+          }
+        }
+  
+        follow_redirect!
+  
+        expect(response.body).to include 'Pipeline cloned successfully'
+      end
+    end
+
+    context 'when the clone is not successful' do
+      it 'does not create a new pipeline' do
+        expect do
+          post clone_pipeline_path(pipeline), params: {
+            pipeline: {
+              name: pipeline.name
+            }
+          }
+        end.to change(Pipeline, :count).by(0)
+      end
+
+      it 'displays a helpful message' do
+        post clone_pipeline_path(pipeline), params: {
+          pipeline: {
+            name: pipeline.name
+          }
+        }
+
+        follow_redirect!
+
+        expect(response.body).to include 'Pipeline clone failed. Please confirm that your Pipeline name is unique and then try again.'
+      end
+    end
+  end
 end

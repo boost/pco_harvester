@@ -5,7 +5,7 @@ class ExtractionDefinitionsController < ApplicationController
 
   before_action :find_pipeline
   before_action :find_harvest_definition
-  before_action :find_extraction_definition, only: %i[show edit update]
+  before_action :find_extraction_definition, only: %i[show edit update clone]
   before_action :find_destinations, only: %i[new create edit update]
 
   def show
@@ -67,25 +67,41 @@ class ExtractionDefinitionsController < ApplicationController
     end
   end
 
-  private
+  def clone
+    clone = @extraction_definition.clone(@pipeline, extraction_definition_params['name'])
 
-  def create_redirect_path
-    if @extraction_definition.harvest?
-      pipeline_harvest_definition_extraction_definition_path(
-        @pipeline, @harvest_definition, @extraction_definition
-      )
+    if clone.save
+      @harvest_definition.update(extraction_definition: clone)
+      redirect_to successful_clone_path(clone), notice: t('.success')
     else
-      pipeline_path(@pipeline)
+      flash.alert = t('.failure')
+      redirect_to pipeline_path(@pipeline)
     end
   end
 
+  private
+
+  def create_redirect_path
+    return pipeline_path(@pipeline) unless @extraction_definition.harvest?
+
+    pipeline_harvest_definition_extraction_definition_path(
+      @pipeline, @harvest_definition, @extraction_definition
+    )
+  end
+
   def update_redirect_path
-    if @extraction_definition.harvest?
-      pipeline_harvest_definition_extraction_definition_path(
-        @pipeline, @harvest_definition, @extraction_definition
-      )
+    return pipeline_path(@pipeline) unless @extraction_definition.harvest?
+
+    pipeline_harvest_definition_extraction_definition_path(
+      @pipeline, @harvest_definition, @extraction_definition
+    )
+  end
+
+  def successful_clone_path(clone)
+    if @harvest_definition.enrichment?
+      edit_pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition, clone)
     else
-      pipeline_path(@pipeline)
+      pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition, clone)
     end
   end
 
@@ -107,10 +123,8 @@ class ExtractionDefinitionsController < ApplicationController
 
   def extraction_definition_params
     safe_params = params.require(:extraction_definition).permit(
-      :pipeline_id,
-      :name, :format, :base_url, :throttle, :page, :per_page,
-      :total_selector, :kind, :destination_id, :source_id, :enrichment_url,
-      :paginated
+      :pipeline_id, :name, :format, :base_url, :throttle, :page, :per_page,
+      :total_selector, :kind, :destination_id, :source_id, :enrichment_url, :paginated
     )
     merge_last_edited_by(safe_params)
   end

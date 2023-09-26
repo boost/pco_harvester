@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { map, filter } from "lodash";
+import React from "react";
 import { useSelector } from "react-redux";
 
 import HeaderActions from "/js/apps/ExtractionApp/components/HeaderActions";

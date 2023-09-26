@@ -199,4 +199,61 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
       end
     end
   end
+
+  describe '#clone' do
+    let!(:extraction_definition)    { create(:extraction_definition, name: 'one') }
+    let!(:request_one)              { create(:request, :figshare_initial_request, extraction_definition:) }
+    let!(:request_two)              { create(:request, :figshare_main_request, extraction_definition:) }
+
+    let(:pipeline_two)              { create(:pipeline) }
+    let!(:harvest_definition_two)    { create(:harvest_definition, extraction_definition:, pipeline:) }
+
+    context 'when the clone is successful' do
+      it 'redirects to the Extraction Definition page' do
+        post clone_pipeline_harvest_definition_extraction_definition_path(pipeline_two, harvest_definition_two, extraction_definition), params: {
+          extraction_definition: {
+            name: 'copy'
+          }
+        }
+  
+        expect(response).to redirect_to pipeline_harvest_definition_extraction_definition_path(pipeline_two, harvest_definition_two, ExtractionDefinition.last)
+      end
+
+      it 'displays an appropriate message' do
+        post clone_pipeline_harvest_definition_extraction_definition_path(pipeline_two, harvest_definition_two, extraction_definition), params: {
+          extraction_definition: {
+            name: 'copy'
+          }
+        }
+
+        follow_redirect!
+        
+        expect(response.body).to include('Extraction Definition cloned successfully')
+      end
+    end
+
+    context 'when the clone fails' do
+      it 'redirects to the pipeline page' do
+        post clone_pipeline_harvest_definition_extraction_definition_path(pipeline_two, harvest_definition_two, extraction_definition), params: {
+          extraction_definition: {
+            name: extraction_definition.name
+          }
+        }
+  
+        expect(response).to redirect_to pipeline_path(pipeline_two)
+      end
+
+      it 'displays an appropriate message' do
+        post clone_pipeline_harvest_definition_extraction_definition_path(pipeline_two, harvest_definition_two, extraction_definition), params: {
+          extraction_definition: {
+            name: extraction_definition.name
+          }
+        }
+
+        follow_redirect!
+        
+        expect(response.body).to include('Extraction Definition clone failed. Please confirm that your Extraction Definition name is unique and then try again.')
+      end
+    end
+  end
 end
