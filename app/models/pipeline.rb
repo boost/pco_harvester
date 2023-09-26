@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Pipeline < ApplicationRecord
-  has_many :harvest_definitions, dependent: :restrict_with_exception
+  has_many :harvest_definitions, dependent: :destroy
   has_many :harvest_jobs, through: :harvest_definitions
   belongs_to :last_edited_by, class_name: 'User', optional: true
 

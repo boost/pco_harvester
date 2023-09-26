@@ -199,19 +199,11 @@
         <p>Are you sure you want to delete "<%= @harvest_definition.source_id %>"?</p>
 
         <% if @harvest_definition.extraction_definition.present? %>
-          <% if @harvest_definition.extraction_definition.shared? %>
-            <p>This will <strong>NOT</strong> delete the extraction definition "<%= @harvest_definition.extraction_definition.name %>" as it is shared with another pipeline.</p>
-          <% else %>
-            <p>This <strong>WILL</strong> delete the extraction definition "<%= @harvest_definition.extraction_definition.name %>" as it is not shared with another pipeline.</p>
-          <% end %>
+          <%= definition_delete_text(@harvest_definition.extraction_definition, 'extraction').html_safe %>
         <% end %>
 
         <% if @harvest_definition.transformation_definition.present? %>
-          <% if @harvest_definition.transformation_definition.shared? %>
-            <p>This will <strong>NOT</strong> delete the transformation definition "<%= @harvest_definition.transformation_definition.name %>" as it is shared with another pipeline.</p>
-          <% else %>
-            <p>This <strong>WILL</strong> delete the transformation definition "<%= @harvest_definition.transformation_definition.name %>" as it is not shared with another pipeline.</p>
-          <% end %>
+          <%= definition_delete_text(@harvest_definition.transformation_definition, 'transformation').html_safe %>
         <% end %>
       <% end %>
 
@@ -391,19 +383,11 @@
           <p>Are you sure you want to delete "<%= enrichment_definition.source_id %>"?</p>
 
           <% if enrichment_definition.extraction_definition.present? %>
-            <% if enrichment_definition.extraction_definition.shared? %>
-              <p>This will <strong>NOT</strong> delete the extraction definition "<%= enrichment_definition.extraction_definition.name %>" as it is shared with another pipeline.</p>
-            <% else %>
-              <p>This <strong>WILL</strong> delete the extraction definition "<%= enrichment_definition.extraction_definition.name %>" as it is not shared with another pipeline.</p>
-            <% end %>
+            <%= definition_delete_text(enrichment_definition.extraction_definition, 'extraction').html_safe %>
           <% end %>
 
           <% if enrichment_definition.transformation_definition.present? %>
-            <% if enrichment_definition.transformation_definition.shared? %>
-              <p>This will <strong>NOT</strong> delete the transformation definition "<%= enrichment_definition.transformation_definition.name %>" as it is shared with another pipeline.</p>
-            <% else %>
-              <p>This <strong>WILL</strong> delete the transformation definition "<%= enrichment_definition.transformation_definition.name %>" as it is not shared with another pipeline.</p>
-            <% end %>
+            <%= definition_delete_text(enrichment_definition.transformation_definition, 'transformation').html_safe %>
           <% end %>
         <% end %>
 
@@ -634,8 +618,19 @@
 
 <%# -- Modals -- %>
 
-<%= render layout: 'shared/delete_modal', locals: { path: pipeline_path(@pipeline) } do %>
-  Are you sure you want to delete "<%= @pipeline.name %>"?
+<%= render layout: 'shared/delete_modal', locals: { path: pipeline_path(@pipeline), heading_text: "Delete Pipeline" } do %>
+  <p>Are you sure you want to delete "<%= @pipeline.name %>"?</p>
+
+
+  <% @pipeline.harvest_definitions.each do |definition| %>
+    <% if definition.extraction_definition.present? %>
+      <%= definition_delete_text(definition.extraction_definition, 'extraction').html_safe %>
+    <% end %>
+
+    <% if definition.transformation_definition.present? %>
+      <%= definition_delete_text(definition.transformation_definition, 'transformation').html_safe %>
+    <% end %>
+  <% end %>
 <% end %>
 
 <%= render layout: 'shared/create_modal',
