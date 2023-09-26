@@ -72,8 +72,7 @@ class ExtractionDefinitionsController < ApplicationController
 
     if clone.save
       @harvest_definition.update(extraction_definition: clone)
-      flash.notice = t('.success')
-      successful_clone_path(clone)
+      redirect_to successful_clone_path(clone), notice: t('.success')
     else
       flash.alert = t('.failure')
       redirect_to pipeline_path(@pipeline)
@@ -83,31 +82,26 @@ class ExtractionDefinitionsController < ApplicationController
   private
 
   def create_redirect_path
-    if @extraction_definition.harvest?
-      pipeline_harvest_definition_extraction_definition_path(
-        @pipeline, @harvest_definition, @extraction_definition
-      )
-    else
-      pipeline_path(@pipeline)
-    end
+    return pipeline_path(@pipeline) unless @extraction_definition.harvest?
+
+    pipeline_harvest_definition_extraction_definition_path(
+      @pipeline, @harvest_definition, @extraction_definition
+    )
   end
 
   def update_redirect_path
-    if @extraction_definition.harvest?
-      pipeline_harvest_definition_extraction_definition_path(
-        @pipeline, @harvest_definition, @extraction_definition
-      )
-    else
-      pipeline_path(@pipeline)
-    end
+    return pipeline_path(@pipeline) unless @extraction_definition.harvest?
+
+    pipeline_harvest_definition_extraction_definition_path(
+      @pipeline, @harvest_definition, @extraction_definition
+    )
   end
 
   def successful_clone_path(clone)
     if @harvest_definition.enrichment?
-      redirect_to edit_pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition,
-                                                                              clone)
+      edit_pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition, clone)
     else
-      redirect_to pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition, clone)
+      pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition, clone)
     end
   end
 

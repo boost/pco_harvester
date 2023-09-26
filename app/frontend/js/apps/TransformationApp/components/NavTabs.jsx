@@ -23,7 +23,7 @@ const NavTabs = () => {
 
   return createPortal(
     <>
-      { sharedDefinitions.length > 1 && (
+      {sharedDefinitions.length > 1 && (
         <ul className="nav nav-tabs mt-4" role="tablist">
           <li className="nav-item" role="presentation">
             <button
@@ -43,7 +43,7 @@ const NavTabs = () => {
               role="tab"
               onClick={() => dispatch(toggleSharedDefinitionsTab(true))}
             >
-              Shared Definitions ({sharedDefinitions.length})
+              Shared ({sharedDefinitions.length} pipelines)
             </button>
           </li>
         </ul>
