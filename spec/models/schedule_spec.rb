@@ -36,45 +36,45 @@ RSpec.describe Schedule, type: :model do
 
   describe 'day' do
     it 'can be on Monday' do
-      monday = create(:schedule, frequency: 0, day: 0, pipeline:, destination:, harvest_definitions_to_run:)
+      schedule = create(:schedule, frequency: 0, day: 1, pipeline:, destination:, harvest_definitions_to_run:)
 
-      expect(monday.on_monday?).to be true
+      expect(schedule.on_monday?).to be true
     end
 
     it 'can be on Tuesday' do
-      monday = create(:schedule, frequency: 0, day: 1, pipeline:, destination:, harvest_definitions_to_run:)
+      schedule = create(:schedule, frequency: 0, day: 2, pipeline:, destination:, harvest_definitions_to_run:)
 
-      expect(monday.on_tuesday?).to be true
+      expect(schedule.on_tuesday?).to be true
     end
 
     it 'can be on Wednesday' do
-      monday = create(:schedule, frequency: 0, day: 2, pipeline:, destination:, harvest_definitions_to_run:)
+      schedule = create(:schedule, frequency: 0, day: 3, pipeline:, destination:, harvest_definitions_to_run:)
 
-      expect(monday.on_wednesday?).to be true
+      expect(schedule.on_wednesday?).to be true
     end
 
     it 'can be on Thursday' do
-      monday = create(:schedule, frequency: 0, day: 3, pipeline:, destination:, harvest_definitions_to_run:)
+      schedule = create(:schedule, frequency: 0, day: 4, pipeline:, destination:, harvest_definitions_to_run:)
 
-      expect(monday.on_thursday?).to be true
+      expect(schedule.on_thursday?).to be true
     end
 
     it 'can be on Friday' do
-      monday = create(:schedule, frequency: 0, day: 4, pipeline:, destination:, harvest_definitions_to_run:)
+      schedule = create(:schedule, frequency: 0, day: 5, pipeline:, destination:, harvest_definitions_to_run:)
 
-      expect(monday.on_friday?).to be true
+      expect(schedule.on_friday?).to be true
     end
 
     it 'can be on Saturday' do
-      monday = create(:schedule, frequency: 0, day: 5, pipeline:, destination:, harvest_definitions_to_run:)
+      schedule = create(:schedule, frequency: 0, day: 6, pipeline:, destination:, harvest_definitions_to_run:)
 
-      expect(monday.on_saturday?).to be true
+      expect(schedule.on_saturday?).to be true
     end
 
     it 'can be on Sunday' do
-      monday = create(:schedule, frequency: 0, day: 6, pipeline:, destination:, harvest_definitions_to_run:)
+      schedule = create(:schedule, frequency: 0, day: 0, pipeline:, destination:, harvest_definitions_to_run:)
 
-      expect(monday.on_sunday?).to be true
+      expect(schedule.on_sunday?).to be true
     end
   end
   
