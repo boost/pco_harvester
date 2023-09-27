@@ -9,7 +9,7 @@ RSpec.describe 'HarvestDefinitions', type: :request do
   let(:extraction_job)            { create(:extraction_job, extraction_definition:) }
   let(:transformation_definition) { create(:transformation_definition, extraction_job:) }
   let(:destination)               { create(:destination) }
-  let(:harvest_definition)        { create(:harvest_definition) }
+  let!(:harvest_definition)        { create(:harvest_definition, pipeline:) }
 
   before do
     sign_in user
@@ -127,6 +127,56 @@ RSpec.describe 'HarvestDefinitions', type: :request do
         harvest_definition.reload
 
         expect(harvest_definition.source_id).not_to eq nil
+      end
+    end
+  end
+
+  describe 'DELETE /destroy' do
+    context 'when the deletion is successful' do
+      it 'deletes the Harvest Definition' do
+        expect do
+         delete pipeline_harvest_definition_path(pipeline, harvest_definition) 
+        end.to change(HarvestDefinition, :count).by(-1)
+      end
+
+      it 'redirects to the Pipeline path' do
+        delete pipeline_harvest_definition_path(pipeline, harvest_definition)
+
+        expect(response).to redirect_to pipeline_path(pipeline)
+      end
+
+      it 'displays an appropriate message' do
+        delete pipeline_harvest_definition_path(pipeline, harvest_definition)
+
+        follow_redirect!
+        
+        expect(response.body).to include 'Harvest deleted successfully'
+      end
+    end
+
+    context 'when the deletion is not successful' do
+      before do
+        allow_any_instance_of(HarvestDefinition).to receive(:destroy).and_return(false)
+      end
+
+      it 'does not delete the Harvest Definition' do
+        expect do
+          delete pipeline_harvest_definition_path(pipeline, harvest_definition) 
+         end.to change(HarvestDefinition, :count).by(0) 
+      end
+
+      it 'redirects to the Pipeline path' do
+        delete pipeline_harvest_definition_path(pipeline, harvest_definition)
+
+        expect(response).to redirect_to pipeline_path(pipeline)
+      end
+
+      it 'displays an appropriate message' do
+        delete pipeline_harvest_definition_path(pipeline, harvest_definition)
+
+        follow_redirect!
+        
+        expect(response.body).to include 'There was an issue deleting your Harvest'
       end
     end
   end

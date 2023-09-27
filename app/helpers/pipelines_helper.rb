@@ -15,6 +15,14 @@ module PipelinesHelper
     "Edit #{type}"
   end
 
+  def definition_delete_text(definition, type)
+    if definition.shared?
+      "This will NOT delete the #{type} definition '#{definition.name}' as it is shared with another pipeline."
+    else
+      "This WILL delete the #{type} definition '#{definition.name} as it is NOT shared with another pipeline."
+    end
+  end
+
   private
 
   def extraction_definition_help_text(definition, type)

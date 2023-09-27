@@ -5,7 +5,7 @@ class ExtractionDefinitionsController < ApplicationController
 
   before_action :find_pipeline
   before_action :find_harvest_definition
-  before_action :find_extraction_definition, only: %i[show edit update clone]
+  before_action :find_extraction_definition, only: %i[show edit update clone destroy]
   before_action :find_destinations, only: %i[new create edit update]
 
   def show
@@ -63,7 +63,9 @@ class ExtractionDefinitionsController < ApplicationController
       redirect_to pipeline_path(@pipeline), notice: t('.success')
     else
       flash.alert = t('.failure')
-      redirect_to pipeline_extraction_definition_path(@pipeline, @extraction_definition)
+
+      redirect_to pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition,
+                                                                         @extraction_definition)
     end
   end
 

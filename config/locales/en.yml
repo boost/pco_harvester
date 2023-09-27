@@ -73,6 +73,9 @@ en:
     update:
       success: Harvest Definition updated successfully
       failure: There was an issue updating your Harvest Definition
+    destroy:
+      success: "%{kind} deleted successfully"
+      failure: "There was an issue deleting your %{kind}"
 
   harvest_jobs:
     create:

@@ -27,3 +27,15 @@
 <% end %>
 
 <div id="js-extraction-app" data-props="<%= @props %>"></div>
+
+<%= render layout: 'shared/delete_modal',
+           locals: { path: pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition,
+                                                                                  @extraction_definition) } do %>
+  <p>
+    Are you sure you want to delete "<%= @extraction_definition.name %>"?
+  </p>
+
+  <p>
+    This will also delete the extracted data associated with it.
+  </p>
+<% end %>

@@ -122,4 +122,35 @@ RSpec.describe HarvestDefinition, type: :model do
       expect(cloned_harvest_definition.transformation_definition).to eq harvest_definition.transformation_definition
     end
   end
+
+  describe "#destroy" do
+    let(:pipeline)                  { create(:pipeline)}
+    let!(:harvest_definition)       { create(:harvest_definition, pipeline:, extraction_definition:, transformation_definition:) }
+    let(:extraction_definition)     { create(:extraction_definition) }
+    let(:transformation_definition) { create(:transformation_definition) }
+
+    context 'when the associated Extraction Definition and Transformation Definition were not shared' do
+      it 'destroys the Extraction Definition' do
+       expect { harvest_definition.destroy }.to change(ExtractionDefinition, :count).by(-1) 
+      end
+
+      it 'destroys the Transformation Definition' do
+        expect { harvest_definition.destroy }.to change(TransformationDefinition, :count).by(-1)
+      end
+    end
+
+    context 'when the associated Extraction Definition and Transformation Definition were shared' do
+      let!(:harvest_definition_two) { create(:harvest_definition, pipeline:, extraction_definition:, transformation_definition:) }
+      
+      it 'does not destroy the Extraction Definition' do
+        expect(extraction_definition.shared?).to eq true 
+        expect { harvest_definition.destroy }.to change(ExtractionDefinition, :count).by(0)
+      end
+
+      it 'does not destroy the Transformation Definition' do
+        expect(transformation_definition.shared?).to eq true
+        expect { harvest_definition.destroy }.to change(TransformationDefinition, :count).by(0)
+      end
+    end
+  end
 end

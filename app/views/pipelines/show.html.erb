@@ -185,7 +185,31 @@
           data-bs-target="#edit-harvest">
           <i class="bi bi-pencil-square" aria-hidden="true"></i> Edit Harvest
         </button>
+
+        <button
+          type="button"
+          class="btn btn-outline-danger"
+          data-bs-toggle="modal"
+          data-bs-target="<%= "#delete-harvest-definition-#{@harvest_definition.id}" %>">
+          <i class="bi bi-trash" aria-hidden="true"></i> Delete Harvest
+        </button>
       </div>
+
+      <% if @harvest_definition.persisted? %>
+        <%= render layout: 'shared/delete_modal',
+                   locals: { path: pipeline_harvest_definition_path(@pipeline, @harvest_definition),
+                             id: "delete-harvest-definition-#{@harvest_definition.id}", heading_text: 'Delete Harvest' } do %>
+          <p>Are you sure you want to delete "<%= @harvest_definition.source_id %>"?</p>
+
+          <% if @harvest_definition.extraction_definition.present? %>
+            <p><%= definition_delete_text(@harvest_definition.extraction_definition, 'extraction') %></p>
+          <% end %>
+
+          <% if @harvest_definition.transformation_definition.present? %>
+            <p><%= definition_delete_text(@harvest_definition.transformation_definition, 'transformation') %></p>
+          <% end %>
+        <% end %>
+      <% end %>
 
       <%= render layout: 'shared/create_modal', locals: { modal_heading: 'Edit harvest', id: 'edit-harvest' } do %>
         <div class='d-grid mt-4'>
@@ -260,6 +284,12 @@
                 @harvest_definition,
                 @harvest_definition.extraction_definition,
                 kind: :full
+              ),
+                       delete_path:
+              pipeline_harvest_definition_extraction_definition_path(
+                @pipeline,
+                @harvest_definition,
+                @harvest_definition.extraction_definition
               )
                      } %>
 
@@ -292,7 +322,13 @@
                 @harvest_definition.transformation_definition
               ),
                        edit_text: definition_edit_text(@harvest_definition.transformation_definition, 'transformation'),
-                       jobs_path: ''
+                       jobs_path: '',
+                       delete_path:
+                pipeline_harvest_definition_transformation_definition_path(
+                  @pipeline,
+                  @harvest_definition,
+                  @harvest_definition.transformation_definition
+                )
                      } %>
 
         <% else %>
@@ -337,7 +373,30 @@
             data-bs-target="<%= "#edit-enrichment-#{enrichment_definition.id}" %>">
             <i class="bi bi-pencil-square" aria-hidden="true"></i> Edit Enrichment
           </button>
+
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            data-bs-toggle="modal"
+            data-bs-target="<%= "#delete-harvest-definition-#{enrichment_definition.id}" %>">
+            <i class="bi bi-trash" aria-hidden="true"></i> Delete Enrichment
+          </button>
         </div>
+
+        <%= render layout: 'shared/delete_modal',
+                   locals: { path: pipeline_harvest_definition_path(@pipeline, enrichment_definition),
+                             id: "delete-harvest-definition-#{enrichment_definition.id}",
+                             heading_text: 'Delete Enrichment' } do %>
+          <p>Are you sure you want to delete "<%= enrichment_definition.source_id %>"?</p>
+
+          <% if enrichment_definition.extraction_definition.present? %>
+            <p><%= definition_delete_text(enrichment_definition.extraction_definition, 'extraction') %></p>
+          <% end %>
+
+          <% if enrichment_definition.transformation_definition.present? %>
+            <p><%= definition_delete_text(enrichment_definition.transformation_definition, 'transformation') %></p>
+          <% end %>
+        <% end %>
 
         <%= render layout: 'shared/create_modal',
                    locals: { modal_heading: 'Edit enrichment',
@@ -414,7 +473,13 @@
                   enrichment_definition,
                   enrichment_definition.extraction_definition,
                   kind: :full
-                )
+                ),
+                       delete_path:
+              pipeline_harvest_definition_extraction_definition_path(
+                @pipeline,
+                enrichment_definition,
+                enrichment_definition.extraction_definition
+              )
                      } %>
 
           <% else %>
@@ -478,12 +543,18 @@
                        edit_path:
                 pipeline_harvest_definition_transformation_definition_path(
                   @pipeline,
-                  @harvest_definition,
+                  enrichment_definition,
                   enrichment_definition.transformation_definition
                 ),
                        edit_text: definition_edit_text(enrichment_definition.transformation_definition,
                                                        'transformation'),
-                       jobs_path: ''
+                       jobs_path: '',
+                       delete_path:
+                        pipeline_harvest_definition_transformation_definition_path(
+                          @pipeline,
+                          enrichment_definition,
+                          enrichment_definition.transformation_definition
+                        )
                      } %>
 
           <% else %>
@@ -554,8 +625,18 @@
 
 <%# -- Modals -- %>
 
-<%= render layout: 'shared/delete_modal', locals: { path: pipeline_path(@pipeline) } do %>
-  Are you sure you want to delete "<%= @pipeline.name %>"?
+<%= render layout: 'shared/delete_modal', locals: { path: pipeline_path(@pipeline), heading_text: 'Delete Pipeline' } do %>
+  <p>Are you sure you want to delete "<%= @pipeline.name %>"?</p>
+
+  <% @pipeline.harvest_definitions.each do |definition| %>
+    <% if definition.extraction_definition.present? %>
+      <p><%= definition_delete_text(definition.extraction_definition, 'extraction') %></p>
+    <% end %>
+
+    <% if definition.transformation_definition.present? %>
+      <p><%= definition_delete_text(definition.transformation_definition, 'transformation') %></p>
+    <% end %>
+  <% end %>
 <% end %>
 
 <%= render layout: 'shared/create_modal',
