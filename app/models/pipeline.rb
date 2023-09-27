@@ -6,6 +6,7 @@ class Pipeline < ApplicationRecord
   belongs_to :last_edited_by, class_name: 'User', optional: true
 
   has_many :pipeline_jobs, dependent: :destroy
+  has_many :schedules, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
 

@@ -25,6 +25,8 @@ Rails.application.routes.draw do
       post :cancel, on: :member
     end
 
+    resources :schedules
+
     resources :harvest_definitions, only: %i[create update destroy] do
       resources :extraction_definitions, only: %i[show edit new create update destroy] do
         collection do

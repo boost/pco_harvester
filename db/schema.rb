@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_24_223008) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_27_004920) do
   create_table "destinations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "url", null: false
@@ -190,6 +190,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_24_223008) do
     t.bigint "extraction_definition_id", null: false
     t.integer "http_method", default: 0
     t.index ["extraction_definition_id"], name: "index_requests_on_extraction_definition_id"
+  end
+
+  create_table "schedules", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "frequency"
+    t.integer "hour"
+    t.integer "minutes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "pipeline_id", null: false
+    t.bigint "destination_id"
+    t.index ["destination_id"], name: "index_schedules_on_destination_id"
+    t.index ["pipeline_id"], name: "index_schedules_on_pipeline_id"
   end
 
   create_table "transformation_definitions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
