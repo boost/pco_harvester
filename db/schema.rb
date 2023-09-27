@@ -193,9 +193,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_27_004920) do
   end
 
   create_table "schedules", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "frequency"
-    t.integer "hour"
-    t.integer "minutes"
+    t.integer "frequency", default: 0
+    t.string "time"
+    t.integer "day"
+    t.string "harvest_definitions_to_run"
+    t.integer "day_of_the_month"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "pipeline_id", null: false

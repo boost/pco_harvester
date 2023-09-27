@@ -23,7 +23,7 @@
           <%= select_tag(
                 :sort_by,
                 options_for_select([['Alphabetical', 'name'], ['Last Edited', 'updated_at']], @sort_by.first),
-                class: ' form-select', id: 'js-content-source-filter'
+                class: 'form-select', id: 'js-content-source-filter'
               ) %>
         <% end %>
       </li>

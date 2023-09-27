@@ -1,0 +1,91 @@
+<%= vertical_form_with model: [@pipeline, @schedule], id: 'js-schedule-form' do |form| %>
+
+  <div class='card'>
+    <div class='card-body'>
+
+      <h4>Schedule Settings</h4>
+
+      <div class='row gy-3 align-items-center my-2'>
+        <div class="col-3">
+          <%= form.label :frequency, 'Schedule frequency', class: 'form-label' %>
+        </div>
+
+        <div class='col-2'>
+          <%= form.select :frequency, options_for_select(
+                Schedule.frequencies.map do |key, _value|
+                  [key.humanize, key]
+              end
+          ), {}, class: 'form-select' %>
+        </div>
+      </div>
+
+      <div class='row gy-3 align-items-center my-2'>
+        <div class="col-3">
+          <%= form.label '', 'Run daily at', class: 'form-label' %>
+        </div>
+
+        <div class='col-8'>
+          <ul class='p-0'> 
+            <li class='d-inline-block me-2'><%= form.text_field :time, class: 'form-control' %></li>
+
+            <li class='d-inline-block me-2'>every</li>
+
+            <li class='d-inline-block'>
+              <%= form.select :day, options_for_select(
+                    Schedule.days.map do |key, _value|
+                      [key.humanize, key]
+                  end
+              ), {}, class: 'form-select' %>
+            </li>
+
+            <li class='d-inline-block ms-2'>on the</li>
+
+            <li class='d-inline-block mx-2'><%= form.select :day_of_the_month, 01..31, {}, class: 'form-select' %></li>
+
+            <li class='d-inline-block'>of the month</li>
+          </ul>
+        </div>
+      </div>
+
+      <br />
+
+      <h4>Run Settings</h4>
+
+      <div class='row gy-3 align-items-center my-2'>
+        <div class="col-3">
+          <%= form.label :harvest_definitions_to_run, 'Blocks to run', class: 'form-label' %>
+        </div>
+
+        <div class='col-2'>
+          <%- @pipeline.harvest_definitions.each do |harvest_definition| %>
+            <div class='form-check'>
+              <%= label_tag do %>
+
+                <%= check_box('schedule', 'harvest_definitions_to_run', {
+                                multiple: true,
+                                checked: harvest_definition.ready_to_run?,
+                                class: "form-check-input js-pipeline-#{harvest_definition.kind}-checkbox",
+                                disabled: !harvest_definition.ready_to_run?
+                              }, harvest_definition.id, nil) %>
+
+                <%= harvest_definition.source_id %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class='row gy-3 align-items-center my-2'>
+        <div class="col-3">
+          <%= form.label :destination_id, 'Destination', class: 'form-label' %>
+        </div>
+
+        <div class='col-2'>
+          <%= form.select :destination_id, options_from_collection_for_select(@destinations, 'id', 'name'), {}, class: 'form-select' %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+<% end %>

@@ -24,3 +24,30 @@
     </li>
   </ul>
 <% end %>
+
+<div class='mb-4'></div>
+
+<div class='row'>
+
+  <div class='col-3'>
+    <%= link_to new_pipeline_schedule_path(@pipeline), class: 'card card--create-cta mb-3 d-flex' do %>
+      <div class='card-body align-items-center d-flex justify-content-center'>
+        <h5 class="card-title">+ Create new schedule</h5>
+      </div>
+    <% end %>
+  </div>
+
+  <%- @pipeline.schedules.each do |schedule| %>
+    <div class='col-3'>
+      <%= link_to schedule, class: 'card mb-3 d-flex' do %>
+        <div class="card-body">
+          <h5 class="card-title">Title</h5>
+          <h6 class="card-subtitle">
+            <%= last_edited_by(schedule) %>
+          </h6>
+        </div>
+      <% end %>
+    </div>
+  <%- end %>
+
+</div>
