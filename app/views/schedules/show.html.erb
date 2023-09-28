@@ -7,6 +7,8 @@
 
   <div class="float-end">
     <%= link_to 'Edit', edit_pipeline_schedule_path(@pipeline, @schedule), class: 'btn btn-outline-primary' %>
+
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">Delete</button>
   </div>
 
   <div class="clearfix"></div>
@@ -90,3 +92,8 @@
     </div>
   </div>
 </div>
+
+<%= render layout: 'shared/delete_modal',
+           locals: { path: pipeline_schedule_path(@pipeline, @schedule) } do %>
+  Are you sure you want to delete "<%= @schedule.name %>"?
+<% end %>
