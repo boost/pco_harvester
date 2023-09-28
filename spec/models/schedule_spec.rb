@@ -103,4 +103,48 @@ RSpec.describe Schedule, type: :model do
       it { is_expected.to validate_presence_of(:day_of_the_month).with_message("can't be blank") }
     end
   end
+
+  describe '#cron_syntax' do
+    context 'daily' do
+      it 'returns a valid cron syntax for a minute and hour' do
+        schedule = create(:schedule, frequency: 0, time: '12:30', pipeline:, destination:, harvest_definitions_to_run:)
+
+        expect(schedule.cron_syntax).to eq '30 12 * * *'
+      end
+
+      it 'returns a valid cron syntax when there is just an hour' do
+        schedule = create(:schedule, frequency: 0, time: '12', pipeline:, destination:, harvest_definitions_to_run:)
+
+        expect(schedule.cron_syntax).to eq '0 12 * * *'
+      end
+    end
+
+    context 'weekly' do
+      it 'returns a valid cron syntax for a particular day of the week' do
+        schedule = create(:schedule, frequency: 1, day: 3, time: '12:30', pipeline:, destination:, harvest_definitions_to_run:)
+
+        expect(schedule.cron_syntax).to eq '30 12 * * 3' 
+      end
+    end 
+
+    context 'fortnightly' do
+      # TODO
+    end
+    
+    # context 'fornightly' do
+    #   pending 'returns a valid cron syntax for a day of the fortnight' do
+    #     schedule = create(:schedule, frequency: 2, day: 1, time: '12:30', pipeline:, destination:, harvest_definitions_to_run:)
+
+    #     expect(schedule.cron_syntax).to eq '30 12 * * *'
+    #   end
+    # end
+
+    context 'monthly' do
+      it 'returns a valid cron syntax for a day of the month' do
+        schedule = create(:schedule, frequency: 3, fornightly_day_one: 1, fornightly_day_two: 15, time: '12:30', pipeline:, destination:, harvest_definitions_to_run:)
+
+        expect(schedule.cron_syntax).to eq '30 12 21 * *'
+      end
+    end
+  end
 end
