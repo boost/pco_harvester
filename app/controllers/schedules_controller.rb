@@ -4,19 +4,20 @@ class SchedulesController < ApplicationController
   include LastEditedBy
 
   before_action :find_pipeline
-  before_action :find_destinations, only: %i[new create]
+  before_action :find_destinations, only: %i[new create edit update]
+  before_action :find_schedule, except: %i[index new create]
 
   def index
-    @schedules = @pipeline.schedules
+    @schedules = @pipeline.schedules.order(updated_at: :desc).page(params[:page])
   end
 
-  def show
-    @schedule = Schedule.find(params[:id])
-  end
+  def show; end
 
   def new
     @schedule = Schedule.new
   end
+
+  def edit; end
 
   def create
     @schedule = Schedule.new(schedule_params)
@@ -29,10 +30,32 @@ class SchedulesController < ApplicationController
     end
   end
 
+  def update
+    if @schedule.update(schedule_params)
+      redirect_to pipeline_schedule_path(@pipeline, @schedule), notice: t('.success')
+    else
+      flash.alert = t('.failure')
+      render :edit
+    end
+  end
+
+  def destroy
+    if @schedule.destroy
+      redirect_to pipeline_schedules_path(@pipeline), notice: t('.success')
+    else
+      flash.alert = t('.failure')
+      redirect_to pipeline_schedule_path(@pipeline, @schedule)
+    end
+  end
+
   private
 
   def find_pipeline
     @pipeline = Pipeline.find(params[:pipeline_id])
+  end
+
+  def find_schedule
+    @schedule = Schedule.find(params[:id])
   end
 
   def find_destinations

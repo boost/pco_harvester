@@ -6,7 +6,7 @@
   <h1 class="header__title"><%= @schedule.name %></h1>
 
   <div class="float-end">
-    <%= link_to 'Edit', pipeline_schedules_path(@pipeline), class: 'btn btn-outline-primary' %>
+    <%= link_to 'Edit', edit_pipeline_schedule_path(@pipeline, @schedule), class: 'btn btn-outline-primary' %>
   </div>
 
   <div class="clearfix"></div>

@@ -37,14 +37,16 @@
     <% end %>
   </div>
 
-  <%- @pipeline.schedules.each do |schedule| %>
+  <%- @schedules.each do |schedule| %>
     <div class='col-3'>
       <%= link_to pipeline_schedule_path(@pipeline, schedule), class: 'card mb-3 d-flex' do %>
         <div class="card-body">
-          <h5 class="card-title">Title</h5>
+          <h5 class="card-title"><%= schedule.name %></h5>
         </div>
       <% end %>
     </div>
   <%- end %>
 
 </div>
+
+<%= render 'shared/pagination_below_table', items: @schedules %>

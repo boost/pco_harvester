@@ -40,6 +40,27 @@ RSpec.describe Schedule, type: :model do
         expect { schedule.destroy }.to change(Sidekiq::Cron::Job, :count).by(-1)
       end
     end
+
+    context 'when an existing Schedule is updated' do
+      it 'updates the Sidekiq::Cron::Job with the new details' do
+        Sidekiq::Cron::Job.destroy_all!
+
+        schedule = create(:schedule, frequency: 0, time: '12:30', pipeline:, destination:, harvest_definitions_to_run:, name: 'Pipeline Schedule')
+        sidekiq_cron  = Sidekiq::Cron::Job.all.first
+
+        expect(Sidekiq::Cron::Job.all.count).to eq 1
+        expect(sidekiq_cron.name).to eq 'Pipeline Schedule'
+        expect(sidekiq_cron.cron).to eq '30 12 * * *'
+
+        schedule.update(name: 'Updated Pipeline Schedule', time: '11:45')
+        
+        sidekiq_cron  = Sidekiq::Cron::Job.all.first
+
+        expect(Sidekiq::Cron::Job.all.count).to eq 1
+        expect(sidekiq_cron.name).to eq 'Updated Pipeline Schedule'
+        expect(sidekiq_cron.cron).to eq '45 11 * * *' 
+      end
+    end
   end
 
   describe 'frequency' do
@@ -54,9 +75,9 @@ RSpec.describe Schedule, type: :model do
       expect(weekly.weekly?).to be true
     end
 
-    it 'can be fortnightly' do
+    it 'can be bi_monthly' do
       fortnightly = build(:schedule, frequency: 2, pipeline:, destination:, harvest_definitions_to_run:)
-      expect(fortnightly.fortnightly?).to be true
+      expect(fortnightly.bi_monthly?).to be true
     end
 
     it 'can be monthly' do
@@ -125,10 +146,11 @@ RSpec.describe Schedule, type: :model do
       it { is_expected.to validate_presence_of(:day).with_message("can't be blank") }
     end
 
-    context 'fortnightly' do
-      subject { build(:schedule, frequency: :fortnightly, pipeline:, destination:, harvest_definitions_to_run:) }
+    context 'bi_monthly' do
+      subject { build(:schedule, frequency: :bi_monthly, pipeline:, destination:, harvest_definitions_to_run:) }
 
-      it { is_expected.to validate_presence_of(:day).with_message("can't be blank") }
+      it { is_expected.to validate_presence_of(:bi_monthly_day_one).with_message("can't be blank") }
+      it { is_expected.to validate_presence_of(:bi_monthly_day_two).with_message("can't be blank") }
     end
 
     context 'monthly' do
@@ -164,15 +186,7 @@ RSpec.describe Schedule, type: :model do
     context 'fortnightly' do
       # TODO
     end
-    
-    # context 'fornightly' do
-    #   pending 'returns a valid cron syntax for a day of the fortnight' do
-    #     schedule = create(:schedule, frequency: 2, day: 1, time: '12:30', pipeline:, destination:, harvest_definitions_to_run:)
-
-    #     expect(schedule.cron_syntax).to eq '30 12 * * *'
-    #   end
-    # end
-
+  
     context 'monthly' do
       it 'returns a valid cron syntax for a day of the month' do
         schedule = create(:schedule, frequency: 3, day_of_the_month: 21, time: '12:30', pipeline:, destination:, harvest_definitions_to_run:)

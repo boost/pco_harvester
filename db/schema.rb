@@ -199,6 +199,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_27_004920) do
     t.integer "day"
     t.string "harvest_definitions_to_run"
     t.integer "day_of_the_month"
+    t.integer "bi_monthly_day_one"
+    t.integer "bi_monthly_day_two"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "pipeline_id", null: false

@@ -138,6 +138,12 @@ en:
     create:
       success: Schedule created successfully
       failure: There was an issue creating your Schedule
+    update:
+      success: Schedule updated successfully
+      failure: There was an issue updating your Schedule
+    destroy:
+      success: Schedule deleted successfully
+      failure: There was an issue deleting your Schedule
 
   users:
     unauthorized: You are not authorized to access this page

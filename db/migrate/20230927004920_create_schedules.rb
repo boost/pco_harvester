@@ -7,6 +7,8 @@ class CreateSchedules < ActiveRecord::Migration[7.0]
       t.integer :day
       t.string  :harvest_definitions_to_run
       t.integer :day_of_the_month
+      t.integer :bi_monthly_day_one
+      t.integer :bi_monthly_day_two
 
       t.timestamps
     end
