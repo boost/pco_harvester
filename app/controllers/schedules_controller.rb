@@ -10,6 +10,10 @@ class SchedulesController < ApplicationController
     @schedules = @pipeline.schedules
   end
 
+  def show
+    @schedule = Schedule.find(params[:id])
+  end
+
   def new
     @schedule = Schedule.new
   end
@@ -36,7 +40,7 @@ class SchedulesController < ApplicationController
   end
 
   def schedule_params
-    params.require(:schedule).permit(:frequency, :time, :day, :day_of_the_month,
+    params.require(:schedule).permit(:frequency, :time, :day, :day_of_the_month, :name,
                                      :pipeline_id, :destination_id, harvest_definitions_to_run: [])
   end
 end

@@ -2,7 +2,8 @@
 
 FactoryBot.define do
   factory :schedule do
-    frequency { 0 }
+    name { Faker::Name.name }
+    frequency { :daily }
     time      { '22:00' }
     harvest_definitions_to_run { [] }
   end

@@ -9,6 +9,16 @@
 
       <div class='row gy-3 align-items-center my-2'>
         <div class="col-3">
+          <%= form.label :name, 'Name', class: 'form-label' %>
+        </div>
+
+        <div class='col-7'>
+          <%= form.text_field :name, class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class='row gy-3 align-items-center my-2'>
+        <div class="col-3">
           <%= form.label :frequency, 'Schedule frequency', class: 'form-label' %>
         </div>
 

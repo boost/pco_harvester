@@ -15,13 +15,29 @@ RSpec.describe Schedule, type: :model do
     context 'when a new Schedule is created' do
       it 'creates a Sidekiq::Cron::Job' do
 
-        expect(Sidekiq::Cron::Job).to receive(:create).with_arguments(class: 'ScheduleWorker')
+        expect(Sidekiq::Cron::Job).to receive(:create).with(
+          name: 'Pipeline Schedule',
+          cron: '30 12 * * *',
+          class: 'ScheduleWorker',
+          args: {
+            pipeline_id: pipeline.id,
+            harvest_definitions_to_run:,
+            destination_id: destination.id,
+            key: anything,
+            page_type: :all_available_pages
+          }
+        )
+        
+        create(:schedule, frequency: 0, time: '12:30', pipeline:, destination:, harvest_definitions_to_run:, name: 'Pipeline Schedule')
       end
     end
 
     context 'when an existing Schedule is deleted' do
       it 'deletes its matching Sidekiq::Cron::Job' do
 
+        schedule = create(:schedule, frequency: 0, time: '12:30', pipeline:, destination:, harvest_definitions_to_run:, name: 'Pipeline Schedule')
+
+        expect { schedule.destroy }.to change(Sidekiq::Cron::Job, :count).by(-1)
       end
     end
   end
@@ -94,11 +110,14 @@ RSpec.describe Schedule, type: :model do
   end
   
   describe 'validations' do
+    let!(:schedule) { create(:schedule, frequency: 0, time: '12:30', pipeline:, destination:, harvest_definitions_to_run:, name: 'Pipeline Schedule') }
     it { is_expected.to validate_presence_of(:pipeline).with_message('must exist') }
     it { is_expected.to validate_presence_of(:destination).with_message('must exist') }
     it { is_expected.to validate_presence_of(:frequency).with_message("can't be blank") }
+    it { is_expected.to validate_presence_of(:name).with_message("can't be blank") }
     it { is_expected.to validate_presence_of(:time).with_message("can't be blank") }
     it { is_expected.to validate_presence_of(:harvest_definitions_to_run).with_message("can't be blank") }
+    it { is_expected.to validate_uniqueness_of(:name).case_insensitive.with_message('has already been taken') }
 
     context 'weekly' do
       subject { build(:schedule, frequency: :weekly, pipeline:, destination:, harvest_definitions_to_run:) }
@@ -156,7 +175,7 @@ RSpec.describe Schedule, type: :model do
 
     context 'monthly' do
       it 'returns a valid cron syntax for a day of the month' do
-        schedule = create(:schedule, frequency: 3, fornightly_day_one: 1, fornightly_day_two: 15, time: '12:30', pipeline:, destination:, harvest_definitions_to_run:)
+        schedule = create(:schedule, frequency: 3, day_of_the_month: 21, time: '12:30', pipeline:, destination:, harvest_definitions_to_run:)
 
         expect(schedule.cron_syntax).to eq '30 12 21 * *'
       end

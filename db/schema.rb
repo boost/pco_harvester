@@ -193,6 +193,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_27_004920) do
   end
 
   create_table "schedules", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
     t.integer "frequency", default: 0
     t.string "time"
     t.integer "day"
@@ -203,6 +204,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_27_004920) do
     t.bigint "pipeline_id", null: false
     t.bigint "destination_id"
     t.index ["destination_id"], name: "index_schedules_on_destination_id"
+    t.index ["name"], name: "index_schedules_on_name", unique: true
     t.index ["pipeline_id"], name: "index_schedules_on_pipeline_id"
   end
 
