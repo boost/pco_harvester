@@ -25,7 +25,7 @@ class Schedule < ApplicationRecord
   def hour
     hour_and_minutes.first
   end
-  
+
   def minute
     return 0 if hour_and_minutes.count == 1
 
@@ -34,7 +34,7 @@ class Schedule < ApplicationRecord
 
   def day_of_the_week
     return '*' unless weekly?
-    
+
     Schedule.days[day]
   end
 
