@@ -11,6 +11,21 @@ RSpec.describe Schedule, type: :model do
     it { is_expected.to belong_to(:destination) }
   end
 
+  describe 'cron scheduling' do
+    context 'when a new Schedule is created' do
+      it 'creates a Sidekiq::Cron::Job' do
+
+        expect(Sidekiq::Cron::Job).to receive(:create).with_arguments(class: 'ScheduleWorker')
+      end
+    end
+
+    context 'when an existing Schedule is deleted' do
+      it 'deletes its matching Sidekiq::Cron::Job' do
+
+      end
+    end
+  end
+
   describe 'frequency' do
     it 'can be daily' do
       daily = build(:schedule, frequency: 0, pipeline:, destination:, harvest_definitions_to_run:)

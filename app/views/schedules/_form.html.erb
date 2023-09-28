@@ -1,5 +1,7 @@
 <%= vertical_form_with model: [@pipeline, @schedule], id: 'js-schedule-form' do |form| %>
 
+  <%= form.hidden_field :pipeline_id, readonly: true, value: @pipeline.id %>
+
   <div class='card'>
     <div class='card-body'>
 

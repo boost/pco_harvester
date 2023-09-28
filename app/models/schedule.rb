@@ -16,6 +16,21 @@ class Schedule < ApplicationRecord
   validates :day, presence: true,              if: -> { weekly? || fortnightly? }
   validates :day_of_the_month, presence: true, if: -> { monthly? }
 
+  after_create do
+    Sidekiq::Cron::Job.create(
+      name: 'Test',
+      cron: cron_syntax,
+      class: 'ScheduleWorker',
+      args: {
+        pipeline_id: pipeline.id,
+        harvest_definitions_to_run:,
+        destination_id: destination.id,
+        key: SecureRandom.hex,
+        page_type: :all_available_pages
+      }
+    )
+  end
+
   def cron_syntax
     "#{minute} #{hour} #{month_day} #{month} #{day_of_the_week}"
   end

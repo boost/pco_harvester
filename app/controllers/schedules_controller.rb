@@ -4,7 +4,7 @@ class SchedulesController < ApplicationController
   include LastEditedBy
 
   before_action :find_pipeline
-  before_action :find_destinations, only: %i[new]
+  before_action :find_destinations, only: %i[new create]
 
   def index
     @schedules = @pipeline.schedules

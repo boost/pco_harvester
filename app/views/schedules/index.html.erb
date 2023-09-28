@@ -39,12 +39,9 @@
 
   <%- @pipeline.schedules.each do |schedule| %>
     <div class='col-3'>
-      <%= link_to schedule, class: 'card mb-3 d-flex' do %>
+      <%= link_to pipeline_schedule_path(@pipeline, schedule), class: 'card mb-3 d-flex' do %>
         <div class="card-body">
           <h5 class="card-title">Title</h5>
-          <h6 class="card-subtitle">
-            <%= last_edited_by(schedule) %>
-          </h6>
         </div>
       <% end %>
     </div>
