@@ -26,35 +26,65 @@
           <%= form.select :frequency, options_for_select(
                 Schedule.frequencies.map do |key, _value|
                   [key.humanize, key]
-              end
-          ), {}, class: 'form-select' %>
+              end, @schedule.frequency
+          ), {}, class: 'form-select', id: 'js-schedule-frequency-select' %>
         </div>
       </div>
 
       <div class='row gy-3 align-items-center my-2'>
         <div class="col-3">
-          <%= form.label '', 'Run daily at', class: 'form-label' %>
+          <%= form.label '', 'Run daily at', class: 'form-label', id: 'js-schedule-run-label' %>
         </div>
 
         <div class='col-8'>
           <ul class='p-0'> 
             <li class='d-inline-block me-2'><%= form.text_field :time, class: 'form-control' %></li>
 
-            <li class='d-inline-block me-2'>every</li>
+            <span id='js-schedule-weekly'>
+              <li class='d-inline-block me-2'>every</li>
 
-            <li class='d-inline-block'>
-              <%= form.select :day, options_for_select(
-                    Schedule.days.map do |key, _value|
-                      [key.humanize, key]
-                  end
-              ), {}, class: 'form-select' %>
-            </li>
+              <li class='d-inline-block'>
+                <%= form.select :day, options_for_select(
+                      Schedule.days.map do |key, _value|
+                        [key.humanize, key]
+                    end,
+                    @schedule.day
+                ), {}, class: 'form-select' %>
+              </li>
+            </span>
 
-            <li class='d-inline-block ms-2'>on the</li>
+            <span id='js-schedule-monthly'>
+              <li class='d-inline-block ms-2'>on the</li>
 
-            <li class='d-inline-block mx-2'><%= form.select :day_of_the_month, 01..31, {}, class: 'form-select' %></li>
+              <li class='d-inline-block mx-2'><%= form.select :day_of_the_month, options_for_select(
+                (01..31).map do |day|
+                  [(day).ordinalize, day]
+                end,
+                @schedule.day_of_the_month
+              ), {}, class: 'form-select' %></li>
 
-            <li class='d-inline-block'>of the month</li>
+              <li class='d-inline-block'>of the month</li>
+            </span>
+
+            <span id='js-schedule-bi-monthly'>
+              <li class='d-inline-block ms-2'>on the</li>
+              <li class='d-inline-block mx-2'><%= form.select :bi_monthly_day_one, options_for_select(
+                (01..31).map do |day|
+                  [(day).ordinalize, day]
+                end,
+                @schedule.bi_monthly_day_one
+              ), {}, class: 'form-select' %></li>
+
+              <li class='d-inline-block ms-2'>and</li>
+
+              <li class='d-inline-block mx-2'><%= form.select :bi_monthly_day_two, options_for_select(
+                (01..31).map do |day|
+                  [(day).ordinalize, day]
+                end,
+                @schedule.bi_monthly_day_two
+              ), {}, class: 'form-select' %></li>
+              <li class='d-inline-block'>of the month</li>
+            </span>
           </ul>
         </div>
       </div>

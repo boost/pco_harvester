@@ -41,7 +41,7 @@ class Schedule < ApplicationRecord
   end
 
   def delete_sidekiq_cron_job(sidekiq_cron_name = name)
-    Sidekiq::Cron::Job.find(sidekiq_cron_name).destroy
+    Sidekiq::Cron::Job.find(sidekiq_cron_name)&.destroy
   end
 
   def refresh_sidekiq_cron_job
