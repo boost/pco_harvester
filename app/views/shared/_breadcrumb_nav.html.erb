@@ -31,18 +31,33 @@
         ) %>
 
     <%= breadcrumb_item(
-          text: 'Jobs',
+          text: 'Schedules',
           path: begin
-            pipeline_jobs_path(pipeline_id)
+            pipeline_schedules_path(pipeline_id)
           rescue StandardError
             nil
           end,
           active: begin
-            current_page?(pipeline_jobs_path(pipeline_id))
+            current_page?(pipeline_schedules_path(pipeline_id))
           rescue StandardError
             false
           end,
-          display: request.path.match?(%r{^/pipelines/\d+/jobs})
+          display: request.path.match?(%r{^/pipelines/\d+/schedules})
+        ) %>
+
+    <%= breadcrumb_item(
+          text: 'Jobs',
+          path: begin
+            pipeline_pipeline_jobs_path(pipeline_id)
+          rescue StandardError
+            nil
+          end,
+          active: begin
+            current_page?(pipeline_pipeline_jobs_path(pipeline_id))
+          rescue StandardError
+            false
+          end,
+          display: request.path.match?(%r{^/pipelines/\d+/pipeline_jobs})
         ) %>
 
     <%= breadcrumb_item(
@@ -68,6 +83,13 @@
         ) %>
 
     <%= breadcrumb_item(
+          text: @schedule&.name_in_database,
+          path: '',
+          active: current_page(:schedules, %w[show]),
+          display: request.path.match?(%r{^/pipelines/\d+/schedules/\d+})
+        ) %>
+
+    <%= breadcrumb_item(
           text: @harvest_job&.name_in_database,
           path: '',
           active: current_page(:harvest_jobs, %w[show]),
@@ -85,5 +107,6 @@
           active: action_name.in?(%w[new create]),
           display: action_name.in?(%w[new create])
         ) %>
+        
   </ol>
 </nav>
