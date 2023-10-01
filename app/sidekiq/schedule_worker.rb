@@ -15,4 +15,3 @@ class ScheduleWorker
     PipelineWorker.perform_async(job.id)
   end
 end
-

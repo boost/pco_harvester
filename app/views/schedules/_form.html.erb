@@ -41,7 +41,7 @@
             <li class='d-inline-block me-2'><%= form.text_field :time, class: 'form-control' %></li>
 
             <span id='js-schedule-weekly'>
-              <li class='d-inline-block me-2'>every</li>
+              <li class='d-inline-block me-2'>on</li>
 
               <li class='d-inline-block'>
                 <%= form.select :day, options_for_select(
@@ -62,8 +62,6 @@
                 end,
                 @schedule.day_of_the_month
               ), {}, class: 'form-select' %></li>
-
-              <li class='d-inline-block'>of the month</li>
             </span>
 
             <span id='js-schedule-bi-monthly'>
@@ -83,7 +81,6 @@
                 end,
                 @schedule.bi_monthly_day_two
               ), {}, class: 'form-select' %></li>
-              <li class='d-inline-block'>of the month</li>
             </span>
           </ul>
         </div>

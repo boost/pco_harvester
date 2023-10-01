@@ -1,4 +1,4 @@
-<%= content_for(:title) { 'New Schedule' } %>
+<%= content_for(:title) { @schedule.name } %>
 
 <%= content_for :header do %>
   <%= render 'shared/breadcrumb_nav' %>
@@ -35,21 +35,11 @@
 
     <div class='row gy-3 align-items-center my-2'>
       <div class="col-3">
-        <strong>Frequency</strong>
+        <strong><%= schedule_run_label(@schedule) %></strong>
       </div>
 
       <div class='col-7'>
-        <%= @schedule.frequency.capitalize %>
-      </div>
-    </div>
-
-    <div class='row gy-3 align-items-center my-2'>
-      <div class="col-3">
-        <strong>Time</strong>
-      </div>
-
-      <div class='col-7'>
-        <%= @schedule.time %>
+        <%= schedule_run_text(@schedule) %>
       </div>
     </div>
 
