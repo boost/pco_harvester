@@ -14,11 +14,14 @@ class Schedule < ApplicationRecord
   enum :frequency, { daily: 0, weekly: 1, bi_monthly: 2, monthly: 3 }
   enum :day,       { sunday: 0, monday: 1, tuesday: 2, wednesday: 3, thursday: 4, friday: 5, saturday: 6 }, prefix: :on
 
-  validates :day, presence: true,                if: -> { weekly? }
-  validates :bi_monthly_day_one, presence: true, if: -> { bi_monthly? }
-  validates :bi_monthly_day_two, presence: true, if: -> { bi_monthly? }
-  validates :day_of_the_month, presence: true,   if: -> { monthly? }
+  validates :day, presence: true, if: -> { weekly? }
 
+  with_options presence: true, if: :bi_monthly? do
+    validates :bi_monthly_day_one
+    validates :bi_monthly_day_two
+  end
+
+  validates :day_of_the_month, presence: true, if: -> { monthly? }
 
   after_create  :create_sidekiq_cron_job
   after_update  :refresh_sidekiq_cron_job
@@ -73,7 +76,8 @@ class Schedule < ApplicationRecord
   end
 
   def month_day
-    return '*' unless monthly?
+    return '*' unless monthly? || bi_monthly?
+    return "#{bi_monthly_day_one}/#{bi_monthly_day_two}" if bi_monthly?
 
     day_of_the_month
   end

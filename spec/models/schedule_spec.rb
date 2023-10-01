@@ -184,7 +184,11 @@ RSpec.describe Schedule, type: :model do
     end 
 
     context 'fortnightly' do
-      # TODO
+      it 'returns a valid cron syntax for a bi monthly schedule' do
+        schedule = create(:schedule, frequency: 2, bi_monthly_day_one: 1, bi_monthly_day_two: 14, time: '10:45', pipeline:, destination:, harvest_definitions_to_run:)
+
+        expect(schedule.cron_syntax).to eq '45 10 1/14 * *'
+      end
     end
   
     context 'monthly' do
