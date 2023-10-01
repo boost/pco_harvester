@@ -87,6 +87,12 @@ class Schedule < ApplicationRecord
   end
 
   def hour_and_minutes
-    time.split(':')
+    sanitized_time.split(':')
+  end
+
+  def sanitized_time
+    return DateTime.parse(time).strftime('%H:%M') if time.downcase.include?('am') || time.downcase.include?('pm')
+
+    time
   end
 end

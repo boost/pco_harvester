@@ -173,6 +173,18 @@ RSpec.describe Schedule, type: :model do
 
         expect(schedule.cron_syntax).to eq '0 12 * * *'
       end
+
+      it 'returns a valid cron syntax when the time has AM or PM' do
+        schedule = create(:schedule, frequency: 0, time: '7:45PM', pipeline:, destination:, harvest_definitions_to_run:)
+
+        expect(schedule.cron_syntax).to eq '45 19 * * *'
+      end
+
+      it 'returns a valid cron syntax when the time is a late 24 hour time' do
+        schedule = create(:schedule, frequency: 0, time: '22:00', pipeline:, destination:, harvest_definitions_to_run:)
+
+        expect(schedule.cron_syntax).to eq '00 22 * * *'
+      end
     end
 
     context 'weekly' do
