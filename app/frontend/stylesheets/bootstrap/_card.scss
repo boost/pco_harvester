@@ -19,6 +19,10 @@
     border: 1px solid $primary;
     color: $primary;
 
+    .card-title {
+      margin-bottom: 0;
+    }
+
     .card-body {
       width: 100%;
     }
