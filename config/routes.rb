@@ -21,6 +21,10 @@ Rails.application.routes.draw do
   
   resources :pipelines, only: %i[index show create update edit destroy] do
     post :clone, on: :member
+
+    member do
+      get 'edit_name'
+    end
     
     resources :pipeline_jobs, only: %i[create show index] do
       post :cancel, on: :member

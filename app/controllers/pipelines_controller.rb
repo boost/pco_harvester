@@ -4,25 +4,15 @@ class PipelinesController < ApplicationController
   include LastEditedBy
 
   before_action :assign_sort_by, only: %w[index create]
-  before_action :find_pipeline, only: %w[show destroy edit update clone]
+  before_action :find_pipeline, only: %w[show destroy edit update clone edit_name]
+  before_action :assign_show_variables, only: %w[show update]
 
   def index
     @pipelines = Pipeline.order(@sort_by).page(params[:page])
     @pipeline = Pipeline.new
   end
 
-  def show
-    @harvest_definition = @pipeline.harvest || HarvestDefinition.new(pipeline: @pipeline)
-    @pipeline_job = PipelineJob.new
-
-    @enrichment_definition = HarvestDefinition.new(pipeline: @pipeline)
-
-    if @harvest_definition&.extraction_definition.present?
-      @extraction_jobs = @harvest_definition.extraction_definition.extraction_jobs.completed.order(created_at: :desc)
-    end
-
-    @destinations = Destination.all
-  end
+  def show; end
 
   def edit; end
 
@@ -38,10 +28,13 @@ class PipelinesController < ApplicationController
     end
   end
 
+  def edit_name; end
+
   def update
     if @pipeline.update(pipeline_params)
-      redirect_to pipeline_path(@pipeline), notice: t('.success')
+      render :show, status: :ok, layout: 'application'
     else
+      # TODO
       flash.alert = t('.failure')
       render :edit
     end
@@ -73,6 +66,19 @@ class PipelinesController < ApplicationController
   end
 
   private
+
+  def assign_show_variables
+    @harvest_definition = @pipeline.harvest || HarvestDefinition.new(pipeline: @pipeline)
+    @pipeline_job = PipelineJob.new
+
+    @enrichment_definition = HarvestDefinition.new(pipeline: @pipeline)
+
+    if @harvest_definition&.extraction_definition.present?
+      @extraction_jobs = @harvest_definition.extraction_definition.extraction_jobs.completed.order(created_at: :desc)
+    end
+
+    @destinations = Destination.all
+  end
 
   def find_pipeline
     @pipeline = Pipeline.find(params[:id])

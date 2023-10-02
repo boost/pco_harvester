@@ -1,0 +1,6 @@
+<%= turbo_frame_tag :edit_name do %>
+  <%= form_with model: @pipeline, url: pipeline_path(@pipeline) do |form| %>
+    <%= form.text_field :name %>
+    <%= form.submit "Save" %>
+  <% end %>
+<% end %>
