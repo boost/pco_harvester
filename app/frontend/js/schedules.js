@@ -24,21 +24,21 @@ function scheduleFrequencyLogic(frequency) {
   hideDynamicFrequencyInputs();
 
   if (frequency == "daily") {
-    scheduleRunLabel.innerHTML = "Run daily at";
+    scheduleRunLabel.innerText = "Run daily at";
   } else if (frequency == "weekly") {
-    scheduleRunLabel.innerHTML = "Run weekly at";
-    scheduleWeekly.style.display = "inline-block";
+    scheduleRunLabel.innerText = "Run weekly at";
+    scheduleWeekly.classList.remove('d-none');
   } else if (frequency == "bi_monthly") {
-    scheduleRunLabel.innerHTML = "Run monthly at";
-    scheduleBiMonthly.style.display = "inline-block";
+    scheduleRunLabel.innerText = "Run monthly at";
+    scheduleBiMonthly.classList.remove('d-none');
   } else if (frequency == "monthly") {
-    scheduleRunLabel.innerHTML = "Run monthly at";
-    scheduleMonthly.style.display = "inline-block";
+    scheduleRunLabel.innerText = "Run monthly at";
+    scheduleMonthly.classList.remove('d-none');
   }
 }
 
 function hideDynamicFrequencyInputs() {
-  scheduleWeekly.style.display = "none";
-  scheduleBiMonthly.style.display = "none";
-  scheduleMonthly.style.display = "none";
+  scheduleWeekly.classList.add('d-none');
+  scheduleBiMonthly.classList.add('d-none');
+  scheduleMonthly.classList.add('d-none');
 }

@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class SchedulesController < ApplicationController
-  include LastEditedBy
-
   before_action :find_pipeline
   before_action :find_destinations, only: %i[new create edit update]
   before_action :find_schedule, except: %i[index new create]
