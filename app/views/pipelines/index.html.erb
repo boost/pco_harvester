@@ -23,7 +23,7 @@
           <%= select_tag(
                 :sort_by,
                 options_for_select([['Alphabetical', 'name'], ['Last Edited', 'updated_at']], @sort_by.first),
-                class: ' form-select', id: 'js-content-source-filter'
+                class: 'form-select', id: 'js-content-source-filter'
               ) %>
         <% end %>
       </li>
@@ -60,6 +60,12 @@
               <span class="badge bg-light text-dark">
                 <%= pipeline.harvest_definitions.enrichment.count %> Enrichments
               </span>
+
+              <% if pipeline.schedules.any? %>
+                <span class="badge bg-primary">
+                  Scheduled
+                </span>
+              <% end %>
             </div>
           </div>
         <% end %>

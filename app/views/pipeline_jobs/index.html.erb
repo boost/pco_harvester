@@ -16,6 +16,10 @@
     </li>
 
     <li class='nav-item'>
+      <%= link_to "Schedules (#{@pipeline.schedules.count})", pipeline_schedules_path(@pipeline), class: 'nav-link' %>
+    </li>
+
+    <li class='nav-item'>
       <%= link_to 'Jobs', pipeline_pipeline_jobs_path(@pipeline), class: 'nav-link active' %>
     </li>
   </ul>
@@ -36,6 +40,7 @@
     <thead>
       <tr class='table-primary'>
         <th scope="col">Pipeline jobs</th>
+        <th scope="col">Run by</th>
         <th scope="col">Status</th>
         <th scope="col">Job started</th>
         <th scope="col">Duration</th>
@@ -63,6 +68,13 @@
 
               <tr>
                 <td><%= report.harvest_job.name %></td>
+                <td>
+                  <% if pipeline_job.schedule.present? %>
+                    Schedule
+                  <% else %>
+                    <%= pipeline_job&.user&.username %>
+                  <% end %>
+                </td>
                 <td>
                   <span class="<%= badge_classes %>">
                     <%= report.status.capitalize %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_24_223008) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_27_004920) do
   create_table "destinations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "url", null: false
@@ -168,10 +168,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_24_223008) do
     t.bigint "extraction_job_id"
     t.integer "page_type", default: 0
     t.integer "pages"
+    t.bigint "schedule_id"
+    t.bigint "user_id"
     t.index ["destination_id"], name: "index_pipeline_jobs_on_destination_id"
     t.index ["extraction_job_id"], name: "index_pipeline_jobs_on_extraction_job_id"
     t.index ["key"], name: "index_pipeline_jobs_on_key", unique: true
     t.index ["pipeline_id"], name: "index_pipeline_jobs_on_pipeline_id"
+    t.index ["schedule_id"], name: "index_pipeline_jobs_on_schedule_id"
+    t.index ["user_id"], name: "index_pipeline_jobs_on_user_id"
   end
 
   create_table "pipelines", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -190,6 +194,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_24_223008) do
     t.bigint "extraction_definition_id", null: false
     t.integer "http_method", default: 0
     t.index ["extraction_definition_id"], name: "index_requests_on_extraction_definition_id"
+  end
+
+  create_table "schedules", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.integer "frequency", default: 0
+    t.string "time"
+    t.integer "day"
+    t.string "harvest_definitions_to_run"
+    t.integer "day_of_the_month"
+    t.integer "bi_monthly_day_one"
+    t.integer "bi_monthly_day_two"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "pipeline_id", null: false
+    t.bigint "destination_id"
+    t.index ["destination_id"], name: "index_schedules_on_destination_id"
+    t.index ["name"], name: "index_schedules_on_name", unique: true
+    t.index ["pipeline_id"], name: "index_schedules_on_pipeline_id"
   end
 
   create_table "transformation_definitions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
