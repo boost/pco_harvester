@@ -3,7 +3,7 @@
 class Schedule < ApplicationRecord
   belongs_to :pipeline
   belongs_to :destination
-  has_many   :pipeline_jobs
+  has_many   :pipeline_jobs, dependent: :nullify
 
   serialize :harvest_definitions_to_run, Array
 

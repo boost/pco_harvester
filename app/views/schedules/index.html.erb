@@ -16,7 +16,8 @@
     </li>
 
     <li class='nav-item'>
-      <%= link_to "Schedules (#{@pipeline.schedules.count})", pipeline_schedules_path(@pipeline), class: 'nav-link active' %>
+      <%= link_to "Schedules (#{@pipeline.schedules.count})", pipeline_schedules_path(@pipeline),
+                  class: 'nav-link active' %>
     </li>
 
     <li class='nav-item'>
@@ -44,7 +45,7 @@
           <h5 class="card-title"><%= schedule.name %></h5>
 
           <p>Next run <%= schedule.next_run_time.strftime('%d/%m/%Y at %l:%M %p') %></p>
-          
+
           <% if schedule.pipeline_jobs.present? %>
             <p>Last run <%= schedule.last_run_time.strftime('%d/%m/%Y at %l:%M %p') %></p>
           <% end %>

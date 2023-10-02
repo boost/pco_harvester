@@ -70,7 +70,7 @@
                 <td><%= report.harvest_job.name %></td>
                 <td>
                   <% if pipeline_job.schedule.present? %>
-                    Schedule 
+                    Schedule
                   <% else %>
                     <%= pipeline_job&.user&.username %>
                   <% end %>
