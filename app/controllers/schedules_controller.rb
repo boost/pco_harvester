@@ -23,7 +23,7 @@ class SchedulesController < ApplicationController
     @schedule = Schedule.new(schedule_params)
 
     if @schedule.save
-      redirect_to pipeline_schedules_path(@pipeline, @schedule), notice: t('.success')
+      redirect_to pipeline_schedules_path(@pipeline), notice: t('.success')
     else
       flash.alert = t('.failure')
       render :new

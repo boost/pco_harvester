@@ -300,7 +300,7 @@
         <% else %>
           <button
             type="button"
-            class="card card--create-cta d-flex"
+            class="card card--create-cta d-flex h-100"
             data-bs-toggle="modal"
             data-bs-target="#add-harvest-extraction">
             <div class="card-body align-items-center d-flex justify-content-center">
@@ -340,7 +340,7 @@
           <button
             type="button"
             class="<%= class_names(
-                         'card', 'card--create-cta', 'd-flex',
+                         'card', 'card--create-cta', 'd-flex', 'h-100',
                          'card--create-cta-disabled': disabled
                        ) %>"
             <% if @harvest_definition&.extraction_definition&.extraction_jobs&.any?(&:completed?) %>
@@ -490,7 +490,7 @@
 
             <button
               type="button"
-              class="card card--create-cta d-flex"
+              class="card card--create-cta d-flex h-100"
               data-bs-toggle="modal"
               data-bs-target="#add-enrichment-extraction-<%= enrichment_definition.id %>">
               <div class="card-body d-flex align-items-center justify-content-center">
@@ -564,7 +564,7 @@
           <% else %>
             <button
               type="button"
-              class="card mb-3 card--create-cta d-flex"
+              class="card mb-3 card--create-cta d-flex h-100"
               data-bs-toggle="modal"
               data-bs-target="#add-enrichment-transformation-<%= enrichment_definition.id %>">
               <div class="card-body d-flex align-items-center justify-content-center d-flex">
