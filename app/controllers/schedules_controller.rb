@@ -63,6 +63,8 @@ class SchedulesController < ApplicationController
   end
 
   def schedule_params
+    params[:schedule][:harvest_definitions_to_run] = [] unless params[:schedule].key?(:harvest_definitions_to_run)
+
     params.require(:schedule).permit(:frequency, :time, :day, :day_of_the_month, :bi_monthly_day_one,
                                      :bi_monthly_day_two, :name,
                                      :pipeline_id, :destination_id, harvest_definitions_to_run: [])

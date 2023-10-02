@@ -137,8 +137,15 @@ RSpec.describe Schedule, type: :model do
     it { is_expected.to validate_presence_of(:frequency).with_message("can't be blank") }
     it { is_expected.to validate_presence_of(:name).with_message("can't be blank") }
     it { is_expected.to validate_presence_of(:time).with_message("can't be blank") }
-    it { is_expected.to validate_presence_of(:harvest_definitions_to_run).with_message("can't be blank") }
     it { is_expected.to validate_uniqueness_of(:name).case_insensitive.with_message('has already been taken') }
+
+    it 'requires the harvest_definitions_to_run' do
+      schedule = build(:schedule, frequency: 0, time: '12:30', pipeline:, destination:, name: 'Harvest Definitions') 
+
+      expect(schedule.valid?).to be false
+
+      binding.pry
+    end
 
     context 'weekly' do
       subject { build(:schedule, frequency: :weekly, pipeline:, destination:, harvest_definitions_to_run:) }
