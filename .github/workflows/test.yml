@@ -101,8 +101,8 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-        env:
-          REDIS_URL: redis://redis:6379
+        ports:
+          - 6379:6379
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
