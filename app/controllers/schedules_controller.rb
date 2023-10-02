@@ -55,7 +55,7 @@ class SchedulesController < ApplicationController
   end
 
   def find_schedule
-    @schedule = Schedule.find(params[:id])
+    @schedule = @pipeline.schedules.find(params[:id])
   end
 
   def find_destinations
