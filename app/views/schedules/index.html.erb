@@ -42,6 +42,12 @@
       <%= link_to pipeline_schedule_path(@pipeline, schedule), class: 'card mb-3 d-flex' do %>
         <div class="card-body">
           <h5 class="card-title"><%= schedule.name %></h5>
+
+          <p>Next runs at <%= schedule.next_run_time.strftime('%d/%m/%Y at %l:%M %p') %></p>
+
+          <span class="badge bg-light text-dark">
+            <%= schedule.destination.name %>
+          </span>
         </div>
       <% end %>
     </div>

@@ -57,6 +57,10 @@ class Schedule < ApplicationRecord
     Sidekiq::Cron::Job.find(sidekiq_cron_job_id)
   end
 
+  def next_run_time
+    Fugit::Cron.parse(cron_syntax).next_time
+  end
+
   private
 
   def hour
