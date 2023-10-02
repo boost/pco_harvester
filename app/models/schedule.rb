@@ -50,10 +50,6 @@ class Schedule < ApplicationRecord
     "#{minute} #{hour} #{month_day} #{month} #{day_of_the_week}"
   end
 
-  def sidekiq_cron_job
-    Sidekiq::Cron::Job.find(sidekiq_cron_job_id)
-  end
-
   def next_run_time
     Fugit::Cron.parse(cron_syntax).next_time
   end

@@ -20,13 +20,7 @@ RSpec.describe Schedule, type: :model do
           name: 'Pipeline Schedule',
           cron: '30 12 * * *',
           class: 'ScheduleWorker',
-          args: {
-            pipeline_id: pipeline.id,
-            harvest_definitions_to_run:,
-            destination_id: destination.id,
-            key: anything,
-            page_type: :all_available_pages
-          }
+          args: anything
         )
         
         create(:schedule, frequency: 0, time: '12:30', pipeline:, destination:, harvest_definitions_to_run:, name: 'Pipeline Schedule')

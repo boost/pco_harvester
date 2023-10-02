@@ -53,12 +53,12 @@ RSpec.describe "Schedules", type: :request do
         end.to change(Schedule, :count).by(1)
       end
 
-      it 'redirects to the pipeline' do
+      it 'redirects to the new schedule' do
         post pipeline_schedules_path(pipeline), params: {
           schedule: attributes_for(:schedule, pipeline_id: pipeline.id, destination_id: destination.id)
         }
 
-        expect(response).to redirect_to pipeline_path(pipeline)
+        expect(response).to redirect_to pipeline_schedules_path(pipeline, Schedule.last)
       end
 
       it 'displays an appropriate message' do
@@ -126,7 +126,8 @@ RSpec.describe "Schedules", type: :request do
       it 'updates the schedule' do
         patch pipeline_schedule_path(pipeline, schedule), params: {
           schedule: {
-            name: 'Changed Name'
+            name: 'Changed Name',
+            harvest_definitions_to_run:
           }
         }
   
@@ -138,7 +139,8 @@ RSpec.describe "Schedules", type: :request do
       it 'redirects to the updated schedule' do
         patch pipeline_schedule_path(pipeline, schedule), params: {
           schedule: {
-            name: 'Changed Name'
+            name: 'Changed Name',
+            harvest_definitions_to_run:
           }
         }
   
@@ -148,7 +150,8 @@ RSpec.describe "Schedules", type: :request do
       it 'displays an appropriate message' do
         patch pipeline_schedule_path(pipeline, schedule), params: {
           schedule: {
-            name: 'Changed Name'
+            name: 'Changed Name',
+            harvest_definitions_to_run:
           }
         }
 
