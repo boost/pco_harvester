@@ -11,7 +11,7 @@ class PipelineJobsController < ApplicationController
   def show; end
 
   def create
-    @pipeline_job = PipelineJob.new(pipeline_job_params)
+    @pipeline_job = PipelineJob.new(pipeline_job_params.merge(user_id: current_user.id))
 
     if @pipeline_job.save
       PipelineWorker.perform_async(@pipeline_job.id)

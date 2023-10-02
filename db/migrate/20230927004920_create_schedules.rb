@@ -16,6 +16,7 @@ class CreateSchedules < ActiveRecord::Migration[7.0]
     add_reference :schedules, :pipeline, null: false
     add_reference :schedules, :destination
     add_reference :pipeline_jobs, :schedule
+    add_reference :pipeline_jobs, :user
     add_index :schedules, %i[name], unique: true
   end
 end
