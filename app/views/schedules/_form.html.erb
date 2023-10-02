@@ -13,9 +13,21 @@
         </div>
 
         <div class='col-7'>
-          <%= form.text_field :name, class: 'form-control' %>
+          <%= form.text_field :name, class: 'form-control', disable_errors_display: true %>
         </div>
       </div>
+
+      <% if @schedule.errors.include?('name') %>
+        <div class='row'>
+          <div class='col-3'></div>
+
+          <div class='col-9'>
+            <div class="alert alert-danger" role="alert">
+              Please enter a name
+            </div>
+          </div>
+        </div>
+      <% end %>
 
       <div class='row gy-3 align-items-center my-2'>
         <div class="col-3">
