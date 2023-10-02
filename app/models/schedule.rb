@@ -3,6 +3,7 @@
 class Schedule < ApplicationRecord
   belongs_to :pipeline
   belongs_to :destination
+  has_many   :pipeline_jobs
 
   serialize :harvest_definitions_to_run, Array
 
@@ -32,11 +33,7 @@ class Schedule < ApplicationRecord
       name:,
       cron: cron_syntax,
       class: 'ScheduleWorker',
-      args: {
-        pipeline_id: pipeline.id, harvest_definitions_to_run:,
-        destination_id: destination.id, key: SecureRandom.hex,
-        page_type: :all_available_pages
-      }
+      args: id
     )
   end
 
@@ -59,6 +56,10 @@ class Schedule < ApplicationRecord
 
   def next_run_time
     Fugit::Cron.parse(cron_syntax).next_time
+  end
+
+  def last_run_time
+    pipeline_jobs.last.created_at
   end
 
   private

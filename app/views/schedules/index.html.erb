@@ -43,7 +43,8 @@
         <div class="card-body">
           <h5 class="card-title"><%= schedule.name %></h5>
 
-          <p>Next runs at <%= schedule.next_run_time.strftime('%d/%m/%Y at %l:%M %p') %></p>
+          <p>Next run <%= schedule.next_run_time.strftime('%d/%m/%Y at %l:%M %p') %></p>
+          <p>Last run <%= schedule.last_run_time.strftime('%d/%m/%Y at %l:%M %p') %></p>
 
           <span class="badge bg-light text-dark">
             <%= schedule.destination.name %>

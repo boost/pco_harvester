@@ -168,10 +168,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_27_004920) do
     t.bigint "extraction_job_id"
     t.integer "page_type", default: 0
     t.integer "pages"
+    t.bigint "schedule_id"
     t.index ["destination_id"], name: "index_pipeline_jobs_on_destination_id"
     t.index ["extraction_job_id"], name: "index_pipeline_jobs_on_extraction_job_id"
     t.index ["key"], name: "index_pipeline_jobs_on_key", unique: true
     t.index ["pipeline_id"], name: "index_pipeline_jobs_on_pipeline_id"
+    t.index ["schedule_id"], name: "index_pipeline_jobs_on_schedule_id"
   end
 
   create_table "pipelines", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

@@ -9,6 +9,7 @@ RSpec.describe Schedule, type: :model do
   describe 'associations' do
     it { is_expected.to belong_to(:pipeline) }
     it { is_expected.to belong_to(:destination) }
+    it { is_expected.to have_many(:pipeline_jobs) }
   end
 
   describe 'cron scheduling' do
@@ -143,8 +144,6 @@ RSpec.describe Schedule, type: :model do
       schedule = build(:schedule, frequency: 0, time: '12:30', pipeline:, destination:, name: 'Harvest Definitions') 
 
       expect(schedule.valid?).to be false
-
-      binding.pry
     end
 
     context 'weekly' do
