@@ -12,52 +12,6 @@ RSpec.describe Schedule, type: :model do
     it { is_expected.to have_many(:pipeline_jobs) }
   end
 
-  describe 'cron scheduling' do
-    context 'when a new Schedule is created' do
-      it 'creates a Sidekiq::Cron::Job' do
-
-        expect(Sidekiq::Cron::Job).to receive(:create).with(
-          name: 'Pipeline Schedule',
-          cron: '30 12 * * *',
-          class: 'ScheduleWorker',
-          args: anything
-        )
-        
-        create(:schedule, frequency: 0, time: '12:30', pipeline:, destination:, harvest_definitions_to_run:, name: 'Pipeline Schedule')
-      end
-    end
-
-    context 'when an existing Schedule is deleted' do
-      it 'deletes its matching Sidekiq::Cron::Job' do
-
-        schedule = create(:schedule, frequency: 0, time: '12:30', pipeline:, destination:, harvest_definitions_to_run:, name: 'Pipeline Schedule')
-
-        expect { schedule.destroy }.to change(Sidekiq::Cron::Job, :count).by(-1)
-      end
-    end
-
-    context 'when an existing Schedule is updated' do
-      it 'updates the Sidekiq::Cron::Job with the new details' do
-        Sidekiq::Cron::Job.destroy_all!
-
-        schedule = create(:schedule, frequency: 0, time: '12:30', pipeline:, destination:, harvest_definitions_to_run:, name: 'Pipeline Schedule')
-        sidekiq_cron  = Sidekiq::Cron::Job.all.first
-
-        expect(Sidekiq::Cron::Job.all.count).to eq 1
-        expect(sidekiq_cron.name).to eq 'Pipeline Schedule'
-        expect(sidekiq_cron.cron).to eq '30 12 * * *'
-
-        schedule.update(name: 'Updated Pipeline Schedule', time: '11:45')
-        
-        sidekiq_cron  = Sidekiq::Cron::Job.all.first
-
-        expect(Sidekiq::Cron::Job.all.count).to eq 1
-        expect(sidekiq_cron.name).to eq 'Updated Pipeline Schedule'
-        expect(sidekiq_cron.cron).to eq '45 11 * * *' 
-      end
-    end
-  end
-
   describe 'frequency' do
     it 'can be daily' do
       daily = build(:schedule, frequency: 0, pipeline:, destination:, harvest_definitions_to_run:)

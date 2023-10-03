@@ -4,6 +4,8 @@ RSpec.describe "Schedules", type: :request do
   let(:pipeline)    { create(:pipeline) }
   let(:user)        { create(:user) }
   let(:destination) { create(:destination) }
+  let(:harvest_definition)         { create(:harvest_definition, pipeline:) }
+  let(:harvest_definitions_to_run) { [harvest_definition.id] }
 
   before do
     sign_in(user)
@@ -58,7 +60,7 @@ RSpec.describe "Schedules", type: :request do
           schedule: attributes_for(:schedule, pipeline_id: pipeline.id, destination_id: destination.id)
         }
 
-        expect(response).to redirect_to pipeline_schedules_path(pipeline, Schedule.last)
+        expect(response).to redirect_to pipeline_schedule_path(pipeline, Schedule.last)
       end
 
       it 'displays an appropriate message' do
@@ -69,6 +71,19 @@ RSpec.describe "Schedules", type: :request do
         follow_redirect!
 
         expect(response.body).to include 'Schedule created successfully'
+      end
+
+      it 'creates a Sidekiq::Cron::Job' do
+        expect(Sidekiq::Cron::Job).to receive(:create).with(
+          name: 'Pipeline Schedule',
+          cron: '30 12 * * *',
+          class: 'ScheduleWorker',
+          args: anything
+        )
+
+        post pipeline_schedules_path(pipeline), params: {
+          schedule: attributes_for(:schedule, harvest_definitions_to_run:, name: 'Pipeline Schedule', frequency: :daily, time: '12:30', pipeline_id: pipeline.id, destination_id: destination.id)
+        } 
       end
     end
 
@@ -101,6 +116,16 @@ RSpec.describe "Schedules", type: :request do
         }
 
         expect(response.body).to include 'There was an issue creating your Schedule'
+      end
+
+      it 'does not creates a Sidekiq::Cron::Job' do
+        expect(Sidekiq::Cron::Job).not_to receive(:create)
+
+        post pipeline_schedules_path(pipeline), params: {
+          schedule: {
+            frequency: :daily
+          }
+        }
       end
     end
   end
@@ -158,6 +183,34 @@ RSpec.describe "Schedules", type: :request do
         follow_redirect!
 
         expect(response.body).to include 'Schedule updated successfully'
+      end
+
+      it 'updates the Sidekiq::Cron::Job with the new details' do
+        Sidekiq::Cron::Job.destroy_all!
+
+        post pipeline_schedules_path(pipeline), params: {
+          schedule: attributes_for(:schedule, harvest_definitions_to_run:, name: 'Schedule', frequency: :daily, time: '12:30', pipeline_id: pipeline.id, destination_id: destination.id)
+        } 
+
+        sidekiq_cron  = Sidekiq::Cron::Job.all.first
+
+        expect(Sidekiq::Cron::Job.all.count).to eq 1
+        expect(sidekiq_cron.name).to eq 'Schedule'
+        expect(sidekiq_cron.cron).to eq '30 12 * * *'
+
+        patch pipeline_schedule_path(pipeline, Schedule.last), params: {
+          schedule: {
+            name: 'Updated Pipeline Schedule',
+            harvest_definitions_to_run:,
+            time: '11:45'
+          }
+        }
+        
+        sidekiq_cron  = Sidekiq::Cron::Job.all.first
+
+        expect(Sidekiq::Cron::Job.all.count).to eq 1
+        expect(sidekiq_cron.name).to eq 'Updated Pipeline Schedule'
+        expect(sidekiq_cron.cron).to eq '45 11 * * *' 
       end
     end
 

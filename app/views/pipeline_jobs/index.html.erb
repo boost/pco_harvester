@@ -72,7 +72,7 @@
                   <% if pipeline_job.schedule.present? %>
                     Schedule
                   <% else %>
-                    <%= pipeline_job&.user&.username %>
+                    <%= pipeline_job.launched_by&.username %>
                   <% end %>
                 </td>
                 <td>
