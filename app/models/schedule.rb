@@ -24,10 +24,6 @@ class Schedule < ApplicationRecord
 
   validates :day_of_the_month, presence: true, if: -> { monthly? }
 
-  after_create  :create_sidekiq_cron_job
-  after_update  :refresh_sidekiq_cron_job
-  after_destroy :delete_sidekiq_cron_job
-
   def create_sidekiq_cron_job
     Sidekiq::Cron::Job.create(
       name:,

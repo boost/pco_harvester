@@ -21,6 +21,7 @@ class SchedulesController < ApplicationController
     @schedule = Schedule.new(schedule_params)
 
     if @schedule.save
+      @schedule.create_sidekiq_cron_job
       redirect_to pipeline_schedules_path(@pipeline, @schedule), notice: t('.success')
     else
       flash.alert = t('.failure')
@@ -30,6 +31,7 @@ class SchedulesController < ApplicationController
 
   def update
     if @schedule.update(schedule_params)
+      @schedule.refresh_sidekiq_cron_job
       redirect_to pipeline_schedule_path(@pipeline, @schedule), notice: t('.success')
     else
       flash.alert = t('.failure')
@@ -39,6 +41,7 @@ class SchedulesController < ApplicationController
 
   def destroy
     if @schedule.destroy
+      @schedule.delete_sidekiq_cron_job
       redirect_to pipeline_schedules_path(@pipeline), notice: t('.success')
     else
       flash.alert = t('.failure')

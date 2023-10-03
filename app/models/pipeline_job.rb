@@ -9,7 +9,7 @@ class PipelineJob < ApplicationRecord
   belongs_to :extraction_job, optional: true
   belongs_to :destination
   belongs_to :schedule, optional: true
-  belongs_to :user, optional: true
+  belongs_to :launched_by, class_name: 'User', optional: true
 
   has_many :harvest_reports, dependent: :destroy
   has_many :harvest_jobs, dependent: :destroy
