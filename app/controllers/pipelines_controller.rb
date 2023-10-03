@@ -4,7 +4,7 @@ class PipelinesController < ApplicationController
   include LastEditedBy
 
   before_action :assign_sort_by, only: %w[index create]
-  before_action :find_pipeline, only: %w[show destroy edit update clone edit_name]
+  before_action :find_pipeline, only: %w[show destroy edit update clone]
   before_action :assign_show_variables, only: %w[show update]
 
   def index
@@ -28,13 +28,10 @@ class PipelinesController < ApplicationController
     end
   end
 
-  def edit_name; end
-
   def update
     if @pipeline.update(pipeline_params)
-      render :show, status: :ok, layout: 'application'
+      redirect_to pipeline_path(@pipeline)
     else
-      # TODO
       flash.alert = t('.failure')
       render :edit
     end
