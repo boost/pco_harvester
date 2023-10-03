@@ -33,7 +33,7 @@ class PipelinesController < ApplicationController
       redirect_to pipeline_path(@pipeline)
     else
       flash.alert = t('.failure')
-      render :edit
+      render :show
     end
   end
 
