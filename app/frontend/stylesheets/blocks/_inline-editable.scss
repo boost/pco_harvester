@@ -1,0 +1,9 @@
+.inline-editable {
+  @include element('control') {
+    color: $primary;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

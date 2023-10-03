@@ -18,8 +18,8 @@ console.log(
 
 // Example: Load Rails libraries in Vite.
 //
-import * as Turbo from '@hotwired/turbo'
-Turbo.start()
+// import * as Turbo from '@hotwired/turbo'
+// Turbo.start()
 //
 // import ActiveStorage from '@rails/activestorage'
 // ActiveStorage.start()
@@ -45,5 +45,6 @@ import "/js/editor";
 import "/js/form-header-submission";
 import "/js/pipeline";
 import "/js/schedules";
+import "/js/inlineEditable";
 
 import "/js/react";
