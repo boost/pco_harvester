@@ -60,7 +60,7 @@ RSpec.describe "Schedules", type: :request do
           schedule: attributes_for(:schedule, pipeline_id: pipeline.id, destination_id: destination.id)
         }
 
-        expect(response).to redirect_to pipeline_schedules_path(pipeline, Schedule.last)
+        expect(response).to redirect_to pipeline_schedule_path(pipeline, Schedule.last)
       end
 
       it 'displays an appropriate message' do

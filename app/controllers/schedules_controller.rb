@@ -22,7 +22,7 @@ class SchedulesController < ApplicationController
 
     if @schedule.save
       @schedule.create_sidekiq_cron_job
-      redirect_to pipeline_schedules_path(@pipeline, @schedule), notice: t('.success')
+      redirect_to pipeline_schedule_path(@pipeline, @schedule), notice: t('.success')
     else
       flash.alert = t('.failure')
       render :new
