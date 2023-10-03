@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :pipelines, only: %i[index show create update edit destroy] do
+  resources :pipelines, only: %i[index show create update destroy] do
     post :clone, on: :member
     
     resources :pipeline_jobs, only: %i[create show index] do

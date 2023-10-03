@@ -4,7 +4,7 @@ class PipelinesController < ApplicationController
   include LastEditedBy
 
   before_action :assign_sort_by, only: %w[index create]
-  before_action :find_pipeline, only: %w[show destroy edit update clone]
+  before_action :find_pipeline, only: %w[show destroy update clone]
   before_action :assign_show_variables, only: %w[show update]
 
   def index
@@ -13,8 +13,6 @@ class PipelinesController < ApplicationController
   end
 
   def show; end
-
-  def edit; end
 
   def create
     @pipeline = Pipeline.new(pipeline_params)
