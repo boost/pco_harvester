@@ -1,0 +1,19 @@
+<% id ||= 'inline-editable-element' %>
+
+<div class='inline-editable'>
+  <div id=<%= "#{id}-content" %>>
+    <span class='float-start'>
+      <%= yield %>
+    </span>
+
+    <i class="bi bi-pencil-square float-start inline-editable__control js-inline-editable-control ms-2" data-id=<%= id %> aria-hidden="true"></i>
+  </div>
+
+  <div class='clearfix'></div>
+
+  <%= vertical_form_with(model: @pipeline, class: 'd-none', id: "#{id}-form") do |form| %>
+    <%= form.text_field attribute, class: 'form-control d-inline-block w-auto' %>
+
+    <%= form.submit 'Save', class: 'btn btn-primary' %>
+  <% end %>
+</div>
