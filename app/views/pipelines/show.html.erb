@@ -544,20 +544,22 @@
   <% end %>
 <% end %>
 
-<div class='row definition-group definition-group--spacer'>
-  <span class='definition-group__bridge'></span>
-  <div class='col-12'>
-    <button
-      type="button"
-      class="card card--create-cta d-flex"
-      data-bs-toggle="modal"
-      data-bs-target="#add-enrichment">
-      <div class="card-body align-items-center d-flex justify-content-center">
-        <p class='card-text'>+ Add Enrichment</p>
-      </div>
-    </button>
+<% if @harvest_definition.persisted? %>
+  <div class='row definition-group definition-group--spacer'>
+    <span class='definition-group__bridge'></span>
+    <div class='col-12'>
+      <button
+        type="button"
+        class="card card--create-cta d-flex"
+        data-bs-toggle="modal"
+        data-bs-target="#add-enrichment">
+        <div class="card-body align-items-center d-flex justify-content-center">
+          <p class='card-text'>+ Add Enrichment</p>
+        </div>
+      </button>
+    </div>
   </div>
-</div>
+<% end %>
 
 <%# -- Modals -- %>
 
