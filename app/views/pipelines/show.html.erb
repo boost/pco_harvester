@@ -149,6 +149,10 @@
     </li>
 
     <li class='nav-item'>
+      <%= link_to "Schedules (#{@pipeline.schedules.count})", pipeline_schedules_path(@pipeline), class: 'nav-link' %>
+    </li>
+
+    <li class='nav-item'>
       <%= link_to 'Jobs', pipeline_pipeline_jobs_path(@pipeline), class: 'nav-link' %>
     </li>
   </ul>

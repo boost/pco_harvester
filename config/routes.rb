@@ -1,4 +1,5 @@
 require 'sidekiq/web'
+require 'sidekiq/cron/web'
 
 Sidekiq::Web.app_url = '/'
 
@@ -24,6 +25,8 @@ Rails.application.routes.draw do
     resources :pipeline_jobs, only: %i[create show index] do
       post :cancel, on: :member
     end
+
+    resources :schedules
 
     resources :harvest_definitions, only: %i[create update destroy] do
       resources :extraction_definitions, only: %i[show edit new create update destroy] do
