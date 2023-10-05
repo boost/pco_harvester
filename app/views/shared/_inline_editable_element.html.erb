@@ -5,13 +5,13 @@
   form_classes = class_names({ 'd-none': !model.errors.include?(attribute) }) 
 %>
 
-<div class='inline-editable'>
+<div class='inline-editable-element'>
   <div id=<%= "#{id}-content" %> class=<%= content_classes %>>
     <span class='float-start'>
       <%= yield %>
     </span>
 
-    <i class="bi bi-pencil-square float-start inline-editable__control js-inline-editable-control ms-2" data-id=<%= id %> aria-hidden="true"></i>
+    <i class="bi bi-pencil-square float-start inline-editable-element__control js-inline-editable-control ms-2" data-id=<%= id %> aria-hidden="true"></i>
   </div>
 
   <div class='clearfix'></div>
