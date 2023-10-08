@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { filter, map } from "lodash";
+import { filter } from "lodash";
 
 import { selectAllParameters } from "~/js/features/ExtractionApp/ParametersSlice";
 import { toggleDisplayParameters } from "~/js/features/ExtractionApp/UiParametersSlice";
