@@ -14,6 +14,19 @@ const uiParametersSlice = createSlice({
         changes: { displayed: action.payload.displayed },
       });
     },
+    setActiveParameter(state, action) {
+      uiParametersAdapter.updateMany(
+        state,
+        state.ids.map((id) => {
+          return { id: id, changes: { active: false } };
+        })
+      )
+
+      uiParametersAdapter.updateOne(state, {
+        id: action.payload,
+        changes: { active: true },
+      });
+    },
     toggleDisplayParameters(state, action) {
       const { parameters, displayed } = action.payload;
 
@@ -35,6 +48,7 @@ const uiParametersSlice = createSlice({
           saving: false,
           expanded: true,
           displayed: true,
+          active: true
         });
       })
       .addCase(updateParameter.pending, (state, action) => {
@@ -66,6 +80,6 @@ export const selectDisplayedParameterIds = (state) => {
     .map((parameter) => parameter.id);
 };
 
-export const { toggleDisplayParameter, toggleDisplayParameters } = actions;
+export const { toggleDisplayParameter, toggleDisplayParameters, setActiveParameter } = actions;
 
 export default reducer;

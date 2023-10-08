@@ -143,9 +143,7 @@ const Field = ({ id }) => {
             <div className="d-flex d-row justify-content-between align-items-center">
               <div>
                 <h5 className="m-0 d-inline">{name}</h5>
-                {name != "" && (
-                  <span className={badgeClasses}>{badgeText()}</span>
-                )}
+                <span className={badgeClasses}>{badgeText()}</span>
               </div>
 
               <div className="hstack gap-2">

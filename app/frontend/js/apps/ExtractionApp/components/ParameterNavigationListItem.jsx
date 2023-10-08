@@ -4,6 +4,7 @@ import { selectParameterById } from "~/js/features/ExtractionApp/ParametersSlice
 import {
   selectUiParameterById,
   toggleDisplayParameter,
+  setActiveParameter
 } from "~/js/features/ExtractionApp/UiParametersSlice";
 
 const ParameterNavigationListItem = ({ id, index }) => {
