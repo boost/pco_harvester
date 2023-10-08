@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, createEntityAdapter } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { request } from "~/js/utils/request";
 
 export const updateExtractionDefinition = createAsyncThunk(

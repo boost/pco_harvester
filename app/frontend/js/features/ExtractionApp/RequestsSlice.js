@@ -5,6 +5,8 @@ import {
 } from "@reduxjs/toolkit";
 import { request } from "~/js/utils/request";
 
+import { updateExtractionDefinition } from "~/js/features/ExtractionApp/AppDetailsSlice";
+
 const requestsAdapter = createEntityAdapter();
 
 export const previewRequest = createAsyncThunk(
@@ -73,6 +75,16 @@ const requestsSlice = createSlice({
       })
       .addCase(previewRequest.fulfilled, (state, action) => {
         requestsAdapter.setOne(state, action.payload);
+      })
+      .addCase(updateExtractionDefinition.fulfilled, (state, action) => {
+        const { base_url, format } = action.payload;
+
+        requestsAdapter.updateMany(
+          state,
+          state.ids.map((id) => {
+            return { id: id, changes: { base_url: base_url, format: format, url: base_url } };
+          })
+        );
       });
   },
 });

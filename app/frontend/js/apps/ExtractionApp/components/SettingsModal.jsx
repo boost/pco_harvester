@@ -38,7 +38,7 @@ const SettingsModal = ({
         format: formatValue,
         total_selector: totalSelectorValue,
         per_page: perPageValue,
-        throttle: throttleValue,
+        throttle: throttleValue || 0,
         paginated: paginatedValue
       })
     );
@@ -114,7 +114,7 @@ const SettingsModal = ({
           <div className='col-9'>
             <input
               id="throttle"
-              type="text"
+              type="number"
               className="form-control"
               required="required"
               defaultValue={throttle}
@@ -185,10 +185,11 @@ const SettingsModal = ({
         </div>
         
         <div className='float-end mt-4'>
-          <a className='btn btn-outline-danger me-2' href={`/pipelines/${appDetails.pipeline.id}`}>Cancel and return to pipeline</a>
+          {/* <a className='btn btn-outline-danger me-2' >Cancel</a> */}
+          <button className='btn btn-outline-danger me-2' onClick={handleClose}>Cancel</button>
 
           <button className="btn btn-success" onClick={handleUpdateClick}>
-            Create Harvest Extraction
+            Update Harvest Extraction
           </button>
         </div>
       </Modal.Body>
