@@ -152,6 +152,23 @@ const Parameter = ({ id }) => {
               </div>
 
               <div className="hstack gap-2">
+
+                <button
+                  className="btn btn-outline-primary"
+                  disabled={!isSaveable()}
+                  onClick={handleSaveClick}
+                >
+                  <i className="bi bi-save" aria-hidden="true"></i>
+                  {saving ? " Saving..." : " Save"}
+                </button>
+
+                <button
+                  className="btn btn-outline-primary"
+                  onClick={handleHideClick}
+                >
+                  <i className="bi bi-eye-slash" aria-hidden="true"></i> Hide
+                </button>
+
                 <div className="dropdown">
                   <button
                     className="btn btn-outline-primary dropdown-toggle"
@@ -198,22 +215,6 @@ const Parameter = ({ id }) => {
                       )}
                   </ul>
                 </div>
-
-                <button
-                  className="btn btn-outline-primary"
-                  disabled={!isSaveable()}
-                  onClick={handleSaveClick}
-                >
-                  <i className="bi bi-save" aria-hidden="true"></i>
-                  {saving ? " Saving..." : " Save"}
-                </button>
-
-                <button
-                  className="btn btn-outline-primary"
-                  onClick={handleHideClick}
-                >
-                  <i className="bi bi-eye-slash" aria-hidden="true"></i> Hide
-                </button>
 
                 <button className="btn btn-outline-danger" onClick={handleShow}>
                   <i className="bi bi-trash" aria-hidden="true"></i>
