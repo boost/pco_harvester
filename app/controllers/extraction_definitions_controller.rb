@@ -36,10 +36,10 @@ class ExtractionDefinitionsController < ApplicationController
 
   def update
     if @extraction_definition.update(extraction_definition_params)
-      redirect_to update_redirect_path, notice: t('.success')
+      update_last_edited_by([@extraction_definition])
+      render json: @extraction_definition
     else
-      flash.alert = t('.failure')
-      render 'edit'
+      render500
     end
   end
 

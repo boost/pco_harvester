@@ -655,13 +655,17 @@
         or
       </div>
 
-      <%= link_to '+ Add new extraction definition',
-                  new_pipeline_harvest_definition_extraction_definition_path(
-                    @pipeline,
-                    @harvest_definition,
-                    kind: 'harvest'
-                  ),
-                  class: 'btn btn-primary' %>
+
+      <%= vertical_form_with(model: [@pipeline, @harvest_definition, ExtractionDefinition.new]) do |form| %>
+
+        <%= form.hidden_field :kind, value: 'harvest' %>
+        <%= form.hidden_field :pipeline_id, value: @pipeline.id %>
+
+        <div class='d-grid gap-2'>
+          <%= form.submit '+ Add new extraction definition', class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+
     </div>
   <% end %>
 
