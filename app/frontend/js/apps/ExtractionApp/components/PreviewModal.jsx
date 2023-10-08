@@ -33,14 +33,14 @@ const PreviewModal = ({
       <Modal.Body>
         <div className="row">
           <div className={initialRequestClasses}>
-            <h5>Initial Request</h5>
+            <h5>First Request</h5>
 
             <Preview id={initialRequestId} />
           </div>
 
           {appDetails.extractionDefinition.paginated && (
             <div className="col-6">
-              <h5>Main Request</h5>
+              <h5>Following Requests</h5>
 
               <Preview id={mainRequestId} />
             </div>

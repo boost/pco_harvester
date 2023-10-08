@@ -229,7 +229,7 @@ const Parameter = ({ id }) => {
                     <strong>Key </strong>
 
                     {content_type == "incremental" && (
-                      <Tooltip data-bs-title="Please select the key of the initial request that you want to be incremented.">
+                      <Tooltip data-bs-title="Please select the key of the first request that you want to be incremented.">
                         <i
                           className="bi bi-question-circle"
                           aria-label="help text"

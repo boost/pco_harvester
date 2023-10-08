@@ -45,7 +45,7 @@ const NavTabs = () => {
 
   const pageOneTabText = () => {
     if (appDetails.extractionDefinition.paginated) {
-      return "Initial Request";
+      return "First Request";
     }
 
     return "Request";
@@ -95,7 +95,7 @@ const NavTabs = () => {
         }}
       >
         <button className={mainRequestClasses} type="button" role="tab">
-          Main Request
+          Following Requests
         </button>
       </li>
     );
