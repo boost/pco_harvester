@@ -15,8 +15,14 @@ const SettingsModal = ({
   const appDetails = useSelector(selectAppDetails);
 
   const { id, base_url, total_selector, per_page, throttle } = appDetails.extractionDefinition;
+  let paginated;
 
-  const paginated = appDetails.extractionDefinition.paginated || true;
+  if(appDetails.extractionDefinition.paginated == null) {
+    paginated = appDetails.extractionDefinition.paginated = true;
+  } else {
+    paginated = appDetails.extractionDefinition.paginated
+  }
+
   const format    = appDetails.extractionDefinition.format || 'JSON';
 
   const dispatch = useDispatch();
