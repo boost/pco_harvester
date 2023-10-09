@@ -11,7 +11,7 @@ class TransformationDefinition < ApplicationRecord
 
   validates :name, uniqueness: true
 
-  validates :record_selector, presence: true
+  # validates :record_selector, presence: true
 
   after_create do
     if name.blank?

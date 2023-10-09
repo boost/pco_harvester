@@ -1,4 +1,5 @@
 .btn:disabled, .btn.disabled, fieldset:disabled .btn {
   --bs-btn-disabled-color: #{$icewind-dale};
   --bs-btn-disabled-border-color: #{$icewind-dale};
+  --bs-btn-disabled-bg: #{$white}
 }

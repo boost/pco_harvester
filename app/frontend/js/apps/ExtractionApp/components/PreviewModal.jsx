@@ -27,8 +27,35 @@ const PreviewModal = ({
       onHide={handleClose}
       className="modal--full-width"
     >
-      <Modal.Header closeButton>
-        <Modal.Title>Preview</Modal.Title>
+      <Modal.Header>
+        <Modal.Title>Extraction preview</Modal.Title>
+
+        <div className='float-end'>
+          <button
+            className="btn btn-outline-primary me-2"
+            onClick={() => { handleClose() }}
+          >
+            <i className="bi bi-arrow-left-short" aria-hidden="true"></i>
+            Continue editing extraction definition
+          </button>
+
+          
+
+          <a href={`/pipelines/${appDetails.pipeline.id}/harvest_definitions/${appDetails.harvestDefinition.id}/extraction_definitions/${appDetails.extractionDefinition.id}/extraction_jobs?kind=sample`}
+            className="btn btn-outline-primary me-2"
+          >
+            <i className="bi bi-play" aria-hidden="true"></i>
+            Run sample and return to pipeline
+          </a>
+
+          <button
+            className="btn btn-primary me-2"
+          >
+            <i className="bi bi-play" aria-hidden="true"></i>
+            Run sample and transform data
+          </button>
+        </div>
+
       </Modal.Header>
       <Modal.Body>
         <div className="row">
