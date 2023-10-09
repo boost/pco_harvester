@@ -41,6 +41,13 @@ const uiParametersSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(addParameter.fulfilled, (state, action) => {
+        uiParametersAdapter.updateMany(
+          state,
+          state.ids.map((id) => {
+            return { id: id, changes: { active: false } };
+          })
+        )
+        
         uiParametersAdapter.upsertOne(state, {
           id: action.payload.id,
           saved: true,

@@ -29,8 +29,8 @@
   }
 
   @include modifier('create-cta-disabled') {
-    border-color: $dark;
-    color: $dark;
+    border-color: $icewind-dale;
+    color: $icewind-dale;
 
     &:hover {
       cursor: default

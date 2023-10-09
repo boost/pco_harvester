@@ -223,83 +223,90 @@ const Parameter = ({ id }) => {
               </div>
             </div>
 
-            <div className="row mt-3">
+            <div className="row align-items-center mt-4">
               {kind != "slug" && (
                 <>
-                  <div class='col-6'>
-                    <div className='input-group mb-3'>
-                      
+                  <div className='col-6'>
+                    <div className='row'>
+                      <div className='col-1'>
+                        {content_type == "incremental" && (
+                          <Tooltip data-bs-title="Please select the key of the first request that you want to be incremented.">
+                            <label className="col-form-label">Key </label>
+                          </Tooltip>
+                        )}
 
-                      {content_type == "incremental" && (
-                        <Tooltip data-bs-title="Please select the key of the first request that you want to be incremented.">
-                          <span class="input-group-text">Key</span>
-                        </Tooltip>
-                      )}
+                        {content_type != "incremental" && (
+                          <label className="col-form-label">Key </label>
+                        )}
+                      </div>
+                    
+                      <div className='col-11'>
 
-                      {content_type != "incremental" && (
-                        <>
-                          <span class="input-group-text">Key</span>
-
+                        { content_type != 'incremental' && (
                           <input
                             type="text"
                             className="form-control"
                             defaultValue={name}
                             onChange={(e) => setNameValue(e.target.value)}
                           />
-                        </>
-                      )}
+                        )}
 
-                      {content_type == "incremental" && kind == "query" && (
-                        <select
-                          className="form-select"
-                          defaultValue={name}
-                          onChange={(e) => setNameValue(e.target.value)}
-                        >
-                          <option value="">
-                            Please select a parameter to be incremented...
-                          </option>
-                          {map(initialRequestQueryParameters, (parameter) => {
-                            return (
-                              <option value={parameter.name}>
-                                {parameter.name}
-                              </option>
-                            );
-                          })}
-                        </select>
-                      )}
+                        {content_type == "incremental" && kind == "query" && (
+                          <select
+                            className="form-select"
+                            defaultValue={name}
+                            onChange={(e) => setNameValue(e.target.value)}
+                          >
+                            <option value="">
+                              Please select a parameter to be incremented...
+                            </option>
+                            {map(initialRequestQueryParameters, (parameter) => {
+                              return (
+                                <option value={parameter.name}>
+                                  {parameter.name}
+                                </option>
+                              );
+                            })}
+                          </select>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </>
               )}
 
               <div className='col-6'>
-                <div className="input-group mb-3">
+                <div className='row'>
+                  <div className='col-1'>
                     {content_type == "incremental" && (
                       <Tooltip data-bs-title="Please input the amount you want the value of this key to be incremented by">
-                        <span class="input-group-text">Value</span>
+                        <label className='col-form-label'>Value </label>
                       </Tooltip>
                     )}
 
                     { content_type != 'incremental' && (
-                      <span class="input-group-text">Value</span>
+                      <label className='col-form-label'>Value </label>
+                    )}
+                  </div>
+                  
+                  <div className='col-11'>
+                    {content_type != "dynamic" && (
+                      <input
+                        type="text"
+                        className="form-control"
+                        required="required"
+                        defaultValue={contentValue}
+                        onChange={(e) => setContentValue(e.target.value)}
+                      />
                     )}
 
-                  {content_type != "dynamic" && (
-                    <input
-                      type="text"
-                      className="form-control"
-                      required="required"
-                      defaultValue={contentValue}
-                      onChange={(e) => setContentValue(e.target.value)}
-                    />
-                  )}
-
-                  {content_type == "dynamic" && (
-                    <CodeEditor
-                      initContent={content}
-                      onChange={(e) => setContentValue(e.target.value)}
-                    />
-                  )}
+                    {content_type == "dynamic" && (
+                      <CodeEditor
+                        initContent={content}
+                        onChange={(e) => setContentValue(e.target.value)}
+                      />
+                    )}
+                  </div>
                 </div>
               </div>
             </div>

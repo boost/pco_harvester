@@ -12,6 +12,14 @@
       <%= send("#{type}_card_subtitle", definition) %>
     </h6>
 
+    <% if type == 'extraction' %>
+      <% if ExtractionJob.where(extraction_definition_id: definition.id).empty? %>
+        <span class="badge text-bg-danger mt-2">No extraction</span>
+      <% else %>
+        <span class="badge text-bg-primary mt-2"><%= ExtractionJob.where(extraction_definition_id: definition.id).count %> extraction</span>
+      <% end %>
+    <% end %>
+
     <% if definition.shared? %>
       <span class="badge text-bg-light">Shared (<%= "#{definition.harvest_definitions.count} pipelines" %>)</span>
     <% end %>
