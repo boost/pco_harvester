@@ -69,9 +69,9 @@ class ExtractionJobsController < ApplicationController
         @harvest_definition.update(transformation_definition_id: transformation_definition.id)
       end
 
-      render json: transformation_definition
+      render json: { location: pipeline_harvest_definition_transformation_definition_path(@pipeline, @harvest_definition, transformation_definition)}
     else
-      render json: @extraction_job
+      render json: { location: pipeline_path(@pipeline) }
     end
   end
 

@@ -30,11 +30,7 @@ const PreviewModal = ({
         return response;
       });
 
-      if(type == 'transform') {
-        window.location.replace(`/pipelines/${appDetails.pipeline.id}/harvest_definitions/${appDetails.harvestDefinition.id}/transformation_definitions/${response.data.id}`);
-      } else {
-        window.location.replace(`/pipelines/${appDetails.pipeline.id}`);
-      }
+      window.location.replace(response.data.location)
   }
 
   return createPortal(
