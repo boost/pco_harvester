@@ -16,7 +16,12 @@ class Pipeline < ApplicationRecord
     words = sanitize_sql_like(words || '')
     return self if words.empty?
 
-    where('name LIKE ?', "%#{words}%").or(where('description LIKE ?', "%#{words}%"))
+    words = "%#{words}%"
+    users = User.select(:id).where('username LIKE ?', words)
+
+    where('name LIKE ?', words)
+      .or(where('description LIKE ?', words))
+      .or(where(last_edited_by: users))
   end
 
   def harvest
