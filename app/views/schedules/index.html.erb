@@ -31,7 +31,7 @@
 <div class='row'>
 
   <div class='col-3'>
-    <%= link_to new_pipeline_schedule_path(@pipeline), class: 'card card--create-cta mb-3 d-flex' do %>
+    <%= link_to new_pipeline_schedule_path(@pipeline), class: 'card card--clickable card--create-cta mb-3 d-flex' do %>
       <div class='card-body align-items-center d-flex justify-content-center'>
         <h5 class="card-title">+ Create new schedule</h5>
       </div>
@@ -40,7 +40,7 @@
 
   <%- @schedules.each do |schedule| %>
     <div class='col-3'>
-      <%= link_to pipeline_schedule_path(@pipeline, schedule), class: 'card mb-3 d-flex' do %>
+      <%= link_to pipeline_schedule_path(@pipeline, schedule), class: 'card card--clickable mb-3 d-flex' do %>
         <div class="card-body">
           <h5 class="card-title"><%= schedule.name %></h5>
 

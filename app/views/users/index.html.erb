@@ -22,7 +22,7 @@
   <div class="row">
     <% @users.each do |user| %>
       <div class='col-3'>
-        <%= link_to user, class: 'card mb-3' do %>
+        <%= link_to user, class: 'card card--clickable mb-3' do %>
           <div class="card-body">
             <h5 class="card-title"><%= user.username %></h5>
             <p><%= user.email %></p>

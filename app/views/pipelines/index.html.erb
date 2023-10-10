@@ -48,7 +48,7 @@
 
     <%- @pipelines.each do |pipeline| %>
       <div class='col-3'>
-        <%= link_to pipeline, class: 'card mb-3 d-flex' do %>
+        <%= link_to pipeline, class: 'card card--clickable mb-3 d-flex' do %>
           <div class="card-body">
             <h5 class="card-title"><%= pipeline.name %></h5>
             <h6 class="card-subtitle">

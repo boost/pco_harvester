@@ -1,0 +1,17 @@
+// this is used to make a card which has interactive elements
+// clickable without breaking a11y
+// See https://inclusive-components.design/cards/
+.card--clickable {
+  &:hover {
+    border-color: $primary;
+  }
+
+  .card__link::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}
