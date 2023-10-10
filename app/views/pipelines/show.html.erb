@@ -9,7 +9,11 @@
     <% end %>
 
     <%= render layout: 'shared/inline_editable_element', locals: { id: 'pipeline-description', model: @pipeline, url: pipeline_path(@pipeline), attribute: :description } do %>
-      <p><%= @pipeline.description %></p>
+      <% if @pipeline.description.present? %>
+        <p><%= @pipeline.description %></p>
+      <% else %>
+        <p class='js-inline-editable-control inline-editable-element__control ' data-id='pipeline-description'>Add pipeline description</p> 
+      <% end %>
     <% end %>
   </div>
 
