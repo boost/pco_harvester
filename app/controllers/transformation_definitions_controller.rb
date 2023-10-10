@@ -11,6 +11,7 @@ class TransformationDefinitionsController < ApplicationController
   def show
     @fields = @transformation_definition.fields.order(created_at: :desc).map(&:to_h)
     @props = transformation_app_state
+    @extraction_jobs = @harvest_definition.extraction_definition.extraction_jobs.completed.order(created_at: :desc)
   end
 
   def new

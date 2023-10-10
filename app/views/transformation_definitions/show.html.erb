@@ -7,6 +7,10 @@
 
   <div class="header__actions">
     <span id="react-header-actions"></span>
+
+    <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#update-transformation-definition-modal">
+      <i class="bi bi bi-sliders2"" aria-hidden="true"></i> Settings
+    </button>
     
     <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">
       <i class="bi bi-trash" aria-hidden="true"></i> Delete
@@ -19,6 +23,8 @@
 <% end %>
 
 <div id="js-transformation-app" data-props="<%= @props %>"></div>
+
+<%= render 'create_edit_modal', id: 'update-transformation-definition-modal', model: @transformation_definition, modal_heading: 'Edit transformation definition', modal_subheading: 'Define the settings for your transformation definition', confirmation_button_text: 'Update transformation definition', extraction_jobs: @extraction_jobs %>
 
 <%# Modals %>
 <%= render layout: 'shared/delete_modal',

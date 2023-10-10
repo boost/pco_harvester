@@ -678,7 +678,7 @@
     </div>
   <% end %>
 
-  <%= render 'shared/extraction_definition_modal', id: 'create-harvest-extraction-definition-modal', modal_heading: 'Create extraction definition', modal_subheading: 'Define the settings for your extraction definition' %>
+  <%= render 'extraction_definitions/create_edit_modal', id: 'create-harvest-extraction-definition-modal', modal_heading: 'Create extraction definition', modal_subheading: 'Define the settings for your extraction definition' %>
 
   <%= render(
         layout: 'shared/create_modal',
@@ -703,17 +703,15 @@
         or
       </div>
 
-      <% if @extraction_jobs&.any? %> 
-        <%= vertical_form_with(model: [@pipeline, @harvest_definition, TransformationDefinition.new]) do |form| %>
-
-          <%= form.hidden_field :pipeline_id, value: @pipeline.id %>
-          <% form.hidden_field :extraction_job_id, value: @extraction_jobs.last.id %>
-
-          <div class='d-grid gap-2'>
-            <%= form.submit '+ Add new transformation definition', class: 'btn btn-primary' %>
-          </div>
-        <% end %>
-      <% end %>
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#create-harvest-transformation-definition-modal">
+        + Add a new transformation definition
+      </button>
     </div>
   <% end %>
+
+  <%= render 'transformation_definitions/create_edit_modal', id: 'create-harvest-transformation-definition-modal', modal_heading: 'Create transformation definition', modal_subheading: 'Define the settings for your transformation definition', extraction_jobs: @extraction_jobs %>
 <% end %>

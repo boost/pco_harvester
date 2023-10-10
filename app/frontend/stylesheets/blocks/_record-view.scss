@@ -19,4 +19,10 @@
       overflow: auto;
     }
   }
+
+  @include modifier('record-selector-result') {
+    .cm-editor  {
+      height: 250px;
+    }
+  }
 }
