@@ -8,6 +8,10 @@
   <div class="header__actions">
     <span id="react-header-actions"></span>
 
+    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#update-extraction-definition-modal">
+      <i class="bi bi bi-sliders2"" aria-hidden="true"></i> Settings
+    </button>
+
     <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">
       <i class="bi bi-trash" aria-hidden="true"></i> Delete
     </button>
@@ -19,6 +23,8 @@
 <% end %>
 
 <div id="js-extraction-app" data-props="<%= @props %>"></div>
+
+<%= render 'shared/extraction_definition_modal', id: 'update-extraction-definition-modal', model: @extraction_definition, modal_heading: 'Edit extraction definition', modal_subheading: 'Define the settings for your extraction definition', confirmation_button_text: 'Update extraction definition' %>
 
 <%= render layout: 'shared/delete_modal',
            locals: { path: pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition,

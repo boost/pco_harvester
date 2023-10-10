@@ -8,7 +8,6 @@ import {
   previewRequest,
 } from "~/js/features/ExtractionApp/RequestsSlice";
 import PreviewModal from "~/js/apps/ExtractionApp/components/PreviewModal";
-import SettingsModal from "~/js/apps/ExtractionApp/components/SettingsModal";
 
 const HeaderActions = () => {
   const dispatch = useDispatch();
@@ -21,10 +20,6 @@ const HeaderActions = () => {
   const [showModal, setShowModal] = useState(false);
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
-
-  const [showSettingsModal, setSettingsModal] = useState(false);
-  const handleSettingsClose = () => setSettingsModal(false);
-  const handleSettingsShow  = () => setSettingsModal(true); 
 
   const handlePreviewClick = async () => {
     handleShow();
@@ -54,10 +49,6 @@ const HeaderActions = () => {
     }
   };
 
-  const handleSettingsClick = async () => {
-    handleSettingsShow();
-  }
-
   return createPortal(
     <>
       <button className="btn btn-success me-2" onClick={handlePreviewClick}>
@@ -69,15 +60,6 @@ const HeaderActions = () => {
         handleClose={handleClose}
         initialRequestId={initialRequestId}
         mainRequestId={mainRequestId}
-      />
-
-      <button className="btn btn-outline-success me-2" onClick={handleSettingsClick}>
-        <i className="bi bi-sliders2" aria-hidden="true"></i> Settings
-      </button>
-
-      <SettingsModal
-        showModal={showSettingsModal}
-        handleClose={handleSettingsClose}
       />
     </>,
     document.getElementById("react-header-actions")

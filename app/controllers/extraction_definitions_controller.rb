@@ -38,9 +38,15 @@ class ExtractionDefinitionsController < ApplicationController
   def update
     if @extraction_definition.update(extraction_definition_params)
       update_last_edited_by([@extraction_definition])
-      render json: @extraction_definition
+
+      redirect_to pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition, @extraction_definition), notice: t('.success')
     else
-      render500
+      flash.alert = t('.failure')
+
+      @parameters = @extraction_definition.parameters.order(created_at: :desc)
+      @props = extraction_app_state
+      
+      render :show
     end
   end
 
