@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Pipeline < ApplicationRecord
+  paginates_per 20
+
   has_many :harvest_definitions, dependent: :destroy
   has_many :harvest_jobs, through: :harvest_definitions
   belongs_to :last_edited_by, class_name: 'User', optional: true
