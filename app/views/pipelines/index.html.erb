@@ -20,10 +20,11 @@
 
       <li class='list-inline-item'>
         <%= form_with url: '/pipelines', method: :get do |form| %>
-          <%= select_tag(
+          <%= form.select(
                 :sort_by,
-                options_for_select([['Alphabetical', 'name'], ['Last Edited', 'updated_at']], @sort_by.first),
-                class: 'form-select', id: 'js-content-source-filter'
+                [['Last Edited', 'updated_at'], ['Alphabetical', 'name']],
+                { selected: @sort_by.keys.first },
+                class: 'form-select', id: 'js-pipeline-sort'
               ) %>
         <% end %>
       </li>

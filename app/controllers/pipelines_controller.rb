@@ -79,8 +79,8 @@ class PipelinesController < ApplicationController
   end
 
   def assign_sort_by
-    @sort_by = { name: :asc }
-    @sort_by = { updated_at: :desc } if params['sort_by'] == 'updated_at'
+    @sort_by = { updated_at: :desc }
+    @sort_by = { name: :asc } if params['sort_by'] == 'name'
   end
 
   def pipeline_params
