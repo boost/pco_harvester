@@ -5,13 +5,19 @@ class ExtractionDefinitionsController < ApplicationController
 
   before_action :find_pipeline
   before_action :find_harvest_definition
-  before_action :find_extraction_definition, only: %i[show update clone destroy]
-  before_action :find_destinations, only: %i[create update]
+  before_action :find_extraction_definition, only: %i[show update clone destroy edit]
+  before_action :find_destinations, only: %i[create update new edit]
 
   def show
     @parameters = @extraction_definition.parameters.order(created_at: :desc)
     @props = extraction_app_state
   end
+
+  def new
+    @extraction_definition = ExtractionDefinition.new(kind: params[:kind])
+  end
+
+  def edit; end
 
   def create
     @extraction_definition = ExtractionDefinition.new(extraction_definition_params)

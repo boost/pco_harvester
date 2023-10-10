@@ -183,8 +183,10 @@
     <div class='d-flex'>
       <div class='me-auto'>
 
-        <%= render layout: 'shared/inline_editable_element', locals: { id: "harvest-definition-#{@harvest_definition.id}-source-id", model: @harvest_definition, attribute: :source_id, url: pipeline_harvest_definition_path(@pipeline, @harvest_definition) } do %>
-          <h4><%= @harvest_definition.source_id %> </h4>
+        <% if @harvest_definition.id.present? %>
+          <%= render layout: 'shared/inline_editable_element', locals: { id: "harvest-definition-#{@harvest_definition.id}-source-id", model: @harvest_definition, attribute: :source_id, url: pipeline_harvest_definition_path(@pipeline, @harvest_definition) } do %>
+            <h4><%= @harvest_definition.source_id %> </h4>
+          <% end %>
         <% end %>
       </div>
 

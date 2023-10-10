@@ -14,7 +14,7 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
 
   describe '#new' do
     it 'renders the new form' do
-      get new_pipeline_harvest_definition_extraction_definition_path(pipeline, harvest_definition, kind: 'harvest')
+      get new_pipeline_harvest_definition_extraction_definition_path(pipeline, harvest_definition, kind: 'enrichment')
 
       expect(response.status).to eq 200
     end
@@ -91,13 +91,17 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
           extraction_definition: extraction_definition2.attributes
         }
 
-        expect(response.status).to eq 200
+        expect(response.status).to eq 302
+        follow_redirect!
         expect(response.body).to include 'There was an issue creating your Extraction Definition'
       end
     end
   end
 
   describe '#update' do
+    let!(:request_one) { create(:request, extraction_definition:) }
+    let!(:request_two) { create(:request, extraction_definition:) }
+
     context 'with valid parameters' do
       it 'updates the extraction definition' do
         patch pipeline_harvest_definition_extraction_definition_path(pipeline, harvest_definition, extraction_definition), params: {
@@ -131,7 +135,7 @@ RSpec.describe 'ExtractionDefinitions', type: :request do
     end
 
     context 'with invalid paramaters' do
-      it 'does not update the content source' do
+      it 'does not update the extraction_definition' do
         patch pipeline_harvest_definition_extraction_definition_path(pipeline, harvest_definition, extraction_definition), params: {
           extraction_definition: { format: nil }
         }

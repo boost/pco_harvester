@@ -13,23 +13,6 @@ RSpec.describe 'Transformation Definitions', type: :request do
     sign_in user
   end
 
-  describe '#new' do
-    it 'renders the new form' do
-      get new_pipeline_harvest_definition_transformation_definition_path(pipeline, harvest_definition, kind: 'harvest')
-
-      expect(response.status).to eq 200
-    end
-  end
-
-  describe '#edit' do
-    it 'renders the form' do
-      get edit_pipeline_harvest_definition_transformation_definition_path(pipeline, harvest_definition,
-                                                                          transformation_definition)
-
-      expect(response.status).to eq 200
-    end
-  end
-
   describe '#create' do
     context 'with valid parameters' do
       let(:transformation_definition) { build(:transformation_definition, pipeline:, extraction_job:) }
@@ -71,12 +54,13 @@ RSpec.describe 'Transformation Definitions', type: :request do
         end.not_to change(TransformationDefinition, :count)
       end
 
-      it 'rerenders the new form' do
+      it 'redirects to the pipeline path' do
         post pipeline_harvest_definition_transformation_definitions_path(pipeline, harvest_definition), params: {
           transformation_definition: transformation_definition.attributes
         }
 
-        expect(response.status).to eq 200
+        expect(response.status).to eq 302
+        follow_redirect!
         expect(response.body).to include 'There was an issue creating your Transformation Definition'
       end
     end

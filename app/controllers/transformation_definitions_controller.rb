@@ -26,7 +26,7 @@ class TransformationDefinitionsController < ApplicationController
     else
       flash.alert = t('.failure')
 
-      render :new
+      redirect_to pipeline_path(@pipeline)
     end
   end
 
@@ -37,7 +37,12 @@ class TransformationDefinitionsController < ApplicationController
       ), notice: t('.success')
     else
       flash.alert = t('.failure')
-      render 'edit'
+
+      @fields = @transformation_definition.fields.order(created_at: :desc).map(&:to_h)
+      @props = transformation_app_state
+      @extraction_jobs = @harvest_definition.extraction_definition.extraction_jobs.completed.order(created_at: :desc) 
+      
+      render :show
     end
   end
 
