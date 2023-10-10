@@ -22,7 +22,7 @@ class ExtractionDefinitionsController < ApplicationController
   def create
     @extraction_definition = ExtractionDefinition.new(extraction_definition_params)
 
-    if @extraction_definition.save(validate: false)
+    if @extraction_definition.save
       @harvest_definition.update(extraction_definition_id: @extraction_definition.id)
 
       2.times { Request.create(extraction_definition: @extraction_definition) }
@@ -30,7 +30,8 @@ class ExtractionDefinitionsController < ApplicationController
       redirect_to create_redirect_path, notice: t('.success')
     else
       flash.alert = t('.failure')
-      render :new
+      
+      redirect_to pipeline_path(@pipeline)
     end
   end
 

@@ -668,24 +668,88 @@
         or
       </div>
 
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#create-harvest-extraction">
+        + Add a new extraction definition
+      </button>
+    </div>
+  <% end %>
 
-      <%= vertical_form_with(model: [@pipeline, @harvest_definition, ExtractionDefinition.new]) do |form| %>
+  <%= render layout: 'shared/create_modal',
+           locals: { modal_heading: 'Create extraction definition', id: 'create-harvest-extraction',
+                     modal_subheading: 'Define the settings for your harvest extraction' } do %>
+  <div class='d-grid mt-4'>
+    <%= vertical_form_with model: [@pipeline, @harvest_definition, ExtractionDefinition.new] do |form| %>
+      <div class='row gy-3 align-items-center'>
 
         <%= form.hidden_field :kind, value: 'harvest' %>
         <%= form.hidden_field :pipeline_id, value: @pipeline.id %>
-        <%= form.hidden_field :page, value: 1 %>
-        <%= form.hidden_field :format, value: 'JSON' %>
-        <%= form.hidden_field :per_page, value: 10 %>
-        <%= form.hidden_field :base_url, value: 'https://example.com' %>
-        <%= form.hidden_field :total_selector, value: '$.records' %>
 
-        <div class='d-grid gap-2'>
-          <%= form.submit '+ Add new extraction definition', class: 'btn btn-primary' %>
+        <div class="col-4">
+          <%= form.label :base_url, 'Base URL', class: 'form-label' %>
         </div>
-      <% end %>
+        <div class='col-8'>
+          <%= form.text_field :base_url,
+                              class: {
+                                'form-control': true,
+                                'is-invalid': @harvest_definition.errors[:base_url].any?
+                              }, required: true %>
+        </div>
 
-    </div>
-  <% end %>
+        <div class="col-4">
+          <%= form.label :format, class: 'form-label' do %>
+            Format
+            <span
+              data-bs-toggle="tooltip"
+              data-bs-title="The format the API returns"><i class="bi bi-question-circle" aria-label="helper text"></i>
+          <% end %>
+        </div>
+        <div class="col-8">
+          <% options = find_options_from_validations(ExtractionDefinition, :format) %>
+          <%= form.select :format, options, {}, class: 'form-select' %>
+        </div>
+
+        <div class="col-4">
+          <%= form.label :throttle, 'Throttle (in ms)', class: 'form-label' %>
+        </div>
+        <div class="col-8">
+          <%= form.number_field :throttle, class: 'form-control', required: true %>
+        </div>
+
+        <div class="col-4">
+          <%= form.label :total_selector, 'Total Selector', class: 'form-label' %>
+        </div>
+        <div class="col-8">
+          <%= form.text_field :total_selector, class: 'form-control', required: true %>
+        </div>
+
+        <div class="col-4">
+          <%= form.label :per_page, 'Per Page', class: 'form-label' %>
+        </div>
+        <div class="col-8">
+          <%= form.number_field :per_page, class: 'form-control', required: true %>
+        </div>
+
+        <div class="col-4">
+          <%= form.label :paginated, class: 'form-label' do %>
+            Paginated
+          <% end %>
+        </div>
+        <div class="col-8">
+          <%= form.select :paginated, options_for_select([['Paginated', 'true'], ['Not Paginated', 'false']]), {}, class: 'form-select' %>
+        </div>
+      </div>
+
+      <div class='float-end mt-4'>
+        <button type="button" class="btn btn-outline-danger me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+        <button type="submit" class="btn btn-primary">Create harvest extraction</button>
+      </div>
+    <% end %>
+  </div>
+<% end %>
 
   <%= render(
         layout: 'shared/create_modal',
