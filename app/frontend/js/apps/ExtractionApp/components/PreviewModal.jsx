@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { useSelector } from "react-redux";
 import classNames from "classnames";
 import { selectAppDetails } from "~/js/features/ExtractionApp/AppDetailsSlice";
+import { request } from "~/js/utils/request";
 
 import Modal from "react-bootstrap/Modal";
 import Preview from "~/js/apps/ExtractionApp/components/Preview";
@@ -19,6 +20,22 @@ const PreviewModal = ({
     "col-6": appDetails.extractionDefinition.paginated,
     "col-12": !appDetails.extractionDefinition.paginated,
   });
+
+  const handleSampleClick = async (type) => {
+    const response = await request
+      .post(
+        `/pipelines/${appDetails.pipeline.id}/harvest_definitions/${appDetails.harvestDefinition.id}/extraction_definitions/${appDetails.extractionDefinition.id}/extraction_jobs.json?kind=sample&type=${type}`,
+      )
+      .then((response) => {
+        return response;
+      });
+
+      if(type == 'transform') {
+        window.location.replace(`/pipelines/${appDetails.pipeline.id}/harvest_definitions/${appDetails.harvestDefinition.id}/transformation_definitions/${response.data.id}`);
+      } else {
+        window.location.replace(`/pipelines/${appDetails.pipeline.id}`);
+      }
+  }
 
   return createPortal(
     <Modal
@@ -39,17 +56,17 @@ const PreviewModal = ({
             Continue editing extraction definition
           </button>
 
-          
-
-          <a href={`/pipelines/${appDetails.pipeline.id}/harvest_definitions/${appDetails.harvestDefinition.id}/extraction_definitions/${appDetails.extractionDefinition.id}/extraction_jobs?kind=sample`}
+          <button
             className="btn btn-outline-primary me-2"
+            onClick={() => { handleSampleClick('pipeline')}}
           >
             <i className="bi bi-play" aria-hidden="true"></i>
             Run sample and return to pipeline
-          </a>
+          </button>
 
           <button
             className="btn btn-primary me-2"
+            onClick={() => { handleSampleClick('transform')}}
           >
             <i className="bi bi-play" aria-hidden="true"></i>
             Run sample and transform data

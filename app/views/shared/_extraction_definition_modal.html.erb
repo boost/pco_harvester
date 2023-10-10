@@ -27,12 +27,14 @@
             <%= form.hidden_field :kind, value: 'harvest' %>
             <%= form.hidden_field :pipeline_id, value: @pipeline.id %>
 
-            <div class="col-4">
-              <%= form.label :name, 'Name', class: 'form-label' %>
-            </div>
-            <div class="col-8">
-              <%= form.text_field :name, class: 'form-control' %>
-            </div>
+            <% if model.persisted? %>
+              <div class="col-4">
+                <%= form.label :name, 'Name', class: 'form-label' %>
+              </div>
+              <div class="col-8">
+                <%= form.text_field :name, class: 'form-control' %>
+              </div>
+            <% end %>
 
             <div class="col-4">
               <%= form.label :base_url, 'Base URL', class: 'form-label' %>
