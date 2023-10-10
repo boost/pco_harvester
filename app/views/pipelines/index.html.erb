@@ -9,7 +9,28 @@
 <% end %>
 
 <%= form_with url: '/pipelines', method: :get, class: 'row mb-4' do |form| %>
+  <div class="col"></div>
   <div class="col-auto">
+    <div class="input-group mb-3">
+      <%= form.text_field(:search, value: params[:search], class: 'form-control', 'aria-label': 'Search') %>
+      <button class="btn btn-primary" type="submit">Search</button>
+    </div>
+  </div>
+
+  <!--
+  <div class="col-auto pe-0">
+    <%= form.label :format, 'Format:', class: 'col-form-label' %>
+  </div>
+  <div class="col-auto">
+    <%= form.select(
+          :format,
+          ExtractionDefinition::FORMATS,
+          { selected: @format },
+          class: 'form-select', 'data-submitting-select': true
+        ) %>
+  </div>
+  -->
+  <div class="col-auto pe-0">
     <%= form.label :sort_by, 'Sort by:', class: 'col-form-label' %>
   </div>
   <div class="col-auto">
@@ -19,16 +40,6 @@
           { selected: @sort_by.keys.first },
           class: 'form-select', 'data-submitting-select': true
         ) %>
-  </div>
-  <div class="col"></div>
-  <div class="col-auto">
-    <%= form.label :search, 'Search:', class: 'col-form-label' %>
-  </div>
-  <div class="col-auto">
-    <div class="input-group mb-3">
-      <%= form.text_field(:search, value: params[:search], class: 'form-control') %>
-      <button class="btn btn-primary" type="submit">Search</button>
-    </div>
   </div>
 <% end %>
 

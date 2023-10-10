@@ -12,7 +12,7 @@ class Pipeline < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
 
-  def self.search(words)
+  def self.search(words, _format)
     words = sanitize_sql_like(words || '')
     return self if words.empty?
 
