@@ -17,7 +17,7 @@
           :sort_by,
           [['Last Edited', 'updated_at'], ['Alphabetical', 'name']],
           { selected: @sort_by.keys.first },
-          class: 'form-select', id: 'js-pipeline-sort'
+          class: 'form-select', 'data-submitting-select': true
         ) %>
   </div>
   <div class="col"></div>
@@ -37,7 +37,7 @@
   <div class='col-3'>
     <button type="button" class="card mb-3 card--create-cta d-flex" data-bs-toggle="modal" data-bs-target="#create-modal">
       <div class="card-body align-items-center d-flex justify-content-center">
-        <h5 class="card-title">+ Create new pipeline</h5>
+        <h2 class="card-title">+ Create new pipeline</h5>
       </div>
     </button>
   </div>
@@ -46,10 +46,10 @@
     <div class='col-3'>
       <%= link_to pipeline, class: 'card card--clickable mb-3 d-flex' do %>
         <div class="card-body">
-          <h5 class="card-title"><%= pipeline.name %></h5>
-          <h6 class="card-subtitle">
+          <h2 class="card-title"><%= pipeline.name %></h2>
+          <h3 class="card-subtitle">
             <%= last_edited_by(pipeline) %>
-          </h6>
+          </h3>
           <div>
             <span class="badge bg-light text-dark">
               <%= pipeline.harvest_definitions.harvest.count %> Harvest

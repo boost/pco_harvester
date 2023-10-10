@@ -7,14 +7,14 @@
 
 <div class="card card--clickable">
   <div class='card-body'>
-    <h5 class="card-title">
+    <h2 class="card-title">
       <%= link_to edit_path, class: 'card__link' do %>
         <%= definition.name %>
       <% end %>
-    </h5>
-    <h6 class="card-subtitle">
+    </h2>
+    <h3 class="card-subtitle">
       <%= send("#{type}_card_subtitle", definition) %>
-    </h6>
+    </h3>
 
     <% if definition.shared? %>
       <span class="badge text-bg-light">Shared (<%= "#{definition.harvest_definitions.count} pipelines" %>)</span>

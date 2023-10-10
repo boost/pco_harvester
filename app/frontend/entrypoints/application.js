@@ -37,7 +37,7 @@ import "/js/TestTransformationRecordSelector";
 import "/js/TestDestination";
 import "/js/Tooltips";
 import "/js/CollapseScroll";
-import "/js/PipelineSort";
+import "/js/SubmittingSelect";
 import "/js/CreateModal";
 import "/js/AutoComplete";
 
