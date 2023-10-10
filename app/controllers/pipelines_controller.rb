@@ -78,11 +78,7 @@ class PipelinesController < ApplicationController
   end
 
   def pipelines
-    Pipeline.search(params[:search], format).order(sort_by).page(params[:page])
-  end
-
-  def format
-    @format ||= params['format']
+    Pipeline.search(params[:search], params[:format]).order(sort_by).page(params[:page])
   end
 
   def sort_by

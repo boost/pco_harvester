@@ -17,19 +17,17 @@
     </div>
   </div>
 
-  <!--
   <div class="col-auto pe-0">
     <%= form.label :format, 'Format:', class: 'col-form-label' %>
   </div>
   <div class="col-auto">
     <%= form.select(
           :format,
-          ExtractionDefinition::FORMATS,
-          { selected: @format },
+          [['All formats', '']] + ExtractionDefinition::FORMATS.map { |format| [format, format] },
+          { selected: params[:format].in?([nil, '', 'All formats']) ? 'All formats' : params[:format] },
           class: 'form-select', 'data-submitting-select': true
         ) %>
   </div>
-  -->
   <div class="col-auto pe-0">
     <%= form.label :sort_by, 'Sort by:', class: 'col-form-label' %>
   </div>

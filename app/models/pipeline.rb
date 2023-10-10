@@ -12,9 +12,9 @@ class Pipeline < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
 
-  def self.search(words, _format)
+  def self.search(words, format)
     words = sanitize_sql_like(words || '')
-    return self if words.empty?
+    return by_format(format) if words.empty?
 
     words = "%#{words}%"
     users = User.select(:id).where('username LIKE ?', words)
@@ -22,6 +22,14 @@ class Pipeline < ApplicationRecord
     where('name LIKE ?', words)
       .or(where('description LIKE ?', words))
       .or(where(last_edited_by: users))
+      .or(by_format(format))
+  end
+
+  def self.by_format(format)
+    return self if format.blank?
+
+    pipeline_ids = ExtractionDefinition.where(format:).pluck(:pipeline_id)
+    where(id: pipeline_ids)
   end
 
   def harvest
