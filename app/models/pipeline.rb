@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Pipeline < ApplicationRecord
-  paginates_per 20
+  paginates_per 19 # not 20 because of the "Create new pipeline" button
 
   has_many :harvest_definitions, dependent: :destroy
   has_many :harvest_jobs, through: :harvest_definitions
