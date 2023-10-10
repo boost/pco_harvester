@@ -36,9 +36,10 @@ import "/js/TestEnrichmentExtraction";
 import "/js/TestTransformationRecordSelector";
 import "/js/TestDestination";
 import "/js/Tooltips";
+import "/js/Toasts";
 import "/js/CollapseScroll";
 import "/js/ContentSourceFilter";
-import "/js/CreateModal";
+import "/js/formModals";
 import "/js/AutoComplete";
 
 import "/js/editor";

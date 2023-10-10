@@ -1,8 +1,14 @@
-<% matches = { notice: 'success', alert: 'danger' } %>
+<% matches = { notice: 'primary', alert: 'danger' } %>
 
 <% flash.each do |type, msg| %>
-  <div class="alert alert-dismissible fade show w-25 text-light fixed-bottom <%= "alert-#{matches[type.to_sym]}" %>" role="alert">
-    <%= msg %>
-    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+  <div class="toast-container p-3 bottom-0 end-0">
+    <div class="toast align-items-center <%= "text-bg-#{matches[type.to_sym]}" %> border-0" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body">
+          <%= msg %>
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+    </div>
   </div>
 <% end %>
