@@ -673,6 +673,11 @@
 
         <%= form.hidden_field :kind, value: 'harvest' %>
         <%= form.hidden_field :pipeline_id, value: @pipeline.id %>
+        <%= form.hidden_field :page, value: 1 %>
+        <%= form.hidden_field :format, value: 'JSON' %>
+        <%= form.hidden_field :per_page, value: 10 %>
+        <%= form.hidden_field :base_url, value: 'https://example.com' %>
+        <%= form.hidden_field :total_selector, value: '$.records' %>
 
         <div class='d-grid gap-2'>
           <%= form.submit '+ Add new extraction definition', class: 'btn btn-primary' %>
@@ -705,7 +710,7 @@
         or
       </div>
 
-      <% if @extraction_jobs.any? %> 
+      <% if @extraction_jobs&.any? %> 
         <%= vertical_form_with(model: [@pipeline, @harvest_definition, TransformationDefinition.new]) do |form| %>
 
           <%= form.hidden_field :pipeline_id, value: @pipeline.id %>
