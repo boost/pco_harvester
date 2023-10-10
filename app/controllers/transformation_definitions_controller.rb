@@ -5,20 +5,14 @@ class TransformationDefinitionsController < ApplicationController
 
   before_action :find_pipeline
   before_action :find_harvest_definition
-  before_action :find_transformation_definition, only: %w[show edit update destroy clone]
-  before_action :find_extraction_jobs, only: %w[new create edit update]
+  before_action :find_transformation_definition, only: %w[show update destroy clone]
+  before_action :find_extraction_jobs, only: %w[create update]
 
   def show
     @fields = @transformation_definition.fields.order(created_at: :desc).map(&:to_h)
     @props = transformation_app_state
     @extraction_jobs = @harvest_definition.extraction_definition.extraction_jobs.completed.order(created_at: :desc)
   end
-
-  def new
-    @transformation_definition = TransformationDefinition.new(kind: params[:kind])
-  end
-
-  def edit; end
 
   def create
     @transformation_definition = TransformationDefinition.new(transformation_definition_params)
