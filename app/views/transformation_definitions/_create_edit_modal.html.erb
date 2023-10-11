@@ -23,7 +23,7 @@
       </div>
       <div class="modal-body">
 
-        <%= vertical_form_with model: [@pipeline, @harvest_definition, model],
+        <%= vertical_form_with model: [@pipeline, harvest_definition, model],
                               id: 'js-transformation-definition-form' do |form| %>
           <%= form.hidden_field :pipeline_id, value: @pipeline.id %>
           <%= form.hidden_field :kind, value: 'harvest' %>

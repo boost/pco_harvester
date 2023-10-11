@@ -499,7 +499,7 @@
 
           <% else %>
 
-            <% disabled = !@enrichment_definition&.extraction_definition&.extraction_jobs&.any?(&:completed?) %>
+            <% disabled = !enrichment_definition&.extraction_definition&.extraction_jobs&.any?(&:completed?) %>
 
             <button
               type="button"
@@ -542,16 +542,22 @@
                   or
                 </div>
 
-                <%= link_to '+ Add new transformation definition',
-                            new_pipeline_harvest_definition_transformation_definition_path(
-                              @pipeline,
-                              enrichment_definition,
-                              kind: 'enrichment'
-                            ),
-                            class: 'btn btn-primary' %>
-
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target=<%= "#create-enrichment-transformation-definition-modal-#{enrichment_definition.id}" %>>
+                  + Add a new transformation definition
+                </button>
               </div>
             <% end %>
+
+            <% unless disabled %>
+              <% extraction_jobs = enrichment_definition.extraction_definition.extraction_jobs.completed.order(created_at: :desc) %>
+
+              <%= render 'transformation_definitions/create_edit_modal', id: "create-enrichment-transformation-definition-modal-#{enrichment_definition.id}", modal_heading: 'Create transformation definition', harvest_definition: enrichment_definition, modal_subheading: 'Define the settings for your transformation definition', extraction_jobs: extraction_jobs, confirmation_button_text: 'Create enrichment transformation' %>
+            <% end %>
+
           <% end %>
         </div>
       </div>
@@ -719,5 +725,5 @@
     </div>
   <% end %>
 
-  <%= render 'transformation_definitions/create_edit_modal', id: 'create-harvest-transformation-definition-modal', modal_heading: 'Create transformation definition', modal_subheading: 'Define the settings for your transformation definition', extraction_jobs: @extraction_jobs %>
+  <%= render 'transformation_definitions/create_edit_modal', id: 'create-harvest-transformation-definition-modal', modal_heading: 'Create transformation definition', harvest_definition: @harvest_definition, modal_subheading: 'Define the settings for your transformation definition', extraction_jobs: @extraction_jobs %>
 <% end %>
