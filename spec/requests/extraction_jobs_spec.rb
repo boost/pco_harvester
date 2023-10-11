@@ -35,56 +35,106 @@ RSpec.describe 'ExtractionJobs', type: :request do
   end
 
   describe '#create' do
-    describe 'is successful' do
-      it 'redirects to the extraction definition jobs path' do
-        post pipeline_harvest_definition_extraction_definition_extraction_jobs_path(pipeline, harvest_definition, extraction_definition,
-                                                                                    kind: 'full')
+    context 'when the format is HTML' do
+      describe 'is successful' do
+        it 'redirects to the extraction definition jobs path' do
+          post pipeline_harvest_definition_extraction_definition_extraction_jobs_path(pipeline, harvest_definition, extraction_definition,
+                                                                                      kind: 'full')
 
-        expect(response).to redirect_to pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
-          pipeline, harvest_definition, extraction_definition
-        )
+          expect(response).to redirect_to pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
+            pipeline, harvest_definition, extraction_definition
+          )
+        end
+
+        it 'sets a succesful message' do
+          post pipeline_harvest_definition_extraction_definition_extraction_jobs_path(pipeline, harvest_definition, extraction_definition,
+                                                                                      kind: 'full')
+          follow_redirect!
+          expect(response.body).to include 'Job queued successfuly'
+        end
+
+        it 'queues a job' do
+          expect(ExtractionWorker).to receive(:perform_async)
+
+          post pipeline_harvest_definition_extraction_definition_extraction_jobs_path(pipeline, harvest_definition, extraction_definition,
+                                                                                      kind: 'full')
+        end
       end
 
-      it 'sets a succesful message' do
-        post pipeline_harvest_definition_extraction_definition_extraction_jobs_path(pipeline, harvest_definition, extraction_definition,
-                                                                                    kind: 'full')
-        follow_redirect!
-        expect(response.body).to include 'Job queued successfuly'
-      end
+      describe 'is not successful' do
+        before do
+          expect_any_instance_of(ExtractionJob).to receive(:save).and_return(false)
+        end
 
-      it 'queues a job' do
-        expect(ExtractionWorker).to receive(:perform_async)
+        it 'redirects to the extraction definition jobs path' do
+          post pipeline_harvest_definition_extraction_definition_extraction_jobs_path(pipeline, harvest_definition,
+                                                                                      extraction_definition)
 
-        post pipeline_harvest_definition_extraction_definition_extraction_jobs_path(pipeline, harvest_definition, extraction_definition,
-                                                                                    kind: 'full')
+          expect(response).to redirect_to pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
+            pipeline, harvest_definition, extraction_definition
+          )
+        end
+
+        it 'sets a failure message' do
+          post pipeline_harvest_definition_extraction_definition_extraction_jobs_path(pipeline, harvest_definition,
+                                                                                      extraction_definition)
+          follow_redirect!
+          expect(response.body).to include 'There was an issue launching the job'
+        end
+
+        it 'does not queue a job' do
+          expect(ExtractionWorker).not_to receive(:perform_async)
+          post pipeline_harvest_definition_extraction_definition_extraction_jobs_path(pipeline, harvest_definition,
+                                                                                      extraction_definition)
+        end
       end
     end
 
-    describe 'is not successful' do
-      before do
-        expect_any_instance_of(ExtractionJob).to receive(:save).and_return(false)
+    context 'when the format is JSON' do
+      context 'when the type is pipeline' do
+        it 'returns information to redirect to the pipeline path' do
+          post pipeline_harvest_definition_extraction_definition_extraction_jobs_path(pipeline, harvest_definition, extraction_definition, kind: 'full', type: 'pipeline', format: 'json')
+
+          body = JSON.parse(response.body)
+
+          expect(body['location']).to eq "/pipelines/#{pipeline.id}"
+        end
+
+        it 'queues a job' do
+          expect(ExtractionWorker).to receive(:perform_async)
+
+          post pipeline_harvest_definition_extraction_definition_extraction_jobs_path(pipeline, harvest_definition, extraction_definition, kind: 'full', type: 'pipeline', format: 'json')
+        end
       end
 
-      it 'redirects to the extraction definition jobs path' do
-        post pipeline_harvest_definition_extraction_definition_extraction_jobs_path(pipeline, harvest_definition,
-                                                                                    extraction_definition)
+      context 'when the type is transform' do
+        context 'when there is allready a Transformation Definition associated with the harvest_definition' do
+          it 'updates the Transformation Definition to reference the new job id' do
+            existing_extraction_job = harvest_definition.transformation_definition.extraction_job
 
-        expect(response).to redirect_to pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
-          pipeline, harvest_definition, extraction_definition
-        )
-      end
+            post pipeline_harvest_definition_extraction_definition_extraction_jobs_path(pipeline, harvest_definition, extraction_definition, kind: 'full', type: 'transform', format: 'json')
 
-      it 'sets a failure message' do
-        post pipeline_harvest_definition_extraction_definition_extraction_jobs_path(pipeline, harvest_definition,
-                                                                                    extraction_definition)
-        follow_redirect!
-        expect(response.body).to include 'There was an issue launching the job'
-      end
+            harvest_definition.reload
+            
+            expect(harvest_definition.transformation_definition.extraction_job).not_to eq existing_extraction_job
+          end
+        end
 
-      it 'does not queue a job' do
-        expect(ExtractionWorker).not_to receive(:perform_async)
-        post pipeline_harvest_definition_extraction_definition_extraction_jobs_path(pipeline, harvest_definition,
-                                                                                    extraction_definition)
+        context 'when there is no Transformation Definition associated with the harvest definition' do
+          it 'creates a new Transformation Definition and assigns it to the Harvest Definition' do
+            harvest_definition.transformation_definition.destroy
+            harvest_definition.reload
+
+            expect(harvest_definition.transformation_definition).to be_nil
+
+            expect do
+              post pipeline_harvest_definition_extraction_definition_extraction_jobs_path(pipeline, harvest_definition, extraction_definition, kind: 'full', type: 'transform', format: 'json')
+            end.to change(TransformationDefinition, :count).by(1)
+
+            harvest_definition.reload
+            expect(harvest_definition.transformation_definition).not_to be_nil
+          end
+        end
       end
     end
   end
