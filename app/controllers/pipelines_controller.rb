@@ -78,7 +78,7 @@ class PipelinesController < ApplicationController
   end
 
   def pipelines
-    Pipeline.search(params[:search], params[:format]).order(sort_by).page(params[:page])
+    PipelineSearchQuery.new(params).call.order(sort_by).page(params[:page])
   end
 
   def sort_by

@@ -25,25 +25,6 @@ class Pipeline < ApplicationRecord
     query
   end
 
-  def self.sanitized_words(words)
-    words = sanitize_sql_like(words || '')
-    return nil if words.empty?
-
-    "%#{words}%"
-  end
-
-  def self.search_user_ids(words)
-    User.where('username LIKE ?', words).pluck(:id)
-  end
-
-  def self.search_source_ids(words)
-    HarvestDefinition.where('source_id LIKE ?', words).pluck(:pipeline_id)
-  end
-
-  def self.search_format_ids(format)
-    ExtractionDefinition.where(format:).pluck(:pipeline_id)
-  end
-
   def harvest
     harvest_definitions.find_by(kind: 'harvest')
   end
