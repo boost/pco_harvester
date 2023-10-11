@@ -36,7 +36,14 @@
             <%= form.hidden_field :key, value: SecureRandom.hex %>
 
             <div class='col-5'>
-              <%= form.label :harvest_definitions_to_run, 'Blocks to run', class: 'form-label' %>
+              <%= form.label :harvest_definitions_to_run, class: 'form-label' do %>
+                Blocks to run
+
+                <span
+                  data-bs-toggle="tooltip"
+                  data-bs-title="Please select the parts of your pipeline that you wish to run."><i class="bi bi-question-circle" aria-label="helper text"></i>
+                </span>
+              <% end %>
             </div>
 
             <div class='col-7'>
@@ -59,7 +66,14 @@
 
             <% if @extraction_jobs %>
               <div class="col-5 js-transformation-input">
-                <%= form.label :extraction_job_id, 'Transformation input', class: 'form-label' %>
+                <%= form.label :extraction_job_id, class: 'form-label' do %>
+                  Transformation input
+
+                  <span
+                    data-bs-toggle="tooltip"
+                    data-bs-title="Choose to either perform fresh extraction or use existing extracted data."><i class="bi bi-question-circle" aria-label="helper text"></i>
+                  </span> 
+                <% end %>
               </div>
 
               <div class='col-7 js-transformation-input'>
@@ -69,7 +83,9 @@
             <% end %>
 
             <div class="col-5">
-              <%= form.label :page_type, 'Pages to transform', class: 'form-label' %>
+              <%= form.label :page_type, class: 'form-label' do %>
+                Pages to transform
+              <% end %>
             </div>
 
             <div id='js-pipeline-page-type' class='col-7'>
@@ -85,7 +101,14 @@
             </div>
 
             <div class="col-5">
-              <%= form.label :destination, 'Destination', class: 'form-label' %>
+              <%= form.label :destination, class: 'form-label' do %>
+                Destination
+
+                <span
+                  data-bs-toggle="tooltip"
+                  data-bs-title="The location that you want to send your transformed data." aria-label="helper text"><i class="bi bi-question-circle" aria-label="helper text"></i>
+                </span> 
+              <% end %>
             </div>
 
             <div class='col-7'>
@@ -321,9 +344,8 @@
                        ) %>"
             <% if disabled %>
               data-bs-toggle="tooltip" data-bs-placement="top"
-              data-bs-title="You need to run the extraction before you can add a transformation"
-            <% end %>
-            <% if !disabled %>
+              data-bs-title="You need to extract some data before you can add a transformation"
+            <% else %>
               data-bs-toggle="modal"
               data-bs-target="#add-harvest-transformation"
             <% end %>>
@@ -565,15 +587,25 @@
   <% end %>
 <% end %>
 
-<% if @harvest_definition.persisted? %>
+<% if @harvest_definition.ready_to_run? %>
   <div class='row definition-group definition-group--spacer'>
     <span class='definition-group__bridge'></span>
     <div class='col-12'>
-      <button
-        type="button"
-        class="card card--create-cta d-flex"
-        data-bs-toggle="modal"
-        data-bs-target="#add-enrichment">
+        <button
+          type="button"
+          class="<%= class_names(
+                        'card', 'card--create-cta', 'd-flex',
+                        'card--create-cta-disabled': @completed_harvest_jobs.empty?
+                      ) %>"
+
+          <% if @completed_harvest_jobs.empty? %>
+            data-bs-toggle="tooltip" data-bs-placement="top"
+            data-bs-title="You need to run the harvest before you can add an enrichment"
+          <% else %>
+            data-bs-toggle="modal"
+            data-bs-target="#add-enrichment"
+          <% end %>>
+        
         <div class="card-body align-items-center d-flex justify-content-center">
           <p class='card-text'>+ Add Enrichment</p>
         </div>
@@ -608,7 +640,13 @@
         <%= form.hidden_field :kind, value: 'harvest' %>
 
         <div class="col-4">
-          <%= form.label :source_id, 'Source ID', class: 'form-label' %>
+          <%= form.label :source_id, class: 'form-label' do %>
+            Source ID 
+            <span
+              data-bs-toggle="tooltip"
+              data-bs-title="This is used as a way to identify records from this harvest."><i class="bi bi-question-circle" aria-label="helper text"></i>
+              
+          <% end %>
         </div>
         <div class='col-8'>
           <%= form.text_field :source_id,
@@ -637,7 +675,13 @@
         <%= form.hidden_field :priority, value: "-#{@pipeline.enrichments.count + 1}" %>
 
         <div class="col-4">
-          <%= form.label :source_id, 'Source ID', class: 'form-label' %>
+          <%= form.label :source_id, class: 'form-label' do %>
+            Source ID
+
+            <span
+              data-bs-toggle="tooltip"
+              data-bs-title="This is used as a way to identify records from this enrichment. This needs to be different than the harvest source ID."><i class="bi bi-question-circle" aria-label="helper text"></i>
+          <% end %>
         </div>
         <div class='col-8'>
           <%= form.text_field :source_id,

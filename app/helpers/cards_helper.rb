@@ -11,8 +11,7 @@ module CardsHelper
 
   def transformation_card_subtitle(definition)
     [
-      last_edited_by(definition),
-      pluralize(definition.fields.count, 'field')
+      last_edited_by(definition)
     ].compact.join(' | ')
   end
 end

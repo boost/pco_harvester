@@ -37,8 +37,16 @@
             <% end %>
 
             <div class="col-4">
-              <%= form.label :base_url, 'Base URL', class: 'form-label' %>
+              <%= form.label :base_url, class: 'form-label' do %>
+                Base URL
+
+                <span
+                    data-bs-toggle="tooltip"
+                    data-bs-title="The URL which you wish to extract your data from"><i class="bi bi-question-circle" aria-label="helper text"></i>
+                </span>
+              <% end %>
             </div>
+
             <div class='col-8'>
               <%= form.text_field :base_url,
                                   class: {
@@ -52,7 +60,7 @@
                 Format
                 <span
                   data-bs-toggle="tooltip"
-                  data-bs-title="The format the API returns"><i class="bi bi-question-circle" aria-label="helper text"></i>
+                  data-bs-title="The format of the source which you are extracting data from"><i class="bi bi-question-circle" aria-label="helper text"></i>
               <% end %>
             </div>
             <div class="col-8">
@@ -61,7 +69,14 @@
             </div>
 
             <div class="col-4">
-              <%= form.label :throttle, 'Throttle (in ms)', class: 'form-label' %>
+              <%= form.label :throttle, class: 'form-label' do %>
+                Throttle
+
+                <span
+                    data-bs-toggle="tooltip"
+                    data-bs-title="The delay in milliseconds between requests made during the extraction. This is done to reduce the stress on a content source."><i class="bi bi-question-circle" aria-label="helper text"></i>
+                </span>
+              <% end %>
             </div>
             <div class="col-8">
               <%= form.number_field :throttle, class: 'form-control', required: true %>
@@ -84,6 +99,11 @@
             <div class="col-4">
               <%= form.label :paginated, class: 'form-label' do %>
                 Paginated
+
+                <span
+                  data-bs-toggle="tooltip"
+                  data-bs-title="If the source you are extracting data from returns results across multiple pages."><i class="bi bi-question-circle" aria-label="helper text"></i>
+                </span>
               <% end %>
             </div>
             <div class="col-8">

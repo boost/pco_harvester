@@ -7,6 +7,7 @@ import { selectAllParameters } from "~/js/features/ExtractionApp/ParametersSlice
 import { toggleDisplayParameters } from "~/js/features/ExtractionApp/UiParametersSlice";
 import { selectUiAppDetails } from "~/js/features/ExtractionApp/UiAppDetailsSlice";
 import { selectRequestById } from "~/js/features/ExtractionApp/RequestsSlice";
+import Tooltip from "~/js/components/Tooltip";
 
 import AddParameter from "./AddParameter";
 import ParameterNavigationList from "./ParameterNavigationList";
@@ -41,7 +42,10 @@ const ParameterNavigationPanel = () => {
     <div className="card field-nav-panel">
       <div className="d-flex flex-column overflow-auto">
         <div className="field-nav-panel__header">
-          <h5>{queryHeading()}</h5>
+
+          <Tooltip data-bs-title="Query parameters will make up the majority of your request. They are appended to the base url after the question mark.">  
+            <h5>{queryHeading()}</h5>
+          </Tooltip>
 
           <div className="btn-group card__control">
             <i
@@ -92,7 +96,9 @@ const ParameterNavigationPanel = () => {
         </div>
 
         <div className="field-nav-panel__header field-nav-panel__header--fields">
-          <h5>Header</h5>
+          <Tooltip data-bs-title="Header parameters are sent in the headers of the request. They are often used for authentication.">
+            <h5>Header</h5>
+          </Tooltip>
 
           <div className="btn-group card__control">
             <i
@@ -143,7 +149,9 @@ const ParameterNavigationPanel = () => {
         </div>
 
         <div className="field-nav-panel__header field-nav-panel__header--fields">
-          <h5>Slug</h5>
+          <Tooltip data-bs-title="Slug parameters are sometimes required for particular use cases. They are appended to the base url after the forward slash.">
+            <h5>Slug</h5>
+          </Tooltip>
 
           <div className="btn-group card__control">
             <i

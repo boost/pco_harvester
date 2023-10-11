@@ -31,7 +31,7 @@ const AddParameter = ({ kind, buttonText }) => {
   return (
     <>
       { emptyParameters && (
-        <Tooltip data-bs-title="Please save unsaved parameters before adding another">
+        <Tooltip data-bs-title="Please save incomplete parameters before adding another">
           <div className='d-grid gap-2'>
             <button
               disabled="true"

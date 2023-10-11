@@ -39,7 +39,14 @@
             <% end %>
 
             <div class='col-4'>
-              <%= form.label :extraction_job_id, 'Preview Records', class: 'form-label' %>
+              <%= form.label :extraction_job_id, class: 'form-label' do %>
+                Extracted Data
+
+                <span
+                  data-bs-toggle="tooltip"
+                  data-bs-title="The data you wish to use to build your transformation"><i class="bi bi-question-circle" aria-label="helper text"></i>
+                </span>
+              <% end %>
             </div>
 
             <div class='col-8'>
@@ -51,7 +58,14 @@
             </div>
 
             <div class="col-4">
-              <%= form.label :record_selector, 'Record Selector', class: 'form-label' %>
+              <%= form.label :record_selector, class: 'form-label' do %>
+                Record Selector
+                
+                <span
+                  data-bs-toggle="tooltip"
+                  data-bs-title="This defines the scope of a single record from within the extracted data"><i class="bi bi-question-circle" aria-label="helper text"></i>
+                </span>
+              <% end %>
             </div>
 
             <div class='col-6'>

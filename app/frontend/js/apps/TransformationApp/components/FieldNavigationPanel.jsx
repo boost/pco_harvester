@@ -8,6 +8,7 @@ import { filter, concat } from "lodash";
 import FieldNavigationListItem from "./FieldNavigationListItem";
 import AddField from "~/js/apps/TransformationApp/components/AddField";
 import { toggleDisplayFields } from "~/js/features/TransformationApp/UiFieldsSlice";
+import Tooltip from "~/js/components/Tooltip";
 
 const FieldNavigationPanel = () => {
   const dispatch = useDispatch();
@@ -22,7 +23,9 @@ const FieldNavigationPanel = () => {
     <div className="card field-nav-panel">
       <div className="d-flex flex-column overflow-auto">
         <div className="field-nav-panel__header">
-          <h5>Conditions</h5>
+          <Tooltip data-bs-title="Conditions allow you to define rules to reject or delete records.">  
+            <h5>Conditions</h5>
+          </Tooltip>
 
           <div className="btn-group card__control">
             <i
@@ -71,7 +74,9 @@ const FieldNavigationPanel = () => {
         </div>
 
         <div className="field-nav-panel__header field-nav-panel__header--fields">
-          <h5>Fields</h5>
+          <Tooltip data-bs-title="Fields define the resulting attributes of your transformed record"> 
+            <h5>Fields</h5>
+          </Tooltip>
 
           <div className="btn-group card__control">
             <i

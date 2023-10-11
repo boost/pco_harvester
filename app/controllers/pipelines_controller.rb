@@ -72,6 +72,8 @@ class PipelinesController < ApplicationController
       @extraction_jobs = @harvest_definition.extraction_definition.extraction_jobs.completed.order(created_at: :desc)
     end
 
+    @completed_harvest_jobs = HarvestJob.where(harvest_definition_id: @harvest_definition.id).completed
+
     @destinations = Destination.all
   end
 
