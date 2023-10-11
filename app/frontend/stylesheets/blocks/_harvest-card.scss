@@ -1,18 +1,22 @@
 .harvest-card {
-  @include element('control') {
+  @include element('actions') {
     position: absolute;
-    right: .5rem;
+    right: 0rem;
     top: 0;
     bottom: 0;
     margin: auto;
-    height: 1rem;
+    height: 2.25rem;
 
     &:hover {
       cursor: pointer;
     }
   }
 
-  @include element('control-action') {
+  @include element('actions-toggle') {
+    border: none;
+  }
+
+  @include element('action') {
     padding: .625rem 1rem;
   }
 

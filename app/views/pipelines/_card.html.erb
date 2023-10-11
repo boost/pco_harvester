@@ -24,11 +24,13 @@
       </div>
 
       <div class="col-1">
-        <div class="btn-group harvest-card__control">
-          <i class="bi bi-three-dots-vertical" data-bs-toggle='dropdown'></i>
+        <div class="dropdown harvest-card__actions">
+          <button class="btn btn-clear harvest-card__actions-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Toggle actions dropdown">
+            <i class="bi bi-three-dots-vertical" aria-hidden="true"></i>
+          </button>
           <ul class="dropdown-menu dropdown-menu-end">
             <li>
-              <%= link_to edit_path, class: 'dropdown-item harvest-card__control-action' do %>
+              <%= link_to edit_path, class: 'dropdown-item harvest-card__action' do %>
                 <i class="bi bi-link-45deg me-2"></i><%= edit_text %>
               <% end %>
             </li>
@@ -36,7 +38,7 @@
             <% if definition.shared? %>
               <li>
                 <a
-                  class="dropdown-item harvest-card__control-action"
+                  class="dropdown-item harvest-card__action"
                   href="#"
                   data-bs-toggle='modal'
                   data-bs-target="<%= "#clone-definition-#{type}-#{definition.id}" %>">
@@ -46,7 +48,7 @@
 
               <li>
                 <a
-                  class="dropdown-item harvest-card__control-action"
+                  class="dropdown-item harvest-card__action"
                   href="#"
                   data-bs-toggle='modal'
                   data-bs-target="<%= "#remove-shared-#{type}-definition-#{definition.id}" %>">
@@ -56,7 +58,7 @@
             <% else %>
               <li>
                 <a
-                  class="dropdown-item harvest-card__control-action"
+                  class="dropdown-item harvest-card__action"
                   href="#"
                   data-bs-toggle='modal'
                   data-bs-target="<%= "#delete-#{type}-definition-#{definition.id}" %>">
@@ -67,7 +69,7 @@
 
             <% if jobs_path.present? %>
               <li>
-                <%= link_to jobs_path, class: 'dropdown-item harvest-card__control-action' do %>
+                <%= link_to jobs_path, class: 'dropdown-item harvest-card__action' do %>
                   <i class="bi bi-eye me-2"></i> View Extraction Jobs
                 <% end %>
               </li>
@@ -75,7 +77,7 @@
 
             <% if run_sample_extraction_path.present? %>
               <li>
-                <%= button_to run_sample_extraction_path, class: 'dropdown-item harvest-card__control-action' do %>
+                <%= button_to run_sample_extraction_path, class: 'dropdown-item harvest-card__action' do %>
                   <i class="bi bi-play me-2"></i> Run Sample Extraction
                 <% end %>
               </li>
@@ -83,7 +85,7 @@
 
             <% if run_full_extraction_path.present? %>
               <li>
-                <%= button_to run_full_extraction_path, class: 'dropdown-item harvest-card__control-action' do %>
+                <%= button_to run_full_extraction_path, class: 'dropdown-item harvest-card__action' do %>
                   <i class="bi bi-play me-2"></i> Run Full Extraction
                 <% end %>
               </li>
