@@ -34,7 +34,7 @@
   }
 
   @include element('control-action') {
-    padding: 10px 16px 9px 16px;
+    padding: .625rem 1rem;
   }
 
   @include element('control') {
