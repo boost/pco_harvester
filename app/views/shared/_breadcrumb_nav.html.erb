@@ -14,7 +14,7 @@
           active: current_page?(pipelines_path),
           display: request.path.include?(pipelines_path)
         ) %>
-      
+
     <%= breadcrumb_item(
           text: @pipeline&.name_in_database,
           path: begin
