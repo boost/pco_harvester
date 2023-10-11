@@ -107,7 +107,9 @@
               <% end %>
             </div>
             <div class="col-8">
-              <%= form.select :paginated, options_for_select([['Paginated', 'true'], ['Not Paginated', 'false']], model.paginated), {}, class: 'form-select' %>
+              <%= form.select :paginated, options_for_select(
+                    [['Paginated', 'true'], ['Not Paginated', 'false']], model.paginated
+                  ), {}, class: 'form-select' %>
             </div>
           </div>
 
