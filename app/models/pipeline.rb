@@ -13,23 +13,35 @@ class Pipeline < ApplicationRecord
   validates :name, presence: true, uniqueness: true
 
   def self.search(words, format)
-    words = sanitize_sql_like(words || '')
-    return by_format(format) if words.empty?
+    words = sanitized_words(words)
+    return self if words.blank? && format.blank?
 
-    words = "%#{words}%"
-    users = User.select(:id).where('username LIKE ?', words)
+    query = where('name LIKE ?', words)
+            .or(where('description LIKE ?', words))
+            .or(where(last_edited_by_id: search_user_ids(words)))
+            .or(where(id: search_source_ids(words)))
 
-    where('name LIKE ?', words)
-      .or(where('description LIKE ?', words))
-      .or(where(last_edited_by: users))
-      .or(by_format(format))
+    query = query.and(where(id: search_format_ids(format))) if format.present?
+    query
   end
 
-  def self.by_format(format)
-    return self if format.blank?
+  def self.sanitized_words(words)
+    words = sanitize_sql_like(words || '')
+    return nil if words.empty?
 
-    pipeline_ids = ExtractionDefinition.where(format:).pluck(:pipeline_id)
-    where(id: pipeline_ids)
+    "%#{words}%"
+  end
+
+  def self.search_user_ids(words)
+    User.where('username LIKE ?', words).pluck(:id)
+  end
+
+  def self.search_source_ids(words)
+    HarvestDefinition.where('source_id LIKE ?', words).pluck(:pipeline_id)
+  end
+
+  def self.search_format_ids(format)
+    ExtractionDefinition.where(format:).pluck(:pipeline_id)
   end
 
   def harvest
