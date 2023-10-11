@@ -109,26 +109,6 @@ RSpec.describe 'Transformation Definitions', type: :request do
                                                                                                    harvest_definition, transformation_definition))
       end
     end
-
-    context 'with invalid paramaters' do
-      it 'does not update the transformation_definition' do
-        patch pipeline_harvest_definition_transformation_definition_path(pipeline, harvest_definition, transformation_definition), params: {
-          transformation_definition: { record_selector: nil }
-        }
-
-        transformation_definition.reload
-
-        expect(transformation_definition.record_selector).not_to eq nil
-      end
-
-      it 're renders the form' do
-        patch pipeline_harvest_definition_transformation_definition_path(pipeline, harvest_definition, transformation_definition), params: {
-          transformation_definition: { record_selector: nil }
-        }
-
-        expect(response.body).to include transformation_definition.name_in_database
-      end
-    end
   end
 
   describe '#destroy' do

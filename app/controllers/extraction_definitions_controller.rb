@@ -7,11 +7,9 @@ class ExtractionDefinitionsController < ApplicationController
   before_action :find_harvest_definition
   before_action :find_extraction_definition, only: %i[show update clone destroy edit]
   before_action :find_destinations, only: %i[create update new edit]
+  before_action :assign_show_variables, only: %i[show update]
 
-  def show
-    @parameters = @extraction_definition.parameters.order(created_at: :desc)
-    @props = extraction_app_state
-  end
+  def show; end
 
   def new
     @extraction_definition = ExtractionDefinition.new(kind: params[:kind])
@@ -30,7 +28,7 @@ class ExtractionDefinitionsController < ApplicationController
       redirect_to create_redirect_path, notice: t('.success')
     else
       flash.alert = t('.failure')
-      
+
       redirect_to pipeline_path(@pipeline)
     end
   end
@@ -39,13 +37,11 @@ class ExtractionDefinitionsController < ApplicationController
     if @extraction_definition.update(extraction_definition_params)
       update_last_edited_by([@extraction_definition])
 
-      redirect_to pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition, @extraction_definition), notice: t('.success')
+      redirect_to pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition,
+                                                                         @extraction_definition), notice: t('.success')
     else
       flash.alert = t('.failure')
 
-      @parameters = @extraction_definition.parameters.order(created_at: :desc)
-      @props = extraction_app_state
-      
       render :show
     end
   end
@@ -90,20 +86,21 @@ class ExtractionDefinitionsController < ApplicationController
 
   private
 
+  def assign_show_variables
+    @parameters = @extraction_definition.parameters.order(created_at: :desc)
+    @props = extraction_app_state
+  end
+
   def create_redirect_path
     return pipeline_path(@pipeline) unless @extraction_definition.harvest?
 
-    pipeline_harvest_definition_extraction_definition_path(
-      @pipeline, @harvest_definition, @extraction_definition
-    )
+    pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition, @extraction_definition)
   end
 
   def update_redirect_path
     return pipeline_path(@pipeline) unless @extraction_definition.harvest?
 
-    pipeline_harvest_definition_extraction_definition_path(
-      @pipeline, @harvest_definition, @extraction_definition
-    )
+    pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition, @extraction_definition)
   end
 
   def successful_clone_path(clone)
