@@ -8,13 +8,30 @@
   <div class="clearfix"></div>
 <% end %>
 
-<%= form_with url: '/pipelines', method: :get, class: 'row mb-4' do |form| %>
-  <div class="col"></div>
-  <div class="col-auto">
-    <div class="input-group mb-3">
-      <%= form.text_field(:search, value: params[:search], class: 'form-control', 'aria-label': 'Search') %>
-      <button class="btn btn-primary" type="submit">Search</button>
+<%= form_with url: '/pipelines', method: :get, class: 'row justify-content-end mb-5' do |form| %>
+  <div class="col-auto pe-2">
+    <div class="search">
+      <%= form.text_field(
+            :search,
+            value: params[:search],
+            placeholder: 'Search by name, description, source_id, last edited by',
+            class: 'form-control search__input'
+          ) %>
+      <%= form.label :search, class: 'search__label' do %>
+        <i aria-hidden="true" class="bi bi-search"></i>
+        Search by name, description, source_id, last edited by
+      <% end %>
+
+      <% if params[:search].present? %>
+        <button type="button" class="btn btn-secondary search__clear" data-clear-field="search">
+          Clear
+          <i aria-hidden="true" class="bi bi-plus"></i>
+        </button>
+      <% end %>
     </div>
+  </div>
+  <div class="col-auto ps-0">
+    <button class="btn btn-primary" type="submit">Search</button>
   </div>
 
   <div class="col-auto pe-0">
@@ -28,6 +45,7 @@
           class: 'form-select', 'data-submitting-select': true
         ) %>
   </div>
+
   <div class="col-auto pe-0">
     <%= form.label :sort_by, 'Sort by:', class: 'col-form-label' %>
   </div>

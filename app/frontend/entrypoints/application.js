@@ -31,6 +31,7 @@ console.log(
 // import '~/index.css'
 
 import * as bootstrap from "bootstrap";
+import "/js/ClearField";
 import "/js/TestRecordExtraction";
 import "/js/TestEnrichmentExtraction";
 import "/js/TestTransformationRecordSelector";
