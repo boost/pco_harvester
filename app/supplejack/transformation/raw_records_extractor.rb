@@ -14,7 +14,7 @@ module Transformation
     #
     # @return Array
     def records(page_number)
-      return [] if record_selector.blank? || @documents[page_number.to_i].nil?
+      return [] if @documents[page_number.to_i].nil?
 
       send("#{format.downcase}_extract", page_number)
     end
@@ -38,7 +38,7 @@ module Transformation
     end
 
     def record_selector
-      @transformation_definition.record_selector
+      @transformation_definition.record_selector || '*'
     end
   end
 end
