@@ -1,0 +1,163 @@
+<div class='card p-4'>
+  <div class='d-flex'>
+    <div class='me-auto'>
+
+      <% if @harvest_definition.id.present? %>
+        <%= render layout: 'shared/inline_editable_element', locals:
+          {
+            id: "harvest-definition-#{@harvest_definition.id}-source-id",
+            model: @harvest_definition,
+            attribute: :source_id,
+            url: pipeline_harvest_definition_path(@pipeline, @harvest_definition)
+          } do %>
+          <h4><%= @harvest_definition.source_id %> </h4>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div>
+      <button
+        type="button"
+        class="btn btn-outline-danger mb-4"
+        data-bs-toggle="modal"
+        data-bs-target="<%= "#delete-harvest-definition-#{@harvest_definition.id}" %>">
+        <i class="bi bi-trash" aria-hidden="true"></i> Delete Harvest
+      </button>
+    </div>
+
+    <% if @harvest_definition.persisted? %>
+      <%= render layout: 'shared/delete_modal',
+                 locals: { path: pipeline_harvest_definition_path(@pipeline, @harvest_definition),
+                           id: "delete-harvest-definition-#{@harvest_definition.id}", heading_text: 'Delete Harvest' } do %>
+        <p>Are you sure you want to delete "<%= @harvest_definition.source_id %>"?</p>
+
+        <% if @harvest_definition.extraction_definition.present? %>
+          <p><%= definition_delete_text(@harvest_definition.extraction_definition, 'extraction') %></p>
+        <% end %>
+
+        <% if @harvest_definition.transformation_definition.present? %>
+          <p><%= definition_delete_text(@harvest_definition.transformation_definition, 'transformation') %></p>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <input
+    type='hidden'
+    value="<%= @pipeline.id %>"
+    name='pipeline_id'
+    id='js-pipeline-id'>
+  <input
+    type='hidden'
+    value="<%= @pipeline.harvest.id %>"
+    name='harvest_id'
+    id='js-harvest-definition-id'>
+
+  <div class='row'>
+    <div class='col-6'>
+      <% if @harvest_definition.extraction_definition.present? %>
+
+        <%= render partial: 'pipelines/card',
+                   locals: {
+                     pipeline: @pipeline,
+                     block_definition: @harvest_definition,
+                     definition: @harvest_definition.extraction_definition,
+                     edit_path:
+           pipeline_harvest_definition_extraction_definition_path(
+             @pipeline,
+             @harvest_definition,
+             @harvest_definition.extraction_definition
+           ),
+                     edit_text: definition_edit_text(@harvest_definition.extraction_definition, 'extraction'),
+                     jobs_path:
+           pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
+             @pipeline,
+             @harvest_definition,
+             @harvest_definition.extraction_definition
+           ),
+                     run_sample_extraction_path:
+           pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
+             @pipeline,
+             @harvest_definition,
+             @harvest_definition.extraction_definition,
+             kind: :sample
+           ),
+                     run_full_extraction_path:
+           pipeline_harvest_definition_extraction_definition_extraction_jobs_path(
+             @pipeline,
+             @harvest_definition,
+             @harvest_definition.extraction_definition,
+             kind: :full
+           ),
+                     delete_path:
+           pipeline_harvest_definition_extraction_definition_path(
+             @pipeline,
+             @harvest_definition,
+             @harvest_definition.extraction_definition
+           )
+                   } %>
+
+      <% else %>
+        <button
+          type="button"
+          class="card card--create-cta d-flex h-100"
+          data-bs-toggle="modal"
+          data-bs-target="#add-harvest-extraction">
+          <div class="card-body align-items-center d-flex justify-content-center">
+            <p class='card-text'>+ Add harvest extraction</p>
+          </div>
+          <i class="bi bi-arrow-right card__right-arrow"></i>
+        </button>
+      <% end %>
+    </div>
+
+    <div class='col-6'>
+      <% if @harvest_definition.transformation_definition.present? %>
+
+        <%= render partial: 'pipelines/card',
+                   locals: {
+                     pipeline: @pipeline,
+                     block_definition: @harvest_definition,
+                     definition: @harvest_definition.transformation_definition,
+                     edit_path:
+           pipeline_harvest_definition_transformation_definition_path(
+             @pipeline,
+             @harvest_definition,
+             @harvest_definition.transformation_definition
+           ),
+                     edit_text: definition_edit_text(@harvest_definition.transformation_definition, 'transformation'),
+                     jobs_path: '',
+                     delete_path:
+             pipeline_harvest_definition_transformation_definition_path(
+               @pipeline,
+               @harvest_definition,
+               @harvest_definition.transformation_definition
+             )
+                   } %>
+
+      <% else %>
+
+        <% disabled = !@harvest_definition&.extraction_definition&.extraction_jobs&.any?(&:completed?) %>
+
+        <button
+          type="button"
+          class="<%= class_names(
+                       'card', 'mb-3', 'card--create-cta', 'd-flex', 'h-100',
+                       'card--create-cta-disabled': disabled
+                     ) %>"
+          <% if disabled %>
+            data-bs-toggle="tooltip" data-bs-placement="top"
+            data-bs-title="You need to extract some data before you can add a transformation"
+          <% else %>
+            data-bs-toggle="modal"
+            data-bs-target="#add-harvest-transformation"
+          <% end %>>
+
+          <div class="card-body align-items-center d-flex justify-content-center">
+            <p class="card-text">+ Add harvest transformation</p>
+          </div>
+        </button>
+      <% end %>
+    </div>
+  </div>
+</div>
