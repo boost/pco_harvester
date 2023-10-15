@@ -5,7 +5,7 @@
         <%= link_to pipeline_harvest_definition_extraction_definition_extraction_job_path(
               pipeline, harvest_definition, extraction_definition, job
             ),
-                    class: 'card mb-3' do %>
+                    class: 'card card--clickable mb-3' do %>
           <div class='card-body'>
             <h5 class='card-title'><%= job.name %></h5>
             <h6 class='card-subtitle'><%= job.updated_at.to_fs(:light) %></h6>

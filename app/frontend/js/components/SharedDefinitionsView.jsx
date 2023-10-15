@@ -16,7 +16,7 @@ const SharedDefinitionsView = ({ definitionType }) => {
           return (
             <div className="col-3" key={sharedDefinition.id}>
               <a
-                className="card mb-3"
+                className="card card--clickable mb-3"
                 href={`/pipelines/${sharedDefinition.pipeline.id}`}
               >
                 <div className="card-body">

@@ -3,12 +3,11 @@
 class PipelinesController < ApplicationController
   include LastEditedBy
 
-  before_action :assign_sort_by, only: %w[index create]
   before_action :find_pipeline, only: %w[show destroy update clone]
   before_action :assign_show_variables, only: %w[show update]
 
   def index
-    @pipelines = Pipeline.order(@sort_by).page(params[:page])
+    @pipelines = pipelines
     @pipeline = Pipeline.new
   end
 
@@ -21,7 +20,7 @@ class PipelinesController < ApplicationController
       redirect_to pipeline_path(@pipeline), notice: t('.success')
     else
       flash.alert = t('.failure')
-      @pipelines = Pipeline.order(@sort_by).page(params[:page])
+      @pipelines = pipelines
       render :index
     end
   end
@@ -81,9 +80,12 @@ class PipelinesController < ApplicationController
     @pipeline = Pipeline.find(params[:id])
   end
 
-  def assign_sort_by
-    @sort_by = { name: :asc }
-    @sort_by = { updated_at: :desc } if params['sort_by'] == 'updated_at'
+  def pipelines
+    PipelineSearchQuery.new(params).call.order(sort_by).page(params[:page])
+  end
+
+  def sort_by
+    @sort_by ||= params['sort_by'] == 'name' ? { name: :asc } : { updated_at: :desc }
   end
 
   def pipeline_params

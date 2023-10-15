@@ -3,6 +3,8 @@
 # Used to store the information for running an extraction
 #
 class ExtractionDefinition < ApplicationRecord
+  FORMATS = %w[JSON XML HTML].freeze
+
   # The destination is used for Enrichment Extractions
   # To know where to pull the records that are to be enriched from
   belongs_to :destination, optional: true
@@ -40,7 +42,7 @@ class ExtractionDefinition < ApplicationRecord
 
   # Harvest related validation
   with_options if: :harvest? do
-    validates :format, presence: true, inclusion: { in: %w[JSON XML HTML] }
+    validates :format, presence: true, inclusion: { in: FORMATS }
     validates :base_url, presence: true, format: { with: URI::DEFAULT_PARSER.make_regexp }
     validate :total_selector_format
     validates :total_selector, presence: true

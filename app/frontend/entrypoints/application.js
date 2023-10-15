@@ -31,6 +31,7 @@ console.log(
 // import '~/index.css'
 
 import * as bootstrap from "bootstrap";
+import "/js/ClearField";
 import "/js/TestRecordExtraction";
 import "/js/TestEnrichmentExtraction";
 import "/js/TestTransformationRecordSelector";
@@ -38,8 +39,8 @@ import "/js/TestDestination";
 import "/js/Tooltips";
 import "/js/Toasts";
 import "/js/CollapseScroll";
-import "/js/ContentSourceFilter";
 import "/js/formModals";
+import "/js/SubmittingSelect";
 import "/js/AutoComplete";
 
 import "/js/editor";
