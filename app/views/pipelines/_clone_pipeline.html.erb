@@ -1,0 +1,35 @@
+<button
+  type="button"
+  class="btn btn-outline-primary"
+  data-bs-toggle="modal"
+  data-bs-target="#clone-pipeline">
+  <i class="bi bi-layers" aria-hidden="true"></i> Clone pipeline
+</button>
+
+<div
+  class="modal fade"
+  id="clone-pipeline">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Clone and edit new pipeline</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Please name the new pipeline which you are cloning</p>
+
+        <%= vertical_form_with(model: @pipeline,
+                               url: clone_pipeline_path(@pipeline), method: :post) do |f| %>
+
+          <%= f.text_field :name, required: true, class: 'form-control', value: "[CLONE] #{@pipeline.name}" %>
+
+          <br>
+
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Clone and edit new</button>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

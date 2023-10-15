@@ -1,0 +1,105 @@
+<%= button_tag(
+      type: 'button',
+      class: 'btn btn-primary me-1',
+      disabled: !@pipeline.ready_to_run?,
+      data: { 'bs-toggle' => 'modal', 'bs-target' => '#run-settings' }
+    ) do %>
+  <i class='bi bi-play'></i>
+    Run
+<% end %>
+
+<% if @pipeline.ready_to_run? %>
+  <%= render layout: 'shared/create_modal', locals: { modal_heading: 'Run Settings', id: 'run-settings' } do %>
+    <%= vertical_form_with(model: [@pipeline, @pipeline_job]) do |form| %>
+      <div class='row gy-3 align-items-center'>
+        <%= form.hidden_field :pipeline_id, value: @pipeline.id %>
+        <%= form.hidden_field :key, value: SecureRandom.hex %>
+
+        <div class='col-5'>
+          <%= form.label :harvest_definitions_to_run, class: 'form-label' do %>
+            Blocks to run
+
+            <span
+              data-bs-toggle="tooltip"
+              data-bs-title="Please select the parts of your pipeline that you wish to run."><i class="bi bi-question-circle" aria-label="helper text"></i>
+            </span>
+          <% end %>
+        </div>
+
+        <div class='col-7'>
+          <%- @pipeline.harvest_definitions.each do |harvest_definition| %>
+            <div class='form-check'>
+              <%= label_tag do %>
+
+                <%= check_box('pipeline_job', 'harvest_definitions_to_run', {
+                                multiple: true,
+                                checked: harvest_definition.ready_to_run?,
+                                class: "form-check-input js-pipeline-#{harvest_definition.kind}-checkbox",
+                                disabled: !harvest_definition.ready_to_run?
+                              }, harvest_definition.id, nil) %>
+
+                <%= harvest_definition.source_id %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+
+        <% if @extraction_jobs %>
+          <div class="col-5 js-transformation-input">
+            <%= form.label :extraction_job_id, class: 'form-label' do %>
+              Transformation input
+
+              <span
+                data-bs-toggle="tooltip"
+                data-bs-title="Choose to either perform fresh extraction or use existing extracted data."><i class="bi bi-question-circle" aria-label="helper text"></i>
+              </span>
+            <% end %>
+          </div>
+
+          <div class='col-7 js-transformation-input'>
+            <%= form.collection_select(:extraction_job_id, @extraction_jobs, :id, :name,
+                                       { include_blank: 'Fresh extraction' }, class: 'form-select') %>
+          </div>
+        <% end %>
+
+        <div class="col-5">
+          <%= form.label :page_type, class: 'form-label' do %>
+            Pages to transform
+          <% end %>
+        </div>
+
+        <div id='js-pipeline-page-type' class='col-7'>
+          <%= form.select :page_type, options_for_select(
+                PipelineJob.page_types.map do |key, _value|
+                  [key.humanize, key]
+                end
+              ), {}, id: 'js-pipeline-page-type-select', class: 'form-select' %>
+        </div>
+
+        <div id='js-pipeline-pages' class='col-3 d-none'>
+          <%= form.number_field :pages, class: 'form-control' %>
+        </div>
+
+        <div class="col-5">
+          <%= form.label :destination, class: 'form-label' do %>
+            Destination
+
+            <span
+              data-bs-toggle="tooltip"
+              data-bs-title="The location that you want to send your transformed data." aria-label="helper text"><i class="bi bi-question-circle" aria-label="helper text"></i>
+            </span>
+          <% end %>
+        </div>
+
+        <div class='col-7'>
+          <%= form.select :destination_id, options_from_collection_for_select(@destinations, 'id', 'name'), {},
+                          class: 'form-select' %>
+        </div>
+      </div>
+
+      <div class='d-grid mt-4'>
+        <button type="submit" class="btn btn-primary">Run</button>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
