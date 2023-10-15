@@ -14,15 +14,15 @@
       <div class='row gy-3 align-items-center'>
         <%= form.hidden_field :pipeline_id, value: @pipeline.id %>
         <%= form.hidden_field :key, value: SecureRandom.hex %>
-        
+
         <% if @pipeline.harvest_definitions.count == 1 %>
           <%- @pipeline.harvest_definitions.each do |harvest_definition| %>
             <%= check_box('pipeline_job', 'harvest_definitions_to_run', {
-                  multiple: true,
-                  checked: true,
-                  class: "form-check-input js-pipeline-#{harvest_definition.kind}-checkbox d-none",
-                  disabled: !harvest_definition.ready_to_run?
-                }, harvest_definition.id, nil) %> 
+                            multiple: true,
+                            checked: true,
+                            class: "form-check-input js-pipeline-#{harvest_definition.kind}-checkbox d-none",
+                            disabled: !harvest_definition.ready_to_run?
+                          }, harvest_definition.id, nil) %>
           <% end %>
         <% else %>
           <div class='col-5'>
