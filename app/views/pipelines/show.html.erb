@@ -79,7 +79,7 @@
 
 <% else %>
 
-  <%= render partial: 'harvest_definition' %>
+  <%= render partial: 'pipelines/harvest_definition' %>
 
 <% end %>
 
@@ -87,7 +87,7 @@
 
   <% @pipeline.enrichments.each do |enrichment_definition| %>
 
-    <%= render partial: 'enrichment_definition', locals: { enrichment_definition: } %>
+    <%= render partial: 'pipelines/enrichment_definition', locals: { enrichment_definition: } %>
 
   <% end %>
 <% end %>
