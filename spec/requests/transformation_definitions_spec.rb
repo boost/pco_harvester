@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Transformation Definitions', type: :request do
+RSpec.describe 'Transformation Definitions' do
   let!(:user) { create(:user) }
   let!(:pipeline) { create(:pipeline) }
   let!(:harvest_definition) { create(:harvest_definition, pipeline:) }
@@ -73,7 +73,7 @@ RSpec.describe 'Transformation Definitions', type: :request do
       get pipeline_harvest_definition_transformation_definition_path(pipeline, harvest_definition,
                                                                      transformation_definition)
 
-      expect(response.status).to eq 200
+      expect(response).to have_http_status :ok
     end
   end
 
@@ -172,9 +172,9 @@ RSpec.describe 'Transformation Definitions', type: :request do
         transformation_definition: subject.attributes
       }
 
-      expect(response.status).to eq 200
+      expect(response).to have_http_status :ok
 
-      json_data = JSON.parse(response.body)['result']
+      json_data = response.parsed_body['result']
       expected_keys = %w[article_id title DOI description type url published_date authors links defined_type
                          modified_date]
 
