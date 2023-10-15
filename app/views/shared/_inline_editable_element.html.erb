@@ -4,7 +4,7 @@
    form_classes = class_names({ 'd-none': model.errors.exclude?(attribute) }) %>
 
 <div class='inline-editable-element'>
-  <div id="<%= "#{id}-content" %> <%= content_classes %>">
+  <div id="<%= "#{id}-content" %>" class="<%= content_classes %>">
     <span class='float-start'>
       <%= yield %>
     </span>

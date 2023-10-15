@@ -8,6 +8,8 @@ each(inlineEditableControls, (control) => {
   control.addEventListener("click", (event) => {
     const id = event.target.dataset.id;
 
+    console.log(id);
+
     const content = document.getElementById(`${id}-content`);
     const form = document.getElementById(`${id}-form`);
 
