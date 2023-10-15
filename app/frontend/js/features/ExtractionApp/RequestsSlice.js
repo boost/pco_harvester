@@ -82,7 +82,10 @@ const requestsSlice = createSlice({
         requestsAdapter.updateMany(
           state,
           state.ids.map((id) => {
-            return { id: id, changes: { base_url: base_url, format: format, url: base_url } };
+            return {
+              id: id,
+              changes: { base_url: base_url, format: format, url: base_url },
+            };
           })
         );
       });

@@ -24,14 +24,14 @@ const PreviewModal = ({
   const handleSampleClick = async (type) => {
     const response = await request
       .post(
-        `/pipelines/${appDetails.pipeline.id}/harvest_definitions/${appDetails.harvestDefinition.id}/extraction_definitions/${appDetails.extractionDefinition.id}/extraction_jobs.json?kind=sample&type=${type}`,
+        `/pipelines/${appDetails.pipeline.id}/harvest_definitions/${appDetails.harvestDefinition.id}/extraction_definitions/${appDetails.extractionDefinition.id}/extraction_jobs.json?kind=sample&type=${type}`
       )
       .then((response) => {
         return response;
       });
 
-      window.location.replace(response.data.location)
-  }
+    window.location.replace(response.data.location);
+  };
 
   return createPortal(
     <Modal
@@ -43,10 +43,12 @@ const PreviewModal = ({
       <Modal.Header>
         <Modal.Title>Extraction preview</Modal.Title>
 
-        <div className='float-end'>
+        <div className="float-end">
           <button
             className="btn btn-outline-primary me-2"
-            onClick={() => { handleClose() }}
+            onClick={() => {
+              handleClose();
+            }}
           >
             <i className="bi bi-arrow-left-short" aria-hidden="true"></i>
             Continue editing extraction definition
@@ -54,7 +56,9 @@ const PreviewModal = ({
 
           <button
             className="btn btn-outline-primary me-2"
-            onClick={() => { handleSampleClick('pipeline')}}
+            onClick={() => {
+              handleSampleClick("pipeline");
+            }}
           >
             <i className="bi bi-play" aria-hidden="true"></i>
             Run sample and return to pipeline
@@ -62,13 +66,14 @@ const PreviewModal = ({
 
           <button
             className="btn btn-primary me-2"
-            onClick={() => { handleSampleClick('transform')}}
+            onClick={() => {
+              handleSampleClick("transform");
+            }}
           >
             <i className="bi bi-play" aria-hidden="true"></i>
             Run sample and transform data
           </button>
         </div>
-
       </Modal.Header>
       <Modal.Body>
         <div className="row">

@@ -42,8 +42,7 @@ const ParameterNavigationPanel = () => {
     <div className="card field-nav-panel">
       <div className="d-flex flex-column overflow-auto">
         <div className="field-nav-panel__header">
-
-          <Tooltip data-bs-title="Query parameters will make up the majority of your request. They are appended to the base url after the question mark.">  
+          <Tooltip data-bs-title="Query parameters will make up the majority of your request. They are appended to the base url after the question mark.">
             <h5>{queryHeading()}</h5>
           </Tooltip>
 

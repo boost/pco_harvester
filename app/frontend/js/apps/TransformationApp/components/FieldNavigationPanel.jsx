@@ -23,7 +23,7 @@ const FieldNavigationPanel = () => {
     <div className="card field-nav-panel">
       <div className="d-flex flex-column overflow-auto">
         <div className="field-nav-panel__header">
-          <Tooltip data-bs-title="Conditions allow you to define rules to reject or delete records.">  
+          <Tooltip data-bs-title="Conditions allow you to define rules to reject or delete records.">
             <h5>Conditions</h5>
           </Tooltip>
 
@@ -74,7 +74,7 @@ const FieldNavigationPanel = () => {
         </div>
 
         <div className="field-nav-panel__header field-nav-panel__header--fields">
-          <Tooltip data-bs-title="Fields define the resulting attributes of your transformed record"> 
+          <Tooltip data-bs-title="Fields define the resulting attributes of your transformed record">
             <h5>Fields</h5>
           </Tooltip>
 

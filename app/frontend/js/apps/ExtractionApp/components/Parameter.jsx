@@ -94,10 +94,16 @@ const Parameter = ({ id }) => {
     }
   };
 
-  const parameterClasses = classNames("col-12", "collapse", "mt-4", "border", "rounded", {
-    show: displayed,
-    "border-primary": active
-  },
+  const parameterClasses = classNames(
+    "col-12",
+    "collapse",
+    "mt-4",
+    "border",
+    "rounded",
+    {
+      show: displayed,
+      "border-primary": active,
+    }
   );
 
   const badgeClasses = classNames({
@@ -141,7 +147,11 @@ const Parameter = ({ id }) => {
 
   return (
     <>
-      <div id={`parameter-${id}`} className={parameterClasses} onClick={ () => dispatch(setActiveParameter(id)) }>
+      <div
+        id={`parameter-${id}`}
+        className={parameterClasses}
+        onClick={() => dispatch(setActiveParameter(id))}
+      >
         <div className="card">
           <div className="card-body">
             <div className="d-flex d-row justify-content-between align-items-center">
@@ -152,7 +162,6 @@ const Parameter = ({ id }) => {
               </div>
 
               <div className="hstack gap-2">
-
                 <button
                   className="btn btn-outline-primary"
                   disabled={!isSaveable()}
@@ -226,9 +235,9 @@ const Parameter = ({ id }) => {
             <div className="row align-items-center mt-4">
               {kind != "slug" && (
                 <>
-                  <div className='col-6'>
-                    <div className='row'>
-                      <div className='col-1'>
+                  <div className="col-6">
+                    <div className="row">
+                      <div className="col-1">
                         {content_type == "incremental" && (
                           <Tooltip data-bs-title="Please select the key of the first request that you want to be incremented.">
                             <label className="col-form-label">Key </label>
@@ -239,10 +248,9 @@ const Parameter = ({ id }) => {
                           <label className="col-form-label">Key </label>
                         )}
                       </div>
-                    
-                      <div className='col-11'>
 
-                        { content_type != 'incremental' && (
+                      <div className="col-11">
+                        {content_type != "incremental" && (
                           <input
                             type="text"
                             className="form-control"
@@ -275,21 +283,21 @@ const Parameter = ({ id }) => {
                 </>
               )}
 
-              <div className='col-6'>
-                <div className='row'>
-                  <div className='col-1'>
+              <div className="col-6">
+                <div className="row">
+                  <div className="col-1">
                     {content_type == "incremental" && (
                       <Tooltip data-bs-title="Please input the amount you want the value of this key to be incremented by">
-                        <label className='col-form-label'>Value </label>
+                        <label className="col-form-label">Value </label>
                       </Tooltip>
                     )}
 
-                    { content_type != 'incremental' && (
-                      <label className='col-form-label'>Value </label>
+                    {content_type != "incremental" && (
+                      <label className="col-form-label">Value </label>
                     )}
                   </div>
-                  
-                  <div className='col-11'>
+
+                  <div className="col-11">
                     {content_type != "dynamic" && (
                       <input
                         type="text"

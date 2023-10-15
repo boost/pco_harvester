@@ -13,7 +13,7 @@ export const updateExtractionDefinition = createAsyncThunk(
       per_page,
       throttle,
       paginated,
-      format
+      format,
     } = payload;
 
     const response = request
@@ -43,10 +43,9 @@ const AppDetailsSlice = createSlice({
   initialState: {},
   reducers: {},
   extraReducers: (builder) => {
-    builder
-      .addCase(updateExtractionDefinition.fulfilled, (state, action) => {
-        state.extractionDefinition = action.payload;
-      });
+    builder.addCase(updateExtractionDefinition.fulfilled, (state, action) => {
+      state.extractionDefinition = action.payload;
+    });
   },
 });
 
