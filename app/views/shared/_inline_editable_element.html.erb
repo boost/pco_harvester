@@ -5,17 +5,15 @@
 
 <div class='inline-editable-element'>
   <div id="<%= "#{id}-content" %>" class="<%= content_classes %>">
-    <span class='float-start'>
+    <span class='d-flex align-items-center'>
       <%= yield %>
+
+      <i
+        class="bi bi-pencil-square inline-editable-element__control js-inline-editable-control ms-2"
+        data-id="<%= id %>">
+      </i>
     </span>
-
-    <i
-      class="bi bi-pencil-square float-start inline-editable-element__control js-inline-editable-control ms-2"
-      data-id="<%= id %>">
-    </i>
   </div>
-
-  <div class='clearfix'></div>
 
   <%= vertical_form_with(model:, url:, class: form_classes, id: "#{id}-form") do |form| %>
 

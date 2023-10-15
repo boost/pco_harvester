@@ -14,35 +14,46 @@
       <div class='row gy-3 align-items-center'>
         <%= form.hidden_field :pipeline_id, value: @pipeline.id %>
         <%= form.hidden_field :key, value: SecureRandom.hex %>
-
-        <div class='col-5'>
-          <%= form.label :harvest_definitions_to_run, class: 'form-label' do %>
-            Blocks to run
-
-            <span
-              data-bs-toggle="tooltip"
-              data-bs-title="Please select the parts of your pipeline that you wish to run."><i class="bi bi-question-circle" aria-label="helper text"></i>
-            </span>
-          <% end %>
-        </div>
-
-        <div class='col-7'>
+        
+        <% if @pipeline.harvest_definitions.count == 1 %>
           <%- @pipeline.harvest_definitions.each do |harvest_definition| %>
-            <div class='form-check'>
-              <%= label_tag do %>
-
-                <%= check_box('pipeline_job', 'harvest_definitions_to_run', {
-                                multiple: true,
-                                checked: harvest_definition.ready_to_run?,
-                                class: "form-check-input js-pipeline-#{harvest_definition.kind}-checkbox",
-                                disabled: !harvest_definition.ready_to_run?
-                              }, harvest_definition.id, nil) %>
-
-                <%= harvest_definition.source_id %>
-              <% end %>
-            </div>
+            <%= check_box('pipeline_job', 'harvest_definitions_to_run', {
+                  multiple: true,
+                  checked: true,
+                  class: "form-check-input js-pipeline-#{harvest_definition.kind}-checkbox d-none",
+                  disabled: !harvest_definition.ready_to_run?
+                }, harvest_definition.id, nil) %> 
           <% end %>
-        </div>
+        <% else %>
+          <div class='col-5'>
+            <%= form.label :harvest_definitions_to_run, class: 'form-label' do %>
+              Blocks to run
+
+              <span
+                data-bs-toggle="tooltip"
+                data-bs-title="Please select the parts of your pipeline that you wish to run."><i class="bi bi-question-circle" aria-label="helper text"></i>
+              </span>
+            <% end %>
+          </div>
+
+          <div class='col-7'>
+            <%- @pipeline.harvest_definitions.each do |harvest_definition| %>
+              <div class='form-check'>
+                <%= label_tag do %>
+
+                  <%= check_box('pipeline_job', 'harvest_definitions_to_run', {
+                                  multiple: true,
+                                  checked: harvest_definition.ready_to_run?,
+                                  class: "form-check-input js-pipeline-#{harvest_definition.kind}-checkbox",
+                                  disabled: !harvest_definition.ready_to_run?
+                                }, harvest_definition.id, nil) %>
+
+                  <%= harvest_definition.source_id %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
 
         <% if @extraction_jobs %>
           <div class="col-5 js-transformation-input">
