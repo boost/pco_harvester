@@ -5,87 +5,100 @@
    delete_path ||= ''
    position = type == 'extraction' ? 'first' : 'last' %>
 
-<div class="card">
+<div class="card harvest-card card--clickable">
   <div class='card-body'>
-    <h5 class="card-title"><%= definition.name %></h5>
-    <h6 class="card-subtitle">
-      <%= send("#{type}_card_subtitle", definition) %>
-    </h6>
+    <div class="row">
 
-    <% if definition.shared? %>
-      <span class="badge text-bg-light">Shared (<%= "#{definition.harvest_definitions.count} pipelines" %>)</span>
-    <% end %>
-
-    <div class="btn-group card__control">
-      <i class="bi bi-three-dots-vertical" data-bs-toggle='dropdown'></i>
-      <ul class="dropdown-menu dropdown-menu-end">
-        <li>
-          <%= link_to edit_path, class: 'dropdown-item card__control-action' do %>
-            <i class="bi bi-link-45deg me-2"></i><%= edit_text %>
+      <div class="col-11">
+        <h2 class="card-title">
+          <%= link_to edit_path, class: 'card__link' do %>
+            <%= definition.name %>
           <% end %>
-        </li>
-
+        </h2>
+        <h3 class="card-subtitle">
+          <%= send("#{type}_card_subtitle", definition) %>
+        </h3>
         <% if definition.shared? %>
-          <li>
-            <a
-              class="dropdown-item card__control-action"
-              href="#"
-              data-bs-toggle='modal'
-              data-bs-target="<%= "#clone-definition-#{type}-#{definition.id}" %>">
-                <i class="bi bi-layers me-2"></i>Clone and edit new definition
-              </a>
-          </li>
-
-          <li>
-            <a
-              class="dropdown-item card__control-action"
-              href="#"
-              data-bs-toggle='modal'
-              data-bs-target="<%= "#remove-shared-#{type}-definition-#{definition.id}" %>">
-                <i class="bi bi-trash me-2"></i>Remove shared definition
-              </a>
-          </li>
-        <% else %>
-          <li>
-            <a
-              class="dropdown-item card__control-action"
-              href="#"
-              data-bs-toggle='modal'
-              data-bs-target="<%= "#delete-#{type}-definition-#{definition.id}" %>">
-                <i class="bi bi-trash me-2"></i>Delete definition
-              </a>
-          </li>
+          <span class="badge text-bg-light">Shared (<%= "#{definition.harvest_definitions.count} pipelines" %>)</span>
         <% end %>
+      </div>
 
-        <% if jobs_path.present? %>
-          <li>
-            <%= link_to jobs_path, class: 'dropdown-item card__control-action' do %>
-              <i class="bi bi-eye me-2"></i> View Extraction Jobs
+      <div class="col-1">
+        <div class="dropdown harvest-card__actions">
+          <button class="btn btn-clear harvest-card__actions-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Toggle actions dropdown">
+            <i class="bi bi-three-dots-vertical" aria-hidden="true"></i>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li>
+              <%= link_to edit_path, class: 'dropdown-item harvest-card__action' do %>
+                <i class="bi bi-link-45deg me-2"></i><%= edit_text %>
+              <% end %>
+            </li>
+
+            <% if definition.shared? %>
+              <li>
+                <a
+                  class="dropdown-item harvest-card__action"
+                  href="#"
+                  data-bs-toggle='modal'
+                  data-bs-target="<%= "#clone-definition-#{type}-#{definition.id}" %>">
+                    <i class="bi bi-layers me-2"></i>Clone and edit new definition
+                  </a>
+              </li>
+
+              <li>
+                <a
+                  class="dropdown-item harvest-card__action"
+                  href="#"
+                  data-bs-toggle='modal'
+                  data-bs-target="<%= "#remove-shared-#{type}-definition-#{definition.id}" %>">
+                    <i class="bi bi-trash me-2"></i>Remove shared definition
+                  </a>
+              </li>
+            <% else %>
+              <li>
+                <a
+                  class="dropdown-item harvest-card__action"
+                  href="#"
+                  data-bs-toggle='modal'
+                  data-bs-target="<%= "#delete-#{type}-definition-#{definition.id}" %>">
+                    <i class="bi bi-trash me-2"></i>Delete definition
+                  </a>
+              </li>
             <% end %>
-          </li>
-        <% end %>
 
-        <% if run_sample_extraction_path.present? %>
-          <li>
-            <%= button_to run_sample_extraction_path, class: 'dropdown-item card__control-action' do %>
-              <i class="bi bi-play me-2"></i> Run Sample Extraction
+            <% if jobs_path.present? %>
+              <li>
+                <%= link_to jobs_path, class: 'dropdown-item harvest-card__action' do %>
+                  <i class="bi bi-eye me-2"></i> View Extraction Jobs
+                <% end %>
+              </li>
             <% end %>
-          </li>
-        <% end %>
 
-        <% if run_full_extraction_path.present? %>
-          <li>
-            <%= button_to run_full_extraction_path, class: 'dropdown-item card__control-action' do %>
-              <i class="bi bi-play me-2"></i> Run Full Extraction
+            <% if run_sample_extraction_path.present? %>
+              <li>
+                <%= button_to run_sample_extraction_path, class: 'dropdown-item harvest-card__action' do %>
+                  <i class="bi bi-play me-2"></i> Run Sample Extraction
+                <% end %>
+              </li>
             <% end %>
-          </li>
-        <% end %>
-      </ul>
+
+            <% if run_full_extraction_path.present? %>
+              <li>
+                <%= button_to run_full_extraction_path, class: 'dropdown-item harvest-card__action' do %>
+                  <i class="bi bi-play me-2"></i> Run Full Extraction
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
     </div>
+
   </div>
 
   <% if position == 'first' %>
-    <i class="bi bi-arrow-right card__right-arrow"></i>
+    <i class="bi bi-arrow-right harvest-card__right-arrow"></i>
   <% end %>
 </div>
 

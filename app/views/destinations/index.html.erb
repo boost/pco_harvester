@@ -18,9 +18,9 @@
   <div class='row'>
     <%- @destinations.each do |destination| %>
       <div class='col-3'>
-        <%= link_to destination, class: 'card mb-3' do %>
+        <%= link_to destination, class: 'card card--clickable mb-3' do %>
           <div class='card-body'>
-              <h5 class='card-title'><%= destination.name %></h5>
+            <h5 class='card-title'><%= destination.name %></h5>
           </div>
         <% end %>
       </div>

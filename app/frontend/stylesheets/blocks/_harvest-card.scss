@@ -1,0 +1,33 @@
+.harvest-card {
+  @include element('actions') {
+    position: absolute;
+    right: 0rem;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    height: 2.25rem;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  @include element('actions-toggle') {
+    border: none;
+  }
+
+  @include element('action') {
+    padding: .625rem 1rem;
+  }
+
+  @include element('right-arrow') {
+    position: absolute;
+    right: -1.5rem;
+    top: 0;
+    bottom: 0;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin: auto;
+    color: $primary;
+  }
+}

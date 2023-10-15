@@ -32,40 +32,6 @@
       cursor: default
     }
   }
-
-  @include element('control-action') {
-    padding: 10px 16px 9px 16px;
-  }
-
-  @include element('control') {
-    position: absolute;
-    right: .5rem;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    height: 1rem;
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
-
-  @include element('right-arrow') {
-      position: absolute;
-      right: -1.5rem;
-      top: 0;
-      bottom: 0;
-      width: 1.25rem;
-      height: 1.25rem;
-      margin: auto;
-      color: $primary;
-  }
-}
-
-a.card {
-  &:hover {
-    border-color: $primary;
-  }
 }
 
 form {
