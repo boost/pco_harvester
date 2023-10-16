@@ -25,12 +25,20 @@ if (addHarvestModal) {
   }
 }
 
-const updateTransformationModal = document.getElementById('update-transformation-definition-modal');
+const updateTransformationModal = document.getElementById(
+  "update-transformation-definition-modal"
+);
 
-if(updateTransformationModal) {
-  const recordSelector = document.getElementById('transformation_definition_record_selector');
-  const transformationDefinitionUpdateButton = document.getElementById('js-transformation-definition-update-button');
-  const transformationDefinitionPreviewData = document.getElementById('js-transformation-definition-preview-data');
+if (updateTransformationModal) {
+  const recordSelector = document.getElementById(
+    "transformation_definition_record_selector"
+  );
+  const transformationDefinitionUpdateButton = document.getElementById(
+    "js-transformation-definition-update-button"
+  );
+  const transformationDefinitionPreviewData = document.getElementById(
+    "js-transformation-definition-preview-data"
+  );
 
   let result = transformationDefinitionPreviewData.dataset.result;
   let format = transformationDefinitionPreviewData.dataset.format;
@@ -47,16 +55,18 @@ if(updateTransformationModal) {
 
   editor("#js-record-selector-result", format, true, result);
 
-  if(recordSelector.value == '' && completed == 'true') {
-    new Modal(document.getElementById("update-transformation-definition-modal")).show();
+  if (recordSelector.value == "" && completed == "true") {
+    new Modal(
+      document.getElementById("update-transformation-definition-modal")
+    ).show();
     transformationDefinitionUpdateButton.disabled = true;
   }
 
-  recordSelector.addEventListener('input', (event) => {
-    if(event.target.value == '') {
+  recordSelector.addEventListener("input", (event) => {
+    if (event.target.value == "") {
       transformationDefinitionUpdateButton.disabled = true;
     } else {
       transformationDefinitionUpdateButton.disabled = false;
     }
-  })
+  });
 }
