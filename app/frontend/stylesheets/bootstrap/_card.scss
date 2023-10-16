@@ -14,6 +14,15 @@
     font-weight: 500;
   }
 
+  @include element('control') {
+    position: absolute;
+    right: 0.5rem;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    height: 1rem;
+  }
+
   @include modifier('create-cta') {
     background-color: transparent;
     border: 1px solid $primary;
