@@ -25,7 +25,7 @@ class ExtractionDefinitionsController < ApplicationController
 
       2.times { Request.create(extraction_definition: @extraction_definition) }
 
-      redirect_to create_redirect_path, notice: t('.success')
+      redirect_to pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition, @extraction_definition), notice: t('.success')
     else
       flash.alert = t('.failure')
 
@@ -89,18 +89,6 @@ class ExtractionDefinitionsController < ApplicationController
   def assign_show_variables
     @parameters = @extraction_definition.parameters.order(created_at: :desc)
     @props = extraction_app_state
-  end
-
-  def create_redirect_path
-    return pipeline_path(@pipeline) unless @extraction_definition.harvest?
-
-    pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition, @extraction_definition)
-  end
-
-  def update_redirect_path
-    return pipeline_path(@pipeline) unless @extraction_definition.harvest?
-
-    pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition, @extraction_definition)
   end
 
   def successful_clone_path(clone)

@@ -122,13 +122,13 @@
               or
             </div>
 
-            <%= link_to '+ Add new extraction definition',
-                        new_pipeline_harvest_definition_extraction_definition_path(
-                          @pipeline,
-                          enrichment_definition,
-                          kind: 'enrichment'
-                        ),
-                        class: 'btn btn-primary' %>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#create-enrichment-extraction-definition-modal-<%= enrichment_definition.id %>">
+              + Add a new extraction definition
+            </button>
 
           </div>
         <% end %>
@@ -239,3 +239,5 @@
     </div>
   </div>
 </div>
+
+<%= render partial: 'extraction_definitions/create_edit_enrichment_modal', locals: { enrichment_definition:, id: "create-enrichment-extraction-definition-modal-#{enrichment_definition.id}" } %>

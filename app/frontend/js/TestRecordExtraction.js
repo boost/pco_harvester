@@ -23,8 +23,8 @@ bindTestForm(
     document.querySelector("#js-record-extraction-result").innerHTML = "";
     document.getElementById(
       "js-record-extraction-result"
-    ).innerHTML = `<div class="alert alert-danger my-2" role="alert">
-    Something went wrong fetching your records from the API Source. Please confirm that your API Source details and Source ID are correct.
-  </div>`;
+    ).innerHTML = `<p>
+    Something went wrong fetching your records from the Preview Target. Please confirm that your Preview Target and Preview Source ID are correct.
+  </p>`;
   }
 );

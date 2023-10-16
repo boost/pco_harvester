@@ -17,15 +17,6 @@
         <% end %>
 
         <div class="col-3">
-          <%= form.label :destination_id, 'Enrichment Target', class: 'form-label' %>
-        </div>
-
-        <div class='col-9'>
-          <%= form.select :destination_id, options_from_collection_for_select(@destinations, 'id', 'name'), {},
-                          class: 'form-select' %>
-        </div>
-
-        <div class="col-3">
           <%= form.label :source_id, 'Enrichment Target Source ID', class: 'form-label' %>
         </div>
         <div class='col-9'>
@@ -40,34 +31,11 @@
           <div id="js-enrichment-editor"></div>
         </div>
 
-        <div class="col-3">
-          <%= form.label :format, class: 'form-label' do %>
-            Format
-            <span
-              data-bs-toggle="tooltip"
-              data-bs-title="The format the API returns"><i class="bi bi-question-circle" aria-label="helper text"></i>
-          <% end %>
-        </div>
-        <div class="col-9">
-          <% options = find_options_from_validations(ExtractionDefinition, :format) %>
-          <%= form.select :format, options, {}, class: 'form-select' %>
-        </div>
-
-        <%= form.hidden_field :page, value: 1 %>
-        <%= form.hidden_field :per_page, value: 20 %>
-        <%= form.hidden_field :total_selector, value: '$.meta.total_pages' %>
-
-        <div class="col-3">
-          <%= form.label :throttle, 'Enrichment Throttle (in ms)', class: 'form-label' %>
-        </div>
-        <div class='col-9'>
-          <%= form.number_field :throttle, class: 'form-control' %>
-        </div>
       </div>
     </div>
   </div>
 
 <% end %>
 
-<div id="js-record-extraction-result"></div>
+
 <div id="js-enrichment-extraction-result"></div>

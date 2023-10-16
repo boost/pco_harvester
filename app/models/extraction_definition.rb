@@ -51,7 +51,6 @@ class ExtractionDefinition < ApplicationRecord
   with_options presence: true, if: :enrichment? do
     validates :destination_id
     validates :source_id
-    validates :enrichment_url
   end
 
   def total_selector_format
