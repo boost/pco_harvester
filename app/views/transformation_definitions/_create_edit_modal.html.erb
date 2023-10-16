@@ -80,12 +80,23 @@
               <div id="js-record-selector-result"></div>
             </div>
           </div>
+
           <div class='float-end mt-4'>
             <button type="button" class="btn btn-outline-danger me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
-            <button type="submit" class="btn btn-primary"><%= confirmation_button_text %></button>
+            <button type="submit" class="btn btn-primary" id="js-transformation-definition-update-button"><%= confirmation_button_text %></button>
           </div>
+
         <% end %>
       </div>
     </div>
   </div>
+<% end %>
+
+<% if model.persisted? %>
+  <span 
+    id='js-transformation-definition-preview-data'
+    data-format="<%= model.extraction_job.format %>"
+    data-result="<%= model.records.first.to_json %>"
+    data-completed="<%= model.extraction_job.completed? %>"
+  ></span>
 <% end %>
