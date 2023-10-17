@@ -5,6 +5,8 @@ import { Modal } from "bootstrap";
 import editor from "./editor";
 import xmlFormat from "xml-formatter";
 import { Tooltip } from "bootstrap";
+import { each } from 'lodash';
+import { bindTestForm } from "./utils/test-form";
 
 const createModal = document.getElementById("create-modal");
 
@@ -26,55 +28,86 @@ if (addHarvestModal) {
   }
 }
 
-const updateTransformationModal = document.getElementById(
-  "update-transformation-definition-modal"
-);
+const transformationDefinitionSettingsForms = document.getElementsByClassName('js-transformation-definition-form');
 
-if (updateTransformationModal) {
-  const recordSelector = document.getElementById(
-    "transformation_definition_record_selector"
-  );
-  const transformationDefinitionUpdateButton = document.getElementById(
-    "js-transformation-definition-update-button"
-  );
+if(transformationDefinitionSettingsForms) {
+  each(transformationDefinitionSettingsForms, (form) => {
+    const id = form.dataset.id;
 
-  const tooltip = Tooltip.getInstance('#js-transformation-definition-update-button-tooltip');
+    const recordSelector = document.getElementById(
+      `js-transformation-definition-record-selector-${id}`
+    );
 
-  const transformationDefinitionPreviewData = document.getElementById(
-    "js-transformation-definition-preview-data"
-  );
+    const transformationDefinitionUpdateButton = document.getElementById(
+      `js-transformation-definition-submit-button-${id}`
+    );
 
-  let result = transformationDefinitionPreviewData.dataset.result;
-  let format = transformationDefinitionPreviewData.dataset.format;
-  let completed = transformationDefinitionPreviewData.dataset.completed;
+    const tooltip = Tooltip.getInstance(`#js-transformation-definition-submit-button-tooltip-${id}`);
 
-  if (format == "JSON") {
-    result = JSON.stringify(JSON.parse(result), null, 2);
-  } else if (format == "XML") {
-    result = xmlFormat(result, {
-      indentation: "  ",
-      lineSeparator: "\n",
-    });
-  }
+    const transformationDefinitionPreviewData = document.getElementById(
+      `js-transformation-definition-preview-data-${id}`
+    );
 
-  editor("#js-record-selector-result", format, true, result);
-  tooltip.disable();
+    let result = transformationDefinitionPreviewData.dataset.result;
+    let format = transformationDefinitionPreviewData.dataset.format;
+    let completed = transformationDefinitionPreviewData.dataset.completed;
 
-  if (recordSelector.value == "" && completed == "true") {
-    new Modal(
-      document.getElementById("update-transformation-definition-modal")
-    ).show();
-    transformationDefinitionUpdateButton.disabled = true;
-    tooltip.enable();
-  }
 
-  recordSelector.addEventListener("input", (event) => {
-    if (event.target.value == "") {
+
+    if (format == "JSON") {
+      result = JSON.stringify(JSON.parse(result), null, 2);
+    } else if (format == "XML") {
+      result = xmlFormat(result, {
+        indentation: "  ",
+        lineSeparator: "\n",
+      });
+    }
+
+    editor(`#js-record-selector-result-${id}`, format, true, result);
+    tooltip.disable();
+
+    if(recordSelector.value == "") {
       transformationDefinitionUpdateButton.disabled = true;
       tooltip.enable();
-    } else {
-      transformationDefinitionUpdateButton.disabled = false;
-      tooltip.disable();
     }
+
+    if (recordSelector.value == "" && completed == "true") {
+      new Modal(
+        document.getElementById("update-transformation-definition-modal")
+      ).show();
+    }
+
+    recordSelector.addEventListener("input", (event) => {
+      if (event.target.value == "") {
+        transformationDefinitionUpdateButton.disabled = true;
+        tooltip.enable();
+      } else {
+        transformationDefinitionUpdateButton.disabled = false;
+        tooltip.disable();
+      }
+    });
+
+    bindTestForm(
+      "test",
+      `js-test-transformation-record-selector-button-${id}`,
+      `js-transformation-definition-form-${id}`,
+      (response, _alertClass) => {
+        let results = response.data.result;
+    
+        if (response.data.format == "JSON") {
+          results = JSON.stringify(response.data.result, null, 2);
+        } else if (response.data.format == "XML") {
+          results = xmlFormat(response.data.result, {
+            indentation: "  ",
+            lineSeparator: "\n",
+          });
+        }
+    
+        editor(`#js-record-selector-result-${id}`, response.data.format, true, results);
+      }
+    );
+    
   });
 }
+
+
