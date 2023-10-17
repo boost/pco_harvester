@@ -4,6 +4,7 @@
 import { Modal } from "bootstrap";
 import editor from "./editor";
 import xmlFormat from "xml-formatter";
+import { Tooltip } from "bootstrap";
 
 const createModal = document.getElementById("create-modal");
 
@@ -36,6 +37,9 @@ if (updateTransformationModal) {
   const transformationDefinitionUpdateButton = document.getElementById(
     "js-transformation-definition-update-button"
   );
+
+  const tooltip = Tooltip.getInstance('#js-transformation-definition-update-button-tooltip');
+
   const transformationDefinitionPreviewData = document.getElementById(
     "js-transformation-definition-preview-data"
   );
@@ -54,19 +58,23 @@ if (updateTransformationModal) {
   }
 
   editor("#js-record-selector-result", format, true, result);
+  tooltip.disable();
 
   if (recordSelector.value == "" && completed == "true") {
     new Modal(
       document.getElementById("update-transformation-definition-modal")
     ).show();
     transformationDefinitionUpdateButton.disabled = true;
+    tooltip.enable();
   }
 
   recordSelector.addEventListener("input", (event) => {
     if (event.target.value == "") {
       transformationDefinitionUpdateButton.disabled = true;
+      tooltip.enable();
     } else {
       transformationDefinitionUpdateButton.disabled = false;
+      tooltip.disable();
     }
   });
 }
