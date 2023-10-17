@@ -42,7 +42,7 @@ class Request < ApplicationRecord
     }
   end
 
-  def initial_request?
+  def first_request?
     extraction_definition.requests.first.id == id
   end
 

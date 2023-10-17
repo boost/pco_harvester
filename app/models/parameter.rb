@@ -28,11 +28,9 @@ class Parameter < ApplicationRecord
       content: block.call(response_object&.body)
     )
   rescue StandardError
-    # If the parameter fails to be evaluated
-    # return the unevaluated parameter
     Parameter.new(
       name:,
-      content:
+      content: ''
     )
   end
   # rubocop:enable Lint/UnusedBlockArgument

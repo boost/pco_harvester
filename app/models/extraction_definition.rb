@@ -59,10 +59,6 @@ class ExtractionDefinition < ApplicationRecord
     errors.add(:total_selector, "invalid selector for the #{format} format")
   end
 
-  def initial_request
-    requests.first
-  end
-
   def to_h
     {
       id:,

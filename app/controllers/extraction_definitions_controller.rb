@@ -52,15 +52,6 @@ class ExtractionDefinitionsController < ApplicationController
     render json: Extraction::RecordExtraction.new(Request.new(extraction_definition:), 1).extract
   end
 
-  def test_enrichment_extraction
-    @extraction_definition = ExtractionDefinition.new(extraction_definition_params)
-
-    api_records = Extraction::RecordExtraction.new(@extraction_definition, 1).extract
-    records = JSON.parse(api_records.body)['records']
-
-    render json: Extraction::EnrichmentExtraction.new(@extraction_definition, records.first, 1).extract
-  end
-
   def destroy
     if @extraction_definition.destroy
       redirect_to pipeline_path(@pipeline), notice: t('.success')

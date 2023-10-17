@@ -44,44 +44,100 @@ RSpec.describe 'Requests' do
     end
   end
 
-  describe 'GET /show' do
-    before do
-      stub_figshare_harvest_requests(request_one)
-    end
+  describe 'GET /show' do    
+    context 'when the extraction definition is for a harvest' do
+      before do
+        stub_figshare_harvest_requests(request_one)
+      end
+  
+      let(:request_one) { create(:request, :figshare_initial_request, extraction_definition:) }
+      let(:request_two) { create(:request, :figshare_main_request, extraction_definition:) }
 
-    let(:request_one) { create(:request, :figshare_initial_request, extraction_definition:) }
-    let(:request_two) { create(:request, :figshare_main_request, extraction_definition:) }
-
-    it 'returns a JSON response of the completed request' do
-      get pipeline_harvest_definition_extraction_definition_request_path(pipeline, harvest_definition,
-                                                                         extraction_definition, request_one)
-
-      expect(response).to have_http_status :ok
-
-      json_data = response.parsed_body
-
-      expected_keys = %w[url format preview http_method created_at updated_at id]
-
-      expected_keys.each do |key|
-        expect(json_data).to have_key(key)
+      it 'returns a JSON response of the completed request' do
+        get pipeline_harvest_definition_extraction_definition_request_path(pipeline, harvest_definition,
+                                                                           extraction_definition, request_one)
+  
+        expect(response).to have_http_status :ok
+  
+        json_data = response.parsed_body
+  
+        expected_keys = %w[url format preview http_method created_at updated_at id]
+  
+        expected_keys.each do |key|
+          expect(json_data).to have_key(key)
+        end
+      end
+  
+      it 'returns a JSON response of the completed request referencing a response' do
+        get pipeline_harvest_definition_extraction_definition_request_path(pipeline, harvest_definition,
+                                                                           extraction_definition, request_two, previous_request_id: request_one.id)
+  
+        expect(response).to have_http_status :ok
+  
+        json_data = response.parsed_body
+  
+        expected_keys = %w[url format preview http_method created_at updated_at id]
+  
+        expected_keys.each do |key|
+          expect(json_data).to have_key(key)
+        end
+  
+        expect(JSON.parse(json_data['preview']['body'])['page_nr']).to eq 2
       end
     end
 
-    it 'returns a JSON response of the completed request referencing a response' do
-      get pipeline_harvest_definition_extraction_definition_request_path(pipeline, harvest_definition,
-                                                                         extraction_definition, request_two, previous_request_id: request_one.id)
+    context 'when the extraction definition is for an enrichment' do
+      let(:destination) { create(:destination) }
+      let(:extraction_definition) { create(:extraction_definition, :enrichment, pipeline:, destination:) }
 
-      expect(response).to have_http_status :ok
+      let!(:request_one) { create(:request, extraction_definition:) }
+      let!(:request_two) { create(:request, extraction_definition:) }
 
-      json_data = response.parsed_body
+      let!(:parameter)   { create(:parameter, content: "response['dc_identifier'].first", kind: 'slug', request: request_two, content_type: 'dynamic') }
 
-      expected_keys = %w[url format preview http_method created_at updated_at id]
-
-      expected_keys.each do |key|
-        expect(json_data).to have_key(key)
+      before do
+        stub_figshare_enrichment_page1(destination)
       end
 
-      expect(JSON.parse(json_data['preview']['body'])['page_nr']).to eq 2
+      it 'returns a JSON response of data from the API' do
+        get pipeline_harvest_definition_extraction_definition_request_path(pipeline, harvest_definition,
+                                                                           extraction_definition, request_one)
+
+        expect(response).to have_http_status :ok
+
+        json_data = response.parsed_body
+
+        expected_keys = %w[url format preview http_method created_at updated_at id]
+
+        expected_keys.each do |key|
+          expect(json_data).to have_key(key)
+        end
+
+        api_response = JSON.parse(json_data['preview']['body'])
+
+        expect(api_response).to have_key('records')
+        expect(api_response).to have_key('meta')
+      end
+
+      it 'returns a JSON response of the data from the content partner based on the data from the API' do
+        get pipeline_harvest_definition_extraction_definition_request_path(pipeline, harvest_definition,
+                                                                           extraction_definition, request_two)
+
+        expect(response).to have_http_status :ok
+
+        json_data = response.parsed_body
+
+        expected_keys = %w[http_method base_url url format preview]
+
+        expected_keys.each do |key|
+          expect(json_data).to have_key(key)
+        end
+
+        content_source_response = JSON.parse(json_data['preview']['body'])
+
+        expect(content_source_response).to have_key('count')
+        expect(content_source_response).to have_key('items')
+      end
     end
   end
 end

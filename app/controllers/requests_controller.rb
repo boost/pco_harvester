@@ -18,7 +18,7 @@ class RequestsController < ApplicationController
       )
     else
       records = Extraction::RecordExtraction.new(@request, 1).extract
-      if @request.initial_request?
+      if @request.first_request?
         render json: @request.to_h.merge(
           preview: records
         )

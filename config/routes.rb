@@ -33,7 +33,6 @@ Rails.application.routes.draw do
         collection do
           post :test
           post :test_record_extraction
-          post :test_enrichment_extraction
         end
 
         member do

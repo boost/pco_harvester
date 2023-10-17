@@ -29,10 +29,9 @@ FactoryBot.define do
     trait :enrichment do
       kind { 1 }
       source_id { 'test' }
-      # rubocop:disable Lint/InterpolationCheck
-      enrichment_url { '"https://api.figshare.com/v1/articles/#{record["dc_identifier"].first}"' }
-      # rubocop:enable Lint/InterpolationCheck
-      throttle { 1000 }
+      base_url { 'https://api.figshare.com/v1/articles' }
+      total_selector { '$.meta.total_pages' }
+      per_page { 20 }
     end
 
     pipeline
