@@ -20,7 +20,6 @@ class Parameter < ApplicationRecord
 
   # rubocop:disable Lint/UnusedBlockArgument
   # rubocop:disable Security/Eval
-  # rubocop:disable Lint/SuppressedException
   def dynamic_evaluation(response_object)
     block = ->(response) { eval(content) }
 
@@ -29,10 +28,15 @@ class Parameter < ApplicationRecord
       content: block.call(response_object&.body)
     )
   rescue StandardError
+    # If the parameter fails to be evaluated
+    # return the unevaluated parameter
+    Parameter.new(
+      name:,
+      content:
+    )
   end
   # rubocop:enable Lint/UnusedBlockArgument
   # rubocop:enable Security/Eval
-  # rubocop:enable Lint/SuppressedException
 
   def to_h
     return if slug?

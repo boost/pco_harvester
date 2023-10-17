@@ -6,15 +6,30 @@ class RequestsController < ApplicationController
   def show
     @request = Request.find(params[:id])
 
-    if params[:previous_request_id].present?
-      @previous_request = Request.find(params[:previous_request_id])
+    if @request.extraction_definition.harvest?
+      if params[:previous_request_id].present?
+        @previous_request = Request.find(params[:previous_request_id])
 
-      @previous_response = Extraction::DocumentExtraction.new(@previous_request).extract
+        @previous_response = Extraction::DocumentExtraction.new(@previous_request).extract
+      end
+
+      render json: @request.to_h.merge(
+        preview: Extraction::DocumentExtraction.new(@request, nil, @previous_response).extract
+      )
+    else
+      records = Extraction::RecordExtraction.new(@request, 1).extract
+      if @request.initial_request?
+        render json: @request.to_h.merge(
+          preview: records
+        )
+      else
+        record = OpenStruct.new(body: JSON.parse(records.body)['records'].first)
+
+        render json: @request.to_h.merge(
+          preview: Extraction::EnrichmentExtraction.new(@request, record).extract
+        )
+      end
     end
-
-    render json: @request.to_h.merge(
-      preview: Extraction::DocumentExtraction.new(@request, nil, @previous_response).extract
-    )
   end
 
   def update

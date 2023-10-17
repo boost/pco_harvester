@@ -1,37 +1,15 @@
 import React from "react";
 import { createPortal } from "react-dom";
-import { useSelector } from "react-redux";
-import classNames from "classnames";
-import { selectAppDetails } from "~/js/features/ExtractionApp/AppDetailsSlice";
-import { request } from "~/js/utils/request";
 
 import Modal from "react-bootstrap/Modal";
 import Preview from "~/js/apps/ExtractionApp/components/Preview";
 
-const PreviewModal = ({
+const EnrichmentPreviewModal = ({
   showModal,
   handleClose,
   initialRequestId,
   mainRequestId,
 }) => {
-  const appDetails = useSelector(selectAppDetails);
-
-  const initialRequestClasses = classNames({
-    "col-6": appDetails.extractionDefinition.paginated,
-    "col-12": !appDetails.extractionDefinition.paginated,
-  });
-
-  const handleSampleClick = async () => {
-    const response = await request
-      .post(
-        `/pipelines/${appDetails.pipeline.id}/harvest_definitions/${appDetails.harvestDefinition.id}/extraction_definitions/${appDetails.extractionDefinition.id}/extraction_jobs.json?kind=sample`
-      )
-      .then((response) => {
-        return response;
-      });
-
-    window.location.replace(response.data.location);
-  };
 
   return createPortal(
     <Modal
@@ -41,7 +19,7 @@ const PreviewModal = ({
       className="modal--full-width"
     >
       <Modal.Header>
-        <Modal.Title>Extraction preview</Modal.Title>
+        <Modal.Title>Enrichment Extraction preview</Modal.Title>
 
         <div className="float-end">
           <button
@@ -67,19 +45,17 @@ const PreviewModal = ({
       </Modal.Header>
       <Modal.Body>
         <div className="row">
-          <div className={initialRequestClasses}>
-            <h5>First Request</h5>
+          <div className="col-6">
+            <h5>API Response body</h5>
 
             <Preview id={initialRequestId} />
           </div>
 
-          {appDetails.extractionDefinition.paginated && (
-            <div className="col-6">
-              <h5>Following Requests</h5>
-
-              <Preview id={mainRequestId} />
-            </div>
-          )}
+          <div className="col-6">
+            <h5>API Response body</h5>
+            
+            <Preview id={mainRequestId} />
+          </div>
         </div>
       </Modal.Body>
     </Modal>,
@@ -87,4 +63,4 @@ const PreviewModal = ({
   );
 };
 
-export default PreviewModal;
+export default EnrichmentPreviewModal;

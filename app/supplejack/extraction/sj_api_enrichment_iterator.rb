@@ -31,7 +31,7 @@ module Extraction
 
     def get_api_document(page)
       RecordExtraction.new(
-        @extraction_definition, page, @harvest_job
+        @extraction_definition.initial_request, page, @harvest_job
       ).extract
     end
   end

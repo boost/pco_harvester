@@ -24,7 +24,7 @@ module Extraction
         page = page_from_index(index)
 
         ee = new_enrichment_extraction(api_record, page)
-        next unless ee.valid?
+        # next unless ee.valid?
 
         ee.extract_and_save
         enqueue_record_transformation(api_record, ee.document, page)
@@ -52,7 +52,7 @@ module Extraction
     end
 
     def new_enrichment_extraction(api_record, page)
-      EnrichmentExtraction.new(@extraction_definition, api_record, page, @extraction_job.extraction_folder)
+      EnrichmentExtraction.new(@extraction_definition.requests.last, OpenStruct.new(body: api_record), page, @extraction_job.extraction_folder)
     end
 
     def enqueue_record_transformation(api_record, document, page)

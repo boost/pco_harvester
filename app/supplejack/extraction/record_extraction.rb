@@ -2,12 +2,13 @@
 
 module Extraction
   class RecordExtraction < AbstractExtraction
-    def initialize(extraction_definition, page, harvest_job = nil)
+    def initialize(request, page, harvest_job = nil)
       super()
-      @extraction_definition = extraction_definition
-      @api_source            = extraction_definition.destination
-      @page = page
-      @harvest_job = harvest_job
+      @request               = request
+      @extraction_definition = request.extraction_definition
+      @api_source            = @extraction_definition.destination
+      @page                  = page
+      @harvest_job           = harvest_job
     end
 
     private

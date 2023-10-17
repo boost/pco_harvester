@@ -42,9 +42,13 @@ class Request < ApplicationRecord
     }
   end
 
+  def initial_request?
+    extraction_definition.requests.first.id == id
+  end
+
   private
 
-  def slug(response)
+  def slug(response = nil)
     parameters
       .slug
       .map { |parameter| parameter.evaluate(response) }

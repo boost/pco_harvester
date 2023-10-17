@@ -22,7 +22,7 @@ class ExtractionDefinitionsController < ApplicationController
 
     if @extraction_definition.save
       @harvest_definition.update(extraction_definition_id: @extraction_definition.id)
-
+ 
       2.times { Request.create(extraction_definition: @extraction_definition) }
 
       redirect_to pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition, @extraction_definition), notice: t('.success')
@@ -47,9 +47,9 @@ class ExtractionDefinitionsController < ApplicationController
   end
 
   def test_record_extraction
-    @extraction_definition = ExtractionDefinition.new(extraction_definition_params)
+    extraction_definition = ExtractionDefinition.new(extraction_definition_params)
 
-    render json: Extraction::RecordExtraction.new(@extraction_definition, 1).extract
+    render json: Extraction::RecordExtraction.new(Request.new(extraction_definition:), 1).extract
   end
 
   def test_enrichment_extraction
