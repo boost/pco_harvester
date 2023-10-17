@@ -30,11 +30,6 @@ Rails.application.routes.draw do
 
     resources :harvest_definitions, only: %i[create update destroy] do
       resources :extraction_definitions, only: %i[show create update destroy new edit] do
-        collection do
-          post :test
-          post :test_record_extraction
-        end
-
         member do
           post :clone
         end

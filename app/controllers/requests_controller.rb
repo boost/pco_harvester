@@ -6,30 +6,9 @@ class RequestsController < ApplicationController
   def show
     @request = Request.find(params[:id])
 
-    if @request.extraction_definition.harvest?
-      if params[:previous_request_id].present?
-        @previous_request = Request.find(params[:previous_request_id])
+    return harvest_request if @request.extraction_definition.harvest?
 
-        @previous_response = Extraction::DocumentExtraction.new(@previous_request).extract
-      end
-
-      render json: @request.to_h.merge(
-        preview: Extraction::DocumentExtraction.new(@request, nil, @previous_response).extract
-      )
-    else
-      records = Extraction::RecordExtraction.new(@request, 1).extract
-      if @request.first_request?
-        render json: @request.to_h.merge(
-          preview: records
-        )
-      else
-        record = OpenStruct.new(body: JSON.parse(records.body)['records'].first)
-
-        render json: @request.to_h.merge(
-          preview: Extraction::EnrichmentExtraction.new(@request, record).extract
-        )
-      end
-    end
+    enrichment_request
   end
 
   def update
@@ -44,6 +23,33 @@ class RequestsController < ApplicationController
   end
 
   private
+
+  def harvest_request
+    if params[:previous_request_id].present?
+      @previous_request = Request.find(params[:previous_request_id])
+
+      @previous_response = Extraction::DocumentExtraction.new(@previous_request).extract
+    end
+
+    render json: @request.to_h.merge(
+      preview: Extraction::DocumentExtraction.new(@request, nil, @previous_response).extract
+    )
+  end
+
+  def enrichment_request
+    response = Extraction::RecordExtraction.new(@request, 1).extract
+    record   = Extraction::ApiResponse.new(response).record(0)
+
+    if @request.first_request?
+      render json: @request.to_h.merge(
+        preview: response
+      )
+    else
+      render json: @request.to_h.merge(
+        preview: Extraction::EnrichmentExtraction.new(@request, record).extract
+      )
+    end
+  end
 
   def request_params
     params.require(:request).permit(:http_method)
