@@ -1,8 +1,22 @@
 import React from "react";
 import { createPortal } from "react-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { selectAppDetails } from "~/js/features/ExtractionApp/AppDetailsSlice";
 
 import Modal from "react-bootstrap/Modal";
 import Preview from "~/js/apps/ExtractionApp/components/Preview";
+
+import {
+  previewRequest,
+} from "~/js/features/ExtractionApp/RequestsSlice";
+
+import { setLoading } from "~/js/features/ExtractionApp/UiRequestsSlice";
+
+import {
+  setCurrentPage,
+  setCurrentRecord,
+  selectUiAppDetails
+} from "~/js/features/ExtractionApp/UiAppDetailsSlice";
 
 const EnrichmentPreviewModal = ({
   showModal,
@@ -10,6 +24,42 @@ const EnrichmentPreviewModal = ({
   initialRequestId,
   mainRequestId,
 }) => {
+
+  const dispatch = useDispatch();
+  const appDetails = useSelector(selectAppDetails);
+  const uiAppDetails = useSelector(selectUiAppDetails);
+
+  const handleNextRecordClick = async () => {
+    // dispatch(setLoading(initialRequestId));
+    // dispatch(setLoading(mainRequestId));
+
+    // dispatch(setCurrentRecord(uiAppDetails.currentRecord + 1))
+
+    // const initialPreview = await dispatch(
+    //   previewRequest({
+    //     harvestDefinitionId: appDetails.harvestDefinition.id,
+    //     pipelineId: appDetails.pipeline.id,
+    //     extractionDefinitionId: appDetails.extractionDefinition.id,
+    //     id: initialRequestId,
+    //     page: uiAppDetails.currentPage,
+    //     record: uiAppDetails.currentRecord
+    //   })
+    // )
+
+    // dispatch(
+    //   previewRequest({
+    //     harvestDefinitionId: appDetails.harvestDefinition.id,
+    //     pipelineId: appDetails.pipeline.id,
+    //     extractionDefinitionId: appDetails.extractionDefinition.id,
+    //     id: mainRequestId,
+    //     previousRequestId: initialPreview.payload.id,
+    //   })
+    // );
+  }
+
+  const handlePreviousRecordClick = () => {
+    dispatch(setCurrentRecord(uiAppDetails.currentRecord - 1))
+  }
 
   return createPortal(
     <Modal
@@ -46,12 +96,32 @@ const EnrichmentPreviewModal = ({
       <Modal.Body>
         <div className="row">
           <div className="col-6">
-            <h5>Record 1/500</h5>
+            <h5>Record { uiAppDetails.currentRecord }/TOTAL</h5>
 
             <Preview id={initialRequestId} view={'apiRecord'} />
           </div>
 
           <div className="col-6">
+            <button
+              className="btn btn-outline-primary me-2"
+              onClick={() => {
+                handlePreviousRecordClick();
+              }}
+            >
+              <i className="bi bi-arrow-left-short me-1" aria-hidden="true"></i>
+              Previous record
+            </button> 
+
+            <button
+              className="btn btn-outline-primary me-2"
+              onClick={() => {
+                handleNextRecordClick();
+              }}
+            >
+              Next record
+              <i className="bi bi-arrow-right-short me-1" aria-hidden="true"></i>
+            </button> 
+
             <Preview id={mainRequestId} />
           </div>
         </div>

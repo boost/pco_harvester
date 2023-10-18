@@ -34,6 +34,8 @@ const HeaderActions = () => {
         pipelineId: appDetails.pipeline.id,
         extractionDefinitionId: appDetails.extractionDefinition.id,
         id: initialRequestId,
+        page: 1,
+        record: 1
       })
     );
 

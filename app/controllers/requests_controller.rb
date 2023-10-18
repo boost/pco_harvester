@@ -37,15 +37,13 @@ class RequestsController < ApplicationController
   end
 
   def enrichment_request
-    response = Extraction::RecordExtraction.new(@request, 1).extract
-    record   = Extraction::ApiResponse.new(response).record(0)
+    response = Extraction::RecordExtraction.new(@request, params[:page]).extract
+    record   = Extraction::ApiResponse.new(response).record(params[:record].to_i - 1)
 
     if @request.first_request?
-      render json: @request.to_h.merge(preview: record.to_hash)
+      render json: @request.to_h.merge(preview: { **record.to_hash, meta: JSON.parse(response.body)['meta'] })
     else
-      render json: @request.to_h.merge(
-        preview: Extraction::EnrichmentExtraction.new(@request, record).extract
-      )
+      render json: @request.to_h.merge(preview: Extraction::EnrichmentExtraction.new(@request, record).extract)
     end
   end
 
