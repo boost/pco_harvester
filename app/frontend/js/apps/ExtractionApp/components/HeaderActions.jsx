@@ -47,6 +47,8 @@ const HeaderActions = () => {
           extractionDefinitionId: appDetails.extractionDefinition.id,
           id: mainRequestId,
           previousRequestId: initialPreview.payload.id,
+          page: 1,
+          record: 1
         })
       );
     }

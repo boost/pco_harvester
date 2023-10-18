@@ -29,36 +29,44 @@ const EnrichmentPreviewModal = ({
   const appDetails = useSelector(selectAppDetails);
   const uiAppDetails = useSelector(selectUiAppDetails);
 
-  const handleNextRecordClick = async () => {
-    // dispatch(setLoading(initialRequestId));
-    // dispatch(setLoading(mainRequestId));
+  const handleNextRecordClick = () => {
+    dispatch(setCurrentRecord(uiAppDetails.currentRecord + 1))
 
-    // dispatch(setCurrentRecord(uiAppDetails.currentRecord + 1))
-
-    // const initialPreview = await dispatch(
-    //   previewRequest({
-    //     harvestDefinitionId: appDetails.harvestDefinition.id,
-    //     pipelineId: appDetails.pipeline.id,
-    //     extractionDefinitionId: appDetails.extractionDefinition.id,
-    //     id: initialRequestId,
-    //     page: uiAppDetails.currentPage,
-    //     record: uiAppDetails.currentRecord
-    //   })
-    // )
-
-    // dispatch(
-    //   previewRequest({
-    //     harvestDefinitionId: appDetails.harvestDefinition.id,
-    //     pipelineId: appDetails.pipeline.id,
-    //     extractionDefinitionId: appDetails.extractionDefinition.id,
-    //     id: mainRequestId,
-    //     previousRequestId: initialPreview.payload.id,
-    //   })
-    // );
+    requestNewPreview();
   }
 
   const handlePreviousRecordClick = () => {
     dispatch(setCurrentRecord(uiAppDetails.currentRecord - 1))
+
+    requestNewPreview();
+  }
+
+  const requestNewPreview = async () => {
+    dispatch(setLoading(initialRequestId));
+    dispatch(setLoading(mainRequestId));
+
+    const initialPreview = await dispatch(
+      previewRequest({
+        harvestDefinitionId: appDetails.harvestDefinition.id,
+        pipelineId: appDetails.pipeline.id,
+        extractionDefinitionId: appDetails.extractionDefinition.id,
+        id: initialRequestId,
+        page: uiAppDetails.currentPage,
+        record: uiAppDetails.currentRecord
+      })
+    )
+
+    dispatch(
+      previewRequest({
+        harvestDefinitionId: appDetails.harvestDefinition.id,
+        pipelineId: appDetails.pipeline.id,
+        extractionDefinitionId: appDetails.extractionDefinition.id,
+        id: mainRequestId,
+        previousRequestId: initialPreview.payload.id,
+        page: uiAppDetails.currentPage,
+        record: uiAppDetails.currentRecord
+      })
+    );
   }
 
   return createPortal(
