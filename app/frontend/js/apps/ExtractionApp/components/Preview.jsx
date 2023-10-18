@@ -136,10 +136,10 @@ const Preview = ({ id, view = 'accordion' }) => {
   const apiRecordView = () => {
     return(
       <>
-        <div className='accordion-item'>
+        <div className='card p-4'>
+          <strong className='mb-4'>API Response</strong>
           <CodeEditor initContent={preview.body} format={format} />
         </div>
-        
       </>
     )
   }

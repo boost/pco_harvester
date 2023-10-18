@@ -51,7 +51,7 @@ const PreviewModal = ({
             }}
           >
             <i className="bi bi-pencil-square me-1" aria-hidden="true"></i>
-            Continue editing extraction definition
+            Return to edit extraction
           </button>
 
           <button
