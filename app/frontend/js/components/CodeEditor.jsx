@@ -43,6 +43,7 @@ const CodeEditor = ({ initContent, onChange, format = "ruby", ...props }) => {
         });
       }
 
+      return content;
     } else if (format == "XML") {
       return xmlFormat(initContent, { indentation: "  ", lineSeparator: "\n" });
     } else if (format == "ruby") {
