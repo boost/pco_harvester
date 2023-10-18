@@ -41,9 +41,7 @@ class RequestsController < ApplicationController
     record   = Extraction::ApiResponse.new(response).record(0)
 
     if @request.first_request?
-      render json: @request.to_h.merge(
-        preview: response
-      )
+      render json: @request.to_h.merge(preview: record.to_hash)
     else
       render json: @request.to_h.merge(
         preview: Extraction::EnrichmentExtraction.new(@request, record).extract
