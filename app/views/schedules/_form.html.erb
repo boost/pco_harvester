@@ -23,7 +23,8 @@
 
           <div class='col-9'>
             <div class="alert alert-danger" role="alert">
-              Please enter a name
+
+              <%= @schedule.errors['name'].first.capitalize %>
             </div>
           </div>
         </div>

@@ -81,15 +81,6 @@ RSpec.describe 'Pipelines' do
     end
   end
 
-  describe 'GET /edit' do
-    it 'renders the edit page successfully' do
-      get edit_pipeline_path(pipeline)
-
-      expect(response).to have_http_status :ok
-      expect(response.body).to include pipeline.name
-    end
-  end
-
   describe 'PATCH /update' do
     context 'with valid parameters' do
       it 'updates the content source' do

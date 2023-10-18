@@ -1,0 +1,26 @@
+<% id ||= 'inline-editable-element' %>
+
+<% content_classes = class_names({ 'd-none': model.errors.include?(attribute) })
+   form_classes = class_names({ 'd-none': model.errors.exclude?(attribute) }) %>
+
+<div class='inline-editable-element'>
+  <div id="<%= "#{id}-content" %>" class="<%= content_classes %>">
+    <span class='d-flex align-items-center'>
+      <%= yield %>
+
+      <i
+        class="bi bi-pencil-square inline-editable-element__control js-inline-editable-control ms-2"
+        data-id="<%= id %>">
+      </i>
+    </span>
+  </div>
+
+  <%= vertical_form_with(model:, url:, class: form_classes, id: "#{id}-form") do |form| %>
+
+    <div class='float-start'>
+      <%= form.text_field attribute, class: 'form-control w-auto' %>
+    </div>
+
+    <%= form.submit 'Save', class: 'btn btn-primary ms-2' %>
+  <% end %>
+</div>

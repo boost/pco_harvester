@@ -143,9 +143,7 @@ const Field = ({ id }) => {
             <div className="d-flex d-row justify-content-between align-items-center">
               <div>
                 <h5 className="m-0 d-inline">{name}</h5>
-                {name != "" && (
-                  <span className={badgeClasses}>{badgeText()}</span>
-                )}
+                <span className={badgeClasses}>{badgeText()}</span>
               </div>
 
               <div className="hstack gap-2">
@@ -157,6 +155,7 @@ const Field = ({ id }) => {
                   <i className="bi bi-save" aria-hidden="true"></i>
                   {saving ? " Saving..." : " Save"}
                 </button>
+
                 <button
                   className="btn btn-outline-primary"
                   disabled={!saved || hasChanged() || running}

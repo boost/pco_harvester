@@ -1,0 +1,136 @@
+<% id ||= 'create-modal' %>
+<% modal_heading ||= 'Create transformation definition' %>
+<% modal_subheading ||= '' %>
+<% model ||= TransformationDefinition.new %>
+<% confirmation_button_text ||= 'Create harvest transformation' %>
+<% extraction_jobs ||= [] %>
+
+<%= tag.div(
+      class: 'modal fade',
+      id:,
+      tabindex: '-1',
+      'aria-labelledby': 'Create',
+      'aria-hidden': 'true'
+    ) do %>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header modal-header--with-subheader">
+        <h5 class="modal-title" id="create-modal-label"><%= modal_heading %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class='modal-subheader'>
+        <p><%= modal_subheading %></p>
+      </div>
+      <div class="modal-body">
+
+        <%= vertical_form_with model: [@pipeline, harvest_definition, model],
+                               class: 'js-transformation-definition-form',
+                               data: { id: harvest_definition.id },
+                               id: "js-transformation-definition-form-#{harvest_definition.id}" do |form| %>
+
+          <%= form.hidden_field :pipeline_id, value: @pipeline.id %>
+          <%= form.hidden_field :kind, value: 'harvest' %>
+
+          <div class="row gy-3 align-items-center">
+            <% if model.persisted? %>
+              <div class="col-4">
+                <%= form.label :name, 'Name', class: 'form-label' %>
+              </div>
+              <div class='col-8'>
+                <%= form.text_field :name, class: 'form-control' %>
+              </div>
+            <% end %>
+
+            <div class='col-4'>
+              <%= form.label :extraction_job_id, class: 'form-label' do %>
+                Extracted Data
+
+                <span
+                  data-bs-toggle="tooltip"
+                  data-bs-title="The data you wish to use to build your transformation"><i class="bi bi-question-circle" aria-label="helper text"></i>
+                </span>
+              <% end %>
+            </div>
+
+            <div class='col-8'>
+              <%= form.select(
+                    :extraction_job_id,
+                    options_from_collection_for_select(extraction_jobs, 'id', 'name', model.extraction_job_id),
+                    {}, class: 'form-select'
+                  ) %>
+            </div>
+
+            <div class="col-4">
+              <%= form.label :record_selector, class: 'form-label' do %>
+                Record Selector
+                <span
+                  data-bs-toggle="tooltip"
+                  data-bs-title="This defines the scope of a single record from within the extracted data"><i class="bi bi-question-circle" aria-label="helper text"></i>
+                </span>
+              <% end %>
+            </div>
+
+            <% record_selector_id = "js-transformation-definition-record-selector-#{harvest_definition.id}" %>
+            <div class='col-6'>
+              <%= form.text_field :record_selector, class: 'form-control',
+                                                    id: record_selector_id %>
+            </div>
+
+            <div class='col-2'>
+              <button
+                type="button"
+                class="btn btn-primary"
+                id="js-test-transformation-record-selector-button-<%= harvest_definition.id %>">
+                Test
+              </button>
+            </div>
+
+            <div class='record-view record-view--record-selector-result mt-4'>
+              <div id="js-record-selector-result-<%= harvest_definition.id %>"></div>
+            </div>
+          </div>
+
+          <div class='float-end mt-4'>
+            <button type="button" class="btn btn-outline-danger me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+            <span id='js-transformation-definition-submit-button-tooltip-<%= harvest_definition.id %>' class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" data-bs-title="Please add a record selector">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                id="js-transformation-definition-submit-button-<%= harvest_definition.id %>">
+                <%= confirmation_button_text %>
+              </button>
+            </span>
+          </div>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<% if model.persisted? %>
+  <span
+    id='js-transformation-definition-preview-data-<%= harvest_definition.id %>'
+    data-format="<%= model.extraction_job.format %>"
+    <% if model.extraction_job.format == 'JSON' %>
+      data-result="<%= model.records.first.to_json %>"
+    <% else %>
+      data-result="<%= model.records.first %>"
+    <% end %>
+    data-completed="<%= model.extraction_job.completed? %>">
+  </span>
+<% else %>
+  <% extraction_job = extraction_jobs.first %>
+  <% if extraction_job %>
+    <span
+      id='js-transformation-definition-preview-data-<%= harvest_definition.id %>'
+      data-format="<%= extraction_job.format %>"
+      <% if extraction_job.format == 'JSON' %>
+        data-result="<%= TransformationDefinition.new(extraction_job:).records.first.to_json %>"
+      <% else %>
+        data-result="<%= TransformationDefinition.new(extraction_job:).records.first %>"
+      <% end %>
+      data-completed="false">
+    </span>
+  <% end %>
+<% end %>

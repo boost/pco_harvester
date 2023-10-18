@@ -14,10 +14,23 @@
     font-weight: 500;
   }
 
+  @include element('control') {
+    position: absolute;
+    right: 0.5rem;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    height: 1rem;
+  }
+
   @include modifier('create-cta') {
     background-color: transparent;
     border: 1px solid $primary;
     color: $primary;
+
+    .card-title {
+      margin-bottom: 0;
+    }
 
     .card-body {
       width: 100%;
@@ -25,8 +38,8 @@
   }
 
   @include modifier('create-cta-disabled') {
-    border-color: $dark;
-    color: $dark;
+    border-color: $foggy-morn;
+    color: $foggy-morn;
 
     &:hover {
       cursor: default

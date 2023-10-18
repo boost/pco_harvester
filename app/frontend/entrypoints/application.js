@@ -37,14 +37,16 @@ import "/js/TestEnrichmentExtraction";
 import "/js/TestTransformationRecordSelector";
 import "/js/TestDestination";
 import "/js/Tooltips";
+import "/js/Toasts";
 import "/js/CollapseScroll";
+import "/js/formModals";
 import "/js/SubmittingSelect";
-import "/js/CreateModal";
 import "/js/AutoComplete";
 
 import "/js/editor";
 import "/js/form-header-submission";
 import "/js/pipeline";
 import "/js/schedules";
+import "/js/inlineEditable";
 
 import "/js/react";

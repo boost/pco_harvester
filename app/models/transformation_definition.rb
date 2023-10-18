@@ -11,8 +11,6 @@ class TransformationDefinition < ApplicationRecord
 
   validates :name, uniqueness: true
 
-  validates :record_selector, presence: true
-
   after_create do
     if name.blank?
       self.name = "#{pipeline.name.parameterize}__#{kind}-transformation-#{id}"

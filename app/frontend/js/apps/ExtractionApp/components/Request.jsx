@@ -54,9 +54,9 @@ const Request = ({}) => {
     }
 
     if (id == initialRequestId) {
-      return "Initial Request URL";
+      return "First Request URL";
     } else {
-      return "Main Request URL";
+      return "Following Requests URL";
     }
   };
 

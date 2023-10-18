@@ -5,7 +5,7 @@
    delete_path ||= ''
    position = type == 'extraction' ? 'first' : 'last' %>
 
-<div class="card harvest-card card--clickable">
+<div class="card harvest-card card--clickable h-100">
   <div class='card-body'>
     <div class="row">
 
@@ -18,6 +18,23 @@
         <h3 class="card-subtitle">
           <%= send("#{type}_card_subtitle", definition) %>
         </h3>
+
+        <% if type == 'extraction' %>
+          <% completed_extraction_jobs = ExtractionJob.where(extraction_definition_id: definition.id).completed %>
+          <% if completed_extraction_jobs.empty? %>
+            <span class="badge text-bg-danger mt-2">No completed extraction</span>
+          <% else %>
+            <span class="badge text-bg-primary mt-2"><%= pluralize(completed_extraction_jobs.count, 'extraction') %></span>
+          <% end %>
+        <% end %>
+        <% if type == 'transformation' %>
+          <% if definition.fields.empty? %>
+            <span class="badge text-bg-danger mt-2">Incomplete transformation</span>
+          <% else %>
+            <span class="badge text-bg-primary mt-2"><%= pluralize(definition.fields.count, 'fields') %></span>
+          <% end %>
+        <% end %>
+
         <% if definition.shared? %>
           <span class="badge text-bg-light">Shared (<%= "#{definition.harvest_definitions.count} pipelines" %>)</span>
         <% end %>

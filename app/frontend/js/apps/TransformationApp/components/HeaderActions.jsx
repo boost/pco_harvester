@@ -6,7 +6,6 @@ import {
   selectAppDetails,
 } from "/js/features/TransformationApp/AppDetailsSlice";
 import { selectFieldIds } from "/js/features/TransformationApp/FieldsSlice";
-import { selectUiAppDetails } from "~/js/features/TransformationApp/UiAppDetailsSlice";
 import { selectRawRecord } from "/js/features/TransformationApp/RawRecordSlice";
 
 const HeaderActions = () => {
@@ -30,7 +29,7 @@ const HeaderActions = () => {
 
   return createPortal(
     <>
-      <button className="btn btn-success" onClick={runAllFields}>
+      <button className="btn btn-success me-2" onClick={runAllFields}>
         <i className="bi bi-play" aria-hidden="true"></i> Preview
       </button>
     </>,

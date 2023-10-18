@@ -1,0 +1,5 @@
+.btn:disabled, .btn.disabled, fieldset:disabled .btn {
+  --bs-btn-disabled-color: #{$foggy-morn};
+  --bs-btn-disabled-border-color: #{$foggy-morn};
+  --bs-btn-disabled-bg: transparent;
+}

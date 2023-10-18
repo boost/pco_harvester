@@ -19,6 +19,7 @@ import { selectRequestIds } from "~/js/features/ExtractionApp/RequestsSlice";
 import {
   selectUiParameterById,
   toggleDisplayParameter,
+  setActiveParameter,
 } from "~/js/features/ExtractionApp/UiParametersSlice";
 
 import Tooltip from "~/js/components/Tooltip";
@@ -43,7 +44,7 @@ const Parameter = ({ id }) => {
     selectParameterById(state, id)
   );
 
-  const { saved, deleting, saving, displayed } = useSelector((state) =>
+  const { saved, deleting, saving, displayed, active } = useSelector((state) =>
     selectUiParameterById(state, id)
   );
 
@@ -93,9 +94,17 @@ const Parameter = ({ id }) => {
     }
   };
 
-  const parameterClasses = classNames("col-12", "collapse", "mt-4", {
-    show: displayed,
-  });
+  const parameterClasses = classNames(
+    "col-12",
+    "collapse",
+    "mt-4",
+    "border",
+    "rounded",
+    {
+      show: displayed,
+      "border-primary": active,
+    }
+  );
 
   const badgeClasses = classNames({
     badge: true,
@@ -112,7 +121,6 @@ const Parameter = ({ id }) => {
   };
 
   const valueColumnClasses = classNames({
-    "col-sm-5": kind != "slug",
     "col-sm-11": kind == "slug",
   });
 
@@ -139,19 +147,37 @@ const Parameter = ({ id }) => {
 
   return (
     <>
-      <div id={`parameter-${id}`} className={parameterClasses}>
+      <div
+        id={`parameter-${id}`}
+        className={parameterClasses}
+        onClick={() => dispatch(setActiveParameter(id))}
+      >
         <div className="card">
           <div className="card-body">
             <div className="d-flex d-row justify-content-between align-items-center">
               <div>
                 <h5 className="m-0 d-inline">{displayName()}</h5>
 
-                {displayName() != "" && (
-                  <span className={badgeClasses}>{badgeText()}</span>
-                )}
+                <span className={badgeClasses}>{badgeText()}</span>
               </div>
 
               <div className="hstack gap-2">
+                <button
+                  className="btn btn-outline-primary"
+                  disabled={!isSaveable()}
+                  onClick={handleSaveClick}
+                >
+                  <i className="bi bi-save" aria-hidden="true"></i>
+                  {saving ? " Saving..." : " Save"}
+                </button>
+
+                <button
+                  className="btn btn-outline-primary"
+                  onClick={handleHideClick}
+                >
+                  <i className="bi bi-eye-slash" aria-hidden="true"></i> Hide
+                </button>
+
                 <div className="dropdown">
                   <button
                     className="btn btn-outline-primary dropdown-toggle"
@@ -199,22 +225,6 @@ const Parameter = ({ id }) => {
                   </ul>
                 </div>
 
-                <button
-                  className="btn btn-outline-primary"
-                  disabled={!isSaveable()}
-                  onClick={handleSaveClick}
-                >
-                  <i className="bi bi-save" aria-hidden="true"></i>
-                  {saving ? " Saving..." : " Save"}
-                </button>
-
-                <button
-                  className="btn btn-outline-primary"
-                  onClick={handleHideClick}
-                >
-                  <i className="bi bi-eye-slash" aria-hidden="true"></i> Hide
-                </button>
-
                 <button className="btn btn-outline-danger" onClick={handleShow}>
                   <i className="bi bi-trash" aria-hidden="true"></i>
                   {deleting ? " Deleting..." : " Delete"}
@@ -222,85 +232,90 @@ const Parameter = ({ id }) => {
               </div>
             </div>
 
-            <div className="row mt-3">
+            <div className="row align-items-center mt-4">
               {kind != "slug" && (
                 <>
-                  <label className="col-form-label col-sm-1" htmlFor="name">
-                    <strong>Key </strong>
+                  <div className="col-6">
+                    <div className="row">
+                      <div className="col-1">
+                        {content_type == "incremental" && (
+                          <Tooltip data-bs-title="Please select the key of the first request that you want to be incremented.">
+                            <label className="col-form-label">Key </label>
+                          </Tooltip>
+                        )}
 
-                    {content_type == "incremental" && (
-                      <Tooltip data-bs-title="Please select the key of the initial request that you want to be incremented.">
-                        <i
-                          className="bi bi-question-circle"
-                          aria-label="help text"
-                        ></i>
-                      </Tooltip>
-                    )}
-                  </label>
+                        {content_type != "incremental" && (
+                          <label className="col-form-label">Key </label>
+                        )}
+                      </div>
 
-                  {content_type != "incremental" && (
-                    <div className="col-sm-5">
-                      <input
-                        type="text"
-                        className="form-control"
-                        defaultValue={name}
-                        onChange={(e) => setNameValue(e.target.value)}
-                      />
-                    </div>
-                  )}
+                      <div className="col-11">
+                        {content_type != "incremental" && (
+                          <input
+                            type="text"
+                            className="form-control"
+                            defaultValue={name}
+                            onChange={(e) => setNameValue(e.target.value)}
+                          />
+                        )}
 
-                  {content_type == "incremental" && kind == "query" && (
-                    <div className="col-sm-5">
-                      <select
-                        className="form-select"
-                        defaultValue={name}
-                        onChange={(e) => setNameValue(e.target.value)}
-                      >
-                        <option value="">
-                          Please select a parameter to be incremented...
-                        </option>
-                        {map(initialRequestQueryParameters, (parameter) => {
-                          return (
-                            <option value={parameter.name}>
-                              {parameter.name}
+                        {content_type == "incremental" && kind == "query" && (
+                          <select
+                            className="form-select"
+                            defaultValue={name}
+                            onChange={(e) => setNameValue(e.target.value)}
+                          >
+                            <option value="">
+                              Please select a parameter to be incremented...
                             </option>
-                          );
-                        })}
-                      </select>
+                            {map(initialRequestQueryParameters, (parameter) => {
+                              return (
+                                <option value={parameter.name}>
+                                  {parameter.name}
+                                </option>
+                              );
+                            })}
+                          </select>
+                        )}
+                      </div>
                     </div>
-                  )}
+                  </div>
                 </>
               )}
 
-              <label className="col-form-label col-sm-1" htmlFor="name">
-                <strong>Value </strong>
-                {content_type == "incremental" && (
-                  <Tooltip data-bs-title="Please input the amount you want the value of this key to be incremented by">
-                    <i
-                      className="bi bi-question-circle"
-                      aria-label="help text"
-                    ></i>
-                  </Tooltip>
-                )}
-              </label>
+              <div className="col-6">
+                <div className="row">
+                  <div className="col-1">
+                    {content_type == "incremental" && (
+                      <Tooltip data-bs-title="Please input the amount you want the value of this key to be incremented by">
+                        <label className="col-form-label">Value </label>
+                      </Tooltip>
+                    )}
 
-              <div className={valueColumnClasses}>
-                {content_type != "dynamic" && (
-                  <input
-                    type="text"
-                    className="form-control"
-                    required="required"
-                    defaultValue={contentValue}
-                    onChange={(e) => setContentValue(e.target.value)}
-                  />
-                )}
+                    {content_type != "incremental" && (
+                      <label className="col-form-label">Value </label>
+                    )}
+                  </div>
 
-                {content_type == "dynamic" && (
-                  <CodeEditor
-                    initContent={content}
-                    onChange={(e) => setContentValue(e.target.value)}
-                  />
-                )}
+                  <div className="col-11">
+                    {content_type != "dynamic" && (
+                      <input
+                        type="text"
+                        className="form-control"
+                        required="required"
+                        defaultValue={contentValue}
+                        onChange={(e) => setContentValue(e.target.value)}
+                      />
+                    )}
+
+                    {content_type == "dynamic" && (
+                      <CodeEditor
+                        initContent={content}
+                        onChange={(e) => setContentValue(e.target.value)}
+                      />
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
           </div>

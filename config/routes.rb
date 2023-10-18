@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :pipelines, only: %i[index show create update edit destroy] do
+  resources :pipelines, only: %i[index show create update destroy] do
     post :clone, on: :member
     
     resources :pipeline_jobs, only: %i[create show index] do
@@ -29,7 +29,7 @@ Rails.application.routes.draw do
     resources :schedules
 
     resources :harvest_definitions, only: %i[create update destroy] do
-      resources :extraction_definitions, only: %i[show edit new create update destroy] do
+      resources :extraction_definitions, only: %i[show create update destroy new edit] do
         collection do
           post :test
           post :test_record_extraction
@@ -47,7 +47,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :transformation_definitions, only: %i[new create show edit update destroy] do
+      resources :transformation_definitions, only: %i[create show update destroy] do
         post :test, on: :collection
         post :clone, on: :member
 

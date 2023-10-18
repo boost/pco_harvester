@@ -33,7 +33,7 @@
 
     <div class='row'>
       <div class='col'>
-        <div class='card'>
+        <div class='card harvest-card'>
           <div class='card-body'>
             <h5 class='card-title'>Extraction</h5>
 
@@ -41,12 +41,12 @@
             <p><%= report.pages_extracted %> pages</p>
           </div>
 
-          <i class='bi bi-arrow-right card__right-arrow'></i>
+          <i class='bi bi-arrow-right harvest-card__right-arrow'></i>
         </div>
       </div>
 
       <div class='col'>
-        <div class='card'>
+        <div class='card harvest-card'>
           <div class='card-body'>
             <h5 class='card-title'>Transformation</h5>
 
@@ -59,12 +59,12 @@
             </p>
           </div>
 
-          <i class='bi bi-arrow-right card__right-arrow'></i>
+          <i class='bi bi-arrow-right harvest-card__right-arrow'></i>
         </div>
       </div>
 
       <div class='col'>
-        <div class='card'>
+        <div class='harvest-card card'>
           <div class='card-body'>
             <h5 class='card-title'>Load</h5>
 
@@ -73,7 +73,7 @@
           </div>
 
           <% if report.transformation_definition.fields.any?(&:delete_if?) %>
-            <i class='bi bi-arrow-right card__right-arrow'></i>
+            <i class='bi bi-arrow-right harvest-card__right-arrow'></i>
           <% end %>
         </div>
       </div>

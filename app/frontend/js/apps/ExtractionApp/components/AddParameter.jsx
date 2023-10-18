@@ -6,6 +6,7 @@ import {
 } from "~/js/features/ExtractionApp/ParametersSlice";
 import { selectAppDetails } from "~/js/features/ExtractionApp/AppDetailsSlice";
 import { selectUiAppDetails } from "~/js/features/ExtractionApp/UiAppDetailsSlice";
+import Tooltip from "~/js/components/Tooltip";
 
 const AddParameter = ({ kind, buttonText }) => {
   const dispatch = useDispatch();
@@ -28,15 +29,28 @@ const AddParameter = ({ kind, buttonText }) => {
   };
 
   return (
-    <div className="d-grid gap-2">
-      <button
-        disabled={emptyParameters}
-        className="btn btn-outline-primary"
-        onClick={() => addNewParameter()}
-      >
-        {buttonText}
-      </button>
-    </div>
+    <>
+      {emptyParameters && (
+        <Tooltip data-bs-title="Please save incomplete parameters before adding another">
+          <div className="d-grid gap-2">
+            <button disabled="true" className="btn btn-outline-primary">
+              {buttonText}
+            </button>
+          </div>
+        </Tooltip>
+      )}
+
+      {!emptyParameters && (
+        <div className="d-grid gap-2">
+          <button
+            className="btn btn-outline-primary"
+            onClick={() => addNewParameter()}
+          >
+            {buttonText}
+          </button>
+        </div>
+      )}
+    </>
   );
 };
 

@@ -15,7 +15,6 @@ class ExtractionDefinition < ApplicationRecord
   has_many :extraction_jobs, dependent: :destroy
   has_many :requests, dependent: :destroy
   has_many :parameters, through: :requests
-  validates :name, uniqueness: true
 
   enum :kind, { harvest: 0, enrichment: 1 }
 
@@ -33,6 +32,8 @@ class ExtractionDefinition < ApplicationRecord
     HTML: %r{^/},
     OAI: %r{^/}
   }.freeze
+
+  validates :name, uniqueness: true
 
   validates :throttle, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 60_000 }
 

@@ -1,0 +1,15 @@
+.inline-editable-element {
+
+  p {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  @include element('control') {
+    color: $primary;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

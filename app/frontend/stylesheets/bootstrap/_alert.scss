@@ -1,0 +1,18 @@
+.alert {
+  right: 1rem;
+  left: auto;
+}
+
+.alert-danger {
+  --bs-alert-bg: #{$cruel-ruby};
+  --bs-alert-border-color: #{$cruel-ruby};
+}
+
+.alert-success {
+  --bs-alert-bg: #{$primary};
+  --bs-alert-border-color: #{$primary}; 
+}
+
+.alert-dismissible .btn-close:hover {
+  box-shadow: none;
+}

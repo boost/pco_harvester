@@ -16,17 +16,10 @@ class ExtractionJobsController < ApplicationController
   end
 
   def create
-    @extraction_job = ExtractionJob.new(extraction_definition: @extraction_definition, kind: params[:kind])
-
-    if @extraction_job.save
-      ExtractionWorker.perform_async(@extraction_job.id)
-      flash.notice = t('.success')
-    else
-      flash.alert = t('.failure')
+    respond_to do |format|
+      format.html { html_create }
+      format.json { json_create }
     end
-
-    redirect_to pipeline_harvest_definition_extraction_definition_extraction_jobs_path(@pipeline, @harvest_definition,
-                                                                                       @extraction_definition)
   end
 
   def destroy
@@ -42,6 +35,47 @@ class ExtractionJobsController < ApplicationController
   end
 
   private
+
+  def html_create
+    @extraction_job = ExtractionJob.new(extraction_definition: @extraction_definition, kind: params[:kind])
+
+    if @extraction_job.save
+      ExtractionWorker.perform_async(@extraction_job.id)
+      flash.notice = t('.success')
+    else
+      flash.alert = t('.failure')
+    end
+
+    redirect_to pipeline_harvest_definition_extraction_definition_extraction_jobs_path(@pipeline, @harvest_definition,
+                                                                                       @extraction_definition)
+  end
+
+  def json_create
+    @extraction_job = ExtractionJob.create(extraction_definition: @extraction_definition, kind: params[:kind])
+    ExtractionWorker.perform_async(@extraction_job.id)
+
+    return render json: { location: pipeline_path(@pipeline) } unless params[:type] == 'transform'
+
+    render json: {
+      location: pipeline_harvest_definition_transformation_definition_path(@pipeline, @harvest_definition,
+                                                                           create_or_update_transformation_definition)
+    }
+  end
+
+  def create_or_update_transformation_definition
+    if @harvest_definition.transformation_definition.present?
+      @harvest_definition.transformation_definition.update(extraction_job_id: @extraction_job.id)
+    else
+      transformation_definition = TransformationDefinition.create(
+        extraction_job_id: @extraction_job.id,
+        pipeline_id: @pipeline.id
+      )
+
+      @harvest_definition.update(transformation_definition_id: transformation_definition.id)
+    end
+
+    @harvest_definition.transformation_definition
+  end
 
   def find_pipeline
     @pipeline = Pipeline.find(params[:pipeline_id])

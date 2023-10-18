@@ -5,19 +5,11 @@ class TransformationDefinitionsController < ApplicationController
 
   before_action :find_pipeline
   before_action :find_harvest_definition
-  before_action :find_transformation_definition, only: %w[show edit update destroy clone]
-  before_action :find_extraction_jobs, only: %w[new create edit update]
+  before_action :find_transformation_definition, only: %i[show update destroy clone]
+  before_action :find_extraction_jobs, only: %i[create update]
+  before_action :assign_show_variables, only: %i[show update]
 
-  def show
-    @fields = @transformation_definition.fields.order(created_at: :desc).map(&:to_h)
-    @props = transformation_app_state
-  end
-
-  def new
-    @transformation_definition = TransformationDefinition.new(kind: params[:kind])
-  end
-
-  def edit; end
+  def show; end
 
   def create
     @transformation_definition = TransformationDefinition.new(transformation_definition_params)
@@ -31,7 +23,7 @@ class TransformationDefinitionsController < ApplicationController
     else
       flash.alert = t('.failure')
 
-      render :new
+      redirect_to pipeline_path(@pipeline)
     end
   end
 
@@ -42,7 +34,8 @@ class TransformationDefinitionsController < ApplicationController
       ), notice: t('.success')
     else
       flash.alert = t('.failure')
-      render 'edit'
+
+      render :show
     end
   end
 
@@ -80,6 +73,12 @@ class TransformationDefinitionsController < ApplicationController
   end
 
   private
+
+  def assign_show_variables
+    @fields = @transformation_definition.fields.order(created_at: :desc).map(&:to_h)
+    @props = transformation_app_state
+    @extraction_jobs = @harvest_definition.extraction_definition.extraction_jobs.completed.order(created_at: :desc)
+  end
 
   def find_pipeline
     @pipeline = Pipeline.find(params[:pipeline_id])
