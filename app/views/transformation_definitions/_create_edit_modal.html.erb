@@ -23,7 +23,11 @@
       </div>
       <div class="modal-body">
 
-        <%= vertical_form_with model: [@pipeline, harvest_definition, model], class: 'js-transformation-definition-form', data: { id: harvest_definition.id }, id: "js-transformation-definition-form-#{harvest_definition.id}" do |form| %>
+        <%= vertical_form_with model: [@pipeline, harvest_definition, model],
+                               class: 'js-transformation-definition-form',
+                               data: { id: harvest_definition.id },
+                               id: "js-transformation-definition-form-#{harvest_definition.id}" do |form| %>
+
           <%= form.hidden_field :pipeline_id, value: @pipeline.id %>
           <%= form.hidden_field :kind, value: 'harvest' %>
 
@@ -66,12 +70,17 @@
               <% end %>
             </div>
 
+            <% record_selector_id = "js-transformation-definition-record-selector-#{harvest_definition.id}" %>
             <div class='col-6'>
-              <%= form.text_field :record_selector, class: 'form-control', id: "js-transformation-definition-record-selector-#{harvest_definition.id}" %>
+              <%= form.text_field :record_selector, class: 'form-control',
+                                                    id: record_selector_id %>
             </div>
 
             <div class='col-2'>
-              <button type="button" class="btn btn-primary" id="js-test-transformation-record-selector-button-<%= harvest_definition.id %>">
+              <button
+                type="button"
+                class="btn btn-primary"
+                id="js-test-transformation-record-selector-button-<%= harvest_definition.id %>">
                 Test
               </button>
             </div>
@@ -84,7 +93,10 @@
           <div class='float-end mt-4'>
             <button type="button" class="btn btn-outline-danger me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
             <span id='js-transformation-definition-submit-button-tooltip-<%= harvest_definition.id %>' class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" data-bs-title="Please add a record selector">
-              <button type="submit" class="btn btn-primary" id="js-transformation-definition-submit-button-<%= harvest_definition.id %>">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                id="js-transformation-definition-submit-button-<%= harvest_definition.id %>">
                 <%= confirmation_button_text %>
               </button>
             </span>
