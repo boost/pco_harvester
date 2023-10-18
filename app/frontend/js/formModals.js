@@ -48,65 +48,64 @@ if(transformationDefinitionSettingsForms) {
       `js-transformation-definition-preview-data-${id}`
     );
 
-    let result = transformationDefinitionPreviewData.dataset.result;
-    let format = transformationDefinitionPreviewData.dataset.format;
-    let completed = transformationDefinitionPreviewData.dataset.completed;
+    if(transformationDefinitionPreviewData) {
+      let result = transformationDefinitionPreviewData.dataset.result;
+      let format = transformationDefinitionPreviewData.dataset.format;
+      let completed = transformationDefinitionPreviewData.dataset.completed;
 
-
-
-    if (format == "JSON") {
-      result = JSON.stringify(JSON.parse(result), null, 2);
-    } else if (format == "XML") {
-      result = xmlFormat(result, {
-        indentation: "  ",
-        lineSeparator: "\n",
-      });
-    }
-
-    editor(`#js-record-selector-result-${id}`, format, true, result);
-    tooltip.disable();
-
-    if(recordSelector.value == "") {
-      transformationDefinitionUpdateButton.disabled = true;
-      tooltip.enable();
-    }
-
-    if (recordSelector.value == "" && completed == "true") {
-      new Modal(
-        document.getElementById("update-transformation-definition-modal")
-      ).show();
-    }
-
-    recordSelector.addEventListener("input", (event) => {
-      if (event.target.value == "") {
+      if (format == "JSON") {
+        result = JSON.stringify(JSON.parse(result), null, 2);
+      } else if (format == "XML") {
+        result = xmlFormat(result, {
+          indentation: "  ",
+          lineSeparator: "\n",
+        });
+      }
+  
+      editor(`#js-record-selector-result-${id}`, format, true, result);
+      tooltip.disable();
+  
+      if(recordSelector.value == "") {
         transformationDefinitionUpdateButton.disabled = true;
         tooltip.enable();
-      } else {
-        transformationDefinitionUpdateButton.disabled = false;
-        tooltip.disable();
       }
-    });
-
-    bindTestForm(
-      "test",
-      `js-test-transformation-record-selector-button-${id}`,
-      `js-transformation-definition-form-${id}`,
-      (response, _alertClass) => {
-        let results = response.data.result;
-    
-        if (response.data.format == "JSON") {
-          results = JSON.stringify(response.data.result, null, 2);
-        } else if (response.data.format == "XML") {
-          results = xmlFormat(response.data.result, {
-            indentation: "  ",
-            lineSeparator: "\n",
-          });
+  
+      if (recordSelector.value == "" && completed == "true") {
+        new Modal(
+          document.getElementById("update-transformation-definition-modal")
+        ).show();
+      }
+  
+      recordSelector.addEventListener("input", (event) => {
+        if (event.target.value == "") {
+          transformationDefinitionUpdateButton.disabled = true;
+          tooltip.enable();
+        } else {
+          transformationDefinitionUpdateButton.disabled = false;
+          tooltip.disable();
         }
-    
-        editor(`#js-record-selector-result-${id}`, response.data.format, true, results);
-      }
-    );
-    
+      });
+  
+      bindTestForm(
+        "test",
+        `js-test-transformation-record-selector-button-${id}`,
+        `js-transformation-definition-form-${id}`,
+        (response, _alertClass) => {
+          let results = response.data.result;
+      
+          if (response.data.format == "JSON") {
+            results = JSON.stringify(response.data.result, null, 2);
+          } else if (response.data.format == "XML") {
+            results = xmlFormat(response.data.result, {
+              indentation: "  ",
+              lineSeparator: "\n",
+            });
+          }
+      
+          editor(`#js-record-selector-result-${id}`, response.data.format, true, results);
+        }
+      );
+    }
   });
 }
 

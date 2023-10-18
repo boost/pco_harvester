@@ -104,10 +104,14 @@
     data-completed="<%= model.extraction_job.completed? %>">
   </span>
 <% else %>
-  <span
-    id='js-transformation-definition-preview-data-<%= harvest_definition.id %>'
-    data-format="<%= extraction_jobs.first.format %>"
-    data-result="<%= TransformationDefinition.new(extraction_job: extraction_jobs.first).records.first.to_json %>"
-    data-completed="false">
-  </span>
+  <% extraction_job = extraction_jobs.first %>
+
+  <% if extraction_job %>
+    <span
+      id='js-transformation-definition-preview-data-<%= harvest_definition.id %>'
+      data-format="<%= extraction_job.format %>"
+      data-result="<%= TransformationDefinition.new(extraction_job: extraction_job).records.first.to_json %>"
+      data-completed="false">
+    </span>
+  <% end %>
 <% end %>
