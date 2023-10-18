@@ -8,7 +8,7 @@ import { selectRequestById } from "~/js/features/ExtractionApp/RequestsSlice";
 
 import CodeEditor from "~/js/components/CodeEditor";
 
-const Preview = ({ id, display = 'accordion' }) => {
+const Preview = ({ id, view = 'accordion' }) => {
   const { loading } = useSelector((state) => selectUiRequestById(state, id));
   const { preview, format } = useSelector((state) =>
     selectRequestById(state, id)
@@ -133,6 +133,17 @@ const Preview = ({ id, display = 'accordion' }) => {
     )
   }
 
+  const apiRecordView = () => {
+    return(
+      <>
+        <div className='accordion-item'>
+          <CodeEditor initContent={preview.body} format={format} />
+        </div>
+        
+      </>
+    )
+  }
+
   return (
     <>
       {loading && (
@@ -142,7 +153,8 @@ const Preview = ({ id, display = 'accordion' }) => {
           </div>
         </div>
       )}
-      {!loading && display == 'accordion' && accordionView()}
+      {!loading && view == 'accordion' && accordionView()}
+      {!loading && view == 'apiRecord' && apiRecordView()}
     </>
   );
 };

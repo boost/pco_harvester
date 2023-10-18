@@ -46,14 +46,12 @@ const EnrichmentPreviewModal = ({
       <Modal.Body>
         <div className="row">
           <div className="col-6">
-            <h5>API Response body</h5>
+            <h5>Record 1/500</h5>
 
-            <Preview id={initialRequestId} />
+            <Preview id={initialRequestId} view={'apiRecord'} />
           </div>
 
           <div className="col-6">
-            <h5>API Response body</h5>
-            
             <Preview id={mainRequestId} />
           </div>
         </div>
