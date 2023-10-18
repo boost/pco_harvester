@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { EditorState } from "@codemirror/state";
-import { EditorView, basicSetup } from "codemirror";
+import { EditorView } from "codemirror";
 import { editorExtensions } from "~/js/editor";
 
 import xmlFormat from "xml-formatter";
