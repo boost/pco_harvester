@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { selectAppDetails } from "~/js/features/ExtractionApp/AppDetailsSlice";
@@ -11,12 +11,8 @@ import {
 } from "~/js/features/ExtractionApp/RequestsSlice";
 
 import { setLoading } from "~/js/features/ExtractionApp/UiRequestsSlice";
-
-import {
-  setCurrentPage,
-  setCurrentRecord,
-  selectUiAppDetails
-} from "~/js/features/ExtractionApp/UiAppDetailsSlice";
+import { selectUiRequestById } from "~/js/features/ExtractionApp/UiRequestsSlice";
+import { selectRequestById } from "~/js/features/ExtractionApp/requestsSlice";
 
 const EnrichmentPreviewModal = ({
   showModal,
@@ -27,18 +23,35 @@ const EnrichmentPreviewModal = ({
 
   const dispatch = useDispatch();
   const appDetails = useSelector(selectAppDetails);
-  const uiAppDetails = useSelector(selectUiAppDetails);
 
-  const handleNextRecordClick = () => {
-    dispatch(setCurrentRecord(uiAppDetails.currentRecord + 1))
+  const [currentPage, setCurrentPage] = useState(1);
+  const [currentRecord, setCurrentRecord] = useState(1);
+  
+  const initialRequestLoading = useSelector((state) => selectUiRequestById(state, initialRequestId)).loading;
+  const mainRequestLoading = useSelector((state) => selectUiRequestById(state, mainRequestId)).loading;
 
+  const { total_pages, total_records } = useSelector((state) => selectRequestById(state, initialRequestId)).preview;
+
+  useEffect(() => {
     requestNewPreview();
+  }, [currentPage, currentRecord]);
+
+  const handleNextRecordClick = async () => {
+    if(currentRecord < total_records) {
+      setCurrentRecord(currentRecord + 1)
+    } else {
+      setCurrentPage(currentPage + 1)
+      setCurrentRecord(1);
+    }
   }
 
   const handlePreviousRecordClick = () => {
-    dispatch(setCurrentRecord(uiAppDetails.currentRecord - 1))
-
-    requestNewPreview();
+    if(currentRecord > 1) {
+      setCurrentRecord(currentRecord - 1)
+    } else {
+      setCurrentPage(currentPage - 1)
+      setCurrentRecord(total_records);
+    }
   }
 
   const requestNewPreview = async () => {
@@ -51,8 +64,8 @@ const EnrichmentPreviewModal = ({
         pipelineId: appDetails.pipeline.id,
         extractionDefinitionId: appDetails.extractionDefinition.id,
         id: initialRequestId,
-        page: uiAppDetails.currentPage,
-        record: uiAppDetails.currentRecord
+        page: currentPage,
+        record: currentRecord
       })
     )
 
@@ -63,10 +76,18 @@ const EnrichmentPreviewModal = ({
         extractionDefinitionId: appDetails.extractionDefinition.id,
         id: mainRequestId,
         previousRequestId: initialPreview.payload.id,
-        page: uiAppDetails.currentPage,
-        record: uiAppDetails.currentRecord
+        page: currentPage,
+        record: currentRecord
       })
     );
+  }
+
+  const canNotClickPreviousRecord = () => {
+    return (initialRequestLoading || mainRequestLoading) || (currentPage == 1 && currentRecord == 1);
+  }
+  
+  const canNotClickNextRecord = () => {
+    return (initialRequestLoading || mainRequestLoading) || (currentPage == total_pages && currentRecord == total_records);
   }
 
   return createPortal(
@@ -104,7 +125,7 @@ const EnrichmentPreviewModal = ({
       <Modal.Body>
         <div className="row">
           <div className="col-6">
-            <h5>Record { uiAppDetails.currentRecord }/TOTAL</h5>
+            <h5>Current Page: { currentPage } / { total_pages } Current Record: { currentRecord } / { total_records }</h5>
 
             <Preview id={initialRequestId} view={'apiRecord'} />
           </div>
@@ -112,6 +133,7 @@ const EnrichmentPreviewModal = ({
           <div className="col-6">
             <button
               className="btn btn-outline-primary me-2"
+              disabled={canNotClickPreviousRecord()}
               onClick={() => {
                 handlePreviousRecordClick();
               }}
@@ -122,6 +144,7 @@ const EnrichmentPreviewModal = ({
 
             <button
               className="btn btn-outline-primary me-2"
+              disabled={canNotClickNextRecord()} 
               onClick={() => {
                 handleNextRecordClick();
               }}

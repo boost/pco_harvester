@@ -63,8 +63,6 @@ module ExtractionReduxState
     {
       activeRequest: active_request_id,
       sharedDefinitionsTabActive: false,
-      currentPage: 1,
-      currentRecord: 1
     }
   end
 
