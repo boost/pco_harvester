@@ -61,10 +61,11 @@
 
             <div class="col-4">
               <%= form.label :format, class: 'form-label' do %>
-                Source Format
+                Enrichment source format
                 <span
                   data-bs-toggle="tooltip"
-                  data-bs-title="Placeholder"><i class="bi bi-question-circle" aria-label="helper text"></i>
+                  data-bs-title="The format of data you are enriching your records with"><i class="bi bi-question-circle" aria-label="helper text"></i>
+                </span>
               <% end %>
             </div>
             <div class="col-8">
@@ -73,7 +74,13 @@
             </div>
 
             <div class="col-4">
-              <%= form.label :destination_id, 'Preview Target', class: 'form-label' %>
+              <%= form.label :destination_id, class: 'form-label' do %>
+              Preview harvested records from
+              <span
+                  data-bs-toggle="tooltip"
+                  data-bs-title="The location of the harvested records you wish to use in your preview when building your enrichment transformation"><i class="bi bi-question-circle" aria-label="helper text"></i>
+              </span>
+              <% end %>
             </div>
 
             <div class='col-8'>
