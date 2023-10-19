@@ -66,7 +66,7 @@ class ExtractionJobsController < ApplicationController
     else
       transformation_definition = TransformationDefinition.create(
         extraction_job_id: @extraction_job.id,
-        pipeline_id: @pipeline.id
+        pipeline_id: @pipeline.id, kind: @extraction_definition.kind
       )
 
       @harvest_definition.update(transformation_definition_id: transformation_definition.id)

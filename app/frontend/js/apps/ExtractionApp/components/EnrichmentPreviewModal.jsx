@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { selectAppDetails } from "~/js/features/ExtractionApp/AppDetailsSlice";
+import { request } from "~/js/utils/request";
 
 import Modal from "react-bootstrap/Modal";
 import Preview from "~/js/apps/ExtractionApp/components/Preview";
@@ -10,7 +11,7 @@ import { previewRequest } from "~/js/features/ExtractionApp/RequestsSlice";
 
 import { setLoading } from "~/js/features/ExtractionApp/UiRequestsSlice";
 import { selectUiRequestById } from "~/js/features/ExtractionApp/UiRequestsSlice";
-import { selectRequestById } from "~/js/features/ExtractionApp/requestsSlice";
+import { selectRequestById } from "~/js/features/ExtractionApp/RequestsSlice";
 
 const EnrichmentPreviewModal = ({
   showModal,
@@ -55,6 +56,18 @@ const EnrichmentPreviewModal = ({
       setCurrentPage(currentPage - 1);
       setCurrentRecord(total_records);
     }
+  };
+
+  const handleSampleClick = async () => {
+    const response = await request
+      .post(
+        `/pipelines/${appDetails.pipeline.id}/harvest_definitions/${appDetails.harvestDefinition.id}/extraction_definitions/${appDetails.extractionDefinition.id}/extraction_jobs.json?kind=sample`
+      )
+      .then((response) => {
+        return response;
+      });
+
+    window.location.replace(response.data.location);
   };
 
   const requestNewPreview = async () => {
