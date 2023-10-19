@@ -123,36 +123,40 @@ const EnrichmentPreviewModal = ({
         </div>
       </Modal.Header>
       <Modal.Body>
+        <h5 class='float-start'>Record { currentRecord } / { total_records } | Page { currentPage } / { total_pages }</h5>
+        
+        <div className='float-end'>
+          <button
+            className="btn btn-outline-primary me-2"
+            disabled={canNotClickPreviousRecord()}
+            onClick={() => {
+              handlePreviousRecordClick();
+            }}
+          >
+            <i className="bi bi-arrow-left-short me-1" aria-hidden="true"></i>
+            Previous record
+          </button> 
+
+          <button
+            className="btn btn-outline-primary me-2"
+            disabled={canNotClickNextRecord()} 
+            onClick={() => {
+              handleNextRecordClick();
+            }}
+          >
+            Next record
+            <i className="bi bi-arrow-right-short me-1" aria-hidden="true"></i>
+          </button> 
+        </div>
+
+        <div className='clearfix'></div>
+
         <div className="row">
           <div className="col-6">
-            <h5>Current Page: { currentPage } / { total_pages } Current Record: { currentRecord } / { total_records }</h5>
-
             <Preview id={initialRequestId} view={'apiRecord'} />
           </div>
 
           <div className="col-6">
-            <button
-              className="btn btn-outline-primary me-2"
-              disabled={canNotClickPreviousRecord()}
-              onClick={() => {
-                handlePreviousRecordClick();
-              }}
-            >
-              <i className="bi bi-arrow-left-short me-1" aria-hidden="true"></i>
-              Previous record
-            </button> 
-
-            <button
-              className="btn btn-outline-primary me-2"
-              disabled={canNotClickNextRecord()} 
-              onClick={() => {
-                handleNextRecordClick();
-              }}
-            >
-              Next record
-              <i className="bi bi-arrow-right-short me-1" aria-hidden="true"></i>
-            </button> 
-
             <Preview id={mainRequestId} />
           </div>
         </div>

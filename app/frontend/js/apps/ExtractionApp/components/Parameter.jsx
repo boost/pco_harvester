@@ -122,6 +122,7 @@ const Parameter = ({ id }) => {
 
   const valueColumnClasses = classNames({
     "col-sm-11": kind == "slug",
+    "col-sm-6": kind != 'slug'
   });
 
   const displayName = () => {
@@ -283,7 +284,7 @@ const Parameter = ({ id }) => {
                 </>
               )}
 
-              <div className="col-6">
+              <div className={valueColumnClasses}>
                 <div className="row">
                   <div className="col-1">
                     {content_type == "incremental" && (
@@ -317,6 +318,8 @@ const Parameter = ({ id }) => {
                   </div>
                 </div>
               </div>
+
+              
             </div>
           </div>
         </div>
