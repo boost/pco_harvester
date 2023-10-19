@@ -39,8 +39,9 @@ module Transformation
 
     def record_selector
       return @transformation_definition.record_selector if @transformation_definition.record_selector.present?
+      return '*' if format == 'JSON'
 
-      '*'
+      '/'
     end
   end
 end
