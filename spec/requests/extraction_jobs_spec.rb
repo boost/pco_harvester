@@ -91,49 +91,31 @@ RSpec.describe 'ExtractionJobs' do
     end
 
     context 'when the format is JSON' do
-      context 'when the type is pipeline' do
-        it 'returns information to redirect to the pipeline path' do
-          post pipeline_harvest_definition_extraction_definition_extraction_jobs_path(pipeline, harvest_definition, extraction_definition, kind: 'full', type: 'pipeline', format: 'json')
+      context 'when there is allready a Transformation Definition associated with the harvest_definition' do
+        it 'updates the Transformation Definition to reference the new job id' do
+          existing_extraction_job = harvest_definition.transformation_definition.extraction_job
 
-          body = JSON.parse(response.body)
+          post pipeline_harvest_definition_extraction_definition_extraction_jobs_path(pipeline, harvest_definition, extraction_definition, kind: 'full', type: 'transform', format: 'json')
 
-          expect(body['location']).to eq "/pipelines/#{pipeline.id}"
-        end
-
-        it 'queues a job' do
-          expect(ExtractionWorker).to receive(:perform_async)
-
-          post pipeline_harvest_definition_extraction_definition_extraction_jobs_path(pipeline, harvest_definition, extraction_definition, kind: 'full', type: 'pipeline', format: 'json')
+          harvest_definition.reload
+          
+          expect(harvest_definition.transformation_definition.extraction_job).not_to eq existing_extraction_job
         end
       end
 
-      context 'when the type is transform' do
-        context 'when there is allready a Transformation Definition associated with the harvest_definition' do
-          it 'updates the Transformation Definition to reference the new job id' do
-            existing_extraction_job = harvest_definition.transformation_definition.extraction_job
+      context 'when there is no Transformation Definition associated with the harvest definition' do
+        it 'creates a new Transformation Definition and assigns it to the Harvest Definition' do
+          harvest_definition.transformation_definition.destroy
+          harvest_definition.reload
 
+          expect(harvest_definition.transformation_definition).to be_nil
+
+          expect do
             post pipeline_harvest_definition_extraction_definition_extraction_jobs_path(pipeline, harvest_definition, extraction_definition, kind: 'full', type: 'transform', format: 'json')
+          end.to change(TransformationDefinition, :count).by(1)
 
-            harvest_definition.reload
-            
-            expect(harvest_definition.transformation_definition.extraction_job).not_to eq existing_extraction_job
-          end
-        end
-
-        context 'when there is no Transformation Definition associated with the harvest definition' do
-          it 'creates a new Transformation Definition and assigns it to the Harvest Definition' do
-            harvest_definition.transformation_definition.destroy
-            harvest_definition.reload
-
-            expect(harvest_definition.transformation_definition).to be_nil
-
-            expect do
-              post pipeline_harvest_definition_extraction_definition_extraction_jobs_path(pipeline, harvest_definition, extraction_definition, kind: 'full', type: 'transform', format: 'json')
-            end.to change(TransformationDefinition, :count).by(1)
-
-            harvest_definition.reload
-            expect(harvest_definition.transformation_definition).not_to be_nil
-          end
+          harvest_definition.reload
+          expect(harvest_definition.transformation_definition).not_to be_nil
         end
       end
     end

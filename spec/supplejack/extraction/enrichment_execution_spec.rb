@@ -7,6 +7,11 @@ RSpec.describe Extraction::EnrichmentExecution do
   let(:extraction_definition) { create(:extraction_definition, :enrichment, destination:, throttle: 0) }
   let(:sample_job) { create(:extraction_job, extraction_definition:, kind: 'sample') }
   let(:full_job) { create(:extraction_job, extraction_definition:, kind: 'full') }
+  
+  let!(:request_one) { create(:request, extraction_definition:) }
+  let!(:request_two) { create(:request, extraction_definition:) }
+
+  let!(:parameter)   { create(:parameter, content: "response['dc_identifier'].first", kind: 'slug', request: request_two, content_type: 'dynamic') }
 
   describe '#call' do
     before do

@@ -30,8 +30,7 @@ RSpec.describe ExtractionWorker, type: :job do
     context 'when the extraction is for an enrichment' do
       let(:destination) { create(:destination) }
       let(:extraction_definition) do
-        create(:extraction_definition, kind: 'enrichment', destination:, source_id: 'test',
-                                       enrichment_url: 'http://www.google.co.nz')
+        create(:extraction_definition, kind: 'enrichment', destination:, source_id: 'test')
       end
       let(:enrichment_extraction_job) { create(:extraction_job, extraction_definition:, status: 'queued') }
 

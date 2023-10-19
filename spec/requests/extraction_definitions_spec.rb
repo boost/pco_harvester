@@ -155,55 +155,6 @@ RSpec.describe 'ExtractionDefinitions' do
     end
   end
 
-  describe '#test_record_extraction' do
-    let(:destination)           { create(:destination) }
-    let(:extraction_definition) { create(:extraction_definition, :enrichment, destination:) }
-
-    before do
-      stub_figshare_enrichment_page1(destination)
-    end
-
-    it 'returns a document extraction of API records' do
-      post test_record_extraction_pipeline_harvest_definition_extraction_definitions_path(pipeline, harvest_definition), params: {
-        extraction_definition: extraction_definition.attributes
-      }
-
-      expect(response).to have_http_status :ok
-
-      json_response = response.parsed_body['body']
-      records = JSON.parse(json_response)['records']
-
-      records.each do |record|
-        expect(record).to have_key('dc_identifier')
-        expect(record).to have_key('internal_identifier')
-      end
-    end
-  end
-
-  describe '#test_enrichment_extraction' do
-    let(:destination) { create(:destination) }
-    let(:ed) { create(:extraction_definition, :enrichment, destination:) }
-
-    before do
-      stub_figshare_enrichment_page1(destination)
-    end
-
-    it 'returns a document extraction of data for an enrichment' do
-      post test_enrichment_extraction_pipeline_harvest_definition_extraction_definitions_path(pipeline, harvest_definition), params: {
-        extraction_definition: ed.attributes
-      }
-
-      expect(response).to have_http_status :ok
-
-      json_response = response.parsed_body['body']
-      records = JSON.parse(json_response)['items']
-
-      records.each do |record|
-        expect(record).to have_key('article_id')
-      end
-    end
-  end
-
   describe '#clone' do
     let!(:extraction_definition)    { create(:extraction_definition, name: 'one') }
     let!(:request_one)              { create(:request, :figshare_initial_request, extraction_definition:) }

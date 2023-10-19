@@ -18,9 +18,7 @@ class HarvestDefinitionsController < ApplicationController
     else
       flash.alert = t('.failure', kind: harvest_kind)
 
-      @enrichment_definition = HarvestDefinition.new(pipeline: @pipeline)
-
-      render 'pipelines/show'
+      redirect_to pipeline_path(@pipeline)
     end
   end
 

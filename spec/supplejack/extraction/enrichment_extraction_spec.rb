@@ -3,16 +3,23 @@
 require 'rails_helper'
 
 RSpec.describe Extraction::EnrichmentExtraction do
-  subject { described_class.new(ed, records.first, 1, extraction_job.extraction_folder) }
+  subject { described_class.new(request_two, record, 1, extraction_job.extraction_folder) }
 
   let(:extraction_job) { create(:extraction_job) }
   let(:destination) { create(:destination) }
   let(:ed) { create(:extraction_definition, :enrichment, destination:, extraction_jobs: [extraction_job]) }
-  let(:re) { Extraction::RecordExtraction.new(ed, 1).extract }
+  let(:re) { Extraction::RecordExtraction.new(request_one, 1).extract }
   let(:records) { JSON.parse(re.body)['records'] }
+  let(:record)  { Extraction::ApiRecord.new(records.first) }
+
+  let!(:request_one) { create(:request, extraction_definition: ed) }
+  let!(:request_two) { create(:request, extraction_definition: ed) }
+
+  let!(:parameter)   { create(:parameter, content: "response['dc_identifier'].first", kind: 'slug', request: request_two, content_type: 'dynamic') }
 
   before do
     stub_figshare_enrichment_page1(destination)
+    stub_figshare_enrichment_page2(destination)
   end
 
   describe '#extract' do
@@ -33,7 +40,7 @@ RSpec.describe Extraction::EnrichmentExtraction do
 
     context 'when there is no extraction_folder' do
       it 'returns an extracted document from a content source' do
-        doc = described_class.new(ed, records.first, 1)
+        doc = described_class.new(request_two, record, 1)
         expect { doc.save }.to raise_error(ArgumentError, 'extraction_folder was not provided in #new')
       end
     end
@@ -60,13 +67,9 @@ RSpec.describe Extraction::EnrichmentExtraction do
     end
 
     it 'returns false if the provided enrichment url returns nothing from the record' do
-      ed = create(
-        :extraction_definition, :enrichment,
-        destination:,
-        extraction_jobs: [extraction_job],
-        enrichment_url: '"http://www.google.co.nz/#{record["bla"]}"'
-      )
-      expect(described_class.new(ed, records.first, 1, extraction_job.extraction_folder).valid?).to be false
+      record = Extraction::ApiRecord.new({ 'hello' => 'goodbye'} )
+
+      expect(described_class.new(request_two, record, 1, extraction_job.extraction_folder).valid?).to be false
     end
   end
 end

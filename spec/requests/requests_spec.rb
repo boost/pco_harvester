@@ -113,10 +113,13 @@ RSpec.describe 'Requests' do
           expect(json_data).to have_key(key)
         end
 
-        api_response = JSON.parse(json_data['preview']['body'])
+        expected_preview_keys = %w[page total_pages total_records body]
 
-        expect(api_response).to have_key('records')
-        expect(api_response).to have_key('meta')
+        preview_data = json_data['preview']
+
+        expected_preview_keys.each do |key|
+          expect(preview_data).to have_key(key)
+        end
       end
 
       it 'returns a JSON response of the data from the content partner based on the data from the API' do

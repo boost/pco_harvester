@@ -6,6 +6,9 @@ RSpec.describe Extraction::RecordExtraction do
   let(:destination)           { create(:destination) }
   let(:extraction_definition) { create(:extraction_definition, :enrichment, destination:) }
 
+  let!(:request) { create(:request, extraction_definition:) }
+
+
   describe '#extract' do
     context 'when the enrichment is not scheduled after a harvest' do
       before do
@@ -25,7 +28,7 @@ RSpec.describe Extraction::RecordExtraction do
           ).to_return(fake_response('test_api_records_1'))
       end
 
-      let(:subject) { described_class.new(extraction_definition, 1) }
+      let(:subject) { described_class.new(request, 1) }
 
       it 'returns an extracted document from a Supplejack API' do
         expect(subject.extract).to be_a(Extraction::Document)
@@ -39,7 +42,7 @@ RSpec.describe Extraction::RecordExtraction do
       let(:harvest_job)        do
         create(:harvest_job, :completed, harvest_definition:, pipeline_job:, target_job_id: 'harvest-job-1')
       end
-      let(:subject) { described_class.new(extraction_definition, 1, harvest_job) }
+      let(:subject) { described_class.new(request, 1, harvest_job) }
 
       before do
         stub_request(:get, "#{destination.url}/harvester/records")
