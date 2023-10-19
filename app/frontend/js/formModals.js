@@ -112,6 +112,13 @@ if (transformationDefinitionSettingsForms) {
             true,
             results
           );
+        },
+        () => {
+          document.getElementById(
+            `js-record-selector-result-${id}`,
+            ).innerHTML = `<p class='text-danger'>
+            Record Selector did not return anything
+          </p>`;
         }
       );
     }

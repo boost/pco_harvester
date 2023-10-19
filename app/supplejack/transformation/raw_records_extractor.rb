@@ -38,7 +38,9 @@ module Transformation
     end
 
     def record_selector
-      @transformation_definition.record_selector || '*'
+      return @transformation_definition.record_selector if @transformation_definition.record_selector.present?
+
+      '*'
     end
   end
 end

@@ -32,7 +32,6 @@ console.log(
 
 import * as bootstrap from "bootstrap";
 import "/js/ClearField";
-import "/js/TestTransformationRecordSelector";
 import "/js/TestDestination";
 import "/js/Tooltips";
 import "/js/Toasts";
