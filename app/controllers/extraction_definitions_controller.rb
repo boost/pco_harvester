@@ -5,17 +5,11 @@ class ExtractionDefinitionsController < ApplicationController
 
   before_action :find_pipeline
   before_action :find_harvest_definition
-  before_action :find_extraction_definition, only: %i[show update clone destroy edit]
-  before_action :find_destinations, only: %i[create update new edit]
+  before_action :find_extraction_definition, only: %i[show update clone destroy]
+  before_action :find_destinations, only: %i[create update]
   before_action :assign_show_variables, only: %i[show update]
 
   def show; end
-
-  def new
-    @extraction_definition = ExtractionDefinition.new(kind: params[:kind])
-  end
-
-  def edit; end
 
   def create
     @extraction_definition = ExtractionDefinition.new(extraction_definition_params)
@@ -25,12 +19,11 @@ class ExtractionDefinitionsController < ApplicationController
 
       2.times { Request.create(extraction_definition: @extraction_definition) }
 
-      redirect_to pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition, @extraction_definition),
-                  notice: t('.success')
+      redirect_to pipeline_harvest_definition_extraction_definition_path(
+        @pipeline, @harvest_definition, @extraction_definition
+      ), notice: t('.success')
     else
-      flash.alert = t('.failure')
-
-      redirect_to pipeline_path(@pipeline)
+      redirect_to pipeline_path(@pipeline), alert: t('.failure')
     end
   end
 

@@ -26,7 +26,7 @@ export const previewRequest = createAsyncThunk(
     let path = `/pipelines/${pipelineId}/harvest_definitions/${harvestDefinitionId}/extraction_definitions/${extractionDefinitionId}/requests/${id}?page=${page}&record=${record}`;
 
     if (previousRequestId != undefined) {
-      path = `${path}?previous_request_id=${previousRequestId}`;
+      path = `${path}&previous_request_id=${previousRequestId}`;
     }
 
     const response = request.get(path).then((response) => {

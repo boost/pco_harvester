@@ -12,14 +12,6 @@ RSpec.describe 'ExtractionDefinitions' do
     sign_in user
   end
 
-  describe '#new' do
-    it 'renders the new form' do
-      get new_pipeline_harvest_definition_extraction_definition_path(pipeline, harvest_definition, kind: 'enrichment')
-
-      expect(response).to have_http_status :ok
-    end
-  end
-
   describe '#create' do
     context 'with valid parameters' do
       let(:extraction_definition2) { build(:extraction_definition, pipeline:) }

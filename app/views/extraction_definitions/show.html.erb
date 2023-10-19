@@ -25,7 +25,7 @@
 <div id="js-extraction-app" data-props="<%= @props %>"></div>
 
 <% if @harvest_definition.harvest? %>
-  <%= render 'create_edit_modal',
+  <%= render 'create_edit_harvest_modal',
             id: 'update-extraction-definition-modal',
             model: @extraction_definition,
             modal_heading: 'Edit extraction definition',

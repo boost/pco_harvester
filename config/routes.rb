@@ -29,7 +29,7 @@ Rails.application.routes.draw do
     resources :schedules
 
     resources :harvest_definitions, only: %i[create update destroy] do
-      resources :extraction_definitions, only: %i[show create update destroy new edit] do
+      resources :extraction_definitions, only: %i[show create update destroy] do
         member do
           post :clone
         end

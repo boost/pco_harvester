@@ -26,7 +26,7 @@ module ExtractionReduxState
     {
       parameters: ui_parameters_slice,
       requests: ui_requests_slice,
-      appDetails: ui_extraction_app_details_slice,
+      appDetails: ui_extraction_app_details_slice
     }
   end
 
@@ -62,7 +62,7 @@ module ExtractionReduxState
   def ui_extraction_app_details_slice
     {
       activeRequest: active_request_id,
-      sharedDefinitionsTabActive: false,
+      sharedDefinitionsTabActive: false
     }
   end
 

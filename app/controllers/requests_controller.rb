@@ -37,14 +37,12 @@ class RequestsController < ApplicationController
   end
 
   def enrichment_request
-    response = Extraction::RecordExtraction.new(@request, page_param).extract
-    record   = Extraction::ApiResponse.new(response).record(record_param.to_i - 1)
-    parsed_body = JSON.parse(response.body)
+    parsed_body = JSON.parse(api_response.body)
 
     if @request.first_request?
-      render json: @request.to_h.merge(preview: { **record.to_hash, **parsed_body['meta'], total_records: parsed_body['records'].count })
+      render json: first_enrichment_request_response(parsed_body)
     else
-      render json: @request.to_h.merge(preview: Extraction::EnrichmentExtraction.new(@request, record).extract)
+      render json: second_enrichment_request_response
     end
   end
 
@@ -54,6 +52,26 @@ class RequestsController < ApplicationController
 
   def record_param
     params[:record] || 1
+  end
+
+  def api_response
+    Extraction::RecordExtraction.new(@request, page_param).extract
+  end
+
+  def api_record
+    Extraction::ApiResponse.new(api_response).record(record_param.to_i - 1)
+  end
+
+  def first_enrichment_request_response(parsed_body)
+    @request.to_h.merge(preview: {
+                          **api_record.to_hash,
+                          **parsed_body['meta'],
+                          total_records: parsed_body['records'].count
+                        })
+  end
+
+  def second_enrichment_request_response
+    @request.to_h.merge(preview: Extraction::EnrichmentExtraction.new(@request, api_record).extract)
   end
 
   def request_params
