@@ -3,6 +3,8 @@
 class RequestsController < ApplicationController
   include LastEditedBy
 
+  before_action :find_extraction_definition, only: %w[show]
+
   def show
     @request = Request.find(params[:id])
 
@@ -24,9 +26,13 @@ class RequestsController < ApplicationController
 
   private
 
+  def find_extraction_definition
+    @extraction_definition = ExtractionDefinition.find(params[:extraction_definition_id])
+  end
+
   def harvest_request
     if params[:previous_request_id].present?
-      @previous_request = Request.find(params[:previous_request_id])
+      @previous_request = @extraction_definition.requests.find(params[:previous_request_id])
 
       @previous_response = Extraction::DocumentExtraction.new(@previous_request).extract
     end
