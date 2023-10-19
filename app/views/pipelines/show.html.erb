@@ -78,7 +78,7 @@
   </div>
 
 <% else %>
-  
+
   <%= render partial: 'pipelines/harvest_definition' %>
 
 <% end %>
@@ -170,8 +170,8 @@
 
 <% if @pipeline.harvest.present? %>
   <%= render layout: 'shared/create_modal',
-            locals: { modal_heading: 'Add enrichment', id: 'add-enrichment',
-                      modal_subheading: 'Add a source_id to identify records from this enrichment' } do %>
+             locals: { modal_heading: 'Add enrichment', id: 'add-enrichment',
+                       modal_subheading: 'Add a source_id to identify records from this enrichment' } do %>
     <div class='d-grid mt-4'>
       <%= vertical_form_with model: [@pipeline, @enrichment_definition] do |form| %>
         <div class='row gy-3 align-items-center'>
