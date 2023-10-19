@@ -4,7 +4,7 @@ import { selectParameterById } from "~/js/features/ExtractionApp/ParametersSlice
 import {
   selectUiParameterById,
   toggleDisplayParameter,
-  setActiveParameter
+  setActiveParameter,
 } from "~/js/features/ExtractionApp/UiParametersSlice";
 
 const ParameterNavigationListItem = ({ id }) => {
@@ -28,12 +28,14 @@ const ParameterNavigationListItem = ({ id }) => {
   const handleListItemClick = () => {
     const desiredDisplaySetting = !displayed;
 
-    dispatch(toggleDisplayParameter({ id: id, displayed: desiredDisplaySetting }))
+    dispatch(
+      toggleDisplayParameter({ id: id, displayed: desiredDisplaySetting })
+    );
 
-    if(desiredDisplaySetting == true) {
-      dispatch(setActiveParameter(id))
+    if (desiredDisplaySetting == true) {
+      dispatch(setActiveParameter(id));
     }
-  }
+  };
 
   return (
     <li className="nav-item">

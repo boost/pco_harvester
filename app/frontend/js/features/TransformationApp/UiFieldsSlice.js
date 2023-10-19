@@ -58,7 +58,7 @@ const uiFieldsSlice = createSlice({
           hasRun: false,
           expanded: true,
           displayed: true,
-          active: true
+          active: true,
         });
       })
       .addCase(clickedOnRunFields.pending, (state, action) => {
@@ -138,6 +138,7 @@ export const selectDisplayedFieldIds = (state) => {
     .map((field) => field.id);
 };
 
-export const { toggleDisplayField, toggleDisplayFields, setActiveField } = actions;
+export const { toggleDisplayField, toggleDisplayFields, setActiveField } =
+  actions;
 
 export default reducer;

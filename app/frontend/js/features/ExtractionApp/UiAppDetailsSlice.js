@@ -11,7 +11,7 @@ const uiAppDetailsSlice = createSlice({
     activateSharedDefinitionsTab(state) {
       state.activeRequest = 0;
       state.sharedDefinitionsTabActive = true;
-    }
+    },
   },
 });
 

@@ -35,11 +35,14 @@ const HeaderActions = () => {
         extractionDefinitionId: appDetails.extractionDefinition.id,
         id: initialRequestId,
         page: 1,
-        record: 1
+        record: 1,
       })
     );
 
-    if (appDetails.extractionDefinition.paginated || appDetails.extractionDefinition.kind == 'enrichment') {
+    if (
+      appDetails.extractionDefinition.paginated ||
+      appDetails.extractionDefinition.kind == "enrichment"
+    ) {
       dispatch(
         previewRequest({
           harvestDefinitionId: appDetails.harvestDefinition.id,
@@ -48,7 +51,7 @@ const HeaderActions = () => {
           id: mainRequestId,
           previousRequestId: initialPreview.payload.id,
           page: 1,
-          record: 1
+          record: 1,
         })
       );
     }
@@ -60,7 +63,7 @@ const HeaderActions = () => {
         <i className="bi bi-play" aria-hidden="true"></i> Preview
       </button>
 
-      { appDetails.extractionDefinition.kind == 'harvest' && (
+      {appDetails.extractionDefinition.kind == "harvest" && (
         <PreviewModal
           showModal={showModal}
           handleClose={handleClose}
@@ -69,7 +72,7 @@ const HeaderActions = () => {
         />
       )}
 
-      { appDetails.extractionDefinition.kind == 'enrichment' && (
+      {appDetails.extractionDefinition.kind == "enrichment" && (
         <EnrichmentPreviewModal
           showModal={showModal}
           handleClose={handleClose}
@@ -77,7 +80,6 @@ const HeaderActions = () => {
           mainRequestId={mainRequestId}
         />
       )}
-
     </>,
     document.getElementById("react-header-actions")
   );

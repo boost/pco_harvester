@@ -4,7 +4,7 @@ import { selectFieldById } from "~/js/features/TransformationApp/FieldsSlice";
 import {
   selectUiFieldById,
   toggleDisplayField,
-  setActiveField
+  setActiveField,
 } from "~/js/features/TransformationApp/UiFieldsSlice";
 import classNames from "classnames";
 
@@ -30,12 +30,12 @@ const FieldNavigationListItem = ({ id }) => {
   const handleListItemClick = () => {
     const desiredDisplaySetting = !displayed;
 
-    dispatch(toggleDisplayField({ id: id, displayed: desiredDisplaySetting }))
+    dispatch(toggleDisplayField({ id: id, displayed: desiredDisplaySetting }));
 
-    if(desiredDisplaySetting == true) {
-      dispatch(setActiveField(id))
+    if (desiredDisplaySetting == true) {
+      dispatch(setActiveField(id));
     }
-  }
+  };
 
   return (
     <li className="nav-item">

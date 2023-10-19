@@ -20,7 +20,7 @@ export const previewRequest = createAsyncThunk(
       extractionDefinitionId,
       previousRequestId,
       page,
-      record
+      record,
     } = payload;
 
     let path = `/pipelines/${pipelineId}/harvest_definitions/${harvestDefinitionId}/extraction_definitions/${extractionDefinitionId}/requests/${id}?page=${page}&record=${record}`;

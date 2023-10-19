@@ -6,9 +6,7 @@ import { selectAppDetails } from "~/js/features/ExtractionApp/AppDetailsSlice";
 import Modal from "react-bootstrap/Modal";
 import Preview from "~/js/apps/ExtractionApp/components/Preview";
 
-import {
-  previewRequest,
-} from "~/js/features/ExtractionApp/RequestsSlice";
+import { previewRequest } from "~/js/features/ExtractionApp/RequestsSlice";
 
 import { setLoading } from "~/js/features/ExtractionApp/UiRequestsSlice";
 import { selectUiRequestById } from "~/js/features/ExtractionApp/UiRequestsSlice";
@@ -20,39 +18,44 @@ const EnrichmentPreviewModal = ({
   initialRequestId,
   mainRequestId,
 }) => {
-
   const dispatch = useDispatch();
   const appDetails = useSelector(selectAppDetails);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [currentRecord, setCurrentRecord] = useState(1);
-  
-  const initialRequestLoading = useSelector((state) => selectUiRequestById(state, initialRequestId)).loading;
-  const mainRequestLoading = useSelector((state) => selectUiRequestById(state, mainRequestId)).loading;
 
-  const { total_pages, total_records } = useSelector((state) => selectRequestById(state, initialRequestId)).preview;
+  const initialRequestLoading = useSelector((state) =>
+    selectUiRequestById(state, initialRequestId)
+  ).loading;
+  const mainRequestLoading = useSelector((state) =>
+    selectUiRequestById(state, mainRequestId)
+  ).loading;
+
+  const { total_pages, total_records } = useSelector((state) =>
+    selectRequestById(state, initialRequestId)
+  ).preview;
 
   useEffect(() => {
     requestNewPreview();
   }, [currentPage, currentRecord]);
 
   const handleNextRecordClick = async () => {
-    if(currentRecord < total_records) {
-      setCurrentRecord(currentRecord + 1)
+    if (currentRecord < total_records) {
+      setCurrentRecord(currentRecord + 1);
     } else {
-      setCurrentPage(currentPage + 1)
+      setCurrentPage(currentPage + 1);
       setCurrentRecord(1);
     }
-  }
+  };
 
   const handlePreviousRecordClick = () => {
-    if(currentRecord > 1) {
-      setCurrentRecord(currentRecord - 1)
+    if (currentRecord > 1) {
+      setCurrentRecord(currentRecord - 1);
     } else {
-      setCurrentPage(currentPage - 1)
+      setCurrentPage(currentPage - 1);
       setCurrentRecord(total_records);
     }
-  }
+  };
 
   const requestNewPreview = async () => {
     dispatch(setLoading(initialRequestId));
@@ -65,9 +68,9 @@ const EnrichmentPreviewModal = ({
         extractionDefinitionId: appDetails.extractionDefinition.id,
         id: initialRequestId,
         page: currentPage,
-        record: currentRecord
+        record: currentRecord,
       })
-    )
+    );
 
     dispatch(
       previewRequest({
@@ -77,18 +80,26 @@ const EnrichmentPreviewModal = ({
         id: mainRequestId,
         previousRequestId: initialPreview.payload.id,
         page: currentPage,
-        record: currentRecord
+        record: currentRecord,
       })
     );
-  }
+  };
 
   const canNotClickPreviousRecord = () => {
-    return (initialRequestLoading || mainRequestLoading) || (currentPage == 1 && currentRecord == 1);
-  }
-  
+    return (
+      initialRequestLoading ||
+      mainRequestLoading ||
+      (currentPage == 1 && currentRecord == 1)
+    );
+  };
+
   const canNotClickNextRecord = () => {
-    return (initialRequestLoading || mainRequestLoading) || (currentPage == total_pages && currentRecord == total_records);
-  }
+    return (
+      initialRequestLoading ||
+      mainRequestLoading ||
+      (currentPage == total_pages && currentRecord == total_records)
+    );
+  };
 
   return createPortal(
     <Modal
@@ -123,9 +134,12 @@ const EnrichmentPreviewModal = ({
         </div>
       </Modal.Header>
       <Modal.Body>
-        <h5 class='float-start'>Record { currentRecord } / { total_records } | Page { currentPage } / { total_pages }</h5>
-        
-        <div className='float-end'>
+        <h5 class="float-start">
+          Record {currentRecord} / {total_records} | Page {currentPage} /{" "}
+          {total_pages}
+        </h5>
+
+        <div className="float-end">
           <button
             className="btn btn-outline-primary me-2"
             disabled={canNotClickPreviousRecord()}
@@ -135,25 +149,25 @@ const EnrichmentPreviewModal = ({
           >
             <i className="bi bi-arrow-left-short me-1" aria-hidden="true"></i>
             Previous record
-          </button> 
+          </button>
 
           <button
             className="btn btn-outline-primary me-2"
-            disabled={canNotClickNextRecord()} 
+            disabled={canNotClickNextRecord()}
             onClick={() => {
               handleNextRecordClick();
             }}
           >
             Next record
             <i className="bi bi-arrow-right-short me-1" aria-hidden="true"></i>
-          </button> 
+          </button>
         </div>
 
-        <div className='clearfix'></div>
+        <div className="clearfix"></div>
 
         <div className="row">
           <div className="col-6">
-            <Preview id={initialRequestId} view={'apiRecord'} />
+            <Preview id={initialRequestId} view={"apiRecord"} />
           </div>
 
           <div className="col-6">

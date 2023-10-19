@@ -122,7 +122,7 @@ const Parameter = ({ id }) => {
 
   const valueColumnClasses = classNames({
     "col-sm-11": kind == "slug",
-    "col-sm-6": kind != 'slug'
+    "col-sm-6": kind != "slug",
   });
 
   const displayName = () => {
@@ -318,8 +318,6 @@ const Parameter = ({ id }) => {
                   </div>
                 </div>
               </div>
-
-              
             </div>
           </div>
         </div>
