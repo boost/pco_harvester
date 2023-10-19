@@ -11,6 +11,10 @@ module Extraction
       @extraction_folder = extraction_folder
     end
 
+    def valid?
+      url.exclude?('evaluation-error')
+    end
+
     private
 
     def url

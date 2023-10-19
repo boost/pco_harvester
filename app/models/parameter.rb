@@ -30,7 +30,7 @@ class Parameter < ApplicationRecord
   rescue StandardError
     Parameter.new(
       name:,
-      content: ''
+      content: "#{content}-evaluation-error".parameterize
     )
   end
   # rubocop:enable Lint/UnusedBlockArgument
