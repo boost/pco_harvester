@@ -6,7 +6,6 @@ module Extraction
       super()
       @request               = request
       @extraction_definition = request.extraction_definition
-      @api_source            = @extraction_definition.destination
       @page                  = page
       @harvest_job           = harvest_job
     end
@@ -14,14 +13,14 @@ module Extraction
     private
 
     def url
-      "#{@api_source.url}/harvester/records"
+      "#{api_source.url}/harvester/records"
     end
 
     def params
       {
         search: active_filter.merge(fragment_filter),
         search_options: { page: @page },
-        api_key: @api_source.api_key
+        api_key: api_source.api_key
       }
     end
 
@@ -35,6 +34,12 @@ module Extraction
       else
         { 'fragments.source_id' => @extraction_definition.source_id }
       end
+    end
+
+    def api_source
+      return @harvest_job.pipeline_job.destination if @harvest_job.present?
+
+      @extraction_definition.destination
     end
   end
 end
