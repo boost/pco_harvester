@@ -7,8 +7,6 @@ FactoryBot.define do
     throttle { 0 }
     kind { 0 }
     per_page { 50 }
-    total_selector { '$.totalObjects' }
-    page { 1 }
     paginated { false }
 
     trait :figshare do
@@ -17,8 +15,6 @@ FactoryBot.define do
       base_url { 'https://api.figshare.com' }
       throttle { 1000 }
       page { 1 }
-      total_selector { '$.items_found' }
-      per_page { 10 }
       paginated { true }
     end
 
