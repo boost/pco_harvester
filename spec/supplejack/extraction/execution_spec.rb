@@ -199,18 +199,6 @@ RSpec.describe Extraction::Execution do
           before do
             stub_freesound_harvest_requests(request_one)
             stub_freesound_harvest_requests(request_two)
-
-            # TODO
-
-            stub_request(:get, "#{extraction_definition.base_url}?page=nokogiri-html-parse-response-at_xpath-html-body-root-next-content-match-page-page-page-evaluation-error&page_size=50").
-            with(
-              headers: {
-             'Accept'=>'*/*',
-             'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-             'Content-Type'=>'application/json',
-             'User-Agent'=>'Supplejack Harvester v2.0'
-              }).
-            to_return(fake_response('freesound_4'))
           end
 
           it 'enqueues 4 TransformationWorkers in sidekiq' do

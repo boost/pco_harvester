@@ -43,6 +43,7 @@ def stub_freesound_harvest_requests(request)
     ).to_return(fake_response("freesound_#{page}"))
   end
 
+  # Stub the last page with a duplicate so that the harvest finishes
   stub_request(:get, request.url).with(
     query: { 'page' => 5, 'page_size' => '50' }
   ).to_return(fake_response('freesound_4'))

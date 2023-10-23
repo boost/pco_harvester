@@ -17,7 +17,7 @@ body: |-
   <root>
     <count>198</count>
     <previous>https://freesound.org/apiv2/search/text/?&query='Zealand'&weights=&page=3&page_size=50&fields=name,created,geotag,type,images,id,tags,license,username,url,description</previous>
-    <next/>
+    <next>https://freesound.org/apiv2/search/text/?&query='Zealand'&weights=&page=5&page_size=50&fields=name,created,geotag,type,images,id,tags,license,username,url,description</next>
     <results>
       <list-item>
         <id>417770</id>
