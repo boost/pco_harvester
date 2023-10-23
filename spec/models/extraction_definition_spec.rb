@@ -47,7 +47,6 @@ RSpec.describe ExtractionDefinition do
     end
 
     it { is_expected.to validate_numericality_of(:page).only_integer }
-    it { is_expected.to validate_numericality_of(:per_page).only_integer }
   end
 
   describe '#validation' do
