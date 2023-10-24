@@ -147,7 +147,7 @@ const EnrichmentPreviewModal = ({
         </div>
       </Modal.Header>
       <Modal.Body>
-        <h5 class="float-start">
+        <h5 className="float-start">
           Record {currentRecord} / {total_records} | Page {currentPage} /{" "}
           {total_pages}
         </h5>

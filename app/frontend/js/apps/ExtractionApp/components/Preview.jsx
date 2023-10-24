@@ -117,7 +117,7 @@ const Preview = ({ id, view = "accordion" }) => {
               <div className="accordion-body">
                 {map(preview.response_headers, (value, key) => {
                   return (
-                    <p>
+                    <p key={key}>
                       {key}: {value}
                     </p>
                   );
@@ -135,7 +135,7 @@ const Preview = ({ id, view = "accordion" }) => {
       <>
         <div className="card p-4 mt-4">
           <strong className="mb-4">API Response</strong>
-          <CodeEditor initContent={preview.body} format={format} />
+          <CodeEditor initContent={preview.body} format='JSON' />
         </div>
       </>
     );
