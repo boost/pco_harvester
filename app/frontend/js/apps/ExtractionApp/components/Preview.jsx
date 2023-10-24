@@ -135,7 +135,7 @@ const Preview = ({ id, view = "accordion" }) => {
       <>
         <div className="card p-4 mt-4">
           <strong className="mb-4">API Response</strong>
-          <CodeEditor initContent={preview.body} format='JSON' />
+          <CodeEditor initContent={preview.body} format="JSON" />
         </div>
       </>
     );
