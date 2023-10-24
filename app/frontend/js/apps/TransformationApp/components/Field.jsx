@@ -15,7 +15,10 @@ import {
   selectAppDetails,
   clickedOnRunFields,
 } from "~/js/features/TransformationApp/AppDetailsSlice";
-import { toggleDisplayField } from "~/js/features/TransformationApp/UiFieldsSlice";
+import {
+  toggleDisplayField,
+  setActiveField,
+} from "~/js/features/TransformationApp/UiFieldsSlice";
 
 import { selectRawRecord } from "/js/features/TransformationApp/RawRecordSlice";
 
@@ -31,7 +34,7 @@ const Field = ({ id }) => {
 
   const rawRecord = useSelector(selectRawRecord);
 
-  const { saved, deleting, saving, running, error, hasRun, displayed } =
+  const { saved, deleting, saving, running, error, hasRun, displayed, active } =
     useSelector((state) => selectUiFieldById(state, id));
 
   const dispatch = useDispatch();
@@ -125,7 +128,14 @@ const Field = ({ id }) => {
     }
   }, []);
 
-  const fieldClasses = classNames("col-12", "collapse", { show: displayed });
+  const fieldClasses = classNames("col-12", "collapse", {
+    show: displayed,
+    "border-primary": active,
+  });
+
+  const cardClasses = classNames("card", "border", "rounded", {
+    "border-primary": active,
+  });
 
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
@@ -137,8 +147,13 @@ const Field = ({ id }) => {
 
   return (
     <>
-      <div id={`field-${id}`} className={fieldClasses} data-testid="field">
-        <div className="card">
+      <div
+        id={`field-${id}`}
+        className={fieldClasses}
+        data-testid="field"
+        onClick={() => dispatch(setActiveField(id))}
+      >
+        <div className={cardClasses}>
           <div className="card-body">
             <div className="d-flex d-row justify-content-between align-items-center">
               <div>

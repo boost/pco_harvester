@@ -24,12 +24,22 @@
 
 <div id="js-extraction-app" data-props="<%= @props %>"></div>
 
-<%= render 'create_edit_modal',
-           id: 'update-extraction-definition-modal',
-           model: @extraction_definition,
-           modal_heading: 'Edit extraction definition',
-           modal_subheading: 'Define the settings for your extraction definition',
-           confirmation_button_text: 'Update extraction definition' %>
+<% if @harvest_definition.harvest? %>
+  <%= render 'create_edit_harvest_modal',
+             id: 'update-extraction-definition-modal',
+             model: @extraction_definition,
+             modal_heading: 'Edit extraction definition',
+             modal_subheading: 'Define the settings for your extraction definition',
+             confirmation_button_text: 'Update extraction definition' %>
+<% else %>
+  <%= render 'create_edit_enrichment_modal',
+             id: 'update-extraction-definition-modal',
+             model: @extraction_definition,
+             enrichment_definition: @harvest_definition,
+             modal_heading: 'Edit extraction definition',
+             modal_subheading: 'Define the settings for your extraction definition',
+             confirmation_button_text: 'Update extraction definition' %>
+<% end %>
 
 <%= render layout: 'shared/delete_modal',
            locals: { path: pipeline_harvest_definition_extraction_definition_path(@pipeline, @harvest_definition,

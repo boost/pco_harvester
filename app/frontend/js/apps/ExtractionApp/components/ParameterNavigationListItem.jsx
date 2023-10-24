@@ -4,9 +4,10 @@ import { selectParameterById } from "~/js/features/ExtractionApp/ParametersSlice
 import {
   selectUiParameterById,
   toggleDisplayParameter,
+  setActiveParameter,
 } from "~/js/features/ExtractionApp/UiParametersSlice";
 
-const ParameterNavigationListItem = ({ id, index }) => {
+const ParameterNavigationListItem = ({ id }) => {
   const dispatch = useDispatch();
 
   const { name, kind, content } = useSelector((state) =>
@@ -24,14 +25,24 @@ const ParameterNavigationListItem = ({ id, index }) => {
     return name;
   };
 
+  const handleListItemClick = () => {
+    const desiredDisplaySetting = !displayed;
+
+    dispatch(
+      toggleDisplayParameter({ id: id, displayed: desiredDisplaySetting })
+    );
+
+    if (desiredDisplaySetting == true) {
+      dispatch(setActiveParameter(id));
+    }
+  };
+
   return (
     <li className="nav-item">
       <a
         className="nav-link text-truncate"
         data-bs-toggle="collapse"
-        onClick={() =>
-          dispatch(toggleDisplayParameter({ id: id, displayed: !displayed }))
-        }
+        onClick={() => handleListItemClick()}
         href={`#parameter-${id}`}
         role="button"
         aria-expanded={displayed}

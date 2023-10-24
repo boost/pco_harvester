@@ -21,10 +21,10 @@ const PreviewModal = ({
     "col-12": !appDetails.extractionDefinition.paginated,
   });
 
-  const handleSampleClick = async (type) => {
+  const handleSampleClick = async () => {
     const response = await request
       .post(
-        `/pipelines/${appDetails.pipeline.id}/harvest_definitions/${appDetails.harvestDefinition.id}/extraction_definitions/${appDetails.extractionDefinition.id}/extraction_jobs.json?kind=sample&type=${type}`
+        `/pipelines/${appDetails.pipeline.id}/harvest_definitions/${appDetails.harvestDefinition.id}/extraction_definitions/${appDetails.extractionDefinition.id}/extraction_jobs.json?kind=sample`
       )
       .then((response) => {
         return response;
@@ -50,27 +50,17 @@ const PreviewModal = ({
               handleClose();
             }}
           >
-            <i className="bi bi-arrow-left-short" aria-hidden="true"></i>
-            Continue editing extraction definition
-          </button>
-
-          <button
-            className="btn btn-outline-primary me-2"
-            onClick={() => {
-              handleSampleClick("pipeline");
-            }}
-          >
-            <i className="bi bi-play" aria-hidden="true"></i>
-            Run sample and return to pipeline
+            <i className="bi bi-pencil-square me-1" aria-hidden="true"></i>
+            Return to edit extraction
           </button>
 
           <button
             className="btn btn-primary me-2"
             onClick={() => {
-              handleSampleClick("transform");
+              handleSampleClick();
             }}
           >
-            <i className="bi bi-play" aria-hidden="true"></i>
+            <i className="bi bi-play me-1" aria-hidden="true"></i>
             Run sample and transform data
           </button>
         </div>

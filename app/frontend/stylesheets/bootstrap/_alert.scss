@@ -1,6 +1,7 @@
 .alert {
   right: 1rem;
   left: auto;
+  --bs-alert-color: #{$white}
 }
 
 .alert-danger {

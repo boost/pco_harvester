@@ -4,6 +4,7 @@ import { selectFieldById } from "~/js/features/TransformationApp/FieldsSlice";
 import {
   selectUiFieldById,
   toggleDisplayField,
+  setActiveField,
 } from "~/js/features/TransformationApp/UiFieldsSlice";
 import classNames from "classnames";
 
@@ -26,14 +27,22 @@ const FieldNavigationListItem = ({ id }) => {
     return "condition";
   };
 
+  const handleListItemClick = () => {
+    const desiredDisplaySetting = !displayed;
+
+    dispatch(toggleDisplayField({ id: id, displayed: desiredDisplaySetting }));
+
+    if (desiredDisplaySetting == true) {
+      dispatch(setActiveField(id));
+    }
+  };
+
   return (
     <li className="nav-item">
       <a
         className={linkClasses}
         data-bs-toggle="collapse"
-        onClick={() =>
-          dispatch(toggleDisplayField({ id: id, displayed: !displayed }))
-        }
+        onClick={() => handleListItemClick()}
         href={`#field-${id}`}
         role="button"
         aria-expanded={displayed}

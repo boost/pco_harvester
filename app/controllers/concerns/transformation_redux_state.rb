@@ -62,7 +62,8 @@ module TransformationReduxState
       deleting: false,
       running: false,
       hasRun: false,
-      displayed: false
+      displayed: false,
+      active: false
     }
   end
 

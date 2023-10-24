@@ -61,7 +61,7 @@ module ExtractionReduxState
 
   def ui_extraction_app_details_slice
     {
-      activeRequest: @extraction_definition.requests.first.id,
+      activeRequest: active_request_id,
       sharedDefinitionsTabActive: false
     }
   end
@@ -106,5 +106,11 @@ module ExtractionReduxState
       id: request[:id],
       loading: false
     }
+  end
+
+  def active_request_id
+    return @extraction_definition.requests.first.id if @extraction_definition.harvest?
+
+    @extraction_definition.requests.last.id
   end
 end

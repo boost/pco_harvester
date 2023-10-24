@@ -52,7 +52,8 @@ module Extraction
     end
 
     def new_enrichment_extraction(api_record, page)
-      EnrichmentExtraction.new(@extraction_definition, api_record, page, @extraction_job.extraction_folder)
+      EnrichmentExtraction.new(@extraction_definition.requests.last, ApiRecord.new(api_record), page,
+                               @extraction_job.extraction_folder)
     end
 
     def enqueue_record_transformation(api_record, document, page)

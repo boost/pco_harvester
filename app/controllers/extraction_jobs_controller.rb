@@ -54,8 +54,6 @@ class ExtractionJobsController < ApplicationController
     @extraction_job = ExtractionJob.create(extraction_definition: @extraction_definition, kind: params[:kind])
     ExtractionWorker.perform_async(@extraction_job.id)
 
-    return render json: { location: pipeline_path(@pipeline) } unless params[:type] == 'transform'
-
     render json: {
       location: pipeline_harvest_definition_transformation_definition_path(@pipeline, @harvest_definition,
                                                                            create_or_update_transformation_definition)
@@ -68,7 +66,7 @@ class ExtractionJobsController < ApplicationController
     else
       transformation_definition = TransformationDefinition.create(
         extraction_job_id: @extraction_job.id,
-        pipeline_id: @pipeline.id
+        pipeline_id: @pipeline.id, kind: @extraction_definition.kind
       )
 
       @harvest_definition.update(transformation_definition_id: transformation_definition.id)

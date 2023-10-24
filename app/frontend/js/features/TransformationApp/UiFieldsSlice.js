@@ -15,6 +15,19 @@ const uiFieldsSlice = createSlice({
         changes: { displayed: action.payload.displayed },
       });
     },
+    setActiveField(state, action) {
+      uiFieldsAdapter.updateMany(
+        state,
+        state.ids.map((id) => {
+          return { id: id, changes: { active: false } };
+        })
+      );
+
+      uiFieldsAdapter.updateOne(state, {
+        id: action.payload,
+        changes: { active: true },
+      });
+    },
     toggleDisplayFields(state, action) {
       const { fields, displayed } = action.payload;
 
@@ -29,6 +42,13 @@ const uiFieldsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(addField.fulfilled, (state, action) => {
+        uiFieldsAdapter.updateMany(
+          state,
+          state.ids.map((id) => {
+            return { id: id, changes: { active: false } };
+          })
+        );
+
         uiFieldsAdapter.upsertOne(state, {
           id: action.payload.id,
           saved: true,
@@ -38,6 +58,7 @@ const uiFieldsSlice = createSlice({
           hasRun: false,
           expanded: true,
           displayed: true,
+          active: true,
         });
       })
       .addCase(clickedOnRunFields.pending, (state, action) => {
@@ -117,6 +138,7 @@ export const selectDisplayedFieldIds = (state) => {
     .map((field) => field.id);
 };
 
-export const { toggleDisplayField, toggleDisplayFields } = actions;
+export const { toggleDisplayField, toggleDisplayFields, setActiveField } =
+  actions;
 
 export default reducer;

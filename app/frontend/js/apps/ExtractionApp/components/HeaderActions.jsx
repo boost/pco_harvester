@@ -8,6 +8,7 @@ import {
   previewRequest,
 } from "~/js/features/ExtractionApp/RequestsSlice";
 import PreviewModal from "~/js/apps/ExtractionApp/components/PreviewModal";
+import EnrichmentPreviewModal from "~/js/apps/ExtractionApp/components/EnrichmentPreviewModal";
 
 const HeaderActions = () => {
   const dispatch = useDispatch();
@@ -33,10 +34,15 @@ const HeaderActions = () => {
         pipelineId: appDetails.pipeline.id,
         extractionDefinitionId: appDetails.extractionDefinition.id,
         id: initialRequestId,
+        page: 1,
+        record: 1,
       })
     );
 
-    if (appDetails.extractionDefinition.paginated) {
+    if (
+      appDetails.extractionDefinition.paginated ||
+      appDetails.extractionDefinition.kind == "enrichment"
+    ) {
       dispatch(
         previewRequest({
           harvestDefinitionId: appDetails.harvestDefinition.id,
@@ -44,6 +50,8 @@ const HeaderActions = () => {
           extractionDefinitionId: appDetails.extractionDefinition.id,
           id: mainRequestId,
           previousRequestId: initialPreview.payload.id,
+          page: 1,
+          record: 1,
         })
       );
     }
@@ -55,12 +63,23 @@ const HeaderActions = () => {
         <i className="bi bi-play" aria-hidden="true"></i> Preview
       </button>
 
-      <PreviewModal
-        showModal={showModal}
-        handleClose={handleClose}
-        initialRequestId={initialRequestId}
-        mainRequestId={mainRequestId}
-      />
+      {appDetails.extractionDefinition.kind == "harvest" && (
+        <PreviewModal
+          showModal={showModal}
+          handleClose={handleClose}
+          initialRequestId={initialRequestId}
+          mainRequestId={mainRequestId}
+        />
+      )}
+
+      {appDetails.extractionDefinition.kind == "enrichment" && (
+        <EnrichmentPreviewModal
+          showModal={showModal}
+          handleClose={handleClose}
+          initialRequestId={initialRequestId}
+          mainRequestId={mainRequestId}
+        />
+      )}
     </>,
     document.getElementById("react-header-actions")
   );

@@ -22,7 +22,6 @@ RSpec.describe ExtractionDefinition do
 
       it { is_expected.not_to validate_presence_of(:destination_id).with_message("can't be blank") }
       it { is_expected.not_to validate_presence_of(:source_id).with_message("can't be blank") }
-      it { is_expected.not_to validate_presence_of(:enrichment_url).with_message("can't be blank") }
     end
 
     context 'when the extraction definition is for an enrichment' do
@@ -33,7 +32,6 @@ RSpec.describe ExtractionDefinition do
       it { is_expected.to validate_presence_of(:throttle).with_message('is not a number') }
       it { is_expected.to validate_presence_of(:destination_id).with_message("can't be blank") }
       it { is_expected.to validate_presence_of(:source_id).with_message("can't be blank") }
-      it { is_expected.to validate_presence_of(:enrichment_url).with_message("can't be blank") }
 
       it { is_expected.not_to validate_presence_of(:format).with_message("can't be blank") }
       it { is_expected.not_to validate_presence_of(:base_url).with_message("can't be blank") }

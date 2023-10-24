@@ -8,7 +8,7 @@ const uiAppDetailsSlice = createSlice({
       state.activeRequest = action.payload;
       state.sharedDefinitionsTabActive = false;
     },
-    activateSharedDefinitionsTab(state, action) {
+    activateSharedDefinitionsTab(state) {
       state.activeRequest = 0;
       state.sharedDefinitionsTabActive = true;
     },

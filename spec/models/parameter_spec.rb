@@ -68,6 +68,10 @@ RSpec.describe Parameter do
       create(:parameter, kind: 'query', name: 'itemsPerPage', content: 'JSON.parse(response)["items_found"] + 10',
                          content_type: 1)
     end
+    let(:erroring_dynamic_response) do
+      create(:parameter, kind: 'query', name: 'itemsPerPage', content: 'raise',
+                         content_type: 1)
+    end
     let(:extraction_definition)         { create(:extraction_definition, :figshare) }
     let(:request)                       { create(:request, :figshare_initial_request, extraction_definition:) }
     let(:response)                      { Extraction::DocumentExtraction.new(request).extract }
@@ -90,6 +94,10 @@ RSpec.describe Parameter do
 
     it 'returns the incremented parameter if it is incremental' do
       expect(incremental.evaluate(response).content).to eq '22'
+    end
+
+    it 'returns a helpful message if the paramater has failed to be evaluated' do
+      expect(erroring_dynamic_response.evaluate(response).content).to eq 'raise-evaluation-error'
     end
   end
 end
