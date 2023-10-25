@@ -54,7 +54,7 @@ RSpec.describe Extraction::Execution do
         end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
         total_time = end_time - start_time
 
-        expect(total_time.ceil).to eq 5
+        expect(total_time.ceil).to eq 6
       end
     end
 
@@ -138,6 +138,7 @@ RSpec.describe Extraction::Execution do
       context 'when the document has failed to be extracted' do
         before do
           stub_failed_figshare_harvest_requests(request_one)
+          stub_failed_figshare_harvest_requests(request_two)
         end
 
         let(:subject) { described_class.new(extraction_job, extraction_definition) }
@@ -154,8 +155,7 @@ RSpec.describe Extraction::Execution do
 
         context 'when the extraction_definition pagination_type is token' do
           let(:extraction_definition) do
-            create(:extraction_definition, format: 'JSON', total_selector: '$.total_results', page: 1, paginated: true,
-                                           per_page: 30)
+            create(:extraction_definition, format: 'JSON', page: 1, paginated: true)
           end
           let(:request_one) { create(:request, :inaturalist_initial_request, extraction_definition:) }
           let(:request_two) { create(:request, :inaturalist_main_request, extraction_definition:) }
@@ -174,7 +174,7 @@ RSpec.describe Extraction::Execution do
                                                 1 => '0',
                                                 2 => '2098031',
                                                 3 => '4218778',
-                                                4 => '7179629'
+                                                4 => '7179629',
                                               })
           end
 
@@ -191,8 +191,7 @@ RSpec.describe Extraction::Execution do
 
         context 'when the extraction_definition pagination_type is page' do
           let(:extraction_definition) do
-            create(:extraction_definition, format: 'XML', paginated: true, total_selector: '//count/text()',
-                                           page: 1, per_page: 50)
+            create(:extraction_definition, format: 'XML', paginated: true, page: 1)
           end
           let(:request_one) { create(:request, :freesound_initial_request, extraction_definition:) }
           let(:request_two) { create(:request, :freesound_main_request, extraction_definition:) }
@@ -211,8 +210,8 @@ RSpec.describe Extraction::Execution do
 
         context 'when the extraction_definition pagination_type is tokenised' do
           let(:extraction_definition) do
-            create(:extraction_definition, format: 'XML', pagination_type: 'tokenised', total_selector: '//records/@total',
-                                           page: 1, paginated: true, per_page: 100)
+            create(:extraction_definition, format: 'XML', pagination_type: 'tokenised',
+                                           page: 1, paginated: true)
           end
           let(:request_one)           { create(:request, :trove_initial_request, extraction_definition:) }
           let(:request_two)           { create(:request, :trove_main_request, extraction_definition:) }
@@ -223,11 +222,37 @@ RSpec.describe Extraction::Execution do
                                           1 => '*',
                                           2 => 'AoErc3UyMzQwNjY5OTI=',
                                           3 => 'AoErc3UyMzQwNjcwOTI=',
-                                          4 => 'AoErc3UyMzQwNjcxOTQ='
+                                          4 => 'AoErc3UyMzQwNjcxOTQ=',
+                                          5 => 'AoErc3UyMzQwNjcyOTU='
                                         })
           end
 
           it 'enqueues 4 TransformationWorkers in sidekiq' do
+            expect(TransformationWorker).to receive(:perform_async).exactly(4).times.and_call_original
+
+            subject.call
+          end
+        end
+
+        context 'when the same document is extracted multiple times' do
+          let(:extraction_definition) do
+            create(:extraction_definition, format: 'XML', pagination_type: 'tokenised', page: 1, paginated: true)
+          end
+          let(:request_one)           { create(:request, :trove_initial_request, extraction_definition:) }
+          let(:request_two)           { create(:request, :trove_main_request, extraction_definition:) }
+
+          before do
+            stub_trove_harvest_requests(request_one,
+                                        {
+                                          1 => '*',
+                                          2 => 'AoErc3UyMzQwNjY5OTI=',
+                                          3 => 'AoErc3UyMzQwNjcwOTI=',
+                                          4 => 'AoErc3UyMzQwNjcxOTQ=',
+                                          5 => 'AoErc3UyMzQwNjcyOTU='
+                                        })
+          end
+
+          it 'stops the harvest' do
             expect(TransformationWorker).to receive(:perform_async).exactly(4).times.and_call_original
 
             subject.call

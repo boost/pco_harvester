@@ -38,25 +38,16 @@ class ExtractionDefinition < ApplicationRecord
   validates :throttle, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 60_000 }
 
   validates :page, numericality: { only_integer: true }
-  validates :per_page, numericality: { only_integer: true }
 
   # Harvest related validation
   with_options if: :harvest? do
     validates :format, presence: true, inclusion: { in: FORMATS }
     validates :base_url, presence: true, format: { with: URI::DEFAULT_PARSER.make_regexp }
-    validate :total_selector_format
-    validates :total_selector, presence: true
   end
 
   with_options presence: true, if: :enrichment? do
     validates :destination_id
     validates :source_id
-  end
-
-  def total_selector_format
-    return if FORMAT_SELECTOR_REGEX_MAP[format&.to_sym]&.match?(total_selector)
-
-    errors.add(:total_selector, "invalid selector for the #{format} format")
   end
 
   def to_h

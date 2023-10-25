@@ -121,7 +121,7 @@ RSpec.describe ExtractionJob do
     let(:extraction_definition) { create(:extraction_definition, base_url: 'http://google.com', paginated: true) }
 
     before do
-      (1...6).each do |page|
+      (1...5).each do |page|
         request = create(:request, extraction_definition:)
         create(:parameter, name: 'url_param', content: 'url_value', kind: 'query', request:)
         create(:parameter, name: 'per_page', content: '50', kind: 'query', request:)
@@ -130,14 +130,14 @@ RSpec.describe ExtractionJob do
         stub_request(:get, 'http://google.com').with(
           query: { 'page' => page, 'per_page' => 50, 'url_param' => 'url_value' },
           headers: fake_json_headers
-        ).and_return(fake_response('test'))
+        ).and_return(fake_response("figshare_#{page}"))
       end
     end
 
     it 'returns the size of the extraction folder in bytes' do
       Extraction::Execution.new(subject, extraction_definition).call
 
-      expect(subject.extraction_folder_size_in_bytes).to eq 1535
+      expect(subject.extraction_folder_size_in_bytes).to eq 46334
     end
   end
 
