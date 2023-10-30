@@ -33,15 +33,7 @@
       <li class="list-group-item">File size: <%= number_to_human_size(@document.size_in_bytes) %></li>
     <% end %>
     <li class="list-group-item">Folder size: <%= number_to_human_size(@extraction_job.extraction_folder_size_in_bytes) %></li>
-    <% if @extraction_definition.harvest? %>
-      <li class="list-group-item">Records Per Page: <%= @extraction_definition.per_page %></li>
-    <% end %>
     <li class="list-group-item">Total Pages: <%= @extraction_job.documents.total_pages %></li>
-    <% if @extraction_definition.harvest? %>
-      <li class="list-group-item"><span data-bs-toggle="tooltip" title="This is based on the per_page and the total_pages amount, not the extracted data.">
-        Estimated Records: <%= @extraction_definition.per_page * @extraction_job.documents.total_pages %></span>
-      </li>
-    <% end %>
 </ul>
 
 <% if @document.blank? %>
