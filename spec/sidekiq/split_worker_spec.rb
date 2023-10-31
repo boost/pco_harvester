@@ -63,10 +63,23 @@ RSpec.describe SplitWorker, type: :job do
       end
     end
 
+    context 'when the split is not part of a harvest' do
+      before do
+        FileUtils.cp("#{Rails.root}/spec/support/split_example.json", "#{extraction_job.extraction_folder}/split_example.json")
+      end
+
+      it 'does not enqueue Transformation Workers' do
+        expect(TransformationWorker).not_to receive(:perform_async)
+
+        SplitWorker.new.perform(extraction_job.id) 
+      end
+    end
+
     context 'when the split is part of a harvest' do
       before do
         FileUtils.cp("#{Rails.root}/spec/support/split_example.json", "#{extraction_job.extraction_folder}/split_example.json")
       end
+
       let!(:harvest_report)    { create(:harvest_report, pipeline_job:, harvest_job:) }
       let(:destination)        { create(:destination) }
       let(:pipeline_job)       { create(:pipeline_job, pipeline:, destination:) }
