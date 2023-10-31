@@ -12,7 +12,6 @@ module Extraction
 
     def call
       extract_and_save_document(@extraction_definition.requests.first)
-
       return if @extraction_job.is_sample?
       return unless @extraction_definition.paginated?
 
@@ -74,7 +73,7 @@ module Extraction
     end
 
     def enqueue_record_transformation
-      return unless @harvest_job.present? && @de.document.successful?
+      return unless @harvest_job.present? && @de.document.successful? && !@extraction_definition.split
 
       TransformationWorker.perform_async(@extraction_job.id, @harvest_job.id, @extraction_definition.page)
       @harvest_report.increment_transformation_workers_queued!

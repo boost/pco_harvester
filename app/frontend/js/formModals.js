@@ -163,7 +163,7 @@ if (transformationDefinitionSettingsForms) {
           document.getElementById(
             `js-record-selector-result-${id}`
           ).innerHTML = `<p class='text-danger'>
-            Record Selector did not return anything
+            Something went wrong when attempting to display this document. This could mean that the provided record selector doesn't return anything or if the document is over 10 megabytes you will need to split it before it can be used in a Transformation.
           </p>`;
         }
       );
