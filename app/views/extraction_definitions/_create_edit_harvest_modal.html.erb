@@ -65,7 +65,7 @@
             </div>
             <div class="col-8">
               <% options = find_options_from_validations(ExtractionDefinition, :format) %>
-              <%= form.select :format, options, {}, class: 'form-select' %>
+              <%= form.select :format, options, {}, class: 'form-select', id: 'js-extraction-definition-format' %>
             </div>
 
             <div class="col-4">
@@ -97,6 +97,41 @@
                     [['Paginated', 'true'], ['Not Paginated', 'false']], model.paginated
                   ), {}, class: 'form-select' %>
             </div>
+
+            <div class="col-4 js-split d-none">
+              <%= form.label :split, class: 'form-label' do %>
+                Split
+
+                <span
+                    data-bs-toggle="tooltip"
+                    data-bs-title="If this is a large file you can split it into many small files so that it is easier to work with. Note that this feature is only currently available for XML."><i class="bi bi-question-circle" aria-label="helper text"></i>
+                </span>
+              <% end %>
+            </div>
+            <div class="col-8 js-split d-none">
+              <%= form.check_box :split, class: 'form-check-input', id: 'js-extraction-definition-split-checkbox' %>
+            </div>
+            
+            <div class="col-4 js-split d-none">
+              <%= form.label :record_selector, class: 'form-label' do %>
+                Record Selector
+
+                <span
+                    data-bs-toggle="tooltip"
+                    data-bs-title="The record selector used when splitting the file"><i class="bi bi-question-circle" aria-label="helper text"></i>
+                </span>
+              <% end %>
+            </div>
+
+            <div class='col-8 js-split d-none'>
+              <%= form.text_field :record_selector,
+                                  id: 'js-extraction-definition-record-selector',
+                                  class: {
+                                    'form-control': true,
+                                    'is-invalid': @harvest_definition.errors[:record_selector].any?
+                                  } %>
+            </div>
+
           </div>
 
           <div class='float-end mt-4'>

@@ -28,6 +28,43 @@ if (addHarvestModal) {
   }
 }
 
+const updateExtractionDefinitionModal = document.getElementById("update-extraction-definition-modal");
+
+if (updateExtractionDefinitionModal) {
+  const updateExtractionDefinitionAlert = updateExtractionDefinitionModal.getElementsByClassName("is-invalid");
+
+  if (updateExtractionDefinitionAlert[0]) {
+    new Modal(document.getElementById("update-extraction-definition-modal")).show();
+  }
+
+  const extractionDefinitionFormat = document.getElementById('js-extraction-definition-format');
+
+  toggleSplitElements(extractionDefinitionFormat.value);
+
+  extractionDefinitionFormat.addEventListener("change", (event) => {
+    toggleSplitElements(event.target.value);
+  });
+
+  function toggleSplitElements(format) {
+    const elements = document.getElementsByClassName("js-split"); 
+    const splitCheckBox = document.getElementById('js-extraction-definition-split-checkbox');
+    const recordSelector = document.getElementById('js-extraction-definition-record-selector');
+
+    if(format == 'XML') {
+      each(elements, (element) => {
+        element.classList.remove('d-none');
+      });
+    } else {
+      each(elements, (element) => {
+        element.classList.add('d-none');
+      });
+
+      splitCheckBox.checked = false;
+      recordSelector.value = '';
+    }
+  }
+}
+
 const transformationDefinitionSettingsForms = document.getElementsByClassName(
   "js-transformation-definition-form"
 );
