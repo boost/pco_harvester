@@ -28,16 +28,23 @@ if (addHarvestModal) {
   }
 }
 
-const updateExtractionDefinitionModal = document.getElementById("update-extraction-definition-modal");
+const updateExtractionDefinitionModal = document.getElementById(
+  "update-extraction-definition-modal"
+);
 
 if (updateExtractionDefinitionModal) {
-  const updateExtractionDefinitionAlert = updateExtractionDefinitionModal.getElementsByClassName("is-invalid");
+  const updateExtractionDefinitionAlert =
+    updateExtractionDefinitionModal.getElementsByClassName("is-invalid");
 
   if (updateExtractionDefinitionAlert[0]) {
-    new Modal(document.getElementById("update-extraction-definition-modal")).show();
+    new Modal(
+      document.getElementById("update-extraction-definition-modal")
+    ).show();
   }
 
-  const extractionDefinitionFormat = document.getElementById('js-extraction-definition-format');
+  const extractionDefinitionFormat = document.getElementById(
+    "js-extraction-definition-format"
+  );
 
   toggleSplitElements(extractionDefinitionFormat.value);
 
@@ -46,21 +53,25 @@ if (updateExtractionDefinitionModal) {
   });
 
   function toggleSplitElements(format) {
-    const elements = document.getElementsByClassName("js-split"); 
-    const splitCheckBox = document.getElementById('js-extraction-definition-split-checkbox');
-    const recordSelector = document.getElementById('js-extraction-definition-record-selector');
+    const elements = document.getElementsByClassName("js-split");
+    const splitCheckBox = document.getElementById(
+      "js-extraction-definition-split-checkbox"
+    );
+    const recordSelector = document.getElementById(
+      "js-extraction-definition-record-selector"
+    );
 
-    if(format == 'XML') {
+    if (format == "XML") {
       each(elements, (element) => {
-        element.classList.remove('d-none');
+        element.classList.remove("d-none");
       });
     } else {
       each(elements, (element) => {
-        element.classList.add('d-none');
+        element.classList.add("d-none");
       });
 
       splitCheckBox.checked = false;
-      recordSelector.value = '';
+      recordSelector.value = "";
     }
   }
 }
@@ -94,7 +105,7 @@ if (transformationDefinitionSettingsForms) {
       let format = transformationDefinitionPreviewData.dataset.format;
       let completed = transformationDefinitionPreviewData.dataset.completed;
 
-      if(result == '') {
+      if (result == "") {
         document.getElementById(
           `js-record-selector-result-${id}`
         ).innerHTML = `<p class='text-danger'>
@@ -109,22 +120,21 @@ if (transformationDefinitionSettingsForms) {
             lineSeparator: "\n",
           });
         }
-  
-  
+
         editor(`#js-record-selector-result-${id}`, format, true, result);
         tooltip.disable();
-  
+
         if (recordSelector.value == "") {
           transformationDefinitionUpdateButton.disabled = true;
           tooltip.enable();
         }
-  
+
         if (recordSelector.value == "" && completed == "true") {
           new Modal(
             document.getElementById("update-transformation-definition-modal")
           ).show();
         }
-  
+
         recordSelector.addEventListener("input", (event) => {
           if (event.target.value == "") {
             transformationDefinitionUpdateButton.disabled = true;
