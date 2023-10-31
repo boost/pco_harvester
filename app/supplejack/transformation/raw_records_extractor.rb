@@ -15,6 +15,7 @@ module Transformation
     # @return Array
     def records(page_number)
       return [] if @documents[page_number.to_i].nil?
+      return [] if @documents[page_number.to_i].size_in_bytes > 10.megabytes
 
       send("#{format.downcase}_extract", page_number)
     end

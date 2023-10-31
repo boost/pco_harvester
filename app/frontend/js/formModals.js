@@ -57,38 +57,47 @@ if (transformationDefinitionSettingsForms) {
       let format = transformationDefinitionPreviewData.dataset.format;
       let completed = transformationDefinitionPreviewData.dataset.completed;
 
-      if (format == "JSON") {
-        result = JSON.stringify(JSON.parse(result), null, 2);
-      } else if (format == "XML") {
-        result = xmlFormat(result, {
-          indentation: "  ",
-          lineSeparator: "\n",
-        });
-      }
-
-      editor(`#js-record-selector-result-${id}`, format, true, result);
-      tooltip.disable();
-
-      if (recordSelector.value == "") {
-        transformationDefinitionUpdateButton.disabled = true;
-        tooltip.enable();
-      }
-
-      if (recordSelector.value == "" && completed == "true") {
-        new Modal(
-          document.getElementById("update-transformation-definition-modal")
-        ).show();
-      }
-
-      recordSelector.addEventListener("input", (event) => {
-        if (event.target.value == "") {
+      if(result == '') {
+        document.getElementById(
+          `js-record-selector-result-${id}`
+        ).innerHTML = `<p class='text-danger'>
+          Something went wrong when attempting to display this document. If it is over 10 megabytes you will need to split it before it can be used in a Transformation.
+        </p>`;
+      } else {
+        if (format == "JSON") {
+          result = JSON.stringify(JSON.parse(result), null, 2);
+        } else if (format == "XML") {
+          result = xmlFormat(result, {
+            indentation: "  ",
+            lineSeparator: "\n",
+          });
+        }
+  
+  
+        editor(`#js-record-selector-result-${id}`, format, true, result);
+        tooltip.disable();
+  
+        if (recordSelector.value == "") {
           transformationDefinitionUpdateButton.disabled = true;
           tooltip.enable();
-        } else {
-          transformationDefinitionUpdateButton.disabled = false;
-          tooltip.disable();
         }
-      });
+  
+        if (recordSelector.value == "" && completed == "true") {
+          new Modal(
+            document.getElementById("update-transformation-definition-modal")
+          ).show();
+        }
+  
+        recordSelector.addEventListener("input", (event) => {
+          if (event.target.value == "") {
+            transformationDefinitionUpdateButton.disabled = true;
+            tooltip.enable();
+          } else {
+            transformationDefinitionUpdateButton.disabled = false;
+            tooltip.disable();
+          }
+        });
+      }
 
       bindTestForm(
         "test",
