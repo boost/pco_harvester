@@ -11,7 +11,7 @@ const transformationDefinitionSettingsForms = document.getElementsByClassName(
 
 if (transformationDefinitionSettingsForms) {
   each(transformationDefinitionSettingsForms, (form) => {
-    initializeTransformationPreview(form)
+    initializeTransformationPreview(form);
   });
 }
 
@@ -34,17 +34,37 @@ function initializeTransformationPreview(form) {
     `js-transformation-definition-preview-data-${id}`
   );
 
-  if(transformationDefinitionPreviewData) {
-    displayTransformationPreview(id, recordSelector, transformationDefinitionUpdateButton, tooltip, transformationDefinitionPreviewData);
+  if (transformationDefinitionPreviewData) {
+    displayTransformationPreview(
+      id,
+      recordSelector,
+      transformationDefinitionUpdateButton,
+      tooltip,
+      transformationDefinitionPreviewData
+    );
   }
 }
 
-function displayTransformationPreview(id, recordSelector, transformationDefinitionUpdateButton, tooltip, transformationDefinitionPreviewData) {
+function displayTransformationPreview(
+  id,
+  recordSelector,
+  transformationDefinitionUpdateButton,
+  tooltip,
+  transformationDefinitionPreviewData
+) {
   let result = transformationDefinitionPreviewData.dataset.result;
   let format = transformationDefinitionPreviewData.dataset.format;
   let completed = transformationDefinitionPreviewData.dataset.completed;
 
-  displayInitialPreview(id, recordSelector, result, format, transformationDefinitionUpdateButton, tooltip, completed)
+  displayInitialPreview(
+    id,
+    recordSelector,
+    result,
+    format,
+    transformationDefinitionUpdateButton,
+    tooltip,
+    completed
+  );
 
   bindTestForm(
     "test",
@@ -75,7 +95,15 @@ function displayTransformationPreview(id, recordSelector, transformationDefiniti
   );
 }
 
-function displayInitialPreview(id, recordSelector, result, format, transformationDefinitionUpdateButton, tooltip, completed) {
+function displayInitialPreview(
+  id,
+  recordSelector,
+  result,
+  format,
+  transformationDefinitionUpdateButton,
+  tooltip,
+  completed
+) {
   if (result == "") {
     displayError(id);
     tooltip.disable();

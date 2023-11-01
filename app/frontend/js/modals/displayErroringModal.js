@@ -1,14 +1,14 @@
 import { Modal } from "bootstrap";
-import { each } from 'lodash';
+import { each } from "lodash";
 
 const modalIds = [
-  'create-modal',
-  'update-extraction-definition-modal',
-  'add-harvest'
-]
+  "create-modal",
+  "update-extraction-definition-modal",
+  "add-harvest",
+];
 
 each(modalIds, (id) => {
-  if(document.getElementById(id)) {
+  if (document.getElementById(id)) {
     initializeModalErrorDisplay(id);
   }
 });

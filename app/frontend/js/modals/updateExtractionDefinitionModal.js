@@ -22,42 +22,42 @@ if (updateExtractionDefinitionModal) {
     splitDropdown.addEventListener("change", () => {
       toggleSplitElements(extractionDefinitionFormat.value);
     });
+  }
 
-    function toggleSplitElements(format) {
-      const elements = document.getElementsByClassName("js-split");
-      const splitDropdownContainers = document.getElementsByClassName(
-        "js-extraction-definition-split-dropdown-container"
-      );
-      const splitSelectorContainers = document.getElementsByClassName(
-        "js-extraction-definition-split-selector-container"
-      );
-      const splitSelector = document.getElementById(
-        "js-extraction-definition-split-selector"
-      );
+  function toggleSplitElements(format) {
+    const elements = document.getElementsByClassName("js-split");
+    const splitDropdownContainers = document.getElementsByClassName(
+      "js-extraction-definition-split-dropdown-container"
+    );
+    const splitSelectorContainers = document.getElementsByClassName(
+      "js-extraction-definition-split-selector-container"
+    );
+    const splitSelector = document.getElementById(
+      "js-extraction-definition-split-selector"
+    );
 
-      if (format == "XML") {
-        each(splitDropdownContainers, (container) => {
+    if (format == "XML") {
+      each(splitDropdownContainers, (container) => {
+        container.classList.remove("d-none");
+      });
+
+      if (splitDropdown.value == "true") {
+        each(splitSelectorContainers, (container) => {
           container.classList.remove("d-none");
         });
-
-        if (splitDropdown.value == "true") {
-          each(splitSelectorContainers, (container) => {
-            container.classList.remove("d-none");
-          });
-        } else {
-          each(splitSelectorContainers, (container) => {
-            container.classList.add("d-none");
-            splitSelector.value = "";
-          });
-        }
       } else {
-        each(elements, (element) => {
-          element.classList.add("d-none");
+        each(splitSelectorContainers, (container) => {
+          container.classList.add("d-none");
+          splitSelector.value = "";
         });
-
-        splitDropdown.value = "false";
-        splitSelector.value = "";
       }
+    } else {
+      each(elements, (element) => {
+        element.classList.add("d-none");
+      });
+
+      splitDropdown.value = "false";
+      splitSelector.value = "";
     }
   }
 }
