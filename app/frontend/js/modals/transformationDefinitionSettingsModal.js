@@ -1,6 +1,3 @@
-// Open the create Modal on error so the user can see the validation issues
-// and correct them without having to open the modal again.
-
 import { Modal } from "bootstrap";
 import editor from "../editor";
 import xmlFormat from "xml-formatter";
@@ -14,101 +11,115 @@ const transformationDefinitionSettingsForms = document.getElementsByClassName(
 
 if (transformationDefinitionSettingsForms) {
   each(transformationDefinitionSettingsForms, (form) => {
-    const id = form.dataset.id;
+    initializeTransformationPreview(form)
+  });
+}
 
-    const recordSelector = document.getElementById(
-      `js-transformation-definition-record-selector-${id}`
-    );
+function initializeTransformationPreview(form) {
+  const id = form.dataset.id;
 
-    const transformationDefinitionUpdateButton = document.getElementById(
-      `js-transformation-definition-submit-button-${id}`
-    );
+  const recordSelector = document.getElementById(
+    `js-transformation-definition-record-selector-${id}`
+  );
 
-    const tooltip = Tooltip.getInstance(
-      `#js-transformation-definition-submit-button-tooltip-${id}`
-    );
+  const transformationDefinitionUpdateButton = document.getElementById(
+    `js-transformation-definition-submit-button-${id}`
+  );
 
-    const transformationDefinitionPreviewData = document.getElementById(
-      `js-transformation-definition-preview-data-${id}`
-    );
+  const tooltip = Tooltip.getInstance(
+    `#js-transformation-definition-submit-button-tooltip-${id}`
+  );
 
-    if (transformationDefinitionPreviewData) {
-      let result = transformationDefinitionPreviewData.dataset.result;
-      let format = transformationDefinitionPreviewData.dataset.format;
-      let completed = transformationDefinitionPreviewData.dataset.completed;
+  const transformationDefinitionPreviewData = document.getElementById(
+    `js-transformation-definition-preview-data-${id}`
+  );
 
-      if (result == "") {
-        document.getElementById(
-          `js-record-selector-result-${id}`
-        ).innerHTML = `<p class='text-danger'>
-          Something went wrong when attempting to display this document. If it is over 10 megabytes you will need to split it before it can be used in a Transformation.
-        </p>`;
-      } else {
-        if (format == "JSON") {
-          result = JSON.stringify(JSON.parse(result), null, 2);
-        } else if (format == "XML") {
-          result = xmlFormat(result, {
-            indentation: "  ",
-            lineSeparator: "\n",
-          });
-        }
+  if(transformationDefinitionPreviewData) {
+    displayTransformationPreview(id, recordSelector, transformationDefinitionUpdateButton, tooltip, transformationDefinitionPreviewData);
+  }
+}
 
-        editor(`#js-record-selector-result-${id}`, format, true, result);
-        tooltip.disable();
+function displayTransformationPreview(id, recordSelector, transformationDefinitionUpdateButton, tooltip, transformationDefinitionPreviewData) {
+  let result = transformationDefinitionPreviewData.dataset.result;
+  let format = transformationDefinitionPreviewData.dataset.format;
+  let completed = transformationDefinitionPreviewData.dataset.completed;
 
-        if (recordSelector.value == "") {
-          transformationDefinitionUpdateButton.disabled = true;
-          tooltip.enable();
-        }
+  displayInitialPreview(id, recordSelector, result, format, transformationDefinitionUpdateButton, tooltip, completed)
 
-        if (recordSelector.value == "" && completed == "true") {
-          new Modal(
-            document.getElementById("update-transformation-definition-modal")
-          ).show();
-        }
+  bindTestForm(
+    "test",
+    `js-test-transformation-record-selector-button-${id}`,
+    `js-transformation-definition-form-${id}`,
+    (response, _alertClass) => {
+      let results = response.data.result;
 
-        recordSelector.addEventListener("input", (event) => {
-          if (event.target.value == "") {
-            transformationDefinitionUpdateButton.disabled = true;
-            tooltip.enable();
-          } else {
-            transformationDefinitionUpdateButton.disabled = false;
-            tooltip.disable();
-          }
+      if (response.data.format == "JSON") {
+        results = JSON.stringify(response.data.result, null, 2);
+      } else if (response.data.format == "XML") {
+        results = xmlFormat(response.data.result, {
+          indentation: "  ",
+          lineSeparator: "\n",
         });
       }
 
-      bindTestForm(
-        "test",
-        `js-test-transformation-record-selector-button-${id}`,
-        `js-transformation-definition-form-${id}`,
-        (response, _alertClass) => {
-          let results = response.data.result;
-
-          if (response.data.format == "JSON") {
-            results = JSON.stringify(response.data.result, null, 2);
-          } else if (response.data.format == "XML") {
-            results = xmlFormat(response.data.result, {
-              indentation: "  ",
-              lineSeparator: "\n",
-            });
-          }
-
-          editor(
-            `#js-record-selector-result-${id}`,
-            response.data.format,
-            true,
-            results
-          );
-        },
-        () => {
-          document.getElementById(
-            `js-record-selector-result-${id}`
-          ).innerHTML = `<p class='text-danger'>
-            Something went wrong when attempting to display this document. This could mean that the provided record selector doesn't return anything or if the document is over 10 megabytes you will need to split it before it can be used in a Transformation.
-          </p>`;
-        }
+      editor(
+        `#js-record-selector-result-${id}`,
+        response.data.format,
+        true,
+        results
       );
+    },
+    () => {
+      displayError(id);
     }
-  });
+  );
+}
+
+function displayInitialPreview(id, recordSelector, result, format, transformationDefinitionUpdateButton, tooltip, completed) {
+  if (result == "") {
+    displayError(id);
+    tooltip.disable();
+  } else {
+    if (format == "JSON") {
+      result = JSON.stringify(JSON.parse(result), null, 2);
+    } else if (format == "XML") {
+      result = xmlFormat(result, {
+        indentation: "  ",
+        lineSeparator: "\n",
+      });
+    }
+
+    editor(`#js-record-selector-result-${id}`, format, true, result);
+
+    tooltip.disable();
+
+    if (recordSelector.value == "") {
+      transformationDefinitionUpdateButton.disabled = true;
+      tooltip.enable();
+    }
+
+    if (recordSelector.value == "" && completed == "true") {
+      new Modal(
+        document.getElementById("update-transformation-definition-modal")
+      ).show();
+    }
+
+    recordSelector.addEventListener("input", (event) => {
+      if (event.target.value == "") {
+        transformationDefinitionUpdateButton.disabled = true;
+        tooltip.enable();
+      } else {
+        transformationDefinitionUpdateButton.disabled = false;
+        tooltip.disable();
+      }
+    });
+  }
+}
+
+function displayError(id) {
+  document.getElementById(
+    `js-record-selector-result-${id}`
+  ).innerHTML = `<p class='text-danger'>
+    Something went wrong when attempting to display this document. This could mean that the provided record selector doesn't return anything or if the document is over 10 megabytes you will need to split it before it can be used in a Transformation.
+  </p>`;
 }

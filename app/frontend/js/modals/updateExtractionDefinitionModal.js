@@ -1,4 +1,3 @@
-import { Modal } from "bootstrap";
 import { each } from "lodash";
 
 const updateExtractionDefinitionModal = document.getElementById(
@@ -6,15 +5,6 @@ const updateExtractionDefinitionModal = document.getElementById(
 );
 
 if (updateExtractionDefinitionModal) {
-  const updateExtractionDefinitionAlert =
-    updateExtractionDefinitionModal.getElementsByClassName("is-invalid");
-
-  if (updateExtractionDefinitionAlert[0]) {
-    new Modal(
-      document.getElementById("update-extraction-definition-modal")
-    ).show();
-  }
-
   const extractionDefinitionFormat = document.getElementById(
     "js-extraction-definition-format"
   );
