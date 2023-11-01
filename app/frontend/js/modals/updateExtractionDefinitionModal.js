@@ -24,6 +24,8 @@ if (updateExtractionDefinitionModal) {
     });
   }
 
+  // This hides and shows elements to do with splitting a document on the ExtractionDefinition modal.
+
   function toggleSplitElements(format) {
     const elements = document.getElementsByClassName("js-split");
     const splitDropdownContainers = document.getElementsByClassName(

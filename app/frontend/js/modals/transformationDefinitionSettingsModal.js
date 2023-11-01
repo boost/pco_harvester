@@ -11,11 +11,16 @@ const transformationDefinitionSettingsForms = document.getElementsByClassName(
 
 if (transformationDefinitionSettingsForms) {
   each(transformationDefinitionSettingsForms, (form) => {
-    initializeTransformationPreview(form);
+    const data = extractTransformationPreviewData(form);
+    
+    if(data) {
+      displayInitialPreview(data);
+      initializeRecordSelectorTest(data.id);
+    }
   });
 }
 
-function initializeTransformationPreview(form) {
+function extractTransformationPreviewData(form) {
   const id = form.dataset.id;
 
   const recordSelector = document.getElementById(
@@ -34,76 +39,22 @@ function initializeTransformationPreview(form) {
     `js-transformation-definition-preview-data-${id}`
   );
 
-  if (transformationDefinitionPreviewData) {
-    displayTransformationPreview(
+  if(transformationDefinitionPreviewData) {
+    return {
       id,
       recordSelector,
       transformationDefinitionUpdateButton,
       tooltip,
-      transformationDefinitionPreviewData
-    );
+      result: transformationDefinitionPreviewData.dataset.result,
+      format: transformationDefinitionPreviewData.dataset.format,
+      completed: transformationDefinitionPreviewData.dataset.completed
+    }
   }
 }
 
-function displayTransformationPreview(
-  id,
-  recordSelector,
-  transformationDefinitionUpdateButton,
-  tooltip,
-  transformationDefinitionPreviewData
-) {
-  let result = transformationDefinitionPreviewData.dataset.result;
-  let format = transformationDefinitionPreviewData.dataset.format;
-  let completed = transformationDefinitionPreviewData.dataset.completed;
+function displayInitialPreview(data) {
+  let { id, recordSelector, result, format, transformationDefinitionUpdateButton, tooltip, completed } = data;
 
-  displayInitialPreview(
-    id,
-    recordSelector,
-    result,
-    format,
-    transformationDefinitionUpdateButton,
-    tooltip,
-    completed
-  );
-
-  bindTestForm(
-    "test",
-    `js-test-transformation-record-selector-button-${id}`,
-    `js-transformation-definition-form-${id}`,
-    (response, _alertClass) => {
-      let results = response.data.result;
-
-      if (response.data.format == "JSON") {
-        results = JSON.stringify(response.data.result, null, 2);
-      } else if (response.data.format == "XML") {
-        results = xmlFormat(response.data.result, {
-          indentation: "  ",
-          lineSeparator: "\n",
-        });
-      }
-
-      editor(
-        `#js-record-selector-result-${id}`,
-        response.data.format,
-        true,
-        results
-      );
-    },
-    () => {
-      displayError(id);
-    }
-  );
-}
-
-function displayInitialPreview(
-  id,
-  recordSelector,
-  result,
-  format,
-  transformationDefinitionUpdateButton,
-  tooltip,
-  completed
-) {
   if (result == "") {
     displayError(id);
     tooltip.disable();
@@ -142,6 +93,36 @@ function displayInitialPreview(
       }
     });
   }
+}
+
+function initializeRecordSelectorTest(id) {
+  bindTestForm(
+    "test",
+    `js-test-transformation-record-selector-button-${id}`,
+    `js-transformation-definition-form-${id}`,
+    (response, _alertClass) => {
+      let results = response.data.result;
+
+      if (response.data.format == "JSON") {
+        results = JSON.stringify(response.data.result, null, 2);
+      } else if (response.data.format == "XML") {
+        results = xmlFormat(response.data.result, {
+          indentation: "  ",
+          lineSeparator: "\n",
+        });
+      }
+
+      editor(
+        `#js-record-selector-result-${id}`,
+        response.data.format,
+        true,
+        results
+      );
+    },
+    () => {
+      displayError(id);
+    }
+  );
 }
 
 function displayError(id) {
