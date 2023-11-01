@@ -40,7 +40,7 @@ RSpec.describe ExtractionDefinition do
     context 'when the extraction definition needs to be split' do
       subject! { build(:extraction_definition, pipeline: pipeline1, split: true) }
 
-      it { is_expected.to validate_presence_of(:record_selector).with_message("can't be blank") } 
+      it { is_expected.to validate_presence_of(:split_selector).with_message("can't be blank") } 
     end
   end
 

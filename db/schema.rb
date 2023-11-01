@@ -38,7 +38,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_31_013240) do
     t.integer "per_page"
     t.string "total_selector"
     t.boolean "split", default: false, null: false
-    t.string "record_selector"
+    t.string "split_selector"
     t.index ["destination_id"], name: "index_extraction_definitions_on_destination_id"
     t.index ["last_edited_by_id"], name: "index_extraction_definitions_on_last_edited_by_id"
     t.index ["name"], name: "index_extraction_definitions_on_name", unique: true

@@ -2,79 +2,11 @@
 // and correct them without having to open the modal again.
 
 import { Modal } from "bootstrap";
-import editor from "./editor";
+import editor from "../editor";
 import xmlFormat from "xml-formatter";
 import { Tooltip } from "bootstrap";
 import { each } from "lodash";
-import { bindTestForm } from "./utils/test-form";
-
-const createModal = document.getElementById("create-modal");
-
-if (createModal) {
-  const alert = document.getElementsByClassName("is-invalid");
-
-  if (alert[0]) {
-    new Modal(document.getElementById("create-modal")).show();
-  }
-}
-
-const addHarvestModal = document.getElementById("add-harvest");
-
-if (addHarvestModal) {
-  const addHarvestAlert = addHarvestModal.getElementsByClassName("is-invalid");
-
-  if (addHarvestAlert[0]) {
-    new Modal(document.getElementById("add-harvest")).show();
-  }
-}
-
-const updateExtractionDefinitionModal = document.getElementById(
-  "update-extraction-definition-modal"
-);
-
-if (updateExtractionDefinitionModal) {
-  const updateExtractionDefinitionAlert =
-    updateExtractionDefinitionModal.getElementsByClassName("is-invalid");
-
-  if (updateExtractionDefinitionAlert[0]) {
-    new Modal(
-      document.getElementById("update-extraction-definition-modal")
-    ).show();
-  }
-
-  const extractionDefinitionFormat = document.getElementById(
-    "js-extraction-definition-format"
-  );
-
-  toggleSplitElements(extractionDefinitionFormat.value);
-
-  extractionDefinitionFormat.addEventListener("change", (event) => {
-    toggleSplitElements(event.target.value);
-  });
-
-  function toggleSplitElements(format) {
-    const elements = document.getElementsByClassName("js-split");
-    const splitCheckBox = document.getElementById(
-      "js-extraction-definition-split-checkbox"
-    );
-    const recordSelector = document.getElementById(
-      "js-extraction-definition-record-selector"
-    );
-
-    if (format == "XML") {
-      each(elements, (element) => {
-        element.classList.remove("d-none");
-      });
-    } else {
-      each(elements, (element) => {
-        element.classList.add("d-none");
-      });
-
-      splitCheckBox.checked = false;
-      recordSelector.value = "";
-    }
-  }
-}
+import { bindTestForm } from "../utils/test-form";
 
 const transformationDefinitionSettingsForms = document.getElementsByClassName(
   "js-transformation-definition-form"
