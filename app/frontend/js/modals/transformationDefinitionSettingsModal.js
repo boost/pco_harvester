@@ -12,8 +12,8 @@ const transformationDefinitionSettingsForms = document.getElementsByClassName(
 if (transformationDefinitionSettingsForms) {
   each(transformationDefinitionSettingsForms, (form) => {
     const data = extractTransformationPreviewData(form);
-    
-    if(data) {
+
+    if (data) {
       displayInitialPreview(data);
       initializeRecordSelectorTest(data.id);
     }
@@ -39,7 +39,7 @@ function extractTransformationPreviewData(form) {
     `js-transformation-definition-preview-data-${id}`
   );
 
-  if(transformationDefinitionPreviewData) {
+  if (transformationDefinitionPreviewData) {
     return {
       id,
       recordSelector,
@@ -47,13 +47,21 @@ function extractTransformationPreviewData(form) {
       tooltip,
       result: transformationDefinitionPreviewData.dataset.result,
       format: transformationDefinitionPreviewData.dataset.format,
-      completed: transformationDefinitionPreviewData.dataset.completed
-    }
+      completed: transformationDefinitionPreviewData.dataset.completed,
+    };
   }
 }
 
 function displayInitialPreview(data) {
-  let { id, recordSelector, result, format, transformationDefinitionUpdateButton, tooltip, completed } = data;
+  let {
+    id,
+    recordSelector,
+    result,
+    format,
+    transformationDefinitionUpdateButton,
+    tooltip,
+    completed,
+  } = data;
 
   if (result == "") {
     displayError(id);
