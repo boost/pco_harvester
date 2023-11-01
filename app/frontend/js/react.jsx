@@ -18,15 +18,17 @@ if (transformationAppHTMLElement !== null) {
   const root = ReactDOM.createRoot(transformationAppHTMLElement);
   const props = JSON.parse(transformationAppHTMLElement.dataset.props);
 
-  root.render(
-    <React.StrictMode>
-      <ErrorBoundary environment={props.config.environment}>
-        <Provider store={configureAppStore(props)}>
-          <TransformationApp />
-        </Provider>
-      </ErrorBoundary>
-    </React.StrictMode>
-  );
+  if(props.entities.rawRecord.body != null) {
+    root.render(
+      <React.StrictMode>
+        <ErrorBoundary environment={props.config.environment}>
+          <Provider store={configureAppStore(props)}>
+            <TransformationApp />
+          </Provider>
+        </ErrorBoundary>
+      </React.StrictMode>
+    );
+  }
 }
 
 // Extraction App
