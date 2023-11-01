@@ -15,7 +15,7 @@ if (transformationDefinitionSettingsForms) {
 
     if (data) {
       displayInitialPreview(data);
-      initializeRecordSelectorTest(data.id);
+      bindRecordSelectorTestEventListeners(data.id);
     }
   });
 }
@@ -103,7 +103,7 @@ function displayInitialPreview(data) {
   }
 }
 
-function initializeRecordSelectorTest(id) {
+function bindRecordSelectorTestEventListeners(id) {
   bindTestForm(
     "test",
     `js-test-transformation-record-selector-button-${id}`,
