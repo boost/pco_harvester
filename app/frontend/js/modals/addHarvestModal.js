@@ -1,4 +1,4 @@
-import { Modal } from 'bootstrap';
+import { Modal } from "bootstrap";
 
 const addHarvestModal = document.getElementById("add-harvest");
 

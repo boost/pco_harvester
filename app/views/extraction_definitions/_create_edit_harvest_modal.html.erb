@@ -111,7 +111,7 @@
 
             <div class="col-8 js-split d-none js-extraction-definition-split-dropdown-container">
               <%= form.select :split, options_for_select(
-                    [['No', 'false'], ['Yes', 'true']], model.split
+                    [%w[No false], %w[Yes true]], model.split
                   ), {}, class: 'form-select', id: 'js-extraction-definition-split-dropdown' %>
             </div>
 

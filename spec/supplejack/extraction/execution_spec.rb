@@ -120,7 +120,7 @@ RSpec.describe Extraction::Execution do
       end
 
       context 'when the extraction needs to be split' do
-        let(:extraction_definition) { create(:extraction_definition, pipeline:, split: true, record_selector: '//node') }
+        let(:extraction_definition) { create(:extraction_definition, pipeline:, split: true, split_selector: '//node') }
         let(:subject) { described_class.new(extraction_job, extraction_definition) }
 
         it 'does not enqueue any TransformationWorkers in sidekiq' do
