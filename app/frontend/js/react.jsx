@@ -18,7 +18,7 @@ if (transformationAppHTMLElement !== null) {
   const root = ReactDOM.createRoot(transformationAppHTMLElement);
   const props = JSON.parse(transformationAppHTMLElement.dataset.props);
 
-  if(props.entities.rawRecord.body != null) {
+  if (props.entities.rawRecord.body != null) {
     root.render(
       <React.StrictMode>
         <ErrorBoundary environment={props.config.environment}>
