@@ -132,7 +132,7 @@
       "cwe_id": [
         22
       ],
-      "note": ""
+      "note": "Not concerned about this as the FileUtils needs to find the file to be removed based on the Extraction Job record extraction folder information which is generated automatically by the system so should be safe from user input meddling."
     },
     {
       "warning_type": "Unscoped Find",
