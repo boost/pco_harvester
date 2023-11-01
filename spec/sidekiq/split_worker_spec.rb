@@ -14,7 +14,7 @@ RSpec.describe SplitWorker, type: :job do
         FileUtils.cp("#{Rails.root}/spec/support/split_example.json", "#{extraction_job.extraction_folder}/split_example.json")
       end
 
-      it 'splits a large file into many small ones' do
+      it 'splits a large file into chunks of 100' do
         extracted_files = Dir.glob("#{extraction_job.extraction_folder}/*").select { |e| File.file? e }
   
         expect(extracted_files.count).to eq 1
@@ -23,7 +23,7 @@ RSpec.describe SplitWorker, type: :job do
   
         extracted_files = Dir.glob("#{extraction_job.extraction_folder}/*").select { |e| File.file? e }
   
-        expect(extracted_files.count).to eq 4
+        expect(extracted_files.count).to eq 2
       end
 
       it 'cleans up the tmp folder it creates' do
@@ -59,7 +59,7 @@ RSpec.describe SplitWorker, type: :job do
   
         extracted_files = Dir.glob("#{extraction_job.extraction_folder}/*").select { |e| File.file? e }
   
-        expect(extracted_files.count).to eq 8
+        expect(extracted_files.count).to eq 4
       end
     end
 
@@ -88,7 +88,7 @@ RSpec.describe SplitWorker, type: :job do
       let(:extraction_job)     { create(:extraction_job, extraction_definition:, harvest_job:) }
 
       it 'enqueues Transformation Workers to process the split files' do
-        expect(TransformationWorker).to receive(:perform_async).exactly(4).times.and_call_original
+        expect(TransformationWorker).to receive(:perform_async).exactly(2).times.and_call_original
 
         SplitWorker.new.perform(extraction_job.id) 
       end
@@ -100,8 +100,8 @@ RSpec.describe SplitWorker, type: :job do
 
         harvest_report.reload
 
-        expect(harvest_report.pages_extracted).to eq 4
-        expect(harvest_report.transformation_workers_queued).to eq 4
+        expect(harvest_report.pages_extracted).to eq 2
+        expect(harvest_report.transformation_workers_queued).to eq 2
       end
     end
   end
