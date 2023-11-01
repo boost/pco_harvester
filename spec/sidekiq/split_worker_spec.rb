@@ -6,7 +6,7 @@ RSpec.describe SplitWorker, type: :job do
   let(:extraction_job) { create(:extraction_job, extraction_definition:) }
 
   let(:pipeline) { create(:pipeline, name: 'National Library of New Zealand') }
-  let(:extraction_definition) { create(:extraction_definition, pipeline:, split: true, record_selector: '//node') }
+  let(:extraction_definition) { create(:extraction_definition, pipeline:, split: true, split_selector: '//node') }
 
   describe '#perform' do
     context 'when the request is not paginated' do

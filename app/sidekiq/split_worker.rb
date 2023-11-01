@@ -54,7 +54,7 @@ class SplitWorker
     Dir.children(@tmp_directory).each do |file|
       saved_response = JSON.parse(File.read("#{@tmp_directory}/#{file}"))
 
-      Nokogiri::XML(saved_response['body']).xpath(@extraction_definition.record_selector).each do |record|
+      Nokogiri::XML(saved_response['body']).xpath(@extraction_definition.split_selector).each do |record|
         create_document(record, saved_response)
         @page += 1
       end
