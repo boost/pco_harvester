@@ -14,7 +14,6 @@ import { setLoading } from "~/js/features/ExtractionApp/UiRequestsSlice";
 import { selectUiRequestById } from "~/js/features/ExtractionApp/UiRequestsSlice";
 import { selectRequestById } from "~/js/features/ExtractionApp/RequestsSlice";
 
-
 const EnrichmentPreviewModal = ({
   showModal,
   handleClose,
@@ -59,7 +58,6 @@ const EnrichmentPreviewModal = ({
       setCurrentRecord(total_records);
     }
   };
-
 
   const requestNewPreview = async () => {
     dispatch(setLoading(initialRequestId));
@@ -125,7 +123,7 @@ const EnrichmentPreviewModal = ({
             <i className="bi bi-pencil-square me-1" aria-hidden="true"></i>
             Return to edit extraction
           </button>
-          
+
           <RunSample />
         </div>
       </Modal.Header>

@@ -42,8 +42,7 @@ const PreviewModal = ({
             Return to edit extraction
           </button>
 
-            <RunSample />
-
+          <RunSample />
         </div>
       </Modal.Header>
       <Modal.Body>
