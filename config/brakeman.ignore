@@ -7,7 +7,7 @@
       "check_name": "UnscopedFind",
       "message": "Unscoped call to `Parameter#find`",
       "file": "app/controllers/parameters_controller.rb",
-      "line": 29,
+      "line": 45,
       "link": "https://brakemanscanner.org/docs/warning_types/unscoped_find/",
       "code": "Parameter.find(params[:id])",
       "render_path": null,
@@ -76,7 +76,7 @@
       "check_name": "UnscopedFind",
       "message": "Unscoped call to `Request#find`",
       "file": "app/controllers/requests_controller.rb",
-      "line": 19,
+      "line": 17,
       "link": "https://brakemanscanner.org/docs/warning_types/unscoped_find/",
       "code": "Request.find(params[:id])",
       "render_path": null,
@@ -112,6 +112,29 @@
       "note": ""
     },
     {
+      "warning_type": "File Access",
+      "warning_code": 16,
+      "fingerprint": "7501c46c81f7d45a1f7629d9a9321e68c6e4afa3e5465264e7574ef1bfbbf062",
+      "check_name": "FileAccess",
+      "message": "Model attribute used in file name",
+      "file": "app/sidekiq/split_worker.rb",
+      "line": 19,
+      "link": "https://brakemanscanner.org/docs/warning_types/file_access/",
+      "code": "FileUtils.remove_dir(\"#{ExtractionJob.find(extraction_job_id).extraction_folder}/tmp\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "SplitWorker",
+        "method": "perform"
+      },
+      "user_input": "ExtractionJob.find(extraction_job_id).extraction_folder",
+      "confidence": "Medium",
+      "cwe_id": [
+        22
+      ],
+      "note": "Not concerned about this as the FileUtils needs to find the file to be removed based on the Extraction Job record extraction folder information which is generated automatically by the system so should be safe from user input meddling."
+    },
+    {
       "warning_type": "Unscoped Find",
       "warning_code": 82,
       "fingerprint": "80cd626861db94d291b01519b71b81522b32db087a8eb1ecbbbc1cb99de52884",
@@ -141,7 +164,7 @@
       "check_name": "UnscopedFind",
       "message": "Unscoped call to `Request#find`",
       "file": "app/controllers/requests_controller.rb",
-      "line": 5,
+      "line": 9,
       "link": "https://brakemanscanner.org/docs/warning_types/unscoped_find/",
       "code": "Request.find(params[:id])",
       "render_path": null,
@@ -204,6 +227,6 @@
       "note": ""
     }
   ],
-  "updated": "2023-09-13 13:16:31 +1200",
+  "updated": "2023-11-01 11:51:13 +1300",
   "brakeman_version": "6.0.1"
 }

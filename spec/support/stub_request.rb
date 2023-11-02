@@ -13,6 +13,8 @@ WebMock.disable_net_connect!(
 
 RSpec.configure do |config|
   config.before(:suite) do
+    FileUtils.rm Dir.glob("#{ExtractionJob::EXTRACTIONS_FOLDER}/*/tmp/*")
+    FileUtils.rmdir Dir.glob("#{ExtractionJob::EXTRACTIONS_FOLDER}/*/tmp")
     FileUtils.rm Dir.glob("#{ExtractionJob::EXTRACTIONS_FOLDER}/*/*")
     FileUtils.rmdir Dir.glob("#{ExtractionJob::EXTRACTIONS_FOLDER}/*")
   end

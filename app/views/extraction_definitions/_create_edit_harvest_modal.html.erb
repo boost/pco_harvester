@@ -65,7 +65,7 @@
             </div>
             <div class="col-8">
               <% options = find_options_from_validations(ExtractionDefinition, :format) %>
-              <%= form.select :format, options, {}, class: 'form-select' %>
+              <%= form.select :format, options, {}, class: 'form-select', id: 'js-extraction-definition-format' %>
             </div>
 
             <div class="col-4">
@@ -97,6 +97,44 @@
                     [['Paginated', 'true'], ['Not Paginated', 'false']], model.paginated
                   ), {}, class: 'form-select' %>
             </div>
+
+            <div class="col-4 js-split d-none js-extraction-definition-split-dropdown-container">
+              <%= form.label :split, class: 'form-label' do %>
+                Split
+
+                <span
+                    data-bs-toggle="tooltip"
+                    data-bs-title="If this is a large file (more than 10MB) you can split it into multiple files of 100 records each so that it is easier to work with. Note that this feature is only currently available for the XML format."><i class="bi bi-question-circle" aria-label="helper text"></i>
+                </span>
+              <% end %>
+            </div>
+
+            <div class="col-8 js-split d-none js-extraction-definition-split-dropdown-container">
+              <%= form.select :split, options_for_select(
+                    [%w[No false], %w[Yes true]], model.split
+                  ), {}, class: 'form-select', id: 'js-extraction-definition-split-dropdown' %>
+            </div>
+
+            <div class="col-4 js-split d-none js-extraction-definition-split-selector-container">
+              <%= form.label :split_selector, class: 'form-label' do %>
+                Split Selector
+
+                <span
+                    data-bs-toggle="tooltip"
+                    data-bs-title="This selector is applied to the extracted file to determine how to split records"><i class="bi bi-question-circle" aria-label="helper text"></i>
+                </span>
+              <% end %>
+            </div>
+
+            <div class='col-8 js-split d-none js-extraction-definition-split-selector-container'>
+              <%= form.text_field :split_selector,
+                                  id: 'js-extraction-definition-split-selector',
+                                  class: {
+                                    'form-control': true,
+                                    'is-invalid': @harvest_definition.errors[:split_selector].any?
+                                  } %>
+            </div>
+
           </div>
 
           <div class='float-end mt-4'>

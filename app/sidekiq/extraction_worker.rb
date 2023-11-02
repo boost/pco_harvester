@@ -13,6 +13,8 @@ class ExtractionWorker < ApplicationWorker
       Extraction::EnrichmentExecution.new(extraction_job).call
     else
       Extraction::Execution.new(extraction_job, extraction_job.extraction_definition).call
+
+      SplitWorker.perform_async(extraction_job.id) if extraction_job.extraction_definition.split
     end
   end
 

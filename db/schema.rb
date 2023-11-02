@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_16_002448) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_31_013240) do
   create_table "destinations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "url", null: false
@@ -29,14 +29,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_16_002448) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "kind", default: 0
-    t.string "source_id"
     t.bigint "destination_id"
     t.integer "page", default: 1
-    t.string "total_selector"
-    t.integer "per_page"
     t.boolean "paginated"
     t.bigint "last_edited_by_id"
     t.bigint "pipeline_id"
+    t.string "source_id"
+    t.integer "per_page"
+    t.string "total_selector"
+    t.boolean "split", default: false, null: false
+    t.string "split_selector"
     t.index ["destination_id"], name: "index_extraction_definitions_on_destination_id"
     t.index ["last_edited_by_id"], name: "index_extraction_definitions_on_last_edited_by_id"
     t.index ["name"], name: "index_extraction_definitions_on_name", unique: true

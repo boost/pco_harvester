@@ -36,6 +36,12 @@ RSpec.describe ExtractionDefinition do
       it { is_expected.not_to validate_presence_of(:format).with_message("can't be blank") }
       it { is_expected.not_to validate_presence_of(:base_url).with_message("can't be blank") }
     end
+
+    context 'when the extraction definition needs to be split' do
+      subject! { build(:extraction_definition, pipeline: pipeline1, split: true) }
+
+      it { is_expected.to validate_presence_of(:split_selector).with_message("can't be blank") } 
+    end
   end
 
   describe '#validation numericality' do

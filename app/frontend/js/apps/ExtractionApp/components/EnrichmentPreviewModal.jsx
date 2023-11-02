@@ -6,6 +6,7 @@ import { request } from "~/js/utils/request";
 
 import Modal from "react-bootstrap/Modal";
 import Preview from "~/js/apps/ExtractionApp/components/Preview";
+import RunSample from "~/js/apps/ExtractionApp/components/RunSample";
 
 import { previewRequest } from "~/js/features/ExtractionApp/RequestsSlice";
 
@@ -56,18 +57,6 @@ const EnrichmentPreviewModal = ({
       setCurrentPage(currentPage - 1);
       setCurrentRecord(total_records);
     }
-  };
-
-  const handleSampleClick = async () => {
-    const response = await request
-      .post(
-        `/pipelines/${appDetails.pipeline.id}/harvest_definitions/${appDetails.harvestDefinition.id}/extraction_definitions/${appDetails.extractionDefinition.id}/extraction_jobs.json?kind=sample`
-      )
-      .then((response) => {
-        return response;
-      });
-
-    window.location.replace(response.data.location);
   };
 
   const requestNewPreview = async () => {
@@ -135,15 +124,7 @@ const EnrichmentPreviewModal = ({
             Return to edit extraction
           </button>
 
-          <button
-            className="btn btn-primary me-2"
-            onClick={() => {
-              handleSampleClick();
-            }}
-          >
-            <i className="bi bi-play me-1" aria-hidden="true"></i>
-            Run sample and transform data
-          </button>
+          <RunSample />
         </div>
       </Modal.Header>
       <Modal.Body>
