@@ -9,6 +9,7 @@ import {
 } from "~/js/features/ExtractionApp/RequestsSlice";
 import PreviewModal from "~/js/apps/ExtractionApp/components/PreviewModal";
 import EnrichmentPreviewModal from "~/js/apps/ExtractionApp/components/EnrichmentPreviewModal";
+import RunSample from "~/js/apps/ExtractionApp/components/RunSample";
 
 const HeaderActions = () => {
   const dispatch = useDispatch();
@@ -64,6 +65,8 @@ const HeaderActions = () => {
           <i className="bi bi-play" aria-hidden="true"></i> Preview
         </button>
       )}
+
+      {appDetails.extractionDefinition.split && <RunSample />}
 
       {appDetails.extractionDefinition.kind == "harvest" && (
         <PreviewModal

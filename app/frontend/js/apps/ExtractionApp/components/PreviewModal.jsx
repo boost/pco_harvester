@@ -3,10 +3,10 @@ import { createPortal } from "react-dom";
 import { useSelector } from "react-redux";
 import classNames from "classnames";
 import { selectAppDetails } from "~/js/features/ExtractionApp/AppDetailsSlice";
-import { request } from "~/js/utils/request";
 
 import Modal from "react-bootstrap/Modal";
 import Preview from "~/js/apps/ExtractionApp/components/Preview";
+import RunSample from "~/js/apps/ExtractionApp/components/RunSample";
 
 const PreviewModal = ({
   showModal,
@@ -20,18 +20,6 @@ const PreviewModal = ({
     "col-6": appDetails.extractionDefinition.paginated,
     "col-12": !appDetails.extractionDefinition.paginated,
   });
-
-  const handleSampleClick = async () => {
-    const response = await request
-      .post(
-        `/pipelines/${appDetails.pipeline.id}/harvest_definitions/${appDetails.harvestDefinition.id}/extraction_definitions/${appDetails.extractionDefinition.id}/extraction_jobs.json?kind=sample`
-      )
-      .then((response) => {
-        return response;
-      });
-
-    window.location.replace(response.data.location);
-  };
 
   return createPortal(
     <Modal
@@ -54,15 +42,8 @@ const PreviewModal = ({
             Return to edit extraction
           </button>
 
-          <button
-            className="btn btn-primary me-2"
-            onClick={() => {
-              handleSampleClick();
-            }}
-          >
-            <i className="bi bi-play me-1" aria-hidden="true"></i>
-            Run sample and transform data
-          </button>
+            <RunSample />
+
         </div>
       </Modal.Header>
       <Modal.Body>

@@ -4,7 +4,11 @@ const updateExtractionDefinitionModal = document.getElementById(
   "update-extraction-definition-modal"
 );
 
-if (updateExtractionDefinitionModal) {
+const createExtractionDefinitionModal = document.getElementById(
+  "create-harvest-extraction-definition-modal"
+);
+
+if (updateExtractionDefinitionModal || createExtractionDefinitionModal) {
   const extractionDefinitionFormat = document.getElementById(
     "js-extraction-definition-format"
   );
