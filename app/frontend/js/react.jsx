@@ -28,6 +28,12 @@ if (transformationAppHTMLElement !== null) {
         </ErrorBoundary>
       </React.StrictMode>
     );
+  } else {
+    root.render(
+      <p className='text-danger'>
+        Something went wrong when attempting to display this Transformation. This could mean that the provided record selector doesn't return anything or if the document is over 10 megabytes you will need to split it before it can be used in a Transformation. 
+      </p>
+    )
   }
 }
 
