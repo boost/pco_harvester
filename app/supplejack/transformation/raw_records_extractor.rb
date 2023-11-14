@@ -17,7 +17,11 @@ module Transformation
       return [] if @documents[page_number.to_i].nil?
       return [] if @documents[page_number.to_i].size_in_bytes > 10.megabytes
 
-      send("#{format.downcase}_extract", page_number)
+      begin
+        send("#{format.downcase}_extract", page_number)
+      rescue NoMethodError, Nokogiri::XML::XPath::SyntaxError
+        []
+      end
     end
 
     private
