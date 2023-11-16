@@ -9,6 +9,18 @@
   </div>
 
   <div class="float-end">
+    <% if @extraction_job.queued? || @extraction_job.running? %>
+      <%= button_to 'Cancel job',
+                    cancel_pipeline_harvest_definition_extraction_definition_extraction_job_path(
+                      @pipeline,
+                      @harvest_definition,
+                      @extraction_definition,
+                      @extraction_job
+                    ),
+                    class: 'btn btn-outline-danger me-1',
+                    form_class: 'd-inline' %>
+    <% end %>
+
     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">
       <i class="bi bi-trash" aria-hidden="true"></i> Delete results
     </button>
