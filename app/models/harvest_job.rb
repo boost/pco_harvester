@@ -12,6 +12,8 @@ class HarvestJob < ApplicationRecord
   delegate :extraction_definition, to: :harvest_definition
   delegate :transformation_definition, to: :harvest_definition
 
+  PROCESSES = %w[TransformationWorker LoadWorker DeleteWorker].freeze
+
   # This is to ensure that there is only ever one version of a HarvestJob running.
   # It is used when enqueing enrichments at the end of a harvest.
   validates :key, uniqueness: true
@@ -21,12 +23,15 @@ class HarvestJob < ApplicationRecord
     save!
   end
 
+  # The order of arguments is important to sidekiq workers
+  # If the order of arguments change in the TransformationWorker, LoadWorker, or DeleteWorker
+  # That change will need to be reflected here
+  # args[0] is assumed to be the harvest_job_id
   def cancel_sidekiq_workers!
     queue = Sidekiq::Queue.new
 
     queue.each do |job|
-      job.delete if job.klass == 'TransformationWorker' && job.args[1] == id
-      job.delete if job.klass == 'LoadWorker' && job.args[0] == id
+      job.delete if PROCESSES.include?(job.klass) && job.args[0] == id
     end
   end
 end
