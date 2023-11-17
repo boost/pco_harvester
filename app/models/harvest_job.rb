@@ -20,4 +20,13 @@ class HarvestJob < ApplicationRecord
     self.name = "#{harvest_definition.name}__job-#{id}"
     save!
   end
+
+  def cancel_sidekiq_workers!
+    queue = Sidekiq::Queue.new
+
+    queue.each do |job|
+      job.delete if job.klass == 'TransformationWorker' && job.args[1] == id
+      job.delete if job.klass == 'LoadWorker' && job.args[0] == id
+    end
+  end
 end

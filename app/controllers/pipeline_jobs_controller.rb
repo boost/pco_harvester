@@ -28,6 +28,7 @@ class PipelineJobsController < ApplicationController
       @pipeline_job.harvest_jobs.each do |harvest_job|
         harvest_job.cancelled!
         harvest_job.extraction_job.cancelled!
+        harvest_job.cancel_sidekiq_workers!
       end
 
       flash.notice = t('.success')
