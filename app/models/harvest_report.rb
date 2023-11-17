@@ -84,9 +84,9 @@ class HarvestReport < ApplicationRecord
   def status
     return 'queued'    if statuses.all?('queued')
     return 'completed' if statuses.all?('completed')
-    return 'cancelled' if statuses.any?('cancelled')
-    return 'running'   if statuses.any?('running')
-    return 'running'   if statuses.any?('completed') && statuses.any?('queued')
+    return 'cancelled' if statuses.any?('cancelled') || harvest_job.cancelled?
+
+    'running' if (statuses.any?('completed') && statuses.any?('queued')) || statuses.any?('running')
   end
 
   def transformation_workers_completed?

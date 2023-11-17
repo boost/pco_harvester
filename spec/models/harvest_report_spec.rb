@@ -188,6 +188,11 @@ RSpec.describe HarvestReport do
                               transformation_status: 'completed', load_status: 'completed', delete_status: 'completed')
     end
 
+    let(:cancelled_harvest_job) do
+      create(:harvest_report, pipeline_job:, harvest_job: create(:harvest_job, harvest_definition:, pipeline_job:, status: 'cancelled'), extraction_status: 'running', transformation_status: 'queued',
+                              load_status: 'queued', delete_status: 'queued')
+    end
+
     it 'returns queued if all processes are queued' do
       expect(queued.status).to eq 'queued'
     end
@@ -206,6 +211,10 @@ RSpec.describe HarvestReport do
 
     it 'returns canclled if something has been cancelled' do
       expect(cancelled.status).to eq 'cancelled'
+    end
+
+    it 'returns cancelled if the harvest_job has been cancelled' do
+      expect(cancelled_harvest_job.status).to eq 'cancelled'
     end
   end
 
