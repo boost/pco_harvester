@@ -27,7 +27,7 @@ class HarvestJob < ApplicationRecord
   # If the order of arguments change in the TransformationWorker, LoadWorker, or DeleteWorker
   # That change will need to be reflected here
   # args[0] is assumed to be the harvest_job_id
-  def cancel_sidekiq_workers!
+  def cancel_sidekiq_workers
     queue = Sidekiq::Queue.new
 
     queue.each do |job|
