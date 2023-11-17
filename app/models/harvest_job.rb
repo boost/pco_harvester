@@ -23,7 +23,15 @@ class HarvestJob < ApplicationRecord
     save!
   end
 
-  # The order of arguments is important to sidekiq workers
+  def cancel
+    extraction_job.cancelled! unless extraction_job.completed?
+    cancel_sidekiq_workers
+    cancelled!
+  end
+
+  private
+
+  # The order of arguments is important to sidekiq workers as they do not support keyword arguments
   # If the order of arguments change in the TransformationWorker, LoadWorker, or DeleteWorker
   # That change will need to be reflected here
   # args[0] is assumed to be the harvest_job_id
