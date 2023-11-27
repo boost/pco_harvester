@@ -83,10 +83,10 @@ class HarvestReport < ApplicationRecord
 
   def status
     return 'queued'    if statuses.all?('queued')
+    return 'cancelled' if considered_cancelled?
     return 'completed' if statuses.all?('completed')
-    return 'cancelled' if statuses.any?('cancelled')
-    return 'running'   if statuses.any?('running')
-    return 'running'   if statuses.any?('completed') && statuses.any?('queued')
+
+    'running' if considered_running?
   end
 
   def transformation_workers_completed?
@@ -102,6 +102,14 @@ class HarvestReport < ApplicationRecord
   end
 
   private
+
+  def considered_cancelled?
+    statuses.any?('cancelled') || harvest_job.cancelled? || pipeline_job.cancelled?
+  end
+
+  def considered_running?
+    (statuses.any?('completed') && statuses.any?('queued')) || statuses.any?('running')
+  end
 
   def times
     TIME_METRICS.filter_map { |time| send(time) }

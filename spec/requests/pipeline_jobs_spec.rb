@@ -121,6 +121,7 @@ RSpec.describe 'PipelineJobs' do
       it 'cancels the pipeline and harvest extraction_jobs' do
         expect(pipeline_job.cancelled?).to be false
         expect(harvest_job.cancelled?).to be false
+        harvest_job.extraction_job.running!
 
         post cancel_pipeline_pipeline_job_path(pipeline, pipeline_job)
 
@@ -130,6 +131,20 @@ RSpec.describe 'PipelineJobs' do
         expect(pipeline_job.cancelled?).to be true
         expect(harvest_job.cancelled?).to be true
         expect(harvest_job.extraction_job.cancelled?).to be true
+      end
+
+      it 'does not cancel extraction jobs that have allready completed' do
+        expect(pipeline_job.cancelled?).to be false
+        expect(harvest_job.cancelled?).to be false
+
+        post cancel_pipeline_pipeline_job_path(pipeline, pipeline_job)
+
+        pipeline_job.reload
+        harvest_job.reload
+
+        expect(pipeline_job.cancelled?).to be true
+        expect(harvest_job.cancelled?).to be true
+        expect(harvest_job.extraction_job.cancelled?).to be false
       end
 
       it 'displays an appropriate message' do

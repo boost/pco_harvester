@@ -25,10 +25,7 @@ class PipelineJobsController < ApplicationController
 
   def cancel
     if @pipeline_job.cancelled!
-      @pipeline_job.harvest_jobs.each do |harvest_job|
-        harvest_job.cancelled!
-        harvest_job.extraction_job.cancelled!
-      end
+      @pipeline_job.harvest_jobs.each(&:cancel)
 
       flash.notice = t('.success')
     else

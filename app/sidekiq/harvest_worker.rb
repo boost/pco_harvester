@@ -30,8 +30,11 @@ class HarvestWorker < ApplicationWorker
     @harvest_report.extraction_completed!
 
     (extraction_job.extraction_definition.page..extraction_job.documents.total_pages).each do |page|
+      @pipeline_job.reload
+      break if @pipeline_job.cancelled?
+
       @harvest_report.increment_pages_extracted!
-      TransformationWorker.perform_async(extraction_job.id, @harvest_job.id, page)
+      TransformationWorker.perform_async(@harvest_job.id, page)
       @harvest_report.increment_transformation_workers_queued!
     end
   end

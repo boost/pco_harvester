@@ -176,4 +176,66 @@ RSpec.describe 'ExtractionJobs' do
       end
     end
   end
+
+  describe 'POST /cancel' do
+    context 'when the cancellation is successful' do
+      it 'cancels the extraction job' do
+        expect(subject.cancelled?).to eq false
+  
+        post cancel_pipeline_harvest_definition_extraction_definition_extraction_job_path(pipeline, harvest_definition, extraction_definition, subject)
+  
+        subject.reload
+  
+        expect(subject.cancelled?).to eq true
+      end
+  
+      it 'displays an appropriate message' do
+        post cancel_pipeline_harvest_definition_extraction_definition_extraction_job_path(pipeline, harvest_definition, extraction_definition, subject)
+  
+        follow_redirect!
+  
+        expect(response.body).to include 'Job cancelled successfully'
+      end
+  
+      it 'redirects to the extraction job page' do
+        post cancel_pipeline_harvest_definition_extraction_definition_extraction_job_path(pipeline, harvest_definition, extraction_definition, subject)
+  
+        expect(response).to redirect_to pipeline_harvest_definition_extraction_definition_extraction_job_path(
+          pipeline, harvest_definition, extraction_definition, subject
+        )
+      end
+    end
+
+    context 'when the cancellation is not successful' do
+      before do
+        allow_any_instance_of(ExtractionJob).to receive(:cancelled!).and_return(false)
+      end
+
+      it 'does not cancel the extraction job' do
+        expect(subject.cancelled?).to eq false
+  
+        post cancel_pipeline_harvest_definition_extraction_definition_extraction_job_path(pipeline, harvest_definition, extraction_definition, subject)
+  
+        subject.reload
+  
+        expect(subject.cancelled?).to eq false
+      end
+  
+      it 'displays an appropriate message' do
+        post cancel_pipeline_harvest_definition_extraction_definition_extraction_job_path(pipeline, harvest_definition, extraction_definition, subject)
+  
+        follow_redirect!
+  
+        expect(response.body).to include 'There was an issue cancelling the job'
+      end
+  
+      it 'redirects to the extraction job page' do
+        post cancel_pipeline_harvest_definition_extraction_definition_extraction_job_path(pipeline, harvest_definition, extraction_definition, subject)
+  
+        expect(response).to redirect_to pipeline_harvest_definition_extraction_definition_extraction_job_path(
+          pipeline, harvest_definition, extraction_definition, subject
+        )
+      end
+    end
+  end
 end

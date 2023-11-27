@@ -31,7 +31,7 @@ class SplitWorker
 
     (@extraction_job.extraction_definition.page..@extraction_job.documents.total_pages).each do |page|
       harvest_report.increment_pages_extracted!
-      TransformationWorker.perform_async(@extraction_job.id, @extraction_job.harvest_job.id, page)
+      TransformationWorker.perform_async(@extraction_job.harvest_job.id, page)
       harvest_report.increment_transformation_workers_queued!
     end
   end

@@ -34,7 +34,9 @@ Rails.application.routes.draw do
           post :clone
         end
 
-        resources :extraction_jobs, only: %i[index show create destroy]
+        resources :extraction_jobs, only: %i[index show create destroy] do
+          post :cancel, on: :member
+        end
 
         resources :requests do
           resources :parameters
