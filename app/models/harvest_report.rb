@@ -83,8 +83,8 @@ class HarvestReport < ApplicationRecord
 
   def status
     return 'queued'    if statuses.all?('queued')
-    return 'completed' if statuses.all?('completed')
     return 'cancelled' if considered_cancelled?
+    return 'completed' if statuses.all?('completed')
 
     'running' if considered_running?
   end
