@@ -104,7 +104,7 @@ class HarvestReport < ApplicationRecord
   private
 
   def considered_cancelled?
-    statuses.any?('cancelled') || harvest_job.cancelled?
+    statuses.any?('cancelled') || harvest_job.cancelled? || pipeline_job.cancelled?
   end
 
   def considered_running?
