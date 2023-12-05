@@ -18,7 +18,7 @@ RSpec.describe Load::Execution do
   describe '#call' do
     context 'when the harvest definition is for a harvest' do
       before do
-        stub_request(:post, 'http://www.localhost:3000/harvester/records')
+        stub_request(:post, 'http://www.localhost:3000/harvester/records/create_batch')
           .with(
             body: "{\"records\":[{\"fields\":{\"title\":[\"title\"],\"description\":[\"description\"],\"source_id\":\"test\",\"priority\":0,\"job_id\":\"#{harvest_job.name}\"}}]}",
             headers: {
