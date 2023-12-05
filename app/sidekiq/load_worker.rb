@@ -15,7 +15,7 @@ class LoadWorker
 
     transformed_records.each_slice(100) do |batch|
       Load::Execution.new(batch, @harvest_job, api_record_id).call
-      @harvest_report.increment_records_loaded!(transformed_records.count)
+      @harvest_report.increment_records_loaded!(batch.count)
       @harvest_report.update(load_updated_time: Time.zone.now)
     end
 
