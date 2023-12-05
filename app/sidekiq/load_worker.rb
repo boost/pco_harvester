@@ -13,9 +13,9 @@ class LoadWorker
 
     transformed_records = JSON.parse(records)
 
-    transformed_records.each do |transformed_record|
-      Load::Execution.new(transformed_record, @harvest_job, api_record_id).call
-      @harvest_report.increment_records_loaded!
+    transformed_records.each_slice(100) do |batch|
+      Load::Execution.new(batch, @harvest_job, api_record_id).call
+      @harvest_report.increment_records_loaded!(transformed_records.count)
       @harvest_report.update(load_updated_time: Time.zone.now)
     end
 
