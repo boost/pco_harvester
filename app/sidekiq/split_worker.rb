@@ -25,6 +25,7 @@ class SplitWorker
 
   def create_transformation_jobs
     harvest_report = @extraction_job.harvest_job.harvest_report
+    pipeline_job = harvest_report.pipeline_job
 
     harvest_report.update(pages_extracted: 0)
     harvest_report.extraction_completed!
@@ -33,6 +34,9 @@ class SplitWorker
       harvest_report.increment_pages_extracted!
       TransformationWorker.perform_async(@extraction_job.harvest_job.id, page)
       harvest_report.increment_transformation_workers_queued!
+
+      pipeline_job.reload
+      break if pipeline_job.cancelled?
     end
   end
 
