@@ -27,8 +27,7 @@ class SplitWorker
     harvest_report = @extraction_job.harvest_job.harvest_report
     pipeline_job = harvest_report.pipeline_job
 
-    harvest_report.update(pages_extracted: 0)
-    harvest_report.extraction_completed!
+    reset_harvest_report(harvest_report)
 
     (@extraction_job.extraction_definition.page..@extraction_job.documents.total_pages).each do |page|
       harvest_report.increment_pages_extracted!
@@ -38,6 +37,11 @@ class SplitWorker
       pipeline_job.reload
       break if pipeline_job.cancelled?
     end
+  end
+
+  def reset_harvest_report(harvest_report)
+    harvest_report.update(pages_extracted: 0)
+    harvest_report.extraction_completed!
   end
 
   def setup_tmp_directory
