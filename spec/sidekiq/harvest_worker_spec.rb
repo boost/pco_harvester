@@ -44,16 +44,20 @@ RSpec.describe HarvestWorker, type: :job do
     end
 
     context 'when the HarvestJob is for an Enrichment' do
+      before do
+        harvest_definition.update(kind: 'enrichment')
+      end
+
       it 'creates an ExtractionJob' do
         expect {
-          HarvestWorker.new.perform(enrichment_job.id)
+          HarvestWorker.new.perform(harvest_job.id)
         }.to change(ExtractionJob, :count).by(1)
       end
 
       it 'does not queue any TransformationWorkers' do
         expect(TransformationWorker).to receive(:perform_async).exactly(0).times.and_call_original
 
-        HarvestWorker.new.perform(enrichment_job.id)
+        HarvestWorker.new.perform(harvest_job.id)
       end
     end
 
