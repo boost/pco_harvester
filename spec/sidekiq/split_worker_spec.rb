@@ -93,6 +93,13 @@ RSpec.describe SplitWorker, type: :job do
         SplitWorker.new.perform(extraction_job.id) 
       end
 
+      it 'stops enqueuing TransformationWorkers if the pipeline has been cancelled' do
+        expect(TransformationWorker).to receive(:perform_async).exactly(1).times.and_call_original
+        pipeline_job.cancelled!
+
+        SplitWorker.new.perform(extraction_job.id)
+      end
+
       it 'updates the Harvest Report appropriately' do
         expect(harvest_report.pages_extracted).to eq 0
 
