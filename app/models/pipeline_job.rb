@@ -51,6 +51,8 @@ class PipelineJob < ApplicationRecord
   end
 
   def harvest_completed?
+    return true if harvest_reports.find_by(kind: 'harvest').nil?
+
     harvest_reports.find_by(kind: 'harvest').completed?
   end
 

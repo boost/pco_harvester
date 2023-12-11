@@ -2,8 +2,8 @@
 
 module Load
   class Execution
-    def initialize(record, harvest_job, api_record_id = nil)
-      @record             = record
+    def initialize(records, harvest_job, api_record_id = nil)
+      @records            = records
       @harvest_job        = harvest_job
       @destination        = harvest_job.pipeline_job.destination
       @harvest_definition = harvest_job.harvest_definition
@@ -23,8 +23,10 @@ module Load
     def harvest_request
       connection(@destination.url, {}, { 'Authentication-Token' => @destination.api_key })
         .post(
-          '/harvester/records',
-          { record: build_record }.to_json,
+          '/harvester/records/create_batch',
+          {
+            records: build_records
+          }.to_json,
           headers
         )
     end
@@ -35,18 +37,23 @@ module Load
       connection(@destination.url, {}, { 'Authentication-Token' => @destination.api_key })
         .post(
           "/harvester/records/#{@api_record_id}/fragments.json",
-          { fragment: build_record, required_fragments: }.to_json,
+          { fragment: build_record(@records.first), required_fragments: }.to_json,
           headers
         )
     end
 
-    def build_record
-      record = JSON.parse(@record.to_json)['transformed_record']
+    def build_records
+      @records.map { |record| { fields: build_record(record) } }
+    end
+
+    def build_record(record)
+      record = JSON.parse(record.to_json)['transformed_record']
       record.transform_values! { |value| [value].flatten(1) }
 
       record['source_id'] = @harvest_definition.source_id
       record['priority']  = @harvest_definition.priority
       record['job_id']    = @harvest_job.name
+
       record
     end
 
