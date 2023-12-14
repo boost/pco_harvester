@@ -64,5 +64,27 @@ RSpec.describe LoadWorker, type: :job do
         end.not_to change(HarvestJob, :count)
       end
     end
+
+    context 'when the Load Execution raises an exception' do
+      before do
+        allow_any_instance_of(Load::Execution).to receive(:call).and_raise(StandardError)
+      end
+
+      it 'retries the Load Execution' do
+        expect(Load::Execution).to receive(:new).exactly(5).times
+
+        described_class.new.perform(harvest_job.id, "[{\"transformed_record\":{\"internal_identifier\":\"test\"}}]")
+      end
+
+      it 'still increments the number of workers completed' do
+        expect(harvest_report.load_workers_queued).to eq 1
+        expect(harvest_report.load_workers_completed).to eq 0
+
+        described_class.new.perform(harvest_job.id, "[{\"transformed_record\":{\"internal_identifier\":\"test\"}}]")
+        harvest_report.reload
+
+        expect(harvest_report.load_workers_completed).to eq 1
+      end
+    end
   end
 end
