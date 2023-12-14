@@ -14,12 +14,22 @@ class LoadWorker
     transformed_records = JSON.parse(records)
 
     transformed_records.each_slice(100) do |batch|
-      Load::Execution.new(batch, @harvest_job, api_record_id).call
-      @harvest_report.increment_records_loaded!(batch.count)
-      @harvest_report.update(load_updated_time: Time.zone.now)
+      process_batch(batch, api_record_id)
     end
 
     job_end
+  end
+
+  def process_batch(batch, api_record_id)
+    ::Retriable.retriable(tries: 5, base_interval: 1, multiplier: 2) do
+      ::Sidekiq.logger.info 'Retrying Load Execution' if defined?(Sidekiq)
+      Load::Execution.new(batch, @harvest_job, api_record_id).call
+
+      @harvest_report.increment_records_loaded!(batch.count)
+      @harvest_report.update(load_updated_time: Time.zone.now)
+    end
+  rescue StandardError => e
+    ::Sidekiq.logger.info "Load Excecution error: #{e}" if defined?(Sidekiq)
   end
 
   def job_start
