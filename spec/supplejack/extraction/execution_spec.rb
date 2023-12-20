@@ -272,4 +272,38 @@ RSpec.describe Extraction::Execution do
       end
     end
   end
+
+  context 'when a user has defined custom stop conditions' do
+    let(:subject) { described_class.new(full_job, extraction_definition) }
+    let(:extraction_definition) do
+      create(:extraction_definition, format: 'JSON', page: 1, paginated: true)
+    end
+    let(:request_one) { create(:request, :inaturalist_initial_request, extraction_definition:) }
+    let(:request_two) { create(:request, :inaturalist_main_request, extraction_definition:) }
+    let!(:stop_condition) { create(:stop_condition, content: 'JsonPath.new("$.page").on(response).first == 1', extraction_definition:) }
+
+    before do
+      stub_inaturalist_harvest_requests(request_one,
+                                        {
+                                          1 => '0',
+                                          2 => '2098031',
+                                          3 => '4218778',
+                                          4 => '7179629'
+                                        })
+
+      stub_inaturalist_harvest_requests(request_two,
+                                        {
+                                          1 => '0',
+                                          2 => '2098031',
+                                          3 => '4218778',
+                                          4 => '7179629',
+                                        })
+    end
+
+    it 'stops once a stop condition has been met' do
+      expect(Extraction::DocumentExtraction).to receive(:new).exactly(2).times.and_call_original
+
+      subject.call
+    end
+  end
 end

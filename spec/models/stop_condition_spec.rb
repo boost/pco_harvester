@@ -12,8 +12,8 @@ RSpec.describe StopCondition, type: :model do
       expect(subject.name).to eq 'Name'
     end
 
-    it 'has a block' do
-      expect(subject.block).to eq 'response.status == 200'
+    it 'has content' do
+      expect(subject.content).to eq 'response.status == 200'
     end
 
     it { is_expected.to belong_to(:extraction_definition) }

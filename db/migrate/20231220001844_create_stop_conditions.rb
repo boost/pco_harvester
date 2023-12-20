@@ -4,7 +4,7 @@ class CreateStopConditions < ActiveRecord::Migration[7.0]
   def change
     create_table :stop_conditions do |t|
       t.string :name
-      t.text :block
+      t.text :content
 
       t.timestamps
     end
