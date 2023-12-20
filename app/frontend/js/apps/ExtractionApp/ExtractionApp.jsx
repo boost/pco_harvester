@@ -8,6 +8,7 @@ import ParameterList from "/js/apps/ExtractionApp/components/ParameterList";
 import ParameterNavigationPanel from "/js/apps/ExtractionApp/components/ParameterNavigationPanel";
 import SharedDefinitionsView from "/js/components/SharedDefinitionsView";
 import SharedDefinitionsModal from "/js/components/SharedDefinitionsModal";
+import StopConditionsView from '/js/apps/ExtractionApp/components/StopConditionsView';
 
 import { selectAppDetails } from "~/js/features/TransformationApp/AppDetailsSlice";
 import { selectUiAppDetails } from "~/js/features/TransformationApp/UiAppDetailsSlice";
@@ -42,9 +43,12 @@ const ExtractionApp = ({}) => {
       <SharedDefinitionsModal pipelineId={appDetails.pipeline.id} />
 
       <div className="row">
-        {!uiAppDetails.sharedDefinitionsTabActive && queryBuilderView()}
+        {(!uiAppDetails.sharedDefinitionsTabActive && !uiAppDetails.stopConditionsTabActive) && queryBuilderView()}
         {uiAppDetails.sharedDefinitionsTabActive && (
           <SharedDefinitionsView definitionType="extraction" />
+        )}
+        { uiAppDetails.stopConditionsTabActive && (
+          <StopConditionsView />
         )}
       </div>
     </>
