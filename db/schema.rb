@@ -220,7 +220,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_20_001844) do
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "extraction_definition_id", null: false
+    t.bigint "extraction_definition_id"
     t.index ["extraction_definition_id"], name: "index_stop_conditions_on_extraction_definition_id"
   end
 

@@ -9,6 +9,6 @@ class CreateStopConditions < ActiveRecord::Migration[7.0]
       t.timestamps
     end
 
-    add_reference :stop_conditions, :extraction_definition, null: false
+    add_reference :stop_conditions, :extraction_definition
   end
 end

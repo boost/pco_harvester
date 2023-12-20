@@ -13,7 +13,7 @@ RSpec.describe StopCondition, type: :model do
     end
 
     it 'has content' do
-      expect(subject.content).to eq 'response.status == 200'
+      expect(subject.content).to eq "JsonPath.new('$.page').on(response).first == 1"
     end
 
     it { is_expected.to belong_to(:extraction_definition) }
