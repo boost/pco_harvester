@@ -8,6 +8,7 @@ import ParameterList from "/js/apps/ExtractionApp/components/ParameterList";
 import ParameterNavigationPanel from "/js/apps/ExtractionApp/components/ParameterNavigationPanel";
 
 import StopConditionNavigationPanel from '/js/apps/ExtractionApp/components/StopConditionNavigationPanel';
+import StopCondition from '/js/apps/ExtractionApp/components/StopCondition';
 
 import SharedDefinitionsView from "/js/components/SharedDefinitionsView";
 import SharedDefinitionsModal from "/js/components/SharedDefinitionsModal";
@@ -15,9 +16,14 @@ import SharedDefinitionsModal from "/js/components/SharedDefinitionsModal";
 import { selectAppDetails } from "~/js/features/TransformationApp/AppDetailsSlice";
 import { selectUiAppDetails } from "~/js/features/TransformationApp/UiAppDetailsSlice";
 
+import { selectStopConditionIds } from '/js/features/ExtractionApp/StopConditionsSlice';
+import { map } from 'lodash';
+
 const ExtractionApp = ({}) => {
   const appDetails = useSelector(selectAppDetails);
   const uiAppDetails = useSelector(selectUiAppDetails);
+
+  const stopConditionIds = useSelector(selectStopConditionIds);
 
   const queryBuilderView = () => {
     return (
@@ -45,7 +51,13 @@ const ExtractionApp = ({}) => {
         </div>
 
         <div className='col-10'>
-          <p>Stop Conditions</p>
+          <div className='col-12 mb-4'>
+            <div className='row gy-4'>
+              {map(stopConditionIds, (stopConditionId) => (
+                <StopCondition id={stopConditionId} key={stopConditionId} />
+              ))}
+            </div>
+          </div>
         </div>
       </>
     )

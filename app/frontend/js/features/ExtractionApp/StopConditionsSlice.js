@@ -23,15 +23,16 @@ export const addStopCondition = createAsyncThunk(
       extractionDefinitionId,
     } = payload;
 
+    console.log(`/pipelines/${pipelineId}/harvest_definitions/${harvestDefinitionId}/extraction_definitions/${extractionDefinitionId}/stop_conditions`)
+
     const response = request
       .post(
         `/pipelines/${pipelineId}/harvest_definitions/${harvestDefinitionId}/extraction_definitions/${extractionDefinitionId}/stop_conditions`,
         {
-          parameter: {
-            request_id: requestId,
-            kind: kind,
+          stop_condition: {
             name: name,
             content: content,
+            extraction_definition_id: extractionDefinitionId
           },
         }
       )
@@ -41,7 +42,7 @@ export const addStopCondition = createAsyncThunk(
 
     return response;
   }
-)
+);
 
 const stopConditionsSlice = createSlice({
   name: "stopConditionsSlice",
