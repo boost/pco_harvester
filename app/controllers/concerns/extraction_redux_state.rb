@@ -18,7 +18,8 @@ module ExtractionReduxState
       requests: requests_slice,
       parameters: parameters_slice,
       sharedDefinitions: extraction_shared_definitions_slice,
-      appDetails: extraction_app_details_slice
+      appDetails: extraction_app_details_slice,
+      stopConditions: stop_conditions_slice
     }
   end
 
@@ -26,7 +27,8 @@ module ExtractionReduxState
     {
       parameters: ui_parameters_slice,
       requests: ui_requests_slice,
-      appDetails: ui_extraction_app_details_slice
+      appDetails: ui_extraction_app_details_slice,
+      stopConditions: ui_stop_conditions_slice
     }
   end
 
@@ -59,6 +61,13 @@ module ExtractionReduxState
     }
   end
 
+  def stop_conditions_slice
+    {
+      ids: @extraction_definition.stop_conditions.pluck(:id),
+      entities: @extraction_definition.stop_conditions.map(&:to_h).index_by { |request| request[:id] }
+    }
+  end
+
   def ui_extraction_app_details_slice
     {
       activeRequest: active_request_id,
@@ -78,6 +87,25 @@ module ExtractionReduxState
     {
       ids: @parameters.pluck(:id),
       entities: parameter_entities.index_by { |parameter| parameter[:id] }
+    }
+  end
+
+  def ui_stop_conditions_slice
+    stop_condition_entities = @extraction_definition.stop_conditions.map { |condition| ui_stop_condition_entity(condition) }
+
+    {
+      ids: @extraction_definition.stop_conditions.pluck(:id),
+      entities: stop_condition_entities.index_by { |condition| condition[:id] }
+    }
+  end
+
+  def ui_stop_condition_entity(condition)
+    {
+      id: condition[:id],
+      saved: true,
+      saving: false,
+      deleting: false,
+      active: false,
     }
   end
 

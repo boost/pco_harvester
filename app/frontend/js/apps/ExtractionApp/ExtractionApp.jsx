@@ -6,9 +6,11 @@ import NavTabs from "/js/apps/ExtractionApp/components/NavTabs";
 import Request from "/js/apps/ExtractionApp/components/Request";
 import ParameterList from "/js/apps/ExtractionApp/components/ParameterList";
 import ParameterNavigationPanel from "/js/apps/ExtractionApp/components/ParameterNavigationPanel";
+
+import StopConditionNavigationPanel from '/js/apps/ExtractionApp/components/StopConditionNavigationPanel';
+
 import SharedDefinitionsView from "/js/components/SharedDefinitionsView";
 import SharedDefinitionsModal from "/js/components/SharedDefinitionsModal";
-import StopConditionsView from '/js/apps/ExtractionApp/components/StopConditionsView';
 
 import { selectAppDetails } from "~/js/features/TransformationApp/AppDetailsSlice";
 import { selectUiAppDetails } from "~/js/features/TransformationApp/UiAppDetailsSlice";
@@ -35,6 +37,20 @@ const ExtractionApp = ({}) => {
     );
   };
 
+  const stopConditionsView = () => {
+    return(
+      <>
+        <div className='col-2'>
+          <StopConditionNavigationPanel />
+        </div>
+
+        <div className='col-10'>
+          <p>Stop Conditions</p>
+        </div>
+      </>
+    )
+  }
+
   return (
     <>
       <HeaderActions />
@@ -48,7 +64,7 @@ const ExtractionApp = ({}) => {
           <SharedDefinitionsView definitionType="extraction" />
         )}
         { uiAppDetails.stopConditionsTabActive && (
-          <StopConditionsView />
+          stopConditionsView()
         )}
       </div>
     </>

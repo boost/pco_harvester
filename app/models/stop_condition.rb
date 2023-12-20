@@ -14,4 +14,14 @@ class StopCondition < ApplicationRecord
   end
   # rubocop:enable Lint/UnusedBlockArgument
   # rubocop:enable Security/Eval
+
+  def to_h
+    {
+      id:,
+      name:,
+      content:,
+      created_at:,
+      updated_at:
+    }
+  end
 end
