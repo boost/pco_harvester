@@ -1,10 +1,20 @@
 import React from "react";
 
-import AddStopCondition from "./AddStopCondition";
 
+import { useSelector, useDispatch } from 'react-redux';
+import AddStopCondition from "./AddStopCondition";
 import Tooltip from "~/js/components/Tooltip";
+import StopConditionNavigationListItem from './StopConditionNavigationListItem';
+
+import { selectAllStopConditions } from '~/js/features/ExtractionApp/StopConditionsSlice';
+import { toggleDisplayStopConditions } from "~/js/features/ExtractionApp/UiStopConditionsSlice";
 
 const StopConditionNavigationPanel = () => {
+
+  const dispatch = useDispatch();
+
+  const stopConditions = useSelector(selectAllStopConditions);
+
   return (
     <div className="card field-nav-panel">
       <div className="d-flex flex-column overflow-auto">
@@ -23,12 +33,12 @@ const StopConditionNavigationPanel = () => {
               <li
                 className="dropdown-item card__control-action"
                 onClick={() => {
-                  // dispatch(
-                  //   toggleDisplayParameters({
-                  //     parameters: queryParameters,
-                  //     displayed: false,
-                  //   })
-                  // );
+                  dispatch(
+                    toggleDisplayStopConditions({
+                      stopConditions: stopConditions,
+                      displayed: false,
+                    })
+                  );
                 }}
               >
                 <i className="bi bi-eye-slash me-2"></i> Hide all
@@ -37,12 +47,12 @@ const StopConditionNavigationPanel = () => {
               <li
                 className="dropdown-item card__control-action"
                 onClick={() => {
-                  // dispatch(
-                  //   toggleDisplayParameters({
-                  //     parameters: queryParameters,
-                  //     displayed: true,
-                  //   })
-                  // );
+                  dispatch(
+                    toggleDisplayStopConditions({
+                      stopConditions: stopConditions,
+                      displayed: true,
+                    })
+                  );
                 }}
               >
                 <i className="bi bi-eye me-2"></i> Show all
@@ -55,10 +65,11 @@ const StopConditionNavigationPanel = () => {
           <AddStopCondition />
 
           <ul className="field-nav nav nav-pills flex-column overflow-auto flex-nowrap">
-            {/* <ParameterNavigationList
-              requestId={uiAppDetails.activeRequest}
-              kind="query"
-            /> */}
+
+            { stopConditions.map((stopCondition) => {
+              return <StopConditionNavigationListItem id={stopCondition.id} key={stopCondition.id} />;
+            })} 
+            
           </ul>
         </div>
       </div>

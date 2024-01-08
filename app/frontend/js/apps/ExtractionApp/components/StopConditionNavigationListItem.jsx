@@ -1,21 +1,20 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectStopConditionById } from "~/js/features/ExtractionApp/StopConditionsSlice";
-// import {
-//   selectUiParameterById,
-//   toggleDisplayParameter,
-//   setActiveParameter,
-// } from "~/js/features/ExtractionApp/UiParametersSlice";
+import {
+  selectUiStopConditionById,
+  toggleDisplayStopCondition,
+  setActiveStopCondition,
+} from "~/js/features/ExtractionApp/UiStopConditionsSlice";
 
 const StopConditionNavigationListItem = ({ id }) => {
   const dispatch = useDispatch();
-
   const { name } = useSelector((state) =>
     selectStopConditionById(state, id)
   );
-  // const { displayed } = useSelector((state) =>
-  //   selectUiParameterById(state, id)
-  // );
+  const { displayed } = useSelector((state) =>
+    selectUiStopConditionById(state, id)
+  );
 
   const handleListItemClick = () => {
     const desiredDisplaySetting = !displayed;
