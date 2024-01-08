@@ -51,13 +51,35 @@ const ExtractionApp = ({}) => {
         </div>
 
         <div className='col-10'>
-          <div className='col-12 mb-4'>
-            <div className='row gy-4'>
-              {map(stopConditionIds, (stopConditionId) => (
-                <StopCondition id={stopConditionId} key={stopConditionId} />
-              ))}
+          <div class="card">
+            <div class="card-body">
+              <h5>Stop Conditions</h5>
+              
+              <p>
+                This is how you tell an extraction to stop. By default an extraction will stop when one of the following conditions have been met: 
+              </p>
+                
+              <ul>
+                <li>
+                  The extraction has reached a set number of pages.
+                </li>
+
+                <li>
+                  The content source has returned an unsuccessful status code.
+                </li>
+
+                <li>
+                  The exact same document has been extracted twice in a row.
+                </li>
+              </ul>
+
+              <p>If the above conditions aren't enough for your use case, you can add custom stop conditions here. Note that stop conditions are not evaluated as part of the extraction preview.</p>
             </div>
           </div>
+
+          {map(stopConditionIds, (stopConditionId) => (
+            <StopCondition id={stopConditionId} key={stopConditionId} />
+          ))}
         </div>
       </>
     )

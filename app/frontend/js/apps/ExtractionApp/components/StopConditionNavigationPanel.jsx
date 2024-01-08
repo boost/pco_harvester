@@ -3,7 +3,6 @@ import React from "react";
 
 import { useSelector, useDispatch } from 'react-redux';
 import AddStopCondition from "./AddStopCondition";
-import Tooltip from "~/js/components/Tooltip";
 import StopConditionNavigationListItem from './StopConditionNavigationListItem';
 
 import { selectAllStopConditions } from '~/js/features/ExtractionApp/StopConditionsSlice';
@@ -19,9 +18,7 @@ const StopConditionNavigationPanel = () => {
     <div className="card field-nav-panel">
       <div className="d-flex flex-column overflow-auto">
         <div className="field-nav-panel__header">
-          <Tooltip data-bs-title="Stop conditions are how you tell an extraction to stop. By default an extraction will stop for the following reasons: It has reached a set number of pages, the content source returns an unsuccessful status code, or the exact same document has been extracted twice in a row.">
-            <h5>Stop Conditions</h5>
-          </Tooltip>
+          <h5>Stop Conditions</h5>
 
           <div className="btn-group card__control">
             <i

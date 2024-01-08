@@ -31,7 +31,7 @@ const AddStopCondition = ({}) => {
       {emptyStopConditions && (
         <Tooltip data-bs-title="Please save incomplete stop conditions before adding another">
           <div className="d-grid gap-2">
-            <button disabled="true" className="btn btn-outline-primary">
+            <button disabled={true} className="btn btn-outline-primary">
               Add Stop Condition
             </button>
           </div>

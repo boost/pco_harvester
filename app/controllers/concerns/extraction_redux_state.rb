@@ -64,7 +64,7 @@ module ExtractionReduxState
   def stop_conditions_slice
     {
       ids: @extraction_definition.stop_conditions.pluck(:id),
-      entities: @extraction_definition.stop_conditions.map(&:to_h).index_by { |request| request[:id] }
+      entities: @extraction_definition.stop_conditions.map(&:to_h).index_by { |condition| condition[:id] }
     }
   end
 

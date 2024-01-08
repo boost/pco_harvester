@@ -23,8 +23,6 @@ export const addStopCondition = createAsyncThunk(
       extractionDefinitionId,
     } = payload;
 
-    console.log(`/pipelines/${pipelineId}/harvest_definitions/${harvestDefinitionId}/extraction_definitions/${extractionDefinitionId}/stop_conditions`)
-
     const response = request
       .post(
         `/pipelines/${pipelineId}/harvest_definitions/${harvestDefinitionId}/extraction_definitions/${extractionDefinitionId}/stop_conditions`,
@@ -44,6 +42,54 @@ export const addStopCondition = createAsyncThunk(
   }
 );
 
+export const updateStopCondition = createAsyncThunk(
+  "fields/updateStopConditionStatus",
+  async (payload) => {
+    const {
+      id,
+      pipelineId,
+      harvestDefinitionId,
+      extractionDefinitionId,
+      name,
+      content,
+    } = payload;
+
+    const response = request
+      .patch(
+        `/pipelines/${pipelineId}/harvest_definitions/${harvestDefinitionId}/extraction_definitions/${extractionDefinitionId}/stop_conditions/${id}`,
+        {
+          stop_condition: {
+            name: name,
+            content: content,
+          },
+        }
+      )
+      .then((response) => {
+        return response.data;
+      });
+
+    return response;
+  }
+);
+
+export const deleteStopCondition = createAsyncThunk(
+  "fields/deleteStopConditionStatus",
+  async (payload) => {
+    const { id, pipelineId, harvestDefinitionId, extractionDefinitionId } =
+      payload;
+
+    const response = request
+      .delete(
+        `/pipelines/${pipelineId}/harvest_definitions/${harvestDefinitionId}/extraction_definitions/${extractionDefinitionId}/stop_conditions/${id}`
+      )
+      .then((response) => {
+        return id;
+      });
+
+    return response;
+  }
+);
+
 const stopConditionsSlice = createSlice({
   name: "stopConditionsSlice",
   initialState: {},
@@ -53,6 +99,12 @@ const stopConditionsSlice = createSlice({
       .addCase(addStopCondition.fulfilled, (state, action) => {
         stopConditionsAdapter.upsertOne(state, action.payload);
       })
+      .addCase(deleteStopCondition.fulfilled, (state, action) => {
+        stopConditionsAdapter.removeOne(state, action.payload);
+      })
+      .addCase(updateStopCondition.fulfilled, (state, action) => {
+        stopConditionsAdapter.setOne(state, action.payload);
+      });
   },
 });
 
