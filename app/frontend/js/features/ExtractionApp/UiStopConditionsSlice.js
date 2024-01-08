@@ -39,25 +39,24 @@ const uiStopConditionsSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder
-      .addCase(addStopCondition.fulfilled, (state, action) => {
-        uiStopConditionsAdapter.updateMany(
-          state,
-          state.ids.map((id) => {
-            return { id: id, changes: { active: false } };
-          })
-        );
+    builder.addCase(addStopCondition.fulfilled, (state, action) => {
+      uiStopConditionsAdapter.updateMany(
+        state,
+        state.ids.map((id) => {
+          return { id: id, changes: { active: false } };
+        })
+      );
 
-        uiStopConditionsAdapter.upsertOne(state, {
-          id: action.payload.id,
-          saved: true,
-          deleting: false,
-          saving: false,
-          expanded: true,
-          displayed: true,
-          active: true,
-        });
-      })
+      uiStopConditionsAdapter.upsertOne(state, {
+        id: action.payload.id,
+        saved: true,
+        deleting: false,
+        saving: false,
+        expanded: true,
+        displayed: true,
+        active: true,
+      });
+    });
   },
 });
 
@@ -78,7 +77,7 @@ export const {
 export const {
   toggleDisplayStopCondition,
   toggleDisplayStopConditions,
-  setActiveStopCondition
+  setActiveStopCondition,
 } = actions;
 
 export default reducer;

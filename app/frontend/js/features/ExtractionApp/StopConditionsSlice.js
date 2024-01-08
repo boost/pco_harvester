@@ -5,7 +5,7 @@ import {
 } from "@reduxjs/toolkit";
 import { request } from "~/js/utils/request";
 
-import { some } from 'lodash';
+import { some } from "lodash";
 
 const stopConditionsAdapter = createEntityAdapter({
   sortComparer: (stopConditionOne, stopConditionTwo) =>
@@ -14,10 +14,10 @@ const stopConditionsAdapter = createEntityAdapter({
 
 export const addStopCondition = createAsyncThunk(
   "stopConditions/addStopConditionStatus",
-  async(payload) => {
+  async (payload) => {
     const {
       name,
-      content, 
+      content,
       harvestDefinitionId,
       pipelineId,
       extractionDefinitionId,
@@ -30,7 +30,7 @@ export const addStopCondition = createAsyncThunk(
           stop_condition: {
             name: name,
             content: content,
-            extraction_definition_id: extractionDefinitionId
+            extraction_definition_id: extractionDefinitionId,
           },
         }
       )
@@ -111,14 +111,16 @@ const stopConditionsSlice = createSlice({
 const { actions, reducer } = stopConditionsSlice;
 
 export const hasEmptyStopConditions = (state) => {
-  return some(selectAllStopConditions(state), { content: '' });
-}
+  return some(selectAllStopConditions(state), { content: "" });
+};
 
 export const {
   selectById: selectStopConditionById,
   selectIds: selectStopConditionIds,
   selectAll: selectAllStopConditions,
-} = stopConditionsAdapter.getSelectors((state) => state.entities.stopConditions);
+} = stopConditionsAdapter.getSelectors(
+  (state) => state.entities.stopConditions
+);
 
 export const {} = actions;
 

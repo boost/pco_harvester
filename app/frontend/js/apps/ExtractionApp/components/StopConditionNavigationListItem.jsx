@@ -9,9 +9,7 @@ import {
 
 const StopConditionNavigationListItem = ({ id }) => {
   const dispatch = useDispatch();
-  const { name } = useSelector((state) =>
-    selectStopConditionById(state, id)
-  );
+  const { name } = useSelector((state) => selectStopConditionById(state, id));
   const { displayed } = useSelector((state) =>
     selectUiStopConditionById(state, id)
   );

@@ -1,15 +1,13 @@
 import React from "react";
 
-
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 import AddStopCondition from "./AddStopCondition";
-import StopConditionNavigationListItem from './StopConditionNavigationListItem';
+import StopConditionNavigationListItem from "./StopConditionNavigationListItem";
 
-import { selectAllStopConditions } from '~/js/features/ExtractionApp/StopConditionsSlice';
+import { selectAllStopConditions } from "~/js/features/ExtractionApp/StopConditionsSlice";
 import { toggleDisplayStopConditions } from "~/js/features/ExtractionApp/UiStopConditionsSlice";
 
 const StopConditionNavigationPanel = () => {
-
   const dispatch = useDispatch();
 
   const stopConditions = useSelector(selectAllStopConditions);
@@ -62,11 +60,14 @@ const StopConditionNavigationPanel = () => {
           <AddStopCondition />
 
           <ul className="field-nav nav nav-pills flex-column overflow-auto flex-nowrap">
-
-            { stopConditions.map((stopCondition) => {
-              return <StopConditionNavigationListItem id={stopCondition.id} key={stopCondition.id} />;
-            })} 
-            
+            {stopConditions.map((stopCondition) => {
+              return (
+                <StopConditionNavigationListItem
+                  id={stopCondition.id}
+                  key={stopCondition.id}
+                />
+              );
+            })}
           </ul>
         </div>
       </div>

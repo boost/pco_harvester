@@ -118,8 +118,8 @@ const NavTabs = () => {
           Stop Conditions
         </button>
       </li>
-    )
-  }
+    );
+  };
 
   return createPortal(
     <>
@@ -127,10 +127,9 @@ const NavTabs = () => {
         {(appDetails.extractionDefinition.paginated ||
           sharedDefinitions.length > 1) &&
           pageOne()}
-        {appDetails.extractionDefinition.paginated && pageTwo()} 
-        { stopConditions() }
+        {appDetails.extractionDefinition.paginated && pageTwo()}
+        {stopConditions()}
         {sharedDefinitions.length > 1 && shared()}
-
       </ul>
     </>,
     document.getElementById("react-nav-tabs")

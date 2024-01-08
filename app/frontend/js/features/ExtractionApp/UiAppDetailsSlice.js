@@ -26,6 +26,10 @@ const { actions, reducer } = uiAppDetailsSlice;
 
 export const selectUiAppDetails = (state) => state.ui.appDetails;
 
-export const { updateActiveRequest, activateSharedDefinitionsTab, activateStopConditionsTab } = actions;
+export const {
+  updateActiveRequest,
+  activateSharedDefinitionsTab,
+  activateStopConditionsTab,
+} = actions;
 
 export default reducer;

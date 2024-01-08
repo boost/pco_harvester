@@ -11,9 +11,7 @@ import {
 } from "~/js/features/ExtractionApp/StopConditionsSlice";
 
 import { selectStopConditionById } from "~/js/features/ExtractionApp/StopConditionsSlice";
-import {
-  selectAppDetails,
-} from "~/js/features/TransformationApp/AppDetailsSlice";
+import { selectAppDetails } from "~/js/features/TransformationApp/AppDetailsSlice";
 import {
   toggleDisplayStopCondition,
   setActiveStopCondition,
@@ -28,15 +26,15 @@ const StopCondition = ({ id }) => {
     selectStopConditionById(state, id)
   );
 
-  const { saved, deleting, saving, displayed, active } =
-    useSelector((state) => selectUiStopConditionById(state, id));
+  const { saved, deleting, saving, displayed, active } = useSelector((state) =>
+    selectUiStopConditionById(state, id)
+  );
 
   const dispatch = useDispatch();
 
   const [nameValue, setNameValue] = useState(name);
   const [contentValue, setContentValue] = useState(content);
   const [showModal, setShowModal] = useState(false);
-
 
   const handleHideClick = () => {
     dispatch(toggleDisplayStopCondition({ id: id, displayed: false }));
@@ -94,7 +92,7 @@ const StopCondition = ({ id }) => {
     }
   };
 
-  const stopConditionClasses = classNames("col-12", "collapse", 'mt-4', {
+  const stopConditionClasses = classNames("col-12", "collapse", "mt-4", {
     show: displayed,
     "border-primary": active,
   });
