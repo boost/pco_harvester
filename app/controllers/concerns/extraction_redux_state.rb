@@ -19,7 +19,7 @@ module ExtractionReduxState
       parameters: parameters_slice,
       sharedDefinitions: entity_slice(@extraction_definition.harvest_definitions),
       appDetails: extraction_app_details_slice,
-      stopConditions: entity_slice(@extraction_definition.stop_conditions.sort_by(&:created_at).reverse)
+      stopConditions: entity_slice(@extraction_definition.stop_conditions.order(created_at: :desc))
     }
   end
 
