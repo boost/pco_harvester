@@ -3,6 +3,7 @@
 class StopConditionsController < ApplicationController
   include LastEditedBy
 
+  before_action :find_extraction_definition, only: %i[update destroy]
   before_action :find_stop_condition, only: %i[update destroy]
 
   def create
@@ -36,8 +37,12 @@ class StopConditionsController < ApplicationController
 
   private
 
+  def find_extraction_definition
+    @extraction_definition = ExtractionDefinition.find(params[:extraction_definition_id])
+  end
+
   def find_stop_condition
-    @stop_condition = StopCondition.find(params[:id])
+    @stop_condition = @extraction_definition.stop_conditions.find(params[:id])
   end
 
   def stop_condition_params
