@@ -68,12 +68,6 @@ export const {
   selectAll: selectAllUiStopConditions,
 } = uiStopConditionsAdapter.getSelectors((state) => state.ui.stopConditions);
 
-// export const selectDisplayedParameterIds = (state) => {
-//   return selectAllUiParameters(state)
-//     .filter((parameter) => parameter.displayed)
-//     .map((parameter) => parameter.id);
-// };
-
 export const {
   toggleDisplayStopCondition,
   toggleDisplayStopConditions,

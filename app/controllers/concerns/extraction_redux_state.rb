@@ -19,7 +19,7 @@ module ExtractionReduxState
       parameters: parameters_slice,
       sharedDefinitions: entity_slice(@extraction_definition.harvest_definitions),
       appDetails: extraction_app_details_slice,
-      stopConditions: entity_slice(@extraction_definition.stop_conditions)
+      stopConditions: entity_slice(@extraction_definition.stop_conditions.sort_by(&:created_at).reverse)
     }
   end
 
@@ -87,7 +87,7 @@ module ExtractionReduxState
     {
       id: condition[:id], saved: true,
       saving: false, deleting: false,
-      active: false, displayed: condition == @extraction_definition.stop_conditions.first
+      active: false, displayed: condition == @extraction_definition.stop_conditions.last
     }
   end
 
