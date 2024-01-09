@@ -1,10 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  selectFieldIds,
-  selectAllFields,
-} from "~/js/features/TransformationApp/FieldsSlice";
-import { filter, concat } from "lodash";
+import { selectAllFields } from "~/js/features/TransformationApp/FieldsSlice";
+import { filter } from "lodash";
 import FieldNavigationListItem from "./FieldNavigationListItem";
 import AddField from "~/js/apps/TransformationApp/components/AddField";
 import { toggleDisplayFields } from "~/js/features/TransformationApp/UiFieldsSlice";

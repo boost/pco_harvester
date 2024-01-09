@@ -41,6 +41,8 @@ Rails.application.routes.draw do
         resources :requests do
           resources :parameters
         end
+
+        resources :stop_conditions, only: %i[create update destroy]
       end
 
       resources :transformation_definitions, only: %i[create show update destroy] do

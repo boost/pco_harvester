@@ -14,6 +14,7 @@ import {
   selectUiAppDetails,
   updateActiveRequest,
   activateSharedDefinitionsTab,
+  activateStopConditionsTab,
 } from "~/js/features/ExtractionApp/UiAppDetailsSlice";
 
 const NavTabs = () => {
@@ -33,6 +34,9 @@ const NavTabs = () => {
   });
   const sharedClasses = classNames("nav-link", {
     active: uiAppDetails.sharedDefinitionsTabActive == true,
+  });
+  const stopConditionsClasses = classNames("nav-link", {
+    active: uiAppDetails.stopConditionsTabActive == true,
   });
   const allParameters = useSelector(selectAllParameters);
 
@@ -101,6 +105,22 @@ const NavTabs = () => {
     );
   };
 
+  const stopConditions = () => {
+    return (
+      <li
+        className="nav-item"
+        role="presentation"
+        onClick={() => {
+          dispatch(activateStopConditionsTab());
+        }}
+      >
+        <button className={stopConditionsClasses} type="button" role="tab">
+          Stop Conditions
+        </button>
+      </li>
+    );
+  };
+
   return createPortal(
     <>
       <ul className="nav nav-tabs mt-4" role="tablist">
@@ -108,6 +128,7 @@ const NavTabs = () => {
           sharedDefinitions.length > 1) &&
           pageOne()}
         {appDetails.extractionDefinition.paginated && pageTwo()}
+        {stopConditions()}
         {sharedDefinitions.length > 1 && shared()}
       </ul>
     </>,

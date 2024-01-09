@@ -15,6 +15,7 @@ class ExtractionDefinition < ApplicationRecord
   has_many :extraction_jobs, dependent: :destroy
   has_many :requests, dependent: :destroy
   has_many :parameters, through: :requests
+  has_many :stop_conditions, dependent: :destroy
 
   enum :kind, { harvest: 0, enrichment: 1 }
 

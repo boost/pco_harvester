@@ -104,6 +104,12 @@ RSpec.describe ExtractionDefinition do
     it 'has many jobs' do
       expect(subject.extraction_jobs).to include(extraction_job)
     end
+
+    it { is_expected.to have_many(:harvest_definitions) }
+    it { is_expected.to have_many(:extraction_jobs) }
+    it { is_expected.to have_many(:requests) }
+    it { is_expected.to have_many(:parameters) }
+    it { is_expected.to have_many(:stop_conditions) }
   end
 
   describe '#kinds' do

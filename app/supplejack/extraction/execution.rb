@@ -30,7 +30,7 @@ module Extraction
     private
 
     def stop_condition_met?
-      [set_number_reached?, extraction_failed?, duplicate_document_extracted?].any?(true)
+      [set_number_reached?, extraction_failed?, duplicate_document_extracted?, custom_stop_conditions_met?].any?(true)
     end
 
     def set_number_reached?
@@ -50,6 +50,12 @@ module Extraction
       return false if previous_document.nil?
 
       previous_document.body == @de.document.body
+    end
+
+    def custom_stop_conditions_met?
+      return false if @extraction_definition.stop_conditions.empty?
+
+      @extraction_definition.stop_conditions.map { |condition| condition.evaluate(@de.document.body) }.any?(true)
     end
 
     def throttle
