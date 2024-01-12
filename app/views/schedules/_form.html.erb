@@ -158,7 +158,10 @@
         </div>
 
         <div class='col-2'>
-          <%= form.select :destination_id, options_from_collection_for_select(@destinations, 'id', 'name', @schedule.destination.id), {},
+          <%= form.select :destination_id, 
+                          options_from_collection_for_select(
+                            @destinations, 'id', 'name', @schedule.destination&.id
+                          ), {},
                           class: 'form-select' %>
         </div>
       </div>
