@@ -22,7 +22,7 @@
   <span id='react-nav-tabs'></span>
 <% end %>
 
-<% if @transformation_definition.extraction_job.completed? %>
+<% if @transformation_definition.extraction_job.completed? || @transformation_definition.extraction_job.cancelled? %>
   <div id="js-transformation-app" data-props="<%= @props %>"></div>
 <% else %>
   <div class="container">
