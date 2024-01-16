@@ -29,6 +29,14 @@ class HarvestJob < ApplicationRecord
     cancelled!
   end
 
+  def execute_delete_previous_records
+    return unless harvest_definition.harvest?
+    return unless pipeline_job.delete_previous_records? && !pipeline_job.cancelled?
+    return unless harvest_report.ready_to_delete_previous_records?
+
+    DeletePreviousRecords::Execution.new(harvest_definition.source_id, name, pipeline_job.destination).call
+  end
+
   private
 
   # The order of arguments is important to sidekiq workers as they do not support keyword arguments

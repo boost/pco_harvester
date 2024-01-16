@@ -101,6 +101,10 @@ class HarvestReport < ApplicationRecord
     transformation_completed? && delete_workers_queued == delete_workers_completed
   end
 
+  def ready_to_delete_previous_records?
+    !records_loaded.zero? && completed?
+  end
+
   private
 
   def considered_cancelled?

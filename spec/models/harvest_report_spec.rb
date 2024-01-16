@@ -317,4 +317,27 @@ RSpec.describe HarvestReport do
       expect(incomplete.completed?).to be false
     end
   end
+
+  describe '#ready_to_delete_previous_records?' do
+    it 'returns true when there are loaded records and the harvest is completed' do
+      harvest_report = create(:harvest_report, pipeline_job:, harvest_job:, extraction_status: 'completed',
+      transformation_status: 'completed', load_status: 'completed', delete_status: 'completed', records_loaded: 100)
+
+      expect(harvest_report.ready_to_delete_previous_records?).to eq true
+    end
+
+    it 'returns false when there are no loaded records' do
+      harvest_report = create(:harvest_report, pipeline_job:, harvest_job:, extraction_status: 'completed',
+      transformation_status: 'completed', load_status: 'completed', delete_status: 'completed', records_loaded: 0)
+
+      expect(harvest_report.ready_to_delete_previous_records?).to eq false
+    end
+
+    it 'returns false when the harvest is not completed' do
+      harvest_report = create(:harvest_report, pipeline_job:, harvest_job:, extraction_status: 'completed',
+      transformation_status: 'completed', load_status: 'running', delete_status: 'completed', records_loaded: 100)
+
+      expect(harvest_report.ready_to_delete_previous_records?).to eq false
+    end
+  end
 end

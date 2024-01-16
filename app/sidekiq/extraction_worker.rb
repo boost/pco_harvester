@@ -50,6 +50,6 @@ class ExtractionWorker < ApplicationWorker
 
   def trigger_following_processes
     @harvest_report.pipeline_job.enqueue_enrichment_jobs(@harvest_report.harvest_job.name)
-    @harvest_report.pipeline_job.execute_delete_previous_records(@harvest_report.harvest_job)
+    @harvest_report.harvest_job.execute_delete_previous_records
   end
 end
