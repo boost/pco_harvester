@@ -7,7 +7,7 @@
 module Extraction
   class Connection
     include HttpClient
-    
+
     attr_reader :url, :params, :headers
 
     def initialize(url:, params: {}, headers: {})
