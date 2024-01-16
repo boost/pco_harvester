@@ -43,6 +43,6 @@ class LoadWorker
     @harvest_report.load_completed! if @harvest_report.load_workers_completed?
 
     @harvest_job.pipeline_job.enqueue_enrichment_jobs(@harvest_job.name)
-    @harvest_report.pipeline_job.execute_delete_previous_records
+    @harvest_report.pipeline_job.execute_delete_previous_records(@harvest_job)
   end
 end
