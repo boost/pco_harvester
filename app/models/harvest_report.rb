@@ -18,32 +18,21 @@ class HarvestReport < ApplicationRecord
   enum :kind, { harvest: 0, enrichment: 1 }
 
   METRICS = %w[
-    pages_extracted
-    records_transformed
-    records_loaded
-    records_rejected
-    records_deleted
-    transformation_workers_queued
-    transformation_workers_completed
-    load_workers_queued
-    load_workers_completed
-    delete_workers_queued
+    pages_extracted records_transformed
+    records_loaded records_rejected
+    records_deleted transformation_workers_queued
+    transformation_workers_completed load_workers_queued
+    load_workers_completed delete_workers_queued
     delete_workers_completed
   ].freeze
 
   TIME_METRICS = %i[
-    extraction_start_time
-    extraction_updated_time
-    extraction_end_time
-    transformation_start_time
-    transformation_updated_time
-    transformation_end_time
-    load_start_time
-    load_updated_time
-    load_end_time
-    delete_start_time
-    delete_updated_time
-    delete_end_time
+    extraction_start_time extraction_updated_time
+    extraction_end_time transformation_start_time
+    transformation_updated_time transformation_end_time
+    load_start_time load_updated_time
+    load_end_time delete_start_time
+    delete_updated_time delete_end_time
   ].freeze
 
   def completed?

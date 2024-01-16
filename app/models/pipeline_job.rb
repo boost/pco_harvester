@@ -40,7 +40,7 @@ class PipelineJob < ApplicationRecord
   def harvest_report
     harvest_reports.find_by(kind: 'harvest')
   end
-  
+
   private
 
   def should_queue_enrichments?
