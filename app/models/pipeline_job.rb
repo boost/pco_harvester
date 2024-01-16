@@ -37,7 +37,34 @@ class PipelineJob < ApplicationRecord
     end
   end
 
+  def execute_delete_previous_records
+    return unless should_delete_previous_records?
+    return unless ready_to_delete_previous_records?
+
+    Rails.logger.info '!!!  Delete Previous Records !!!'
+
+    DeletePreviousRecords::Execution.new(harvest_definition.source_id, harvest_job.name, destination).call
+  end
+
   private
+
+  def should_delete_previous_records?
+    delete_previous_records? && completed?
+  end
+
+  def ready_to_delete_previous_records?
+    return false if harvest_definition.nil? || harvest_job.nil? || harvest_job.harvest_report.blank?
+
+    !harvest_job.harvest_report.records_loaded.zero? && harvest_job.harvest_report.completed?
+  end
+
+  def harvest_definition
+    HarvestDefinition.find(harvest_definitions_to_run).find(&:harvest?)
+  end
+
+  def harvest_job
+    harvest_jobs.find_by(harvest_definition_id: harvest_definition.id)
+  end
 
   def should_queue_enrichments?
     reload
