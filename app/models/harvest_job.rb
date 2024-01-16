@@ -43,6 +43,9 @@ class HarvestJob < ApplicationRecord
   # If the order of arguments change in the TransformationWorker, LoadWorker, or DeleteWorker
   # That change will need to be reflected here
   # args[0] is assumed to be the harvest_job_id
+
+  # :reek:FeatureEnvy
+  # This reek has been ignored as the job referred here is the Sidekiq job.
   def cancel_sidekiq_workers
     queue = Sidekiq::Queue.new
 
