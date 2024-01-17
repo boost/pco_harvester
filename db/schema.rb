@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_20_001844) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_17_001915) do
   create_table "destinations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "url", null: false
@@ -171,6 +171,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_20_001844) do
     t.integer "pages"
     t.bigint "schedule_id"
     t.bigint "launched_by_id"
+    t.boolean "delete_previous_records", default: false, null: false
     t.index ["destination_id"], name: "index_pipeline_jobs_on_destination_id"
     t.index ["extraction_job_id"], name: "index_pipeline_jobs_on_extraction_job_id"
     t.index ["key"], name: "index_pipeline_jobs_on_key", unique: true
@@ -210,6 +211,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_20_001844) do
     t.datetime "updated_at", null: false
     t.bigint "pipeline_id", null: false
     t.bigint "destination_id"
+    t.boolean "delete_previous_records", default: false, null: false
     t.index ["destination_id"], name: "index_schedules_on_destination_id"
     t.index ["name"], name: "index_schedules_on_name", unique: true
     t.index ["pipeline_id"], name: "index_schedules_on_pipeline_id"
@@ -262,11 +264,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_20_001844) do
     t.boolean "otp_required_for_login"
     t.boolean "two_factor_setup", default: false, null: false
     t.boolean "enforce_two_factor", default: true, null: false
+    t.integer "failed_attempts", default: 0, null: false
+    t.datetime "locked_at"
+    t.string "unlock_token"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invited_by_id"], name: "index_users_on_invited_by_id"
     t.index ["invited_by_type", "invited_by_id"], name: "index_users_on_invited_by"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
   add_foreign_key "extraction_definitions", "users", column: "last_edited_by_id"
