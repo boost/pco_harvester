@@ -61,7 +61,11 @@
   </ul>
 <% end %>
 
-<% if @pipeline.harvest.blank? %>
+<% if @pipeline.harvest_definitions.any?(&:harvest?) %>
+
+  <%= render partial: 'pipelines/harvest_definition' %>
+
+<% else %>
 
   <div class='row definition-group'>
     <div class='col-12'>
@@ -76,10 +80,6 @@
       </button>
     </div>
   </div>
-
-<% else %>
-
-  <%= render partial: 'pipelines/harvest_definition' %>
 
 <% end %>
 
@@ -100,9 +100,9 @@
           type="button"
           class="<%= class_names(
                        'card', 'card--create-cta', 'd-flex',
-                       'card--create-cta-disabled': @completed_harvest_jobs.empty?
+                       'card--create-cta-disabled': !@harvest_definition.completed_harvest_jobs?
                      ) %>"
-          <% if @completed_harvest_jobs.empty? %>
+          <% if !@harvest_definition.completed_harvest_jobs? %>
             data-bs-toggle="tooltip" data-bs-placement="top"
             data-bs-title="You need to run the harvest before you can add an enrichment"
           <% else %>

@@ -20,6 +20,8 @@ gem 'puma', '~> 5.0'
 gem 'elastic-apm'
 gem 'vite_rails'
 
+gem 'rack-mini-profiler'
+
 # handles pagination
 gem 'kaminari'
 
