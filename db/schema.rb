@@ -264,11 +264,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_16_211621) do
     t.boolean "otp_required_for_login"
     t.boolean "two_factor_setup", default: false, null: false
     t.boolean "enforce_two_factor", default: true, null: false
+    t.integer "failed_attempts", default: 0, null: false
+    t.datetime "locked_at"
+    t.string "unlock_token"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invited_by_id"], name: "index_users_on_invited_by_id"
     t.index ["invited_by_type", "invited_by_id"], name: "index_users_on_invited_by"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
   add_foreign_key "extraction_definitions", "users", column: "last_edited_by_id"
