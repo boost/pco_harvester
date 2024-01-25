@@ -106,6 +106,26 @@
           <%= form.select :destination_id, options_from_collection_for_select(@destinations, 'id', 'name'), {},
                           class: 'form-select' %>
         </div>
+
+        <div class='col-5'>
+          <%= form.label :delete_previous_records, class: 'form-label' do %>
+            Delete Previous Records
+
+            <span
+              data-bs-toggle="tooltip"
+              data-bs-title="Selecting this option when running your pipeline will delete all previous records associated with this Source ID"><i class="bi bi-question-circle" aria-label="helper text"></i>
+            </span>
+          <% end %>
+        </div>
+
+        <div class='col-7'>
+          <div class='form-check'>
+            <%= label_tag do %>
+              <%= check_box('pipeline_job', 'delete_previous_records', { class: 'form-check-input' }) %>
+            <% end %>
+          </div>
+        </div>
+
       </div>
 
       <div class='d-grid mt-4'>

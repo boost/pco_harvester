@@ -1,20 +1,22 @@
 # frozen_string_literal: true
 
-module Delete
+module DeletePreviousRecords
   class Execution
     include HttpClient
 
-    def initialize(record, destination)
-      @record = record
+    def initialize(source_id, job_id, destination)
+      @source_id = source_id
+      @job_id = job_id
       @destination = destination
     end
 
     def call
       connection(@destination.url, {}, { 'Authentication-Token' => @destination.api_key })
-        .put(
-          '/harvester/records/delete',
+        .post(
+          '/harvester/records/flush',
           {
-            id: @record['transformed_record']['internal_identifier']
+            source_id: @source_id,
+            job_id: @job_id
           }.to_json,
           'Content-Type' => 'application/json'
         )

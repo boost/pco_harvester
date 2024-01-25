@@ -166,6 +166,27 @@
         </div>
       </div>
 
+      <div class='row gy-3 align-items-center my-2'>
+        <div class="col-3">
+          <%= form.label :delete_previous_records, class: 'form-label' do %>
+            Delete Previous Records
+
+            <span
+              data-bs-toggle="tooltip"
+              data-bs-title="Selecting this option will delete all previous records associated with this Source ID"><i class="bi bi-question-circle" aria-label="helper text"></i>
+            </span>
+          <% end %>
+        </div>
+
+        <div class='col-2'>
+          <div class='form-check'>
+            <%= label_tag do %>
+              <%= check_box('schedule', 'delete_previous_records', { class: 'form-check-input' }) %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 

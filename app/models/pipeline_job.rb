@@ -37,6 +37,10 @@ class PipelineJob < ApplicationRecord
     end
   end
 
+  def harvest_report
+    harvest_reports.find_by(kind: 'harvest')
+  end
+
   private
 
   def should_queue_enrichments?
@@ -51,9 +55,9 @@ class PipelineJob < ApplicationRecord
   end
 
   def harvest_completed?
-    return true if harvest_reports.find_by(kind: 'harvest').nil?
+    return true if harvest_report.blank?
 
-    harvest_reports.find_by(kind: 'harvest').completed?
+    harvest_report.completed?
   end
 
   def should_run?(id)

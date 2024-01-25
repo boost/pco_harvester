@@ -3,6 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe PipelineJob do
+  let(:destination)        { create(:destination) }
+
   describe 'associations' do
     it { is_expected.to have_many(:harvest_reports) }
   end
@@ -11,7 +13,6 @@ RSpec.describe PipelineJob do
     subject                  { create(:pipeline_job, pipeline:, destination:) }
 
     let(:pipeline)           { create(:pipeline, name: 'NLNZCat') }
-    let(:destination)        { create(:destination) }
     let(:harvest_definition) { create(:harvest_definition, pipeline:) }
 
     it { is_expected.to validate_uniqueness_of(:key).case_insensitive.with_message('has already been taken') }

@@ -6,6 +6,8 @@
 #
 module Extraction
   class Connection
+    include HttpClient
+
     attr_reader :url, :params, :headers
 
     def initialize(url:, params: {}, headers: {})
@@ -25,13 +27,6 @@ module Extraction
     end
 
     private
-
-    def connection(url, params, headers)
-      Faraday.new(url:, params:, headers:) do |f|
-        f.response :follow_redirects, limit: 5
-        f.adapter Faraday.default_adapter
-      end
-    end
 
     # We store all values in the database as a string
     # but for POST requests the type can be important to the content source

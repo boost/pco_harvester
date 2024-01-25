@@ -80,6 +80,16 @@
         <%= @schedule.destination.name %>
       </div>
     </div>
+
+    <div class='row gy-3 align-items-center my-2'>
+      <div class="col-3">
+        <strong>Delete Previous Records</strong>
+      </div>
+
+      <div class='col-7'>
+        <%= check_box('schedule', 'delete_previous_records', { class: 'form-check-input', disabled: true }) %>
+      </div>
+    </div>
   </div>
 </div>
 

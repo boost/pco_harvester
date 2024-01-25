@@ -2,6 +2,8 @@
 
 module Load
   class Execution
+    include HttpClient
+
     def initialize(records, harvest_job, api_record_id = nil)
       @records            = records
       @harvest_job        = harvest_job
@@ -59,15 +61,6 @@ module Load
 
     def headers
       { 'Content-Type' => 'application/json' }
-    end
-
-    # TODO
-    # How can we reuse our existing request object?
-    def connection(url, params, headers)
-      Faraday.new(url:, params:, headers:) do |f|
-        f.response :follow_redirects, limit: 5
-        f.adapter Faraday.default_adapter
-      end
     end
   end
 end

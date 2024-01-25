@@ -12,7 +12,7 @@ module Extraction
 
     def call
       extract_and_save_document(@extraction_definition.requests.first)
-      return if @extraction_job.is_sample?
+      return if @extraction_job.is_sample? || set_number_reached?
       return unless @extraction_definition.paginated?
 
       loop do
