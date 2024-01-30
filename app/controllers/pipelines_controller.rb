@@ -79,12 +79,8 @@ class PipelinesController < ApplicationController
 
   def assign_show_variables
     @harvest_definition = @pipeline.harvest_definitions.find(&:harvest?) || HarvestDefinition.new(pipeline: @pipeline)
-
+    @extraction_jobs = @harvest_definition.extraction_definition&.extraction_jobs&.order(created_at: :desc)
     @enrichment_definition = HarvestDefinition.new(pipeline: @pipeline)
-
-    return if @harvest_definition&.extraction_definition.blank?
-
-    @extraction_jobs = @harvest_definition.extraction_definition.extraction_jobs.order(created_at: :desc)
   end
 
   def find_pipeline

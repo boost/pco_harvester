@@ -12,13 +12,14 @@ module Extraction
       @folder = folder
       @per_page = 1
       @limit_value = nil
+      @documents = {}
     end
 
     def [](key)
       @current_page = key&.to_i || 1
       return nil unless in_bounds?(@current_page)
 
-      Document.load_from_file(documents_filepath[@current_page - 1])
+      @documents[@current_page] ||= Document.load_from_file(documents_filepath[@current_page - 1])
     end
 
     def total_pages

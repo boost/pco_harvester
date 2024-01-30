@@ -32,6 +32,7 @@ module Extraction
     end
 
     def self.load_from_file(file_path)
+      Rails.logger.debug { "Loading document #{file_path}" }
       json = JSON.parse(File.read(file_path)).symbolize_keys
       Document.new(file_path, **json)
     end
