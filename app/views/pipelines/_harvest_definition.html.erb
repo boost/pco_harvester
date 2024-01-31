@@ -49,7 +49,7 @@
     id='js-pipeline-id'>
   <input
     type='hidden'
-    value="<%= @pipeline.harvest.id %>"
+    value="<%= @harvest_definition.id %>"
     name='harvest_id'
     id='js-harvest-definition-id'>
 
@@ -162,13 +162,16 @@
   </div>
 </div>
 
+<% if @harvest_definition.extraction_definition.blank? %>
 <%= render 'extraction_definitions/create_edit_harvest_modal',
            {
              id: 'create-harvest-extraction-definition-modal',
              modal_heading: 'Create extraction definition',
              modal_subheading: 'Define the settings for your extraction definition'
            } %>
+<% end %>
 
+<% if @harvest_definition.transformation_definition.blank? %>
   <%= render 'transformation_definitions/create_edit_modal',
              {
                id: 'create-harvest-transformation-definition-modal',
@@ -177,3 +180,4 @@
                modal_subheading: 'Define the settings for your transformation definition',
                extraction_jobs: @extraction_jobs
              } %>
+<% end %>

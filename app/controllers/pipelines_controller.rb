@@ -3,8 +3,10 @@
 class PipelinesController < ApplicationController
   include LastEditedBy
 
-  before_action :find_pipeline, only: %w[show destroy update clone]
+  before_action :find_pipeline, only: %w[destroy clone]
+  before_action :assign_show_pipeline, only: %w[show update]
   before_action :assign_show_variables, only: %w[show update]
+  before_action :assign_destinations, only: %w[show update]
 
   def index
     @pipelines = pipelines
@@ -61,19 +63,24 @@ class PipelinesController < ApplicationController
 
   private
 
-  def assign_show_variables
-    @harvest_definition = @pipeline.harvest || HarvestDefinition.new(pipeline: @pipeline)
-    @pipeline_job = PipelineJob.new
+  def assign_show_pipeline
+    @pipeline = Pipeline.includes(
+      :schedules,
+      harvest_definitions: [
+        { extraction_definition: :last_edited_by },
+        { transformation_definition: %i[fields last_edited_by] }
+      ]
+    ).find(params[:id])
+  end
 
-    @enrichment_definition = HarvestDefinition.new(pipeline: @pipeline)
-
-    if @harvest_definition&.extraction_definition.present?
-      @extraction_jobs = @harvest_definition.extraction_definition.extraction_jobs.order(created_at: :desc)
-    end
-
-    @completed_harvest_jobs = HarvestJob.where(harvest_definition_id: @harvest_definition.id).completed
-
+  def assign_destinations
     @destinations = Destination.all
+  end
+
+  def assign_show_variables
+    @harvest_definition = @pipeline.harvest_definitions.find(&:harvest?) || HarvestDefinition.new(pipeline: @pipeline)
+    @extraction_jobs = @harvest_definition.extraction_definition&.extraction_jobs&.order(created_at: :desc)
+    @enrichment_definition = HarvestDefinition.new(pipeline: @pipeline)
   end
 
   def find_pipeline

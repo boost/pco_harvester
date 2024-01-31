@@ -22,9 +22,17 @@ class HarvestDefinition < ApplicationRecord
     save!
   end
 
+  def destroy_definition(definition)
+    definition.destroy unless definition.nil? || definition.shared?
+  end
+
   def destroy_associated_definitions
-    extraction_definition.destroy unless extraction_definition.nil? || extraction_definition.shared?
-    transformation_definition.destroy unless transformation_definition.nil? || transformation_definition.shared?
+    destroy_definition(extraction_definition)
+    destroy_definition(transformation_definition)
+  end
+
+  def completed_harvest_jobs?
+    @completed_harvest_jobs ||= harvest_jobs.completed.any?
   end
 
   def ready_to_run?

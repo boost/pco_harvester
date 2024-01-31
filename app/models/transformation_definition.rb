@@ -34,7 +34,8 @@ class TransformationDefinition < ApplicationRecord
   end
 
   def shared?
-    harvest_definitions.count > 1
+    @shared = harvest_definitions.count > 1 if @shared.nil?
+    @shared
   end
 
   def clone(pipeline, name)

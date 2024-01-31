@@ -20,18 +20,21 @@
         </h3>
 
         <% if type == 'extraction' %>
-          <% completed_extraction_jobs = ExtractionJob.where(extraction_definition_id: definition.id).completed %>
-          <% if completed_extraction_jobs.empty? %>
+          <% completed_extraction_jobs_count = ExtractionJob
+                                               .where(extraction_definition_id: definition.id)
+                                               .completed
+                                               .count %>
+          <% if completed_extraction_jobs_count.zero? %>
             <span class="badge text-bg-danger mt-2">No completed extraction</span>
           <% else %>
-            <span class="badge text-bg-primary mt-2"><%= pluralize(completed_extraction_jobs.count, 'extraction') %></span>
+            <span class="badge text-bg-primary mt-2"><%= pluralize(completed_extraction_jobs_count, 'extraction') %></span>
           <% end %>
         <% end %>
         <% if type == 'transformation' %>
           <% if definition.fields.empty? %>
             <span class="badge text-bg-danger mt-2">Incomplete transformation</span>
           <% else %>
-            <span class="badge text-bg-primary mt-2"><%= pluralize(definition.fields.count, 'fields') %></span>
+            <span class="badge text-bg-primary mt-2"><%= pluralize(definition.fields.length, 'fields') %></span>
           <% end %>
         <% end %>
 
