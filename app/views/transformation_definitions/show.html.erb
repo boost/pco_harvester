@@ -22,9 +22,9 @@
   <span id='react-nav-tabs'></span>
 <% end %>
 
-<% if @transformation_definition.extraction_job.completed? || @transformation_definition.extraction_job.cancelled? %>
+<% if @transformation_definition.extraction_job.present? && (@transformation_definition.extraction_job.completed? || @transformation_definition.extraction_job.cancelled?) %>
   <div id="js-transformation-app" data-props="<%= @props %>"></div>
-<% else %>
+<% elsif @transformation_definition.extraction_job.present? %>
   <div class="container">
     <div class="row">
       <div class="col text-center">
@@ -33,6 +33,12 @@
             <i class="bi bi-arrow-repeat" aria-hidden="true"></i> Refresh
           <% end %>
       </div>
+    </div>
+  </div>
+<% else %>
+  <div class="container">
+    <div class="row">
+      <p class='text-danger'>Extracted Data unavailable.</p>
     </div>
   </div>
 <% end %>

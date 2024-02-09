@@ -13,10 +13,24 @@ class RawRecordSlice
     {
       page: @page,
       record: @record,
-      totalPages: @job.documents.total_pages,
+      totalPages: total_pages,
       totalRecords: @records.length,
-      format: @job.format,
+      format:,
       body: @records[@record - 1]
     }
+  end
+
+  private
+
+  def total_pages
+    return 0 if @job.nil?
+
+    @job.documents.total_pages
+  end
+
+  def format
+    return 'JSON' if @job.nil?
+
+    @job.format
   end
 end
