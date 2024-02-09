@@ -67,13 +67,19 @@ function displayInitialPreview(data) {
     displayError(id);
     tooltip.disable();
   } else {
-    if (format == "JSON") {
-      result = JSON.stringify(JSON.parse(result), null, 2);
-    } else if (format == "XML") {
-      result = xmlFormat(result, {
-        indentation: "  ",
-        lineSeparator: "\n",
-      });
+    try {
+      if (format == "JSON") {
+        result = JSON.stringify(JSON.parse(result), null, 2);
+      } else if (format == "XML") {
+        result = xmlFormat(result, {
+          indentation: "  ",
+          lineSeparator: "\n",
+        });
+      }
+    } catch (error) {
+      displayError(id);
+      tooltip.disable(); 
+      return;
     }
 
     editor(`#js-record-selector-result-${id}`, format, true, result);
