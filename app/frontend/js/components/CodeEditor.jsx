@@ -31,13 +31,11 @@ const CodeEditor = ({ initContent, onChange, format = "ruby", ...props }) => {
   };
 
   const errorDocument = () => {
-    return (
-      JSON.stringify({
-        error:
-          "Something went wrong fetching the response from the content source. This can also happen when the format specified in the extraction definition is not the same as the format of the extracted document.",
-      })
-    );
-  }
+    return JSON.stringify({
+      error:
+        "Something went wrong fetching the response from the content source. This can also happen when the format specified in the extraction definition is not the same as the format of the extracted document.",
+    });
+  };
 
   const doc = () => {
     let content;
@@ -51,8 +49,11 @@ const CodeEditor = ({ initContent, onChange, format = "ruby", ...props }) => {
       return content;
     } else if (format == "XML") {
       try {
-        content = xmlFormat(initContent, { indentation: "  ", lineSeparator: "\n" });
-      } catch(err) {
+        content = xmlFormat(initContent, {
+          indentation: "  ",
+          lineSeparator: "\n",
+        });
+      } catch (err) {
         content = errorDocument();
       }
 

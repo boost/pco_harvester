@@ -24,7 +24,7 @@ class TransformationDefinition < ApplicationRecord
   # @return Array
   def records(page = 1)
     return [] if extraction_job.nil?
-    
+
     Transformation::RawRecordsExtractor.new(self, extraction_job).records(page)
   end
 

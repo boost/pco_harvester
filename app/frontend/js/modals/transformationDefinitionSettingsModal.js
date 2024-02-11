@@ -78,7 +78,7 @@ function displayInitialPreview(data) {
       }
     } catch (error) {
       displayError(id);
-      tooltip.disable(); 
+      tooltip.disable();
       return;
     }
 
