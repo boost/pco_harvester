@@ -23,13 +23,13 @@ class RawRecordSlice
   private
 
   def total_pages
-    return 0 if @job.nil?
+    return 0 if @job.blank?
 
     @job.documents.total_pages
   end
 
   def format
-    return 'JSON' if @job.nil?
+    return 'JSON' if @job.blank?
 
     @job.format
   end

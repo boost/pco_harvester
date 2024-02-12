@@ -23,7 +23,7 @@ class TransformationDefinition < ApplicationRecord
   #
   # @return Array
   def records(page = 1)
-    return [] if extraction_job.nil?
+    return [] if extraction_job.blank?
 
     Transformation::RawRecordsExtractor.new(self, extraction_job).records(page)
   end
@@ -36,7 +36,7 @@ class TransformationDefinition < ApplicationRecord
   end
 
   def shared?
-    @shared = harvest_definitions.count > 1 if @shared.nil?
+    @shared = harvest_definitions.count > 1 if @shared.blank?
     @shared
   end
 

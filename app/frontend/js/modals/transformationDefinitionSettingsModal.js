@@ -52,13 +52,8 @@ function extractTransformationPreviewData(form) {
   }
 }
 
-
 function displayInitialPreview(data) {
-  let {
-    id,
-    result,
-    tooltip,
-  } = data;
+  let { id, result, tooltip } = data;
 
   if (result == "") {
     displayError(id);
@@ -70,9 +65,12 @@ function displayInitialPreview(data) {
 
 function displayPreview(data) {
   let {
-    id, recordSelector,
-    result, format,
-    transformationDefinitionUpdateButton, tooltip,
+    id,
+    recordSelector,
+    result,
+    format,
+    transformationDefinitionUpdateButton,
+    tooltip,
     completed,
   } = data;
 
@@ -95,10 +93,18 @@ function displayPreview(data) {
 
   setupTooltip(tooltip, recordSelector, transformationDefinitionUpdateButton);
   setupModal(recordSelector, completed);
-  bindRecordSelectorInput(recordSelector, transformationDefinitionUpdateButton, tooltip);
+  bindRecordSelectorInput(
+    recordSelector,
+    transformationDefinitionUpdateButton,
+    tooltip
+  );
 }
 
-function setupTooltip(tooltip, recordSelector, transformationDefinitionUpdateButton) {
+function setupTooltip(
+  tooltip,
+  recordSelector,
+  transformationDefinitionUpdateButton
+) {
   tooltip.disable();
 
   if (recordSelector.value == "") {
@@ -115,7 +121,11 @@ function setupModal(recordSelector, completed) {
   }
 }
 
-function bindRecordSelectorInput(recordSelector, transformationDefinitionUpdateButton, tooltip) {
+function bindRecordSelectorInput(
+  recordSelector,
+  transformationDefinitionUpdateButton,
+  tooltip
+) {
   recordSelector.addEventListener("input", (event) => {
     if (event.target.value == "") {
       transformationDefinitionUpdateButton.disabled = true;
