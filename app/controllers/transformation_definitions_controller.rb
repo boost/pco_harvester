@@ -77,7 +77,12 @@ class TransformationDefinitionsController < ApplicationController
   def assign_show_variables
     @fields = @transformation_definition.fields.order(created_at: :desc).map(&:to_h)
     @props = transformation_app_state
-    @extraction_jobs = @harvest_definition.extraction_definition.extraction_jobs.order(created_at: :desc)
+
+    @extraction_jobs = if @harvest_definition.extraction_definition.present?
+                         @harvest_definition.extraction_definition.extraction_jobs.order(created_at: :desc)
+                       else
+                         []
+                       end
   end
 
   def find_pipeline
