@@ -53,11 +53,15 @@
             </div>
 
             <div class='col-8'>
-              <%= form.select(
-                    :extraction_job_id,
-                    options_from_collection_for_select(extraction_jobs, 'id', 'name', model.extraction_job_id),
-                    {}, class: 'form-select'
-                  ) %>
+              <% if extraction_jobs.any? %>
+                <%= form.select(
+                      :extraction_job_id,
+                      options_from_collection_for_select(extraction_jobs, 'id', 'name', model.extraction_job_id),
+                      {}, class: 'form-select'
+                    ) %>
+              <% else %>
+                <p class='text-danger'>There is no available extracted data.</p>
+              <% end %>
             </div>
 
             <div class="col-4">
@@ -108,7 +112,7 @@
   </div>
 <% end %>
 
-<% if model.persisted? %>
+<% if model.persisted? && model.extraction_job.present? %>
   <span
     id='js-transformation-definition-preview-data-<%= harvest_definition.id %>'
     data-format="<%= model.extraction_job.format %>"

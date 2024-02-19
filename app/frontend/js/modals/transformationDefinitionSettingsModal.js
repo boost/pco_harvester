@@ -53,6 +53,17 @@ function extractTransformationPreviewData(form) {
 }
 
 function displayInitialPreview(data) {
+  let { id, result, tooltip } = data;
+
+  if (result == "") {
+    displayError(id);
+    tooltip.disable();
+  } else {
+    displayPreview(data);
+  }
+}
+
+function displayPreview(data) {
   let {
     id,
     recordSelector,
@@ -63,10 +74,7 @@ function displayInitialPreview(data) {
     completed,
   } = data;
 
-  if (result == "") {
-    displayError(id);
-    tooltip.disable();
-  } else {
+  try {
     if (format == "JSON") {
       result = JSON.stringify(JSON.parse(result), null, 2);
     } else if (format == "XML") {
@@ -75,32 +83,58 @@ function displayInitialPreview(data) {
         lineSeparator: "\n",
       });
     }
-
-    editor(`#js-record-selector-result-${id}`, format, true, result);
-
+  } catch (error) {
+    displayError(id);
     tooltip.disable();
+    return;
+  }
 
-    if (recordSelector.value == "") {
+  editor(`#js-record-selector-result-${id}`, format, true, result);
+
+  setupTooltip(tooltip, recordSelector, transformationDefinitionUpdateButton);
+  setupModal(recordSelector, completed);
+  bindRecordSelectorInput(
+    recordSelector,
+    transformationDefinitionUpdateButton,
+    tooltip
+  );
+}
+
+function setupTooltip(
+  tooltip,
+  recordSelector,
+  transformationDefinitionUpdateButton
+) {
+  tooltip.disable();
+
+  if (recordSelector.value == "") {
+    transformationDefinitionUpdateButton.disabled = true;
+    tooltip.enable();
+  }
+}
+
+function setupModal(recordSelector, completed) {
+  if (recordSelector.value == "" && completed == "true") {
+    new Modal(
+      document.getElementById("update-transformation-definition-modal")
+    ).show();
+  }
+}
+
+function bindRecordSelectorInput(
+  recordSelector,
+  transformationDefinitionUpdateButton,
+  tooltip
+) {
+  recordSelector.addEventListener("input", (event) => {
+    if (event.target.value == "") {
       transformationDefinitionUpdateButton.disabled = true;
       tooltip.enable();
+    } else {
+      transformationDefinitionUpdateButton.disabled = false;
+      tooltip.disable();
     }
-
-    if (recordSelector.value == "" && completed == "true") {
-      new Modal(
-        document.getElementById("update-transformation-definition-modal")
-      ).show();
-    }
-
-    recordSelector.addEventListener("input", (event) => {
-      if (event.target.value == "") {
-        transformationDefinitionUpdateButton.disabled = true;
-        tooltip.enable();
-      } else {
-        transformationDefinitionUpdateButton.disabled = false;
-        tooltip.disable();
-      }
-    });
-  }
+  });
 }
 
 function bindRecordSelectorTestEventListeners(id) {
