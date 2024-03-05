@@ -15,6 +15,7 @@ class ExtractionWorker < ApplicationWorker
       Extraction::Execution.new(extraction_job, extraction_job.extraction_definition).call
 
       SplitWorker.perform_async(extraction_job.id) if extraction_job.extraction_definition.split
+      TextExtractionWorker.perform_async(extraction_job.id) if extraction_job.extraction_definition.format == 'PDF'
     end
   end
 

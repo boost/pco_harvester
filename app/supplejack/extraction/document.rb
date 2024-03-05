@@ -22,7 +22,11 @@ module Extraction
     end
 
     def save(file_path)
-      File.write(file_path, to_json)
+      if @response_headers.present? && @response_headers['content-type'] == 'application/pdf'
+        File.write(file_path, @body, mode: 'wb')
+      else
+        File.write(file_path, to_json)
+      end
     end
 
     def size_in_bytes
