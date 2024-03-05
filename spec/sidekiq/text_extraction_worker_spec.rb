@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe PdfExtractionWorker, type: :job do
+RSpec.describe TextExtractionWorker, type: :job do
   let(:pipeline) { create(:pipeline, name: 'PDF Example') }
   let(:extraction_definition) { create(:extraction_definition, pipeline:, format: 'PDF') }
   let(:extraction_job) { create(:extraction_job, extraction_definition:) }
@@ -17,7 +17,7 @@ RSpec.describe PdfExtractionWorker, type: :job do
   
       expect(extracted_files.count).to eq 1
 
-      PdfExtractionWorker.new.perform(extraction_job.id)
+      TextExtractionWorker.new.perform(extraction_job.id)
 
       extracted_files = Dir.glob("#{extraction_job.extraction_folder}/*").select { |e| File.file? e }
   
@@ -27,13 +27,13 @@ RSpec.describe PdfExtractionWorker, type: :job do
     it 'cleans up the tmp folder it creates' do
       expect(Dir.exist?("#{extraction_job.extraction_folder}/tmp")).to eq false
 
-      PdfExtractionWorker.new.perform(extraction_job.id)
+      TextExtractionWorker.new.perform(extraction_job.id)
 
       expect(Dir.exist?("#{extraction_job.extraction_folder}/tmp")).to eq false 
     end
 
     it 'names the new files following the appropriate naming convention' do
-      PdfExtractionWorker.new.perform(extraction_job.id)
+      TextExtractionWorker.new.perform(extraction_job.id)
       
       expect(File.exist?("#{extraction_job.extraction_folder}/pdf-example_harvest-extraction-210__-__000000001.json"))
     end
@@ -46,7 +46,7 @@ RSpec.describe PdfExtractionWorker, type: :job do
       it 'does not enqueue Transformation Workers' do
         expect(TransformationWorker).not_to receive(:perform_async)
 
-        PdfExtractionWorker.new.perform(extraction_job.id) 
+        TextExtractionWorker.new.perform(extraction_job.id) 
       end
     end
 
@@ -65,13 +65,13 @@ RSpec.describe PdfExtractionWorker, type: :job do
       it 'enqueues Transformation Workers to process the text from the PDF' do
         expect(TransformationWorker).to receive(:perform_async).exactly(1).times.and_call_original
 
-        PdfExtractionWorker.new.perform(extraction_job.id) 
+        TextExtractionWorker.new.perform(extraction_job.id) 
       end
       
       it 'updates the Harvest Report appropriately' do
         expect(harvest_report.pages_extracted).to eq 0
 
-        PdfExtractionWorker.new.perform(extraction_job.id)  
+        TextExtractionWorker.new.perform(extraction_job.id)  
 
         harvest_report.reload
 

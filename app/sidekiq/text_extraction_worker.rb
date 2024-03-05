@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class PdfExtractionWorker < FileExtractionWorker
+class TextExtractionWorker < FileExtractionWorker
   def process_extracted_documents
     Dir.children(@tmp_directory).each do |file|
       saved_file = File.read("#{@tmp_directory}/#{file}")
