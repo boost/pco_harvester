@@ -59,3 +59,5 @@ node_modules
 # from code editors
 /.vscode
 /app/frontend/jsconfig.json
+
+/dev_data
