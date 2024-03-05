@@ -426,6 +426,7 @@ GEM
     xpath (3.2.0)
       nokogiri (~> 1.8)
     yard (0.9.34)
+    yomu (0.1.5)
     zeitwerk (2.6.11)
 
 PLATFORMS
@@ -475,6 +476,7 @@ DEPENDENCIES
   webdrivers
   webmock
   yard
+  yomu
 
 RUBY VERSION
    ruby 3.2.2p53
