@@ -17,7 +17,9 @@ class ExtractionWorker < ApplicationWorker
       SplitWorker.perform_async(extraction_job.id) if extraction_job.extraction_definition.split
     end
 
-    TextExtractionWorker.perform_async(extraction_job.id) if extraction_job.extraction_definition.extract_text_from_file?
+    return unless extraction_job.extraction_definition.extract_text_from_file?
+
+    TextExtractionWorker.perform_async(extraction_job.id)
   end
 
   def job_start
