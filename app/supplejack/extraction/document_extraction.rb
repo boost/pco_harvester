@@ -19,7 +19,7 @@ module Extraction
     end
 
     def extension
-      return 'json' unless @extraction_definition.format == 'PDF'
+      return 'json' unless @extraction_definition.extract_text_from_file?
 
       'pdf'
     end

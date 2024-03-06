@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe TextExtractionWorker, type: :job do
   let(:pipeline) { create(:pipeline, name: 'PDF Example') }
-  let(:extraction_definition) { create(:extraction_definition, pipeline:, format: 'PDF') }
+  let(:extraction_definition) { create(:extraction_definition, pipeline:, format: 'JSON', extract_text_from_file: true) }
   let(:extraction_job) { create(:extraction_job, extraction_definition:) }
 
   describe "#perform" do

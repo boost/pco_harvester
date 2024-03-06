@@ -36,7 +36,6 @@ class ExtractionDefinition < ApplicationRecord
 
   validates :name, uniqueness: true
   validates :split_selector, presence: true, if: :split?
-  validates :extracted_file_format, presence: true, if: :extract_text_from_file?
 
   validates :throttle, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 60_000 }
 

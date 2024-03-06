@@ -40,7 +40,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_05_235829) do
     t.boolean "split", default: false, null: false
     t.string "split_selector"
     t.boolean "extract_text_from_file", default: false, null: false
-    t.string "extracted_file_format"
     t.index ["destination_id"], name: "index_extraction_definitions_on_destination_id"
     t.index ["last_edited_by_id"], name: "index_extraction_definitions_on_last_edited_by_id"
     t.index ["name"], name: "index_extraction_definitions_on_name", unique: true

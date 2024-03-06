@@ -42,12 +42,6 @@ RSpec.describe ExtractionDefinition do
 
       it { is_expected.to validate_presence_of(:split_selector).with_message("can't be blank") } 
     end
-
-    context 'when the extraction definition needs to extract the text from a file' do
-      subject! { build(:extraction_definition, pipeline: pipeline1, extract_text_from_file: true) }
-      
-      it { is_expected.to validate_presence_of(:extracted_file_format).with_message("can't be blank") } 
-    end
   end
 
   describe '#validation numericality' do
