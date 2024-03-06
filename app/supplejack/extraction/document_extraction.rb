@@ -15,13 +15,7 @@ module Extraction
     def file_path
       page_str = format('%09d', @extraction_definition.page)[-9..]
       name_str = @extraction_definition.name.parameterize(separator: '_')
-      "#{@extraction_folder}/#{name_str}__-__#{page_str}.#{extension}"
-    end
-
-    def extension
-      return 'json' unless @extraction_definition.extract_text_from_file?
-
-      'pdf'
+      "#{@extraction_folder}/#{name_str}__-__#{page_str}.json"
     end
 
     def url
