@@ -31,12 +31,18 @@ class FileExtractionWorker
 
     (@extraction_job.extraction_definition.page..@extraction_job.documents.total_pages).each do |page|
       harvest_report.increment_pages_extracted!
-      TransformationWorker.perform_async(@extraction_job.harvest_job.id, page)
+      TransformationWorker.perform_async(@extraction_job.harvest_job.id, page, api_record_id(page))
       harvest_report.increment_transformation_workers_queued!
 
       pipeline_job.reload
       break if pipeline_job.cancelled?
     end
+  end
+
+  def api_record_id(page)
+    return nil unless @extraction_job.extraction_definition.enrichment?
+
+    @extraction_job.documents[page].file_path.match(/__(?<record_id>.+)__/)[:record_id]
   end
 
   def reset_harvest_report(harvest_report)

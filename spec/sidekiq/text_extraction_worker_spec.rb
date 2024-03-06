@@ -9,7 +9,7 @@ RSpec.describe TextExtractionWorker, type: :job do
 
   describe "#perform" do
     before do
-      FileUtils.cp("#{Rails.root}/spec/support/example.pdf", "#{extraction_job.extraction_folder}/example.pdf")
+      FileUtils.cp("#{Rails.root}/spec/support/example.pdf", "#{extraction_job.extraction_folder}/example.json")
     end
 
     it 'converts a PDF into raw text' do
@@ -40,7 +40,7 @@ RSpec.describe TextExtractionWorker, type: :job do
 
     context 'when the PDF extraction is not part of a harvest' do
       before do
-        FileUtils.cp("#{Rails.root}/spec/support/example.pdf", "#{extraction_job.extraction_folder}/example.pdf")
+        FileUtils.cp("#{Rails.root}/spec/support/example.pdf", "#{extraction_job.extraction_folder}/example.json")
       end
 
       it 'does not enqueue Transformation Workers' do
@@ -52,7 +52,7 @@ RSpec.describe TextExtractionWorker, type: :job do
 
     context 'when the PDF extraction is part of a harvest' do
       before do
-        FileUtils.cp("#{Rails.root}/spec/support/example.pdf", "#{extraction_job.extraction_folder}/example.pdf")
+        FileUtils.cp("#{Rails.root}/spec/support/example.pdf", "#{extraction_job.extraction_folder}/example.json")
       end
       
       let!(:harvest_report)    { create(:harvest_report, pipeline_job:, harvest_job:) }
