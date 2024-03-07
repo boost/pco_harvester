@@ -3,7 +3,7 @@ FROM ruby:3.2.2-alpine3.18
 WORKDIR /app
 
 ARG BUILD_PACKAGES="build-base curl-dev git"
-ARG DEV_PACKAGES="bash mysql-client mariadb-dev yaml-dev zlib-dev nodejs yarn libxml2 libxml2-dev libxslt libxslt-dev gmp-dev"
+ARG DEV_PACKAGES="bash mysql-client mariadb-dev yaml-dev zlib-dev nodejs yarn libxml2 libxml2-dev libxslt libxslt-dev gmp-dev openjdk8-jre"
 ARG RUBY_PACKAGES="tzdata"
 
 WORKDIR /app
