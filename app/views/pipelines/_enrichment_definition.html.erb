@@ -164,7 +164,7 @@
 
         <% disabled =
              enrichment_definition.extraction_definition.blank? ||
-             enrichment_definition.extraction_definition.extraction_jobs&.none?(&:completed) %>
+             enrichment_definition.extraction_definition.extraction_jobs&.none?(&:completed?) %>
 
         <button
           type="button"
