@@ -84,8 +84,11 @@
             </div>
 
             <div class='col-8'>
-              <%= form.select :destination_id, options_from_collection_for_select(@destinations, 'id', 'name', @extraction_definition&.destination&.id), {},
-                              class: 'form-select' %>
+              <%= form.select(:destination_id,
+                              options_from_collection_for_select(
+                                @destinations, 'id', 'name', @extraction_definition&.destination&.id
+                              ),
+                              {}, class: 'form-select') %>
             </div>
 
                         <div class="col-4">

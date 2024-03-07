@@ -162,7 +162,7 @@
 
       <% else %>
 
-        <% disabled = !enrichment_definition&.extraction_definition&.extraction_jobs&.any?(&:completed?) %>
+        <% disabled = enrichment_definition&.extraction_definition&.extraction_jobs&.none?(&:completed?) %>
 
         <button
           type="button"

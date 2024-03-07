@@ -24,19 +24,27 @@ class FileExtractionWorker
   private
 
   def create_transformation_jobs
-    harvest_report = @extraction_job.harvest_job.harvest_report
-    pipeline_job = harvest_report.pipeline_job
-
     reset_harvest_report(harvest_report)
 
     (@extraction_job.extraction_definition.page..@extraction_job.documents.total_pages).each do |page|
-      harvest_report.increment_pages_extracted!
-      TransformationWorker.perform_async(@extraction_job.harvest_job.id, page, api_record_id(page))
-      harvest_report.increment_transformation_workers_queued!
-
+      create_transformation_job(page)
       pipeline_job.reload
       break if pipeline_job.cancelled?
     end
+  end
+
+  def harvest_report
+    @extraction_job.harvest_job.harvest_report
+  end
+
+  def pipeline_job
+    harvest_report.pipeline_job
+  end
+
+  def create_transformation_job(page)
+    harvest_report.increment_pages_extracted!
+    TransformationWorker.perform_async(@extraction_job.harvest_job.id, page, api_record_id(page))
+    harvest_report.increment_transformation_workers_queued!
   end
 
   def api_record_id(page)
