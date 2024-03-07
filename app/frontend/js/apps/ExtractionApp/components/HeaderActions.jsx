@@ -60,7 +60,7 @@ const HeaderActions = () => {
 
   return createPortal(
     <>
-      {!appDetails.extractionDefinition.split && (
+      {!appDetails.extractionDefinition.split && !appDetails.extractionDefinition.extract_text_from_file && (
         <button className="btn btn-success me-2" onClick={handlePreviewClick}>
           <i className="bi bi-play" aria-hidden="true"></i> Preview
         </button>
