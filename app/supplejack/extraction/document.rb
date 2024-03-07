@@ -22,11 +22,12 @@ module Extraction
     end
 
     def save(file_path)
-      if @response_headers.present? && @response_headers['content-type'] == 'application/pdf'
-        File.write(file_path, @body, mode: 'wb')
-      else
-        File.write(file_path, to_json)
-      end
+      File.write(file_path, to_json)
+      # If the file fails to be converted to a JSON document
+      # write the original file to the filepath as a binary
+      # It is probably a PDF or Word Doc
+    rescue JSON::GeneratorError
+      File.write(file_path, @body, mode: 'wb')
     end
 
     def size_in_bytes
