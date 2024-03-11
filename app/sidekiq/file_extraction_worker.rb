@@ -55,7 +55,6 @@ class FileExtractionWorker
 
   def reset_harvest_report(harvest_report)
     harvest_report.update(pages_extracted: 0)
-    harvest_report.extraction_completed!
   end
 
   def setup_tmp_directory
