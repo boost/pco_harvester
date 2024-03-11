@@ -6,11 +6,7 @@ class FileExtractionWorker
   sidekiq_options retry: 0
 
   def perform(extraction_job_id)
-    @extraction_job = ExtractionJob.find(extraction_job_id)
-    @extraction_definition = @extraction_job.extraction_definition
-    @extraction_folder = @extraction_job.extraction_folder
-    @tmp_directory = "#{@extraction_folder}/tmp"
-    @page = 1
+    initialize_instance_variables(extraction_job_id)
 
     reset_harvest_report(harvest_report) if @extraction_job.harvest_job.present?
 
@@ -24,6 +20,14 @@ class FileExtractionWorker
   end
 
   private
+
+  def initialize_instance_variables(extraction_job_id)
+    @extraction_job = ExtractionJob.find(extraction_job_id)
+    @extraction_definition = @extraction_job.extraction_definition
+    @extraction_folder = @extraction_job.extraction_folder
+    @tmp_directory = "#{@extraction_folder}/tmp"
+    @page = 1
+  end
 
   def create_transformation_jobs
     (@extraction_job.extraction_definition.page..@extraction_job.documents.total_pages).each do |page|

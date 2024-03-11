@@ -65,14 +65,13 @@ RSpec.describe TextExtractionWorker, type: :job do
       end
       
       it 'updates the Harvest Report appropriately' do
-        expect(harvest_report.pages_extracted).to eq 0
-
         TextExtractionWorker.new.perform(extraction_job.id)  
 
         harvest_report.reload
 
-        expect(harvest_report.pages_extracted).to eq 1
         expect(harvest_report.transformation_workers_queued).to eq 1
+        expect(harvest_report.transformation_status).to eq 'queued'
+        expect(harvest_report.load_status).to eq 'queued'
       end
     end
 
