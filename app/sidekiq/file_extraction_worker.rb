@@ -12,6 +12,8 @@ class FileExtractionWorker
     @tmp_directory = "#{@extraction_folder}/tmp"
     @page = 1
 
+    reset_harvest_report(harvest_report) if @extraction_job.harvest_job.present?
+
     setup_tmp_directory
     move_extracted_documents_into_tmp_directory
     process_extracted_documents
@@ -24,8 +26,6 @@ class FileExtractionWorker
   private
 
   def create_transformation_jobs
-    reset_harvest_report(harvest_report)
-
     (@extraction_job.extraction_definition.page..@extraction_job.documents.total_pages).each do |page|
       create_transformation_job(page)
       pipeline_job.reload
@@ -42,7 +42,6 @@ class FileExtractionWorker
   end
 
   def create_transformation_job(page)
-    harvest_report.increment_pages_extracted!
     TransformationWorker.perform_async(@extraction_job.harvest_job.id, page, api_record_id(page))
     harvest_report.increment_transformation_workers_queued!
   end
@@ -54,7 +53,8 @@ class FileExtractionWorker
   end
 
   def reset_harvest_report(harvest_report)
-    harvest_report.update(pages_extracted: 0)
+    harvest_report.transformation_queued!
+    harvest_report.load_queued!
   end
 
   def setup_tmp_directory
