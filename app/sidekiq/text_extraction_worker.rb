@@ -10,6 +10,8 @@ class TextExtractionWorker < FileExtractionWorker
       create_document(Yomu.read(:text, saved_file), saved_response, file)
       @page += 1
     end
+
+    @extraction_definition.update(format: 'JSON')
   end
 
   def create_document(extracted_text, saved_response, filename)

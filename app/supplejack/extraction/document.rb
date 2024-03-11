@@ -40,6 +40,8 @@ module Extraction
       Rails.logger.debug { "Loading document #{file_path}" }
       json = JSON.parse(File.read(file_path)).symbolize_keys
       Document.new(file_path, **json)
+    rescue JSON::ParserError
+      {}
     end
 
     def to_hash
