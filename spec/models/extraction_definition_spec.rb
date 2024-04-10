@@ -42,6 +42,12 @@ RSpec.describe ExtractionDefinition do
 
       it { is_expected.to validate_presence_of(:split_selector).with_message("can't be blank") } 
     end
+
+    context 'when the extraction definition comes from S3' do
+      subject! { build(:extraction_definition, pipeline: pipeline1, s3: true) }
+
+      it { is_expected.to validate_presence_of(:s3_bucket).with_message("can't be blank") }
+    end
   end
 
   describe '#validation numericality' do

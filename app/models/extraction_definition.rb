@@ -36,6 +36,7 @@ class ExtractionDefinition < ApplicationRecord
 
   validates :name, uniqueness: true
   validates :split_selector, presence: true, if: :split?
+  validates :s3_bucket, presence: true, if: :s3?
 
   validates :throttle, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 60_000 }
 
