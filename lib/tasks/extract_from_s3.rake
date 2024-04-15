@@ -71,20 +71,25 @@ class S3ExtractionExecution
   end
 
   # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics/AbcSize
   def convert_files_to_extraction_job
     p 'Converting files from S3 into extraction job format...'
 
     page = 1
 
-    Dir["#{@directory_path}/#{@job_id}/**/*.xml"].each do |file|
+    Dir["#{@directory_path}/#{@job_id}/**/*.xml"].each_slice(100) do |batch|
       page_str = format('%09d', page)[-9..]
       name_str = @extraction_definition.name.parameterize(separator: '_')
+
+      files = batch.map { |file| File.read(file) }
+      metadata = files.map { |record| Nokogiri::HTML(record).xpath('/html/body/metadata') }
+      body = "<?xml version=\"1.0\"?><root>#{metadata.map(&:to_xml).join}</root>"
 
       Extraction::Document.new(
         url: 's3', method: 's3 cli',
         params: '', request_headers: [],
         status: '', response_headers: [],
-        body: File.read(file)
+        body:
       ).save("#{@extraction_job.extraction_folder}/#{name_str}__-__#{page_str}.json")
 
       page += 1
@@ -92,5 +97,6 @@ class S3ExtractionExecution
 
     @extraction_job.completed!
   end
+  # rubocop:enable Metrics/AbcSize
   # rubocop:enable Metrics/MethodLength
 end
