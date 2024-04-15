@@ -15,19 +15,24 @@ namespace :s3 do
     p 'Starting S3 sync...'
 
     p 'Extracting Acts...'
-    S3ExtractionExecution.new(acts_harvest.extraction_definition.id, "#{args[:source]}/Acts", '*-document-metadata.xml').call
+    S3ExtractionExecution.new(acts_harvest.extraction_definition.id, "#{args[:source]}/Acts",
+                              '*-document-metadata.xml').call
 
     p 'Extracting Bills...'
-    S3ExtractionExecution.new(bills_harvest.extraction_definition.id, "#{args[:source]}/Bills", '*-document-metadata.xml').call
+    S3ExtractionExecution.new(bills_harvest.extraction_definition.id, "#{args[:source]}/Bills",
+                              '*-document-metadata.xml').call
 
     p 'Extracting Deemed regulations...'
-    S3ExtractionExecution.new(deemed_regulations_harvest.extraction_definition.id, "#{args[:source]}/Deemed Regulations", '*-document-metadata.xml').call
+    S3ExtractionExecution.new(deemed_regulations_harvest.extraction_definition.id,
+                              "#{args[:source]}/Deemed Regulations", '*-document-metadata.xml').call
 
     p 'Extracting Regulations...'
-    S3ExtractionExecution.new(regulations_harvest.extraction_definition.id, "#{args[:source]}/Regulations", '*-document-metadata.xml').call
+    S3ExtractionExecution.new(regulations_harvest.extraction_definition.id, "#{args[:source]}/Regulations",
+                              '*-document-metadata.xml').call
 
     p 'Extracting Sops...'
-    S3ExtractionExecution.new(sops_harvest.extraction_definition.id, "#{args[:source]}/Sops", '*-document-metadata.xml').call
+    S3ExtractionExecution.new(sops_harvest.extraction_definition.id, "#{args[:source]}/Sops",
+                              '*-document-metadata.xml').call
 
     p 'Finished!'
   end
@@ -65,6 +70,7 @@ class S3ExtractionExecution
     `aws s3 sync '#{@source}' '#{@directory_path}/#{@job_id}' --exclude '*' --include '#{@file_pattern}'`
   end
 
+  # rubocop:disable Metrics/MethodLength
   def convert_files_to_extraction_job
     p 'Converting files from S3 into extraction job format...'
 
@@ -86,4 +92,5 @@ class S3ExtractionExecution
 
     @extraction_job.completed!
   end
+  # rubocop:enable Metrics/MethodLength
 end
