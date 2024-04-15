@@ -2,8 +2,10 @@
 
 require 'securerandom'
 
+# rails "s3:extract[bucket_source]"
+
 namespace :s3 do
-  task extract: :environment do
+  task :extract, [:source] => [:environment] do |_task, args|
     acts_harvest = HarvestDefinition.find_by(source_id: 'lenz_acts')
     bills_harvest = HarvestDefinition.find_by(source_id: 'lenz_bills')
     deemed_regulations_harvest = HarvestDefinition.find_by(source_id: 'lenz_deemed_regulations')
@@ -13,21 +15,21 @@ namespace :s3 do
     p 'Starting S3 sync...'
 
     p 'Extracting Acts...'
-    S3ExtractionExecution.new(acts_harvest.extraction_definition.id, 's3://lenz-data/10042024/Acts', '*-document-metadata.xml').call
+    S3ExtractionExecution.new(acts_harvest.extraction_definition.id, "#{args[:source]}/Acts", '*-document-metadata.xml').call
 
     p 'Extracting Bills...'
-    S3ExtractionExecution.new(bills_harvest.extraction_definition.id, 's3://lenz-data/10042024/Bills', '*-document-metadata.xml').call
+    S3ExtractionExecution.new(bills_harvest.extraction_definition.id, "#{args[:source]}/Bills", '*-document-metadata.xml').call
 
     p 'Extracting Deemed regulations...'
-    S3ExtractionExecution.new(deemed_regulations_harvest.extraction_definition.id, 's3://lenz-data/10042024/Deemed Regulations', '*-document-metadata.xml').call
+    S3ExtractionExecution.new(deemed_regulations_harvest.extraction_definition.id, "#{args[:source]}/Deemed Regulations", '*-document-metadata.xml').call
 
     p 'Extracting Regulations...'
-    S3ExtractionExecution.new(regulations_harvest.extraction_definition.id, 's3://lenz-data/10042024/Regulations', '*-document-metadata.xml').call
+    S3ExtractionExecution.new(regulations_harvest.extraction_definition.id, "#{args[:source]}/Regulations", '*-document-metadata.xml').call
 
     p 'Extracting Sops...'
-    S3ExtractionExecution.new(sops_harvest.extraction_definition.id, 's3://lenz-data/10042024/Sops', '*-document-metadata.xml').call
+    S3ExtractionExecution.new(sops_harvest.extraction_definition.id, "#{args[:source]}/Sops", '*-document-metadata.xml').call
 
-    p 'Completed!'
+    p 'Finished!'
   end
 end
 
