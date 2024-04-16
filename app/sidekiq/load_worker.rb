@@ -20,10 +20,21 @@ class LoadWorker
     job_end
   end
 
+  def log_retry_attempt
+    proc do |exception, try, elapsed_time, next_interval|
+      if defined?(Sidekiq)
+        ::Sidekiq.logger.info("
+          #{exception.class}: '#{exception.message}':
+          #{try} tries in #{elapsed_time} seconds and
+          #{next_interval} seconds until the next try.")
+      end
+    end
+  end
+
   # :reek:UncommunicativeVariableName
   # this reek has been ignored as 'e' is the variable name wanted by Rubocop
   def process_batch(batch, api_record_id)
-    ::Retriable.retriable(tries: 5, base_interval: 1, multiplier: 2) do
+    ::Retriable.retriable(tries: 10, base_interval: 1, multiplier: 2, on_retry: log_retry_attempt) do
       Load::Execution.new(batch, @harvest_job, api_record_id).call
 
       @harvest_report.increment_records_loaded!(batch.count)
