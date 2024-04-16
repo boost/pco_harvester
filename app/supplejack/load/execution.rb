@@ -19,7 +19,7 @@ module Load
                    enrichment_request
                  end
 
-      return unless response.status == 500
+      return response unless response.status == 500
 
       raise StandardError, 'Destination API responded with status 500'
     end
