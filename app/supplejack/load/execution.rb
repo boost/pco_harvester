@@ -13,11 +13,15 @@ module Load
     end
 
     def call
-      if @harvest_definition.harvest?
-        harvest_request
-      elsif @harvest_definition.enrichment?
-        enrichment_request
-      end
+      response = if @harvest_definition.harvest?
+                   harvest_request
+                 elsif @harvest_definition.enrichment?
+                   enrichment_request
+                 end
+
+      return response unless response.status == 500
+
+      raise StandardError, 'Destination API responded with status 500'
     end
 
     private
