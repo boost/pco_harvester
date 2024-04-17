@@ -79,7 +79,7 @@ RSpec.describe HarvestWorker, type: :job do
       end
 
       it 'queues a number of TransformationWorkers based on the number of pages in the Extracted document' do
-        expect(TransformationWorker).to receive(:perform_async).exactly(5).times.and_call_original
+        expect(TransformationWorker).to receive(:perform_in).exactly(5).times.and_call_original
 
         HarvestWorker.new.perform(harvest_job.id)
       end
@@ -90,7 +90,7 @@ RSpec.describe HarvestWorker, type: :job do
         end
 
         it 'queues a number of TransformationWorkers based on the number specified in the PipelineJob' do
-          expect(TransformationWorker).to receive(:perform_async).exactly(2).times.and_call_original
+          expect(TransformationWorker).to receive(:perform_in).exactly(2).times.and_call_original
 
           HarvestWorker.new.perform(harvest_job.id)
         end

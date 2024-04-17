@@ -24,6 +24,7 @@ class HarvestWorker < ApplicationWorker
     ExtractionWorker.perform_async(extraction_job.id, @harvest_report.id)
   end
 
+  # rubocop:disable Metrics/AbcSize
   def create_transformation_jobs
     extraction_job = @pipeline_job.extraction_job
     @harvest_job.update(extraction_job_id: extraction_job.id)
@@ -31,13 +32,14 @@ class HarvestWorker < ApplicationWorker
 
     (extraction_job.extraction_definition.page..extraction_job.documents.total_pages).each do |page|
       @harvest_report.increment_pages_extracted!
-      TransformationWorker.perform_async(@harvest_job.id, page)
+      TransformationWorker.perform_in((page * 2).seconds, @harvest_job.id, page)
       @harvest_report.increment_transformation_workers_queued!
 
       @pipeline_job.reload
       break if @pipeline_job.cancelled? || page_number_reached?(page)
     end
   end
+  # rubocop:enable Metrics/AbcSize
 
   private
 
