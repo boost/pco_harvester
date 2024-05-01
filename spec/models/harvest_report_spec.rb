@@ -153,6 +153,9 @@ RSpec.describe HarvestReport do
                               transformation_end_time: 5.minutes.ago)
     end
 
+
+
+
     it 'returns nil if there are no times' do
       expect(nil_report.duration_seconds).to be_nil
     end
@@ -338,6 +341,25 @@ RSpec.describe HarvestReport do
       transformation_status: 'completed', load_status: 'running', delete_status: 'completed', records_loaded: 100)
 
       expect(harvest_report.ready_to_delete_previous_records?).to eq false
+    end
+  end
+
+  describe '#extraction_running!' do
+    it 'updates the start time of the report to be the time that this was called' do
+      subject.extraction_running
+      expect(subject.extraction_start_time).not_to be_nil
+    end
+
+    it 'does not overwrite an existing time if it is called subsequently' do
+      subject.extraction_running!
+
+      time = subject.extraction_start_time
+
+      sleep 2
+
+      subject.extraction_running!
+
+      expect(subject.extraction_start_time).to eq time
     end
   end
 end

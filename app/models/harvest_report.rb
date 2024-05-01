@@ -42,7 +42,7 @@ class HarvestReport < ApplicationRecord
   %i[extraction transformation load delete].each do |process|
     define_method("#{process}_running!") do
       super()
-      send(:update, "#{process}_start_time" => Time.zone.now)
+      send(:update, "#{process}_start_time" => Time.zone.now) if send("#{process}_start_time").blank?
     end
 
     define_method("#{process}_completed!") do
