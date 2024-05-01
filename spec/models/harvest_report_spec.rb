@@ -346,7 +346,7 @@ RSpec.describe HarvestReport do
 
   describe '#extraction_running!' do
     it 'updates the start time of the report to be the time that this was called' do
-      subject.extraction_running
+      subject.extraction_running!
       expect(subject.extraction_start_time).not_to be_nil
     end
 
