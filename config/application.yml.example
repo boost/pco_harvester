@@ -3,12 +3,16 @@ default: &default
   SJ_USER_AGENT: Supplejack Harvester v2.0
   FIXTURES_PATH: spec/fixtures
   OTP_ENCRYPTION_KEY: AGoodEncryptionKey
+  SECRET_KEY_BASE: anawesomelysecretsecretkeybase
+  ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY: encryptionprimarykey
+  ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY: encryptiondeterministickey
+  ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT: encryptionderivationsalt
 
 development:
   <<: *default
   SUPPLEJACK_API: http://localhost:3000
   HARVESTER_API_KEY: your_supplejack_api_key_used_for_fixtures
-  APPLICATION_HOST_DOMAIN: localhost
+  APPLICATION_HOST_DOMAIN: http://localhost:3000
   MAIL_FROM: harvester@your-domain.org
 
 test:
