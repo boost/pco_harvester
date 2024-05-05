@@ -83,8 +83,8 @@ group :test do
   gem 'capybara-screenshot'
   gem 'factory_bot_rails'
   gem 'faker'
-  gem 'shoulda-matchers'
   gem 'selenium-webdriver'
+  gem 'shoulda-matchers'
 
   # generates code coverage reports
   gem 'simplecov'
