@@ -6,8 +6,8 @@ require 'securerandom'
 
 namespace :s3 do
   ## EXAMPLE
-  S3ExtractionExecution.new(EXTRACTION_DEFINITION_ID, "#{args[:source]}/FOLDER_NAME",
-  'file-pattern').call
+  # extraction_definition = The extraction definition to associate the result of the S3 extraction with
+  # S3ExtractionExecution.new(extraction_definition.id, "#{args[:source]}/FOLDER_NAME", 'file-pattern').call
 end
 
 class S3ExtractionExecution
