@@ -42,7 +42,7 @@ class HarvestReport < ApplicationRecord
   %i[extraction transformation load delete].each do |process|
     define_method("#{process}_running!") do
       super()
-      send(:update, "#{process}_start_time" => Time.zone.now)
+      send(:update, "#{process}_start_time" => Time.zone.now) if send("#{process}_start_time").blank?
     end
 
     define_method("#{process}_completed!") do
@@ -115,6 +115,7 @@ class HarvestReport < ApplicationRecord
   def idle_offset
     return 0 if extraction_end_time.blank?
     return @idle_offset if @idle_offset.present?
+    return 0 if transformation_start_time.blank? || extraction_end_time.blank?
 
     @idle_offset = transformation_start_time - extraction_end_time
     @idle_offset = 0 if @idle_offset.negative?

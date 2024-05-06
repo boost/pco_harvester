@@ -3,7 +3,7 @@ FROM ruby:3.2.2-alpine3.18
 WORKDIR /app
 
 ARG BUILD_PACKAGES="build-base curl-dev git"
-ARG DEV_PACKAGES="bash mysql-client mariadb-dev yaml-dev zlib-dev nodejs yarn libxml2 libxml2-dev libxslt libxslt-dev gmp-dev"
+ARG DEV_PACKAGES="bash mysql-client mariadb-dev yaml-dev zlib-dev nodejs yarn libxml2 libxml2-dev libxslt libxslt-dev gmp-dev openjdk8-jre python3 py3-pip"
 ARG RUBY_PACKAGES="tzdata"
 
 WORKDIR /app
@@ -24,6 +24,10 @@ RUN gem install bundler -v $(tail -n1 Gemfile.lock) \
     && find $GEM_HOME/gems/ -name "*.c" -delete \
     && find $GEM_HOME/gems/ -name "*.o" -delete
 
+# AWS CLI is used to run the S3 extraction
+
+RUN pip3 install --upgrade pip
+RUN pip3 install awscli
 
 COPY package.json yarn.lock ./
 RUN yarn install --production
