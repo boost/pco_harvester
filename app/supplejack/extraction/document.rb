@@ -56,8 +56,8 @@ module Extraction
       }
     end
 
-    def to_json(*args)
-      JSON.generate(to_hash, *args)
+    def to_json(*)
+      JSON.generate(to_hash, *)
     end
   end
 end
