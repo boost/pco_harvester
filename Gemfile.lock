@@ -483,7 +483,7 @@ DEPENDENCIES
   erb_lint
   factory_bot_rails
   faker
-  faraday (~> 2.7)
+  faraday (~> 2.9)
   faraday-follow_redirects
   foreman
   jsonpath
