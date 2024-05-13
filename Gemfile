@@ -37,7 +37,7 @@ gem 'devise-two-factor'
 gem 'rqrcode'
 
 # extraction related
-gem 'faraday', '~> 2.7'
+gem 'faraday', '~> 2.9'
 gem 'faraday-follow_redirects'
 gem 'jsonpath'
 gem 'nokogiri'
