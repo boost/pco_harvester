@@ -20,7 +20,7 @@ class ErrorBoundary extends Component {
   developmentRender() {
     return (
       <>
-        <h1>[DEVEVELOPMENT] AN ERROR OCCURED</h1>
+        <h1>[DEVELOPMENT] AN ERROR OCCURED</h1>
         <p className="callout callout-warning">{this.state.error.message}</p>
         <pre>
           <code className="code-block">{this.state.error.stack}</code>
