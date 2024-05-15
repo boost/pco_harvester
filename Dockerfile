@@ -3,6 +3,7 @@ FROM ruby:3.2.2-alpine3.19
 WORKDIR /app
 
 ARG BUILD_PACKAGES="build-base curl-dev git"
+# AWS CLI is used to run the S3 extraction
 ARG DEV_PACKAGES="bash mysql-client mariadb-dev yaml-dev zlib-dev nodejs yarn libxml2 libxml2-dev libxslt libxslt-dev gmp-dev openjdk8-jre python3 py3-pip aws-cli"
 ARG RUBY_PACKAGES="tzdata"
 
@@ -23,8 +24,6 @@ RUN gem install bundler -v $(tail -n1 Gemfile.lock) \
     && rm -rf $GEM_HOME/cache/*.gem \
     && find $GEM_HOME/gems/ -name "*.c" -delete \
     && find $GEM_HOME/gems/ -name "*.o" -delete
-
-# AWS CLI is used to run the S3 extraction
 
 COPY package.json yarn.lock ./
 RUN yarn install --production
