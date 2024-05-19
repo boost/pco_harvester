@@ -6,7 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.2.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
-gem 'rails', '~> 7.0.4'
+gem 'rails', '~> 7.1.3.2'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem 'sprockets-rails'
@@ -15,7 +15,7 @@ gem 'sprockets-rails'
 gem 'mysql2', '~> 0.5'
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem 'puma', '~> 5.0'
+gem 'puma', '~> 6.0'
 
 gem 'elastic-apm'
 gem 'vite_rails'
@@ -37,7 +37,7 @@ gem 'devise-two-factor'
 gem 'rqrcode'
 
 # extraction related
-gem 'faraday', '~> 2.7'
+gem 'faraday', '~> 2.9'
 gem 'faraday-follow_redirects'
 gem 'jsonpath'
 gem 'nokogiri'

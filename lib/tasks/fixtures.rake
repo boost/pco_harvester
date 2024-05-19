@@ -14,7 +14,7 @@ namespace :fixtures do
     `bin/rails db:fixtures:load`
 
     puts 'Launching the extraction jobs...'
-    ExtractionJob.all.each do |job|
+    ExtractionJob.find_each do |job|
       job.create_folder
       ExtractionWorker.new.perform(job.id)
     end
