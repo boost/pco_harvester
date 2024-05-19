@@ -53,7 +53,7 @@ class TransformationDefinitionsController < ApplicationController
     @transformation_definition = TransformationDefinition.new(transformation_definition_params)
 
     render json: {
-      result: (@transformation_definition.records.first || []),
+      result: @transformation_definition.records.first || [],
       format: @transformation_definition.extraction_job.extraction_definition.format
     }
   end
