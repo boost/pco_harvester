@@ -40,12 +40,12 @@ class HarvestReport < ApplicationRecord
   end
 
   %i[extraction transformation load delete].each do |process|
-    define_method("#{process}_running!") do
+    define_method(:"#{process}_running!") do
       super()
-      send(:update, "#{process}_start_time" => Time.zone.now) if send("#{process}_start_time").blank?
+      send(:update, "#{process}_start_time" => Time.zone.now) if send(:"#{process}_start_time").blank?
     end
 
-    define_method("#{process}_completed!") do
+    define_method(:"#{process}_completed!") do
       super()
       send(:update, "#{process}_end_time" => Time.zone.now)
     end
@@ -54,7 +54,7 @@ class HarvestReport < ApplicationRecord
   ## These queries are all done atomically on the database
   # To prevent race conditions when multiple sidekiq processes are updating the same report at the same time.
   METRICS.each do |metric|
-    define_method("increment_#{metric}!") do |amount = 1|
+    define_method(:"increment_#{metric}!") do |amount = 1|
       with_lock do
         send(:increment!, metric, amount)
       end

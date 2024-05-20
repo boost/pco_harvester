@@ -7,7 +7,7 @@ class Parameter < ApplicationRecord
   enum :content_type, { static: 0, dynamic: 1, incremental: 2 }
 
   def evaluate(response_object = nil)
-    send("#{content_type}_evaluation", response_object)
+    send(:"#{content_type}_evaluation", response_object)
   end
 
   def static_evaluation(_response_object)

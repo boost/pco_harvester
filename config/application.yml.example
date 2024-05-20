@@ -12,7 +12,7 @@ development:
   <<: *default
   SUPPLEJACK_API: http://localhost:3000
   HARVESTER_API_KEY: your_supplejack_api_key_used_for_fixtures
-  APPLICATION_HOST_DOMAIN: localhost
+  APPLICATION_HOST_DOMAIN: http://localhost:3000
   MAIL_FROM: harvester@your-domain.org
 
 test:

@@ -5,7 +5,7 @@
 class ExtractionJob < ApplicationRecord
   include Job
 
-  EXTRACTIONS_FOLDER = "#{Rails.root}/extractions/#{Rails.env}".freeze
+  EXTRACTIONS_FOLDER = Rails.root.join("extractions/#{Rails.env}").to_s.freeze
 
   enum :kind, { full: 0, sample: 1 }, prefix: :is
 
