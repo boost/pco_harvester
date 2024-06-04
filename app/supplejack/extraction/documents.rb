@@ -33,8 +33,8 @@ module Extraction
     end
 
     def documents_filepath
-      @documents_filepath ||= Dir.glob("#{@folder}/*.json").sort_by do |page| 
-        page.match(/__(?<record_id>.+)__(?<page>.+).json/)[:page].to_i 
+      @documents_filepath ||= Dir.glob("#{@folder}/*.json").sort_by do |page|
+        page.match(/__(?<record_id>.+)__(?<page>.+).json/)[:page].to_i
       end
     end
   end
